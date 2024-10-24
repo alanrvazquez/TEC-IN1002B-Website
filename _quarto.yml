@@ -1,19 +1,35 @@
 project:
+  title: "TEC-IN1002B Introduction to Data Science Projects"
   type: website
+  output-dir: docs
+editor: visual
 
 website:
-  title: "TEC-IN1002B-Website"
-  navbar:
-    left:
-      - href: index.qmd
+  title: "IN2039 Introduction to Data Science Projects"
+  page-navigation: true
+  sidebar:
+    contents:
+      - href: TEC-IN1002B-index.qmd
         text: Home
-      - about.qmd
 
+author: 
+  - name: Alan R. Vazquez
+    affiliations:
+      - name: Department of Industrial Engineering
+        
 format:
   html:
-    theme: cosmo
-    css: styles.css
     toc: true
+    shift-heading-level-by: 1
 
-editor: visual
+  revealjs:
+    output-ext: "slides.html"
+    chalkboard: true
+    multiplex: true
+    footer: "Tecnologico de Monterrey"
+    logo: IN1002b_logo.png
+    css: style.css
+    slide-number: True
+revealjs-plugins:
+  - pointer 
 

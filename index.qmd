@@ -1,12 +1,13 @@
 ---
-title: "TEC-IN1002B-Website"
-jupyter: python3
+title: "IN1002B Introduction to Data Science Projects"
+subtitle: "Materials for Semester AD 2024"
+author: 
+  - name: Alan R. Vazquez
+    orcid: 0000-0002-3658-0911
+    affiliations:
+      - name: Tecnologico de Monterrey
 ---
 
 This is a Quarto website.
 
 To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{python}
-1 + 1
-```
