@@ -8,6 +8,24 @@ author:
       - name: Tecnologico de Monterrey
 ---
 
-This is a Quarto website.
+## Course topics
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+### Module 2
+
+1.  Introduction to Data Science ([slides](/IntroductionDS/Introduction.slides.html))
+2.  Tools: Part 1 ([slides](/Tools/Tools1.slides.html)) 
+3.  Tools: Part 2 ([slides](/Tools/Tools2.slides.html))
+4.  Preprocessing ([slides](/PreProcessing/PreProcessing.slides.html))
+
+### Module 3
+
+1.  Introduction to Linear Regression ([slides](/LinearRegression/LinearRegression.slides.html))
+2.  Model Inference and Evaluation ([slides](/ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html)) 
+3.  Additional Topics ([slides](/AdditionalTopics/AdditionalTopics.slides.html)) 
+4.  Logistic Regression ([slides](/Classification/Classification.slides.html))
+
+
+## About the author
+
+Alan R. Vazquez ([website](https://alanrvazquez.netlify.app/)) is a Research Professor at the Department of Industrial Engineering at Tecnologico de Monterrey, Monterrey campus.
+

@@ -5,7 +5,7 @@ project:
 editor: visual
 
 website:
-  title: "IN2039 Introduction to Data Science Projects"
+  title: "IN1001B Introduction to Data Science Projects"
   page-navigation: true
   sidebar:
     contents:

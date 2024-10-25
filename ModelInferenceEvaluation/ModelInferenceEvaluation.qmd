@@ -1,0 +1,618 @@
+---
+title: "Model Evaluation and Inference"
+subtitle: "IN1001B: Introduction to Data Science Projects"
+author: 
+  - name: Alan R. Vazquez
+    affiliations:
+      - name: Department of Industrial Engineering
+format: 
+  revealjs:
+    chalkboard: false
+    multiplex: true
+    footer: "Tecnologico de Monterrey"
+    logo: IN1002b_logo.png
+    css: style.css
+    slide-number: True
+    html-math-method: mathjax
+editor: visual
+jupyter: python3
+---
+
+## Agenda
+
+1.  Residual analysis
+2.  Inference about individual $\beta$'s using t-tests
+3.  Multiple and adjusted $R^2$ statistics
+
+## Load the libraries
+
+Let's import **statsmodels** into python together with the other relevant libraries.
+
+```{python}
+#| echo: true
+#| output: false
+
+# Importing necessary libraries
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
+```
+
+# Residual analysis
+
+## Multiple linear regression model
+
+$$Y_i = \beta_0 + \beta_1 X_{i1} + \cdots + \beta_p X_{ip} + \epsilon_i$$
+
+-   $p$ is the number of predictors.
+-   $n$ is the number of observations.
+-   $X_{ij}$ is the i-th observation of the j-th predictor.
+-   $Y_{i}$ is the i-th observation of the response.
+-   $\epsilon_i$ is the i-th random error.
+
+## Assumptions
+
+The error $\epsilon_i$’s must then satisfy the following assumptions:
+
+1.  On average, they are close to zero for any value of the predictors $X_j$.
+2.  For any value of the predictor $X_j$, the dispersion or variance is constant and equal to $\sigma^2$.
+3.  The $\epsilon_i$’s are all independent from each other.
+4.  [The $\epsilon_i$’s follow normal distribution with mean 0 and variance $\sigma^2$.]{style="color:gray;"}
+
+## Residuals
+
+The errors $\epsilon_1, \ldots, \epsilon_n$ are not observed. To overcome this issue, we use the residuals of our model.
+
+Suppose that the multiple linear regression model is correct and consider the fitted responses $\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \cdots + \hat{\beta}_p X_{ip}$, where $\hat{\beta}_{j}$ is the least squares estimator for the j-th predictor.
+
+We define the residual [**residuals**]{style="color:purple;"} $\hat{\epsilon}_i = y_i - \hat{y}_i$, $i = 1, \ldots, n.$
+
+::: notes
+The residuals $\hat{\epsilon}_i$ are the estimates of the random errors $\epsilon_i$.
+:::
+
+## 
+
+If the model structure is correctly specified and assuming that the least-squares estimates $\hat{\beta}_j$’s are close to the true $\beta_j$’s, respectively, we have that
+
+$$\hat{\epsilon}_i = y_i - \hat{y}_i = y_i - \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \cdots + \hat{\beta}_p X_{ip} \approx \epsilon_i$$
+
+So, the residuals $\hat{\epsilon}_i$ should resemble the random errors $\epsilon$.
+
+To evaluate the assumption of a (simple and) multiple linear regression model, we use a [**Residual analysis**]{style="color:green;"}.
+
+## Residual Analysis
+
+To check the validity of these assumptions, we will follow a graphical approach. Specifically, we will construct three informative plots of the residuals.
+
+::: incremental
+1.  **Residuals vs Fitted Values** Plot. To assess the structure of the model and check for constant variance
+
+2.  **Residuals Vs Time** Plot. To check independence.
+
+3.  **Normal Quantile-Quantile** Plot. To assess if the residuals follow a normal distribution
+:::
+
+## Example
+
+-   This example is inspired by Foster, Stine and Waterman (1997, pages 191–199).
+
+-   The data are in the form of the time taken (in minutes) for a production run, $Y$, and the number of items produced, $X$, for 20 randomly selected orders as supervised by a manager.
+
+-   We wish to develop an equation to model the relationship between the run time ($Y$) and the run size ($X$).
+
+## Dataset
+
+The dataset is in the file "production.xlsx".
+
+```{python}
+#| echo: true
+#| output: true
+
+production_data = pd.read_excel('production.xlsx')
+production_data.head()
+```
+
+## Intuition behind the plot
+
+```{python}
+#| echo: false
+#| output: true
+#| fig-align: center
+
+# Defining the predictor (X) and the response variable (Y)
+X_pred = production_data['RunSize'] 
+y = production_data['RunTime']
+
+# Add intercept.
+X = sm.add_constant(X_pred)
+
+# Fitting the simple linear regression model
+regr = sm.OLS(y, X)
+lr_model = regr.fit()
+
+plt.figure(figsize=(7, 5))
+sns.scatterplot(x='RunSize', y='RunTime', data=production_data, color='blue')
+plt.plot(production_data['RunSize'], lr_model.fittedvalues, color='red', linestyle='--', linewidth=2)
+plt.title("Fitted Regression Line")
+plt.xlabel("Run size", fontsize = 14)
+plt.ylabel("Run time", fontsize = 14)
+plt.show()
+```
+
+## Calculation of predicted values and residuals
+
+Recall that we can calculate the predicted values and residuals using commands from **statsmodels**.
+
+```{python}
+#| echo: true
+#| output: true
+
+# Defining the predictor (X) and the response variable (Y).
+prod_Y_train = production_data['RunTime']
+prod_X_pred = production_data['RunSize']
+prod_X_train = sm.add_constant(prod_X_pred)
+
+
+# Fitting the simple linear regression model.
+regr = sm.OLS(prod_Y_train, prod_X_train)
+linear_model = regr.fit()
+
+# Make predictions using the the model
+prod_Y_pred = linear_model.fittedvalues
+
+# Calculate residuals.
+residuals = linear_model.resid
+```
+
+## Residuals vs Fitted Values
+
+::::: columns
+::: {.column width="60%"}
+```{python}
+#| echo: true
+#| output: true
+#| code-fold: true
+#| fig-align: center
+
+# Residual vs Fitted Values Plot
+plt.figure(figsize=(5, 5))
+sns.scatterplot(x = prod_Y_train, y = residuals)
+plt.axhline(y=0, color='red', linestyle='--')
+plt.title('Residuals vs Fitted Values')
+plt.xlabel('Predicted Values')
+plt.ylabel('Residuals')
+plt.show()
+```
+:::
+
+::: {.column width="40%"}
+-   If there is a trend, the model is misspecified.
+-   A "funnel" shape indicates that the assumption of constant variance is not met.
+:::
+:::::
+
+## 
+
+Examples of plots that do not support the conclusion of constant variance.
+
+![](images/clipboard-513958775.png){fig-align="center"}
+
+## 
+
+Another example.
+
+![](images/clipboard-890785179.png){fig-align="center"}
+
+The phenomenon of non-constant variance is called [**heteroscedasticity**]{style="color:red;"}
+
+## Residuals vs Time Plot
+
+-   By “time,” we mean that time the observation was taken or the order in which it was taken. The plot should not show any structure or pattern in the residuals.
+
+-   Dependence on time is a common source of lack of independence, but other plots might also detect lack of independence.
+
+-   Ideally, we plot the residuals versus each variable of interest we could think of, either included or excluded in the model.
+
+-   Assessing the assumption of independence is hard in practice.
+
+## 
+
+```{python}
+#| echo: true
+#| output: true
+#| code-fold: true
+#| fig-align: center
+
+# Residuals vs Time (Case) Plot
+plt.figure(figsize=(7, 5))
+sns.scatterplot(x = production_data['Case'], y = residuals)
+plt.axhline(y=0, color='red', linestyle='--')
+plt.title('Residuals vs Time (Case)')
+plt.xlabel('Case')
+plt.ylabel('Residuals')
+plt.show()
+```
+
+## 
+
+::::: columns
+::: {.column width="30%"}
+Example of plot that do not support the independence assumption.
+:::
+
+::: {.column width="70%"}
+![](images/clipboard-2835904055.png){fig-align="center" width="411"}
+:::
+:::::
+
+## Checking for normality
+
+This assumption is generally checked by looking at the distribution of the residuals.
+
+Two plots:
+
+-   Histogram.
+
+-   Normal Quantile-Quantile Plot (also called normal probability plot).
+
+## Histogram
+
+Ideally, the histogram resembles a normal distribution around 0. If the number of observations is small, the histogram may not be an effective visualization.
+
+```{python}
+#| echo: true
+#| output: true
+#| code-fold: true
+#| fig-align: center
+
+# Histogram of residuals
+plt.figure(figsize=(5, 3))
+sns.histplot(residuals)
+plt.title('Histogram of Residuals')
+plt.xlabel('Residuals')
+plt.show()
+```
+
+## Normal Quantile-Quantile (QQ) Plot
+
+A normal QQ plot is helpful for deciding whether a sample was drawn from a distribution that is approximately normal.
+
+First, let $\hat{\epsilon}_{[1]}, \hat{\epsilon}_{[2]}, \ldots, \hat{\epsilon}_{[n]}$ be the residuals ranked in an increasing order, where $\hat{\epsilon}_{[1]}$ is the minimum and $\hat{\epsilon}_{[n]}$ is the maximum. These points define the [**sample**]{style="color:lightblue;"} percentiles (or quantiles) of the distribution of the residuals.
+
+Next, calculate the [**theoretical**]{style="color:pink;"} percentiles of a (standard) Normal distribution calculated using Python.
+
+## 
+
+The normal QQ plot displays the (sample) percentiles of the residuals versus the quantiles of a normal distribution.
+
+If these quantiles agree with each other, then they would approximate a straight line.
+
+The straight line is usually determined visually, with emphasis on the central values rather than the extremes.
+
+For a nice explanation, see this YouTube video
+
+## QQ plot in python
+
+To construct a QQ plot, we use the function `qqplot()` **statsmodels** library.
+
+```{python}
+#| echo: true
+#| output: true
+#| code-fold: false
+#| fig-align: center
+
+# QQ plot to assess normality of residuals
+plt.figure(figsize=(5, 3))
+sm.qqplot(residuals, fit = True, line = '45')
+plt.title('QQ Plot of Residuals')
+plt.show()
+```
+
+## 
+
+::::: columns
+::: {.column width="40%"}
+```{python}
+#| echo: false
+#| output: true
+#| code-fold: false
+#| fig-align: center
+
+# QQ plot to assess normality of residuals
+plt.figure(figsize=(4, 4))
+sm.qqplot(residuals, fit = True, line = '45')
+plt.title('QQ Plot of Residuals')
+plt.show()
+```
+:::
+
+::: {.column width="60%"}
+-   Substantial departures from a straight line indicate that the distribution is not normal.
+
+-   This plot suggests that the residuals are consistent with a Normal curve.
+:::
+:::::
+
+## Comments
+
+These data are truly Normally distributed. But note that we still see deviations. These are entirely due to chance.
+
+When *n* is relatively small, you tend to see deviations, particularly in the tails.
+
+![](images/clipboard-191119898.png){fig-align="center"}
+
+## 
+
+**Normal probability plots for data sets following various distributions.** 100 observations in each data set.
+
+![](images/clipboard-1290062732.png){fig-align="center"}
+
+## Consequences of faulty assumptions
+
+[If the model structure is incorrect]{style="color:red;"}, then the estimated coefficients $\hat{\beta}_j$ will be biased and the predictions $\hat{y}_i$ will be inaccurate.
+
+[If the residuals do not follow a normal distribution]{style="color:red;"}, then we have two cases:
+
+-   If sample size is large, we still get accurate p-values for the t-tests for the coefficients thanks to the Central Limit Theorem.
+-   However, the t-tests and all inference tools are invalidated.
+
+## 
+
+</br></br></br>
+
+[If the residuals do not have constant variance]{style="color:red;"}, then the linear model is incorrect and everything falls apart!
+
+[If the residuals are dependent]{style="color:red;"}, then the linear model is incorrect and everything falls apart!
+
+# Inference about individual $\beta$’s using t-tests
+
+## The two cultures of statistical models
+
+::: incremental
+-   [**Inference**]{style="color:darkblue;"}: develop a model that fits the data well. Then make inferences about the data-generating process based on the structure of such model.
+
+-   [**Prediction**]{style="color:darkgreen;"}: Silent about the underlying mechanism generating the data and allow for many predictive algorithms, which only care about accuracy of predictions.
+:::
+
+. . .
+
+They overlap very often.
+
+## 
+
+</br></br></br>
+
+The least squares estimators $\hat{\beta}_0, \hat{\beta}_1, \ldots, \hat{\beta}_p$ are subject to uncertainty, since they are calculated based on a random sample of data.
+
+Therefore, assessing the amount of the uncertainty in these estimators is important. To this end, we use [hypothesis]{style="color:blue;"} tests on individual coefficients.
+
+## Hypothesis test
+
+A statistical hypothesis is a statement about the coefficients of a model.
+
+$H_0: \beta_j = 0$ v.s. $H_1: \beta_j \neq 0$ (Two-tailed Test)
+
+Testing this hypothesis consists of the following steps:
+
+1.  Take a random sample.
+2.  Compute the appropriate test statistic.
+3.  Reject or fail to reject the null hypothesis based on the computed p-value.
+
+## Step 1. Random sample
+
+The random sample is our training data:
+
+```{python}
+#| echo: true
+#| output: true
+
+production_data.head()
+```
+
+## Step 2. Test statistic
+
+The test statistic is
+
+$$T = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }$$
+
+-   $\hat{\beta}_j$ is the least squares estimate of the true coefficient $\beta_j$.
+-   $\hat{v}_{jj}$ is the *standard error* of the estimate $\hat{\beta}_j$ calculated using python.
+
+## 
+
+::::: columns
+::: {.column width="30%"}
+$$T = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }$$
+:::
+
+::: {.column width="70%"}
+We like this statistic because it follows a well-known distribution.
+
+If the null hypothesis ($H_0: \beta_j = 0$) is true, the statistic $T$ follows a [$t$ distribution]{style="color:purple;"} with $n-p-1$ degrees of freedom
+
+($n$ is the number of observations and $p$ the number of predictors).
+:::
+:::::
+
+## t distribution
+
+</br>
+
+This distribution is also known as the student’s t-distribution.
+
+It was invented by William Gosset when he worked at the Guinness Brewery in Ireland.
+
+It has one parameter $\nu$ which generally equals a number of degrees of freedom.
+
+The parameter $\nu$ controls the shape of the distribution.
+
+## 
+
+The t-distribution resembles a standard normal distribution when $\nu$ goes to infinity.
+
+![](images/clipboard-309922779.png){fig-align="center"}
+
+## Step 3. Calculate the p-value
+
+</br></br></br>
+
+The **p-value** is the probability that the test statistic $T$ will take on a value that is at least as extreme as the observed value of the statistic when the null hypothesis ($H_0$) is true.
+
+## 
+
+For example, consider a t-distribution with 18 degrees of freedom and an observed value of the statistic $t_0 = -2.20$.
+
+We sketch the critical region for $t_{18}$, with $\alpha = 0.05$.
+
+![](images/critical_region.png){fig-align="center"}
+
+## Decision
+
+</br></br>
+
+The smaller the p-value, the stronger the evidence is against the null hypothesis $H_0: \beta_j = 0$.
+
+</br>
+
+If the p-value is sufficiently small, we may be willing to abandon our assumption that $H_0$ is true and reject it!
+
+## What is a small p-value?
+
+</br>
+
+For a significance level of $\alpha = 0.05$
+
+-   If the p-value is smaller than $\alpha$, we reject $H_0: \beta_j = 0$.
+
+-   If the p-value is larger than $\alpha$, we fail to reject $H_0$.
+
+No scientific basis for this advice. In practice, report the p-value and explore the data using descriptive statistics.
+
+## t-tests in python
+
+```{python}
+#| echo: true
+#| output: true
+
+linear_model.fittedvalues
+```
+
+# Multiple and adjusted $R^2$ statistics
+
+## Total Sum of Squares
+
+Let’s consider the total sum of squares
+
+$$SS_{Total} = \sum_{i=1}^{n} (y_i - \bar{y})^2 \text{ where } \bar{y} = \sum_{i=1}^{n} \frac{y_i}{n}.$$
+
+This quantity measures the total variation of the response.
+
+In other words, it is the amount of variability inherent in the response before regression is performed.
+
+## Residual Sum of Squares
+
+Let’s also consider the residual sum of squares
+
+$$RSS = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 \text{ where } \bar{y} = \sum_{i=1}^{n} \frac{y_i}{n}.$$
+
+RSS is the sum of squares due to residuals of the linear regression model; or, residual variation left unexplained by this model.
+
+The better the predictions of the model, the smaller the RSS value.
+
+## Coefficient of determination
+
+$$R^2 = 1 - \frac{RSS}{SS_{total}}$$
+
+$R^2$ measures the “proportion of variation in the response explained by the full regression model.”
+
+![](images/example_R-01.png)
+
+## 
+
+$$R^2 = 1 - \frac{RSS}{SS_{total}}$$
+
+-   What would you conclude about RSS if $R^2 = 1$?
+
+-   In this case, $RSS = 0$ and the model fits the data perfectly.
+
+-   If $R^2$ is small, then large RSS: lots of scatter and the model’s fit is not good.
+
+-   It turns out that $R^2$ is the square of the correlation between the observed response and predictor values.
+
+## 
+
+![](images/Figures.004.jpeg){fig-align="center"}
+
+## Remarks on $R^2$
+
+-   The statistic $R^2$ should be used with caution because it is always possible to make it unity by simply adding more and more predictors (relevant for multiple linear regression).
+
+-   If $R^2$ is large, it does not necessarily imply that the full model will provide accurate predictions of future observations.
+
+## Adjusted $R^2$ statistic
+
+Adjusted $R^2$ is a better measure to decide whether to add a new variable into the model or not. It is:
+
+$$R_{adj}^2=1-\frac{RSS/(n-k-1)}{SS_{total}/(n-1)},$$
+
+where $k$ is the number of variables in the model. For the full model, $k = p$.
+
+-   If adjusted $R^2$ goes down or stays the same, then new variable is not important.
+-   If adjusted $R^2$ goes up, then it is probably useful.
+
+## 
+
+![](images/Figures.005.jpeg){fig-align="center"}
+
+## 
+
+Why is adjusted $R^2$ more useful than $R^2$ for adding new variables?
+
+$$R_{adj}^2=1-\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}$$
+
+-   As we explain more variability, the numerator gets smaller and adjusted $R^2$ gets closer to 1. So, we want to make the numerator small.
+-   If we add a “good” variable to the model, RSS will go down. However, $n - k - 1$ will decrease a little bit (because k is now bigger by 1.) So the numerator does not go down by as much as it does in ‘plain’ $R^2$.
+
+## 
+
+$$R_{adj}^2=1-\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}$$
+
+-   If we add a noise variable, RSS goes down a tiny bit, but because we divide by $n - k - 1$, the numerator might actually get bigger or change very little.
+
+-   So adjusted $R^2$ is a better measure of whether adding a new variable is an improvement. If adjusted $R^2$ goes down or stays the same, then new variable is irrelevant. If it goes up, then it probably useful.
+
+## In python
+
+To show the $R^2$ value, we use the `rsquared` argument of the `linear_model` object.
+
+```{python}
+#| echo: true
+#| output: true
+
+print( round(linear_model.rsquared, 2) )
+```
+
+To show the adjusted $R^2$ value, we use the `rsquared` argument of the `estimated_model` object.
+
+```{python}
+#| echo: true
+#| output: true
+
+print( round(linear_model.rsquared_adj, 2) )
+```
+
+## Model building
+
+Model building refers to a set of techniques to reduce the full model to one that only includes significant predictors.
+
+Note that it is more a deconstruction than building an actual model. This is because the full model must be a valid one to begin with. Specifically, the full model must provide residuals that satisfy all the assumptions (1)-(4).
+
+After we have obtained a satisfactory full model, we can start the model building process.
+
+## Some model building techniques
+
+Adjusted $R^2$ statistic. We add one variable at a time and see the change in adjusted $R^2$ statistic. If the value decreases, then we stop and evaluate the resulting model.
+
+T-tests on the individual coefficients. If $H_0$ is not rejected, this indicates that the predictor $X_j$ can be deleted from the model. We can then delete the predictor and refit the model. We can repeat this process several times until we reach a model in which all variables are significant.
