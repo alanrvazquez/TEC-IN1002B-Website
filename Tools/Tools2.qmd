@@ -1,6 +1,6 @@
 ---
 title: "Tools for Data Science: Part II"
-subtitle: "IN1001B: Introduction to Data Science Projects"
+subtitle: "IN1002B: Introduction to Data Science Projects"
 author: 
   - name: Alan R. Vazquez
     affiliations:
