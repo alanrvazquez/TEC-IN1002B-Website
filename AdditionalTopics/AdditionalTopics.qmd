@@ -687,3 +687,5 @@ plt.show()
 -   Therefore, transformations are more useful to build good predictive models. That is, models whose goal is to give accurate predictions of future observations.
 
 -   Note that, we need to transform back our response predictions to the original scale. For example, if $Y' = \ln{Y}$ is the transformed response, then our final prediction is $Y^\star = e^{{Y'}^\star}$.
+
+# [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)

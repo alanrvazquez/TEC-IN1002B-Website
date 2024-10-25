@@ -320,7 +320,7 @@ The IRLS algorithm (and consequently maximum likelihood estimation and Logistic 
 
 ## In python
 
-Using the training dataset, we estimate a logistic regression classifier using the function `Logit()` from **statsmodel**. To this end, we first define the target category using the `get_dummies()` 
+Using the training dataset, we estimate a logistic regression classifier using the function `Logit()` from **statsmodel**. To this end, we first define the target category using the `get_dummies()`
 
 ```{python}
 #| echo: true
@@ -343,7 +343,7 @@ We also define the matrix of predictors with the intercept.
 X_train_int = sm.add_constant(X_train)
 ```
 
-##
+## 
 
 After that, we fit the model using the function `Logit()`.
 
@@ -402,11 +402,11 @@ X_test = sm.add_constant(X_test)
 predicted_probability = logit_model.predict(X_test)
 ```
 
-##
+## 
 
 </br>
 
-Technically, the classifier outputs [**probabilities**]{style="color:brown;"} instead of actual classes. 
+Technically, the classifier outputs [**probabilities**]{style="color:brown;"} instead of actual classes.
 
 ```{python}
 #| echo: true
@@ -417,7 +417,7 @@ predicted_probability.head()
 
 These are the probabilities of a banknote being "counterfeit" according to its characteristics (values of the predictors).
 
-##
+## 
 
 </br>
 
@@ -432,17 +432,17 @@ Therefore, we turn the probabilities to actual classes by rounding the probabili
 predicted_classes = round(predicted_probability).astype('int')
 ```
 
-##
+## 
 
 ```{python}
 #| echo: true
 predicted_classes.head()
 ```
 
-- Observations with probabilities higher than 0.5 are classified as "counterfeit".
-- Observations with probabilities lower than 0.5 are classified as "genuine".
+-   Observations with probabilities higher than 0.5 are classified as "counterfeit".
+-   Observations with probabilities lower than 0.5 are classified as "genuine".
 
-Now, we compare the predictions with the actual categories in the test dataset. [A good logistic regression model has a good agreement between its predictions and the actual categories.]{style="color:darkblue;"} 
+Now, we compare the predictions with the actual categories in the test dataset. [A good logistic regression model has a good agreement between its predictions and the actual categories.]{style="color:darkblue;"}
 
 ## Confusion matrix
 
@@ -454,10 +454,9 @@ Now, we compare the predictions with the actual categories in the test dataset. 
 
 ![](images/confusion_matrix.png){fig-align="center"}
 
-
 ## In python
 
-We compute the confusion matrix using the function with the same name of **scikit-learn**. To this end, 
+We compute the confusion matrix using the function with the same name of **scikit-learn**. To this end,
 
 ```{python}
 #| echo: true
@@ -494,10 +493,12 @@ The higher the accuracy, the better the performance of the classifier.
 
 ## Remarks
 
-- Accuracy is simple to calculate and interpret.
+-   Accuracy is simple to calculate and interpret.
 
-- It works well when the dataset has a balanced class distribution (i.e., roughly equal positive and negative cases).
+-   It works well when the dataset has a balanced class distribution (i.e., roughly equal positive and negative cases).
 
-- Not ideal for imbalanced datasets: When one class is much more frequent than the other, accuracy can be misleading.
+-   Not ideal for imbalanced datasets: When one class is much more frequent than the other, accuracy can be misleading.
 
-- Other summaries of the confusion matrix such as **Precision**, **Recall**, and **F1-Score** are better suited for imbalanced data.
+-   Other summaries of the confusion matrix such as **Precision**, **Recall**, and **F1-Score** are better suited for imbalanced data.
+
+# [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)

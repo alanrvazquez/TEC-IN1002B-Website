@@ -534,3 +534,5 @@ plt.title("Bar chart of Type of Glasses") # Set plot title.
 plt.ylabel("Frequency") # Set label for Y axis.
 plt.show() # Show plot.
 ```
+
+# [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)

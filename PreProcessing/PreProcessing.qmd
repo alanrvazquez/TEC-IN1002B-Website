@@ -632,3 +632,5 @@ We can identify the variables that are highly correlated using quite complex cod
 # Dataset without highly correlated predictors.
 reduced_auto = complete_sbAuto['acceleration']
 ```
+
+# [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)

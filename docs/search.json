@@ -326,7 +326,7 @@
     "href": "PreProcessing/PreProcessing.slides.html#in-practice",
     "title": "Data preprocessing",
     "section": "In practice",
-    "text": "In practice\nWe deal with collinearity by removing the minimum number of predictors to ensure that all pairwise correlations are below a certain threshold, say, 0.75.\nWe can identify the variables that are highly correlated using quite complex code. However, here we will do it manually using the correlation map.\n\n# Dataset without highly correlated predictors.\nreduced_auto = complete_sbAuto['acceleration']\n\n\n\n\n\nTecnologico de Monterrey"
+    "text": "In practice\nWe deal with collinearity by removing the minimum number of predictors to ensure that all pairwise correlations are below a certain threshold, say, 0.75.\nWe can identify the variables that are highly correlated using quite complex code. However, here we will do it manually using the correlation map.\n\n# Dataset without highly correlated predictors.\nreduced_auto = complete_sbAuto['acceleration']"
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#agenda",
@@ -410,7 +410,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-1",
     "title": "Additional Topics",
     "section": "",
-    "text": "Finally, we fit the model using OLS() and fit() from statsmodels.\n\n# Create linear regression object\nregr = sm.OLS(auto_data['mpg'], dummy_X_train)\n\n# Train the model using the training sets\nlinear_model = regr.fit()\n\n# Summary of the models.\nlinear_model.summary()\n\n\nOLS Regression Results\n\n\nDep. Variable:\nmpg\nR-squared:\n0.332\n\n\nModel:\nOLS\nAdj. R-squared:\n0.328\n\n\nMethod:\nLeast Squares\nF-statistic:\n96.60\n\n\nDate:\nThu, 24 Oct 2024\nProb (F-statistic):\n8.67e-35\n\n\nTime:\n18:13:16\nLog-Likelihood:\n-1282.2\n\n\nNo. Observations:\n392\nAIC:\n2570.\n\n\nDf Residuals:\n389\nBIC:\n2582.\n\n\nDf Model:\n2\n\n\n\n\nCovariance Type:\nnonrobust\n\n\n\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n[0.025\n0.975]\n\n\nconst\n20.0335\n0.409\n49.025\n0.000\n19.230\n20.837\n\n\nEuropean\n7.5695\n0.877\n8.634\n0.000\n5.846\n9.293\n\n\nJapanese\n10.4172\n0.828\n12.588\n0.000\n8.790\n12.044\n\n\n\n\n\n\n\n\nOmnibus:\n26.330\nDurbin-Watson:\n0.763\n\n\nProb(Omnibus):\n0.000\nJarque-Bera (JB):\n30.217\n\n\nSkew:\n0.679\nProb(JB):\n2.74e-07\n\n\nKurtosis:\n3.066\nCond. No.\n3.16\n\n\n\nNotes:[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+    "text": "Finally, we fit the model using OLS() and fit() from statsmodels.\n\n# Create linear regression object\nregr = sm.OLS(auto_data['mpg'], dummy_X_train)\n\n# Train the model using the training sets\nlinear_model = regr.fit()\n\n# Summary of the models.\nlinear_model.summary()\n\n\nOLS Regression Results\n\n\nDep. Variable:\nmpg\nR-squared:\n0.332\n\n\nModel:\nOLS\nAdj. R-squared:\n0.328\n\n\nMethod:\nLeast Squares\nF-statistic:\n96.60\n\n\nDate:\nThu, 24 Oct 2024\nProb (F-statistic):\n8.67e-35\n\n\nTime:\n18:17:47\nLog-Likelihood:\n-1282.2\n\n\nNo. Observations:\n392\nAIC:\n2570.\n\n\nDf Residuals:\n389\nBIC:\n2582.\n\n\nDf Model:\n2\n\n\n\n\nCovariance Type:\nnonrobust\n\n\n\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n[0.025\n0.975]\n\n\nconst\n20.0335\n0.409\n49.025\n0.000\n19.230\n20.837\n\n\nEuropean\n7.5695\n0.877\n8.634\n0.000\n5.846\n9.293\n\n\nJapanese\n10.4172\n0.828\n12.588\n0.000\n8.790\n12.044\n\n\n\n\n\n\n\n\nOmnibus:\n26.330\nDurbin-Watson:\n0.763\n\n\nProb(Omnibus):\n0.000\nJarque-Bera (JB):\n30.217\n\n\nSkew:\n0.679\nProb(JB):\n2.74e-07\n\n\nKurtosis:\n3.066\nCond. No.\n3.16\n\n\n\nNotes:[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#analysis-of-covariance",
@@ -445,7 +445,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#model-summary",
     "title": "Additional Topics",
     "section": "Model summary",
-    "text": "Model summary\n\n# Summary of the models.\nancova_model.summary()\n\n\nOLS Regression Results\n\n\nDep. Variable:\nmpg\nR-squared:\n0.702\n\n\nModel:\nOLS\nAdj. R-squared:\n0.700\n\n\nMethod:\nLeast Squares\nF-statistic:\n304.7\n\n\nDate:\nThu, 24 Oct 2024\nProb (F-statistic):\n1.28e-101\n\n\nTime:\n18:13:16\nLog-Likelihood:\n-1123.9\n\n\nNo. Observations:\n392\nAIC:\n2256.\n\n\nDf Residuals:\n388\nBIC:\n2272.\n\n\nDf Model:\n3\n\n\n\n\nCovariance Type:\nnonrobust\n\n\n\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n[0.025\n0.975]\n\n\nconst\n43.7322\n1.113\n39.277\n0.000\n41.543\n45.921\n\n\nEuropean\n0.9709\n0.659\n1.474\n0.141\n-0.324\n2.266\n\n\nJapanese\n2.3271\n0.665\n3.501\n0.001\n1.020\n3.634\n\n\nweight\n-0.0070\n0.000\n-21.956\n0.000\n-0.008\n-0.006\n\n\n\n\n\n\n\n\nOmnibus:\n40.731\nDurbin-Watson:\n0.832\n\n\nProb(Omnibus):\n0.000\nJarque-Bera (JB):\n61.938\n\n\nSkew:\n0.689\nProb(JB):\n3.55e-14\n\n\nKurtosis:\n4.377\nCond. No.\n1.83e+04\n\n\n\nNotes:[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.[2] The condition number is large, 1.83e+04. This might indicate that there arestrong multicollinearity or other numerical problems."
+    "text": "Model summary\n\n# Summary of the models.\nancova_model.summary()\n\n\nOLS Regression Results\n\n\nDep. Variable:\nmpg\nR-squared:\n0.702\n\n\nModel:\nOLS\nAdj. R-squared:\n0.700\n\n\nMethod:\nLeast Squares\nF-statistic:\n304.7\n\n\nDate:\nThu, 24 Oct 2024\nProb (F-statistic):\n1.28e-101\n\n\nTime:\n18:17:47\nLog-Likelihood:\n-1123.9\n\n\nNo. Observations:\n392\nAIC:\n2256.\n\n\nDf Residuals:\n388\nBIC:\n2272.\n\n\nDf Model:\n3\n\n\n\n\nCovariance Type:\nnonrobust\n\n\n\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n[0.025\n0.975]\n\n\nconst\n43.7322\n1.113\n39.277\n0.000\n41.543\n45.921\n\n\nEuropean\n0.9709\n0.659\n1.474\n0.141\n-0.324\n2.266\n\n\nJapanese\n2.3271\n0.665\n3.501\n0.001\n1.020\n3.634\n\n\nweight\n-0.0070\n0.000\n-21.956\n0.000\n-0.008\n-0.006\n\n\n\n\n\n\n\n\nOmnibus:\n40.731\nDurbin-Watson:\n0.832\n\n\nProb(Omnibus):\n0.000\nJarque-Bera (JB):\n61.938\n\n\nSkew:\n0.689\nProb(JB):\n3.55e-14\n\n\nKurtosis:\n4.377\nCond. No.\n1.83e+04\n\n\n\nNotes:[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.[2] The condition number is large, 1.83e+04. This might indicate that there arestrong multicollinearity or other numerical problems."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#standardization",
@@ -508,7 +508,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-6",
     "title": "Additional Topics",
     "section": "",
-    "text": "To fit the model, we follow the same functions as before.\n\n# Create linear regression object\nstd_regr = sm.OLS(catalyst_data['Yield'], Xs_training)\n\n# Train the model using the training sets\nstd_linear_model = regr.fit()\n\n# Summary of the model.\nstd_linear_model.summary()\n\n\nOLS Regression Results\n\n\nDep. Variable:\nmpg\nR-squared:\n0.702\n\n\nModel:\nOLS\nAdj. R-squared:\n0.700\n\n\nMethod:\nLeast Squares\nF-statistic:\n304.7\n\n\nDate:\nThu, 24 Oct 2024\nProb (F-statistic):\n1.28e-101\n\n\nTime:\n18:13:17\nLog-Likelihood:\n-1123.9\n\n\nNo. Observations:\n392\nAIC:\n2256.\n\n\nDf Residuals:\n388\nBIC:\n2272.\n\n\nDf Model:\n3\n\n\n\n\nCovariance Type:\nnonrobust\n\n\n\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n[0.025\n0.975]\n\n\nconst\n43.7322\n1.113\n39.277\n0.000\n41.543\n45.921\n\n\nEuropean\n0.9709\n0.659\n1.474\n0.141\n-0.324\n2.266\n\n\nJapanese\n2.3271\n0.665\n3.501\n0.001\n1.020\n3.634\n\n\nweight\n-0.0070\n0.000\n-21.956\n0.000\n-0.008\n-0.006\n\n\n\n\n\n\n\n\nOmnibus:\n40.731\nDurbin-Watson:\n0.832\n\n\nProb(Omnibus):\n0.000\nJarque-Bera (JB):\n61.938\n\n\nSkew:\n0.689\nProb(JB):\n3.55e-14\n\n\nKurtosis:\n4.377\nCond. No.\n1.83e+04\n\n\n\nNotes:[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.[2] The condition number is large, 1.83e+04. This might indicate that there arestrong multicollinearity or other numerical problems."
+    "text": "To fit the model, we follow the same functions as before.\n\n# Create linear regression object\nstd_regr = sm.OLS(catalyst_data['Yield'], Xs_training)\n\n# Train the model using the training sets\nstd_linear_model = regr.fit()\n\n# Summary of the model.\nstd_linear_model.summary()\n\n\nOLS Regression Results\n\n\nDep. Variable:\nmpg\nR-squared:\n0.702\n\n\nModel:\nOLS\nAdj. R-squared:\n0.700\n\n\nMethod:\nLeast Squares\nF-statistic:\n304.7\n\n\nDate:\nThu, 24 Oct 2024\nProb (F-statistic):\n1.28e-101\n\n\nTime:\n18:17:47\nLog-Likelihood:\n-1123.9\n\n\nNo. Observations:\n392\nAIC:\n2256.\n\n\nDf Residuals:\n388\nBIC:\n2272.\n\n\nDf Model:\n3\n\n\n\n\nCovariance Type:\nnonrobust\n\n\n\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;|t|\n[0.025\n0.975]\n\n\nconst\n43.7322\n1.113\n39.277\n0.000\n41.543\n45.921\n\n\nEuropean\n0.9709\n0.659\n1.474\n0.141\n-0.324\n2.266\n\n\nJapanese\n2.3271\n0.665\n3.501\n0.001\n1.020\n3.634\n\n\nweight\n-0.0070\n0.000\n-21.956\n0.000\n-0.008\n-0.006\n\n\n\n\n\n\n\n\nOmnibus:\n40.731\nDurbin-Watson:\n0.832\n\n\nProb(Omnibus):\n0.000\nJarque-Bera (JB):\n61.938\n\n\nSkew:\n0.689\nProb(JB):\n3.55e-14\n\n\nKurtosis:\n4.377\nCond. No.\n1.83e+04\n\n\n\nNotes:[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.[2] The condition number is large, 1.83e+04. This might indicate that there arestrong multicollinearity or other numerical problems."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#discussion",
@@ -606,7 +606,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#conclusions",
     "title": "Additional Topics",
     "section": "Conclusions",
-    "text": "Conclusions\n\nTransformations may help us to develop models that better approximate the data. However, the interpretation of these models may be too complex. For instance, how can you interpret \\(\\beta_1\\) in \\(\\log{(Y)} = \\beta_0 + \\beta_1\\ X + \\epsilon\\)?\nTherefore, transformations are more useful to build good predictive models. That is, models whose goal is to give accurate predictions of future observations.\nNote that, we need to transform back our response predictions to the original scale. For example, if \\(Y' = \\ln{Y}\\) is the transformed response, then our final prediction is \\(Y^\\star = e^{{Y'}^\\star}\\).\n\n\n\n\n\nTecnologico de Monterrey"
+    "text": "Conclusions\n\nTransformations may help us to develop models that better approximate the data. However, the interpretation of these models may be too complex. For instance, how can you interpret \\(\\beta_1\\) in \\(\\log{(Y)} = \\beta_0 + \\beta_1\\ X + \\epsilon\\)?\nTherefore, transformations are more useful to build good predictive models. That is, models whose goal is to give accurate predictions of future observations.\nNote that, we need to transform back our response predictions to the original scale. For example, if \\(Y' = \\ln{Y}\\) is the transformed response, then our final prediction is \\(Y^\\star = e^{{Y'}^\\star}\\)."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#agenda",
@@ -963,7 +963,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#some-model-building-techniques",
     "title": "Model Evaluation and Inference",
     "section": "Some model building techniques",
-    "text": "Some model building techniques\nAdjusted \\(R^2\\) statistic. We add one variable at a time and see the change in adjusted \\(R^2\\) statistic. If the value decreases, then we stop and evaluate the resulting model.\nT-tests on the individual coefficients. If \\(H_0\\) is not rejected, this indicates that the predictor \\(X_j\\) can be deleted from the model. We can then delete the predictor and refit the model. We can repeat this process several times until we reach a model in which all variables are significant.\n\n\n\n\nTecnologico de Monterrey"
+    "text": "Some model building techniques\nAdjusted \\(R^2\\) statistic. We add one variable at a time and see the change in adjusted \\(R^2\\) statistic. If the value decreases, then we stop and evaluate the resulting model.\nT-tests on the individual coefficients. If \\(H_0\\) is not rejected, this indicates that the predictor \\(X_j\\) can be deleted from the model. We can then delete the predictor and refit the model. We can repeat this process several times until we reach a model in which all variables are significant."
   },
   {
     "objectID": "Tools/Tools1.slides.html#agenda",
@@ -1180,7 +1180,7 @@
     "href": "Tools/Tools1.slides.html#indexing-variables-a-dataset",
     "title": "Tools for Data Science: Part I",
     "section": "Indexing variables a dataset",
-    "text": "Indexing variables a dataset\nWe can select specific variables of a dataset using the syntaxis below.\n\npenguins_data['bill_length_mm']\n\n0      39.1\n1      39.5\n2      40.3\n3       NaN\n4      36.7\n       ... \n339    55.8\n340    43.5\n341    49.6\n342    50.8\n343    50.2\nName: bill_length_mm, Length: 344, dtype: float64\n\n\nHere, we selected the variable bill_length_mm in the penguins_data dataset.\n\n\n\n\nTecnologico de Monterrey"
+    "text": "Indexing variables a dataset\nWe can select specific variables of a dataset using the syntaxis below.\n\npenguins_data['bill_length_mm']\n\n0      39.1\n1      39.5\n2      40.3\n3       NaN\n4      36.7\n       ... \n339    55.8\n340    43.5\n341    49.6\n342    50.8\n343    50.2\nName: bill_length_mm, Length: 344, dtype: float64\n\n\nHere, we selected the variable bill_length_mm in the penguins_data dataset."
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#agenda",
@@ -1362,7 +1362,7 @@
     "href": "LinearRegression/LinearRegression.slides.html#estimation-of-variance",
     "title": "Multiple Linear Regression",
     "section": "Estimation of variance",
-    "text": "Estimation of variance\nThe variance \\(\\sigma^2\\) of the errors is estimated by\n\\[\\hat{\\sigma}^2=\\frac{1}{n-p-1}\\sum_{i=1}^{n} \\hat{\\epsilon}_i^{2}.\\]\nIn python, we compute \\(\\hat{\\sigma}^2\\) as follows.\n\n# Apply the formula.\nerror_variance = linear_model.scale\n\n# Print result.\nprint( round(error_variance, 3) )\n\n105.931\n\n\n\n\n\n\nTecnologico de Monterrey"
+    "text": "Estimation of variance\nThe variance \\(\\sigma^2\\) of the errors is estimated by\n\\[\\hat{\\sigma}^2=\\frac{1}{n-p-1}\\sum_{i=1}^{n} \\hat{\\epsilon}_i^{2}.\\]\nIn python, we compute \\(\\hat{\\sigma}^2\\) as follows.\n\n# Apply the formula.\nerror_variance = linear_model.scale\n\n# Print result.\nprint( round(error_variance, 3) )\n\n105.931"
   },
   {
     "objectID": "Classification/Classification.slides.html#agenda",
@@ -1544,7 +1544,7 @@
     "href": "Classification/Classification.slides.html#section-9",
     "title": "Logistic Regression",
     "section": "",
-    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.056201\n         Iterations 12\nconst    -200.548728\nLeft       -1.344060\nRight       1.975565\nBottom      5.307992\nTop         6.611811\ndtype: float64"
+    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.031482\n         Iterations 14\nconst    -473.875900\nLeft       -8.105009\nRight      10.331302\nBottom      6.899022\nTop        11.290662\ndtype: float64"
   },
   {
     "objectID": "Classification/Classification.slides.html#parameter-testing",
@@ -1558,7 +1558,7 @@
     "href": "Classification/Classification.slides.html#section-10",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression classifier.\n\nprint(logit_model.summary())\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      135\nMethod:                           MLE   Df Model:                            4\nDate:                Thu, 24 Oct 2024   Pseudo R-squ.:                  0.9187\nTime:                        18:12:55   Log-Likelihood:                -7.8682\nconverged:                       True   LL-Null:                       -96.812\nCovariance Type:            nonrobust   LLR p-value:                 2.119e-37\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -200.5487    336.324     -0.596      0.551    -859.732     458.634\nLeft          -1.3441      3.411     -0.394      0.694      -8.030       5.342\nRight          1.9756      2.943      0.671      0.502      -3.792       7.743\nBottom         5.3080      2.118      2.506      0.012       1.157       9.459\nTop            6.6118      2.413      2.740      0.006       1.883      11.341\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.55 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
+    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression classifier.\n\nprint(logit_model.summary())\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      135\nMethod:                           MLE   Df Model:                            4\nDate:                Thu, 24 Oct 2024   Pseudo R-squ.:                  0.9546\nTime:                        18:17:26   Log-Likelihood:                -4.4074\nconverged:                       True   LL-Null:                       -97.026\nCovariance Type:            nonrobust   LLR p-value:                 5.591e-39\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -473.8759    402.477     -1.177      0.239   -1262.716     314.965\nLeft          -8.1050      6.785     -1.195      0.232     -21.403       5.193\nRight         10.3313      7.309      1.414      0.157      -3.994      24.656\nBottom         6.8990      4.138      1.667      0.095      -1.211      15.009\nTop           11.2907      6.709      1.683      0.092      -1.859      24.441\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.81 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
   },
   {
     "objectID": "Classification/Classification.slides.html#evaluation",
@@ -1572,7 +1572,7 @@
     "href": "Classification/Classification.slides.html#section-11",
     "title": "Logistic Regression",
     "section": "",
-    "text": "Technically, the classifier outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n132    0.999999\n71     0.000462\n52     0.005962\n92     0.000064\n34     0.159173\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors)."
+    "text": "Technically, the classifier outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n13     1.316788e-04\n152    9.987569e-01\n115    9.263021e-03\n27     1.339089e-04\n57     1.272776e-11\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors)."
   },
   {
     "objectID": "Classification/Classification.slides.html#section-12",
@@ -1586,7 +1586,7 @@
     "href": "Classification/Classification.slides.html#section-13",
     "title": "Logistic Regression",
     "section": "",
-    "text": "predicted_classes.head()\n\n132    1\n71     0\n52     0\n92     0\n34     0\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the test dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
+    "text": "predicted_classes.head()\n\n13     0\n152    1\n115    0\n27     0\n57     0\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the test dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
   },
   {
     "objectID": "Classification/Classification.slides.html#confusion-matrix",
@@ -1600,21 +1600,21 @@
     "href": "Classification/Classification.slides.html#in-python-1",
     "title": "Logistic Regression",
     "section": "In python",
-    "text": "In python\nWe compute the confusion matrix using the function with the same name of scikit-learn. To this end,\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[26  0]\n [ 1 33]]"
+    "text": "In python\nWe compute the confusion matrix using the function with the same name of scikit-learn. To this end,\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[29  0]\n [ 3 28]]"
   },
   {
     "objectID": "Classification/Classification.slides.html#accuracy",
     "href": "Classification/Classification.slides.html#accuracy",
     "title": "Logistic Regression",
     "section": "Accuracy",
-    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.98\n\n\nThe higher the accuracy, the better the performance of the classifier."
+    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.95\n\n\nThe higher the accuracy, the better the performance of the classifier."
   },
   {
     "objectID": "Classification/Classification.slides.html#remarks",
     "href": "Classification/Classification.slides.html#remarks",
     "title": "Logistic Regression",
     "section": "Remarks",
-    "text": "Remarks\n\nAccuracy is simple to calculate and interpret.\nIt works well when the dataset has a balanced class distribution (i.e., roughly equal positive and negative cases).\nNot ideal for imbalanced datasets: When one class is much more frequent than the other, accuracy can be misleading.\nOther summaries of the confusion matrix such as Precision, Recall, and F1-Score are better suited for imbalanced data.\n\n\n\n\n\nTecnologico de Monterrey"
+    "text": "Remarks\n\nAccuracy is simple to calculate and interpret.\nIt works well when the dataset has a balanced class distribution (i.e., roughly equal positive and negative cases).\nNot ideal for imbalanced datasets: When one class is much more frequent than the other, accuracy can be misleading.\nOther summaries of the confusion matrix such as Precision, Recall, and F1-Score are better suited for imbalanced data."
   },
   {
     "objectID": "Tools/Tools2.slides.html#agenda",
@@ -1880,7 +1880,7 @@
     "href": "Tools/Tools2.slides.html#section-8",
     "title": "Tools for Data Science: Part II",
     "section": "",
-    "text": "Finally, we create the bar chart using the function countplot() from seaborn.\n\n\nCode\n# Create plot.\nplt.figure(figsize=(7,4)) # Create space for the plot.\nsns.countplot(data = glass_data, x = 'Type') # Show the plot.\nplt.title(\"Bar chart of Type of Glasses\") # Set plot title.\nplt.ylabel(\"Frequency\") # Set label for Y axis.\nplt.show() # Show plot.\n\n\n\n\n\n\n\n\n\n\n\n\n\nTecnologico de Monterrey"
+    "text": "Finally, we create the bar chart using the function countplot() from seaborn.\n\n\nCode\n# Create plot.\nplt.figure(figsize=(7,4)) # Create space for the plot.\nsns.countplot(data = glass_data, x = 'Type') # Show the plot.\nplt.title(\"Bar chart of Type of Glasses\") # Set plot title.\nplt.ylabel(\"Frequency\") # Set label for Y axis.\nplt.show() # Show plot."
   },
   {
     "objectID": "IntroductionDS/Introduction.slides.html#agenda",
@@ -2034,7 +2034,7 @@
     "href": "IntroductionDS/Introduction.slides.html#yogi-berra",
     "title": "Introduction to Data Science",
     "section": "Yogi Berra",
-    "text": "Yogi Berra\n\nIt’s though to make predictions, especially about the future.\n\n\n\n\n\nTecnologico de Monterrey"
+    "text": "Yogi Berra\n\nIt’s though to make predictions, especially about the future."
   },
   {
     "objectID": "index.slides.html#course-topics",
