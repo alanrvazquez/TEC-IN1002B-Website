@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Alan R. Vazquez">
-  <title>IN1001B Introduction to Data Science Projects – Model Evaluation and Inference</title>
+  <title>IN1002B Introduction to Data Science Projects – Model Evaluation and Inference</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -398,7 +398,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Model Evaluation and Inference</h1>
-  <p class="subtitle">IN1001B: Introduction to Data Science Projects</p>
+  <p class="subtitle">IN1002B: Introduction to Data Science Projects</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -423,7 +423,7 @@ Alan R. Vazquez
 <section id="load-the-libraries" class="slide level2">
 <h2>Load the libraries</h2>
 <p>Let’s import <strong>statsmodels</strong> into python together with the other relevant libraries.</p>
-<div id="ea379611" class="cell" data-execution_count="1">
+<div id="33195747" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Importing necessary libraries</span></span>
 <span id="cb1-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -505,7 +505,7 @@ Alan R. Vazquez
 <section id="dataset" class="slide level2">
 <h2>Dataset</h2>
 <p>The dataset is in the file “production.xlsx”.</p>
-<div id="ac19ed9c" class="cell" data-execution_count="2">
+<div id="2b94ef57" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>production_data <span class="op">=</span> pd.read_excel(<span class="st">'production.xlsx'</span>)</span>
 <span id="cb2-2"><a></a>production_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
@@ -573,7 +573,7 @@ Alan R. Vazquez
 </section>
 <section id="intuition-behind-the-plot" class="slide level2">
 <h2>Intuition behind the plot</h2>
-<div id="29ba308a" class="cell" data-execution_count="3">
+<div id="f02842b3" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -586,7 +586,7 @@ Alan R. Vazquez
 <section id="calculation-of-predicted-values-and-residuals" class="slide level2">
 <h2>Calculation of predicted values and residuals</h2>
 <p>Recall that we can calculate the predicted values and residuals using commands from <strong>statsmodels</strong>.</p>
-<div id="4615fa73" class="cell" data-execution_count="4">
+<div id="7e7f86d3" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># Defining the predictor (X) and the response variable (Y).</span></span>
 <span id="cb3-2"><a></a>prod_Y_train <span class="op">=</span> production_data[<span class="st">'RunTime'</span>]</span>
 <span id="cb3-3"><a></a>prod_X_pred <span class="op">=</span> production_data[<span class="st">'RunSize'</span>]</span>
@@ -608,7 +608,7 @@ Alan R. Vazquez
 <h2>Residuals vs Fitted Values</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<div id="a5f21370" class="cell" data-execution_count="5">
+<div id="b3282440" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co"># Residual vs Fitted Values Plot</span></span>
@@ -657,7 +657,7 @@ Alan R. Vazquez
 </section>
 <section id="section-3" class="slide level2">
 <h2></h2>
-<div id="4d765f98" class="cell" data-execution_count="6">
+<div id="67ea52a3" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="co"># Residuals vs Time (Case) Plot</span></span>
@@ -703,7 +703,7 @@ Alan R. Vazquez
 <section id="histogram" class="slide level2">
 <h2>Histogram</h2>
 <p>Ideally, the histogram resembles a normal distribution around 0. If the number of observations is small, the histogram may not be an effective visualization.</p>
-<div id="5a0d2b94" class="cell" data-execution_count="7">
+<div id="a362d9f9" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="co"># Histogram of residuals</span></span>
@@ -738,7 +738,7 @@ Alan R. Vazquez
 <section id="qq-plot-in-python" class="slide level2">
 <h2>QQ plot in python</h2>
 <p>To construct a QQ plot, we use the function <code>qqplot()</code> <strong>statsmodels</strong> library.</p>
-<div id="d659a241" class="cell" data-execution_count="8">
+<div id="89601129" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="co"># QQ plot to assess normality of residuals</span></span>
 <span id="cb7-2"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
 <span id="cb7-3"><a></a>sm.qqplot(residuals, fit <span class="op">=</span> <span class="va">True</span>, line <span class="op">=</span> <span class="st">'45'</span>)</span>
@@ -760,7 +760,7 @@ Alan R. Vazquez
 <h2></h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div id="ce343cfb" class="cell" data-execution_count="9">
+<div id="6e926a24" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <pre><code>&lt;Figure size 384x384 with 0 Axes&gt;</code></pre>
 </div>
@@ -842,7 +842,7 @@ Alan R. Vazquez
 <section id="step-1.-random-sample" class="slide level2">
 <h2>Step 1. Random sample</h2>
 <p>The random sample is our training data:</p>
-<div id="f1676fdd" class="cell" data-execution_count="10">
+<div id="a164a66a" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>production_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div>
@@ -970,7 +970,7 @@ Alan R. Vazquez
 </section>
 <section id="t-tests-in-python" class="slide level2">
 <h2>t-tests in python</h2>
-<div id="27feea86" class="cell" data-execution_count="11">
+<div id="8fe416ab" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>linear_model.fittedvalues</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>0     195.115247
@@ -1077,14 +1077,14 @@ dtype: float64</code></pre>
 <section id="in-python" class="slide level2">
 <h2>In python</h2>
 <p>To show the <span class="math inline">\(R^2\)</span> value, we use the <code>rsquared</code> argument of the <code>linear_model</code> object.</p>
-<div id="a6349df9" class="cell" data-execution_count="12">
+<div id="11415a5c" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="bu">print</span>( <span class="bu">round</span>(linear_model.rsquared, <span class="dv">2</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.73</code></pre>
 </div>
 </div>
 <p>To show the adjusted <span class="math inline">\(R^2\)</span> value, we use the <code>rsquared</code> argument of the <code>estimated_model</code> object.</p>
-<div id="8f29e918" class="cell" data-execution_count="13">
+<div id="0bee3304" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a><span class="bu">print</span>( <span class="bu">round</span>(linear_model.rsquared_adj, <span class="dv">2</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.72</code></pre>
