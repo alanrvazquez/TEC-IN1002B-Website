@@ -171,6 +171,8 @@ It gives an indication of how spread out the data are.
 
 ## 
 
+</br></br>
+
 In python, the sample variance is calculated using the function `var()`
 
 ```{python}
@@ -194,6 +196,8 @@ $$
 This quantity is known as the sample standard deviation. [*It is in the same units as the observations*]{style="color:purple;"}.
 
 ## 
+
+</br></br>
 
 In python, the sample variance is calculated using the function `std()`.
 
@@ -223,11 +227,13 @@ The [**sample median**]{style="color:darkgreen;"} is the middle number of the or
 
 ## 
 
+</br></br>
+
 ![](images/clipboard-838628209.png)
 
 ## 
 
-In python, the quantiles are calculated using the function `quantile()`.
+In python, the quartiles are calculated using the function `quantile()`.
 
 ```{python}
 #| echo: true
@@ -363,9 +369,15 @@ The dataset is in the file "glass.xlsx". Let's load it using **pandas**.
 
 # Load the Excel file into a pandas DataFrame.
 glass_data = pd.read_excel("glass.xlsx")
+```
 
-# Print the first 5 rows of the dataset.
-glass_data.head()
+The variable `Type` is categorical. So, let's ensure python knows this using the code below.
+
+```{python}
+#| echo: true
+#| output: true
+
+glass_data['Type'] = glass_data['Type'].astype('category')
 ```
 
 ## matplotlib library
@@ -496,30 +508,7 @@ The count or frequency within the corresponding category is represented by a bar
 
 ## 
 
-First, we ensure that the variable `Type` is categorical.
-
-```{python}
-#| echo: true
-#| output: true
-
-glass_data['Type'] = glass_data['Type'].astype('category')
-```
-
-</br>
-
-Next, we create the frequency table using **pandas**.
-
-```{python}
-#| echo: true
-#| output: true
-
-table_counts_type = glass_data['Type'].value_counts()
-print(table_counts_type)
-```
-
-## 
-
-Finally, we create the bar chart using the function `countplot()` from **seaborn**.
+We create the bar chart using the function `countplot()` from **seaborn**.
 
 ```{python}
 #| echo: true

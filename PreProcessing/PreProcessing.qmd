@@ -205,11 +205,32 @@ penguins_data['bill_depth_mm'] = num_imputer.fit_transform(penguins_data[ ['bill
 penguins_data.head(3)
 ```
 
+## Using the mean or the median?
+
+</br></br>
+
+We use the **sample mean** when the data distribution is roughly symmetrical.
+
+- Pros: Simple and easy to implement.
+
+- Cons: Sensitive to outliers; may not be accurate for skewed distributions
+
+##
+
+</br></br>
+
+We use the **sample median** when the data is skewed (e.g., incomes, prices).
+
+- Pros: Less sensitive to outliers; robust for skewed distributions.
+
+- Cons: May reduce variability in the data.
+
+
 ## Imputation method for categorical variable
 
 If a categorical variable has missing values, we can use the **most frequent** of the available values to replace the missing values. To this end, we use similar commands as before.
 
-For example, let's imput the missing values of all categorical variables using this strategy.
+For example, let's imput the missing values of `sex` using this strategy.
 
 ```{python}
 #| echo: true
@@ -219,7 +240,7 @@ For example, let's imput the missing values of all categorical variables using t
 cat_imputer = SimpleImputer(strategy = 'most_frequent')
 
 # Apply imputation strategy for categorical variables.
-penguins_data = cat_imputer.fit_transform(penguins_data)
+penguins_data['sex'] = cat_imputer.fit_transform(penguins_data[ ['sex'] ]).ravel()
 ```
 
 # Standarization
@@ -600,6 +621,7 @@ Next, we plot the correlation matrix using the function `heatmap()` from **seabo
 #| output: true
 #| fig-align: center
 
+plt.figure(figsize=(3,3))
 sns.heatmap(correlation_matrix, cmap='coolwarm', annot = True)
 ```
 
@@ -630,7 +652,7 @@ We can identify the variables that are highly correlated using quite complex cod
 #| output: true
 
 # Dataset without highly correlated predictors.
-reduced_auto = complete_sbAuto['acceleration']
+reduced_auto = complete_sbAuto[ ['weight', 'acceleration']]
 ```
 
 # [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)

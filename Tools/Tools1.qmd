@@ -143,7 +143,7 @@ Functions have two basic parts:
 
 ## Python is strict
 
-Python, like all programming languages, is very demanding. For example, if you write
+Python, like all programming languages, is very strict. For example, if you write
 
 ```{python}
 #| echo: true
@@ -188,7 +188,8 @@ You can make up any name you want for a python object. However, there are two ba
 ```{python}
 #| echo: true
 
-# This code will assign the number 18 to the object called my_favorite_number
+# This code will assign the number 18
+# to the object called my_favorite_number
 
 my_favorite_number = 18
 ```
@@ -246,7 +247,7 @@ my_list_2
 
 ## Operations
 
-We can do simple operations with vectors. For example, we can multiply sum all the elements of a list.
+We can do simple operations with vectors. For example, we can sum all the elements of a list.
 
 ```{python}
 #| echo: true
@@ -520,14 +521,21 @@ The following code shows how to read the data in the file "penguins.xlsx" into p
 
 # Load the Excel file into a pandas DataFrame.
 penguins_data = pd.read_excel("penguins.xlsx")
+```
 
+## The function head()
+
+The function `head()` allows you to print the first rows of a pandas data frame.
+
+```{python}
+#| echo: true
 # Print the first 4 rows of the dataset.
 penguins_data.head(4)
 ```
 
 ## Indexing variables a dataset
 
-We can select specific variables of a dataset using the syntaxis below.
+We can select a specific variables of a data frame using the syntaxis below.
 
 ```{python}
 #| echo: true
@@ -536,5 +544,16 @@ penguins_data['bill_length_mm']
 ```
 
 Here, we selected the variable `bill_length_mm` in the `penguins_data` dataset.
+
+## 
+
+To index multiple variables of a data frame, we put the names of the variables in a list object. For example, we select `bill_length_mm`, `species`, and `island` as follows:
+
+```{python}
+#| echo: true
+
+sub_penguins_data = penguins_data[ ['bill_length_mm',  'species', 'island'] ]
+sub_penguins_data.head()
+```
 
 # [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)

@@ -13,9 +13,9 @@ author:
 ### Module 2
 
 1.  Introduction to Data Science ([slides](/IntroductionDS/Introduction.slides.html))
-2.  Tools: Part 1 ([slides](/Tools/Tools1.slides.html)) 
-3.  Tools: Part 2 ([slides](/Tools/Tools2.slides.html))
-4.  Preprocessing ([slides](/PreProcessing/PreProcessing.slides.html))
+2.  Tools: Part 1 ([slides](/Tools/Tools1.slides.html)) ( [colab](https://colab.research.google.com/drive/1-CEdOgN1n5fOYus1-LfqRk2K_GQ75t9S?usp=sharing)) 
+3.  Tools: Part 2 ([slides](/Tools/Tools2.slides.html))([colab](https://colab.research.google.com/drive/1KnrUfS9oUkQa2gHUkrNiMgQ1YNNrbvKt?usp=sharing))
+4.  Preprocessing ([slides](/PreProcessing/PreProcessing.slides.html))([colab](https://colab.research.google.com/drive/1bhF6H3CIwgVr2r1qEsHUuPnqdocT4fUy?usp=sharing))
 
 ### Module 3
 
