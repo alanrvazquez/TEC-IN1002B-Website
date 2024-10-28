@@ -1173,7 +1173,7 @@
     "href": "Tools/Tools1.slides.html#python-libraries",
     "title": "Tools for Data Science: Part I",
     "section": "Python libraries",
-    "text": "Python libraries\nLibraries are the fundamental units of reproducible python code. They include reusable python functions, documentation describing how to use them, and sample data.\nIn this course, we will be working mostly with the following libraries:\n\npandas for data manipulation\nmatplotlib and seaborn for data visualization\nscikit-learn for data modelling"
+    "text": "Python libraries\nLibraries are the fundamental units of reproducible python code. They include reusable python functions, documentation describing how to use them, and sample data.\nIn this course, we will be working mostly with the following libraries:\n\npandas for data manipulation\nmatplotlib and seaborn for data visualization\nstatsmodels and scikit-learn for data modelling"
   },
   {
     "objectID": "Tools/Tools1.slides.html#data-organization",
@@ -2055,14 +2055,14 @@
     "href": "IntroductionDS/Introduction.slides.html#two-main-problems",
     "title": "Introduction to Data Science",
     "section": "Two main problems",
-    "text": "Two main problems\nRegression problems. The response \\(Y\\) is quantitative. For example, person’s income, the value of a house, the blood pressure of a patient.\nClassification problems. The response \\(Y\\) is qualitative and involves \\(K\\) different categories. For example, the brand of a product purchased (A, B, C) whether a person defaults on a debt (yes or no).\nThe predictors (\\(\\boldsymbol{X}\\)) can be qualitative or quantitative."
+    "text": "Two main problems\nRegression problems. The response \\(Y\\) is quantitative. For example, a person’s income, the value of a house, the blood pressure of a patient.\nClassification problems. The response \\(Y\\) is qualitative and has \\(K\\) different categories. For example, the brand of a product purchased (A, B, C), or whether a person defaults on a debt (yes or no).\nThe predictors (\\(\\boldsymbol{X}\\)) can be qualitative or quantitative."
   },
   {
     "objectID": "IntroductionDS/Introduction.slides.html#example",
     "href": "IntroductionDS/Introduction.slides.html#example",
     "title": "Introduction to Data Science",
     "section": "Example",
-    "text": "Example\n\nWhat factors explain the variation in Type II diabetes?\n\n\\(Y\\) is a 1 if a person has Type II diabetes, a 0 if not.\nThe predictors (\\(\\boldsymbol{X}\\)) might include: income, zip code, age, weight, height, gender and race."
+    "text": "Example\n\nWhat factors explain the presence of Type II diabetes on a person?\n\n\\(Y\\) is a 1 if a person has Type II diabetes, a 0 if not.\nThe predictors (\\(\\boldsymbol{X}\\)) might include: income, zip code, age, weight, height, gender and race."
   },
   {
     "objectID": "IntroductionDS/Introduction.slides.html#a-statistical-model",

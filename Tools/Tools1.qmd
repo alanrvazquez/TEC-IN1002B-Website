@@ -379,7 +379,7 @@ In this course, we will be working mostly with the following libraries:
 
 -   `pandas` for data manipulation
 -   `matplotlib` and `seaborn` for data visualization
--   `scikit-learn` for data modelling
+-   `statsmodels` and `scikit-learn` for data modelling
 
 # Reading data with python
 

@@ -230,9 +230,9 @@ Outcome or response:
 
 ## Two main problems
 
-[**Regression problems**]{style="color:blue;"}. The response $Y$ is quantitative. For example, person’s income, the value of a house, the blood pressure of a patient.
+[**Regression problems**]{style="color:blue;"}. The response $Y$ is quantitative. For example, a person’s income, the value of a house, the blood pressure of a patient.
 
-[**Classification problems**]{style="color:green;"}. The response $Y$ is qualitative and involves $K$ different categories. For example, the brand of a product purchased (A, B, C) whether a person defaults on a debt (yes or no).
+[**Classification problems**]{style="color:green;"}. The response $Y$ is qualitative and has $K$ different categories. For example, the brand of a product purchased (A, B, C), or whether a person defaults on a debt (yes or no).
 
 The predictors ($\boldsymbol{X}$) can be qualitative or quantitative.
 
@@ -240,7 +240,7 @@ The predictors ($\boldsymbol{X}$) can be qualitative or quantitative.
 
 </br></br>
 
-What factors explain the variation in Type II diabetes?
+What factors explain the presence of Type II diabetes on a person?
 
 -   $Y$ is a 1 if a person has Type II diabetes, a 0 if not.
 
