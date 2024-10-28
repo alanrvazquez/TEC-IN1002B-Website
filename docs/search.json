@@ -1999,7 +1999,7 @@
     "href": "IntroductionDS/Introduction.slides.html#other-problems",
     "title": "Introduction to Data Science",
     "section": "Other problems",
-    "text": "Other problems\nClustering attempts to group individuals in a population together by their similarity, but not driven by any specific purpose. For example, “Do our customers form natural groups or segments?”"
+    "text": "Other problems\n\nClustering attempts to group individuals in a population together by their similarity, but not driven by any specific purpose. For example, “Do our customers form natural groups or segments?”"
   },
   {
     "objectID": "IntroductionDS/Introduction.slides.html#discussion",
@@ -2027,7 +2027,7 @@
     "href": "IntroductionDS/Introduction.slides.html#our-goal",
     "title": "Introduction to Data Science",
     "section": "Our goal",
-    "text": "Our goal\n\nOur goal is to turn data into information that answers useful questions."
+    "text": "Our goal\n\n\nOur goal is to turn data into information that answers useful questions."
   },
   {
     "objectID": "IntroductionDS/Introduction.slides.html#data-classes",
@@ -2062,7 +2062,7 @@
     "href": "IntroductionDS/Introduction.slides.html#example",
     "title": "Introduction to Data Science",
     "section": "Example",
-    "text": "Example\nWhat factors explain the variation in Type II diabetes?\n\n\\(Y\\) is a 1 if a person has Type II diabetes, a 0 if not.\nThe predictors (\\(\\boldsymbol{X}\\)) might include: income, zip code, age, weight, height, gender and race."
+    "text": "Example\n\nWhat factors explain the variation in Type II diabetes?\n\n\\(Y\\) is a 1 if a person has Type II diabetes, a 0 if not.\nThe predictors (\\(\\boldsymbol{X}\\)) might include: income, zip code, age, weight, height, gender and race."
   },
   {
     "objectID": "IntroductionDS/Introduction.slides.html#a-statistical-model",
@@ -2090,7 +2090,7 @@
     "href": "IntroductionDS/Introduction.slides.html#yogi-berra",
     "title": "Introduction to Data Science",
     "section": "Yogi Berra",
-    "text": "Yogi Berra\n\nIt’s though to make predictions, especially about the future."
+    "text": "Yogi Berra\n\n\nIt’s though to make predictions, especially about the future."
   },
   {
     "objectID": "index.slides.html#course-topics",

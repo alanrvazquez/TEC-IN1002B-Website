@@ -137,6 +137,8 @@ Dillman said
 
 ## Other problems
 
+</br></br>
+
 **Clustering** attempts to group individuals in a population together by their similarity, but not driven by any specific purpose. For example, “Do our customers form natural groups or segments?”
 
 ## Discussion
@@ -168,6 +170,8 @@ Dillman said
 :::
 
 ## Our goal
+
+</br></br></br>
 
 > Our goal is to turn data into information that answers useful questions.
 
@@ -234,6 +238,8 @@ The predictors ($\boldsymbol{X}$) can be qualitative or quantitative.
 
 ## Example
 
+</br></br>
+
 What factors explain the variation in Type II diabetes?
 
 -   $Y$ is a 1 if a person has Type II diabetes, a 0 if not.
@@ -272,6 +278,8 @@ $\hat{f}(\boldsymbol{X})$ represents an approximation or estimate of the true mo
 ![](images/training_test.jpeg/training_test.jpeg.001.jpeg){fig-align="center"}
 
 ## Yogi Berra
+
+</br></br></br>
 
 > It’s though to make predictions, especially about the future.
 
