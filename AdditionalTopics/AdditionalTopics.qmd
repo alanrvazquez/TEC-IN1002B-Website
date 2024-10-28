@@ -36,11 +36,11 @@ Let's import **scikit-learn** into python together with the other relevant libra
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-from sklearn.preprocessing import StandardScaler
 import statsmodels.api as sm
+from sklearn.preprocessing import StandardScaler
 ```
 
-We will not use all the functions from the **scikit-learn** library. Instead, we will use specific functions from the sub-libraries **model_selection**, **linear_model**, and **metrics**.
+We will not use all the functions from the **scikit-learn** library. Instead, we will use specific functions from the sub-library **preprocessing**.
 
 # Linear models with categorical predictors
 
@@ -65,6 +65,8 @@ We will not use all the functions from the **scikit-learn** library. Instead, we
     -   $\beta_j$ is the amount of increase in the mean response when we change from the reference category to another category.
 
 ## Example 1
+
+</br>
 
 The auto data set includes a categorical variable “Origin” which shows the origin of each car.
 
@@ -181,7 +183,16 @@ regr = sm.OLS(auto_data['mpg'], dummy_X_train)
 linear_model = regr.fit()
 
 # Summary of the models.
-linear_model.summary()
+summary_model = linear_model.summary()
+```
+
+## 
+
+```{python}
+#| echo: true
+#| output: true
+
+print(summary_model)
 ```
 
 ## Analysis of covariance
@@ -202,10 +213,10 @@ To gain insight into the model, we write it as follows:
 
 $$
 \begin{align}
-y_i &= \beta_0+\beta_1 d_{1i} +\beta_2 d_{2i} + \beta_3 x_{i} +\epsilon_i \\ &= \begin{cases}
-y_i= (\beta_0+\beta_1)  + \beta_3 x_{i} +\epsilon_i \text{ if car is European} \\
-y_i= (\beta_0+\beta_2) + \beta_3 x_{i} +\epsilon_i \text{ if car is Japanese} \\
-y_i= \beta_0 + \beta_3 x_{i} +\epsilon_i\;\;\;\;\;\;\;\;\  \text{ if car is American}
+Y_i &= \beta_0+\beta_1 d_{1i} +\beta_2 d_{2i} + \beta_3 X_{i} +\epsilon_i \\ &= \begin{cases}
+(\beta_0+\beta_1)  + \beta_3 X_{i} +\epsilon_i \text{ if car is European} \\
+(\beta_0+\beta_2) + \beta_3 X_{i} +\epsilon_i \text{ if car is Japanese} \\
+\beta_0 + \beta_3 X_{i} +\epsilon_i\;\;\;\;\;\;\;\;\  \text{ if car is American}
 \end{cases}.
 \end{align}
 $$
@@ -245,7 +256,8 @@ ancova_model = regr.fit()
 #| output: true
 
 # Summary of the models.
-ancova_model.summary()
+summary_ancova = ancova_model.summary()
+print(summary_ancova)
 ```
 
 # Linear models with standardized predictors
@@ -366,14 +378,25 @@ To fit the model, we follow the same functions as before.
 #| echo: true
 #| output: true
 
+# Add the intercept.
+Xs_training_int = sm.add_constant(Xs_training)
+
 # Create linear regression object
 std_regr = sm.OLS(catalyst_data['Yield'], Xs_training)
 
 # Train the model using the training sets
-std_linear_model = regr.fit()
+std_linear_model = std_regr.fit()
 
 # Summary of the model.
-std_linear_model.summary()
+std_summary_model = std_linear_model.summary()
+```
+
+## 
+
+```{python}
+#| echo: true
+
+print(std_summary_model)
 ```
 
 ## Discussion
@@ -406,7 +429,7 @@ A model is incorrect if
 -   The residuals are not independent.
 :::
 
-## Example
+## Example 3
 
 Consider the fitting the following model to the `auto_data`:
 
@@ -459,7 +482,7 @@ plt.show()
 #| echo: false
 #| output: true
 
-# Residual vs Fitted Values Plot
+# Residual vs Time Plot
 plt.figure(figsize=(5, 5))
 order = range(residuals.shape[0])
 sns.scatterplot(x = order, y = residuals)
@@ -527,7 +550,7 @@ $$\sqrt{Y} = \beta_0 + \beta_1 X + \epsilon$$ $$\sqrt{Y} = \beta_0 + \beta_1 \sq
 import numpy as np
 ```
 
-## Example 3
+## Continuation of Example 3
 
 To transform the response ($Y$) using $\ln{(Y)}$ or $\sqrt{(Y)}$ we use the functions `log()` and `sqrt()`, respectively, from **numpy**.
 
@@ -585,7 +608,7 @@ plt.show()
 #| echo: false
 #| output: true
 
-# Residual vs Fitted Values Plot
+# Residual vs Time Plot
 plt.figure(figsize=(5, 5))
 order = range(residuals.shape[0])
 sns.scatterplot(x = order, y = residuals)
@@ -667,7 +690,7 @@ plt.show()
 #| output: true
 #| code-fold: true
 
-# Residual vs Fitted Values Plot
+# Residual vs Time Plot
 plt.figure(figsize=(5, 5))
 order = range(residuals.shape[0])
 sns.scatterplot(x = order, y = residuals)

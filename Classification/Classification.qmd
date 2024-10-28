@@ -320,7 +320,7 @@ The IRLS algorithm (and consequently maximum likelihood estimation and Logistic 
 
 ## In python
 
-Using the training dataset, we estimate a logistic regression classifier using the function `Logit()` from **statsmodel**. To this end, we first define the target category using the `get_dummies()`
+Using the training dataset, we estimate a logistic regression classifier using the function `Logit()` from **statsmodel**. To this end, we first define the target category using the `get_dummies()`.
 
 ```{python}
 #| echo: true
@@ -379,7 +379,8 @@ The `summary()` function of **statsmodel** contains the Wald tests of the coeffi
 #| echo: true
 #| output: true
 
-print(logit_model.summary())
+logit_summary = logit_model.summary()
+print(logit_summary)
 ```
 
 # Classification performance

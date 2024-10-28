@@ -21,8 +21,8 @@ author:
 
 1.  Introduction to Linear Regression ([slides](/LinearRegression/LinearRegression.slides.html)) ([colab](https://colab.research.google.com/drive/1RPIkJNT2fdFB9jLcYGGjUx22G8JmzAPK?usp=sharing))
 2.  Model Inference and Evaluation ([slides](/ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html)) ([colab](https://colab.research.google.com/drive/1fyUvGw_u9hm5c0Y9sNJAPNgwT3MzyhYA?usp=sharing)) 
-3.  Additional Topics ([slides](/AdditionalTopics/AdditionalTopics.slides.html)) 
-4.  Logistic Regression ([slides](/Classification/Classification.slides.html))
+3.  Additional Topics ([slides](/AdditionalTopics/AdditionalTopics.slides.html)) ([colab](https://colab.research.google.com/drive/1XAUXguROL4Jl4S9RoIS43jw7S2vf95Ei?usp=sharing))
+4.  Logistic Regression ([slides](/Classification/Classification.slides.html)) ([colab](https://colab.research.google.com/drive/1WpUjIUgM_D70waYC11_cB46YOuXCM-13?usp=sharing)) 
 
 
 ## About the author

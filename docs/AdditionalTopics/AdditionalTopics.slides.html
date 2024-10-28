@@ -423,15 +423,15 @@ Alan R. Vazquez
 <section id="load-the-libraries" class="slide level2">
 <h2>Load the libraries</h2>
 <p>Let’s import <strong>scikit-learn</strong> into python together with the other relevant libraries.</p>
-<div id="60e70bdd" class="cell" data-execution_count="1">
+<div id="f00459eb" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Importing necessary libraries</span></span>
 <span id="cb1-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb1-4"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-5"><a></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="cb1-6"><a></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb1-6"><a></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We will not use all the functions from the <strong>scikit-learn</strong> library. Instead, we will use specific functions from the sub-libraries <strong>model_selection</strong>, <strong>linear_model</strong>, and <strong>metrics</strong>.</p>
+<p>We will not use all the functions from the <strong>scikit-learn</strong> library. Instead, we will use specific functions from the sub-library <strong>preprocessing</strong>.</p>
 </section>
 <section>
 <section id="linear-models-with-categorical-predictors" class="title-slide slide level1 center">
@@ -463,8 +463,9 @@ Alan R. Vazquez
 </section>
 <section id="example-1" class="slide level2">
 <h2>Example 1</h2>
+<p><br></p>
 <p>The auto data set includes a categorical variable “Origin” which shows the origin of each car.</p>
-<div id="678ea396" class="cell" data-execution_count="2">
+<div id="11e491bc" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># Load the Excel file into a pandas DataFrame.</span></span>
 <span id="cb2-2"><a></a>auto_data <span class="op">=</span> pd.read_excel(<span class="st">"auto.xlsx"</span>)</span>
 <span id="cb2-3"><a></a></span>
@@ -474,7 +475,7 @@ Alan R. Vazquez
 </section>
 <section id="dataset" class="slide level2">
 <h2>Dataset</h2>
-<div id="320eddae" class="cell" data-execution_count="3">
+<div id="842a1394" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># Show dataset.</span></span>
 <span id="cb3-2"><a></a>auto_data[[<span class="st">'mpg'</span>, <span class="st">'origin'</span>]].head(<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
@@ -594,14 +595,14 @@ Alan R. Vazquez
 <section id="in-python" class="slide level2">
 <h2>In python</h2>
 <p>We follow three steps to fit a linear model with a categorical predictor. First, we compute the dummy variables.</p>
-<div id="1b678cb2" class="cell" data-execution_count="4">
+<div id="dd4c84f0" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co"># Create linear regression object</span></span>
 <span id="cb4-2"><a></a>dummy_data <span class="op">=</span> pd.get_dummies(auto_data[<span class="st">'origin'</span>], drop_first <span class="op">=</span> <span class="va">True</span>, </span>
 <span id="cb4-3"><a></a>                            dtype <span class="op">=</span> <span class="st">'int'</span>)</span>
 <span id="cb4-4"><a></a>dummy_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next, we construct the matrix of predictors with the intercept.</p>
-<div id="67e3ad49" class="cell" data-execution_count="5">
+<div id="f340c6bc" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="co"># Create linear regression object</span></span>
 <span id="cb5-2"><a></a>dummy_X_train <span class="op">=</span> sm.add_constant(dummy_data)</span>
 <span id="cb5-3"><a></a>dummy_X_train</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -610,7 +611,7 @@ Alan R. Vazquez
 <section id="section-1" class="slide level2">
 <h2></h2>
 <p>Finally, we fit the model using <code>OLS()</code> and <code>fit()</code> from <strong>statsmodels</strong>.</p>
-<div id="dca88874" class="cell" data-execution_count="6">
+<div id="662ea12a" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="co"># Create linear regression object</span></span>
 <span id="cb6-2"><a></a>regr <span class="op">=</span> sm.OLS(auto_data[<span class="st">'mpg'</span>], dummy_X_train)</span>
 <span id="cb6-3"><a></a></span>
@@ -618,140 +619,40 @@ Alan R. Vazquez
 <span id="cb6-5"><a></a>linear_model <span class="op">=</span> regr.fit()</span>
 <span id="cb6-6"><a></a></span>
 <span id="cb6-7"><a></a><span class="co"># Summary of the models.</span></span>
-<span id="cb6-8"><a></a>linear_model.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<table class="simpletable caption-top" data-quarto-postprocess="true">
-<caption>OLS Regression Results</caption>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Dep. Variable:</td>
-<td>mpg</td>
-<td data-quarto-table-cell-role="th">R-squared:</td>
-<td>0.332</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Model:</td>
-<td>OLS</td>
-<td data-quarto-table-cell-role="th">Adj. R-squared:</td>
-<td>0.328</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Method:</td>
-<td>Least Squares</td>
-<td data-quarto-table-cell-role="th">F-statistic:</td>
-<td>96.60</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Date:</td>
-<td>Sun, 27 Oct 2024</td>
-<td data-quarto-table-cell-role="th">Prob (F-statistic):</td>
-<td>8.67e-35</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Time:</td>
-<td>18:28:22</td>
-<td data-quarto-table-cell-role="th">Log-Likelihood:</td>
-<td>-1282.2</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">No. Observations:</td>
-<td>392</td>
-<td data-quarto-table-cell-role="th">AIC:</td>
-<td>2570.</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Df Residuals:</td>
-<td>389</td>
-<td data-quarto-table-cell-role="th">BIC:</td>
-<td>2582.</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Df Model:</td>
-<td>2</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Covariance Type:</td>
-<td>nonrobust</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<span id="cb6-8"><a></a>summary_model <span class="op">=</span> linear_model.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<div id="b1fdc141" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="bu">print</span>(summary_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    mpg   R-squared:                       0.332
+Model:                            OLS   Adj. R-squared:                  0.328
+Method:                 Least Squares   F-statistic:                     96.60
+Date:                Sun, 27 Oct 2024   Prob (F-statistic):           8.67e-35
+Time:                        20:01:02   Log-Likelihood:                -1282.2
+No. Observations:                 392   AIC:                             2570.
+Df Residuals:                     389   BIC:                             2582.
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         20.0335      0.409     49.025      0.000      19.230      20.837
+European       7.5695      0.877      8.634      0.000       5.846       9.293
+Japanese      10.4172      0.828     12.588      0.000       8.790      12.044
+==============================================================================
+Omnibus:                       26.330   Durbin-Watson:                   0.763
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               30.217
+Skew:                           0.679   Prob(JB):                     2.74e-07
+Kurtosis:                       3.066   Cond. No.                         3.16
+==============================================================================
 
-
-<table class="simpletable caption-top" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td></td>
-<td data-quarto-table-cell-role="th">coef</td>
-<td data-quarto-table-cell-role="th">std err</td>
-<td data-quarto-table-cell-role="th">t</td>
-<td data-quarto-table-cell-role="th">P&gt;|t|</td>
-<td data-quarto-table-cell-role="th">[0.025</td>
-<td data-quarto-table-cell-role="th">0.975]</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">const</td>
-<td>20.0335</td>
-<td>0.409</td>
-<td>49.025</td>
-<td>0.000</td>
-<td>19.230</td>
-<td>20.837</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">European</td>
-<td>7.5695</td>
-<td>0.877</td>
-<td>8.634</td>
-<td>0.000</td>
-<td>5.846</td>
-<td>9.293</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Japanese</td>
-<td>10.4172</td>
-<td>0.828</td>
-<td>12.588</td>
-<td>0.000</td>
-<td>8.790</td>
-<td>12.044</td>
-</tr>
-</tbody>
-</table>
-
-
-<table class="simpletable caption-top" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Omnibus:</td>
-<td>26.330</td>
-<td data-quarto-table-cell-role="th">Durbin-Watson:</td>
-<td>0.763</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Prob(Omnibus):</td>
-<td>0.000</td>
-<td data-quarto-table-cell-role="th">Jarque-Bera (JB):</td>
-<td>30.217</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Skew:</td>
-<td>0.679</td>
-<td data-quarto-table-cell-role="th">Prob(JB):</td>
-<td>2.74e-07</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Kurtosis:</td>
-<td>3.066</td>
-<td data-quarto-table-cell-role="th">Cond. No.</td>
-<td>3.16</td>
-</tr>
-</tbody>
-</table>
-<br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</code></pre>
 </div>
 </div>
 </section>
@@ -768,16 +669,16 @@ Alan R. Vazquez
 <p>To gain insight into the model, we write it as follows:</p>
 <p><span class="math display">\[
 \begin{align}
-y_i &amp;= \beta_0+\beta_1 d_{1i} +\beta_2 d_{2i} + \beta_3 x_{i} +\epsilon_i \\ &amp;= \begin{cases}
-y_i= (\beta_0+\beta_1)  + \beta_3 x_{i} +\epsilon_i \text{ if car is European} \\
-y_i= (\beta_0+\beta_2) + \beta_3 x_{i} +\epsilon_i \text{ if car is Japanese} \\
-y_i= \beta_0 + \beta_3 x_{i} +\epsilon_i\;\;\;\;\;\;\;\;\  \text{ if car is American}
+Y_i &amp;= \beta_0+\beta_1 d_{1i} +\beta_2 d_{2i} + \beta_3 X_{i} +\epsilon_i \\ &amp;= \begin{cases}
+(\beta_0+\beta_1)  + \beta_3 X_{i} +\epsilon_i \text{ if car is European} \\
+(\beta_0+\beta_2) + \beta_3 X_{i} +\epsilon_i \text{ if car is Japanese} \\
+\beta_0 + \beta_3 X_{i} +\epsilon_i\;\;\;\;\;\;\;\;\  \text{ if car is American}
 \end{cases}.
 \end{align}
 \]</span></p>
 <p>Note that these models have different intercepts but the same slope.</p>
 </section>
-<section id="section-2" class="slide level2">
+<section id="section-3" class="slide level2">
 <h2></h2>
 <p><br><br><br></p>
 <ul>
@@ -789,164 +690,53 @@ y_i= \beta_0 + \beta_3 x_{i} +\epsilon_i\;\;\;\;\;\;\;\;\  \text{ if car is Amer
 <section id="in-python-1" class="slide level2">
 <h2>In python</h2>
 <p>To fit an ANCOVA model, we use similar steps as before. The only new step is to concatenate the data with the dummy variables and the numerical predictor using the function <code>concat()</code> from <strong>pandas</strong>.</p>
-<div id="50a68bd4" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="co"># Concatenate the two data sets.</span></span>
-<span id="cb7-2"><a></a>X_train <span class="op">=</span> pd.concat([dummy_X_train, auto_data[<span class="st">'weight'</span>]], axis <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb7-3"><a></a></span>
-<span id="cb7-4"><a></a><span class="co"># Create linear regression object</span></span>
-<span id="cb7-5"><a></a>regr <span class="op">=</span> sm.OLS(auto_data[<span class="st">'mpg'</span>], X_train)</span>
-<span id="cb7-6"><a></a></span>
-<span id="cb7-7"><a></a><span class="co"># Train the model using the training sets</span></span>
-<span id="cb7-8"><a></a>ancova_model <span class="op">=</span> regr.fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="73dd1208" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="co"># Concatenate the two data sets.</span></span>
+<span id="cb9-2"><a></a>X_train <span class="op">=</span> pd.concat([dummy_X_train, auto_data[<span class="st">'weight'</span>]], axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb9-3"><a></a></span>
+<span id="cb9-4"><a></a><span class="co"># Create linear regression object</span></span>
+<span id="cb9-5"><a></a>regr <span class="op">=</span> sm.OLS(auto_data[<span class="st">'mpg'</span>], X_train)</span>
+<span id="cb9-6"><a></a></span>
+<span id="cb9-7"><a></a><span class="co"># Train the model using the training sets</span></span>
+<span id="cb9-8"><a></a>ancova_model <span class="op">=</span> regr.fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="model-summary" class="slide level2">
 <h2>Model summary</h2>
-<div id="b4cc81ba" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="co"># Summary of the models.</span></span>
-<span id="cb8-2"><a></a>ancova_model.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
-<table class="simpletable caption-top" data-quarto-postprocess="true">
-<caption>OLS Regression Results</caption>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Dep. Variable:</td>
-<td>mpg</td>
-<td data-quarto-table-cell-role="th">R-squared:</td>
-<td>0.702</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Model:</td>
-<td>OLS</td>
-<td data-quarto-table-cell-role="th">Adj. R-squared:</td>
-<td>0.700</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Method:</td>
-<td>Least Squares</td>
-<td data-quarto-table-cell-role="th">F-statistic:</td>
-<td>304.7</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Date:</td>
-<td>Sun, 27 Oct 2024</td>
-<td data-quarto-table-cell-role="th">Prob (F-statistic):</td>
-<td>1.28e-101</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Time:</td>
-<td>18:28:23</td>
-<td data-quarto-table-cell-role="th">Log-Likelihood:</td>
-<td>-1123.9</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">No. Observations:</td>
-<td>392</td>
-<td data-quarto-table-cell-role="th">AIC:</td>
-<td>2256.</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Df Residuals:</td>
-<td>388</td>
-<td data-quarto-table-cell-role="th">BIC:</td>
-<td>2272.</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Df Model:</td>
-<td>3</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Covariance Type:</td>
-<td>nonrobust</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div id="62211215" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="co"># Summary of the models.</span></span>
+<span id="cb10-2"><a></a>summary_ancova <span class="op">=</span> ancova_model.summary()</span>
+<span id="cb10-3"><a></a><span class="bu">print</span>(summary_ancova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    mpg   R-squared:                       0.702
+Model:                            OLS   Adj. R-squared:                  0.700
+Method:                 Least Squares   F-statistic:                     304.7
+Date:                Sun, 27 Oct 2024   Prob (F-statistic):          1.28e-101
+Time:                        20:01:02   Log-Likelihood:                -1123.9
+No. Observations:                 392   AIC:                             2256.
+Df Residuals:                     388   BIC:                             2272.
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         43.7322      1.113     39.277      0.000      41.543      45.921
+European       0.9709      0.659      1.474      0.141      -0.324       2.266
+Japanese       2.3271      0.665      3.501      0.001       1.020       3.634
+weight        -0.0070      0.000    -21.956      0.000      -0.008      -0.006
+==============================================================================
+Omnibus:                       40.731   Durbin-Watson:                   0.832
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               61.938
+Skew:                           0.689   Prob(JB):                     3.55e-14
+Kurtosis:                       4.377   Cond. No.                     1.83e+04
+==============================================================================
 
-
-<table class="simpletable caption-top" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td></td>
-<td data-quarto-table-cell-role="th">coef</td>
-<td data-quarto-table-cell-role="th">std err</td>
-<td data-quarto-table-cell-role="th">t</td>
-<td data-quarto-table-cell-role="th">P&gt;|t|</td>
-<td data-quarto-table-cell-role="th">[0.025</td>
-<td data-quarto-table-cell-role="th">0.975]</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">const</td>
-<td>43.7322</td>
-<td>1.113</td>
-<td>39.277</td>
-<td>0.000</td>
-<td>41.543</td>
-<td>45.921</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">European</td>
-<td>0.9709</td>
-<td>0.659</td>
-<td>1.474</td>
-<td>0.141</td>
-<td>-0.324</td>
-<td>2.266</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Japanese</td>
-<td>2.3271</td>
-<td>0.665</td>
-<td>3.501</td>
-<td>0.001</td>
-<td>1.020</td>
-<td>3.634</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">weight</td>
-<td>-0.0070</td>
-<td>0.000</td>
-<td>-21.956</td>
-<td>0.000</td>
-<td>-0.008</td>
-<td>-0.006</td>
-</tr>
-</tbody>
-</table>
-
-
-<table class="simpletable caption-top" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Omnibus:</td>
-<td>40.731</td>
-<td data-quarto-table-cell-role="th">Durbin-Watson:</td>
-<td>0.832</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Prob(Omnibus):</td>
-<td>0.000</td>
-<td data-quarto-table-cell-role="th">Jarque-Bera (JB):</td>
-<td>61.938</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Skew:</td>
-<td>0.689</td>
-<td data-quarto-table-cell-role="th">Prob(JB):</td>
-<td>3.55e-14</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Kurtosis:</td>
-<td>4.377</td>
-<td data-quarto-table-cell-role="th">Cond. No.</td>
-<td>1.83e+04</td>
-</tr>
-</tbody>
-</table>
-<br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br>[2] The condition number is large, 1.83e+04. This might indicate that there are<br>strong multicollinearity or other numerical problems.
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 1.83e+04. This might indicate that there are
+strong multicollinearity or other numerical problems.</code></pre>
 </div>
 </div>
 </section></section>
@@ -966,7 +756,7 @@ y_i= \beta_0 + \beta_3 x_{i} +\epsilon_i\;\;\;\;\;\;\;\;\  \text{ if car is Amer
 </ul>
 </div>
 </section>
-<section id="section-3" class="slide level2">
+<section id="section-4" class="slide level2">
 <h2></h2>
 <p><br><br></p>
 <p>In mathematical terms, we standardize a predictor <span class="math inline">\(X\)</span> as:</p>
@@ -1008,13 +798,13 @@ y_i= \beta_0 + \beta_3 x_{i} +\epsilon_i\;\;\;\;\;\;\;\;\  \text{ if car is Amer
 <p><br></p>
 <p>The dataset is in the file “catalyst.xlsx”.</p>
 </section>
-<section id="section-4" class="slide level2">
+<section id="section-5" class="slide level2">
 <h2></h2>
 <p><br></p>
 <p>The units of concentration and temperature are percentages and Farenheit degrees, respectively.</p>
-<div id="6b7be2b7" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a>catalyst_data <span class="op">=</span> pd.read_excel(<span class="st">"catalyst.xlsx"</span>)</span>
-<span id="cb9-2"><a></a><span class="bu">print</span>(catalyst_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="b59f7f8d" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a>catalyst_data <span class="op">=</span> pd.read_excel(<span class="st">"catalyst.xlsx"</span>)</span>
+<span id="cb12-2"><a></a><span class="bu">print</span>(catalyst_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Order  Yield  Concentration  Temperature
 0      1     90              2          180
@@ -1032,23 +822,23 @@ y_i= \beta_0 + \beta_3 x_{i} +\epsilon_i\;\;\;\;\;\;\;\;\  \text{ if car is Amer
 <h2>Standarization in python</h2>
 <p><br></p>
 <p>Recall that we standardize numerical predictors using the <code>scaler()</code> function from <strong>scikit-learn</strong>.</p>
-<div id="0dd70d23" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="co"># Select predictor matrix.</span></span>
-<span id="cb11-2"><a></a>predictor_data <span class="op">=</span> catalyst_data[[<span class="st">'Concentration'</span>, <span class="st">'Temperature'</span>]]</span>
-<span id="cb11-3"><a></a></span>
-<span id="cb11-4"><a></a><span class="co"># Define the scaling operator.</span></span>
-<span id="cb11-5"><a></a>scaler <span class="op">=</span> StandardScaler()</span>
-<span id="cb11-6"><a></a></span>
-<span id="cb11-7"><a></a><span class="co"># Apply the scaling operator.</span></span>
-<span id="cb11-8"><a></a>Xs_training <span class="op">=</span> scaler.fit_transform(predictor_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="5fed2933" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="co"># Select predictor matrix.</span></span>
+<span id="cb14-2"><a></a>predictor_data <span class="op">=</span> catalyst_data[[<span class="st">'Concentration'</span>, <span class="st">'Temperature'</span>]]</span>
+<span id="cb14-3"><a></a></span>
+<span id="cb14-4"><a></a><span class="co"># Define the scaling operator.</span></span>
+<span id="cb14-5"><a></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb14-6"><a></a></span>
+<span id="cb14-7"><a></a><span class="co"># Apply the scaling operator.</span></span>
+<span id="cb14-8"><a></a>Xs_training <span class="op">=</span> scaler.fit_transform(predictor_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="section-5" class="slide level2">
+<section id="section-6" class="slide level2">
 <h2></h2>
 <p><br></p>
 <p>Now the predictors are on the same scale</p>
-<div id="e7ced08a" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="bu">print</span>( Xs_training )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="ab858f9f" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a><span class="bu">print</span>( Xs_training )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[ 1.  1.]
  [ 1.  1.]
@@ -1061,160 +851,54 @@ y_i= \beta_0 + \beta_3 x_{i} +\epsilon_i\;\;\;\;\;\;\;\;\  \text{ if car is Amer
 </div>
 </div>
 </section>
-<section id="section-6" class="slide level2">
+<section id="section-7" class="slide level2">
 <h2></h2>
 <p>To fit the model, we follow the same functions as before.</p>
-<div id="e28359ef" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="co"># Create linear regression object</span></span>
-<span id="cb14-2"><a></a>std_regr <span class="op">=</span> sm.OLS(catalyst_data[<span class="st">'Yield'</span>], Xs_training)</span>
-<span id="cb14-3"><a></a></span>
-<span id="cb14-4"><a></a><span class="co"># Train the model using the training sets</span></span>
-<span id="cb14-5"><a></a>std_linear_model <span class="op">=</span> regr.fit()</span>
-<span id="cb14-6"><a></a></span>
-<span id="cb14-7"><a></a><span class="co"># Summary of the model.</span></span>
-<span id="cb14-8"><a></a>std_linear_model.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
-<table class="simpletable caption-top" data-quarto-postprocess="true">
-<caption>OLS Regression Results</caption>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Dep. Variable:</td>
-<td>mpg</td>
-<td data-quarto-table-cell-role="th">R-squared:</td>
-<td>0.702</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Model:</td>
-<td>OLS</td>
-<td data-quarto-table-cell-role="th">Adj. R-squared:</td>
-<td>0.700</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Method:</td>
-<td>Least Squares</td>
-<td data-quarto-table-cell-role="th">F-statistic:</td>
-<td>304.7</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Date:</td>
-<td>Sun, 27 Oct 2024</td>
-<td data-quarto-table-cell-role="th">Prob (F-statistic):</td>
-<td>1.28e-101</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Time:</td>
-<td>18:28:23</td>
-<td data-quarto-table-cell-role="th">Log-Likelihood:</td>
-<td>-1123.9</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">No. Observations:</td>
-<td>392</td>
-<td data-quarto-table-cell-role="th">AIC:</td>
-<td>2256.</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Df Residuals:</td>
-<td>388</td>
-<td data-quarto-table-cell-role="th">BIC:</td>
-<td>2272.</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Df Model:</td>
-<td>3</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Covariance Type:</td>
-<td>nonrobust</td>
-<td data-quarto-table-cell-role="th"></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div id="47da5567" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a><span class="co"># Add the intercept.</span></span>
+<span id="cb17-2"><a></a>Xs_training_int <span class="op">=</span> sm.add_constant(Xs_training)</span>
+<span id="cb17-3"><a></a></span>
+<span id="cb17-4"><a></a><span class="co"># Create linear regression object</span></span>
+<span id="cb17-5"><a></a>std_regr <span class="op">=</span> sm.OLS(catalyst_data[<span class="st">'Yield'</span>], Xs_training)</span>
+<span id="cb17-6"><a></a></span>
+<span id="cb17-7"><a></a><span class="co"># Train the model using the training sets</span></span>
+<span id="cb17-8"><a></a>std_linear_model <span class="op">=</span> std_regr.fit()</span>
+<span id="cb17-9"><a></a></span>
+<span id="cb17-10"><a></a><span class="co"># Summary of the model.</span></span>
+<span id="cb17-11"><a></a>std_summary_model <span class="op">=</span> std_linear_model.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-8" class="slide level2">
+<h2></h2>
+<div id="4df46118" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="bu">print</span>(std_summary_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                 OLS Regression Results                                
+=======================================================================================
+Dep. Variable:                  Yield   R-squared (uncentered):                   0.002
+Model:                            OLS   Adj. R-squared (uncentered):             -0.330
+Method:                 Least Squares   F-statistic:                           0.006694
+Date:                Sun, 27 Oct 2024   Prob (F-statistic):                       0.993
+Time:                        20:01:02   Log-Likelihood:                         -46.940
+No. Observations:                   8   AIC:                                      97.88
+Df Residuals:                       6   BIC:                                      98.04
+Df Model:                           2                                                  
+Covariance Type:            nonrobust                                                  
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+x1             1.5000     34.907      0.043      0.967     -83.914      86.914
+x2             3.7500     34.907      0.107      0.918     -81.664      89.164
+==============================================================================
+Omnibus:                        2.258   Durbin-Watson:                   0.000
+Prob(Omnibus):                  0.323   Jarque-Bera (JB):                0.627
+Skew:                           0.000   Prob(JB):                        0.731
+Kurtosis:                       1.628   Cond. No.                         1.00
+==============================================================================
 
-
-<table class="simpletable caption-top" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td></td>
-<td data-quarto-table-cell-role="th">coef</td>
-<td data-quarto-table-cell-role="th">std err</td>
-<td data-quarto-table-cell-role="th">t</td>
-<td data-quarto-table-cell-role="th">P&gt;|t|</td>
-<td data-quarto-table-cell-role="th">[0.025</td>
-<td data-quarto-table-cell-role="th">0.975]</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">const</td>
-<td>43.7322</td>
-<td>1.113</td>
-<td>39.277</td>
-<td>0.000</td>
-<td>41.543</td>
-<td>45.921</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">European</td>
-<td>0.9709</td>
-<td>0.659</td>
-<td>1.474</td>
-<td>0.141</td>
-<td>-0.324</td>
-<td>2.266</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Japanese</td>
-<td>2.3271</td>
-<td>0.665</td>
-<td>3.501</td>
-<td>0.001</td>
-<td>1.020</td>
-<td>3.634</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">weight</td>
-<td>-0.0070</td>
-<td>0.000</td>
-<td>-21.956</td>
-<td>0.000</td>
-<td>-0.008</td>
-<td>-0.006</td>
-</tr>
-</tbody>
-</table>
-
-
-<table class="simpletable caption-top" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Omnibus:</td>
-<td>40.731</td>
-<td data-quarto-table-cell-role="th">Durbin-Watson:</td>
-<td>0.832</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Prob(Omnibus):</td>
-<td>0.000</td>
-<td data-quarto-table-cell-role="th">Jarque-Bera (JB):</td>
-<td>61.938</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Skew:</td>
-<td>0.689</td>
-<td data-quarto-table-cell-role="th">Prob(JB):</td>
-<td>3.55e-14</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Kurtosis:</td>
-<td>4.377</td>
-<td data-quarto-table-cell-role="th">Cond. No.</td>
-<td>1.83e+04</td>
-</tr>
-</tbody>
-</table>
-<br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br>[2] The condition number is large, 1.83e+04. This might indicate that there are<br>strong multicollinearity or other numerical problems.
+Notes:
+[1] R² is computed without centering (uncentered) since the model does not contain a constant.
+[2] Standard Errors assume that the covariance matrix of the errors is correctly specified.</code></pre>
 </div>
 </div>
 </section>
@@ -1251,8 +935,8 @@ y_i= \beta_0 + \beta_3 x_{i} +\epsilon_i\;\;\;\;\;\;\;\;\  \text{ if car is Amer
 </ul>
 </div>
 </section>
-<section id="example" class="slide level2">
-<h2>Example</h2>
+<section id="example-3" class="slide level2">
+<h2>Example 3</h2>
 <p>Consider the fitting the following model to the <code>auto_data</code>:</p>
 <p><span class="math display">\[Y_i = \beta_0 + \beta_1 X_{i} + \epsilon_i\]</span> where:</p>
 <ul>
@@ -1260,31 +944,31 @@ y_i= \beta_0 + \beta_3 x_{i} +\epsilon_i\;\;\;\;\;\;\;\;\  \text{ if car is Amer
 <li><span class="math inline">\(X_i\)</span> is the horsepower of the i-th car.</li>
 </ul>
 <p>We fit the model:</p>
-<div id="88d616b2" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a>X_train <span class="op">=</span> sm.add_constant(auto_data[<span class="st">'horsepower'</span>])</span>
-<span id="cb15-2"><a></a>regr <span class="op">=</span> sm.OLS(auto_data[<span class="st">'mpg'</span>], X_train)</span>
-<span id="cb15-3"><a></a>linear_model <span class="op">=</span> regr.fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="4048cc4e" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a>X_train <span class="op">=</span> sm.add_constant(auto_data[<span class="st">'horsepower'</span>])</span>
+<span id="cb20-2"><a></a>regr <span class="op">=</span> sm.OLS(auto_data[<span class="st">'mpg'</span>], X_train)</span>
+<span id="cb20-3"><a></a>linear_model <span class="op">=</span> regr.fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="residual-analysis" class="slide level2">
 <h2>Residual analysis</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="62b7fae2" class="cell" data-execution_count="15">
+<div id="094f5376" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="AdditionalTopics_files/figure-revealjs/cell-16-output-1.png" width="447" height="449"></p>
+<p><img data-src="AdditionalTopics_files/figure-revealjs/cell-18-output-1.png" width="447" height="449"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="cee5e028" class="cell" data-execution_count="16">
+<div id="7c8883ef" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="AdditionalTopics_files/figure-revealjs/cell-17-output-1.png" width="450" height="449"></p>
+<p><img data-src="AdditionalTopics_files/figure-revealjs/cell-19-output-1.png" width="450" height="449"></p>
 </figure>
 </div>
 </div>
@@ -1339,44 +1023,44 @@ y_i= \beta_0 + \beta_3 x_{i} +\epsilon_i\;\;\;\;\;\;\;\;\  \text{ if car is Amer
 </figure>
 </div>
 </div></div>
-<div id="33e17a6e" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="4ff317e8" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="example-3" class="slide level2">
-<h2>Example 3</h2>
+<section id="continuation-of-example-3" class="slide level2">
+<h2>Continuation of Example 3</h2>
 <p>To transform the response (<span class="math inline">\(Y\)</span>) using <span class="math inline">\(\ln{(Y)}\)</span> or <span class="math inline">\(\sqrt{(Y)}\)</span> we use the functions <code>log()</code> and <code>sqrt()</code>, respectively, from <strong>numpy</strong>.</p>
-<div id="cb6e1612" class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a>sqrt_Y <span class="op">=</span> np.sqrt( auto_data[<span class="st">'mpg'</span>] )</span>
-<span id="cb17-2"><a></a>log_Y <span class="op">=</span> np.log( auto_data[<span class="st">'mpg'</span>] )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="a694618b" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a></a>sqrt_Y <span class="op">=</span> np.sqrt( auto_data[<span class="st">'mpg'</span>] )</span>
+<span id="cb22-2"><a></a>log_Y <span class="op">=</span> np.log( auto_data[<span class="st">'mpg'</span>] )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s consider the logarithm transformation. The model then is:</p>
 <p><span class="math display">\[\log{(Y_i)} = \beta_0 + \beta_1 X_i +\epsilon_i,\]</span></p>
 <p>which we fit using the code below.</p>
-<div id="db7a7cfe" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a>log_regr <span class="op">=</span> sm.OLS(log_Y, X_train)</span>
-<span id="cb18-2"><a></a>log_linear_model <span class="op">=</span> log_regr.fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="2da5a1cb" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a>log_regr <span class="op">=</span> sm.OLS(log_Y, X_train)</span>
+<span id="cb23-2"><a></a>log_linear_model <span class="op">=</span> log_regr.fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="new-residual-analysis" class="slide level2">
 <h2>New residual analysis</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="35abc790" class="cell" data-execution_count="21">
+<div id="26d3b353" class="cell" data-execution_count="23">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="AdditionalTopics_files/figure-revealjs/cell-22-output-1.png" width="451" height="449"></p>
+<p><img data-src="AdditionalTopics_files/figure-revealjs/cell-24-output-1.png" width="451" height="449"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="31f7777b" class="cell" data-execution_count="22">
+<div id="976c5e6c" class="cell" data-execution_count="24">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="AdditionalTopics_files/figure-revealjs/cell-23-output-1.png" width="455" height="449"></p>
+<p><img data-src="AdditionalTopics_files/figure-revealjs/cell-25-output-1.png" width="455" height="449"></p>
 </figure>
 </div>
 </div>
@@ -1392,65 +1076,65 @@ y_i= \beta_0 + \beta_3 x_{i} +\epsilon_i\;\;\;\;\;\;\;\;\  \text{ if car is Amer
 <p><span class="math display">\[\log{(Y_i)} = \beta_0 + \beta_1 X_i + \beta_2 X_i^2 +\epsilon_i\]</span></p>
 </div>
 </section>
-<section id="section-7" class="slide level2">
+<section id="section-9" class="slide level2">
 <h2></h2>
 <p>To fit this model to the data, we construct a new predictor matrix.</p>
-<div id="f6f65b15" class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a>X_quad <span class="op">=</span> pd.concat([X_train, auto_data[<span class="st">'horsepower'</span>]<span class="op">**</span><span class="dv">2</span>], axis <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="d0118c34" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a></a>X_quad <span class="op">=</span> pd.concat([X_train, auto_data[<span class="st">'horsepower'</span>]<span class="op">**</span><span class="dv">2</span>], axis <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next, we fit the model as before.</p>
-<div id="b3a27562" class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a>quad_regr <span class="op">=</span> sm.OLS(log_Y, X_quad)</span>
-<span id="cb20-2"><a></a>quadratic_model <span class="op">=</span> quad_regr.fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="7aaad071" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a></a>quad_regr <span class="op">=</span> sm.OLS(log_Y, X_quad)</span>
+<span id="cb25-2"><a></a>quadratic_model <span class="op">=</span> quad_regr.fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And calculate the residuals and predicted values.</p>
-<div id="5a61635c" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a>Y_pred <span class="op">=</span> quadratic_model.fittedvalues</span>
-<span id="cb21-2"><a></a>residuals <span class="op">=</span> quadratic_model.resid</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="05d754af" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a></a>Y_pred <span class="op">=</span> quadratic_model.fittedvalues</span>
+<span id="cb26-2"><a></a>residuals <span class="op">=</span> quadratic_model.resid</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="residual-analysis-of-quadratic-model" class="slide level2">
 <h2>Residual analysis of quadratic model</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="29f2bbb3" class="cell" data-execution_count="26">
+<div id="bf58c442" class="cell" data-execution_count="28">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a></a><span class="co"># Residual vs Fitted Values Plot</span></span>
-<span id="cb22-2"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</span>
-<span id="cb22-3"><a></a>sns.scatterplot(x <span class="op">=</span> Y_pred, y <span class="op">=</span> residuals)</span>
-<span id="cb22-4"><a></a>plt.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
-<span id="cb22-5"><a></a>plt.title(<span class="st">'Residuals vs Fitted Values'</span>)</span>
-<span id="cb22-6"><a></a>plt.xlabel(<span class="st">'Predicted Values'</span>)</span>
-<span id="cb22-7"><a></a>plt.ylabel(<span class="st">'Residuals'</span>)</span>
-<span id="cb22-8"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a></a><span class="co"># Residual vs Fitted Values Plot</span></span>
+<span id="cb27-2"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</span>
+<span id="cb27-3"><a></a>sns.scatterplot(x <span class="op">=</span> Y_pred, y <span class="op">=</span> residuals)</span>
+<span id="cb27-4"><a></a>plt.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb27-5"><a></a>plt.title(<span class="st">'Residuals vs Fitted Values'</span>)</span>
+<span id="cb27-6"><a></a>plt.xlabel(<span class="st">'Predicted Values'</span>)</span>
+<span id="cb27-7"><a></a>plt.ylabel(<span class="st">'Residuals'</span>)</span>
+<span id="cb27-8"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="AdditionalTopics_files/figure-revealjs/cell-27-output-1.png" width="451" height="449"></p>
+<p><img data-src="AdditionalTopics_files/figure-revealjs/cell-29-output-1.png" width="451" height="449"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="3b60d9d8" class="cell" data-execution_count="27">
+<div id="0ac9b78e" class="cell" data-execution_count="29">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a><span class="co"># Residual vs Fitted Values Plot</span></span>
-<span id="cb23-2"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</span>
-<span id="cb23-3"><a></a>order <span class="op">=</span> <span class="bu">range</span>(residuals.shape[<span class="dv">0</span>])</span>
-<span id="cb23-4"><a></a>sns.scatterplot(x <span class="op">=</span> order, y <span class="op">=</span> residuals)</span>
-<span id="cb23-5"><a></a>plt.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
-<span id="cb23-6"><a></a>plt.title(<span class="st">'Residuals vs Time'</span>)</span>
-<span id="cb23-7"><a></a>plt.xlabel(<span class="st">'Time'</span>)</span>
-<span id="cb23-8"><a></a>plt.ylabel(<span class="st">'Residuals'</span>)</span>
-<span id="cb23-9"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a></a><span class="co"># Residual vs Time Plot</span></span>
+<span id="cb28-2"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</span>
+<span id="cb28-3"><a></a>order <span class="op">=</span> <span class="bu">range</span>(residuals.shape[<span class="dv">0</span>])</span>
+<span id="cb28-4"><a></a>sns.scatterplot(x <span class="op">=</span> order, y <span class="op">=</span> residuals)</span>
+<span id="cb28-5"><a></a>plt.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb28-6"><a></a>plt.title(<span class="st">'Residuals vs Time'</span>)</span>
+<span id="cb28-7"><a></a>plt.xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb28-8"><a></a>plt.ylabel(<span class="st">'Residuals'</span>)</span>
+<span id="cb28-9"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="AdditionalTopics_files/figure-revealjs/cell-28-output-1.png" width="455" height="449"></p>
+<p><img data-src="AdditionalTopics_files/figure-revealjs/cell-30-output-1.png" width="455" height="449"></p>
 </figure>
 </div>
 </div>
