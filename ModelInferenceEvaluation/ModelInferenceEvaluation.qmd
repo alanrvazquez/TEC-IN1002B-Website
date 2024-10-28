@@ -228,7 +228,6 @@ The phenomenon of non-constant variance is called [**heteroscedasticity**]{style
 # Residuals vs Time (Case) Plot
 plt.figure(figsize=(7, 5))
 sns.scatterplot(x = production_data['Case'], y = residuals)
-plt.axhline(y=0, color='red', linestyle='--')
 plt.title('Residuals vs Time (Case)')
 plt.xlabel('Case')
 plt.ylabel('Residuals')
@@ -368,6 +367,31 @@ When *n* is relatively small, you tend to see deviations, particularly in the ta
 
 # Inference about individual $\beta$’s using t-tests
 
+## Example
+
+Let's consider the "auto.xlsx" dataset.
+
+```{python}
+#| echo: true
+auto_data = pd.read_excel('auto.xlsx')
+```
+
+</br>
+
+Let's assume that we want to study the following model.
+
+$$
+Y_i = \beta_0 + \beta_1 X_{i1}+ \beta_2 X_{i2}+ \epsilon_i,
+$$
+
+where $y_i$ is the mpg, $X_{i1}$ is the weight, and $X_{i2}$ is the acceleration of the $i$-th car, $i = 1, \ldots, 392$. 
+
+## Research question
+
+</br></br></br>
+
+> We want to know if the weight and acceleration have a significant association with the mpg of a car.
+
 ## The two cultures of statistical models
 
 ::: incremental
@@ -402,13 +426,18 @@ Testing this hypothesis consists of the following steps:
 
 ## Step 1. Random sample
 
+</br></br>
+
 The random sample is our training data:
 
 ```{python}
 #| echo: true
 #| output: true
 
-production_data.head()
+pred_auto = auto_data[['weight', 'acceleration']]
+auto_X_train = sm.add_constant(pred_auto)
+
+auto_Y_train = auto_data['mpg']
 ```
 
 ## Step 2. Test statistic
@@ -419,6 +448,22 @@ $$T = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }$$
 
 -   $\hat{\beta}_j$ is the least squares estimate of the true coefficient $\beta_j$.
 -   $\hat{v}_{jj}$ is the *standard error* of the estimate $\hat{\beta}_j$ calculated using python.
+
+##
+
+Recall that we obtain the least squares estimates ($\hat{\beta}_{j}$) in python using:
+
+```{python}
+#| echo: true
+#| output: true
+
+# Fitting the simple linear regression model.
+regr = sm.OLS(auto_Y_train, auto_X_train)
+linear_model = regr.fit()
+linear_model.params
+```
+
+Later, we will see how to obtain the *standard error* of the estimate $\hat{\beta}_j$
 
 ## 
 
@@ -492,11 +537,13 @@ No scientific basis for this advice. In practice, report the p-value and explore
 
 ## t-tests in python
 
+We obtain the t-tests of the coefficients using the function `summary()` together with the `lnear_regression` object.
+
 ```{python}
 #| echo: true
-#| output: true
 
-linear_model.fittedvalues
+model_summary = linear_model.summary()
+print(model_summary)
 ```
 
 # Multiple and adjusted $R^2$ statistics
@@ -547,6 +594,8 @@ $$R^2 = 1 - \frac{RSS}{SS_{total}}$$
 
 ## Remarks on $R^2$
 
+</br>
+
 -   The statistic $R^2$ should be used with caution because it is always possible to make it unity by simply adding more and more predictors (relevant for multiple linear regression).
 
 -   If $R^2$ is large, it does not necessarily imply that the full model will provide accurate predictions of future observations.
@@ -591,7 +640,7 @@ To show the $R^2$ value, we use the `rsquared` argument of the `linear_model` ob
 #| echo: true
 #| output: true
 
-print( round(linear_model.rsquared, 2) )
+print( round(linear_model.rsquared, 3) )
 ```
 
 To show the adjusted $R^2$ value, we use the `rsquared` argument of the `estimated_model` object.
@@ -600,7 +649,7 @@ To show the adjusted $R^2$ value, we use the `rsquared` argument of the `estimat
 #| echo: true
 #| output: true
 
-print( round(linear_model.rsquared_adj, 2) )
+print( round(linear_model.rsquared_adj, 3) )
 ```
 
 ## Model building

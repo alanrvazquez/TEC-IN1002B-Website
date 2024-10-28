@@ -13,14 +13,14 @@ author:
 ### Module 2
 
 1.  Introduction to Data Science ([slides](/IntroductionDS/Introduction.slides.html))
-2.  Tools: Part 1 ([slides](/Tools/Tools1.slides.html)) ( [colab](https://colab.research.google.com/drive/1-CEdOgN1n5fOYus1-LfqRk2K_GQ75t9S?usp=sharing)) 
+2.  Tools: Part 1 ([slides](/Tools/Tools1.slides.html)) ([colab](https://colab.research.google.com/drive/1-CEdOgN1n5fOYus1-LfqRk2K_GQ75t9S?usp=sharing)) 
 3.  Tools: Part 2 ([slides](/Tools/Tools2.slides.html))([colab](https://colab.research.google.com/drive/1KnrUfS9oUkQa2gHUkrNiMgQ1YNNrbvKt?usp=sharing))
 4.  Preprocessing ([slides](/PreProcessing/PreProcessing.slides.html))([colab](https://colab.research.google.com/drive/1bhF6H3CIwgVr2r1qEsHUuPnqdocT4fUy?usp=sharing))
 
 ### Module 3
 
-1.  Introduction to Linear Regression ([slides](/LinearRegression/LinearRegression.slides.html))
-2.  Model Inference and Evaluation ([slides](/ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html)) 
+1.  Introduction to Linear Regression ([slides](/LinearRegression/LinearRegression.slides.html))([colab](https://colab.research.google.com/drive/1RPIkJNT2fdFB9jLcYGGjUx22G8JmzAPK?usp=sharing))
+2.  Model Inference and Evaluation ([slides](/ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html))([colab](https://colab.research.google.com/drive/1fyUvGw_u9hm5c0Y9sNJAPNgwT3MzyhYA?usp=sharing)) 
 3.  Additional Topics ([slides](/AdditionalTopics/AdditionalTopics.slides.html)) 
 4.  Logistic Regression ([slides](/Classification/Classification.slides.html))
 

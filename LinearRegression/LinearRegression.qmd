@@ -285,7 +285,7 @@ $$\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \hat{\beta}_2 X_{i2} + \cdo
 
 where $\hat{y}_i$ is the i-th fitted or predicted response.
 
-In python, we use the argument `fittedvalues` to make predictions of the responses using the values of the predictors.
+In python, we use the argument `fittedvalues` to show the predicted responses of the estimated model.
 
 ```{python}
 #| echo: true
@@ -345,10 +345,8 @@ In python, we compute $\hat{\sigma}^2$ as follows.
 #| echo: true
 #| output:  true
 
-# Apply the formula.
 error_variance = linear_model.scale
 
-# Print result.
 print( round(error_variance, 3) )
 ```
 
