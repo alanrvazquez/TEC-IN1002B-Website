@@ -1754,7 +1754,7 @@
     "href": "Tools/Tools2.slides.html#sample-mean",
     "title": "Tools for Data Science: Part II",
     "section": "Sample mean",
-    "text": "Sample mean\nLet \\(y_1, y_2, \\ldots, y_n\\) be an observed sample of size \\(n\\).\nThe sample mean is\n\\[\\bar{y} = \\frac{1}{n}\\sum_{i=1}^{n} y_i = \\frac{y_1 + y_2 + \\cdots + y_n}{n}.\\]\nThe sample mean gives an indication of the center of the data."
+    "text": "Sample mean\n\nLet \\(y_1, y_2, \\ldots, y_n\\) be an observed sample of size \\(n\\).\nThe sample mean is\n\\[\\bar{y} = \\frac{1}{n}\\sum_{i=1}^{n} y_i = \\frac{y_1 + y_2 + \\cdots + y_n}{n}.\\]\nThe sample mean gives an indication of the center of the data."
   },
   {
     "objectID": "Tools/Tools2.slides.html#in-python",
@@ -1768,7 +1768,7 @@
     "href": "Tools/Tools2.slides.html#sample-variance",
     "title": "Tools for Data Science: Part II",
     "section": "Sample variance",
-    "text": "Sample variance\nLet \\(y_1, y_2, \\ldots, y_n\\) be an observed sample of size \\(n\\). The sample mean is\n\\[\ns^2 = \\frac{1}{n-1} \\sum_{i=1}^{n} (y_i - \\bar{y})^2 = \\frac{(y_1 - \\bar{y})^2  + \\cdots + (y_n - \\bar{y})^2}{n-1}\n\\]\n\nThe sample variance is like an average of the squared differences between each observation and the sample mean.\nIt gives an indication of how spread out the data are."
+    "text": "Sample variance\n\nLet \\(y_1, y_2, \\ldots, y_n\\) be an observed sample of size \\(n\\). The sample mean is\n\\[\ns^2 = \\frac{1}{n-1} \\sum_{i=1}^{n} (y_i - \\bar{y})^2 = \\frac{(y_1 - \\bar{y})^2  + \\cdots + (y_n - \\bar{y})^2}{n-1}\n\\]\n\nThe sample variance is like an average of the squared differences between each observation and the sample mean.\nIt gives an indication of how spread out the data are."
   },
   {
     "objectID": "Tools/Tools2.slides.html#section-2",
@@ -1838,14 +1838,14 @@
     "href": "Tools/Tools2.slides.html#example-2",
     "title": "Tools for Data Science: Part II",
     "section": "Example 2",
-    "text": "Example 2\nA criminologist is developing a rule-based system to classify the types of glasses encountered in criminal investigations.\nThe data consist of 214 glass samples labeled as one of seven class categories.\nThere are nine predictors, including refractive index and percentages of eight elements: Na, Mg, AL, Is, K, Ca, Ba, and Fe. The response is the type of glass."
+    "text": "Example 2\n\nA criminologist is developing a rule-based system to classify the types of glasses encountered in criminal investigations.\nThe data consist of 214 glass samples labeled as one of seven class categories.\nThere are nine predictors, including refractive index and percentages of eight elements: Na, Mg, AL, Is, K, Ca, Ba, and Fe. The response is the type of glass."
   },
   {
     "objectID": "Tools/Tools2.slides.html#section-6",
     "href": "Tools/Tools2.slides.html#section-6",
     "title": "Tools for Data Science: Part II",
     "section": "",
-    "text": "The dataset is in the file “glass.xlsx”. Let’s load it using pandas.\n\n# Load the Excel file into a pandas DataFrame.\nglass_data = pd.read_excel(\"glass.xlsx\")\n\nThe variable Type is categorical. So, let’s ensure python knows this using the code below.\n\nglass_data['Type'] = glass_data['Type'].astype('category')"
+    "text": "The dataset is in the file “glass.xlsx”. Let’s load it using pandas.\n\n# Load the Excel file into a pandas DataFrame.\nglass_data = pd.read_excel(\"glass.xlsx\")\n\n\nThe variable Type is categorical. So, let’s ensure python knows this using the code below.\n\nglass_data['Type'] = glass_data['Type'].astype('category')"
   },
   {
     "objectID": "Tools/Tools2.slides.html#matplotlib-library",
@@ -1866,7 +1866,7 @@
     "href": "Tools/Tools2.slides.html#importing-the-libraries",
     "title": "Tools for Data Science: Part II",
     "section": "Importing the libraries",
-    "text": "Importing the libraries\nThe matplotlib and seaborn libraries are pre-installed in Google Colab. However, we need to inform Google Colab that we want to use them and its functions using the following command:\n\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\nSimilar to pandas, the command as sns allows us to have a short name for seaborn. Similarly, we rename matplotlib as plt."
+    "text": "Importing the libraries\n\nThe matplotlib and seaborn libraries are pre-installed in Google Colab. However, we need to inform Google Colab that we want to use them and its functions using the following command:\n\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\nSimilar to pandas, the command as sns allows us to have a short name for seaborn. Similarly, we rename matplotlib as plt."
   },
   {
     "objectID": "Tools/Tools2.slides.html#histogram",
@@ -1887,7 +1887,7 @@
     "href": "Tools/Tools2.slides.html#box-plot",
     "title": "Tools for Data Science: Part II",
     "section": "Box plot",
-    "text": "Box plot\nA box plot is a graphic that presents the median, the first and third quartiles, and any “outliers” present in the sample.\nThe interquartile range (IQR) is the difference between the third quartile and the first quartile (\\(Q_3 - Q_1\\)). This is the distance needed to span the middle half of the data."
+    "text": "Box plot\n\nA box plot is a graphic that presents the median, the first and third quartiles, and any “outliers” present in the sample.\n\nThe interquartile range (IQR) is the difference between the third quartile and the first quartile (\\(Q_3 - Q_1\\)). This is the distance needed to span the middle half of the data."
   },
   {
     "objectID": "Tools/Tools2.slides.html#anatomy-of-a-box-plot",
@@ -1908,7 +1908,7 @@
     "href": "Tools/Tools2.slides.html#outliers",
     "title": "Tools for Data Science: Part II",
     "section": "Outliers",
-    "text": "Outliers\nOutliers are points that are much larger or smaller than the rest of the sample points.\nOutliers may be data entry errors or they may be points that really are different from the rest.\nOutliers should not be deleted without considerable thought—sometimes calculations and analyses will be done with and without outliers and then compared."
+    "text": "Outliers\n\nOutliers are points that are much larger or smaller than the rest of the sample points.\nOutliers may be data entry errors or they may be points that really are different from the rest.\nOutliers should not be deleted without considerable thought—sometimes calculations and analyses will be done with and without outliers and then compared."
   },
   {
     "objectID": "Tools/Tools2.slides.html#scatter-plot",
@@ -2119,5 +2119,26 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n2"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#saving-plots",
+    "href": "Tools/Tools2.slides.html#saving-plots",
+    "title": "Tools for Data Science: Part II",
+    "section": "Saving plots",
+    "text": "Saving plots\nWe save a figure using the save.fig function from matplotlib. The dpi argument of this function sets the resolution of the image. The higher the dpi, the better the resolution.\n\nplt.figure(figsize=(5, 7))\nsns.countplot(data = glass_data, x = 'Type')\nplt.title('Frequency of Each Category')\nplt.ylabel('Frequency')\nplt.xlabel('Category')\nplt.savefig('bar_chart.png',dpi=300)"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#section-8",
+    "href": "Tools/Tools2.slides.html#section-8",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "plt.figure(figsize=(5, 5))\nsns.countplot(data = glass_data, x = 'Type')\nplt.title('Relative Frequency of Each Category', fontsize = 12)\nplt.ylabel('Relative Frequency', fontsize = 12)\nplt.xlabel('Category', fontsize = 15)\nplt.xticks(fontsize = 12)\nplt.yticks(fontsize = 12)\nplt.savefig('bar_chart.png',dpi=300)"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#improving-the-figure",
+    "href": "Tools/Tools2.slides.html#improving-the-figure",
+    "title": "Tools for Data Science: Part II",
+    "section": "Improving the figure",
+    "text": "Improving the figure\nWe can also use other functions to improve the aspect of the figure:\n\nplt.title(fontsize): Font size of the title.\nplt.ylabel(fontsize): Font size of y axis title.\nplt.xlabel(fontsize): Font size of x axis title.\nplt.yticks(fontsize): Font size of the y axis labels.\nplt.xticks(fontsize): Font size of the x axis labels."
   }
 ]

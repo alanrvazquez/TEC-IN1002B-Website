@@ -63,7 +63,7 @@ What do you think will happen if we run this command?
 #| echo: true
 #| output: false
 
-print("Helllo world!")
+print("Hello world!")
 ```
 
 ## Let's try another command

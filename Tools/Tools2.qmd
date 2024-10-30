@@ -124,6 +124,8 @@ For numerical data, the most popular summary statistics are:
 
 ## Sample mean
 
+</br>
+
 Let $y_1, y_2, \ldots, y_n$ be an observed sample of size $n$.
 
 The sample mean is
@@ -156,6 +158,8 @@ print( round(bill_length_mean, 3) )
 ```
 
 ## Sample variance
+
+</br>
 
 Let $y_1, y_2, \ldots, y_n$ be an observed sample of size $n$. The sample mean is
 
@@ -232,6 +236,8 @@ The [**sample median**]{style="color:darkgreen;"} is the middle number of the or
 ![](images/clipboard-838628209.png)
 
 ## 
+
+</br>
 
 In python, the quartiles are calculated using the function `quantile()`.
 
@@ -353,6 +359,8 @@ La ventaja de la frequencia relativa es que se puede interpretar como una probab
 
 ## Example 2
 
+</br>
+
 A criminologist is developing a rule-based system to classify the types of glasses encountered in criminal investigations.
 
 The data consist of 214 glass samples labeled as one of seven class categories.
@@ -360,6 +368,8 @@ The data consist of 214 glass samples labeled as one of seven class categories.
 There are nine predictors, including refractive index and percentages of eight elements: Na, Mg, AL, Is, K, Ca, Ba, and Fe. The response is the type of glass.
 
 ## 
+
+</br>
 
 The dataset is in the file "glass.xlsx". Let's load it using **pandas**.
 
@@ -370,6 +380,8 @@ The dataset is in the file "glass.xlsx". Let's load it using **pandas**.
 # Load the Excel file into a pandas DataFrame.
 glass_data = pd.read_excel("glass.xlsx")
 ```
+
+</br>
 
 The variable `Type` is categorical. So, let's ensure python knows this using the code below.
 
@@ -399,6 +411,8 @@ glass_data['Type'] = glass_data['Type'].astype('category')
 ![](images/seaborn.png){fig-align="center"}
 
 ## Importing the libraries
+
+</br>
 
 The **matplotlib** and **seaborn** libraries are pre-installed in Google Colab. However, we need to inform Google Colab that we want to use them and its functions using the following command:
 
@@ -436,7 +450,11 @@ plt.show() # Display the plot
 
 ## Box plot
 
+</br>
+
 A box plot is a graphic that presents the median, the first and third quartiles, and any “outliers” present in the sample.
+
+</br>
 
 The interquartile range (IQR) is the difference between the third quartile and the first quartile ($Q_3 - Q_1$). This is the distance needed to span the middle half of the data.
 
@@ -463,6 +481,8 @@ plt.show() # Show the plot.
 ```
 
 ## Outliers
+
+</br>
 
 Outliers are points that are much larger or smaller than the rest of the sample points.
 
@@ -522,6 +542,50 @@ sns.countplot(data = glass_data, x = 'Type') # Show the plot.
 plt.title("Bar chart of Type of Glasses") # Set plot title.
 plt.ylabel("Frequency") # Set label for Y axis.
 plt.show() # Show plot.
+```
+
+## Saving plots
+
+We save a figure using the `save.fig` function from **matplotlib**. The `dpi` argument of this function sets the resolution of the image. The higher the `dpi`, the better the resolution.
+
+```{python}
+#| echo: true
+#| output: false
+
+plt.figure(figsize=(5, 7))
+sns.countplot(data = glass_data, x = 'Type')
+plt.title('Frequency of Each Category')
+plt.ylabel('Frequency')
+plt.xlabel('Category')
+plt.savefig('bar_chart.png',dpi=300)
+```
+
+## Improving the figure
+
+We can also use other functions to improve the aspect of the figure:
+
+- `plt.title(fontsize)`: Font size of the title.
+- `plt.ylabel(fontsize)`: Font size of y axis title.
+- `plt.xlabel(fontsize)`: Font size of x axis title.
+- `plt.yticks(fontsize)`: Font size of the y axis labels.
+- `plt.xticks(fontsize)`: Font size of the x axis labels.
+
+
+## 
+
+```{python}
+#| echo: true
+#| output: true
+#| fig-align: center
+
+plt.figure(figsize=(5, 5))
+sns.countplot(data = glass_data, x = 'Type')
+plt.title('Relative Frequency of Each Category', fontsize = 12)
+plt.ylabel('Relative Frequency', fontsize = 12)
+plt.xlabel('Category', fontsize = 15)
+plt.xticks(fontsize = 12)
+plt.yticks(fontsize = 12)
+plt.savefig('bar_chart.png',dpi=300)
 ```
 
 # [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)
