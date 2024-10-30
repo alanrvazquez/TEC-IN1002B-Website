@@ -479,6 +479,12 @@ In this course, we will assume that data is stored in an Excel file with the abo
 [***The file must be previously uploaded to Google Colab..***]{style="color:red;"}
 :::
 
+##
+
+The dataset `penguins.xlsx` contains data from penguins from three islands.
+
+![](images/penguins_bill.png){fig-align="center"}
+
 ## pandas library
 
 ::::: columns

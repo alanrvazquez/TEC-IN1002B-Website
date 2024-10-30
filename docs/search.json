@@ -1040,7 +1040,7 @@
     "href": "Tools/Tools1.slides.html#lets-try-a-command-in-r",
     "title": "Tools for Data Science: Part I",
     "section": "Let’s try a command in R",
-    "text": "Let’s try a command in R\nWhat do you think will happen if we run this command?\n\nprint(\"Helllo world!\")"
+    "text": "Let’s try a command in R\nWhat do you think will happen if we run this command?\n\nprint(\"Hello world!\")"
   },
   {
     "objectID": "Tools/Tools1.slides.html#lets-try-another-command",
@@ -1075,7 +1075,7 @@
     "href": "Tools/Tools1.slides.html#python-is-strict",
     "title": "Tools for Data Science: Part I",
     "section": "Python is strict",
-    "text": "Python is strict\nPython, like all programming languages, is very strict. For example, if you write\n\nsum([1, 100])\n\n101\n\n\nit will tell you the answer, 101.\n\nBut if you write\n\nSum([1, 100])\n\n\n---------------------------------------------------------------------------\nNameError                                 Traceback (most recent call last)\nCell In[9], line 1\n----&gt; 1 Sum([1, 100])\n\nNameError: name 'Sum' is not defined\n\n\n\nwith the “s” capitalized, he will act like he has no idea what we are talking about!\n\nlo mismo si olvidas incluir un parentesis"
+    "text": "Python is strict\nPython, like all programming languages, is very strict. For example, if you write\n\nsum([1, 100])\n\n101\n\n\nit will tell you the answer, 101.\n\nBut if you write\n\nSum([1, 100])\n\n\n---------------------------------------------------------------------------\nNameError                                 Traceback (most recent call last)\nCell In[34], line 1\n----&gt; 1 Sum([1, 100])\n\nNameError: name 'Sum' is not defined\n\n\n\nwith the “s” capitalized, he will act like he has no idea what we are talking about!\n\nlo mismo si olvidas incluir un parentesis"
   },
   {
     "objectID": "Tools/Tools1.slides.html#save-your-work-in-python-objects",
@@ -1243,7 +1243,7 @@
     "href": "Tools/Tools1.slides.html#section-2",
     "title": "Tools for Data Science: Part I",
     "section": "",
-    "text": "To index multiple variables of a data frame, we put the names of the variables in a list object. For example, we select bill_length_mm, species, and island as follows:\n\nsub_penguins_data = penguins_data[ ['bill_length_mm',  'species', 'island'] ]\nsub_penguins_data.head()\n\n\n\n\n\n\n\n\nbill_length_mm\nspecies\nisland\n\n\n\n\n0\n39.1\nAdelie\nTorgersen\n\n\n1\n39.5\nAdelie\nTorgersen\n\n\n2\n40.3\nAdelie\nTorgersen\n\n\n3\nNaN\nAdelie\nTorgersen\n\n\n4\n36.7\nAdelie\nTorgersen"
+    "text": "The dataset penguins.xlsx contains data from penguins from three islands."
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#agenda",
@@ -2140,5 +2140,12 @@
     "title": "Tools for Data Science: Part II",
     "section": "Improving the figure",
     "text": "Improving the figure\nWe can also use other functions to improve the aspect of the figure:\n\nplt.title(fontsize): Font size of the title.\nplt.ylabel(fontsize): Font size of y axis title.\nplt.xlabel(fontsize): Font size of x axis title.\nplt.yticks(fontsize): Font size of the y axis labels.\nplt.xticks(fontsize): Font size of the x axis labels."
+  },
+  {
+    "objectID": "Tools/Tools1.slides.html#section-3",
+    "href": "Tools/Tools1.slides.html#section-3",
+    "title": "Tools for Data Science: Part I",
+    "section": "",
+    "text": "To index multiple variables of a data frame, we put the names of the variables in a list object. For example, we select bill_length_mm, species, and island as follows:\n\nsub_penguins_data = penguins_data[ ['bill_length_mm',  'species', 'island'] ]\nsub_penguins_data.head()\n\n\n\n\n\n\n\n\nbill_length_mm\nspecies\nisland\n\n\n\n\n0\n39.1\nAdelie\nTorgersen\n\n\n1\n39.5\nAdelie\nTorgersen\n\n\n2\n40.3\nAdelie\nTorgersen\n\n\n3\nNaN\nAdelie\nTorgersen\n\n\n4\n36.7\nAdelie\nTorgersen"
   }
 ]
