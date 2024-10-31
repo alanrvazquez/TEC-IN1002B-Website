@@ -27,6 +27,8 @@ jupyter: python3
 
 ## Types of data I
 
+</br>
+
 When a numerical quantity designating how much or how many is assigned to each item in the sample, the resulting set of values is [**numerical**]{style="color:lightblue;"} or [**quantitative**]{style="color:lightblue;"}.
 
 -   Height (in ft).
@@ -34,6 +36,8 @@ When a numerical quantity designating how much or how many is assigned to each i
 -   Age (in years).
 
 ## Types of data II
+
+</br>
 
 When sample items are placed into categories and category names are assigned to the sample items, the data are [**categorical**]{style="color:pink;"} or [**qualitative**]{style="color:pink;"}.
 
@@ -113,7 +117,7 @@ penguins_data.info()
 
 A sample is often a long list of numbers. To help make the important features of a sample stand out, we compute summary statistics.
 
-For numerical data, the most popular summary statistics are:
+For **numerical** data, the most popular summary statistics are:
 
 ::: incremental
 -   [Sample mean]{style="color:darkblue;"}
@@ -177,7 +181,7 @@ It gives an indication of how spread out the data are.
 
 </br></br>
 
-In python, the sample variance is calculated using the function `var()`
+In python, the sample variance is calculated using the function `var()`.
 
 ```{python}
 #| echo: true

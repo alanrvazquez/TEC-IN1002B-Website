@@ -476,12 +476,12 @@ In this course, we will assume that data is stored in an Excel file with the abo
 :::::
 
 ::: {style="font-size: 85%;"}
-[***The file must be previously uploaded to Google Colab..***]{style="color:red;"}
+[***The file must be previously uploaded to Google Colab.***]{style="color:red;"}
 :::
 
 ##
 
-The dataset `penguins.xlsx` contains data from penguins from three islands.
+The dataset `penguins.xlsx` contains data from penguins living in three islands.
 
 ![](images/penguins_bill.png){fig-align="center"}
 
