@@ -562,4 +562,36 @@ sub_penguins_data = penguins_data[ ['bill_length_mm',  'species', 'island'] ]
 sub_penguins_data.head()
 ```
 
+## Indexing rows
+
+To index rows in a dataset, we use the argument `loc` from **pandas**. For example, we select the rows 3 to 6 of the `penguins_dataset`  dataset:
+
+```{python}
+#| echo: true
+
+rows_penguins_data = penguins_data.loc[2:5]
+rows_penguins_data
+```
+
+##
+
+```{python}
+#| echo: true
+
+rows_penguins_data
+```
+
+Note that the index 2 and 5 refer to observations 3 and 7, respectively, in the dataset. This is because the first index in python is 0.
+
+## Indexing rows and columns
+
+Using `loc`, we can also retrieve a subset from the dataset by selecting specific columns and rows.
+
+```{python}
+#| echo: true
+
+sub_rows_pdata = penguins_data.loc[2:5, ['bill_length_mm',  'species', 'island'] ]
+sub_rows_pdata
+```
+
 # [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)
