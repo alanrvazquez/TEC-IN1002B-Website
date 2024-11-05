@@ -1901,7 +1901,7 @@
     "href": "Tools/Tools2.slides.html#histogram",
     "title": "Tools for Data Science: Part II",
     "section": "Histogram",
-    "text": "Histogram\nGraphical display that gives an idea of the “shape” of the sample, indicating regions where sample points are concentrated and regions where they are sparse.\nThe bars of the histogram touch each other. A space indicates that there are no observations in that interval."
+    "text": "Histogram\n\nGraphical display that gives an idea of the “shape” of the sample, indicating regions where sample points are concentrated and regions where they are sparse.\n\nThe bars of the histogram touch each other. A space indicates that there are no observations in that interval."
   },
   {
     "objectID": "Tools/Tools2.slides.html#histogram-of-na",
@@ -1943,7 +1943,7 @@
     "href": "Tools/Tools2.slides.html#scatter-plot",
     "title": "Tools for Data Science: Part II",
     "section": "Scatter plot",
-    "text": "Scatter plot\nData for which items consists of a pair of numeric values is called bivariate. The graphical summary for bivariate data is a scatterplot.\nThe variables \\(X\\) and \\(Y\\) are placed on the horizontal and vertical axes, respectively. Each point on the graph marks the position of a pair of values of \\(X\\) and \\(Y\\).\nA scatterplot allows us to explor lineal and nonlinear relationships between two variables."
+    "text": "Scatter plot\n\nData for which items consists of a pair of numeric values is called bivariate. The graphical summary for bivariate data is a scatterplot.\nThe variables \\(X\\) and \\(Y\\) are placed on the horizontal and vertical axes, respectively. Each point on the graph marks the position of a pair of values of \\(X\\) and \\(Y\\).\nA scatterplot allows us to explor lineal and nonlinear relationships between two variables."
   },
   {
     "objectID": "Tools/Tools2.slides.html#scatter-plot-of-na-versus-ri",
@@ -1971,14 +1971,14 @@
     "href": "Tools/Tools2.slides.html#saving-plots",
     "title": "Tools for Data Science: Part II",
     "section": "Saving plots",
-    "text": "Saving plots\nWe save a figure using the save.fig function from matplotlib. The dpi argument of this function sets the resolution of the image. The higher the dpi, the better the resolution.\n\nplt.figure(figsize=(5, 7))\nsns.countplot(data = glass_data, x = 'Type')\nplt.title('Frequency of Each Category')\nplt.ylabel('Frequency')\nplt.xlabel('Category')\nplt.savefig('bar_chart.png',dpi=300)"
+    "text": "Saving plots\n\nWe save a figure using the save.fig function from matplotlib. The dpi argument of this function sets the resolution of the image. The higher the dpi, the better the resolution.\n\nplt.figure(figsize=(5, 7))\nsns.countplot(data = glass_data, x = 'Type')\nplt.title('Frequency of Each Category')\nplt.ylabel('Frequency')\nplt.xlabel('Category')\nplt.savefig('bar_chart.png',dpi=300)"
   },
   {
     "objectID": "Tools/Tools2.slides.html#improving-the-figure",
     "href": "Tools/Tools2.slides.html#improving-the-figure",
     "title": "Tools for Data Science: Part II",
     "section": "Improving the figure",
-    "text": "Improving the figure\nWe can also use other functions to improve the aspect of the figure:\n\nplt.title(fontsize): Font size of the title.\nplt.ylabel(fontsize): Font size of y axis title.\nplt.xlabel(fontsize): Font size of x axis title.\nplt.yticks(fontsize): Font size of the y axis labels.\nplt.xticks(fontsize): Font size of the x axis labels."
+    "text": "Improving the figure\n\nWe can also use other functions to improve the aspect of the figure:\n\nplt.title(fontsize): Font size of the title.\nplt.ylabel(fontsize): Font size of y axis title.\nplt.xlabel(fontsize): Font size of x axis title.\nplt.yticks(fontsize): Font size of the y axis labels.\nplt.xticks(fontsize): Font size of the x axis labels."
   },
   {
     "objectID": "Tools/Tools2.slides.html#section-8",

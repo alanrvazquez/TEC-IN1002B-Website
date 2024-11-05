@@ -431,7 +431,11 @@ Similar to **pandas**, the command `as sns` allows us to have a short name for *
 
 ## Histogram
 
+</br></br>
+
 Graphical display that gives an idea of the “shape” of the sample, indicating regions where sample points are concentrated and regions where they are sparse.
+
+</br>
 
 The bars of the histogram touch each other. A space indicates that there are no observations in that interval.
 
@@ -496,6 +500,8 @@ Outliers should not be deleted without considerable thought—sometimes calculat
 
 ## Scatter plot
 
+</br>
+
 Data for which items consists of a pair of numeric values is called bivariate. The graphical summary for bivariate data is a *scatterplot*.
 
 The variables $X$ and $Y$ are placed on the horizontal and vertical axes, respectively. Each point on the graph marks the position of a pair of values of $X$ and $Y$.
@@ -550,6 +556,8 @@ plt.show() # Show plot.
 
 ## Saving plots
 
+</br>
+
 We save a figure using the `save.fig` function from **matplotlib**. The `dpi` argument of this function sets the resolution of the image. The higher the `dpi`, the better the resolution.
 
 ```{python}
@@ -565,6 +573,8 @@ plt.savefig('bar_chart.png',dpi=300)
 ```
 
 ## Improving the figure
+
+</br>
 
 We can also use other functions to improve the aspect of the figure:
 
