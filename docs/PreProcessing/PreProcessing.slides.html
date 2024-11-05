@@ -433,11 +433,13 @@ Alan R. Vazquez
 <p><br></p>
 <p>It can make or break a model’s predictive ability.</p>
 <p><br></p>
-<p>For example, linear regression models (to be discussed later) are (relatively) insensitive to the characteristics of the predictor data, but K-nearest neighbors, principal component regression, and LASSO (to be discussed later) are not.</p>
+<p>For example, linear regression models (to be discussed later) are relatively insensitive to the characteristics of the predictor data, but advanced methods like K-nearest neighbors, principal component regression, and LASSO are not.</p>
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
+<p><br></p>
 <p>We will review some common strategies for removing predictors from the data, without considering how they might be related to the response.</p>
+<div class="fragment">
 <p>In particular, we will review:</p>
 <div>
 <ul>
@@ -446,6 +448,7 @@ Alan R. Vazquez
 <li class="fragment">Transforming categorical predictors.</li>
 <li class="fragment">Filtering: Removing non-informative or correlated predictors.</li>
 </ul>
+</div>
 </div>
 </section>
 <section id="scikit-learn-library" class="slide level2">
@@ -460,8 +463,9 @@ Alan R. Vazquez
 <img data-src="images/scikitlearn.png" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="section-1" class="slide level2">
 <h2></h2>
+<p><br></p>
 <p>Let’s import <strong>scikit-learn</strong> into python together with the other relevant libraries.</p>
-<div id="d81be371" class="cell" data-execution_count="1">
+<div id="faa7ff0b" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -478,14 +482,21 @@ Alan R. Vazquez
 </section>
 <section id="missing-values" class="slide level2">
 <h2>Missing values</h2>
-<p>In many cases, some predictors have no values for a given observation. It is important to understand why the values are missing. There four main types of missing data:</p>
+<p>In many cases, some predictors have no values for a given observation. It is important to understand why the values are missing.</p>
+<p><br></p>
+<div class="fragment">
+<p>There four main types of missing data:</p>
+<div>
 <ul>
-<li><p><em>Structurally missing</em> data is data that is missing for a logical reason or because it should not exist.</p></li>
-<li><p><em>Missing completely at random</em> assumes that the fact that the data is missing is unrelated to the other information in the data.</p></li>
+<li class="fragment"><p><em>Structurally missing</em> data is data that is missing for a logical reason or because it should not exist.</p></li>
+<li class="fragment"><p><em>Missing completely at random</em> assumes that the fact that the data is missing is unrelated to the other information in the data.</p></li>
 </ul>
+</div>
+</div>
 </section>
 <section id="section-2" class="slide level2">
 <h2></h2>
+<p><br><br></p>
 <ul>
 <li><p><em>Missing at random</em> assumes that we can predict the value that is missing based on the other available data.</p></li>
 <li><p><em>Missing not at random</em> assumes that there is a mechanism that generates the missing values, which may include observed and unobserved predictors.</p></li>
@@ -493,16 +504,17 @@ Alan R. Vazquez
 </section>
 <section id="section-3" class="slide level2">
 <h2></h2>
-<p>For large data sets, removal of samples based on missing values is not a problem, assuming that the type of missing data is completely at random.</p>
+<p>For large data sets, removal of observations based on missing values is not a problem, assuming that the type of missing data is completely at random.</p>
 <p><br></p>
-<p>In a smaller data sets, there is a steep price in removing samples. To overcome this issue, we can use methods of imputation, which tries to estimate values of the predictor variables based on the other predictor values and variables.</p>
+<p>In a smaller data sets, there is a high price in removing observations. To overcome this issue, we can use methods of imputation, which try to estimate the missing values of a predictor variable using the other predictors’ values.</p>
 <p><br></p>
 <p>Here, we will introduce three simple methods for imputing missing values in categorical and numerical variables.</p>
 </section>
 <section id="example-1" class="slide level2">
 <h2>Example 1</h2>
+<p><br></p>
 <p>Let’s use the penguins dataset available in the file <code>penguins.xlsx</code>.</p>
-<div id="13f7e155" class="cell" data-execution_count="2">
+<div id="dd2cb75f" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># Load the Excel file into a pandas DataFrame.</span></span>
 <span id="cb2-2"><a></a>penguins_data <span class="op">=</span> pd.read_excel(<span class="st">"penguins.xlsx"</span>)</span>
 <span id="cb2-3"><a></a></span>
@@ -514,9 +526,10 @@ Alan R. Vazquez
 </section>
 <section id="section-4" class="slide level2">
 <h2></h2>
+<p><br></p>
 <p>The dataset has some missing values denoted as <code>NaN</code>.</p>
-<div id="a58ca8fc" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div id="b37612f9" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="1003">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -612,10 +625,10 @@ Alan R. Vazquez
 <section id="removing-missing-values" class="slide level2">
 <h2>Removing missing values</h2>
 <p>If we want to remove all rows in the dataset that have at least one missing value, we use the function <code>dropna()</code>.</p>
-<div id="60962704" class="cell" data-execution_count="4">
+<div id="32ca5887" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>complete_penguins <span class="op">=</span> penguins_data.dropna()</span>
 <span id="cb3-2"><a></a>complete_penguins.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="1004">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -710,10 +723,10 @@ Alan R. Vazquez
 </section>
 <section id="imputation-using-the-mean" class="slide level2">
 <h2>Imputation using the mean</h2>
-<p>We can impute the missing values of a numeric variable using the <strong>mean</strong> or <strong>median</strong> of its available values. For example, let’s consider the variable <code>bill_length_mm</code>, which has missing values.</p>
-<div id="55a76831" class="cell" data-execution_count="5">
+<p>We can impute the missing values of a numeric variable using the <strong>mean</strong> or <strong>median</strong> of its available values. For example, consider the variable <code>bill_length_mm</code> that has missing values.</p>
+<div id="6a4335e4" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>penguins_data[<span class="st">'bill_length_mm'</span>].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="1005">
 <pre><code>0    39.1
 1    39.5
 2    40.3
@@ -726,8 +739,9 @@ Name: bill_length_mm, dtype: float64</code></pre>
 </section>
 <section id="section-5" class="slide level2">
 <h2></h2>
+<p><br></p>
 <p>Using <code>SimpleImputer()</code>, we set the method to imput missing values using the <strong>mean</strong>. We also use the function <code>fit_transform()</code> to apply the imputation method to the variable.</p>
-<div id="f57c19e6" class="cell" data-execution_count="6">
+<div id="451ff05c" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="co"># Imputation for numerical variables (using the mean)</span></span>
 <span id="cb6-2"><a></a>num_imputer <span class="op">=</span> SimpleImputer(strategy<span class="op">=</span><span class="st">'mean'</span>)</span>
 <span id="cb6-3"><a></a></span>
@@ -738,9 +752,9 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <section id="section-6" class="slide level2">
 <h2></h2>
 <p>After imputation, the dataset looks like this.</p>
-<div id="b719577d" class="cell" data-execution_count="7">
+<div id="641cae20" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>penguins_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="1007">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -837,7 +851,7 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <section id="section-7" class="slide level2">
 <h2></h2>
 <p>To imput the missing values using the <strong>median</strong>, we simply set this method in <code>SimpleImputer()</code>. For example, let’s imput the missing values of <code>bill_depth_mm</code>.</p>
-<div id="f73de85b" class="cell" data-execution_count="8">
+<div id="4a778485" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="co"># Imputation for numerical variables (using the mean)</span></span>
 <span id="cb8-2"><a></a>num_imputer <span class="op">=</span> SimpleImputer(strategy <span class="op">=</span> <span class="st">'median'</span>)</span>
 <span id="cb8-3"><a></a></span>
@@ -846,7 +860,7 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <span id="cb8-6"><a></a></span>
 <span id="cb8-7"><a></a><span class="co"># Show the first 4 rows of the updated dataset.</span></span>
 <span id="cb8-8"><a></a>penguins_data.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div class="cell-output cell-output-display" data-execution_count="1008">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -939,7 +953,7 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <h2>Imputation method for categorical variable</h2>
 <p>If a categorical variable has missing values, we can use the <strong>most frequent</strong> of the available values to replace the missing values. To this end, we use similar commands as before.</p>
 <p>For example, let’s imput the missing values of <code>sex</code> using this strategy.</p>
-<div id="ffbf341f" class="cell" data-execution_count="9">
+<div id="16b57766" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="co"># Imputation for categorical variables (using the most frequent value)</span></span>
 <span id="cb9-2"><a></a>cat_imputer <span class="op">=</span> SimpleImputer(strategy <span class="op">=</span> <span class="st">'most_frequent'</span>)</span>
 <span id="cb9-3"><a></a></span>
@@ -954,7 +968,7 @@ Name: bill_length_mm, dtype: float64</code></pre>
 </section>
 <section id="predictors-with-different-units" class="slide level2">
 <h2>Predictors with different units</h2>
-<p>Many of the predictive models we will see later have issues with <span style="color:blue;"><strong>numeric predictors</strong></span> with different units:</p>
+<p>Many good predictive models we have issues with <span style="color:blue;"><strong>numeric predictors</strong></span> with different units:</p>
 <ol type="1">
 <li><p>Methods such as K-nearest neighbors are based on the distance between observations. If the predictors are on different units or scales, then some predictors will have a larger weight for computing the distance.</p></li>
 <li><p>Other methods such as LASSO use the variances of the predictors in their calculations. Predictors with different scales will have different variances and so, those with a higher variance will play a bigger role in the calculations.</p></li>
@@ -967,12 +981,14 @@ Name: bill_length_mm, dtype: float64</code></pre>
 </section>
 <section id="standarization-1" class="slide level2">
 <h2>Standarization</h2>
+<p><br></p>
 <p>Standardization refers to <em>centering</em> and <em>scaling</em> each numeric predictor individually. It puts every predictor on the same scale.</p>
 <p>To <strong>center</strong> a predictor variable, the average predictor value is subtracted from all the values.</p>
 <p>Therefore, the centered predictor has a zero mean (that is, its average value is zero).</p>
 </section>
 <section id="section-10" class="slide level2">
 <h2></h2>
+<p><br></p>
 <p>To <strong>scale</strong> a predictor, each of its value is divided by its standard deviation.</p>
 <p>Scaling the data coerce the values to have a common standard deviation of one.</p>
 <p>In mathematical terms, we standardize a predictor as:</p>
@@ -993,8 +1009,9 @@ Name: bill_length_mm, dtype: float64</code></pre>
 </section>
 <section id="section-11" class="slide level2">
 <h2></h2>
+<p><br><br></p>
 <p>The dataset is in the file “auto.xlsx”. Let’s read the data using <strong>numpy</strong>.</p>
-<div id="5b3f2580" class="cell" data-execution_count="10">
+<div id="30c0abe7" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="co"># Load the Excel file into a pandas DataFrame.</span></span>
 <span id="cb10-2"><a></a>auto_data <span class="op">=</span> pd.read_excel(<span class="st">"auto.xlsx"</span>)</span>
 <span id="cb10-3"><a></a></span>
@@ -1004,8 +1021,8 @@ Name: bill_length_mm, dtype: float64</code></pre>
 </section>
 <section id="section-12" class="slide level2">
 <h2></h2>
-<div id="13be951b" class="cell" data-execution_count="11">
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div id="a9743b5c" class="cell" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="1011">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -1099,8 +1116,9 @@ Name: bill_length_mm, dtype: float64</code></pre>
 </section>
 <section id="dealing-with-missing-values-1" class="slide level2">
 <h2>Dealing with missing values</h2>
+<p><br></p>
 <p>The dataset has missing values. In this example, we remove each row with at least one missing value. We also concentrate on the five numerical predictors in the dataset.</p>
-<div id="177bb417" class="cell" data-execution_count="12">
+<div id="b1985335" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="co"># Select specific variables.</span></span>
 <span id="cb11-2"><a></a>sb_Auto <span class="op">=</span> auto_data[[<span class="st">'cylinders'</span>, <span class="st">'displacement'</span>, </span>
 <span id="cb11-3"><a></a>                    <span class="st">'horsepower'</span>, <span class="st">'weight'</span>, </span>
@@ -1115,7 +1133,7 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <p>Consider two points in the plot: <span class="math inline">\((175, 1613)\)</span> and <span class="math inline">\((69, 1613)\)</span>.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="0dfaafd2" class="cell" data-execution_count="13">
+<div id="11820aa0" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -1125,14 +1143,16 @@ Name: bill_length_mm, dtype: float64</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
+<p><br></p>
 <p>The distance between these points is <span class="math inline">\(\sqrt{(69 - 175)^2 + (1613-5140)^2}\)</span> <span class="math inline">\(= \sqrt{11236 + 12439729}\)</span> <span class="math inline">\(= 3528.592\)</span>.</p>
 </div></div>
 </section>
 <section id="standarization-in-python" class="slide level2">
 <h2>Standarization in python</h2>
+<p><br></p>
 <p>To standardize <strong>numerical</strong> predictors, we use the function <code>StandardScaler()</code>. Moreover, we apply the function to the variables using the function <code>fit_transform()</code>.</p>
 <p><br></p>
-<div id="d9b07fd7" class="cell" data-execution_count="14">
+<div id="81fe69a9" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a>scaler <span class="op">=</span> StandardScaler()</span>
 <span id="cb12-2"><a></a>Xs <span class="op">=</span> scaler.fit_transform(complete_sbAuto)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1140,10 +1160,10 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <section id="section-13" class="slide level2">
 <h2></h2>
 <p>Unfortunately, the resulting object is not a pandas data frame. We then convert this object to this format. <br></p>
-<div id="943d7606" class="cell" data-execution_count="15">
+<div id="4b32f6ce" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a>scaled_df <span class="op">=</span> pd.DataFrame(Xs, columns <span class="op">=</span> complete_sbAuto.columns)</span>
 <span id="cb13-2"><a></a>scaled_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="1015">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -1223,7 +1243,7 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <p>In the new scale, the two points are now: <span class="math inline">\((1.82, 2.53)\)</span> and <span class="math inline">\((-0.91, -1.60)\)</span>.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="a343bad5" class="cell" data-execution_count="16">
+<div id="def47dcd" class="cell" data-execution_count="16">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -1233,11 +1253,13 @@ Name: bill_length_mm, dtype: float64</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
+<p><br></p>
 <p>The distance between these points is <span class="math inline">\(\sqrt{(-0.91 - 1.82)^2 + (-1.60-2.53)^2}\)</span> <span class="math inline">\(= \sqrt{7.45 + 17.05} = 4.95\)</span>.</p>
 </div></div>
 </section>
 <section id="discussion" class="slide level2">
 <h2>Discussion</h2>
+<p><br></p>
 <p>Centering and scaling predictors are generally used to improve the numerical stability of some calculations.</p>
 <p>It is generally recommended to always standardize the numeric predictors. Perhaps the only exception would be if we consider a linear regression model.</p>
 <p>A drawback of these transformations is the <span style="color:pink;"><strong><em>loss of interpretability</em></strong></span> since the data are no longer in the original units.</p>
@@ -1250,16 +1272,21 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <section id="categorical-predictors" class="slide level2">
 <h2>Categorical predictors</h2>
 <p>A <span style="color:darkgreen;"><strong>categorical predictor</strong></span> takes on values that are nominal categories.</p>
+<div class="fragment">
 <p>For example:</p>
 <ul>
 <li><p>Type of school: Public or private.</p></li>
 <li><p>Treatment: New or placebo.</p></li>
 <li><p>Grade: Passed or not passed.</p></li>
 </ul>
+</div>
+<div class="fragment">
 <p>The categories can be represented by names, labels or even numbers. Their use in regression requires <strong>dummy variables</strong>, which are numeric variables.</p>
+</div>
 </section>
 <section id="dummy-variables" class="slide level2">
 <h2>Dummy variables</h2>
+<p><br><br></p>
 <blockquote>
 <p>The traditional choice for a dummy variable is a binary variable, which can only take the values 0 and 1.</p>
 </blockquote>
@@ -1344,12 +1371,15 @@ Name: bill_length_mm, dtype: float64</code></pre>
 </section>
 <section id="a-drawback" class="slide level2">
 <h2>A drawback</h2>
+<p><br></p>
+<div>
 <ul>
-<li><p>A drawback with the initial dummy variables is that they are <span style="color:red;"><strong>linearly dependent</strong></span>. That is, <span class="math inline">\(d_1 + d_2 + d_3 = 1\)</span>.</p></li>
-<li><p>Therefore, we can determine the value of <span class="math inline">\(d_1 = 1- d_2 - d_3.\)</span></p></li>
-<li><p>Predictive models such as linear regression are sensitive to linear dependencies among predictors.</p></li>
-<li><p><strong>The solution is to drop one of the predictor</strong>, say, <span class="math inline">\(d_1\)</span>, from the data.</p></li>
+<li class="fragment"><p>A drawback with the initial dummy variables is that they are <span style="color:red;"><strong>linearly dependent</strong></span>. That is, <span class="math inline">\(d_1 + d_2 + d_3 = 1\)</span>.</p></li>
+<li class="fragment"><p>Therefore, we can determine the value of <span class="math inline">\(d_1 = 1- d_2 - d_3.\)</span></p></li>
+<li class="fragment"><p>Predictive models such as linear regression are sensitive to linear dependencies among predictors.</p></li>
+<li class="fragment"><p><strong>The solution is to drop one of the predictor</strong>, say, <span class="math inline">\(d_1\)</span>, from the data.</p></li>
 </ul>
+</div>
 </section>
 <section id="section-15" class="slide level2">
 <h2></h2>
@@ -1403,19 +1433,20 @@ Name: bill_length_mm, dtype: float64</code></pre>
 </section>
 <section id="dummy-variables-in-python" class="slide level2">
 <h2>Dummy variables in python</h2>
+<p><br></p>
 <p>We can get the dummy variables of a categorical variable using the function <code>pd.get_dummies()</code> from <strong>pandas</strong>.</p>
 <p>The input of the function is the categorical variable.</p>
 <p>The function has an extra argument called <code>drop_first</code> to drop the first dummy variable. It also has the argument <code>dtype</code> to show the values as integers.</p>
-<div id="2de1b3f2" class="cell" data-execution_count="17">
+<div id="24211427" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>dummy_data <span class="op">=</span> pd.get_dummies(auto_data[<span class="st">'origin'</span>], drop_first <span class="op">=</span> <span class="va">True</span>, </span>
 <span id="cb14-2"><a></a>                            dtype <span class="op">=</span> <span class="st">'int'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="section-16" class="slide level2">
 <h2></h2>
-<div id="c4b461d9" class="cell" data-execution_count="18">
+<div id="e49504be" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a>dummy_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="1018">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -1490,15 +1521,19 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <h2>Near-Zero variance predictors</h2>
 <p>A <strong>near-zero variance predictor variable</strong> is one that has only a handful of unique values that occur with very low frequencies.</p>
 <p><br></p>
+<div class="fragment">
 <p>If the predictor has a single unique value, then it is called a <strong>zero-variance predictor variable</strong>.</p>
 <p><br></p>
+</div>
+<div class="fragment">
 <p>Since the values of this predictor variable do not vary or change at all, this predictor does not provide any information to the model and must be discarded.</p>
+</div>
 </section>
 <section id="example-3" class="slide level2">
 <h2>Example 3</h2>
 <p>We consider a data set related to Glass identification. The data has 214 glass samples labeled as one of seven glass categories. There are nine predictors including the refractive index (RI) and percentages of eight elements: Na, Mg, Al, Si, K, Ca, Ba, and Fe.</p>
 <p>Let’s read the data set. Note that this is a modified version of the original data.</p>
-<div id="e39411c3" class="cell" data-execution_count="19">
+<div id="d0cb23d3" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="co"># Load Excel file (make sure the file is in your Colab)</span></span>
 <span id="cb16-2"><a></a>glass_data <span class="op">=</span> pd.read_excel(<span class="st">'glass.xlsx'</span>)</span>
 <span id="cb16-3"><a></a></span>
@@ -1509,7 +1544,7 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <section id="in-python" class="slide level2">
 <h2>In python</h2>
 <p>We use the function <code>VarianceThreshold()</code> to set the threshold for determining a <em>low</em> sample variance. We also use other functions such as <code>selector.fit()</code> and <code>selector.get_support()</code>.</p>
-<div id="67d68e8c" class="cell" data-execution_count="20">
+<div id="540b370a" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a><span class="co"># Set threshold</span></span>
 <span id="cb17-2"><a></a>selector <span class="op">=</span> VarianceThreshold(threshold<span class="op">=</span><span class="fl">0.01</span>)</span>
 <span id="cb17-3"><a></a></span>
@@ -1528,23 +1563,26 @@ Name: bill_length_mm, dtype: float64</code></pre>
 </section>
 <section id="section-17" class="slide level2">
 <h2></h2>
+<p><br><br></p>
 <p>After identifying predictors with low variability, we remove them from the problem because they do not add much to the problem. To this end, we use the command below.</p>
 <p><br></p>
-<div id="0db2d80b" class="cell" data-execution_count="21">
+<div id="b9c63725" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a><span class="co"># Removing problematic predictors</span></span>
 <span id="cb19-2"><a></a>sb_reduced_glass <span class="op">=</span> sb_glass.drop(columns<span class="op">=</span>low_variance_cols)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="between-predictor-correlation" class="slide level2">
 <h2>Between-predictor correlation</h2>
+<p><br></p>
 <p><span style="color:purple;"><strong>Collinearity</strong></span> is the technical term for the situation where two predictors have a substantial correlation with each other.</p>
 <p>If two or more predictors are highly correlated (either negatively or positively), then methods such as the linear regression model will not work!</p>
 <p>To visualize the severity of collinearity between predictors, we calculate and visualize the <em>correlation matrix</em>.</p>
 </section>
 <section id="correlation-matrix" class="slide level2">
 <h2>Correlation matrix</h2>
+<p><br></p>
 <p>In python, we calculate the correlation matrix using the command below.</p>
-<div id="5587ba21" class="cell" data-execution_count="22">
+<div id="3be11a19" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a>correlation_matrix <span class="op">=</span> complete_sbAuto.corr()</span>
 <span id="cb20-2"><a></a><span class="bu">print</span>(correlation_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1560,7 +1598,7 @@ acceleration  -0.504683     -0.543800   -0.689196 -0.416839      1.000000</code>
 <section id="section-18" class="slide level2">
 <h2></h2>
 <p>Next, we plot the correlation matrix using the function <code>heatmap()</code> from <strong>seaborn</strong>. The argument <code>annot</code> shows the actual value of the pair-wise correlations, and <code>cmap</code> shows a nice color theme.</p>
-<div id="87f0f8c9" class="cell" data-execution_count="23">
+<div id="22c021d1" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">3</span>,<span class="dv">3</span>))</span>
 <span id="cb22-2"><a></a>sns.heatmap(correlation_matrix, cmap<span class="op">=</span><span class="st">'coolwarm'</span>, annot <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1574,8 +1612,9 @@ acceleration  -0.504683     -0.543800   -0.689196 -0.416839      1.000000</code>
 </section>
 <section id="section-19" class="slide level2">
 <h2></h2>
+<p><br></p>
 <p>The predictors cylinders and displacement are highly correlated. In fact, their correlation is 0.95.</p>
-<div id="29712d0a" class="cell" data-execution_count="24">
+<div id="cadc0e43" class="cell" data-execution_count="24">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -1587,9 +1626,10 @@ acceleration  -0.504683     -0.543800   -0.689196 -0.416839      1.000000</code>
 </section>
 <section id="in-practice" class="slide level2">
 <h2>In practice</h2>
+<p><br></p>
 <p>We deal with collinearity by removing the minimum number of predictors to ensure that all pairwise correlations are below a certain threshold, say, 0.75.</p>
 <p>We can identify the variables that are highly correlated using quite complex code. However, here we will do it manually using the correlation map.</p>
-<div id="1a6f08ef" class="cell" data-execution_count="25">
+<div id="7cf58c20" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a><span class="co"># Dataset without highly correlated predictors.</span></span>
 <span id="cb23-2"><a></a>reduced_auto <span class="op">=</span> complete_sbAuto[ [<span class="st">'weight'</span>, <span class="st">'acceleration'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
