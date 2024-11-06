@@ -506,7 +506,7 @@ Data for which items consists of a pair of numeric values is called bivariate. T
 
 The variables $X$ and $Y$ are placed on the horizontal and vertical axes, respectively. Each point on the graph marks the position of a pair of values of $X$ and $Y$.
 
-A scatterplot allows us to explor lineal and nonlinear relationships between two variables.
+A scatterplot allows us to explore lineal and nonlinear relationships between two variables.
 
 ## Scatter plot of Na versus RI
 
@@ -578,12 +578,11 @@ plt.savefig('bar_chart.png',dpi=300)
 
 We can also use other functions to improve the aspect of the figure:
 
-- `plt.title(fontsize)`: Font size of the title.
-- `plt.ylabel(fontsize)`: Font size of y axis title.
-- `plt.xlabel(fontsize)`: Font size of x axis title.
-- `plt.yticks(fontsize)`: Font size of the y axis labels.
-- `plt.xticks(fontsize)`: Font size of the x axis labels.
-
+-   `plt.title(fontsize)`: Font size of the title.
+-   `plt.ylabel(fontsize)`: Font size of y axis title.
+-   `plt.xlabel(fontsize)`: Font size of x axis title.
+-   `plt.yticks(fontsize)`: Font size of the y axis labels.
+-   `plt.xticks(fontsize)`: Font size of the x axis labels.
 
 ## 
 
