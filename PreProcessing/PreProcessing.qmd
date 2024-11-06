@@ -294,7 +294,7 @@ The categories can be represented by names, labels or even numbers. Their use in
 
 </br>
 
-***Initially, a categorical variable with*** $k$ categories requires $k$ dummy variables.
+***Initially, a categorical variable with*** $k$ ***categories requires*** $k$ ***dummy variables.***
 
 ## Example 2
 
@@ -443,6 +443,7 @@ Now, to add the dummy variables to the dataset, we use the function `concat()` f
 #| echo: true
 
 augmented_auto = pd.concat([complete_Auto, dummy_data], axis = 1)
+augmented_auto.head()
 ```
 
 # Filtering
@@ -541,7 +542,7 @@ To visualize the severity of collinearity between predictors, we calculate and v
 
 </br>
 
-Weconcentrate on the five numerical predictors in the `complete_Auto` dataset.
+We concentrate on the five numerical predictors in the `complete_Auto` dataset.
 
 ```{python}
 #| echo: true

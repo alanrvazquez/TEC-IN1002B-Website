@@ -2776,7 +2776,7 @@
     "href": "PreProcessing/PreProcessing.slides.html#section-14",
     "title": "Data preprocessing",
     "section": "",
-    "text": "Now, to add the dummy variables to the dataset, we use the function concat() from pandas.\n\naugmented_auto = pd.concat([complete_Auto, dummy_data], axis = 1)"
+    "text": "Now, to add the dummy variables to the dataset, we use the function concat() from pandas.\n\naugmented_auto = pd.concat([complete_Auto, dummy_data], axis = 1)\naugmented_auto.head()\n\n\n\n\n\n\n\n\nobservation\nmpg\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\nyear\norigin\nname\nEuropean\nJapanese\n\n\n\n\n0\n1\n18.0\n8\n307.0\n130\n3504\n12.0\n70\nAmerican\nchevrolet chevelle malibu\n0\n0\n\n\n1\n2\n15.0\n8\n350.0\n165\n3693\n11.5\n70\nAmerican\nbuick skylark 320\n0\n0\n\n\n2\n3\n18.0\n8\n318.0\n150\n3436\n11.0\n70\nAmerican\nplymouth satellite\n0\n0\n\n\n3\n4\n16.0\n8\n304.0\n150\n3433\n12.0\n70\nAmerican\namc rebel sst\n0\n0\n\n\n4\n5\n17.0\n8\n302.0\n140\n3449\n10.5\n70\nAmerican\nford torino\n0\n0"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#removing-predictors",
@@ -2825,7 +2825,7 @@
     "href": "PreProcessing/PreProcessing.slides.html#example-2-cont.-1",
     "title": "Data preprocessing",
     "section": "Example 2 (cont.)",
-    "text": "Example 2 (cont.)\n\nWeconcentrate on the five numerical predictors in the complete_Auto dataset.\n\n# Select specific variables.\ncomplete_sbAuto = complete_Auto[['cylinders', 'displacement', \n                                 'horsepower', 'weight', \n                                 'acceleration']]"
+    "text": "Example 2 (cont.)\n\nWe concentrate on the five numerical predictors in the complete_Auto dataset.\n\n# Select specific variables.\ncomplete_sbAuto = complete_Auto[['cylinders', 'displacement', \n                                 'horsepower', 'weight', \n                                 'acceleration']]"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#correlation-matrix",
