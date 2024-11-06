@@ -467,7 +467,7 @@ Alan R. Vazquez
 <h2></h2>
 <p><br></p>
 <p>Let’s import <strong>scikit-learn</strong> into python together with the other relevant libraries.</p>
-<div id="a9a6b6a7" class="cell" data-execution_count="1">
+<div id="74167b83" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -516,7 +516,7 @@ Alan R. Vazquez
 <h2>Example 1</h2>
 <p><br></p>
 <p>Let’s use the penguins dataset available in the file <code>penguins.xlsx</code>.</p>
-<div id="007809d3" class="cell" data-execution_count="2">
+<div id="ce0deb70" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># Load the Excel file into a pandas DataFrame.</span></span>
 <span id="cb2-2"><a></a>penguins_data <span class="op">=</span> pd.read_excel(<span class="st">"penguins.xlsx"</span>)</span>
 <span id="cb2-3"><a></a></span>
@@ -530,8 +530,8 @@ Alan R. Vazquez
 <h2></h2>
 <p><br></p>
 <p>The dataset has some missing values denoted as <code>NaN</code>.</p>
-<div id="68c2bec6" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display" data-execution_count="93">
+<div id="cd1cda48" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -627,10 +627,10 @@ Alan R. Vazquez
 <section id="removing-missing-values" class="slide level2">
 <h2>Removing missing values</h2>
 <p>If we want to remove all rows in the dataset that have at least one missing value, we use the function <code>dropna()</code>.</p>
-<div id="2a5dce2a" class="cell" data-execution_count="4">
+<div id="b3a65193" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>complete_penguins <span class="op">=</span> penguins_data.dropna()</span>
 <span id="cb3-2"><a></a>complete_penguins.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="94">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -726,9 +726,9 @@ Alan R. Vazquez
 <section id="imputation-using-the-mean" class="slide level2">
 <h2>Imputation using the mean</h2>
 <p>We can impute the missing values of a numeric variable using the <strong>mean</strong> or <strong>median</strong> of its available values. For example, consider the variable <code>bill_length_mm</code> that has missing values.</p>
-<div id="74a73595" class="cell" data-execution_count="5">
+<div id="4aa88d1b" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>penguins_data[<span class="st">'bill_length_mm'</span>].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="95">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>0    39.1
 1    39.5
 2    40.3
@@ -743,7 +743,7 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <h2></h2>
 <p><br></p>
 <p>Using <code>SimpleImputer()</code>, we set the method to imput missing values using the <strong>mean</strong>. We also use the function <code>fit_transform()</code> to apply the imputation method to the variable.</p>
-<div id="7709f2fa" class="cell" data-execution_count="6">
+<div id="f0eea0f1" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="co"># Imputation for numerical variables (using the mean)</span></span>
 <span id="cb6-2"><a></a>num_imputer <span class="op">=</span> SimpleImputer(strategy<span class="op">=</span><span class="st">'mean'</span>)</span>
 <span id="cb6-3"><a></a></span>
@@ -754,9 +754,9 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <section id="section-6" class="slide level2">
 <h2></h2>
 <p>After imputation, the dataset looks like this.</p>
-<div id="686800dc" class="cell" data-execution_count="7">
+<div id="0ae4b39b" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>penguins_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="97">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -853,7 +853,7 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <section id="section-7" class="slide level2">
 <h2></h2>
 <p>To imput the missing values using the <strong>median</strong>, we simply set this method in <code>SimpleImputer()</code>. For example, let’s imput the missing values of <code>bill_depth_mm</code>.</p>
-<div id="7275a08c" class="cell" data-execution_count="8">
+<div id="53e565d4" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="co"># Imputation for numerical variables (using the mean)</span></span>
 <span id="cb8-2"><a></a>num_imputer <span class="op">=</span> SimpleImputer(strategy <span class="op">=</span> <span class="st">'median'</span>)</span>
 <span id="cb8-3"><a></a></span>
@@ -862,7 +862,7 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <span id="cb8-6"><a></a></span>
 <span id="cb8-7"><a></a><span class="co"># Show the first 4 rows of the updated dataset.</span></span>
 <span id="cb8-8"><a></a>penguins_data.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="98">
+<div class="cell-output cell-output-display" data-execution_count="8">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -955,7 +955,7 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <h2>Imputation method for categorical variable</h2>
 <p>If a categorical variable has missing values, we can use the <strong>most frequent</strong> of the available values to replace the missing values. To this end, we use similar commands as before.</p>
 <p>For example, let’s imput the missing values of <code>sex</code> using this strategy.</p>
-<div id="19d790fc" class="cell" data-execution_count="9">
+<div id="995fa464" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="co"># Imputation for categorical variables (using the most frequent value)</span></span>
 <span id="cb9-2"><a></a>cat_imputer <span class="op">=</span> SimpleImputer(strategy <span class="op">=</span> <span class="st">'most_frequent'</span>)</span>
 <span id="cb9-3"><a></a></span>
@@ -1008,7 +1008,7 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <h2></h2>
 <p><br><br></p>
 <p>The dataset is in the file “auto.xlsx”. Let’s read the data using <strong>pandas</strong>.</p>
-<div id="2ef2470e" class="cell" data-execution_count="10">
+<div id="9e274419" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="co"># Load the Excel file into a pandas DataFrame.</span></span>
 <span id="cb10-2"><a></a>auto_data <span class="op">=</span> pd.read_excel(<span class="st">"auto.xlsx"</span>)</span>
 <span id="cb10-3"><a></a></span>
@@ -1018,8 +1018,8 @@ Name: bill_length_mm, dtype: float64</code></pre>
 </section>
 <section id="section-10" class="slide level2">
 <h2></h2>
-<div id="1748fe39" class="cell" data-execution_count="11">
-<div class="cell-output cell-output-display" data-execution_count="101">
+<div id="cc8e04b3" class="cell" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="11">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -1116,7 +1116,7 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <p><br></p>
 <p>The dataset has missing values. In this example, we remove each row with at least one missing value.</p>
 <p><br></p>
-<div id="3ffafc27" class="cell" data-execution_count="12">
+<div id="fc6ba68a" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="co"># Remove rows with missing values.</span></span>
 <span id="cb11-2"><a></a>complete_Auto <span class="op">=</span> auto_data.dropna()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1265,7 +1265,7 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <p>We can get the dummy variables of a categorical variable using the function <code>pd.get_dummies()</code> from <strong>pandas</strong>.</p>
 <p>The input of the function is the categorical variable.</p>
 <p>The function has an extra argument called <code>drop_first</code> to drop the first dummy variable. It also has the argument <code>dtype</code> to show the values as integers.</p>
-<div id="02cb0006" class="cell" data-execution_count="13">
+<div id="8e615f5e" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a>dummy_data <span class="op">=</span> pd.get_dummies(complete_Auto[<span class="st">'origin'</span>], drop_first <span class="op">=</span> <span class="va">True</span>, </span>
 <span id="cb12-2"><a></a>                            dtype <span class="op">=</span> <span class="st">'int'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1273,9 +1273,9 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <section id="section-13" class="slide level2">
 <h2></h2>
 <p><br><br></p>
-<div id="ce3526af" class="cell" data-execution_count="14">
+<div id="1e770348" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a>dummy_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="104">
+<div class="cell-output cell-output-display" data-execution_count="14">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -1362,7 +1362,7 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <h2>Example 3</h2>
 <p>We consider a data set related to Glass identification. The data has 214 glass samples labeled as one of seven glass categories. There are nine predictors including the refractive index (RI) and percentages of eight elements: Na, Mg, Al, Si, K, Ca, Ba, and Fe.</p>
 <p>Let’s read the data set. Note that this is a modified version of the original data.</p>
-<div id="011db32b" class="cell" data-execution_count="15">
+<div id="ba34e286" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="co"># Load Excel file (make sure the file is in your Colab)</span></span>
 <span id="cb14-2"><a></a>glass_data <span class="op">=</span> pd.read_excel(<span class="st">'glass.xlsx'</span>)</span>
 <span id="cb14-3"><a></a></span>
@@ -1373,7 +1373,7 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <section id="in-python" class="slide level2">
 <h2>In python</h2>
 <p>We use the function <code>VarianceThreshold()</code> to set the threshold for determining a <em>low</em> sample variance. We also use other functions such as <code>selector.fit()</code> and <code>selector.get_support()</code>.</p>
-<div id="69d4c973" class="cell" data-execution_count="16">
+<div id="572a8cd5" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a><span class="co"># Set threshold</span></span>
 <span id="cb15-2"><a></a>selector <span class="op">=</span> VarianceThreshold(threshold<span class="op">=</span><span class="fl">0.01</span>)</span>
 <span id="cb15-3"><a></a></span>
@@ -1395,7 +1395,7 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <p><br><br></p>
 <p>After identifying predictors with low variability, we remove them from the problem because they do not add much to the problem. To this end, we use the command below.</p>
 <p><br></p>
-<div id="0a36d3be" class="cell" data-execution_count="17">
+<div id="07baf6cb" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a><span class="co"># Removing problematic predictors</span></span>
 <span id="cb17-2"><a></a>sb_reduced_glass <span class="op">=</span> sb_glass.drop(columns<span class="op">=</span>low_variance_cols)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1411,7 +1411,7 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <h2>Example 2 (cont.)</h2>
 <p><br></p>
 <p>Weconcentrate on the five numerical predictors in the <code>complete_Auto</code> dataset.</p>
-<div id="da3ddf44" class="cell" data-execution_count="18">
+<div id="00d46f53" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="co"># Select specific variables.</span></span>
 <span id="cb18-2"><a></a>complete_sbAuto <span class="op">=</span> complete_Auto[[<span class="st">'cylinders'</span>, <span class="st">'displacement'</span>, </span>
 <span id="cb18-3"><a></a>                                 <span class="st">'horsepower'</span>, <span class="st">'weight'</span>, </span>
@@ -1422,7 +1422,7 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <h2>Correlation matrix</h2>
 <p><br></p>
 <p>In python, we calculate the correlation matrix using the command below.</p>
-<div id="d4fb23f0" class="cell" data-execution_count="19">
+<div id="b7cd8aba" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a>correlation_matrix <span class="op">=</span> complete_sbAuto.corr()</span>
 <span id="cb19-2"><a></a><span class="bu">print</span>(correlation_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1438,7 +1438,7 @@ acceleration  -0.504683     -0.543800   -0.689196 -0.416839      1.000000</code>
 <section id="section-15" class="slide level2">
 <h2></h2>
 <p>Next, we plot the correlation matrix using the function <code>heatmap()</code> from <strong>seaborn</strong>. The argument <code>annot</code> shows the actual value of the pair-wise correlations, and <code>cmap</code> shows a nice color theme.</p>
-<div id="ccad28bb" class="cell" data-execution_count="20">
+<div id="44601903" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">3</span>,<span class="dv">3</span>))</span>
 <span id="cb21-2"><a></a>sns.heatmap(correlation_matrix, cmap<span class="op">=</span><span class="st">'coolwarm'</span>, annot <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1454,7 +1454,7 @@ acceleration  -0.504683     -0.543800   -0.689196 -0.416839      1.000000</code>
 <h2></h2>
 <p><br></p>
 <p>The predictors cylinders and displacement are highly correlated. In fact, their correlation is 0.95.</p>
-<div id="93b5bc3e" class="cell" data-execution_count="21">
+<div id="36ea0ce7" class="cell" data-execution_count="21">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -1469,7 +1469,7 @@ acceleration  -0.504683     -0.543800   -0.689196 -0.416839      1.000000</code>
 <p><br></p>
 <p>We deal with collinearity by removing the minimum number of predictors to ensure that all pairwise correlations are below a certain threshold, say, 0.75.</p>
 <p>We can identify the variables that are highly correlated using quite complex code. However, here we will do it manually using the correlation map.</p>
-<div id="33f6bce2" class="cell" data-execution_count="22">
+<div id="3cf5c773" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a></a><span class="co"># Dataset without highly correlated predictors.</span></span>
 <span id="cb22-2"><a></a>reduced_auto <span class="op">=</span> complete_sbAuto[ [<span class="st">'weight'</span>, <span class="st">'acceleration'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1515,7 +1515,7 @@ acceleration  -0.504683     -0.543800   -0.689196 -0.416839      1.000000</code>
 <p>Consider the <code>complete_sbAuto</code> dataset created previously. Consider two points in the plot: <span class="math inline">\((175, 1613)\)</span> and <span class="math inline">\((69, 1613)\)</span>.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="ba87a6aa" class="cell" data-execution_count="23">
+<div id="30379874" class="cell" data-execution_count="23">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -1534,7 +1534,7 @@ acceleration  -0.504683     -0.543800   -0.689196 -0.416839      1.000000</code>
 <p><br></p>
 <p>To standardize <strong>numerical</strong> predictors, we use the function <code>StandardScaler()</code>. Moreover, we apply the function to the variables using the function <code>fit_transform()</code>.</p>
 <p><br></p>
-<div id="7a465fe9" class="cell" data-execution_count="24">
+<div id="d436b45b" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a>scaler <span class="op">=</span> StandardScaler()</span>
 <span id="cb23-2"><a></a>Xs <span class="op">=</span> scaler.fit_transform(complete_sbAuto)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1542,10 +1542,10 @@ acceleration  -0.504683     -0.543800   -0.689196 -0.416839      1.000000</code>
 <section id="section-19" class="slide level2">
 <h2></h2>
 <p>Unfortunately, the resulting object is not a pandas data frame. We then convert this object to this format. <br></p>
-<div id="d7e9a539" class="cell" data-execution_count="25">
+<div id="526ff3e6" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a></a>scaled_df <span class="op">=</span> pd.DataFrame(Xs, columns <span class="op">=</span> complete_sbAuto.columns)</span>
 <span id="cb24-2"><a></a>scaled_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="115">
+<div class="cell-output cell-output-display" data-execution_count="25">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -1625,7 +1625,7 @@ acceleration  -0.504683     -0.543800   -0.689196 -0.416839      1.000000</code>
 <p>In the new scale, the two points are now: <span class="math inline">\((1.82, 2.53)\)</span> and <span class="math inline">\((-0.91, -1.60)\)</span>.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="1976c868" class="cell" data-execution_count="26">
+<div id="abcf899c" class="cell" data-execution_count="26">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
