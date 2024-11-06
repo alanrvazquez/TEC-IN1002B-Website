@@ -87,6 +87,7 @@ Assumptions:
 
 $$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \beta_4 X_4 + \beta_5 X_5 + \epsilon$$
 
+::: {style="font-size: 90%;"}
 -   $X_1$: acid bath temperature.
 
 -   $X_2$: cascade acid concentration.
@@ -100,6 +101,7 @@ $$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \beta_4 X_4 + \beta_5 
 -   $Y$: whiteness of rayon.
 
 -   $p = 5$ and $\epsilon$ is the error of the model assumed to be 0 and of constant dispersion $\sigma^2$.
+:::
 
 ## Interpretation of coefficients
 
@@ -114,6 +116,8 @@ For the j-th predictor, we have that:
 -   $\beta_j < 0$ implies negative dependence.
 
 ## 
+
+</br>
 
 $$f(\boldsymbol{X}) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p,$$
 
@@ -165,12 +169,16 @@ $$Y_i= \beta_0+\beta_1 X_{i1} + \beta_2 X_{i2} + \cdots + \beta_p X_{ip} + \epsi
 
 The error $\epsilon_i$’s must satisfy the following assumptions:
 
+::: incremental
 1.  On average, they are close to zero for any values of the predictors $X_j$.
 2.  For any value of a predictor $X_i$, the dispersion or variance is constant and equal to $\sigma^2$.
 3.  The $\epsilon_i$’s are all independent from each other.
 4.  [The $\epsilon_i$’s follow normal distribution with mean 0 and variance $\sigma^2$.]{style="color:gray;"}
+:::
 
 ## Questions
+
+</br>
 
 ::: incremental
 1.  How can we estimate $\beta_0, \beta_1, \ldots, \beta_p$ and $\sigma^2$?
@@ -185,6 +193,8 @@ The error $\epsilon_i$’s must satisfy the following assumptions:
 # Parameter Estimation
 
 ## Parameter estimates
+
+</br>
 
 ***Goal***: estimate the parameters $\beta_0, \beta_1, \ldots, \beta_p$ and $\sigma^2$.
 
@@ -205,6 +215,8 @@ The estimators $\hat{\beta}_0, \hat{\beta}_1, \ldots, \hat{\beta}_p$ that minimi
 
 ## Computation of estimators
 
+</br>
+
 To compute the least squares estimates, we first split the data set into a matrix with the values of the predictors only, and a matrix with the response values.
 
 ```{python}
@@ -221,6 +233,10 @@ rayon_X_train = sm.add_constant(rayon_predictors)
 rayon_Y_train = rayon_data['Y']
 ```
 
+## 
+
+</br></br>
+
 Next, we use the functions `OLS()` and `fit()` from **statsmodels**.
 
 ```{python}
@@ -235,6 +251,8 @@ linear_model = regr.fit()
 ```
 
 ## 
+
+</br>
 
 To show the estimated coefficients, we use the argument `params` of the `linear_model` object created previously.
 
@@ -260,6 +278,8 @@ The elements in the vector above are the estimates $\hat{\beta}_0$, $\hat{\beta}
 
 ## 
 
+</br></br>
+
 -   Increasing the water temperature by 1 unit increases the average whiteness of a rayon by $\hat{\beta}_3 = 0.793$ units.
 
 -   Increasing the sulfide concentration by 1 unit increases the average whiteness of a rayon by $\hat{\beta}_4 = 25.583$ units.
@@ -267,6 +287,8 @@ The elements in the vector above are the estimates $\hat{\beta}_0$, $\hat{\beta}
 -   Increasing the amount of chlorine bleach by 1 unit increases the average whiteness of a rayon by $\hat{\beta}_5 = 17.208$ units.
 
 ## Properties of least squares estimators
+
+</br>
 
 If all the assumptions of the linear regression model are satisfied, the least squares estimators have some attractive properties.
 
@@ -296,8 +318,6 @@ rayon_Y_pred = linear_model.fittedvalues
 ```
 
 ## 
-
-</br></br></br>
 
 Predictions of the 26 observations in the training dataset.
 

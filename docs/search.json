@@ -1712,7 +1712,7 @@
     "href": "LinearRegression/LinearRegression.slides.html#in-our-example",
     "title": "Multiple Linear Regression",
     "section": "In our example",
-    "text": "In our example\n\\[Y = \\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\beta_3 X_3 + \\beta_4 X_4 + \\beta_5 X_5 + \\epsilon\\]\n\n\\(X_1\\): acid bath temperature.\n\\(X_2\\): cascade acid concentration.\n\\(X_3\\): water temperature.\n\\(X_4\\): sulfide concentration.\n\\(X_5\\): amount of chlorine bleach.\n\\(Y\\): whiteness of rayon.\n\\(p = 5\\) and \\(\\epsilon\\) is the error of the model assumed to be 0 and of constant dispersion \\(\\sigma^2\\)."
+    "text": "In our example\n\\[Y = \\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\beta_3 X_3 + \\beta_4 X_4 + \\beta_5 X_5 + \\epsilon\\]\n\n\n\\(X_1\\): acid bath temperature.\n\\(X_2\\): cascade acid concentration.\n\\(X_3\\): water temperature.\n\\(X_4\\): sulfide concentration.\n\\(X_5\\): amount of chlorine bleach.\n\\(Y\\): whiteness of rayon.\n\\(p = 5\\) and \\(\\epsilon\\) is the error of the model assumed to be 0 and of constant dispersion \\(\\sigma^2\\)."
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#interpretation-of-coefficients",
@@ -1754,21 +1754,21 @@
     "href": "LinearRegression/LinearRegression.slides.html#assumptions-of-the-errors",
     "title": "Multiple Linear Regression",
     "section": "Assumptions of the errors",
-    "text": "Assumptions of the errors\n\\[Y_i= \\beta_0+\\beta_1 X_{i1} + \\beta_2 X_{i2} + \\cdots + \\beta_p X_{ip} + \\epsilon_i \\]\nThe error \\(\\epsilon_i\\)’s must satisfy the following assumptions:\n\nOn average, they are close to zero for any values of the predictors \\(X_j\\).\nFor any value of a predictor \\(X_i\\), the dispersion or variance is constant and equal to \\(\\sigma^2\\).\nThe \\(\\epsilon_i\\)’s are all independent from each other.\nThe \\(\\epsilon_i\\)’s follow normal distribution with mean 0 and variance \\(\\sigma^2\\)."
+    "text": "Assumptions of the errors\n\\[Y_i= \\beta_0+\\beta_1 X_{i1} + \\beta_2 X_{i2} + \\cdots + \\beta_p X_{ip} + \\epsilon_i \\]\nThe error \\(\\epsilon_i\\)’s must satisfy the following assumptions:\n\n\nOn average, they are close to zero for any values of the predictors \\(X_j\\).\nFor any value of a predictor \\(X_i\\), the dispersion or variance is constant and equal to \\(\\sigma^2\\).\nThe \\(\\epsilon_i\\)’s are all independent from each other.\nThe \\(\\epsilon_i\\)’s follow normal distribution with mean 0 and variance \\(\\sigma^2\\)."
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#questions",
     "href": "LinearRegression/LinearRegression.slides.html#questions",
     "title": "Multiple Linear Regression",
     "section": "Questions",
-    "text": "Questions\n\n\nHow can we estimate \\(\\beta_0, \\beta_1, \\ldots, \\beta_p\\) and \\(\\sigma^2\\)?\nHow can we make inferences about \\(\\beta_0, \\beta_1, \\ldots, \\beta_p\\)?\nHow can we make predictions of future responses using the multiple linear regression model?\nHow can we validate the model and all its assumptions?"
+    "text": "Questions\n\n\n\nHow can we estimate \\(\\beta_0, \\beta_1, \\ldots, \\beta_p\\) and \\(\\sigma^2\\)?\nHow can we make inferences about \\(\\beta_0, \\beta_1, \\ldots, \\beta_p\\)?\nHow can we make predictions of future responses using the multiple linear regression model?\nHow can we validate the model and all its assumptions?"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#parameter-estimates",
     "href": "LinearRegression/LinearRegression.slides.html#parameter-estimates",
     "title": "Multiple Linear Regression",
     "section": "Parameter estimates",
-    "text": "Parameter estimates\nGoal: estimate the parameters \\(\\beta_0, \\beta_1, \\ldots, \\beta_p\\) and \\(\\sigma^2\\).\n\nAn estimate of \\(\\beta_j\\) is denoted by \\(\\hat{\\beta}_j\\).\nSimilarly \\(\\sigma^2\\) is the estimate of \\(\\hat{\\sigma}^2\\).\n\nWe calculate the estimates using the training data on the factor values \\(X_{ij}\\) and the response \\(Y_i\\), \\(i = 1, \\ldots, n\\)."
+    "text": "Parameter estimates\n\nGoal: estimate the parameters \\(\\beta_0, \\beta_1, \\ldots, \\beta_p\\) and \\(\\sigma^2\\).\n\nAn estimate of \\(\\beta_j\\) is denoted by \\(\\hat{\\beta}_j\\).\nSimilarly \\(\\sigma^2\\) is the estimate of \\(\\hat{\\sigma}^2\\).\n\nWe calculate the estimates using the training data on the factor values \\(X_{ij}\\) and the response \\(Y_i\\), \\(i = 1, \\ldots, n\\)."
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#least-squares-estimator",
@@ -1782,14 +1782,14 @@
     "href": "LinearRegression/LinearRegression.slides.html#computation-of-estimators",
     "title": "Multiple Linear Regression",
     "section": "Computation of estimators",
-    "text": "Computation of estimators\nTo compute the least squares estimates, we first split the data set into a matrix with the values of the predictors only, and a matrix with the response values.\n\n# Matrix with predictors.\nrayon_predictors = rayon_data.drop(columns=['Y'])\n\n# Add intercept.\nrayon_X_train = sm.add_constant(rayon_predictors)\n\n# Matrix with response.\nrayon_Y_train = rayon_data['Y']\n\nNext, we use the functions OLS() and fit() from statsmodels.\n\n# Create linear regression object\nregr = sm.OLS(rayon_Y_train, rayon_X_train)\n\n# Train the model using the training sets\nlinear_model = regr.fit()"
+    "text": "Computation of estimators\n\nTo compute the least squares estimates, we first split the data set into a matrix with the values of the predictors only, and a matrix with the response values.\n\n# Matrix with predictors.\nrayon_predictors = rayon_data.drop(columns=['Y'])\n\n# Add intercept.\nrayon_X_train = sm.add_constant(rayon_predictors)\n\n# Matrix with response.\nrayon_Y_train = rayon_data['Y']"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#section-2",
     "href": "LinearRegression/LinearRegression.slides.html#section-2",
     "title": "Multiple Linear Regression",
     "section": "",
-    "text": "To show the estimated coefficients, we use the argument params of the linear_model object created previously.\n\n# The estimated coefficients.\nprint(linear_model.params)\n\nconst   -35.262607\nX1        0.745417\nX2       20.229167\nX3        0.793056\nX4       25.583333\nX5       17.208333\ndtype: float64\n\n\nThe elements in the vector above are the estimates \\(\\hat{\\beta}_0\\), \\(\\hat{\\beta}_1\\), \\(\\hat{\\beta}_2\\), \\(\\hat{\\beta}_3\\), \\(\\hat{\\beta}_4\\), and \\(\\hat{\\beta}_5\\)."
+    "text": "Next, we use the functions OLS() and fit() from statsmodels.\n\n# Create linear regression object\nregr = sm.OLS(rayon_Y_train, rayon_X_train)\n\n# Train the model using the training sets\nlinear_model = regr.fit()"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#interpretation-of-estimated-coefficients",
@@ -1803,14 +1803,14 @@
     "href": "LinearRegression/LinearRegression.slides.html#section-3",
     "title": "Multiple Linear Regression",
     "section": "",
-    "text": "Increasing the water temperature by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_3 = 0.793\\) units.\nIncreasing the sulfide concentration by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_4 = 25.583\\) units.\nIncreasing the amount of chlorine bleach by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_5 = 17.208\\) units."
+    "text": "To show the estimated coefficients, we use the argument params of the linear_model object created previously.\n\n# The estimated coefficients.\nprint(linear_model.params)\n\nconst   -35.262607\nX1        0.745417\nX2       20.229167\nX3        0.793056\nX4       25.583333\nX5       17.208333\ndtype: float64\n\n\nThe elements in the vector above are the estimates \\(\\hat{\\beta}_0\\), \\(\\hat{\\beta}_1\\), \\(\\hat{\\beta}_2\\), \\(\\hat{\\beta}_3\\), \\(\\hat{\\beta}_4\\), and \\(\\hat{\\beta}_5\\)."
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#properties-of-least-squares-estimators",
     "href": "LinearRegression/LinearRegression.slides.html#properties-of-least-squares-estimators",
     "title": "Multiple Linear Regression",
     "section": "Properties of least squares estimators",
-    "text": "Properties of least squares estimators\nIf all the assumptions of the linear regression model are satisfied, the least squares estimators have some attractive properties.\n\nFor example:\n\nOn average, \\(\\hat{\\beta}_{j}\\) equals the true parameter value \\(\\beta_{j}\\).\nEach \\(\\hat{\\beta}_{j}\\) follows a normal distribution with a specific mean and variance."
+    "text": "Properties of least squares estimators\n\nIf all the assumptions of the linear regression model are satisfied, the least squares estimators have some attractive properties.\n\nFor example:\n\nOn average, \\(\\hat{\\beta}_{j}\\) equals the true parameter value \\(\\beta_{j}\\).\nEach \\(\\hat{\\beta}_{j}\\) follows a normal distribution with a specific mean and variance."
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#predictions",
@@ -1824,7 +1824,7 @@
     "href": "LinearRegression/LinearRegression.slides.html#section-4",
     "title": "Multiple Linear Regression",
     "section": "",
-    "text": "Predictions of the 26 observations in the training dataset.\n\nprint(rayon_Y_pred)\n\n0      72.205449\n1      78.205449\n2      80.405449\n3      79.522115\n4      83.738782\n5      82.855449\n6      85.055449\n7      91.055449\n8      90.555449\n9      89.672115\n10     91.872115\n11     97.872115\n12     95.205449\n13    101.205449\n14    103.405449\n15    102.522115\n16     74.176282\n17    103.992949\n18     80.992949\n19     97.176282\n20     84.326282\n21     93.842949\n22     86.526282\n23     91.642949\n24     85.642949\n25     92.526282\ndtype: float64"
+    "text": "Increasing the water temperature by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_3 = 0.793\\) units.\nIncreasing the sulfide concentration by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_4 = 25.583\\) units.\nIncreasing the amount of chlorine bleach by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_5 = 17.208\\) units."
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#residuals",
@@ -1838,7 +1838,7 @@
     "href": "LinearRegression/LinearRegression.slides.html#section-5",
     "title": "Multiple Linear Regression",
     "section": "",
-    "text": "In python, we compute the residuals using the following command.\n\nresiduals = linear_model.resid\n\nprint(residuals)\n\n0      4.294551\n1     -2.205449\n2     -0.505449\n3      3.977885\n4      5.761218\n5      1.344551\n6      0.644551\n7      8.444551\n8     -1.155449\n9      7.827885\n10    11.327885\n11    10.827885\n12    19.994551\n13    10.294551\n14    -1.105449\n15     5.577885\n16     6.023718\n17   -14.892949\n18    -3.792949\n19   -12.076282\n20   -12.826282\n21    -9.342949\n22    -9.026282\n23   -12.442949\n24   -14.642949\n25    -2.326282\ndtype: float64"
+    "text": "Predictions of the 26 observations in the training dataset.\n\nprint(rayon_Y_pred)\n\n0      72.205449\n1      78.205449\n2      80.405449\n3      79.522115\n4      83.738782\n5      82.855449\n6      85.055449\n7      91.055449\n8      90.555449\n9      89.672115\n10     91.872115\n11     97.872115\n12     95.205449\n13    101.205449\n14    103.405449\n15    102.522115\n16     74.176282\n17    103.992949\n18     80.992949\n19     97.176282\n20     84.326282\n21     93.842949\n22     86.526282\n23     91.642949\n24     85.642949\n25     92.526282\ndtype: float64"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#estimation-of-variance",
@@ -2797,7 +2797,7 @@
     "href": "PreProcessing/PreProcessing.slides.html#removing-predictors",
     "title": "Data preprocessing",
     "section": "Removing predictors",
-    "text": "Removing predictors\nThere are potential advantages to removing predictors prior to modeling:\n\nFewer predictors means decreased computational time and complexity.\nIf two predictors are highly-correlated, they are measuring the same underlying information. So, removing one should not compromise the performance of the model.\n\nHere, we will see two techniques to remove predictors."
+    "text": "Removing predictors\nThere are potential advantages to removing predictors prior to modeling:\n\n\nFewer predictors means decreased computational time and complexity.\nIf two predictors are highly-correlated, they are measuring the same underlying information. So, removing one should not compromise the performance of the model.\n\n\n\nHere, we will see two techniques to remove predictors."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#near-zero-variance-predictors",
@@ -2931,5 +2931,12 @@
     "title": "Data preprocessing",
     "section": "Discussion",
     "text": "Discussion\n\n\nStandardized predictors are generally used to improve the numerical stability of some calculations.\nIt is generally recommended to always standardize numeric predictors. Perhaps the only exception would be if we consider a linear regression model.\nA drawback of these transformations is the loss of interpretability since the data are no longer in the original units.\nStandardizing the predictors does not affect their correlation."
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#section-6",
+    "href": "LinearRegression/LinearRegression.slides.html#section-6",
+    "title": "Multiple Linear Regression",
+    "section": "",
+    "text": "In python, we compute the residuals using the following command.\n\nresiduals = linear_model.resid\n\nprint(residuals)\n\n0      4.294551\n1     -2.205449\n2     -0.505449\n3      3.977885\n4      5.761218\n5      1.344551\n6      0.644551\n7      8.444551\n8     -1.155449\n9      7.827885\n10    11.327885\n11    10.827885\n12    19.994551\n13    10.294551\n14    -1.105449\n15     5.577885\n16     6.023718\n17   -14.892949\n18    -3.792949\n19   -12.076282\n20   -12.826282\n21    -9.342949\n22    -9.026282\n23   -12.442949\n24   -14.642949\n25    -2.326282\ndtype: float64"
   }
 ]

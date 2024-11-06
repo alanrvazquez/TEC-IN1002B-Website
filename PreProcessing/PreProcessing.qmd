@@ -476,9 +476,13 @@ augmented_auto.head()
 
 There are potential advantages to removing predictors prior to modeling:
 
+::: incremental
 -   Fewer predictors means decreased computational time and complexity.
 
 -   If two predictors are highly-correlated, they are measuring the same underlying information. So, removing one should not compromise the performance of the model.
+:::
+
+. . .
 
 Here, we will see two techniques to remove predictors.
 
