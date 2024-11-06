@@ -21,11 +21,10 @@ jupyter: python3
 ## Agenda
 
 1.  Introduction
-2.  Training and validation datasets
-3.  Dealing with missing values
-4.  Standarization
-5.  Transforming categorical predictors
-6.  Filtering
+2.  Dealing with missing values
+3.  Standarization
+4.  Transforming categorical predictors
+5.  Filtering
 
 # Introduction
 
@@ -35,7 +34,7 @@ jupyter: python3
 
 </br>
 
-> It can make or break a model’s predictive ability.
+It can make or break a model’s predictive ability.
 
 </br>
 
@@ -52,7 +51,6 @@ We will review some common strategies for removing predictors from the data, wit
 In particular, we will review:
 
 ::: incremental
--   Splitting the data into training and validation
 -   Dealing with missing values.
 -   Standardization.
 -   Transforming categorical predictors.
@@ -80,117 +78,18 @@ Let's import **scikit-learn** into python together with the other relevant libra
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.feature_selection import VarianceThreshold
 from sklearn.impute import SimpleImputer
 ```
 
-We will not use all the functions from the **scikit-learn** library. Instead, we will use specific functions from the sub-libraries **model_selection**, **preprocessing**, **feature_selection**, and **impute**.
-
-# Training and validation datasets
-
-## Two datasets
-
-</br></br>
-
-The application of data science models necessitates two data sets:
-
-::: incremental
--   [**Training data**]{style="color:blue;"} is data that we use to train or construct the estimated model $\hat{f}(\boldsymbol{X})$.
-
--   [**Test data**]{style="color:green;"} is data that we use to evaluate the predictive performance of $\hat{f}(\boldsymbol{X})$ only.
-:::
-
-## 
-
-::::: columns
-::: {.column width="30%"}
-![](images/training.png){width="256"}
-:::
-
-::: {.column width="70%"}
-</br>
-
-A random sample of $n$ observations.
-
-Use it to **construct** $\hat{f}(\boldsymbol{X})$.
-:::
-:::::
-
-::::: columns
-::: {.column width="30%"}
-![](images/test.png){width="262"}
-:::
-
-::: {.column width="70%"}
-Another random sample of $n_t$ observations, which is independent of the training data.
-
-Use it to **evaluate** $\hat{f}(\boldsymbol{X})$.
-:::
-:::::
-
-## Validation Dataset
-
-In many practical situations, a test dataset is not available. To overcome this issue, we use a [**validation dataset**]{style="color:orange;"}.
-
-![](images/validation.png){fig-align="center" width="645"}
-
-**Idea**: Apply model to your [**validation dataset**]{style="color:orange;"} to mimic what will happen when you apply it to test dataset.
-
-## Example 3
-
-We consider a data set related to Glass identification. The data has 214 glass samples labeled as one of seven glass categories. There are nine predictors including the refractive index (RI) and percentages of eight elements: Na, Mg, Al, Si, K, Ca, Ba, and Fe. The response is the type of glass.
-
-Let's read the data set. Note that this is a modified version of the original data.
-
-```{python}
-#| echo: true
-#| output: true
-
-# Load Excel file (make sure the file is in your Colab)
-glass_data = pd.read_excel('glass.xlsx')
-
-# Drop the categorical variable.
-glass_data['Type'] = glass_data['Type'].astype('category')
-```
-## How do we generate validation data?
-
-We split the current data set into a training and a validation dataset. To this end, we use the function `train_test_split()` from **scikit-learn**.
-
-```{python}
-#| echo: true
-#| output: true
-
-# Set full matrix of predictors.
-X_full = glass_data.drop(columns = ['Type'])
-
-# Set full matrix of responses.
-Y_full = glass_data['Type']
-
-# Split the dataset.
-X_train, X_validation, Y_train, Y_validation = train_test_split(X_full, 
-                                                    Y_full, test_size=0.3)
-```
-
-The parameter `test_size` sets the portion of the dataset that will go to the test set.
-
-## 
-
-</br></br>
-
--   The function makes a clever partition of the data using the *empirical* distribution of the response.
-
--   Technically, it splits the data so that the distribution of the response under the training and test sets is similar.
-
--   Usually, the proportion of the dataset that goes to the test set is 20% or 30%.
-
+We will not use all the functions from the **scikit-learn** library. Instead, we will use specific functions from the sub-libraries **preprocessing**, **feature_selection**, and **impute**.
 
 # Dealing with missing values
 
 ## Missing values
 
-In many cases, some predictors have no values for a given observation. It is important to understand why the values are missing.
+In many cases, some predictors have no values for a given observation. It is important to understand why the values are missing. 
 
 </br>
 
@@ -479,6 +378,7 @@ plt.show()
 :::
 
 ::: {.column width="50%"}
+
 </br>
 
 The distance between these points is $\sqrt{(69 - 175)^2 + (1613-5140)^2}$ $= \sqrt{11236 + 12439729}$ $= 3528.592$.
@@ -579,7 +479,7 @@ The categories can be represented by names, labels or even numbers. Their use in
 
 ***Initially, a categorical variable with*** $k$ categories requires $k$ dummy variables.
 
-## Illustrative Example
+## Example
 
 Categorical predictor: Origin of a car. Three categories: American, European and Japanese.
 

@@ -4,21 +4,21 @@
     "href": "PreProcessing/PreProcessing.slides.html#agenda",
     "title": "Data preprocessing",
     "section": "Agenda",
-    "text": "Agenda\n\nIntroduction\nDealing with missing values\nStandarization\nTransforming categorical predictors\nFiltering"
+    "text": "Agenda\n\nIntroduction\nTraining and validation datasets\nDealing with missing values\nStandarization\nTransforming categorical predictors\nFiltering"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#data-preprocessing",
     "href": "PreProcessing/PreProcessing.slides.html#data-preprocessing",
     "title": "Data preprocessing",
     "section": "Data preprocessing",
-    "text": "Data preprocessing\nData pre-processing techniques generally refer to the addition, deletion, or transformation of data.\n\nIt can make or break a model’s predictive ability.\n\nFor example, linear regression models (to be discussed later) are relatively insensitive to the characteristics of the predictor data, but advanced methods like K-nearest neighbors, principal component regression, and LASSO are not."
+    "text": "Data preprocessing\nData pre-processing techniques generally refer to the addition, deletion, or transformation of data.\n\n\nIt can make or break a model’s predictive ability.\n\n\nFor example, linear regression models (to be discussed later) are relatively insensitive to the characteristics of the predictor data, but advanced methods like K-nearest neighbors, principal component regression, and LASSO are not."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#section",
     "href": "PreProcessing/PreProcessing.slides.html#section",
     "title": "Data preprocessing",
     "section": "",
-    "text": "We will review some common strategies for removing predictors from the data, without considering how they might be related to the response.\n\nIn particular, we will review:\n\n\nDealing with missing values.\nStandardization.\nTransforming categorical predictors.\nFiltering: Removing non-informative or correlated predictors."
+    "text": "We will review some common strategies for removing predictors from the data, without considering how they might be related to the response.\n\nIn particular, we will review:\n\n\nSplitting the data into training and validation\nDealing with missing values.\nStandardization.\nTransforming categorical predictors.\nFiltering: Removing non-informative or correlated predictors."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#scikit-learn-library",
@@ -32,7 +32,7 @@
     "href": "PreProcessing/PreProcessing.slides.html#section-1",
     "title": "Data preprocessing",
     "section": "",
-    "text": "Let’s import scikit-learn into python together with the other relevant libraries.\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.feature_selection import VarianceThreshold\nfrom sklearn.impute import SimpleImputer\n\nWe will not use all the functions from the scikit-learn library. Instead, we will use specific functions from the sub-libraries preprocessing, feature_selection, and impute."
+    "text": "Let’s import scikit-learn into python together with the other relevant libraries.\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.feature_selection import VarianceThreshold\nfrom sklearn.impute import SimpleImputer\n\nWe will not use all the functions from the scikit-learn library. Instead, we will use specific functions from the sub-libraries model_selection, preprocessing, feature_selection, and impute."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#missing-values",
@@ -46,14 +46,14 @@
     "href": "PreProcessing/PreProcessing.slides.html#section-2",
     "title": "Data preprocessing",
     "section": "",
-    "text": "Missing at random assumes that we can predict the value that is missing based on the other available data.\nMissing not at random assumes that there is a mechanism that generates the missing values, which may include observed and unobserved predictors."
+    "text": "A random sample of \\(n\\) observations.\nUse it to construct \\(\\hat{f}(\\boldsymbol{X})\\).\n\n\n\n\n\nAnother random sample of \\(n_t\\) observations, which is independent of the training data.\nUse it to evaluate \\(\\hat{f}(\\boldsymbol{X})\\)."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#section-3",
     "href": "PreProcessing/PreProcessing.slides.html#section-3",
     "title": "Data preprocessing",
     "section": "",
-    "text": "For large data sets, removal of observations based on missing values is not a problem, assuming that the type of missing data is completely at random.\n\nIn a smaller data sets, there is a high price in removing observations. To overcome this issue, we can use methods of imputation, which try to estimate the missing values of a predictor variable using the other predictors’ values.\n\nHere, we will introduce three simple methods for imputing missing values in categorical and numerical variables."
+    "text": "The function makes a clever partition of the data using the empirical distribution of the response.\nTechnically, it splits the data so that the distribution of the response under the training and test sets is similar.\nUsually, the proportion of the dataset that goes to the test set is 20% or 30%."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#example-1",
@@ -67,7 +67,7 @@
     "href": "PreProcessing/PreProcessing.slides.html#section-4",
     "title": "Data preprocessing",
     "section": "",
-    "text": "The dataset has some missing values denoted as NaN.\n\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.5\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007\n\n\n3\nAdelie\nTorgersen\nNaN\nNaN\nNaN\nNaN\nNaN\n2007\n\n\n4\nAdelie\nTorgersen\n36.7\n19.3\n193.0\n3450.0\nfemale\n2007"
+    "text": "Missing at random assumes that we can predict the value that is missing based on the other available data.\nMissing not at random assumes that there is a mechanism that generates the missing values, which may include observed and unobserved predictors."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#removing-missing-values",
@@ -88,21 +88,21 @@
     "href": "PreProcessing/PreProcessing.slides.html#section-5",
     "title": "Data preprocessing",
     "section": "",
-    "text": "Using SimpleImputer(), we set the method to imput missing values using the mean. We also use the function fit_transform() to apply the imputation method to the variable.\n\n# Imputation for numerical variables (using the mean)\nnum_imputer = SimpleImputer(strategy='mean')\n\n# Replace the original variable with new version.\npenguins_data['bill_length_mm'] = num_imputer.fit_transform(penguins_data[ ['bill_length_mm'] ] )"
+    "text": "For large data sets, removal of observations based on missing values is not a problem, assuming that the type of missing data is completely at random.\n\nIn a smaller data sets, there is a high price in removing observations. To overcome this issue, we can use methods of imputation, which try to estimate the missing values of a predictor variable using the other predictors’ values.\n\nHere, we will introduce three simple methods for imputing missing values in categorical and numerical variables."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#section-6",
     "href": "PreProcessing/PreProcessing.slides.html#section-6",
     "title": "Data preprocessing",
     "section": "",
-    "text": "After imputation, the dataset looks like this.\n\npenguins_data.head()\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.10000\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.50000\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.30000\n18.0\n195.0\n3250.0\nfemale\n2007\n\n\n3\nAdelie\nTorgersen\n43.92193\nNaN\nNaN\nNaN\nNaN\n2007\n\n\n4\nAdelie\nTorgersen\n36.70000\n19.3\n193.0\n3450.0\nfemale\n2007\n\n\n\n\n\n\n\nNow, bill_length_mm has complete values."
+    "text": "The dataset has some missing values denoted as NaN.\n\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.5\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007\n\n\n3\nAdelie\nTorgersen\nNaN\nNaN\nNaN\nNaN\nNaN\n2007\n\n\n4\nAdelie\nTorgersen\n36.7\n19.3\n193.0\n3450.0\nfemale\n2007"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#section-7",
     "href": "PreProcessing/PreProcessing.slides.html#section-7",
     "title": "Data preprocessing",
     "section": "",
-    "text": "To imput the missing values using the median, we simply set this method in SimpleImputer(). For example, let’s imput the missing values of bill_depth_mm.\n\n# Imputation for numerical variables (using the mean)\nnum_imputer = SimpleImputer(strategy = 'median')\n\n# Replace the original variable with new version.\npenguins_data['bill_depth_mm'] = num_imputer.fit_transform(penguins_data[ ['bill_depth_mm'] ] )\n\n# Show the first 4 rows of the updated dataset.\npenguins_data.head(3)\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.5\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007"
+    "text": "Using SimpleImputer(), we set the method to imput missing values using the mean. We also use the function fit_transform() to apply the imputation method to the variable.\n\n# Imputation for numerical variables (using the mean)\nnum_imputer = SimpleImputer(strategy='mean')\n\n# Replace the original variable with new version.\npenguins_data['bill_length_mm'] = num_imputer.fit_transform(penguins_data[ ['bill_length_mm'] ] )"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#using-the-mean-or-the-median",
@@ -116,7 +116,7 @@
     "href": "PreProcessing/PreProcessing.slides.html#section-8",
     "title": "Data preprocessing",
     "section": "",
-    "text": "We use the sample median when the data is skewed (e.g., incomes, prices).\n\nPros: Less sensitive to outliers; robust for skewed distributions.\nCons: May reduce variability in the data."
+    "text": "After imputation, the dataset looks like this.\n\npenguins_data.head()\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.10000\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.50000\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.30000\n18.0\n195.0\n3250.0\nfemale\n2007\n\n\n3\nAdelie\nTorgersen\n43.92193\nNaN\nNaN\nNaN\nNaN\n2007\n\n\n4\nAdelie\nTorgersen\n36.70000\n19.3\n193.0\n3450.0\nfemale\n2007\n\n\n\n\n\n\n\nNow, bill_length_mm has complete values."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#imputation-method-for-categorical-variable",
@@ -137,7 +137,7 @@
     "href": "PreProcessing/PreProcessing.slides.html#section-9",
     "title": "Data preprocessing",
     "section": "",
-    "text": "In a nutshell, some predictors will have a higher impact in the model due to its unit and not its information provided to it."
+    "text": "To imput the missing values using the median, we simply set this method in SimpleImputer(). For example, let’s imput the missing values of bill_depth_mm.\n\n# Imputation for numerical variables (using the mean)\nnum_imputer = SimpleImputer(strategy = 'median')\n\n# Replace the original variable with new version.\npenguins_data['bill_depth_mm'] = num_imputer.fit_transform(penguins_data[ ['bill_depth_mm'] ] )\n\n# Show the first 4 rows of the updated dataset.\npenguins_data.head(3)\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.5\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#standarization-1",
@@ -151,7 +151,7 @@
     "href": "PreProcessing/PreProcessing.slides.html#section-10",
     "title": "Data preprocessing",
     "section": "",
-    "text": "To scale a predictor, each of its value is divided by its standard deviation.\nScaling the data coerce the values to have a common standard deviation of one.\nIn mathematical terms, we standardize a predictor as:\n\\[{\\color{blue} \\tilde{x}_{i}} = \\frac{{ x_{i} - \\bar{x}}}{ \\sqrt{\\frac{1}{n -1} \\sum_{i=1}^{n} (x_{i} - \\bar{x})^2}},\\]\nwith \\(\\bar{x} = \\sum_{i=1}^n \\frac{x_i}{n}\\)."
+    "text": "We use the sample median when the data is skewed (e.g., incomes, prices).\n\nPros: Less sensitive to outliers; robust for skewed distributions.\nCons: May reduce variability in the data."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#example-2",
@@ -165,14 +165,14 @@
     "href": "PreProcessing/PreProcessing.slides.html#section-11",
     "title": "Data preprocessing",
     "section": "",
-    "text": "The dataset is in the file “auto.xlsx”. Let’s read the data using numpy.\n\n# Load the Excel file into a pandas DataFrame.\nauto_data = pd.read_excel(\"auto.xlsx\")\n\n# Set categorical variables.\nauto_data['origin'] = auto_data['origin'].astype('category')"
+    "text": "In a nutshell, some predictors will have a higher impact in the model due to its unit and not its information provided to it."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#section-12",
     "href": "PreProcessing/PreProcessing.slides.html#section-12",
     "title": "Data preprocessing",
     "section": "",
-    "text": "observation\nmpg\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\nyear\norigin\nname\n\n\n\n\n0\n1\n18.0\n8\n307.0\n130\n3504\n12.0\n70\nAmerican\nchevrolet chevelle malibu\n\n\n1\n2\n15.0\n8\n350.0\n165\n3693\n11.5\n70\nAmerican\nbuick skylark 320\n\n\n2\n3\n18.0\n8\n318.0\n150\n3436\n11.0\n70\nAmerican\nplymouth satellite\n\n\n3\n4\n16.0\n8\n304.0\n150\n3433\n12.0\n70\nAmerican\namc rebel sst"
+    "text": "To scale a predictor, each of its value is divided by its standard deviation.\nScaling the data coerce the values to have a common standard deviation of one.\nIn mathematical terms, we standardize a predictor as:\n\\[{\\color{blue} \\tilde{x}_{i}} = \\frac{{ x_{i} - \\bar{x}}}{ \\sqrt{\\frac{1}{n -1} \\sum_{i=1}^{n} (x_{i} - \\bar{x})^2}},\\]\nwith \\(\\bar{x} = \\sum_{i=1}^n \\frac{x_i}{n}\\)."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#dealing-with-missing-values-1",
@@ -200,7 +200,7 @@
     "href": "PreProcessing/PreProcessing.slides.html#section-13",
     "title": "Data preprocessing",
     "section": "",
-    "text": "Unfortunately, the resulting object is not a pandas data frame. We then convert this object to this format. \n\nscaled_df = pd.DataFrame(Xs, columns = complete_sbAuto.columns)\nscaled_df.head()\n\n\n\n\n\n\n\n\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\n\n\n\n\n0\n1.483947\n1.077290\n0.664133\n0.620540\n-1.285258\n\n\n1\n1.483947\n1.488732\n1.574594\n0.843334\n-1.466724\n\n\n2\n1.483947\n1.182542\n1.184397\n0.540382\n-1.648189\n\n\n3\n1.483947\n1.048584\n1.184397\n0.536845\n-1.285258\n\n\n4\n1.483947\n1.029447\n0.924265\n0.555706\n-1.829655"
+    "text": "The dataset is in the file “auto.xlsx”. Let’s read the data using numpy.\n\n# Load the Excel file into a pandas DataFrame.\nauto_data = pd.read_excel(\"auto.xlsx\")\n\n# Set categorical variables.\nauto_data['origin'] = auto_data['origin'].astype('category')"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#two-predictors-in-standardized-units",
@@ -242,7 +242,7 @@
     "href": "PreProcessing/PreProcessing.slides.html#section-14",
     "title": "Data preprocessing",
     "section": "",
-    "text": "The variable Origin would then be replaced by the three dummy variables\n\n\n\nOrigin (\\(X\\))\n\\(d_1\\)\n\\(d_2\\)\n\\(d_3\\)\n\n\n\n\nAmerican\n1\n0\n0\n\n\nAmerican\n1\n0\n0\n\n\nEuropean\n0\n1\n0\n\n\nEuropean\n0\n1\n0\n\n\nAmerican\n1\n0\n0\n\n\nJapanese\n0\n0\n1\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)"
+    "text": "observation\nmpg\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\nyear\norigin\nname\n\n\n\n\n0\n1\n18.0\n8\n307.0\n130\n3504\n12.0\n70\nAmerican\nchevrolet chevelle malibu\n\n\n1\n2\n15.0\n8\n350.0\n165\n3693\n11.5\n70\nAmerican\nbuick skylark 320\n\n\n2\n3\n18.0\n8\n318.0\n150\n3436\n11.0\n70\nAmerican\nplymouth satellite\n\n\n3\n4\n16.0\n8\n304.0\n150\n3433\n12.0\n70\nAmerican\namc rebel sst"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#a-drawback",
@@ -256,7 +256,7 @@
     "href": "PreProcessing/PreProcessing.slides.html#section-15",
     "title": "Data preprocessing",
     "section": "",
-    "text": "The variable Origin would then be replaced by the three dummy variables\n\n\n\nOrigin (\\(X\\))\n\\(d_2\\)\n\\(d_3\\)\n\n\n\n\nAmerican\n0\n0\n\n\nAmerican\n0\n0\n\n\nEuropean\n1\n0\n\n\nEuropean\n1\n0\n\n\nAmerican\n0\n0\n\n\nJapanese\n0\n1\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)"
+    "text": "Unfortunately, the resulting object is not a pandas data frame. We then convert this object to this format. \n\nscaled_df = pd.DataFrame(Xs, columns = complete_sbAuto.columns)\nscaled_df.head()\n\n\n\n\n\n\n\n\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\n\n\n\n\n0\n1.483947\n1.077290\n0.664133\n0.620540\n-1.285258\n\n\n1\n1.483947\n1.488732\n1.574594\n0.843334\n-1.466724\n\n\n2\n1.483947\n1.182542\n1.184397\n0.540382\n-1.648189\n\n\n3\n1.483947\n1.048584\n1.184397\n0.536845\n-1.285258\n\n\n4\n1.483947\n1.029447\n0.924265\n0.555706\n-1.829655"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#dummy-variables-in-python",
@@ -270,7 +270,7 @@
     "href": "PreProcessing/PreProcessing.slides.html#section-16",
     "title": "Data preprocessing",
     "section": "",
-    "text": "dummy_data.head()\n\n\n\n\n\n\n\n\nEuropean\nJapanese\n\n\n\n\n0\n0\n0\n\n\n1\n0\n0\n\n\n2\n0\n0\n\n\n3\n0\n0\n\n\n4\n0\n0"
+    "text": "The variable Origin would then be replaced by the three dummy variables\n\n\n\nOrigin (\\(X\\))\n\\(d_1\\)\n\\(d_2\\)\n\\(d_3\\)\n\n\n\n\nAmerican\n1\n0\n0\n\n\nAmerican\n1\n0\n0\n\n\nEuropean\n0\n1\n0\n\n\nEuropean\n0\n1\n0\n\n\nAmerican\n1\n0\n0\n\n\nJapanese\n0\n0\n1\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#removing-predictors",
@@ -291,7 +291,7 @@
     "href": "PreProcessing/PreProcessing.slides.html#example-3",
     "title": "Data preprocessing",
     "section": "Example 3",
-    "text": "Example 3\nWe consider a data set related to Glass identification. The data has 214 glass samples labeled as one of seven glass categories. There are nine predictors including the refractive index (RI) and percentages of eight elements: Na, Mg, Al, Si, K, Ca, Ba, and Fe.\nLet’s read the data set. Note that this is a modified version of the original data.\n\n# Load Excel file (make sure the file is in your Colab)\nglass_data = pd.read_excel('glass.xlsx')\n\n# Drop the categorical variable.\nsb_glass = glass_data.drop(columns=['Type'])"
+    "text": "Example 3\nWe consider a data set related to Glass identification. The data has 214 glass samples labeled as one of seven glass categories. There are nine predictors including the refractive index (RI) and percentages of eight elements: Na, Mg, Al, Si, K, Ca, Ba, and Fe. The response is the type of glass.\nLet’s read the data set. Note that this is a modified version of the original data.\n\n# Load Excel file (make sure the file is in your Colab)\nglass_data = pd.read_excel('glass.xlsx')\n\n# Drop the categorical variable.\nglass_data['Type'] = glass_data['Type'].astype('category')"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#in-python",
@@ -305,7 +305,7 @@
     "href": "PreProcessing/PreProcessing.slides.html#section-17",
     "title": "Data preprocessing",
     "section": "",
-    "text": "After identifying predictors with low variability, we remove them from the problem because they do not add much to the problem. To this end, we use the command below.\n\n\n# Removing problematic predictors\nsb_reduced_glass = sb_glass.drop(columns=low_variance_cols)"
+    "text": "The variable Origin would then be replaced by the three dummy variables\n\n\n\nOrigin (\\(X\\))\n\\(d_2\\)\n\\(d_3\\)\n\n\n\n\nAmerican\n0\n0\n\n\nAmerican\n0\n0\n\n\nEuropean\n1\n0\n\n\nEuropean\n1\n0\n\n\nAmerican\n0\n0\n\n\nJapanese\n0\n1\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#between-predictor-correlation",
@@ -326,14 +326,14 @@
     "href": "PreProcessing/PreProcessing.slides.html#section-18",
     "title": "Data preprocessing",
     "section": "",
-    "text": "Next, we plot the correlation matrix using the function heatmap() from seaborn. The argument annot shows the actual value of the pair-wise correlations, and cmap shows a nice color theme.\n\nplt.figure(figsize=(3,3))\nsns.heatmap(correlation_matrix, cmap='coolwarm', annot = True)"
+    "text": "dummy_data.head()\n\n\n\n\n\n\n\n\nEuropean\nJapanese\n\n\n\n\n0\n0\n0\n\n\n1\n0\n0\n\n\n2\n0\n0\n\n\n3\n0\n0\n\n\n4\n0\n0"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#section-19",
     "href": "PreProcessing/PreProcessing.slides.html#section-19",
     "title": "Data preprocessing",
     "section": "",
-    "text": "The predictors cylinders and displacement are highly correlated. In fact, their correlation is 0.95."
+    "text": "After identifying predictors with low variability, we remove them from the problem because they do not add much to the problem. To this end, we use the command below.\n\n\n# Removing problematic predictors\nsb_reduced_glass = sb_glass.drop(columns=low_variance_cols)"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#in-practice",
@@ -1635,7 +1635,7 @@
     "href": "Classification/Classification.slides.html#section-9",
     "title": "Logistic Regression",
     "section": "",
-    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.057591\n         Iterations 12\nconst    -372.946330\nLeft       -1.288767\nRight       3.318145\nBottom      4.514009\nTop         6.363341\ndtype: float64"
+    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.044703\n         Iterations 12\nconst    -243.891948\nLeft       -1.675979\nRight       2.662163\nBottom      5.443617\nTop         6.184562\ndtype: float64"
   },
   {
     "objectID": "Classification/Classification.slides.html#parameter-testing",
@@ -1649,7 +1649,7 @@
     "href": "Classification/Classification.slides.html#section-10",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression classifier.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      135\nMethod:                           MLE   Df Model:                            4\nDate:                Thu, 31 Oct 2024   Pseudo R-squ.:                  0.9165\nTime:                        13:27:30   Log-Likelihood:                -8.0628\nconverged:                       True   LL-Null:                       -96.526\nCovariance Type:            nonrobust   LLR p-value:                 3.409e-37\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -372.9463    336.650     -1.108      0.268   -1032.768     286.875\nLeft          -1.2888      3.650     -0.353      0.724      -8.442       5.864\nRight          3.3181      3.350      0.990      0.322      -3.248       9.885\nBottom         4.5140      1.699      2.656      0.008       1.183       7.845\nTop            6.3633      2.090      3.045      0.002       2.268      10.459\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.56 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
+    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression classifier.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      135\nMethod:                           MLE   Df Model:                            4\nDate:                Tue, 05 Nov 2024   Pseudo R-squ.:                  0.9355\nTime:                        18:32:21   Log-Likelihood:                -6.2585\nconverged:                       True   LL-Null:                       -97.041\nCovariance Type:            nonrobust   LLR p-value:                 3.440e-38\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -243.8919    395.532     -0.617      0.537   -1019.120     531.336\nLeft          -1.6760      4.055     -0.413      0.679      -9.624       6.272\nRight          2.6622      3.478      0.765      0.444      -4.155       9.480\nBottom         5.4436      2.312      2.354      0.019       0.912       9.976\nTop            6.1846      2.243      2.757      0.006       1.789      10.580\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.54 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
   },
   {
     "objectID": "Classification/Classification.slides.html#evaluation",
@@ -1663,7 +1663,7 @@
     "href": "Classification/Classification.slides.html#section-11",
     "title": "Logistic Regression",
     "section": "",
-    "text": "Technically, the classifier outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n35     0.010300\n127    0.999994\n103    0.998337\n157    0.999947\n65     0.061467\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors)."
+    "text": "Technically, the classifier outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n87     0.000239\n24     0.000230\n103    0.998561\n36     0.000028\n181    0.260505\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors)."
   },
   {
     "objectID": "Classification/Classification.slides.html#section-12",
@@ -1677,7 +1677,7 @@
     "href": "Classification/Classification.slides.html#section-13",
     "title": "Logistic Regression",
     "section": "",
-    "text": "predicted_classes.head()\n\n35     0\n127    1\n103    1\n157    1\n65     0\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the test dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
+    "text": "predicted_classes.head()\n\n87     0\n24     0\n103    1\n36     0\n181    0\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the test dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
   },
   {
     "objectID": "Classification/Classification.slides.html#confusion-matrix",
@@ -1691,14 +1691,14 @@
     "href": "Classification/Classification.slides.html#in-python-1",
     "title": "Logistic Regression",
     "section": "In python",
-    "text": "In python\nWe compute the confusion matrix using the function with the same name of scikit-learn. To this end,\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[36  0]\n [ 0 24]]"
+    "text": "In python\nWe compute the confusion matrix using the function with the same name of scikit-learn. To this end,\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[30  0]\n [ 3 27]]"
   },
   {
     "objectID": "Classification/Classification.slides.html#accuracy",
     "href": "Classification/Classification.slides.html#accuracy",
     "title": "Logistic Regression",
     "section": "Accuracy",
-    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n1.0\n\n\nThe higher the accuracy, the better the performance of the classifier."
+    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.95\n\n\nThe higher the accuracy, the better the performance of the classifier."
   },
   {
     "objectID": "Classification/Classification.slides.html#remarks",
@@ -2168,5 +2168,61 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n2"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing.slides.html#two-datasets",
+    "href": "PreProcessing/PreProcessing.slides.html#two-datasets",
+    "title": "Data preprocessing",
+    "section": "Two datasets",
+    "text": "Two datasets\n\nThe application of data science models necessitates two data sets:\n\n\nTraining data is data that we use to train or construct the estimated model \\(\\hat{f}(\\boldsymbol{X})\\).\nTest data is data that we use to evaluate the predictive performance of \\(\\hat{f}(\\boldsymbol{X})\\) only."
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing.slides.html#training-data",
+    "href": "PreProcessing/PreProcessing.slides.html#training-data",
+    "title": "Data preprocessing",
+    "section": "Training data",
+    "text": "Training data\n\n\n\n\nA random sample of \\(n\\) observations.\nUse it to construct \\(\\hat{f}(\\boldsymbol{X})\\).\n\n\n\n\n\nAnother random sample of \\(n_t\\) observations, which is independent of the training data.\nUse it to evaluate \\(\\hat{f}(\\boldsymbol{X})\\)."
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing.slides.html#section-20",
+    "href": "PreProcessing/PreProcessing.slides.html#section-20",
+    "title": "Data preprocessing",
+    "section": "",
+    "text": "Next, we plot the correlation matrix using the function heatmap() from seaborn. The argument annot shows the actual value of the pair-wise correlations, and cmap shows a nice color theme.\n\nplt.figure(figsize=(3,3))\nsns.heatmap(correlation_matrix, cmap='coolwarm', annot = True)"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing.slides.html#validation-dataset",
+    "href": "PreProcessing/PreProcessing.slides.html#validation-dataset",
+    "title": "Data preprocessing",
+    "section": "Validation Dataset",
+    "text": "Validation Dataset\nIn many practical situations, a test dataset is not available. To overcome this issue, we use a validation dataset.\n\nIdea: Apply model to your validation dataset to mimic what will happen when you apply it to test dataset."
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing.slides.html#how-do-we-generate-validation-data",
+    "href": "PreProcessing/PreProcessing.slides.html#how-do-we-generate-validation-data",
+    "title": "Data preprocessing",
+    "section": "How do we generate validation data?",
+    "text": "How do we generate validation data?\nWe split the current data set into a training and a validation dataset. To this end, we use the function train_test_split() from scikit-learn.\n\n# Set full matrix of predictors.\nX_full = glass_data.drop(columns = ['Type'])\n\n# Set full matrix of responses.\nY_full = glass_data['Type']\n\n# Split the dataset.\nX_train, X_validation, Y_train, Y_validation = train_test_split(X_full, \n                                                    Y_full, test_size=0.3)\n\nThe parameter test_size sets the portion of the dataset that will go to the test set."
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing.slides.html#illustrative-example",
+    "href": "PreProcessing/PreProcessing.slides.html#illustrative-example",
+    "title": "Data preprocessing",
+    "section": "Illustrative Example",
+    "text": "Illustrative Example\nCategorical predictor: Origin of a car. Three categories: American, European and Japanese.\nInitially, 3 dummy variables are required:\n\\[d_1 =\n\\begin{cases}\n1 \\text{ if observation is from an American car}\\\\\n0 \\text{ otherwise}\n\\end{cases}\\] \\[d_2 =\n\\begin{cases}\n1 \\text{ if observation is from an European car}\\\\\n0 \\text{ otherwise}\n\\end{cases}\\] \\[d_3 =\n\\begin{cases}\n1 \\text{ if observation is from a Japanese car}\\\\\n0 \\text{ otherwise}\n\\end{cases}\\]"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing.slides.html#example-3-1",
+    "href": "PreProcessing/PreProcessing.slides.html#example-3-1",
+    "title": "Data preprocessing",
+    "section": "Example 3",
+    "text": "Example 3\nWe consider a data set related to Glass identification. The data has 214 glass samples labeled as one of seven glass categories. There are nine predictors including the refractive index (RI) and percentages of eight elements: Na, Mg, Al, Si, K, Ca, Ba, and Fe.\nLet’s read the data set. Note that this is a modified version of the original data.\n\n# Load Excel file (make sure the file is in your Colab)\nglass_data = pd.read_excel('glass.xlsx')\n\n# Drop the categorical variable.\nsb_glass = glass_data.drop(columns=['Type'])"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing.slides.html#section-21",
+    "href": "PreProcessing/PreProcessing.slides.html#section-21",
+    "title": "Data preprocessing",
+    "section": "",
+    "text": "The predictors cylinders and displacement are highly correlated. In fact, their correlation is 0.95."
   }
 ]
