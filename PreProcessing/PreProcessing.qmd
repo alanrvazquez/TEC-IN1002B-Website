@@ -435,6 +435,16 @@ dummy_data = pd.get_dummies(complete_Auto['origin'], drop_first = True,
 dummy_data.head()
 ```
 
+##
+
+Now, to add the dummy variables to the dataset, we use the function `concat()` from **pandas**.
+
+```{python}
+#| echo: true
+
+augmented_auto = pd.concat([complete_Auto, dummy_data], axis = 1)
+```
+
 # Filtering
 
 ## Removing predictors
