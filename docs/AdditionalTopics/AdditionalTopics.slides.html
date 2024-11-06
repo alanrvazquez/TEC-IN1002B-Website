@@ -423,7 +423,7 @@ Alan R. Vazquez
 <section id="load-the-libraries" class="slide level2">
 <h2>Load the libraries</h2>
 <p>Let’s import <strong>scikit-learn</strong> into python together with the other relevant libraries.</p>
-<div id="5248c52e" class="cell" data-execution_count="1">
+<div id="21a820f2" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Importing necessary libraries</span></span>
 <span id="cb1-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -465,7 +465,7 @@ Alan R. Vazquez
 <h2>Example 1</h2>
 <p><br></p>
 <p>The auto data set includes a categorical variable “Origin” which shows the origin of each car.</p>
-<div id="b9195f1e" class="cell" data-execution_count="2">
+<div id="9c24e7f7" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># Load the Excel file into a pandas DataFrame.</span></span>
 <span id="cb2-2"><a></a>auto_data <span class="op">=</span> pd.read_excel(<span class="st">"auto.xlsx"</span>)</span>
 <span id="cb2-3"><a></a></span>
@@ -475,7 +475,7 @@ Alan R. Vazquez
 </section>
 <section id="dataset" class="slide level2">
 <h2>Dataset</h2>
-<div id="c1c6ea97" class="cell" data-execution_count="3">
+<div id="d9b6f9a7" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># Show dataset.</span></span>
 <span id="cb3-2"><a></a>auto_data[[<span class="st">'mpg'</span>, <span class="st">'origin'</span>]].head(<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
@@ -595,14 +595,14 @@ Alan R. Vazquez
 <section id="in-python" class="slide level2">
 <h2>In python</h2>
 <p>We follow three steps to fit a linear model with a categorical predictor. First, we compute the dummy variables.</p>
-<div id="0837e0c0" class="cell" data-execution_count="4">
+<div id="eb3efd67" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co"># Create linear regression object</span></span>
 <span id="cb4-2"><a></a>dummy_data <span class="op">=</span> pd.get_dummies(auto_data[<span class="st">'origin'</span>], drop_first <span class="op">=</span> <span class="va">True</span>, </span>
 <span id="cb4-3"><a></a>                            dtype <span class="op">=</span> <span class="st">'int'</span>)</span>
 <span id="cb4-4"><a></a>dummy_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next, we construct the matrix of predictors with the intercept.</p>
-<div id="ffe96cd5" class="cell" data-execution_count="5">
+<div id="2cccbc0d" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="co"># Create linear regression object</span></span>
 <span id="cb5-2"><a></a>dummy_X_train <span class="op">=</span> sm.add_constant(dummy_data)</span>
 <span id="cb5-3"><a></a>dummy_X_train</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -611,7 +611,7 @@ Alan R. Vazquez
 <section id="section-1" class="slide level2">
 <h2></h2>
 <p>Finally, we fit the model using <code>OLS()</code> and <code>fit()</code> from <strong>statsmodels</strong>.</p>
-<div id="c98dca70" class="cell" data-execution_count="6">
+<div id="99ae171b" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="co"># Create linear regression object</span></span>
 <span id="cb6-2"><a></a>regr <span class="op">=</span> sm.OLS(auto_data[<span class="st">'mpg'</span>], dummy_X_train)</span>
 <span id="cb6-3"><a></a></span>
@@ -624,7 +624,7 @@ Alan R. Vazquez
 </section>
 <section id="section-2" class="slide level2">
 <h2></h2>
-<div id="ce969584" class="cell" data-execution_count="7">
+<div id="91a6f9b4" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="bu">print</span>(summary_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                            OLS Regression Results                            
@@ -633,7 +633,7 @@ Dep. Variable:                    mpg   R-squared:                       0.332
 Model:                            OLS   Adj. R-squared:                  0.328
 Method:                 Least Squares   F-statistic:                     96.60
 Date:                Tue, 05 Nov 2024   Prob (F-statistic):           8.67e-35
-Time:                        22:32:59   Log-Likelihood:                -1282.2
+Time:                        22:43:22   Log-Likelihood:                -1282.2
 No. Observations:                 392   AIC:                             2570.
 Df Residuals:                     389   BIC:                             2582.
 Df Model:                           2                                         
@@ -690,7 +690,7 @@ Y_i &amp;= \beta_0+\beta_1 d_{1i} +\beta_2 d_{2i} + \beta_3 X_{i} +\epsilon_i \\
 <section id="in-python-1" class="slide level2">
 <h2>In python</h2>
 <p>To fit an ANCOVA model, we use similar steps as before. The only extra step is to concatenate the data with the dummy variables and the numerical predictor using the function <code>concat()</code> from <strong>pandas</strong>.</p>
-<div id="7b9c1ad0" class="cell" data-execution_count="8">
+<div id="dd6bcb35" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="co"># Concatenate the two data sets.</span></span>
 <span id="cb9-2"><a></a>X_train <span class="op">=</span> pd.concat([dummy_X_train, auto_data[<span class="st">'weight'</span>]], axis <span class="op">=</span> <span class="dv">1</span>)</span>
 <span id="cb9-3"><a></a></span>
@@ -703,7 +703,7 @@ Y_i &amp;= \beta_0+\beta_1 d_{1i} +\beta_2 d_{2i} + \beta_3 X_{i} +\epsilon_i \\
 </section>
 <section id="model-summary" class="slide level2">
 <h2>Model summary</h2>
-<div id="cf1a877c" class="cell" data-execution_count="9">
+<div id="531d9a03" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="co"># Summary of the models.</span></span>
 <span id="cb10-2"><a></a>summary_ancova <span class="op">=</span> ancova_model.summary()</span>
 <span id="cb10-3"><a></a><span class="bu">print</span>(summary_ancova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -714,7 +714,7 @@ Dep. Variable:                    mpg   R-squared:                       0.702
 Model:                            OLS   Adj. R-squared:                  0.700
 Method:                 Least Squares   F-statistic:                     304.7
 Date:                Tue, 05 Nov 2024   Prob (F-statistic):          1.28e-101
-Time:                        22:32:59   Log-Likelihood:                -1123.9
+Time:                        22:43:22   Log-Likelihood:                -1123.9
 No. Observations:                 392   AIC:                             2256.
 Df Residuals:                     388   BIC:                             2272.
 Df Model:                           3                                         
@@ -802,7 +802,7 @@ strong multicollinearity or other numerical problems.</code></pre>
 <h2></h2>
 <p><br></p>
 <p>The units of concentration and temperature are percentages and Farenheit degrees, respectively.</p>
-<div id="3026d1d6" class="cell" data-execution_count="10">
+<div id="f8c9cbec" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a>catalyst_data <span class="op">=</span> pd.read_excel(<span class="st">"catalyst.xlsx"</span>)</span>
 <span id="cb12-2"><a></a><span class="bu">print</span>(catalyst_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -822,7 +822,7 @@ strong multicollinearity or other numerical problems.</code></pre>
 <h2>Standarization in python</h2>
 <p><br></p>
 <p>Recall that we standardize numerical predictors using the <code>scaler()</code> function from <strong>scikit-learn</strong>.</p>
-<div id="35d23d05" class="cell" data-execution_count="11">
+<div id="0b828e75" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="co"># Select predictor matrix.</span></span>
 <span id="cb14-2"><a></a>predictor_data <span class="op">=</span> catalyst_data[[<span class="st">'Concentration'</span>, <span class="st">'Temperature'</span>]]</span>
 <span id="cb14-3"><a></a></span>
@@ -837,7 +837,7 @@ strong multicollinearity or other numerical problems.</code></pre>
 <h2></h2>
 <p><br></p>
 <p>Now the predictors are on the same scale</p>
-<div id="78bbcd26" class="cell" data-execution_count="12">
+<div id="a3495cba" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a><span class="bu">print</span>( Xs_training )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[ 1.  1.]
@@ -854,7 +854,7 @@ strong multicollinearity or other numerical problems.</code></pre>
 <section id="section-7" class="slide level2">
 <h2></h2>
 <p>To fit the model, we follow the same functions as before.</p>
-<div id="3bcd6a50" class="cell" data-execution_count="13">
+<div id="0402ae91" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a><span class="co"># Add the intercept.</span></span>
 <span id="cb17-2"><a></a>Xs_training_int <span class="op">=</span> sm.add_constant(Xs_training)</span>
 <span id="cb17-3"><a></a></span>
@@ -870,7 +870,7 @@ strong multicollinearity or other numerical problems.</code></pre>
 </section>
 <section id="section-8" class="slide level2">
 <h2></h2>
-<div id="56439c2f" class="cell" data-execution_count="14">
+<div id="b9f2010b" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="bu">print</span>(std_summary_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                                 OLS Regression Results                                
@@ -879,7 +879,7 @@ Dep. Variable:                  Yield   R-squared (uncentered):                 
 Model:                            OLS   Adj. R-squared (uncentered):             -0.330
 Method:                 Least Squares   F-statistic:                           0.006694
 Date:                Tue, 05 Nov 2024   Prob (F-statistic):                       0.993
-Time:                        22:32:59   Log-Likelihood:                         -46.940
+Time:                        22:43:22   Log-Likelihood:                         -46.940
 No. Observations:                   8   AIC:                                      97.88
 Df Residuals:                       6   BIC:                                      98.04
 Df Model:                           2                                                  
@@ -944,7 +944,7 @@ Notes:
 <li><span class="math inline">\(X_i\)</span> is the horsepower of the i-th car.</li>
 </ul>
 <p>We fit the model:</p>
-<div id="c5c203f0" class="cell" data-execution_count="15">
+<div id="3c4adc92" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a>X_train <span class="op">=</span> sm.add_constant(auto_data[<span class="st">'horsepower'</span>])</span>
 <span id="cb20-2"><a></a>regr <span class="op">=</span> sm.OLS(auto_data[<span class="st">'mpg'</span>], X_train)</span>
 <span id="cb20-3"><a></a>linear_model <span class="op">=</span> regr.fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -954,7 +954,7 @@ Notes:
 <h2>Residual analysis</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="e140366f" class="cell" data-execution_count="17">
+<div id="6130ddf0" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -964,7 +964,7 @@ Notes:
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="d6eeae7a" class="cell" data-execution_count="18">
+<div id="55607734" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1023,21 +1023,21 @@ Notes:
 </figure>
 </div>
 </div></div>
-<div id="80366732" class="cell" data-execution_count="19">
+<div id="bdb3ad4c" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="continuation-of-example-3" class="slide level2">
 <h2>Continuation of Example 3</h2>
 <p>To transform the response (<span class="math inline">\(Y\)</span>) using <span class="math inline">\(\ln{(Y)}\)</span> or <span class="math inline">\(\sqrt{(Y)}\)</span> we use the functions <code>log()</code> and <code>sqrt()</code>, respectively, from <strong>numpy</strong>.</p>
-<div id="de03f9b5" class="cell" data-execution_count="20">
+<div id="a65f4d52" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a></a>sqrt_Y <span class="op">=</span> np.sqrt( auto_data[<span class="st">'mpg'</span>] )</span>
 <span id="cb22-2"><a></a>log_Y <span class="op">=</span> np.log( auto_data[<span class="st">'mpg'</span>] )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s consider the logarithm transformation. The model then is:</p>
 <p><span class="math display">\[\log{(Y_i)} = \beta_0 + \beta_1 X_i +\epsilon_i,\]</span></p>
 <p>which we fit using the code below.</p>
-<div id="3e40936f" class="cell" data-execution_count="21">
+<div id="c7200cdc" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a>log_regr <span class="op">=</span> sm.OLS(log_Y, X_train)</span>
 <span id="cb23-2"><a></a>log_linear_model <span class="op">=</span> log_regr.fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1046,7 +1046,7 @@ Notes:
 <h2>New residual analysis</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="6425b7cc" class="cell" data-execution_count="23">
+<div id="750bfd34" class="cell" data-execution_count="23">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1056,7 +1056,7 @@ Notes:
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="5c7bafea" class="cell" data-execution_count="24">
+<div id="0f0a1923" class="cell" data-execution_count="24">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1079,16 +1079,16 @@ Notes:
 <section id="section-9" class="slide level2">
 <h2></h2>
 <p>To fit this model to the data, we construct a new predictor matrix.</p>
-<div id="63d87b50" class="cell" data-execution_count="25">
+<div id="fab4f5f3" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a></a>X_quad <span class="op">=</span> pd.concat([X_train, auto_data[<span class="st">'horsepower'</span>]<span class="op">**</span><span class="dv">2</span>], axis <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next, we fit the model as before.</p>
-<div id="52c8b557" class="cell" data-execution_count="26">
+<div id="8635e3d1" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a></a>quad_regr <span class="op">=</span> sm.OLS(log_Y, X_quad)</span>
 <span id="cb25-2"><a></a>quadratic_model <span class="op">=</span> quad_regr.fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And calculate the residuals and predicted values.</p>
-<div id="80ee3dbf" class="cell" data-execution_count="27">
+<div id="7f8e53fd" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a></a>Y_pred <span class="op">=</span> quadratic_model.fittedvalues</span>
 <span id="cb26-2"><a></a>residuals <span class="op">=</span> quadratic_model.resid</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1097,7 +1097,7 @@ Notes:
 <h2>Residual analysis of quadratic model</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="ebb2211c" class="cell" data-execution_count="28">
+<div id="6cdfd6d6" class="cell" data-execution_count="28">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a></a><span class="co"># Residual vs Fitted Values Plot</span></span>
@@ -1118,7 +1118,7 @@ Notes:
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="d800c36c" class="cell" data-execution_count="29">
+<div id="fc673376" class="cell" data-execution_count="29">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a></a><span class="co"># Residual vs Time Plot</span></span>
