@@ -34,7 +34,7 @@ jupyter: python3
 
 </br>
 
-> It can make or break a model’s predictive ability.
+It can make or break a model’s predictive ability.
 
 </br>
 
@@ -52,9 +52,9 @@ In particular, we will review:
 
 ::: incremental
 -   Dealing with missing values.
+-   Standardization.
 -   Transforming categorical predictors.
 -   Filtering: Removing non-informative or correlated predictors.
--   Standardization.
 :::
 
 ## scikit-learn library
@@ -78,9 +78,9 @@ Let's import **scikit-learn** into python together with the other relevant libra
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.impute import SimpleImputer
-from sklearn.feature_selection import VarianceThreshold
 from sklearn.preprocessing import StandardScaler
+from sklearn.feature_selection import VarianceThreshold
+from sklearn.impute import SimpleImputer
 ```
 
 We will not use all the functions from the **scikit-learn** library. Instead, we will use specific functions from the sub-libraries **preprocessing**, **feature_selection**, and **impute**.
@@ -140,7 +140,6 @@ penguins_data['sex'] = penguins_data['sex'].astype('category')
 penguins_data['species'] = penguins_data['species'].astype('category')
 penguins_data['island'] = penguins_data['island'].astype('category')
 ```
-
 
 ## 
 
@@ -265,6 +264,189 @@ cat_imputer = SimpleImputer(strategy = 'most_frequent')
 penguins_data['sex'] = cat_imputer.fit_transform(penguins_data[ ['sex'] ]).ravel()
 ```
 
+# Standarization
+
+## Predictors with different units
+
+Many good predictive models we have issues with [**numeric predictors**]{style="color:blue;"} with different units:
+
+1.  Methods such as K-nearest neighbors are based on the distance between observations. If the predictors are on different units or scales, then some predictors will have a larger weight for computing the distance.
+
+2.  Other methods such as LASSO use the variances of the predictors in their calculations. Predictors with different scales will have different variances and so, those with a higher variance will play a bigger role in the calculations.
+
+## 
+
+</br></br></br></br>
+
+[***In a nutshell, some predictors will have a higher impact in the model due to its unit and not its information provided to it.***]{style="color:pink;"}
+
+## Standarization
+
+</br>
+
+Standardization refers to *centering* and *scaling* each numeric predictor individually. It puts every predictor on the same scale.
+
+To **center** a predictor variable, the average predictor value is subtracted from all the values.
+
+Therefore, the centered predictor has a zero mean (that is, its average value is zero).
+
+## 
+
+</br>
+
+To **scale** a predictor, each of its value is divided by its standard deviation.
+
+Scaling the data coerce the values to have a common standard deviation of one.
+
+In mathematical terms, we standardize a predictor as:
+
+$${\color{blue} \tilde{x}_{i}} = \frac{{ x_{i} - \bar{x}}}{ \sqrt{\frac{1}{n -1} \sum_{i=1}^{n} (x_{i} - \bar{x})^2}},$$
+
+with $\bar{x} = \sum_{i=1}^n \frac{x_i}{n}$.
+
+## Example 2
+
+A market analyst is studying quality characteristics of cars. Specifically, the analyst is investigating the miles per gallon (mpg) of cars can be predicted using:
+
+-   $X_1:$ cylinders. Number of cylinders between 4 and 8
+-   $X_2:$ displacement. Engine displacement (cu. inches)
+-   $X_3:$ horsepower. Engine horsepower
+-   $X_4:$ weight. Vehicle weight (lbs.)
+-   $X_5:$ acceleration. Time to accelerate from 0 to 60 mph (sec.)
+-   $X_6:$ origin. Origin of car (American, European, Japanese)
+
+## 
+
+</br></br>
+
+The dataset is in the file "auto.xlsx". Let's read the data using **numpy**.
+
+```{python}
+#| echo: true
+
+# Load the Excel file into a pandas DataFrame.
+auto_data = pd.read_excel("auto.xlsx")
+
+# Set categorical variables.
+auto_data['origin'] = auto_data['origin'].astype('category')
+```
+
+## 
+
+```{python}
+# Print the first 4 rows of the dataset.
+auto_data.head(4)
+```
+
+## Dealing with missing values
+
+</br>
+
+The dataset has missing values. In this example, we remove each row with at least one missing value. We also concentrate on the five numerical predictors in the dataset.
+
+```{python}
+#| echo: true
+
+# Select specific variables.
+sb_Auto = auto_data[['cylinders', 'displacement', 
+                    'horsepower', 'weight', 
+                    'acceleration']]
+
+# Remove rows with missing values.
+complete_sbAuto = sb_Auto.dropna()
+```
+
+## Two predictors in original units
+
+Consider two points in the plot: $(175, 1613)$ and $(69, 1613)$.
+
+::::: columns
+::: {.column width="50%"}
+```{python}
+#| echo: false
+#| output: true
+#| fig-align: center
+
+plt.figure(figsize=(5,5))
+sns.scatterplot(data = complete_sbAuto, x = 'horsepower', y = 'weight')
+plt.scatter(x = 175, y = 5140, color = 'red')
+plt.scatter(x = 69, y = 1613, color = 'red')
+plt.xlabel('Horsepower', fontsize=14)
+plt.ylabel('Weight', fontsize=14)
+plt.show()
+```
+:::
+
+::: {.column width="50%"}
+</br>
+
+The distance between these points is $\sqrt{(69 - 175)^2 + (1613-5140)^2}$ $= \sqrt{11236 + 12439729}$ $= 3528.592$.
+:::
+:::::
+
+## Standarization in python
+
+</br>
+
+To standardize **numerical** predictors, we use the function `StandardScaler()`. Moreover, we apply the function to the variables using the function `fit_transform()`.
+
+</br>
+
+```{python}
+#| echo: true
+
+scaler = StandardScaler()
+Xs = scaler.fit_transform(complete_sbAuto)
+```
+
+## 
+
+Unfortunately, the resulting object is not a pandas data frame. We then convert this object to this format. </br>
+
+```{python}
+#| echo: true
+
+scaled_df = pd.DataFrame(Xs, columns = complete_sbAuto.columns)
+scaled_df.head()
+```
+
+## Two predictors in standardized units
+
+In the new scale, the two points are now: $(1.82, 2.53)$ and $(-0.91, -1.60)$.
+
+::::: columns
+::: {.column width="50%"}
+```{python}
+#| echo: false
+#| output: true
+#| fig-align: center
+
+plt.figure(figsize=(5,5))
+sns.scatterplot(data = scaled_df, x = 'horsepower', y = 'weight')
+plt.scatter(x = 1.83, y = 2.54, color = 'red')
+plt.scatter(x = -0.915, y = -1.605, color = 'red')
+plt.xlabel('Standardized horsepower', fontsize=14)
+plt.ylabel('Standardized weight', fontsize=14)
+plt.show()
+```
+:::
+
+::: {.column width="50%"}
+</br>
+
+The distance between these points is $\sqrt{(-0.91 - 1.82)^2 + (-1.60-2.53)^2}$ $= \sqrt{7.45 + 17.05} = 4.95$.
+:::
+:::::
+
+## Discussion
+
+</br>
+
+Centering and scaling predictors are generally used to improve the numerical stability of some calculations.
+
+It is generally recommended to always standardize the numeric predictors. Perhaps the only exception would be if we consider a linear regression model.
+
+A drawback of these transformations is the [***loss of interpretability***]{style="color:pink;"} since the data are no longer in the original units.
 
 # Transforming categorical predictors
 
@@ -296,57 +478,7 @@ The categories can be represented by names, labels or even numbers. Their use in
 
 ***Initially, a categorical variable with*** $k$ categories requires $k$ dummy variables.
 
-## Example 2
-
-A market analyst is studying quality characteristics of cars. Specifically, the analyst is investigating the miles per gallon (mpg) of cars can be predicted using:
-
--   $X_1:$ cylinders. Number of cylinders between 4 and 8
--   $X_2:$ displacement. Engine displacement (cu. inches)
--   $X_3:$ horsepower. Engine horsepower
--   $X_4:$ weight. Vehicle weight (lbs.)
--   $X_5:$ acceleration. Time to accelerate from 0 to 60 mph (sec.)
--   $X_6:$ origin. Origin of car (American, European, Japanese)
-
-## 
-
-</br></br>
-
-The dataset is in the file "auto.xlsx". Let's read the data using **pandas**.
-
-```{python}
-#| echo: true
-
-# Load the Excel file into a pandas DataFrame.
-auto_data = pd.read_excel("auto.xlsx")
-
-# Set categorical variables.
-auto_data['origin'] = auto_data['origin'].astype('category')
-```
-
-## 
-
-```{python}
-# Print the first 4 rows of the dataset.
-auto_data.head(4)
-```
-
-## Dealing with missing values
-
-</br>
-
-The dataset has missing values. In this example, we remove each row with at least one missing value. 
-
-</br>
-
-```{python}
-#| echo: true
-
-# Remove rows with missing values.
-complete_Auto = auto_data.dropna()
-```
-
-
-## Example 2 (cont.)
+## Example
 
 Categorical predictor: Origin of a car. Three categories: American, European and Japanese.
 
@@ -421,13 +553,11 @@ The function has an extra argument called `drop_first` to drop the first dummy v
 ```{python}
 #| echo: true
 
-dummy_data = pd.get_dummies(complete_Auto['origin'], drop_first = True, 
+dummy_data = pd.get_dummies(auto_data['origin'], drop_first = True, 
                             dtype = 'int')
 ```
 
 ## 
-
-</br></br>
 
 ```{python}
 #| echo: true
@@ -527,22 +657,6 @@ If two or more predictors are highly correlated (either negatively or positively
 
 To visualize the severity of collinearity between predictors, we calculate and visualize the *correlation matrix*.
 
-## Example 2 (cont.)
-
-</br>
-
-Weconcentrate on the five numerical predictors in the `complete_Auto` dataset.
-
-```{python}
-#| echo: true
-
-# Select specific variables.
-complete_sbAuto = complete_Auto[['cylinders', 'displacement', 
-                                 'horsepower', 'weight', 
-                                 'acceleration']]
-```
-
-
 ## Correlation matrix
 
 </br>
@@ -603,142 +717,5 @@ We can identify the variables that are highly correlated using quite complex cod
 # Dataset without highly correlated predictors.
 reduced_auto = complete_sbAuto[ ['weight', 'acceleration']]
 ```
-
-# Standarization
-
-## Predictors with different units
-
-Many good predictive models have issues with [**numeric predictors**]{style="color:blue;"} with different units:
-
-1.  Methods such as K-nearest neighbors are based on the distance between observations. If the predictors are on different units or scales, then some predictors will have a larger weight for computing the distance.
-
-2.  Other methods such as LASSO use the variances of the predictors in their calculations. Predictors with different scales will have different variances and so, those with a higher variance will play a bigger role in the calculations.
-
-## 
-
-</br></br></br></br>
-
-::: {style="font-size: 150%;"}
-[***In a nutshell, some predictors will have a higher impact in the model due to its unit and not its information provided to it.***]{style="color:purple;"}
-:::
-
-## Standarization
-
-</br>
-
-Standardization refers to *centering* and *scaling* each numeric predictor individually. It puts every predictor on the same scale.
-
-To **center** a predictor variable, the average predictor value is subtracted from all the values.
-
-Therefore, the centered predictor has a zero mean (that is, its average value is zero).
-
-## 
-
-</br>
-
-To **scale** a predictor, each of its value is divided by its standard deviation.
-
-Scaling the data coerce the values to have a common standard deviation of one.
-
-In mathematical terms, we standardize a predictor as:
-
-$${\color{blue} \tilde{x}_{i}} = \frac{{ x_{i} - \bar{x}}}{ \sqrt{\frac{1}{n -1} \sum_{i=1}^{n} (x_{i} - \bar{x})^2}},$$
-
-with $\bar{x} = \sum_{i=1}^n \frac{x_i}{n}$.
-
-
-## Two predictors in original units
-
-Consider the `complete_sbAuto` dataset created previously. Consider two points in the plot: $(175, 1613)$ and $(69, 1613)$.
-
-::::: columns
-::: {.column width="50%"}
-```{python}
-#| echo: false
-#| output: true
-#| fig-align: center
-
-plt.figure(figsize=(5,5))
-sns.scatterplot(data = complete_sbAuto, x = 'horsepower', y = 'weight')
-plt.scatter(x = 175, y = 5140, color = 'red')
-plt.scatter(x = 69, y = 1613, color = 'red')
-plt.xlabel('Horsepower', fontsize=14)
-plt.ylabel('Weight', fontsize=14)
-plt.show()
-```
-:::
-
-::: {.column width="50%"}
-</br>
-
-The distance between these points is $\sqrt{(69 - 175)^2 + (1613-5140)^2}$ $= \sqrt{11236 + 12439729}$ $= 3528.592$.
-:::
-:::::
-
-## Standarization in python
-
-</br>
-
-To standardize **numerical** predictors, we use the function `StandardScaler()`. Moreover, we apply the function to the variables using the function `fit_transform()`.
-
-</br>
-
-```{python}
-#| echo: true
-
-scaler = StandardScaler()
-Xs = scaler.fit_transform(complete_sbAuto)
-```
-
-## 
-
-Unfortunately, the resulting object is not a pandas data frame. We then convert this object to this format. </br>
-
-```{python}
-#| echo: true
-
-scaled_df = pd.DataFrame(Xs, columns = complete_sbAuto.columns)
-scaled_df.head()
-```
-
-## Two predictors in standardized units
-
-In the new scale, the two points are now: $(1.82, 2.53)$ and $(-0.91, -1.60)$.
-
-::::: columns
-::: {.column width="50%"}
-```{python}
-#| echo: false
-#| output: true
-#| fig-align: center
-
-plt.figure(figsize=(5,5))
-sns.scatterplot(data = scaled_df, x = 'horsepower', y = 'weight')
-plt.scatter(x = 1.83, y = 2.54, color = 'red')
-plt.scatter(x = -0.915, y = -1.605, color = 'red')
-plt.xlabel('Standardized horsepower', fontsize=14)
-plt.ylabel('Standardized weight', fontsize=14)
-plt.show()
-```
-:::
-
-::: {.column width="50%"}
-</br>
-
-The distance between these points is $\sqrt{(-0.91 - 1.82)^2 + (-1.60-2.53)^2}$ $= \sqrt{7.45 + 17.05} = 4.95$.
-:::
-:::::
-
-## Discussion
-
-::: incremental
-- Standardized predictors are generally used to improve the numerical stability of some calculations.
-
-- It is generally recommended to always standardize numeric predictors. Perhaps the only exception would be if we consider a linear regression model.
-
-- A drawback of these transformations is the [***loss of interpretability***]{style="color:pink;"} since the data are no longer in the original units.
-
-- Standardizing the predictors does not affect their correlation.
-:::
 
 # [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)
