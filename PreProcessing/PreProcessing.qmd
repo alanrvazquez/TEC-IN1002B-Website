@@ -22,9 +22,9 @@ jupyter: python3
 
 1.  Introduction
 2.  Dealing with missing values
-3.  Standarization
-4.  Transforming categorical predictors
-5.  Filtering
+3.  Transforming categorical predictors
+4.  Filtering
+5.  Standarization
 
 # Introduction
 

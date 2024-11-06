@@ -2566,7 +2566,7 @@
     "href": "PreProcessing/PreProcessing.slides.html#agenda",
     "title": "Data preprocessing",
     "section": "Agenda",
-    "text": "Agenda\n\nIntroduction\nDealing with missing values\nStandarization\nTransforming categorical predictors\nFiltering"
+    "text": "Agenda\n\nIntroduction\nDealing with missing values\nTransforming categorical predictors\nFiltering\nStandarization"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#data-preprocessing",
