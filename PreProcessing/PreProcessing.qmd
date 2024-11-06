@@ -155,6 +155,30 @@ The dataset has some missing values denoted as `NaN`.
 penguins_data.head(5)
 ```
 
+##
+
+</br>
+
+One way to know what variables have missing data is using the function `info()` from **pandas**.
+
+```{python}
+#| echo: true
+
+penguins_data.info()
+```
+
+##
+
+In the output of the function "non-null" refers to the number of entries in a column that have actual values. That is, the number of entries where there are no `NaN`.
+
+```{python}
+#| echo: false
+
+penguins_data.info()
+```
+
+The value next to "RangeIndex" is the number of observations in the dataset.
+
 ## Removing missing values
 
 If we want to remove all rows in the dataset that have at least one missing value, we use the function `dropna()`.
