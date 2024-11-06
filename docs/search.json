@@ -1852,7 +1852,7 @@
     "href": "Classification/Classification.slides.html#agenda",
     "title": "Logistic Regression",
     "section": "Agenda",
-    "text": "Agenda\n\nIntroduction\nTraining and test set\nLogistic regression\nClassification performance"
+    "text": "Agenda\n\nIntroduction\nLogistic regression\nClassification performance"
   },
   {
     "objectID": "Classification/Classification.slides.html#load-the-libraries",
@@ -1866,7 +1866,7 @@
     "href": "Classification/Classification.slides.html#two-main-problems",
     "title": "Logistic Regression",
     "section": "Two main problems",
-    "text": "Two main problems\nRegression problems. The response \\(Y\\) is quantitative. For example, person’s income, the value of a house, the blood pressure of a patient.\nClassification problems. The response \\(Y\\) is qualitative and involves \\(K\\) different categories. For example, the brand of a product purchased (A, B, C) whether a person defaults on a debt (yes or no).\nThe predictors (\\(\\boldsymbol{X}\\)) can be qualitative or quantitative."
+    "text": "Two main problems\n\nRegression problems. The response \\(Y\\) is quantitative. For example, person’s income, the value of a house, the blood pressure of a patient.\nClassification problems. The response \\(Y\\) is qualitative and involves \\(K\\) different categories. For example, the brand of a product purchased (A, B, C) whether a person defaults on a debt (yes or no).\nThe predictors (\\(\\boldsymbol{X}\\)) can be qualitative or quantitative."
   },
   {
     "objectID": "Classification/Classification.slides.html#terminology",
@@ -1921,8 +1921,8 @@
     "objectID": "Classification/Classification.slides.html#example-1",
     "href": "Classification/Classification.slides.html#example-1",
     "title": "Logistic Regression",
-    "section": "Example",
-    "text": "Example\nConsider the task of identifying old-swiss counterfeit banknotes. The response under study is\n\\[Y =\n    \\begin{cases}\n      1, & \\text{if it is a counterfeit banknote} \\\\\n      0, & \\text{otherwise}\n    \\end{cases}.\\]\nWe have four predictors:\n\n\nLeft: length of left edge (mm)\nRight: length of right edge (mm)\nTop: distance from the image to top edge\nBottom: distance from image to bottom"
+    "section": "Example 1",
+    "text": "Example 1\nConsider a spam e-mail filter.\n\nThe target class is spam.\nThe reference class is not spam.\n\n\n\n\n\n\nBoth e-mails would be classified as spam. However, we’d have more confidence in our classification for the second email."
   },
   {
     "objectID": "Classification/Classification.slides.html#old-swiss-1000-franc-banknote",
@@ -1964,7 +1964,7 @@
     "href": "Classification/Classification.slides.html#section-4",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The function makes a clever partition of the data using the empirical distribution of the response.\nTechnically, it splits the data so that the distribution of the response under the training and test sets is similar.\nUsually, the proportion of the dataset that goes to the test set is 20% or 30%."
+    "text": "The function makes a clever partition of the data using the empirical distribution of the response.\nTechnically, it splits the data so that the distribution of the response under the training and test sets is similar.\nUsually, the proportion of the dataset that goes to the test set is 20% or 30%.\nStrictly speaking, the test dataset must be named validation dataset."
   },
   {
     "objectID": "Classification/Classification.slides.html#logistic-regression-lr",
@@ -2027,7 +2027,7 @@
     "href": "Classification/Classification.slides.html#section-9",
     "title": "Logistic Regression",
     "section": "",
-    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.060027\n         Iterations 12\nconst    -362.863845\nLeft       -1.095007\nRight       3.029756\nBottom      4.756547\nTop         6.391105\ndtype: float64"
+    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.035109\n         Iterations 14\nconst    -910.390334\nLeft        5.482289\nRight       0.216801\nBottom      6.965655\nTop         9.787928\ndtype: float64"
   },
   {
     "objectID": "Classification/Classification.slides.html#parameter-testing",
@@ -2041,7 +2041,7 @@
     "href": "Classification/Classification.slides.html#section-10",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression classifier.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      135\nMethod:                           MLE   Df Model:                            4\nDate:                Wed, 06 Nov 2024   Pseudo R-squ.:                  0.9129\nTime:                        12:14:16   Log-Likelihood:                -8.4037\nconverged:                       True   LL-Null:                       -96.526\nCovariance Type:            nonrobust   LLR p-value:                 4.776e-37\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -362.8638    321.200     -1.130      0.259    -992.405     266.677\nLeft          -1.0950      3.739     -0.293      0.770      -8.423       6.233\nRight          3.0298      3.128      0.969      0.333      -3.101       9.161\nBottom         4.7565      1.847      2.576      0.010       1.137       8.376\nTop            6.3911      2.172      2.943      0.003       2.134      10.648\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.50 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
+    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression classifier.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      135\nMethod:                           MLE   Df Model:                            4\nDate:                Wed, 06 Nov 2024   Pseudo R-squ.:                  0.9492\nTime:                        17:53:14   Log-Likelihood:                -4.9153\nconverged:                       True   LL-Null:                       -96.812\nCovariance Type:            nonrobust   LLR p-value:                 1.142e-38\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -910.3903    817.439     -1.114      0.265   -2512.541     691.760\nLeft           5.4823      7.895      0.694      0.487      -9.992      20.957\nRight          0.2168      3.955      0.055      0.956      -7.536       7.969\nBottom         6.9657      3.739      1.863      0.062      -0.362      14.294\nTop            9.7879      4.686      2.089      0.037       0.603      18.973\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.73 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
   },
   {
     "objectID": "Classification/Classification.slides.html#evaluation",
@@ -2055,7 +2055,7 @@
     "href": "Classification/Classification.slides.html#section-11",
     "title": "Logistic Regression",
     "section": "",
-    "text": "Technically, the classifier outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n55     1.234857e-04\n128    9.999087e-01\n50     3.784451e-07\n48     2.694450e-04\n137    9.901672e-01\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors)."
+    "text": "Technically, the classifier outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n47     3.425769e-06\n89     8.954063e-06\n185    1.000000e+00\n50     1.380851e-10\n136    9.999967e-01\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors)."
   },
   {
     "objectID": "Classification/Classification.slides.html#section-12",
@@ -2069,7 +2069,7 @@
     "href": "Classification/Classification.slides.html#section-13",
     "title": "Logistic Regression",
     "section": "",
-    "text": "predicted_classes.head()\n\n55     0\n128    1\n50     0\n48     0\n137    1\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the test dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
+    "text": "predicted_classes.head()\n\n47     0\n89     0\n185    1\n50     0\n136    1\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the test dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
   },
   {
     "objectID": "Classification/Classification.slides.html#confusion-matrix",
@@ -2083,14 +2083,14 @@
     "href": "Classification/Classification.slides.html#in-python-1",
     "title": "Logistic Regression",
     "section": "In python",
-    "text": "In python\nWe compute the confusion matrix using the function with the same name of scikit-learn. To this end,\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[24  0]\n [ 0 36]]"
+    "text": "In python\nWe compute the confusion matrix using the function with the same name of scikit-learn. To this end,\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[33  1]\n [ 0 26]]"
   },
   {
     "objectID": "Classification/Classification.slides.html#accuracy",
     "href": "Classification/Classification.slides.html#accuracy",
     "title": "Logistic Regression",
     "section": "Accuracy",
-    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n1.0\n\n\nThe higher the accuracy, the better the performance of the classifier."
+    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.98\n\n\nThe higher the accuracy, the better the performance of the classifier."
   },
   {
     "objectID": "Classification/Classification.slides.html#remarks",
@@ -3092,5 +3092,12 @@
     "title": "Additional Topics",
     "section": "",
     "text": "We compute the validation RMSE by first computing the validation MSE using a function with the same name of scikit-learn.\n\nmse = mean_squared_error(Y_valid, predicted_medv_val)\nrmse = mse**(1/2)\nprint( round(rmse, 3) )\n\n4.178\n\n\nThe lower the validation RMSE, the more accurate our model.\nInterpretation: On average, our predictions are off by \\(\\pm\\) 4,465 dollars."
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#example-2",
+    "href": "Classification/Classification.slides.html#example-2",
+    "title": "Logistic Regression",
+    "section": "Example 2",
+    "text": "Example 2\nConsider the task of identifying old-swiss counterfeit banknotes. The response under study is\n\\[Y =\n    \\begin{cases}\n      1, & \\text{if it is a counterfeit banknote} \\\\\n      0, & \\text{otherwise}\n    \\end{cases}.\\]\nWe have four predictors:\n\n\nLeft: length of left edge (mm)\nRight: length of right edge (mm)\nTop: distance from the image to top edge\nBottom: distance from image to bottom"
   }
 ]

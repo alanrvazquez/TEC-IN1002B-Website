@@ -21,9 +21,8 @@ jupyter: python3
 ## Agenda
 
 1.  Introduction
-2.  Training and test set
-3.  Logistic regression
-4.  Classification performance
+2.  Logistic regression
+3.  Classification performance
 
 # Introduction
 
@@ -45,6 +44,8 @@ from sklearn.metrics import confusion_matrix, accuracy_score
 Here, we will introduce the function `train_test_split()` to split a data set into training and test sets. We will also introduce the functions `confusion_matrix()` and `accuracy_score()` to evaluate the performance of classifiers.
 
 ## Two main problems
+
+</br>
 
 [**Regression problems**]{style="color:blue;"}. The response $Y$ is quantitative. For example, person’s income, the value of a house, the blood pressure of a patient.
 
@@ -76,6 +77,8 @@ Explanatory variables or predictors:
 
 ## 
 
+</br>
+
 [**Goal**]{style="color:darkgreen;"}: Find the best function $C(\boldsymbol{x})$ for predicting $Y = \{0, 1\}$ from $\boldsymbol{x}$.
 
 </br>
@@ -86,7 +89,7 @@ To achieve this, we will consider functions $C(\boldsymbol{x})$ that [**predict 
 
 A probability for each class can be very useful for gauging the model’s confidence about the predicted classification.
 
-## Example
+## Example 1
 
 Consider a spam e-mail filter.
 
@@ -135,9 +138,7 @@ To overcome this issue, we have a standard solution:
 
 Before discussing the logistic regression classifier, we need to introduce the training and test set for building and testing the model.
 
-# Training and test sets
-
-## Example
+## Example 2
 
 Consider the task of identifying old-swiss counterfeit banknotes. The response under study is
 
@@ -230,6 +231,8 @@ The parameter `test_size` sets the portion of the dataset that will go to the te
 -   Technically, it splits the data so that the distribution of the response under the training and test sets is similar.
 
 -   Usually, the proportion of the dataset that goes to the test set is 20% or 30%.
+
+-   Strictly speaking, the test dataset must be named [**validation dataset**]{style="color:orange;"}.
 
 # Introduction to logistic regression
 
