@@ -233,7 +233,7 @@ Note that these models have different intercepts but the same slope.
 
 ## In python
 
-To fit an ANCOVA model, we use similar steps as before. The only new step is to concatenate the data with the dummy variables and the numerical predictor using the function `concat()` from **pandas**.
+To fit an ANCOVA model, we use similar steps as before. The only extra step is to concatenate the data with the dummy variables and the numerical predictor using the function `concat()` from **pandas**.
 
 ```{python}
 #| echo: true
