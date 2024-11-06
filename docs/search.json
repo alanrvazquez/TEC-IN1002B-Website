@@ -1761,7 +1761,7 @@
     "href": "LinearRegression/LinearRegression.slides.html#questions",
     "title": "Multiple Linear Regression",
     "section": "Questions",
-    "text": "Questions\n\n\n\nHow can we estimate \\(\\beta_0, \\beta_1, \\ldots, \\beta_p\\) and \\(\\sigma^2\\)?\nHow can we make inferences about \\(\\beta_0, \\beta_1, \\ldots, \\beta_p\\)?\nHow can we make predictions of future responses using the multiple linear regression model?\nHow can we validate the model and all its assumptions?"
+    "text": "Questions\n\n\n\nHow can we estimate \\(\\beta_0, \\beta_1, \\ldots, \\beta_p\\) and \\(\\sigma^2\\)?\nHow can we make inferences about \\(\\beta_0, \\beta_1, \\ldots, \\beta_p\\)?\nHow can we validate the model and all its assumptions?\nHow can we make predictions of future responses using the multiple linear regression model?"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#parameter-estimates",

@@ -151,6 +151,8 @@ rayon_data.head()
 
 ## 
 
+</br>
+
 Since we believe in the multiple linear regression model, then the observations in the data set must comply with
 
 $$Y_i= \beta_0+\beta_1 X_{i1} + \beta_2 X_{i2} + \cdots + \beta_p X_{ip} + \epsilon_i.$$
@@ -185,9 +187,9 @@ The error $\epsilon_i$’s must satisfy the following assumptions:
 
 2.  How can we make inferences about $\beta_0, \beta_1, \ldots, \beta_p$?
 
-3.  How can we make predictions of future responses using the multiple linear regression model?
+3.  How can we validate the model and all its assumptions?
 
-4.  How can we validate the model and all its assumptions?
+4.  How can we make predictions of future responses using the multiple linear regression model?
 :::
 
 # Parameter Estimation
