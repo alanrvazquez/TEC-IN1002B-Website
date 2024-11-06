@@ -823,7 +823,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-2",
     "title": "Additional Topics",
     "section": "",
-    "text": "print(summary_model)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.332\nModel:                            OLS   Adj. R-squared:                  0.328\nMethod:                 Least Squares   F-statistic:                     96.60\nDate:                Tue, 05 Nov 2024   Prob (F-statistic):           8.67e-35\nTime:                        22:32:06   Log-Likelihood:                -1282.2\nNo. Observations:                 392   AIC:                             2570.\nDf Residuals:                     389   BIC:                             2582.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         20.0335      0.409     49.025      0.000      19.230      20.837\nEuropean       7.5695      0.877      8.634      0.000       5.846       9.293\nJapanese      10.4172      0.828     12.588      0.000       8.790      12.044\n==============================================================================\nOmnibus:                       26.330   Durbin-Watson:                   0.763\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               30.217\nSkew:                           0.679   Prob(JB):                     2.74e-07\nKurtosis:                       3.066   Cond. No.                         3.16\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+    "text": "print(summary_model)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.332\nModel:                            OLS   Adj. R-squared:                  0.328\nMethod:                 Least Squares   F-statistic:                     96.60\nDate:                Tue, 05 Nov 2024   Prob (F-statistic):           8.67e-35\nTime:                        22:32:59   Log-Likelihood:                -1282.2\nNo. Observations:                 392   AIC:                             2570.\nDf Residuals:                     389   BIC:                             2582.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         20.0335      0.409     49.025      0.000      19.230      20.837\nEuropean       7.5695      0.877      8.634      0.000       5.846       9.293\nJapanese      10.4172      0.828     12.588      0.000       8.790      12.044\n==============================================================================\nOmnibus:                       26.330   Durbin-Watson:                   0.763\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               30.217\nSkew:                           0.679   Prob(JB):                     2.74e-07\nKurtosis:                       3.066   Cond. No.                         3.16\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#analysis-of-covariance",
@@ -858,7 +858,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#model-summary",
     "title": "Additional Topics",
     "section": "Model summary",
-    "text": "Model summary\n\n# Summary of the models.\nsummary_ancova = ancova_model.summary()\nprint(summary_ancova)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.702\nModel:                            OLS   Adj. R-squared:                  0.700\nMethod:                 Least Squares   F-statistic:                     304.7\nDate:                Tue, 05 Nov 2024   Prob (F-statistic):          1.28e-101\nTime:                        22:32:06   Log-Likelihood:                -1123.9\nNo. Observations:                 392   AIC:                             2256.\nDf Residuals:                     388   BIC:                             2272.\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         43.7322      1.113     39.277      0.000      41.543      45.921\nEuropean       0.9709      0.659      1.474      0.141      -0.324       2.266\nJapanese       2.3271      0.665      3.501      0.001       1.020       3.634\nweight        -0.0070      0.000    -21.956      0.000      -0.008      -0.006\n==============================================================================\nOmnibus:                       40.731   Durbin-Watson:                   0.832\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               61.938\nSkew:                           0.689   Prob(JB):                     3.55e-14\nKurtosis:                       4.377   Cond. No.                     1.83e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 1.83e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
+    "text": "Model summary\n\n# Summary of the models.\nsummary_ancova = ancova_model.summary()\nprint(summary_ancova)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.702\nModel:                            OLS   Adj. R-squared:                  0.700\nMethod:                 Least Squares   F-statistic:                     304.7\nDate:                Tue, 05 Nov 2024   Prob (F-statistic):          1.28e-101\nTime:                        22:32:59   Log-Likelihood:                -1123.9\nNo. Observations:                 392   AIC:                             2256.\nDf Residuals:                     388   BIC:                             2272.\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         43.7322      1.113     39.277      0.000      41.543      45.921\nEuropean       0.9709      0.659      1.474      0.141      -0.324       2.266\nJapanese       2.3271      0.665      3.501      0.001       1.020       3.634\nweight        -0.0070      0.000    -21.956      0.000      -0.008      -0.006\n==============================================================================\nOmnibus:                       40.731   Durbin-Watson:                   0.832\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               61.938\nSkew:                           0.689   Prob(JB):                     3.55e-14\nKurtosis:                       4.377   Cond. No.                     1.83e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 1.83e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#standardization",
@@ -928,7 +928,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-8",
     "title": "Additional Topics",
     "section": "",
-    "text": "print(std_summary_model)\n\n                                 OLS Regression Results                                \n=======================================================================================\nDep. Variable:                  Yield   R-squared (uncentered):                   0.002\nModel:                            OLS   Adj. R-squared (uncentered):             -0.330\nMethod:                 Least Squares   F-statistic:                           0.006694\nDate:                Tue, 05 Nov 2024   Prob (F-statistic):                       0.993\nTime:                        22:32:06   Log-Likelihood:                         -46.940\nNo. Observations:                   8   AIC:                                      97.88\nDf Residuals:                       6   BIC:                                      98.04\nDf Model:                           2                                                  \nCovariance Type:            nonrobust                                                  \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nx1             1.5000     34.907      0.043      0.967     -83.914      86.914\nx2             3.7500     34.907      0.107      0.918     -81.664      89.164\n==============================================================================\nOmnibus:                        2.258   Durbin-Watson:                   0.000\nProb(Omnibus):                  0.323   Jarque-Bera (JB):                0.627\nSkew:                           0.000   Prob(JB):                        0.731\nKurtosis:                       1.628   Cond. No.                         1.00\n==============================================================================\n\nNotes:\n[1] R² is computed without centering (uncentered) since the model does not contain a constant.\n[2] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+    "text": "print(std_summary_model)\n\n                                 OLS Regression Results                                \n=======================================================================================\nDep. Variable:                  Yield   R-squared (uncentered):                   0.002\nModel:                            OLS   Adj. R-squared (uncentered):             -0.330\nMethod:                 Least Squares   F-statistic:                           0.006694\nDate:                Tue, 05 Nov 2024   Prob (F-statistic):                       0.993\nTime:                        22:32:59   Log-Likelihood:                         -46.940\nNo. Observations:                   8   AIC:                                      97.88\nDf Residuals:                       6   BIC:                                      98.04\nDf Model:                           2                                                  \nCovariance Type:            nonrobust                                                  \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nx1             1.5000     34.907      0.043      0.967     -83.914      86.914\nx2             3.7500     34.907      0.107      0.918     -81.664      89.164\n==============================================================================\nOmnibus:                        2.258   Durbin-Watson:                   0.000\nProb(Omnibus):                  0.323   Jarque-Bera (JB):                0.627\nSkew:                           0.000   Prob(JB):                        0.731\nKurtosis:                       1.628   Cond. No.                         1.00\n==============================================================================\n\nNotes:\n[1] R² is computed without centering (uncentered) since the model does not contain a constant.\n[2] Standard Errors assume that the covariance matrix of the errors is correctly specified."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#discussion",
@@ -1327,7 +1327,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#t-tests-in-python",
     "title": "Model Evaluation and Inference",
     "section": "t-tests in python",
-    "text": "t-tests in python\nWe obtain the t-tests of the coefficients using the function summary() together with the lnear_regression object.\n\nmodel_summary = linear_model.summary()\nprint(model_summary)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.700\nModel:                            OLS   Adj. R-squared:                  0.698\nMethod:                 Least Squares   F-statistic:                     453.2\nDate:                Tue, 05 Nov 2024   Prob (F-statistic):          2.43e-102\nTime:                        22:24:21   Log-Likelihood:                -1125.4\nNo. Observations:                 392   AIC:                             2257.\nDf Residuals:                     389   BIC:                             2269.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nconst           41.0953      1.868     21.999      0.000      37.423      44.768\nweight          -0.0073      0.000    -25.966      0.000      -0.008      -0.007\nacceleration     0.2617      0.086      3.026      0.003       0.092       0.432\n==============================================================================\nOmnibus:                       31.397   Durbin-Watson:                   0.818\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               39.962\nSkew:                           0.632   Prob(JB):                     2.10e-09\nKurtosis:                       3.922   Cond. No.                     2.67e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 2.67e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
+    "text": "t-tests in python\nWe obtain the t-tests of the coefficients using the function summary() together with the lnear_regression object.\n\nmodel_summary = linear_model.summary()\nprint(model_summary)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.700\nModel:                            OLS   Adj. R-squared:                  0.698\nMethod:                 Least Squares   F-statistic:                     453.2\nDate:                Tue, 05 Nov 2024   Prob (F-statistic):          2.43e-102\nTime:                        22:32:54   Log-Likelihood:                -1125.4\nNo. Observations:                 392   AIC:                             2257.\nDf Residuals:                     389   BIC:                             2269.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nconst           41.0953      1.868     21.999      0.000      37.423      44.768\nweight          -0.0073      0.000    -25.966      0.000      -0.008      -0.007\nacceleration     0.2617      0.086      3.026      0.003       0.092       0.432\n==============================================================================\nOmnibus:                       31.397   Durbin-Watson:                   0.818\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               39.962\nSkew:                           0.632   Prob(JB):                     2.10e-09\nKurtosis:                       3.922   Cond. No.                     2.67e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 2.67e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#total-sum-of-squares",
@@ -2027,7 +2027,7 @@
     "href": "Classification/Classification.slides.html#section-9",
     "title": "Logistic Regression",
     "section": "",
-    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.042632\n         Iterations 13\nconst    -596.035925\nLeft       -1.535262\nRight       5.131386\nBottom      4.777040\nTop         7.921131\ndtype: float64"
+    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.041698\n         Iterations 13\nconst    -454.434227\nLeft       -4.538982\nRight       6.955101\nBottom      5.891893\nTop         8.111883\ndtype: float64"
   },
   {
     "objectID": "Classification/Classification.slides.html#parameter-testing",
@@ -2041,7 +2041,7 @@
     "href": "Classification/Classification.slides.html#section-10",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression classifier.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      135\nMethod:                           MLE   Df Model:                            4\nDate:                Tue, 05 Nov 2024   Pseudo R-squ.:                  0.9385\nTime:                        22:24:06   Log-Likelihood:                -5.9685\nconverged:                       True   LL-Null:                       -97.026\nCovariance Type:            nonrobust   LLR p-value:                 2.619e-38\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -596.0359    393.923     -1.513      0.130   -1368.110     176.039\nLeft          -1.5353      4.347     -0.353      0.724     -10.054       6.984\nRight          5.1314      4.235      1.212      0.226      -3.170      13.432\nBottom         4.7770      1.961      2.436      0.015       0.934       8.620\nTop            7.9211      2.770      2.860      0.004       2.493      13.350\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.61 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
+    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression classifier.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      135\nMethod:                           MLE   Df Model:                            4\nDate:                Tue, 05 Nov 2024   Pseudo R-squ.:                  0.9397\nTime:                        22:32:37   Log-Likelihood:                -5.8377\nconverged:                       True   LL-Null:                       -96.812\nCovariance Type:            nonrobust   LLR p-value:                 2.845e-38\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -454.4342    351.040     -1.295      0.195   -1142.460     233.591\nLeft          -4.5390      5.286     -0.859      0.391     -14.899       5.821\nRight          6.9551      5.025      1.384      0.166      -2.894      16.804\nBottom         5.8919      3.129      1.883      0.060      -0.241      12.025\nTop            8.1119      3.877      2.092      0.036       0.513      15.711\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.69 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
   },
   {
     "objectID": "Classification/Classification.slides.html#evaluation",
@@ -2055,7 +2055,7 @@
     "href": "Classification/Classification.slides.html#section-11",
     "title": "Logistic Regression",
     "section": "",
-    "text": "Technically, the classifier outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n2      6.049395e-06\n62     1.082147e-04\n199    9.999819e-01\n57     2.104905e-08\n116    9.999749e-01\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors)."
+    "text": "Technically, the classifier outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n184    0.999996\n134    1.000000\n138    1.000000\n125    0.999999\n115    0.047983\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors)."
   },
   {
     "objectID": "Classification/Classification.slides.html#section-12",
@@ -2069,7 +2069,7 @@
     "href": "Classification/Classification.slides.html#section-13",
     "title": "Logistic Regression",
     "section": "",
-    "text": "predicted_classes.head()\n\n2      0\n62     0\n199    1\n57     0\n116    1\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the test dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
+    "text": "predicted_classes.head()\n\n184    1\n134    1\n138    1\n125    1\n115    0\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the test dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
   },
   {
     "objectID": "Classification/Classification.slides.html#confusion-matrix",
@@ -2083,7 +2083,7 @@
     "href": "Classification/Classification.slides.html#in-python-1",
     "title": "Logistic Regression",
     "section": "In python",
-    "text": "In python\nWe compute the confusion matrix using the function with the same name of scikit-learn. To this end,\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[28  1]\n [ 1 30]]"
+    "text": "In python\nWe compute the confusion matrix using the function with the same name of scikit-learn. To this end,\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[26  0]\n [ 2 32]]"
   },
   {
     "objectID": "Classification/Classification.slides.html#accuracy",
@@ -2772,6 +2772,13 @@
     "text": "dummy_data.head()\n\n\n\n\n\n\n\n\nEuropean\nJapanese\n\n\n\n\n0\n0\n0\n\n\n1\n0\n0\n\n\n2\n0\n0\n\n\n3\n0\n0\n\n\n4\n0\n0"
   },
   {
+    "objectID": "PreProcessing/PreProcessing.slides.html#section-14",
+    "href": "PreProcessing/PreProcessing.slides.html#section-14",
+    "title": "Data preprocessing",
+    "section": "",
+    "text": "Now, to add the dummy variables to the dataset, we use the function concat() from pandas.\n\naugmented_auto = pd.concat([complete_Auto, dummy_data], axis = 1)"
+  },
+  {
     "objectID": "PreProcessing/PreProcessing.slides.html#removing-predictors",
     "href": "PreProcessing/PreProcessing.slides.html#removing-predictors",
     "title": "Data preprocessing",
@@ -2800,11 +2807,11 @@
     "text": "In python\nWe use the function VarianceThreshold() to set the threshold for determining a low sample variance. We also use other functions such as selector.fit() and selector.get_support().\n\n# Set threshold\nselector = VarianceThreshold(threshold=0.01)\n\n# Apply threshold.\nselector.fit(sb_glass)\n\n# Identify predictors with low variance.\nlow_variance_cols = sb_glass.columns[~selector.get_support()]\n\n# Print the list of predictors.\nprint(f\"Low variance columns: {low_variance_cols}\")\n\nLow variance columns: Index(['RI', 'Fe'], dtype='object')"
   },
   {
-    "objectID": "PreProcessing/PreProcessing.slides.html#section-14",
-    "href": "PreProcessing/PreProcessing.slides.html#section-14",
+    "objectID": "PreProcessing/PreProcessing.slides.html#section-15",
+    "href": "PreProcessing/PreProcessing.slides.html#section-15",
     "title": "Data preprocessing",
     "section": "",
-    "text": "Now, to add the dummy variables to the dataset, we use the function concat() from pandas.\n\naugmented_auto = pd.concat([complete_Auto, dummy_data], axis = 1)"
+    "text": "After identifying predictors with low variability, we remove them from the problem because they do not add much to the problem. To this end, we use the command below.\n\n\n# Removing problematic predictors\nsb_reduced_glass = sb_glass.drop(columns=low_variance_cols)"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#between-predictor-correlation",
@@ -2828,18 +2835,18 @@
     "text": "Correlation matrix\n\nIn python, we calculate the correlation matrix using the command below.\n\ncorrelation_matrix = complete_sbAuto.corr()\nprint(correlation_matrix)\n\n              cylinders  displacement  horsepower    weight  acceleration\ncylinders      1.000000      0.950823    0.842983  0.897527     -0.504683\ndisplacement   0.950823      1.000000    0.897257  0.932994     -0.543800\nhorsepower     0.842983      0.897257    1.000000  0.864538     -0.689196\nweight         0.897527      0.932994    0.864538  1.000000     -0.416839\nacceleration  -0.504683     -0.543800   -0.689196 -0.416839      1.000000"
   },
   {
-    "objectID": "PreProcessing/PreProcessing.slides.html#section-15",
-    "href": "PreProcessing/PreProcessing.slides.html#section-15",
-    "title": "Data preprocessing",
-    "section": "",
-    "text": "After identifying predictors with low variability, we remove them from the problem because they do not add much to the problem. To this end, we use the command below.\n\n\n# Removing problematic predictors\nsb_reduced_glass = sb_glass.drop(columns=low_variance_cols)"
-  },
-  {
     "objectID": "PreProcessing/PreProcessing.slides.html#section-16",
     "href": "PreProcessing/PreProcessing.slides.html#section-16",
     "title": "Data preprocessing",
     "section": "",
     "text": "Next, we plot the correlation matrix using the function heatmap() from seaborn. The argument annot shows the actual value of the pair-wise correlations, and cmap shows a nice color theme.\n\nplt.figure(figsize=(3,3))\nsns.heatmap(correlation_matrix, cmap='coolwarm', annot = True)"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing.slides.html#section-17",
+    "href": "PreProcessing/PreProcessing.slides.html#section-17",
+    "title": "Data preprocessing",
+    "section": "",
+    "text": "The predictors cylinders and displacement are highly correlated. In fact, their correlation is 0.95."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#in-practice",
@@ -2856,11 +2863,11 @@
     "text": "Predictors with different units\nMany good predictive models have issues with numeric predictors with different units:\n\nMethods such as K-nearest neighbors are based on the distance between observations. If the predictors are on different units or scales, then some predictors will have a larger weight for computing the distance.\nOther methods such as LASSO use the variances of the predictors in their calculations. Predictors with different scales will have different variances and so, those with a higher variance will play a bigger role in the calculations."
   },
   {
-    "objectID": "PreProcessing/PreProcessing.slides.html#section-17",
-    "href": "PreProcessing/PreProcessing.slides.html#section-17",
+    "objectID": "PreProcessing/PreProcessing.slides.html#section-18",
+    "href": "PreProcessing/PreProcessing.slides.html#section-18",
     "title": "Data preprocessing",
     "section": "",
-    "text": "The predictors cylinders and displacement are highly correlated. In fact, their correlation is 0.95."
+    "text": "In a nutshell, some predictors will have a higher impact in the model due to its unit and not its information provided to it."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#standarization-1",
@@ -2870,11 +2877,11 @@
     "text": "Standarization\n\nStandardization refers to centering and scaling each numeric predictor individually. It puts every predictor on the same scale.\nTo center a predictor variable, the average predictor value is subtracted from all the values.\nTherefore, the centered predictor has a zero mean (that is, its average value is zero)."
   },
   {
-    "objectID": "PreProcessing/PreProcessing.slides.html#section-18",
-    "href": "PreProcessing/PreProcessing.slides.html#section-18",
+    "objectID": "PreProcessing/PreProcessing.slides.html#section-19",
+    "href": "PreProcessing/PreProcessing.slides.html#section-19",
     "title": "Data preprocessing",
     "section": "",
-    "text": "In a nutshell, some predictors will have a higher impact in the model due to its unit and not its information provided to it."
+    "text": "To scale a predictor, each of its value is divided by its standard deviation.\nScaling the data coerce the values to have a common standard deviation of one.\nIn mathematical terms, we standardize a predictor as:\n\\[{\\color{blue} \\tilde{x}_{i}} = \\frac{{ x_{i} - \\bar{x}}}{ \\sqrt{\\frac{1}{n -1} \\sum_{i=1}^{n} (x_{i} - \\bar{x})^2}},\\]\nwith \\(\\bar{x} = \\sum_{i=1}^n \\frac{x_i}{n}\\)."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#two-predictors-in-original-units",
@@ -2891,11 +2898,11 @@
     "text": "Standarization in python\n\nTo standardize numerical predictors, we use the function StandardScaler(). Moreover, we apply the function to the variables using the function fit_transform().\n\n\nscaler = StandardScaler()\nXs = scaler.fit_transform(complete_sbAuto)"
   },
   {
-    "objectID": "PreProcessing/PreProcessing.slides.html#section-19",
-    "href": "PreProcessing/PreProcessing.slides.html#section-19",
+    "objectID": "PreProcessing/PreProcessing.slides.html#section-20",
+    "href": "PreProcessing/PreProcessing.slides.html#section-20",
     "title": "Data preprocessing",
     "section": "",
-    "text": "To scale a predictor, each of its value is divided by its standard deviation.\nScaling the data coerce the values to have a common standard deviation of one.\nIn mathematical terms, we standardize a predictor as:\n\\[{\\color{blue} \\tilde{x}_{i}} = \\frac{{ x_{i} - \\bar{x}}}{ \\sqrt{\\frac{1}{n -1} \\sum_{i=1}^{n} (x_{i} - \\bar{x})^2}},\\]\nwith \\(\\bar{x} = \\sum_{i=1}^n \\frac{x_i}{n}\\)."
+    "text": "Unfortunately, the resulting object is not a pandas data frame. We then convert this object to this format. \n\nscaled_df = pd.DataFrame(Xs, columns = complete_sbAuto.columns)\nscaled_df.head()\n\n\n\n\n\n\n\n\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\n\n\n\n\n0\n1.483947\n1.077290\n0.664133\n0.620540\n-1.285258\n\n\n1\n1.483947\n1.488732\n1.574594\n0.843334\n-1.466724\n\n\n2\n1.483947\n1.182542\n1.184397\n0.540382\n-1.648189\n\n\n3\n1.483947\n1.048584\n1.184397\n0.536845\n-1.285258\n\n\n4\n1.483947\n1.029447\n0.924265\n0.555706\n-1.829655"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#two-predictors-in-standardized-units",
@@ -2910,12 +2917,5 @@
     "title": "Data preprocessing",
     "section": "Discussion",
     "text": "Discussion\n\n\nStandardized predictors are generally used to improve the numerical stability of some calculations.\nIt is generally recommended to always standardize numeric predictors. Perhaps the only exception would be if we consider a linear regression model.\nA drawback of these transformations is the loss of interpretability since the data are no longer in the original units.\nStandardizing the predictors does not affect their correlation."
-  },
-  {
-    "objectID": "PreProcessing/PreProcessing.slides.html#section-20",
-    "href": "PreProcessing/PreProcessing.slides.html#section-20",
-    "title": "Data preprocessing",
-    "section": "",
-    "text": "Unfortunately, the resulting object is not a pandas data frame. We then convert this object to this format. \n\nscaled_df = pd.DataFrame(Xs, columns = complete_sbAuto.columns)\nscaled_df.head()\n\n\n\n\n\n\n\n\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\n\n\n\n\n0\n1.483947\n1.077290\n0.664133\n0.620540\n-1.285258\n\n\n1\n1.483947\n1.488732\n1.574594\n0.843334\n-1.466724\n\n\n2\n1.483947\n1.182542\n1.184397\n0.540382\n-1.648189\n\n\n3\n1.483947\n1.048584\n1.184397\n0.536845\n-1.285258\n\n\n4\n1.483947\n1.029447\n0.924265\n0.555706\n-1.829655"
   }
 ]
