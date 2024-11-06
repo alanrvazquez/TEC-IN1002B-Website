@@ -269,7 +269,7 @@ $\hat{f}(\boldsymbol{X})$ represents an approximation or estimate of the true mo
 
 -   Ideally, interpretable (but not necessarily)
 
-## Two data sets
+## Two datasets
 
 -   “Training” data are data used to construct $\hat{f}(\boldsymbol{X})$.
 
