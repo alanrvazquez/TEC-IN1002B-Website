@@ -23,6 +23,7 @@ jupyter: python3
 1.  Linear models with categorical variables
 2.  Linear models with standardized numerical predictors
 3.  Remedies for faulty assumptions
+4.  Predicting future observations
 
 ## Load the libraries
 
@@ -710,5 +711,104 @@ plt.show()
 -   Therefore, transformations are more useful to build good predictive models. That is, models whose goal is to give accurate predictions of future observations.
 
 -   Note that, we need to transform back our response predictions to the original scale. For example, if $Y' = \ln{Y}$ is the transformed response, then our final prediction is $Y^\star = e^{{Y'}^\star}$.
+
+# Predicting future observations
+
+## Two datasets
+
+</br></br>
+
+The application of data science models necessitates two data sets:
+
+::: incremental
+-   [**Training data**]{style="color:blue;"} is data that we use to train or construct the estimated model $\hat{f}(\boldsymbol{X}) = \hat{\beta}_0 + \hat{\beta}_1 X_1 + \cdots + \hat{\beta}_p X_p$.
+
+-   [**Test data**]{style="color:green;"} is data that we use to evaluate the predictive performance of $\hat{f}(\boldsymbol{X})$ only.
+:::
+
+## 
+
+::::: columns
+::: {.column width="30%"}
+![](images/training.png){width="256"}
+:::
+
+::: {.column width="70%"}
+</br>
+
+A random sample of $n$ observations.
+
+Use it to **construct** $\hat{f}(\boldsymbol{X})$.
+:::
+:::::
+
+::::: columns
+::: {.column width="30%"}
+![](images/test.png){width="262"}
+:::
+
+::: {.column width="70%"}
+Another random sample of $n_t$ observations, which is independent of the training data.
+
+Use it to **evaluate** $\hat{f}(\boldsymbol{X})$.
+:::
+:::::
+
+## Validation Dataset
+
+In many practical situations, a test dataset is not available. To overcome this issue, we use a [**validation dataset**]{style="color:orange;"}.
+
+![](images/validation.png){fig-align="center" width="645"}
+
+**Idea**: Apply model to your [**validation dataset**]{style="color:orange;"} to mimic what will happen when you apply it to test dataset.
+
+## Example 4
+
+We consider a data set related to Glass identification. The data has 214 glass samples labeled as one of seven glass categories. There are nine predictors including the refractive index (RI) and percentages of eight elements: Na, Mg, Al, Si, K, Ca, Ba, and Fe. The response is the type of glass.
+
+Let's read the data set. Note that this is a modified version of the original data.
+
+```{python}
+#| echo: true
+#| output: true
+
+# Load Excel file (make sure the file is in your Colab)
+#glass_data = pd.read_excel('glass.xlsx')
+
+# Drop the categorical variable.
+#glass_data['Type'] = glass_data['Type'].astype('category')
+```
+
+## How do we generate validation data?
+
+We split the current data set into a training and a validation dataset. To this end, we use the function `train_test_split()` from **scikit-learn**.
+
+```{python}
+#| echo: true
+#| output: true
+
+# Set full matrix of predictors.
+#X_full = glass_data.drop(columns = ['Type'])
+
+# Set full matrix of responses.
+#Y_full = glass_data['Type']
+
+# Split the dataset.
+#X_train, X_validation, Y_train, Y_validation = train_test_split(X_full, 
+#                                                    Y_full, test_size=0.3)
+```
+
+The parameter `test_size` sets the portion of the dataset that will go to the test set.
+
+## 
+
+</br></br>
+
+-   The function makes a clever partition of the data using the *empirical* distribution of the response.
+
+-   Technically, it splits the data so that the distribution of the response under the training and test sets is similar.
+
+-   Usually, the proportion of the dataset that goes to the test set is 20% or 30%.
+
 
 # [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)

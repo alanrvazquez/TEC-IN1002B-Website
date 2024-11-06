@@ -384,7 +384,7 @@ $$
 Y_i = \beta_0 + \beta_1 X_{i1}+ \beta_2 X_{i2}+ \epsilon_i,
 $$
 
-where $y_i$ is the mpg, $X_{i1}$ is the weight, and $X_{i2}$ is the acceleration of the $i$-th car, $i = 1, \ldots, 392$. 
+where $y_i$ is the mpg, $X_{i1}$ is the weight, and $X_{i2}$ is the acceleration of the $i$-th car, $i = 1, \ldots, 392$.
 
 ## Research question
 
@@ -449,7 +449,7 @@ $$T = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }$$
 -   $\hat{\beta}_j$ is the least squares estimate of the true coefficient $\beta_j$.
 -   $\hat{v}_{jj}$ is the *standard error* of the estimate $\hat{\beta}_j$ calculated using python.
 
-##
+## 
 
 Recall that we obtain the least squares estimates ($\hat{\beta}_{j}$) in python using:
 

@@ -246,7 +246,7 @@ We assume that the response under study is `species` and the other the variables
 
 ## Create training dataset
 
-We create the training dataset called `penguins_train`. We will apply the 
+We create the training dataset called `penguins_train`. We will apply the
 
 ```{python}
 #| echo: true
