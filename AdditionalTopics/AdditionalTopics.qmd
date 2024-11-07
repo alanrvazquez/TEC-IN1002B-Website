@@ -545,7 +545,9 @@ $$\sqrt{Y} = \beta_0 + \beta_1 X + \epsilon$$ $$\sqrt{Y} = \beta_0 + \beta_1 \sq
 ![](images/NumPy_logo_2020.png){fig-align="center"}
 :::
 :::::
-Load it using: 
+
+Load it using:
+
 ```{python}
 #| echo: true
 
@@ -765,27 +767,27 @@ In many practical situations, a test dataset is not available. To overcome this 
 
 ## Example 4
 
-The "BostonHousing.xlsx" contains data collected by the US Bureau of the Census concerning housing in the area of Boston, Massachusetts. The dataset includes data on 506 census housing tracts in the Boston area in 1970s. 
+The "BostonHousing.xlsx" contains data collected by the US Bureau of the Census concerning housing in the area of Boston, Massachusetts. The dataset includes data on 506 census housing tracts in the Boston area in 1970s.
 
-The goal is to predict the median house price in new tracts based on information such as crime rate, pollution, and number of rooms. 
+The goal is to predict the median house price in new tracts based on information such as crime rate, pollution, and number of rooms.
 
-The response is the median value of owner-occupied homes in $1000s, contained in the column `MEDV`.
+The response is the median value of owner-occupied homes in \$1000s, contained in the column `MEDV`.
 
 ## The predictors
 
 ::: {style="font-size: 70%;"}
-- `CRIM`: per capita crime rate by town.
-- `ZN`: proportion of residential land zoned for lots over 25,000 sq.ft.
-- `INDUS`: proportion of non-retail business acres per town.
-- `CHAS`: Charles River dummy variable (= 1 if tract bounds river; 0 otherwise).
-- `NOX`: nitrogen oxides concentration (parts per 10 million).
-- `RM`: average number of rooms per dwelling.
-- `AGE`: proportion of owner-occupied units built prior to 1940.
-- `DIS`: weighted mean of distances to five Boston employment centers
-- `RAD`: index of accessibility to radial highways.
-- `TAX`: full-value property-tax rate per $10,000.
-- `PTRATIO`: pupil-teacher ratio by town.
-- `LSTAT`: lower status of the population (percent).
+-   `CRIM`: per capita crime rate by town.
+-   `ZN`: proportion of residential land zoned for lots over 25,000 sq.ft.
+-   `INDUS`: proportion of non-retail business acres per town.
+-   `CHAS`: Charles River dummy variable (= 1 if tract bounds river; 0 otherwise).
+-   `NOX`: nitrogen oxides concentration (parts per 10 million).
+-   `RM`: average number of rooms per dwelling.
+-   `AGE`: proportion of owner-occupied units built prior to 1940.
+-   `DIS`: weighted mean of distances to five Boston employment centers
+-   `RAD`: index of accessibility to radial highways.
+-   `TAX`: full-value property-tax rate per \$10,000.
+-   `PTRATIO`: pupil-teacher ratio by town.
+-   `LSTAT`: lower status of the population (percent).
 :::
 
 ## Read the dataset
@@ -808,7 +810,7 @@ Boston_data.head(3)
 
 ## How do we generate validation data?
 
-We split the current data set into a training and a validation dataset. To this end, we use the function `train_test_split()` from **scikit-learn**.
+We split the current dataset into a training and a validation dataset. To this end, we use the function `train_test_split()` from **scikit-learn**.
 
 ```{python}
 #| echo: true
@@ -837,8 +839,6 @@ The parameter `test_size` sets the portion of the dataset that will go to the te
 
 -   Usually, the proportion of the dataset that goes to the test set is 20% or 30%.
 
-To compute the least squares estimates, we first split the data set into a matrix with the values of the predictors only, and a matrix with the response values.
-
 ## Fit a model using training data
 
 </br>
@@ -858,7 +858,6 @@ regr = sm.OLS(Y_train, Boston_X_train)
 # Train the model using the training sets
 linear_model = regr.fit()
 ```
-
 
 ## Brief Residual Analysis
 
@@ -890,9 +889,9 @@ $$
 \frac{1}{n_{v}} \sum_{i=1}^{n_{v}} \left( Y_i - \hat{f}(\boldsymbol{X}_i) \right)^2
 $$
 
-where $(Y_1, \boldsymbol{X}_1), \ldots, (Y_{n_{v} }, \boldsymbol{X}_{n_{v}} )$ are  the $n_{v}$ observations in the validation dataset, and $\hat{f}(\boldsymbol{X}_i)$ is the model prediction of the i-th response.
+where $(Y_1, \boldsymbol{X}_1), \ldots, (Y_{n_{v} }, \boldsymbol{X}_{n_{v}} )$ are the $n_{v}$ observations in the validation dataset, and $\hat{f}(\boldsymbol{X}_i)$ is the model prediction of the i-th response.
 
-##
+## 
 
 Another useful metric is the validation [**Root Mean Squared Error**]{style="color:orange;"} ([**RMSE**]{style="color:orange;"}):
 
@@ -903,13 +902,14 @@ $$
 Benefits:
 
 ::: {style="font-size: 90%;"}
-- The RMSE is in the same units as the response.
-- The RMSE value is interpreted as either how far (on average) the residuals are from zero.
-- It can also be interpreted as the average distance between the observed response values and the model predictions. 
+-   The RMSE is in the same units as the response.
+-   The RMSE value is interpreted as either how far (on average) the residuals are from zero.
+-   It can also be interpreted as the average distance between the observed response values and the model predictions.
 :::
+
 ## In python
 
-We first compute the predictions of our model on the validation dataset. That is, we use the values of the predictors in this dataset and use it as input to our model. Our model then computes the prediction of the response for each combination of values of the predictors. 
+We first compute the predictions of our model on the validation dataset. That is, we use the values of the predictors in this dataset and use it as input to our model. Our model then computes the prediction of the response for each combination of values of the predictors.
 
 ```{python}
 #| echo: true
@@ -925,7 +925,7 @@ predicted_medv_val = linear_model.predict(Boston_X_val)
 
 </br>
 
-We compute the validation RMSE by first computing the validation MSE using a function with the same name of **scikit-learn**. 
+We compute the validation RMSE by first computing the validation MSE using a function with the same name of **scikit-learn**.
 
 ```{python}
 #| echo: true
@@ -935,7 +935,7 @@ rmse = mse**(1/2)
 print( round(rmse, 3) )
 ```
 
-The lower the validation RMSE, the more accurate our model. 
+The lower the validation RMSE, the more accurate our model.
 
 [*Interpretation*: On average, our predictions are off by $\pm$ 4,465 dollars.]{style="color:darkblue;"}
 
