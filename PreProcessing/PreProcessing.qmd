@@ -141,7 +141,6 @@ penguins_data['species'] = penguins_data['species'].astype('category')
 penguins_data['island'] = penguins_data['island'].astype('category')
 ```
 
-
 ## 
 
 </br>
@@ -155,7 +154,7 @@ The dataset has some missing values denoted as `NaN`.
 penguins_data.head(5)
 ```
 
-##
+## 
 
 </br>
 
@@ -167,7 +166,7 @@ One way to know what variables have missing data is using the function `info()` 
 penguins_data.info()
 ```
 
-##
+## 
 
 In the output of the function "non-null" refers to the number of entries in a column that have actual values. That is, the number of entries where there are no `NaN`.
 
@@ -289,7 +288,6 @@ cat_imputer = SimpleImputer(strategy = 'most_frequent')
 penguins_data['sex'] = cat_imputer.fit_transform(penguins_data[ ['sex'] ]).ravel()
 ```
 
-
 # Transforming categorical predictors
 
 ## Categorical predictors
@@ -358,7 +356,7 @@ auto_data.head(4)
 
 </br>
 
-The dataset has missing values. In this example, we remove each row with at least one missing value. 
+The dataset has missing values. In this example, we remove each row with at least one missing value.
 
 </br>
 
@@ -368,7 +366,6 @@ The dataset has missing values. In this example, we remove each row with at leas
 # Remove rows with missing values.
 complete_Auto = auto_data.dropna()
 ```
-
 
 ## Example 2 (cont.)
 
@@ -459,7 +456,7 @@ dummy_data = pd.get_dummies(complete_Auto['origin'], drop_first = True,
 dummy_data.head()
 ```
 
-##
+## 
 
 Now, to add the dummy variables to the dataset, we use the function `concat()` from **pandas**.
 
@@ -581,7 +578,6 @@ complete_sbAuto = complete_Auto[['cylinders', 'displacement',
                                  'acceleration']]
 ```
 
-
 ## Correlation matrix
 
 </br>
@@ -685,10 +681,9 @@ $${\color{blue} \tilde{x}_{i}} = \frac{{ x_{i} - \bar{x}}}{ \sqrt{\frac{1}{n -1}
 
 with $\bar{x} = \sum_{i=1}^n \frac{x_i}{n}$.
 
-
 ## Two predictors in original units
 
-Consider the `complete_sbAuto` dataset created previously. Consider two points in the plot: $(175, 1613)$ and $(69, 1613)$.
+Consider the `complete_sbAuto` dataset created previously. Consider two points in the plot: $(175, 5140)$ and $(69, 1613)$.
 
 ::::: columns
 ::: {.column width="50%"}
@@ -771,13 +766,13 @@ The distance between these points is $\sqrt{(-0.91 - 1.82)^2 + (-1.60-2.53)^2}$ 
 ## Discussion
 
 ::: incremental
-- Standardized predictors are generally used to improve the numerical stability of some calculations.
+-   Standardized predictors are generally used to improve the numerical stability of some calculations.
 
-- It is generally recommended to always standardize numeric predictors. Perhaps the only exception would be if we consider a linear regression model.
+-   It is generally recommended to always standardize numeric predictors. Perhaps the only exception would be if we consider a linear regression model.
 
-- A drawback of these transformations is the [***loss of interpretability***]{style="color:pink;"} since the data are no longer in the original units.
+-   A drawback of these transformations is the [***loss of interpretability***]{style="color:pink;"} since the data are no longer in the original units.
 
-- Standardizing the predictors does not affect their correlation.
+-   Standardizing the predictors does not affect their correlation.
 :::
 
 # [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)

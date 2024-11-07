@@ -340,7 +340,7 @@
     "href": "PreProcessing/PreProcessing.slides.html#two-predictors-in-original-units",
     "title": "Data preprocessing",
     "section": "Two predictors in original units",
-    "text": "Two predictors in original units\nConsider the complete_sbAuto dataset created previously. Consider two points in the plot: \\((175, 1613)\\) and \\((69, 1613)\\).\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe distance between these points is \\(\\sqrt{(69 - 175)^2 + (1613-5140)^2}\\) \\(= \\sqrt{11236 + 12439729}\\) \\(= 3528.592\\)."
+    "text": "Two predictors in original units\nConsider the complete_sbAuto dataset created previously. Consider two points in the plot: \\((175, 5140)\\) and \\((69, 1613)\\).\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe distance between these points is \\(\\sqrt{(69 - 175)^2 + (1613-5140)^2}\\) \\(= \\sqrt{11236 + 12439729}\\) \\(= 3528.592\\)."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#standarization-in-python",
