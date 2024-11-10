@@ -424,7 +424,7 @@ Alan R. Vazquez
 <h2>Load the libraries</h2>
 <p><br><br></p>
 <p>Let’s import <strong>statsmodels</strong> into python together with the other relevant libraries.</p>
-<div id="4aef09b5" class="cell" data-execution_count="1">
+<div id="3d3b31bf" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Importing necessary libraries</span></span>
 <span id="cb1-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -514,10 +514,10 @@ Alan R. Vazquez
 <section id="dataset" class="slide level2">
 <h2>Dataset</h2>
 <p>The dataset is in the file “production.xlsx”.</p>
-<div id="25e99aae" class="cell" data-execution_count="2">
+<div id="03aa3f4a" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>production_data <span class="op">=</span> pd.read_excel(<span class="st">'production.xlsx'</span>)</span>
 <span id="cb2-2"><a></a>production_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="264">
+<div class="cell-output cell-output-display" data-execution_count="546">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -583,7 +583,7 @@ Alan R. Vazquez
 <section id="intuition-behind" class="slide level2">
 <h2>Intuition behind …</h2>
 <p>the Residuals versus Fitted Values plot.</p>
-<div id="ad144862" class="cell" data-execution_count="3">
+<div id="29b7071a" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -596,7 +596,7 @@ Alan R. Vazquez
 <section id="calculation-of-fitted-values-and-residuals" class="slide level2">
 <h2>Calculation of fitted values and residuals</h2>
 <p>Recall that we can calculate the predicted values and residuals using commands from <strong>statsmodels</strong>.</p>
-<div id="ec9b31f7" class="cell" data-execution_count="4">
+<div id="88434c3e" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># Defining the predictor (X) and the response variable (Y).</span></span>
 <span id="cb3-2"><a></a>prod_Y_train <span class="op">=</span> production_data[<span class="st">'RunTime'</span>]</span>
 <span id="cb3-3"><a></a>prod_X_pred <span class="op">=</span> production_data[<span class="st">'RunSize'</span>]</span>
@@ -617,7 +617,7 @@ Alan R. Vazquez
 <h2>Residuals vs Fitted Values</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<div id="5e29da15" class="cell" data-execution_count="5">
+<div id="994840c2" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co"># Residual vs Fitted Values Plot</span></span>
@@ -669,17 +669,18 @@ Alan R. Vazquez
 </section>
 <section id="section-3" class="slide level2">
 <h2></h2>
-<div id="a4669d02" class="cell" data-execution_count="6">
+<div id="226a8488" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="co"># Residuals vs Time (Case) Plot</span></span>
 <span id="cb5-2"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
 <span id="cb5-3"><a></a>sns.scatterplot(x <span class="op">=</span> production_data[<span class="st">'Case'</span>], y <span class="op">=</span> residuals)</span>
-<span id="cb5-4"><a></a>plt.title(<span class="st">'Residuals vs Time (Case)'</span>)</span>
-<span id="cb5-5"><a></a>plt.xlabel(<span class="st">'Case'</span>)</span>
-<span id="cb5-6"><a></a>plt.xticks(production_data[<span class="st">'Case'</span>])</span>
-<span id="cb5-7"><a></a>plt.ylabel(<span class="st">'Residuals'</span>)</span>
-<span id="cb5-8"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-4"><a></a>plt.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb5-5"><a></a>plt.title(<span class="st">'Residuals vs Time (Case)'</span>)</span>
+<span id="cb5-6"><a></a>plt.xlabel(<span class="st">'Case'</span>)</span>
+<span id="cb5-7"><a></a>plt.xticks(production_data[<span class="st">'Case'</span>])</span>
+<span id="cb5-8"><a></a>plt.ylabel(<span class="st">'Residuals'</span>)</span>
+<span id="cb5-9"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -717,7 +718,7 @@ Alan R. Vazquez
 <section id="histogram" class="slide level2">
 <h2>Histogram</h2>
 <p>Ideally, the histogram resembles a normal distribution around 0. If the number of observations is small, the histogram may not be an effective visualization.</p>
-<div id="878fde8b" class="cell" data-execution_count="7">
+<div id="40949618" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="co"># Histogram of residuals</span></span>
@@ -759,7 +760,7 @@ Alan R. Vazquez
 <h2>QQ plot in python</h2>
 <p><br><br><br></p>
 <p>To construct a QQ plot, we use the function <code>qqplot()</code> <strong>statsmodels</strong> library.</p>
-<div id="6b338691" class="cell" data-execution_count="8">
+<div id="c0570402" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="co"># QQ plot to assess normality of residuals</span></span>
 <span id="cb7-2"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
 <span id="cb7-3"><a></a>sm.qqplot(residuals, fit <span class="op">=</span> <span class="va">True</span>, line <span class="op">=</span> <span class="st">'45'</span>)</span>
@@ -770,7 +771,7 @@ Alan R. Vazquez
 <section id="section-6" class="slide level2">
 <h2></h2>
 <p>Substantial departures from a straight line indicate that the distribution is not normal.</p>
-<div id="b358f534" class="cell" data-execution_count="9">
+<div id="73dc69bd" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <pre><code>&lt;Figure size 672x384 with 0 Axes&gt;</code></pre>
 </div>
@@ -786,7 +787,7 @@ Alan R. Vazquez
 <section id="section-7" class="slide level2">
 <h2></h2>
 <p>This plot suggests that the residuals are consistent with a Normal curve.</p>
-<div id="72a2419d" class="cell" data-execution_count="10">
+<div id="8370f4d9" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <pre><code>&lt;Figure size 672x384 with 0 Axes&gt;</code></pre>
 </div>
@@ -802,9 +803,9 @@ Alan R. Vazquez
 <section id="comments" class="slide level2">
 <h2>Comments</h2>
 <p>These data are truly Normally distributed. But note that we still see deviations. These are entirely due to chance.</p>
-<p>When <em>n</em> is relatively small, you tend to see deviations, particularly in the tails.</p>
 
-<img data-src="images/clipboard-191119898.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<img data-src="images/clipboard-191119898.png" class="quarto-figure quarto-figure-center r-stretch"><p>When <span class="math inline">\(n\)</span> is relatively small, you tend to see deviations, particularly in the tails.</p>
+</section>
 <section id="section-8" class="slide level2">
 <h2></h2>
 <p><strong>Normal probability plots for data sets following various distributions.</strong> 100 observations in each data set.</p>
@@ -812,12 +813,15 @@ Alan R. Vazquez
 <img data-src="images/clipboard-1290062732.png" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="consequences-of-faulty-assumptions" class="slide level2">
 <h2>Consequences of faulty assumptions</h2>
-<p><span style="color:red;">If the model structure is incorrect</span>, then the estimated coefficients <span class="math inline">\(\hat{\beta}_j\)</span> will be biased and the predictions <span class="math inline">\(\hat{y}_i\)</span> will be inaccurate.</p>
-<p><span style="color:red;">If the residuals do not follow a normal distribution</span>, then we have two cases:</p>
+<p><br></p>
+<p><span style="color:red;">If the model structure is incorrect</span>, the estimated coefficients <span class="math inline">\(\hat{\beta}_j\)</span> will be biased and the predictions <span class="math inline">\(\hat{y}_i\)</span> will be inaccurate.</p>
+<div class="fragment">
+<p><span style="color:red;">If the residuals do not follow a normal distribution</span>, we have two cases:</p>
 <ul>
-<li>If sample size is large, we still get accurate p-values for the t-tests for the coefficients thanks to the Central Limit Theorem.</li>
+<li>If sample size is large, we still get accurate p-values for the t-tests (discussed later) for the coefficients thanks to the <em>Central Limit Theorem</em>.</li>
 <li>However, the t-tests and all inference tools are invalidated.</li>
 </ul>
+</div>
 </section>
 <section id="section-9" class="slide level2">
 <h2></h2>
@@ -830,10 +834,11 @@ Alan R. Vazquez
 <h1>Inference about individual <span class="math inline">\(\beta\)</span>’s using t-tests</h1>
 
 </section>
-<section id="example" class="slide level2">
-<h2>Example</h2>
+<section id="example-2" class="slide level2">
+<h2>Example 2</h2>
+<p><br></p>
 <p>Let’s consider the “auto.xlsx” dataset.</p>
-<div id="d82bbe4a" class="cell" data-execution_count="11">
+<div id="42a65be2" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>auto_data <span class="op">=</span> pd.read_excel(<span class="st">'auto.xlsx'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
@@ -841,7 +846,7 @@ Alan R. Vazquez
 <p><span class="math display">\[
 Y_i = \beta_0 + \beta_1 X_{i1}+ \beta_2 X_{i2}+ \epsilon_i,
 \]</span></p>
-<p>where <span class="math inline">\(y_i\)</span> is the mpg, <span class="math inline">\(X_{i1}\)</span> is the weight, and <span class="math inline">\(X_{i2}\)</span> is the acceleration of the <span class="math inline">\(i\)</span>-th car, <span class="math inline">\(i = 1, \ldots, 392\)</span>.</p>
+<p>where <span class="math inline">\(Y_i\)</span> is the mpg, <span class="math inline">\(X_{i1}\)</span> is the weight, and <span class="math inline">\(X_{i2}\)</span> is the acceleration of the <span class="math inline">\(i\)</span>-th car, <span class="math inline">\(i = 1, \ldots, 392\)</span>.</p>
 </section>
 <section id="research-question" class="slide level2">
 <h2>Research question</h2>
@@ -852,6 +857,7 @@ Y_i = \beta_0 + \beta_1 X_{i1}+ \beta_2 X_{i2}+ \epsilon_i,
 </section>
 <section id="the-two-cultures-of-statistical-models" class="slide level2">
 <h2>The two cultures of statistical models</h2>
+<p><br></p>
 <div>
 <ul>
 <li class="fragment"><p><span style="color:darkblue;"><strong>Inference</strong></span>: develop a model that fits the data well. Then make inferences about the data-generating process based on the structure of such model.</p></li>
@@ -870,8 +876,11 @@ Y_i = \beta_0 + \beta_1 X_{i1}+ \beta_2 X_{i2}+ \epsilon_i,
 </section>
 <section id="hypothesis-test" class="slide level2">
 <h2>Hypothesis test</h2>
+<p><br></p>
 <p>A statistical hypothesis is a statement about the coefficients of a model.</p>
+<div class="r-stack">
 <p><span class="math inline">\(H_0: \beta_j = 0\)</span> v.s. <span class="math inline">\(H_1: \beta_j \neq 0\)</span> (Two-tailed Test)</p>
+</div>
 <p>Testing this hypothesis consists of the following steps:</p>
 <ol type="1">
 <li>Take a random sample.</li>
@@ -883,7 +892,7 @@ Y_i = \beta_0 + \beta_1 X_{i1}+ \beta_2 X_{i2}+ \epsilon_i,
 <h2>Step 1. Random sample</h2>
 <p><br><br></p>
 <p>The random sample is our training data:</p>
-<div id="385cba6d" class="cell" data-execution_count="12">
+<div id="f4f2e516" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>pred_auto <span class="op">=</span> auto_data[[<span class="st">'weight'</span>, <span class="st">'acceleration'</span>]]</span>
 <span id="cb11-2"><a></a>auto_X_train <span class="op">=</span> sm.add_constant(pred_auto)</span>
 <span id="cb11-3"><a></a></span>
@@ -892,6 +901,7 @@ Y_i = \beta_0 + \beta_1 X_{i1}+ \beta_2 X_{i2}+ \epsilon_i,
 </section>
 <section id="step-2.-test-statistic" class="slide level2">
 <h2>Step 2. Test statistic</h2>
+<p><br></p>
 <p>The test statistic is</p>
 <p><span class="math display">\[T = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }\]</span></p>
 <ul>
@@ -901,37 +911,41 @@ Y_i = \beta_0 + \beta_1 X_{i1}+ \beta_2 X_{i2}+ \epsilon_i,
 </section>
 <section id="section-11" class="slide level2">
 <h2></h2>
+<p><br></p>
 <p>Recall that we obtain the least squares estimates (<span class="math inline">\(\hat{\beta}_{j}\)</span>) in python using:</p>
-<div id="359bc8ec" class="cell" data-execution_count="13">
+<div id="1ed74c1c" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="co"># Fitting the simple linear regression model.</span></span>
 <span id="cb12-2"><a></a>regr <span class="op">=</span> sm.OLS(auto_Y_train, auto_X_train)</span>
 <span id="cb12-3"><a></a>linear_model <span class="op">=</span> regr.fit()</span>
 <span id="cb12-4"><a></a>linear_model.params</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="275">
+<div class="cell-output cell-output-display" data-execution_count="557">
 <pre><code>const           41.095329
 weight          -0.007293
 acceleration     0.261650
 dtype: float64</code></pre>
 </div>
 </div>
-<p>Later, we will see how to obtain the <em>standard error</em> of the estimate <span class="math inline">\(\hat{\beta}_j\)</span></p>
+<p>Later, we will see how to obtain the <em>standard error</em> of the estimate <span class="math inline">\(\hat{\beta}_j\)</span>.</p>
 </section>
 <section id="section-12" class="slide level2">
 <h2></h2>
+<p><br><br></p>
 <div class="columns">
 <div class="column" style="width:30%;">
 <p><span class="math display">\[T = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }\]</span></p>
 </div><div class="column" style="width:70%;">
-<p>We like this statistic because it follows a well-known distribution.</p>
-<p>If the null hypothesis (<span class="math inline">\(H_0: \beta_j = 0\)</span>) is true, the statistic <span class="math inline">\(T\)</span> follows a <span style="color:purple;"><span class="math inline">\(t\)</span> distribution</span> with <span class="math inline">\(n-p-1\)</span> degrees of freedom</p>
-<p>(<span class="math inline">\(n\)</span> is the number of observations and <span class="math inline">\(p\)</span> the number of predictors).</p>
+<ul>
+<li><p>We like this statistic because it follows a well-known distribution.</p></li>
+<li><p>If the null hypothesis (<span class="math inline">\(H_0: \beta_j = 0\)</span>) is true, the statistic <span class="math inline">\(T\)</span> follows a <span style="color:purple;"><span class="math inline">\(t\)</span> distribution</span> with <span class="math inline">\(n-p-1\)</span> degrees of freedom</p></li>
+<li><p><span class="math inline">\(n\)</span> is the number of observations and <span class="math inline">\(p\)</span> the number of predictors.</p></li>
+</ul>
 </div></div>
 </section>
 <section id="t-distribution" class="slide level2">
 <h2>t distribution</h2>
 <p><br></p>
 <p>This distribution is also known as the student’s t-distribution.</p>
-<p>It was invented by William Gosset when he worked at the Guinness Brewery in Ireland.</p>
+<p>It was invented by <a href="https://es.wikipedia.org/wiki/William_Sealy_Gosset">William Gosset</a> when he worked at the Guinness Brewery in Ireland.</p>
 <p>It has one parameter <span class="math inline">\(\nu\)</span> which generally equals a number of degrees of freedom.</p>
 <p>The parameter <span class="math inline">\(\nu\)</span> controls the shape of the distribution.</p>
 </section>
@@ -963,15 +977,15 @@ dtype: float64</code></pre>
 <p><br></p>
 <p>For a significance level of <span class="math inline">\(\alpha = 0.05\)</span></p>
 <ul>
-<li><p>If the p-value is smaller than <span class="math inline">\(\alpha\)</span>, we reject <span class="math inline">\(H_0: \beta_j = 0\)</span>.</p></li>
-<li><p>If the p-value is larger than <span class="math inline">\(\alpha\)</span>, we fail to reject <span class="math inline">\(H_0\)</span>.</p></li>
+<li><p>If the p-value is smaller than <span class="math inline">\(\alpha\)</span>, we reject <span class="math inline">\(H_0: \beta_j = 0\)</span> in favor of <span class="math inline">\(H_1: \beta_j \neq 0\)</span>.</p></li>
+<li><p>If the p-value is larger than <span class="math inline">\(\alpha\)</span>, we do not reject <span class="math inline">\(H_0: \beta_j = 0\)</span>.</p></li>
 </ul>
 <p>No scientific basis for this advice. In practice, report the p-value and explore the data using descriptive statistics.</p>
 </section>
 <section id="t-tests-in-python" class="slide level2">
 <h2>t-tests in python</h2>
 <p>We obtain the t-tests of the coefficients using the function <code>summary()</code> together with the <code>lnear_regression</code> object.</p>
-<div id="76572d14" class="cell" data-execution_count="14">
+<div id="51de37fe" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>model_summary <span class="op">=</span> linear_model.summary()</span>
 <span id="cb14-2"><a></a><span class="bu">print</span>(model_summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -981,7 +995,7 @@ Dep. Variable:                    mpg   R-squared:                       0.700
 Model:                            OLS   Adj. R-squared:                  0.698
 Method:                 Least Squares   F-statistic:                     453.2
 Date:                Sun, 10 Nov 2024   Prob (F-statistic):          2.43e-102
-Time:                        14:34:49   Log-Likelihood:                -1125.4
+Time:                        15:38:36   Log-Likelihood:                -1125.4
 No. Observations:                 392   AIC:                             2257.
 Df Residuals:                     389   BIC:                             2269.
 Df Model:                           2                                         
@@ -1013,6 +1027,7 @@ strong multicollinearity or other numerical problems.</code></pre>
 </section>
 <section id="total-sum-of-squares" class="slide level2">
 <h2>Total Sum of Squares</h2>
+<p><br></p>
 <p>Let’s consider the total sum of squares</p>
 <p><span class="math display">\[SS_{Total} = \sum_{i=1}^{n} (y_i - \bar{y})^2 \text{ where } \bar{y} = \sum_{i=1}^{n} \frac{y_i}{n}.\]</span></p>
 <p>This quantity measures the total variation of the response.</p>
@@ -1033,23 +1048,27 @@ strong multicollinearity or other numerical problems.</code></pre>
 <img data-src="images/example_R-01.png" class="r-stretch"></section>
 <section id="section-15" class="slide level2">
 <h2></h2>
+<p><br></p>
 <p><span class="math display">\[R^2 = 1 - \frac{RSS}{SS_{total}}\]</span></p>
+<p>What would you conclude about RSS if <span class="math inline">\(R^2 = 1\)</span>?</p>
+<div>
 <ul>
-<li><p>What would you conclude about RSS if <span class="math inline">\(R^2 = 1\)</span>?</p></li>
-<li><p>In this case, <span class="math inline">\(RSS = 0\)</span> and the model fits the data perfectly.</p></li>
-<li><p>If <span class="math inline">\(R^2\)</span> is small, then large RSS: lots of scatter and the model’s fit is not good.</p></li>
-<li><p>It turns out that <span class="math inline">\(R^2\)</span> is the square of the correlation between the observed response and predictor values.</p></li>
+<li class="fragment"><p>In this case, <span class="math inline">\(RSS = 0\)</span> and the model fits the data perfectly.</p></li>
+<li class="fragment"><p>If <span class="math inline">\(R^2\)</span> is small, then large RSS: lots of scatter and the model’s fit is not good.</p></li>
+<li class="fragment"><p>It turns out that <span class="math inline">\(R^2\)</span> is the square of the correlation between the observed response and predicted values.</p></li>
 </ul>
+</div>
 </section>
 <section id="section-16" class="slide level2">
 <h2></h2>
+<p><br></p>
 
 <img data-src="images/Figures.004.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="remarks-on-r2" class="slide level2">
 <h2>Remarks on <span class="math inline">\(R^2\)</span></h2>
 <p><br></p>
 <ul>
-<li><p>The statistic <span class="math inline">\(R^2\)</span> should be used with caution because it is always possible to make it unity by simply adding more and more predictors (relevant for multiple linear regression).</p></li>
+<li><p>The statistic <span class="math inline">\(R^2\)</span> should be used with caution because it is always possible to make it unity by simply adding more and more predictors.</p></li>
 <li><p>If <span class="math inline">\(R^2\)</span> is large, it does not necessarily imply that the full model will provide accurate predictions of future observations.</p></li>
 </ul>
 </section>
@@ -1065,36 +1084,41 @@ strong multicollinearity or other numerical problems.</code></pre>
 </section>
 <section id="section-17" class="slide level2">
 <h2></h2>
+<p><br></p>
 
 <img data-src="images/Figures.005.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="section-18" class="slide level2">
 <h2></h2>
 <p>Why is adjusted <span class="math inline">\(R^2\)</span> more useful than <span class="math inline">\(R^2\)</span> for adding new variables?</p>
 <p><span class="math display">\[R_{adj}^2=1-\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\]</span></p>
+<div>
 <ul>
-<li>As we explain more variability, the numerator gets smaller and adjusted <span class="math inline">\(R^2\)</span> gets closer to 1. So, we want to make the numerator small.</li>
-<li>If we add a “good” variable to the model, RSS will go down. However, <span class="math inline">\(n - k - 1\)</span> will decrease a little bit (because k is now bigger by 1.) So the numerator does not go down by as much as it does in ‘plain’ <span class="math inline">\(R^2\)</span>.</li>
+<li class="fragment">As we explain more variability, the numerator gets smaller and adjusted <span class="math inline">\(R^2\)</span> gets closer to 1. So, we want to make the numerator small.</li>
+<li class="fragment">If we add a “good” variable to the model, RSS will go down. However, <span class="math inline">\(n - k - 1\)</span> will decrease a little bit (because <span class="math inline">\(k\)</span> is now bigger by 1.) So the numerator does not go down by as much as it does in ‘plain’ <span class="math inline">\(R^2\)</span>.</li>
 </ul>
+</div>
 </section>
 <section id="section-19" class="slide level2">
 <h2></h2>
+<p><br></p>
 <p><span class="math display">\[R_{adj}^2=1-\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\]</span></p>
 <ul>
 <li><p>If we add a noise variable, RSS goes down a tiny bit, but because we divide by <span class="math inline">\(n - k - 1\)</span>, the numerator might actually get bigger or change very little.</p></li>
-<li><p>So adjusted <span class="math inline">\(R^2\)</span> is a better measure of whether adding a new variable is an improvement. If adjusted <span class="math inline">\(R^2\)</span> goes down or stays the same, then new variable is irrelevant. If it goes up, then it probably useful.</p></li>
+<li><p>So, adjusted <span class="math inline">\(R^2\)</span> is a better measure of whether adding a new variable is an improvement. If adjusted <span class="math inline">\(R^2\)</span> goes down or stays the same, then new variable is irrelevant. If it goes up, then it probably useful.</p></li>
 </ul>
 </section>
 <section id="in-python" class="slide level2">
 <h2>In python</h2>
+<p><br></p>
 <p>To show the <span class="math inline">\(R^2\)</span> value, we use the <code>rsquared</code> argument of the <code>linear_model</code> object.</p>
-<div id="ef39f37b" class="cell" data-execution_count="15">
+<div id="11e991bb" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="bu">print</span>( <span class="bu">round</span>(linear_model.rsquared, <span class="dv">3</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.7</code></pre>
 </div>
 </div>
 <p>To show the adjusted <span class="math inline">\(R^2\)</span> value, we use the <code>rsquared</code> argument of the <code>estimated_model</code> object.</p>
-<div id="79b23647" class="cell" data-execution_count="16">
+<div id="3851b336" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="bu">print</span>( <span class="bu">round</span>(linear_model.rsquared_adj, <span class="dv">3</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.698</code></pre>
@@ -1103,12 +1127,14 @@ strong multicollinearity or other numerical problems.</code></pre>
 </section>
 <section id="model-building" class="slide level2">
 <h2>Model building</h2>
+<p><br></p>
 <p>Model building refers to a set of techniques to reduce the full model to one that only includes significant predictors.</p>
 <p>Note that it is more a deconstruction than building an actual model. This is because the full model must be a valid one to begin with. Specifically, the full model must provide residuals that satisfy all the assumptions (1)-(4).</p>
 <p>After we have obtained a satisfactory full model, we can start the model building process.</p>
 </section>
 <section id="some-model-building-techniques" class="slide level2">
 <h2>Some model building techniques</h2>
+<p><br></p>
 <p>Adjusted <span class="math inline">\(R^2\)</span> statistic. We add one variable at a time and see the change in adjusted <span class="math inline">\(R^2\)</span> statistic. If the value decreases, then we stop and evaluate the resulting model.</p>
 <p>T-tests on the individual coefficients. If <span class="math inline">\(H_0\)</span> is not rejected, this indicates that the predictor <span class="math inline">\(X_j\)</span> can be deleted from the model. We can then delete the predictor and refit the model. We can repeat this process several times until we reach a model in which all variables are significant.</p>
 </section></section>

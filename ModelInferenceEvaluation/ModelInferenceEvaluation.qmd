@@ -250,6 +250,7 @@ The phenomenon of non-constant variance is called [**heteroscedasticity**]{style
 # Residuals vs Time (Case) Plot
 plt.figure(figsize=(7, 5))
 sns.scatterplot(x = production_data['Case'], y = residuals)
+plt.axhline(y=0, color='red', linestyle='--')
 plt.title('Residuals vs Time (Case)')
 plt.xlabel('Case')
 plt.xticks(production_data['Case'])
@@ -386,9 +387,9 @@ plt.show()
 
 These data are truly Normally distributed. But note that we still see deviations. These are entirely due to chance.
 
-When *n* is relatively small, you tend to see deviations, particularly in the tails.
-
 ![](images/clipboard-191119898.png){fig-align="center"}
+
+When $n$ is relatively small, you tend to see deviations, particularly in the tails.
 
 ## 
 
@@ -398,11 +399,15 @@ When *n* is relatively small, you tend to see deviations, particularly in the ta
 
 ## Consequences of faulty assumptions
 
-[If the model structure is incorrect]{style="color:red;"}, then the estimated coefficients $\hat{\beta}_j$ will be biased and the predictions $\hat{y}_i$ will be inaccurate.
+</br>
 
-[If the residuals do not follow a normal distribution]{style="color:red;"}, then we have two cases:
+[If the model structure is incorrect]{style="color:red;"}, the estimated coefficients $\hat{\beta}_j$ will be biased and the predictions $\hat{y}_i$ will be inaccurate.
 
--   If sample size is large, we still get accurate p-values for the t-tests for the coefficients thanks to the Central Limit Theorem.
+. . .
+
+[If the residuals do not follow a normal distribution]{style="color:red;"}, we have two cases:
+
+-   If sample size is large, we still get accurate p-values for the t-tests (discussed later) for the coefficients thanks to the *Central Limit Theorem*.
 -   However, the t-tests and all inference tools are invalidated.
 
 ## 
@@ -415,7 +420,9 @@ When *n* is relatively small, you tend to see deviations, particularly in the ta
 
 # Inference about individual $\beta$’s using t-tests
 
-## Example
+## Example 2
+
+</br>
 
 Let's consider the "auto.xlsx" dataset.
 
@@ -432,7 +439,7 @@ $$
 Y_i = \beta_0 + \beta_1 X_{i1}+ \beta_2 X_{i2}+ \epsilon_i,
 $$
 
-where $y_i$ is the mpg, $X_{i1}$ is the weight, and $X_{i2}$ is the acceleration of the $i$-th car, $i = 1, \ldots, 392$.
+where $Y_i$ is the mpg, $X_{i1}$ is the weight, and $X_{i2}$ is the acceleration of the $i$-th car, $i = 1, \ldots, 392$.
 
 ## Research question
 
@@ -441,6 +448,8 @@ where $y_i$ is the mpg, $X_{i1}$ is the weight, and $X_{i2}$ is the acceleration
 > We want to know if the weight and acceleration have a significant association with the mpg of a car.
 
 ## The two cultures of statistical models
+
+</br>
 
 ::: incremental
 -   [**Inference**]{style="color:darkblue;"}: develop a model that fits the data well. Then make inferences about the data-generating process based on the structure of such model.
@@ -462,9 +471,13 @@ Therefore, assessing the amount of the uncertainty in these estimators is import
 
 ## Hypothesis test
 
+</br>
+
 A statistical hypothesis is a statement about the coefficients of a model.
 
+:::{.r-stack}
 $H_0: \beta_j = 0$ v.s. $H_1: \beta_j \neq 0$ (Two-tailed Test)
+:::
 
 Testing this hypothesis consists of the following steps:
 
@@ -490,6 +503,8 @@ auto_Y_train = auto_data['mpg']
 
 ## Step 2. Test statistic
 
+</br>
+
 The test statistic is
 
 $$T = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }$$
@@ -498,6 +513,8 @@ $$T = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }$$
 -   $\hat{v}_{jj}$ is the *standard error* of the estimate $\hat{\beta}_j$ calculated using python.
 
 ## 
+
+</br>
 
 Recall that we obtain the least squares estimates ($\hat{\beta}_{j}$) in python using:
 
@@ -511,9 +528,11 @@ linear_model = regr.fit()
 linear_model.params
 ```
 
-Later, we will see how to obtain the *standard error* of the estimate $\hat{\beta}_j$
+Later, we will see how to obtain the *standard error* of the estimate $\hat{\beta}_j$.
 
 ## 
+
+</br></br>
 
 ::::: columns
 ::: {.column width="30%"}
@@ -521,11 +540,11 @@ $$T = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }$$
 :::
 
 ::: {.column width="70%"}
-We like this statistic because it follows a well-known distribution.
+- We like this statistic because it follows a well-known distribution.
 
-If the null hypothesis ($H_0: \beta_j = 0$) is true, the statistic $T$ follows a [$t$ distribution]{style="color:purple;"} with $n-p-1$ degrees of freedom
+- If the null hypothesis ($H_0: \beta_j = 0$) is true, the statistic $T$ follows a [$t$ distribution]{style="color:purple;"} with $n-p-1$ degrees of freedom
 
-($n$ is the number of observations and $p$ the number of predictors).
+- $n$ is the number of observations and $p$ the number of predictors.
 :::
 :::::
 
@@ -535,7 +554,7 @@ If the null hypothesis ($H_0: \beta_j = 0$) is true, the statistic $T$ follows a
 
 This distribution is also known as the student’s t-distribution.
 
-It was invented by William Gosset when he worked at the Guinness Brewery in Ireland.
+It was invented by [William Gosset](https://es.wikipedia.org/wiki/William_Sealy_Gosset) when he worked at the Guinness Brewery in Ireland.
 
 It has one parameter $\nu$ which generally equals a number of degrees of freedom.
 
@@ -577,9 +596,9 @@ If the p-value is sufficiently small, we may be willing to abandon our assumptio
 
 For a significance level of $\alpha = 0.05$
 
--   If the p-value is smaller than $\alpha$, we reject $H_0: \beta_j = 0$.
+-   If the p-value is smaller than $\alpha$, we reject $H_0: \beta_j = 0$ in favor of $H_1: \beta_j \neq 0$.
 
--   If the p-value is larger than $\alpha$, we fail to reject $H_0$.
+-   If the p-value is larger than $\alpha$, we do not reject $H_0: \beta_j = 0$.
 
 No scientific basis for this advice. In practice, report the p-value and explore the data using descriptive statistics.
 
@@ -597,6 +616,8 @@ print(model_summary)
 # Multiple and adjusted $R^2$ statistics
 
 ## Total Sum of Squares
+
+</br>
 
 Let’s consider the total sum of squares
 
@@ -626,17 +647,23 @@ $R^2$ measures the “proportion of variation in the response explained by the f
 
 ## 
 
+</br>
+
 $$R^2 = 1 - \frac{RSS}{SS_{total}}$$
 
--   What would you conclude about RSS if $R^2 = 1$?
+What would you conclude about RSS if $R^2 = 1$?
 
+::: incremental
 -   In this case, $RSS = 0$ and the model fits the data perfectly.
 
 -   If $R^2$ is small, then large RSS: lots of scatter and the model’s fit is not good.
 
--   It turns out that $R^2$ is the square of the correlation between the observed response and predictor values.
+-   It turns out that $R^2$ is the square of the correlation between the observed response and predicted values.
+:::
 
 ## 
+
+</br>
 
 ![](images/Figures.004.jpeg){fig-align="center"}
 
@@ -644,7 +671,7 @@ $$R^2 = 1 - \frac{RSS}{SS_{total}}$$
 
 </br>
 
--   The statistic $R^2$ should be used with caution because it is always possible to make it unity by simply adding more and more predictors (relevant for multiple linear regression).
+-   The statistic $R^2$ should be used with caution because it is always possible to make it unity by simply adding more and more predictors.
 
 -   If $R^2$ is large, it does not necessarily imply that the full model will provide accurate predictions of future observations.
 
@@ -661,6 +688,8 @@ where $k$ is the number of variables in the model. For the full model, $k = p$.
 
 ## 
 
+</br>
+
 ![](images/Figures.005.jpeg){fig-align="center"}
 
 ## 
@@ -669,18 +698,24 @@ Why is adjusted $R^2$ more useful than $R^2$ for adding new variables?
 
 $$R_{adj}^2=1-\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}$$
 
+::: incremental
 -   As we explain more variability, the numerator gets smaller and adjusted $R^2$ gets closer to 1. So, we want to make the numerator small.
--   If we add a “good” variable to the model, RSS will go down. However, $n - k - 1$ will decrease a little bit (because k is now bigger by 1.) So the numerator does not go down by as much as it does in ‘plain’ $R^2$.
+-   If we add a “good” variable to the model, RSS will go down. However, $n - k - 1$ will decrease a little bit (because $k$ is now bigger by 1.) So the numerator does not go down by as much as it does in ‘plain’ $R^2$.
+:::
 
 ## 
+
+</br>
 
 $$R_{adj}^2=1-\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}$$
 
 -   If we add a noise variable, RSS goes down a tiny bit, but because we divide by $n - k - 1$, the numerator might actually get bigger or change very little.
 
--   So adjusted $R^2$ is a better measure of whether adding a new variable is an improvement. If adjusted $R^2$ goes down or stays the same, then new variable is irrelevant. If it goes up, then it probably useful.
+-   So, adjusted $R^2$ is a better measure of whether adding a new variable is an improvement. If adjusted $R^2$ goes down or stays the same, then new variable is irrelevant. If it goes up, then it probably useful.
 
 ## In python
+
+</br>
 
 To show the $R^2$ value, we use the `rsquared` argument of the `linear_model` object.
 
@@ -702,6 +737,8 @@ print( round(linear_model.rsquared_adj, 3) )
 
 ## Model building
 
+</br>
+
 Model building refers to a set of techniques to reduce the full model to one that only includes significant predictors.
 
 Note that it is more a deconstruction than building an actual model. This is because the full model must be a valid one to begin with. Specifically, the full model must provide residuals that satisfy all the assumptions (1)-(4).
@@ -709,6 +746,8 @@ Note that it is more a deconstruction than building an actual model. This is bec
 After we have obtained a satisfactory full model, we can start the model building process.
 
 ## Some model building techniques
+
+</br>
 
 Adjusted $R^2$ statistic. We add one variable at a time and see the change in adjusted $R^2$ statistic. If the value decreases, then we stop and evaluate the resulting model.
 
