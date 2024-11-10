@@ -26,6 +26,8 @@ jupyter: python3
 
 ## Load the libraries
 
+</br></br>
+
 Let's import **statsmodels** into python together with the other relevant libraries.
 
 ```{python}
@@ -43,6 +45,8 @@ import statsmodels.api as sm
 
 ## Multiple linear regression model
 
+</br>
+
 $$Y_i = \beta_0 + \beta_1 X_{i1} + \cdots + \beta_p X_{ip} + \epsilon_i$$
 
 -   $p$ is the number of predictors.
@@ -53,14 +57,20 @@ $$Y_i = \beta_0 + \beta_1 X_{i1} + \cdots + \beta_p X_{ip} + \epsilon_i$$
 
 ## Assumptions
 
+</br>
+
 The error $\epsilon_i$’s must then satisfy the following assumptions:
 
+::: incremental
 1.  On average, they are close to zero for any value of the predictors $X_j$.
 2.  For any value of the predictor $X_j$, the dispersion or variance is constant and equal to $\sigma^2$.
 3.  The $\epsilon_i$’s are all independent from each other.
 4.  [The $\epsilon_i$’s follow normal distribution with mean 0 and variance $\sigma^2$.]{style="color:gray;"}
+:::
 
 ## Residuals
+
+</br>
 
 The errors $\epsilon_1, \ldots, \epsilon_n$ are not observed. To overcome this issue, we use the residuals of our model.
 
@@ -74,6 +84,8 @@ The residuals $\hat{\epsilon}_i$ are the estimates of the random errors $\epsilo
 
 ## 
 
+</br>
+
 If the model structure is correctly specified and assuming that the least-squares estimates $\hat{\beta}_j$’s are close to the true $\beta_j$’s, respectively, we have that
 
 $$\hat{\epsilon}_i = y_i - \hat{y}_i = y_i - \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \cdots + \hat{\beta}_p X_{ip} \approx \epsilon_i$$
@@ -83,6 +95,8 @@ So, the residuals $\hat{\epsilon}_i$ should resemble the random errors $\epsilon
 To evaluate the assumption of a (simple and) multiple linear regression model, we use a [**Residual analysis**]{style="color:green;"}.
 
 ## Residual Analysis
+
+</br>
 
 To check the validity of these assumptions, we will follow a graphical approach. Specifically, we will construct three informative plots of the residuals.
 
@@ -94,7 +108,9 @@ To check the validity of these assumptions, we will follow a graphical approach.
 3.  **Normal Quantile-Quantile** Plot. To assess if the residuals follow a normal distribution
 :::
 
-## Example
+## Example 1
+
+</br>
 
 -   This example is inspired by Foster, Stine and Waterman (1997, pages 191–199).
 
@@ -114,7 +130,9 @@ production_data = pd.read_excel('production.xlsx')
 production_data.head()
 ```
 
-## Intuition behind the plot
+## Intuition behind ... 
+
+the Residuals versus Fitted Values plot.
 
 ```{python}
 #| echo: false
@@ -141,7 +159,7 @@ plt.ylabel("Run time", fontsize = 14)
 plt.show()
 ```
 
-## Calculation of predicted values and residuals
+## Calculation of fitted values and residuals
 
 Recall that we can calculate the predicted values and residuals using commands from **statsmodels**.
 
@@ -153,7 +171,6 @@ Recall that we can calculate the predicted values and residuals using commands f
 prod_Y_train = production_data['RunTime']
 prod_X_pred = production_data['RunSize']
 prod_X_train = sm.add_constant(prod_X_pred)
-
 
 # Fitting the simple linear regression model.
 regr = sm.OLS(prod_Y_train, prod_X_train)
@@ -178,7 +195,7 @@ residuals = linear_model.resid
 
 # Residual vs Fitted Values Plot
 plt.figure(figsize=(5, 5))
-sns.scatterplot(x = prod_Y_train, y = residuals)
+sns.scatterplot(x = prod_Y_pred, y = residuals)
 plt.axhline(y=0, color='red', linestyle='--')
 plt.title('Residuals vs Fitted Values')
 plt.xlabel('Predicted Values')
@@ -188,6 +205,9 @@ plt.show()
 :::
 
 ::: {.column width="40%"}
+
+</br>
+
 -   If there is a trend, the model is misspecified.
 -   A "funnel" shape indicates that the assumption of constant variance is not met.
 :::
@@ -209,6 +229,7 @@ The phenomenon of non-constant variance is called [**heteroscedasticity**]{style
 
 ## Residuals vs Time Plot
 
+::: incremental
 -   By “time,” we mean that time the observation was taken or the order in which it was taken. The plot should not show any structure or pattern in the residuals.
 
 -   Dependence on time is a common source of lack of independence, but other plots might also detect lack of independence.
@@ -216,6 +237,7 @@ The phenomenon of non-constant variance is called [**heteroscedasticity**]{style
 -   Ideally, we plot the residuals versus each variable of interest we could think of, either included or excluded in the model.
 
 -   Assessing the assumption of independence is hard in practice.
+:::
 
 ## 
 
@@ -230,6 +252,7 @@ plt.figure(figsize=(7, 5))
 sns.scatterplot(x = production_data['Case'], y = residuals)
 plt.title('Residuals vs Time (Case)')
 plt.xlabel('Case')
+plt.xticks(production_data['Case'])
 plt.ylabel('Residuals')
 plt.show()
 ```
@@ -238,7 +261,10 @@ plt.show()
 
 ::::: columns
 ::: {.column width="30%"}
-Example of plot that do not support the independence assumption.
+
+</br></br>
+
+Examples of plots that do and do not support the independence assumption.
 :::
 
 ::: {.column width="70%"}
@@ -247,6 +273,8 @@ Example of plot that do not support the independence assumption.
 :::::
 
 ## Checking for normality
+
+</br>
 
 This assumption is generally checked by looking at the distribution of the residuals.
 
@@ -276,29 +304,39 @@ plt.show()
 
 ## Normal Quantile-Quantile (QQ) Plot
 
+</br>
+
 A normal QQ plot is helpful for deciding whether a sample was drawn from a distribution that is approximately normal.
 
+. . .
+
 First, let $\hat{\epsilon}_{[1]}, \hat{\epsilon}_{[2]}, \ldots, \hat{\epsilon}_{[n]}$ be the residuals ranked in an increasing order, where $\hat{\epsilon}_{[1]}$ is the minimum and $\hat{\epsilon}_{[n]}$ is the maximum. These points define the [**sample**]{style="color:lightblue;"} percentiles (or quantiles) of the distribution of the residuals.
+
+. . .
 
 Next, calculate the [**theoretical**]{style="color:pink;"} percentiles of a (standard) Normal distribution calculated using Python.
 
 ## 
 
-The normal QQ plot displays the (sample) percentiles of the residuals versus the quantiles of a normal distribution.
+</br></br>
 
-If these quantiles agree with each other, then they would approximate a straight line.
+The normal QQ plot displays the (sample) percentiles of the residuals versus the percentiles of a normal distribution.
+
+If these percentiles agree with each other, then they would approximate a straight line.
 
 The straight line is usually determined visually, with emphasis on the central values rather than the extremes.
 
-For a nice explanation, see this YouTube video
+For a nice explanation, see this [YouTube video](https://www.youtube.com/watch?v=okjYjClSjOg&ab_channel=StatQuestwithJoshStarmer).
 
 ## QQ plot in python
+
+</br></br></br>
 
 To construct a QQ plot, we use the function `qqplot()` **statsmodels** library.
 
 ```{python}
 #| echo: true
-#| output: true
+#| output: false
 #| code-fold: false
 #| fig-align: center
 
@@ -311,8 +349,8 @@ plt.show()
 
 ## 
 
-::::: columns
-::: {.column width="40%"}
+Substantial departures from a straight line indicate that the distribution is not normal.
+
 ```{python}
 #| echo: false
 #| output: true
@@ -320,19 +358,29 @@ plt.show()
 #| fig-align: center
 
 # QQ plot to assess normality of residuals
-plt.figure(figsize=(4, 4))
+plt.figure(figsize=(7, 4))
 sm.qqplot(residuals, fit = True, line = '45')
 plt.title('QQ Plot of Residuals')
 plt.show()
 ```
-:::
 
-::: {.column width="60%"}
--   Substantial departures from a straight line indicate that the distribution is not normal.
+## 
 
--   This plot suggests that the residuals are consistent with a Normal curve.
-:::
-:::::
+This plot suggests that the residuals are consistent with a Normal curve.
+
+```{python}
+#| echo: false
+#| output: true
+#| code-fold: false
+#| fig-align: center
+
+# QQ plot to assess normality of residuals
+plt.figure(figsize=(7, 4))
+sm.qqplot(residuals, fit = True, line = '45')
+plt.title('QQ Plot of Residuals')
+plt.show()
+```
+
 
 ## Comments
 

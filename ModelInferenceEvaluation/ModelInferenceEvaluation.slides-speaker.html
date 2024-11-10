@@ -422,8 +422,9 @@ Alan R. Vazquez
 </section>
 <section id="load-the-libraries" class="slide level2">
 <h2>Load the libraries</h2>
+<p><br><br></p>
 <p>Let’s import <strong>statsmodels</strong> into python together with the other relevant libraries.</p>
-<div id="5b912320" class="cell" data-execution_count="1">
+<div id="4aef09b5" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Importing necessary libraries</span></span>
 <span id="cb1-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -438,6 +439,7 @@ Alan R. Vazquez
 </section>
 <section id="multiple-linear-regression-model" class="slide level2">
 <h2>Multiple linear regression model</h2>
+<p><br></p>
 <p><span class="math display">\[Y_i = \beta_0 + \beta_1 X_{i1} + \cdots + \beta_p X_{ip} + \epsilon_i\]</span></p>
 <ul>
 <li><span class="math inline">\(p\)</span> is the number of predictors.</li>
@@ -449,16 +451,20 @@ Alan R. Vazquez
 </section>
 <section id="assumptions" class="slide level2">
 <h2>Assumptions</h2>
+<p><br></p>
 <p>The error <span class="math inline">\(\epsilon_i\)</span>’s must then satisfy the following assumptions:</p>
+<div>
 <ol type="1">
-<li>On average, they are close to zero for any value of the predictors <span class="math inline">\(X_j\)</span>.</li>
-<li>For any value of the predictor <span class="math inline">\(X_j\)</span>, the dispersion or variance is constant and equal to <span class="math inline">\(\sigma^2\)</span>.</li>
-<li>The <span class="math inline">\(\epsilon_i\)</span>’s are all independent from each other.</li>
-<li><span style="color:gray;">The <span class="math inline">\(\epsilon_i\)</span>’s follow normal distribution with mean 0 and variance <span class="math inline">\(\sigma^2\)</span>.</span></li>
+<li class="fragment">On average, they are close to zero for any value of the predictors <span class="math inline">\(X_j\)</span>.</li>
+<li class="fragment">For any value of the predictor <span class="math inline">\(X_j\)</span>, the dispersion or variance is constant and equal to <span class="math inline">\(\sigma^2\)</span>.</li>
+<li class="fragment">The <span class="math inline">\(\epsilon_i\)</span>’s are all independent from each other.</li>
+<li class="fragment"><span style="color:gray;">The <span class="math inline">\(\epsilon_i\)</span>’s follow normal distribution with mean 0 and variance <span class="math inline">\(\sigma^2\)</span>.</span></li>
 </ol>
+</div>
 </section>
 <section id="residuals" class="slide level2">
 <h2>Residuals</h2>
+<p><br></p>
 <p>The errors <span class="math inline">\(\epsilon_1, \ldots, \epsilon_n\)</span> are not observed. To overcome this issue, we use the residuals of our model.</p>
 <p>Suppose that the multiple linear regression model is correct and consider the fitted responses <span class="math inline">\(\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \cdots + \hat{\beta}_p X_{ip}\)</span>, where <span class="math inline">\(\hat{\beta}_{j}\)</span> is the least squares estimator for the j-th predictor.</p>
 <p>We define the residual <span style="color:purple;"><strong>residuals</strong></span> <span class="math inline">\(\hat{\epsilon}_i = y_i - \hat{y}_i\)</span>, <span class="math inline">\(i = 1, \ldots, n.\)</span></p>
@@ -478,6 +484,7 @@ Alan R. Vazquez
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
+<p><br></p>
 <p>If the model structure is correctly specified and assuming that the least-squares estimates <span class="math inline">\(\hat{\beta}_j\)</span>’s are close to the true <span class="math inline">\(\beta_j\)</span>’s, respectively, we have that</p>
 <p><span class="math display">\[\hat{\epsilon}_i = y_i - \hat{y}_i = y_i - \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \cdots + \hat{\beta}_p X_{ip} \approx \epsilon_i\]</span></p>
 <p>So, the residuals <span class="math inline">\(\hat{\epsilon}_i\)</span> should resemble the random errors <span class="math inline">\(\epsilon\)</span>.</p>
@@ -485,6 +492,7 @@ Alan R. Vazquez
 </section>
 <section id="residual-analysis-1" class="slide level2">
 <h2>Residual Analysis</h2>
+<p><br></p>
 <p>To check the validity of these assumptions, we will follow a graphical approach. Specifically, we will construct three informative plots of the residuals.</p>
 <div>
 <ol type="1">
@@ -494,8 +502,9 @@ Alan R. Vazquez
 </ol>
 </div>
 </section>
-<section id="example" class="slide level2">
-<h2>Example</h2>
+<section id="example-1" class="slide level2">
+<h2>Example 1</h2>
+<p><br></p>
 <ul>
 <li><p>This example is inspired by Foster, Stine and Waterman (1997, pages 191–199).</p></li>
 <li><p>The data are in the form of the time taken (in minutes) for a production run, <span class="math inline">\(Y\)</span>, and the number of items produced, <span class="math inline">\(X\)</span>, for 20 randomly selected orders as supervised by a manager.</p></li>
@@ -505,10 +514,10 @@ Alan R. Vazquez
 <section id="dataset" class="slide level2">
 <h2>Dataset</h2>
 <p>The dataset is in the file “production.xlsx”.</p>
-<div id="c1323a2d" class="cell" data-execution_count="2">
+<div id="25e99aae" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>production_data <span class="op">=</span> pd.read_excel(<span class="st">'production.xlsx'</span>)</span>
 <span id="cb2-2"><a></a>production_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="264">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -571,9 +580,10 @@ Alan R. Vazquez
 </div>
 </div>
 </section>
-<section id="intuition-behind-the-plot" class="slide level2">
-<h2>Intuition behind the plot</h2>
-<div id="78a8de24" class="cell" data-execution_count="3">
+<section id="intuition-behind" class="slide level2">
+<h2>Intuition behind …</h2>
+<p>the Residuals versus Fitted Values plot.</p>
+<div id="ad144862" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -583,37 +593,36 @@ Alan R. Vazquez
 </div>
 </div>
 </section>
-<section id="calculation-of-predicted-values-and-residuals" class="slide level2">
-<h2>Calculation of predicted values and residuals</h2>
+<section id="calculation-of-fitted-values-and-residuals" class="slide level2">
+<h2>Calculation of fitted values and residuals</h2>
 <p>Recall that we can calculate the predicted values and residuals using commands from <strong>statsmodels</strong>.</p>
-<div id="6d2f3866" class="cell" data-execution_count="4">
+<div id="ec9b31f7" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># Defining the predictor (X) and the response variable (Y).</span></span>
 <span id="cb3-2"><a></a>prod_Y_train <span class="op">=</span> production_data[<span class="st">'RunTime'</span>]</span>
 <span id="cb3-3"><a></a>prod_X_pred <span class="op">=</span> production_data[<span class="st">'RunSize'</span>]</span>
 <span id="cb3-4"><a></a>prod_X_train <span class="op">=</span> sm.add_constant(prod_X_pred)</span>
 <span id="cb3-5"><a></a></span>
-<span id="cb3-6"><a></a></span>
-<span id="cb3-7"><a></a><span class="co"># Fitting the simple linear regression model.</span></span>
-<span id="cb3-8"><a></a>regr <span class="op">=</span> sm.OLS(prod_Y_train, prod_X_train)</span>
-<span id="cb3-9"><a></a>linear_model <span class="op">=</span> regr.fit()</span>
-<span id="cb3-10"><a></a></span>
-<span id="cb3-11"><a></a><span class="co"># Make predictions using the the model</span></span>
-<span id="cb3-12"><a></a>prod_Y_pred <span class="op">=</span> linear_model.fittedvalues</span>
-<span id="cb3-13"><a></a></span>
-<span id="cb3-14"><a></a><span class="co"># Calculate residuals.</span></span>
-<span id="cb3-15"><a></a>residuals <span class="op">=</span> linear_model.resid</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-6"><a></a><span class="co"># Fitting the simple linear regression model.</span></span>
+<span id="cb3-7"><a></a>regr <span class="op">=</span> sm.OLS(prod_Y_train, prod_X_train)</span>
+<span id="cb3-8"><a></a>linear_model <span class="op">=</span> regr.fit()</span>
+<span id="cb3-9"><a></a></span>
+<span id="cb3-10"><a></a><span class="co"># Make predictions using the the model</span></span>
+<span id="cb3-11"><a></a>prod_Y_pred <span class="op">=</span> linear_model.fittedvalues</span>
+<span id="cb3-12"><a></a></span>
+<span id="cb3-13"><a></a><span class="co"># Calculate residuals.</span></span>
+<span id="cb3-14"><a></a>residuals <span class="op">=</span> linear_model.resid</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="residuals-vs-fitted-values" class="slide level2">
 <h2>Residuals vs Fitted Values</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<div id="70537bab" class="cell" data-execution_count="5">
+<div id="5e29da15" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co"># Residual vs Fitted Values Plot</span></span>
 <span id="cb4-2"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</span>
-<span id="cb4-3"><a></a>sns.scatterplot(x <span class="op">=</span> prod_Y_train, y <span class="op">=</span> residuals)</span>
+<span id="cb4-3"><a></a>sns.scatterplot(x <span class="op">=</span> prod_Y_pred, y <span class="op">=</span> residuals)</span>
 <span id="cb4-4"><a></a>plt.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
 <span id="cb4-5"><a></a>plt.title(<span class="st">'Residuals vs Fitted Values'</span>)</span>
 <span id="cb4-6"><a></a>plt.xlabel(<span class="st">'Predicted Values'</span>)</span>
@@ -623,12 +632,13 @@ Alan R. Vazquez
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="ModelInferenceEvaluation_files/figure-revealjs/cell-6-output-1.png" class="quarto-figure quarto-figure-center" width="447" height="449"></p>
+<p><img data-src="ModelInferenceEvaluation_files/figure-revealjs/cell-6-output-1.png" class="quarto-figure quarto-figure-center" width="448" height="449"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:40%;">
+<p><br></p>
 <ul>
 <li>If there is a trend, the model is misspecified.</li>
 <li>A “funnel” shape indicates that the assumption of constant variance is not met.</li>
@@ -648,16 +658,18 @@ Alan R. Vazquez
 </section>
 <section id="residuals-vs-time-plot" class="slide level2">
 <h2>Residuals vs Time Plot</h2>
+<div>
 <ul>
-<li><p>By “time,” we mean that time the observation was taken or the order in which it was taken. The plot should not show any structure or pattern in the residuals.</p></li>
-<li><p>Dependence on time is a common source of lack of independence, but other plots might also detect lack of independence.</p></li>
-<li><p>Ideally, we plot the residuals versus each variable of interest we could think of, either included or excluded in the model.</p></li>
-<li><p>Assessing the assumption of independence is hard in practice.</p></li>
+<li class="fragment"><p>By “time,” we mean that time the observation was taken or the order in which it was taken. The plot should not show any structure or pattern in the residuals.</p></li>
+<li class="fragment"><p>Dependence on time is a common source of lack of independence, but other plots might also detect lack of independence.</p></li>
+<li class="fragment"><p>Ideally, we plot the residuals versus each variable of interest we could think of, either included or excluded in the model.</p></li>
+<li class="fragment"><p>Assessing the assumption of independence is hard in practice.</p></li>
 </ul>
+</div>
 </section>
 <section id="section-3" class="slide level2">
 <h2></h2>
-<div id="3f581bd1" class="cell" data-execution_count="6">
+<div id="a4669d02" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="co"># Residuals vs Time (Case) Plot</span></span>
@@ -665,8 +677,9 @@ Alan R. Vazquez
 <span id="cb5-3"><a></a>sns.scatterplot(x <span class="op">=</span> production_data[<span class="st">'Case'</span>], y <span class="op">=</span> residuals)</span>
 <span id="cb5-4"><a></a>plt.title(<span class="st">'Residuals vs Time (Case)'</span>)</span>
 <span id="cb5-5"><a></a>plt.xlabel(<span class="st">'Case'</span>)</span>
-<span id="cb5-6"><a></a>plt.ylabel(<span class="st">'Residuals'</span>)</span>
-<span id="cb5-7"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-6"><a></a>plt.xticks(production_data[<span class="st">'Case'</span>])</span>
+<span id="cb5-7"><a></a>plt.ylabel(<span class="st">'Residuals'</span>)</span>
+<span id="cb5-8"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -681,7 +694,8 @@ Alan R. Vazquez
 <h2></h2>
 <div class="columns">
 <div class="column" style="width:30%;">
-<p>Example of plot that do not support the independence assumption.</p>
+<p><br><br></p>
+<p>Examples of plots that do and do not support the independence assumption.</p>
 </div><div class="column" style="width:70%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -692,6 +706,7 @@ Alan R. Vazquez
 </section>
 <section id="checking-for-normality" class="slide level2">
 <h2>Checking for normality</h2>
+<p><br></p>
 <p>This assumption is generally checked by looking at the distribution of the residuals.</p>
 <p>Two plots:</p>
 <ul>
@@ -702,7 +717,7 @@ Alan R. Vazquez
 <section id="histogram" class="slide level2">
 <h2>Histogram</h2>
 <p>Ideally, the histogram resembles a normal distribution around 0. If the number of observations is small, the histogram may not be an effective visualization.</p>
-<div id="8523d154" class="cell" data-execution_count="7">
+<div id="878fde8b" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="co"># Histogram of residuals</span></span>
@@ -723,45 +738,41 @@ Alan R. Vazquez
 </section>
 <section id="normal-quantile-quantile-qq-plot" class="slide level2">
 <h2>Normal Quantile-Quantile (QQ) Plot</h2>
+<p><br></p>
 <p>A normal QQ plot is helpful for deciding whether a sample was drawn from a distribution that is approximately normal.</p>
+<div class="fragment">
 <p>First, let <span class="math inline">\(\hat{\epsilon}_{[1]}, \hat{\epsilon}_{[2]}, \ldots, \hat{\epsilon}_{[n]}\)</span> be the residuals ranked in an increasing order, where <span class="math inline">\(\hat{\epsilon}_{[1]}\)</span> is the minimum and <span class="math inline">\(\hat{\epsilon}_{[n]}\)</span> is the maximum. These points define the <span style="color:lightblue;"><strong>sample</strong></span> percentiles (or quantiles) of the distribution of the residuals.</p>
+</div>
+<div class="fragment">
 <p>Next, calculate the <span style="color:pink;"><strong>theoretical</strong></span> percentiles of a (standard) Normal distribution calculated using Python.</p>
+</div>
 </section>
 <section id="section-5" class="slide level2">
 <h2></h2>
-<p>The normal QQ plot displays the (sample) percentiles of the residuals versus the quantiles of a normal distribution.</p>
-<p>If these quantiles agree with each other, then they would approximate a straight line.</p>
+<p><br><br></p>
+<p>The normal QQ plot displays the (sample) percentiles of the residuals versus the percentiles of a normal distribution.</p>
+<p>If these percentiles agree with each other, then they would approximate a straight line.</p>
 <p>The straight line is usually determined visually, with emphasis on the central values rather than the extremes.</p>
-<p>For a nice explanation, see this YouTube video</p>
+<p>For a nice explanation, see this <a href="https://www.youtube.com/watch?v=okjYjClSjOg&amp;ab_channel=StatQuestwithJoshStarmer">YouTube video</a>.</p>
 </section>
 <section id="qq-plot-in-python" class="slide level2">
 <h2>QQ plot in python</h2>
+<p><br><br><br></p>
 <p>To construct a QQ plot, we use the function <code>qqplot()</code> <strong>statsmodels</strong> library.</p>
-<div id="6e6b3833" class="cell" data-execution_count="8">
+<div id="6b338691" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="co"># QQ plot to assess normality of residuals</span></span>
 <span id="cb7-2"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
 <span id="cb7-3"><a></a>sm.qqplot(residuals, fit <span class="op">=</span> <span class="va">True</span>, line <span class="op">=</span> <span class="st">'45'</span>)</span>
 <span id="cb7-4"><a></a>plt.title(<span class="st">'QQ Plot of Residuals'</span>)</span>
 <span id="cb7-5"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<pre><code>&lt;Figure size 480x288 with 0 Axes&gt;</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="ModelInferenceEvaluation_files/figure-revealjs/cell-9-output-2.png" class="quarto-figure quarto-figure-center" width="823" height="449"></p>
-</figure>
-</div>
-</div>
 </div>
 </section>
 <section id="section-6" class="slide level2">
 <h2></h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div id="3cb59136" class="cell" data-execution_count="9">
+<p>Substantial departures from a straight line indicate that the distribution is not normal.</p>
+<div id="b358f534" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
-<pre><code>&lt;Figure size 384x384 with 0 Axes&gt;</code></pre>
+<pre><code>&lt;Figure size 672x384 with 0 Axes&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -771,12 +782,22 @@ Alan R. Vazquez
 </div>
 </div>
 </div>
-</div><div class="column" style="width:60%;">
-<ul>
-<li><p>Substantial departures from a straight line indicate that the distribution is not normal.</p></li>
-<li><p>This plot suggests that the residuals are consistent with a Normal curve.</p></li>
-</ul>
-</div></div>
+</section>
+<section id="section-7" class="slide level2">
+<h2></h2>
+<p>This plot suggests that the residuals are consistent with a Normal curve.</p>
+<div id="72a2419d" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 672x384 with 0 Axes&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="ModelInferenceEvaluation_files/figure-revealjs/cell-11-output-2.png" class="quarto-figure quarto-figure-center" width="823" height="449"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="comments" class="slide level2">
 <h2>Comments</h2>
@@ -784,7 +805,7 @@ Alan R. Vazquez
 <p>When <em>n</em> is relatively small, you tend to see deviations, particularly in the tails.</p>
 
 <img data-src="images/clipboard-191119898.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="section-7" class="slide level2">
+<section id="section-8" class="slide level2">
 <h2></h2>
 <p><strong>Normal probability plots for data sets following various distributions.</strong> 100 observations in each data set.</p>
 
@@ -798,7 +819,7 @@ Alan R. Vazquez
 <li>However, the t-tests and all inference tools are invalidated.</li>
 </ul>
 </section>
-<section id="section-8" class="slide level2">
+<section id="section-9" class="slide level2">
 <h2></h2>
 <p><br><br><br></p>
 <p><span style="color:red;">If the residuals do not have constant variance</span>, then the linear model is incorrect and everything falls apart!</p>
@@ -809,10 +830,10 @@ Alan R. Vazquez
 <h1>Inference about individual <span class="math inline">\(\beta\)</span>’s using t-tests</h1>
 
 </section>
-<section id="example-1" class="slide level2">
+<section id="example" class="slide level2">
 <h2>Example</h2>
 <p>Let’s consider the “auto.xlsx” dataset.</p>
-<div id="2b9a85c2" class="cell" data-execution_count="10">
+<div id="d82bbe4a" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>auto_data <span class="op">=</span> pd.read_excel(<span class="st">'auto.xlsx'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
@@ -841,7 +862,7 @@ Y_i = \beta_0 + \beta_1 X_{i1}+ \beta_2 X_{i2}+ \epsilon_i,
 <p>They overlap very often.</p>
 </div>
 </section>
-<section id="section-9" class="slide level2">
+<section id="section-10" class="slide level2">
 <h2></h2>
 <p><br><br><br></p>
 <p>The least squares estimators <span class="math inline">\(\hat{\beta}_0, \hat{\beta}_1, \ldots, \hat{\beta}_p\)</span> are subject to uncertainty, since they are calculated based on a random sample of data.</p>
@@ -862,7 +883,7 @@ Y_i = \beta_0 + \beta_1 X_{i1}+ \beta_2 X_{i2}+ \epsilon_i,
 <h2>Step 1. Random sample</h2>
 <p><br><br></p>
 <p>The random sample is our training data:</p>
-<div id="4302c198" class="cell" data-execution_count="11">
+<div id="385cba6d" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>pred_auto <span class="op">=</span> auto_data[[<span class="st">'weight'</span>, <span class="st">'acceleration'</span>]]</span>
 <span id="cb11-2"><a></a>auto_X_train <span class="op">=</span> sm.add_constant(pred_auto)</span>
 <span id="cb11-3"><a></a></span>
@@ -878,15 +899,15 @@ Y_i = \beta_0 + \beta_1 X_{i1}+ \beta_2 X_{i2}+ \epsilon_i,
 <li><span class="math inline">\(\hat{v}_{jj}\)</span> is the <em>standard error</em> of the estimate <span class="math inline">\(\hat{\beta}_j\)</span> calculated using python.</li>
 </ul>
 </section>
-<section id="section-10" class="slide level2">
+<section id="section-11" class="slide level2">
 <h2></h2>
 <p>Recall that we obtain the least squares estimates (<span class="math inline">\(\hat{\beta}_{j}\)</span>) in python using:</p>
-<div id="60d872e9" class="cell" data-execution_count="12">
+<div id="359bc8ec" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="co"># Fitting the simple linear regression model.</span></span>
 <span id="cb12-2"><a></a>regr <span class="op">=</span> sm.OLS(auto_Y_train, auto_X_train)</span>
 <span id="cb12-3"><a></a>linear_model <span class="op">=</span> regr.fit()</span>
 <span id="cb12-4"><a></a>linear_model.params</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="275">
 <pre><code>const           41.095329
 weight          -0.007293
 acceleration     0.261650
@@ -895,7 +916,7 @@ dtype: float64</code></pre>
 </div>
 <p>Later, we will see how to obtain the <em>standard error</em> of the estimate <span class="math inline">\(\hat{\beta}_j\)</span></p>
 </section>
-<section id="section-11" class="slide level2">
+<section id="section-12" class="slide level2">
 <h2></h2>
 <div class="columns">
 <div class="column" style="width:30%;">
@@ -914,7 +935,7 @@ dtype: float64</code></pre>
 <p>It has one parameter <span class="math inline">\(\nu\)</span> which generally equals a number of degrees of freedom.</p>
 <p>The parameter <span class="math inline">\(\nu\)</span> controls the shape of the distribution.</p>
 </section>
-<section id="section-12" class="slide level2">
+<section id="section-13" class="slide level2">
 <h2></h2>
 <p>The t-distribution resembles a standard normal distribution when <span class="math inline">\(\nu\)</span> goes to infinity.</p>
 
@@ -924,7 +945,7 @@ dtype: float64</code></pre>
 <p><br><br><br></p>
 <p>The <strong>p-value</strong> is the probability that the test statistic <span class="math inline">\(T\)</span> will take on a value that is at least as extreme as the observed value of the statistic when the null hypothesis (<span class="math inline">\(H_0\)</span>) is true.</p>
 </section>
-<section id="section-13" class="slide level2">
+<section id="section-14" class="slide level2">
 <h2></h2>
 <p>For example, consider a t-distribution with 18 degrees of freedom and an observed value of the statistic <span class="math inline">\(t_0 = -2.20\)</span>.</p>
 <p>We sketch the critical region for <span class="math inline">\(t_{18}\)</span>, with <span class="math inline">\(\alpha = 0.05\)</span>.</p>
@@ -950,7 +971,7 @@ dtype: float64</code></pre>
 <section id="t-tests-in-python" class="slide level2">
 <h2>t-tests in python</h2>
 <p>We obtain the t-tests of the coefficients using the function <code>summary()</code> together with the <code>lnear_regression</code> object.</p>
-<div id="a528a935" class="cell" data-execution_count="13">
+<div id="76572d14" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>model_summary <span class="op">=</span> linear_model.summary()</span>
 <span id="cb14-2"><a></a><span class="bu">print</span>(model_summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -959,8 +980,8 @@ dtype: float64</code></pre>
 Dep. Variable:                    mpg   R-squared:                       0.700
 Model:                            OLS   Adj. R-squared:                  0.698
 Method:                 Least Squares   F-statistic:                     453.2
-Date:                Thu, 07 Nov 2024   Prob (F-statistic):          2.43e-102
-Time:                        11:12:09   Log-Likelihood:                -1125.4
+Date:                Sun, 10 Nov 2024   Prob (F-statistic):          2.43e-102
+Time:                        14:34:49   Log-Likelihood:                -1125.4
 No. Observations:                 392   AIC:                             2257.
 Df Residuals:                     389   BIC:                             2269.
 Df Model:                           2                                         
@@ -1010,7 +1031,7 @@ strong multicollinearity or other numerical problems.</code></pre>
 <p><span class="math inline">\(R^2\)</span> measures the “proportion of variation in the response explained by the full regression model.”</p>
 
 <img data-src="images/example_R-01.png" class="r-stretch"></section>
-<section id="section-14" class="slide level2">
+<section id="section-15" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[R^2 = 1 - \frac{RSS}{SS_{total}}\]</span></p>
 <ul>
@@ -1020,7 +1041,7 @@ strong multicollinearity or other numerical problems.</code></pre>
 <li><p>It turns out that <span class="math inline">\(R^2\)</span> is the square of the correlation between the observed response and predictor values.</p></li>
 </ul>
 </section>
-<section id="section-15" class="slide level2">
+<section id="section-16" class="slide level2">
 <h2></h2>
 
 <img data-src="images/Figures.004.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
@@ -1042,11 +1063,11 @@ strong multicollinearity or other numerical problems.</code></pre>
 <li>If adjusted <span class="math inline">\(R^2\)</span> goes up, then it is probably useful.</li>
 </ul>
 </section>
-<section id="section-16" class="slide level2">
+<section id="section-17" class="slide level2">
 <h2></h2>
 
 <img data-src="images/Figures.005.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="section-17" class="slide level2">
+<section id="section-18" class="slide level2">
 <h2></h2>
 <p>Why is adjusted <span class="math inline">\(R^2\)</span> more useful than <span class="math inline">\(R^2\)</span> for adding new variables?</p>
 <p><span class="math display">\[R_{adj}^2=1-\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\]</span></p>
@@ -1055,7 +1076,7 @@ strong multicollinearity or other numerical problems.</code></pre>
 <li>If we add a “good” variable to the model, RSS will go down. However, <span class="math inline">\(n - k - 1\)</span> will decrease a little bit (because k is now bigger by 1.) So the numerator does not go down by as much as it does in ‘plain’ <span class="math inline">\(R^2\)</span>.</li>
 </ul>
 </section>
-<section id="section-18" class="slide level2">
+<section id="section-19" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[R_{adj}^2=1-\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\]</span></p>
 <ul>
@@ -1066,14 +1087,14 @@ strong multicollinearity or other numerical problems.</code></pre>
 <section id="in-python" class="slide level2">
 <h2>In python</h2>
 <p>To show the <span class="math inline">\(R^2\)</span> value, we use the <code>rsquared</code> argument of the <code>linear_model</code> object.</p>
-<div id="1253206d" class="cell" data-execution_count="14">
+<div id="ef39f37b" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="bu">print</span>( <span class="bu">round</span>(linear_model.rsquared, <span class="dv">3</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.7</code></pre>
 </div>
 </div>
 <p>To show the adjusted <span class="math inline">\(R^2\)</span> value, we use the <code>rsquared</code> argument of the <code>estimated_model</code> object.</p>
-<div id="6ee2a72f" class="cell" data-execution_count="15">
+<div id="79b23647" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="bu">print</span>( <span class="bu">round</span>(linear_model.rsquared_adj, <span class="dv">3</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.698</code></pre>

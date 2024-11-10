@@ -774,28 +774,28 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#load-the-libraries",
     "title": "Model Evaluation and Inference",
     "section": "Load the libraries",
-    "text": "Load the libraries\nLet’s import statsmodels into python together with the other relevant libraries.\n\n# Importing necessary libraries\nimport pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt\nimport statsmodels.api as sm"
+    "text": "Load the libraries\n\nLet’s import statsmodels into python together with the other relevant libraries.\n\n# Importing necessary libraries\nimport pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt\nimport statsmodels.api as sm"
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#multiple-linear-regression-model",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#multiple-linear-regression-model",
     "title": "Model Evaluation and Inference",
     "section": "Multiple linear regression model",
-    "text": "Multiple linear regression model\n\\[Y_i = \\beta_0 + \\beta_1 X_{i1} + \\cdots + \\beta_p X_{ip} + \\epsilon_i\\]\n\n\\(p\\) is the number of predictors.\n\\(n\\) is the number of observations.\n\\(X_{ij}\\) is the i-th observation of the j-th predictor.\n\\(Y_{i}\\) is the i-th observation of the response.\n\\(\\epsilon_i\\) is the i-th random error."
+    "text": "Multiple linear regression model\n\n\\[Y_i = \\beta_0 + \\beta_1 X_{i1} + \\cdots + \\beta_p X_{ip} + \\epsilon_i\\]\n\n\\(p\\) is the number of predictors.\n\\(n\\) is the number of observations.\n\\(X_{ij}\\) is the i-th observation of the j-th predictor.\n\\(Y_{i}\\) is the i-th observation of the response.\n\\(\\epsilon_i\\) is the i-th random error."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#assumptions",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#assumptions",
     "title": "Model Evaluation and Inference",
     "section": "Assumptions",
-    "text": "Assumptions\nThe error \\(\\epsilon_i\\)’s must then satisfy the following assumptions:\n\nOn average, they are close to zero for any value of the predictors \\(X_j\\).\nFor any value of the predictor \\(X_j\\), the dispersion or variance is constant and equal to \\(\\sigma^2\\).\nThe \\(\\epsilon_i\\)’s are all independent from each other.\nThe \\(\\epsilon_i\\)’s follow normal distribution with mean 0 and variance \\(\\sigma^2\\)."
+    "text": "Assumptions\n\nThe error \\(\\epsilon_i\\)’s must then satisfy the following assumptions:\n\n\nOn average, they are close to zero for any value of the predictors \\(X_j\\).\nFor any value of the predictor \\(X_j\\), the dispersion or variance is constant and equal to \\(\\sigma^2\\).\nThe \\(\\epsilon_i\\)’s are all independent from each other.\nThe \\(\\epsilon_i\\)’s follow normal distribution with mean 0 and variance \\(\\sigma^2\\)."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#residuals",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#residuals",
     "title": "Model Evaluation and Inference",
     "section": "Residuals",
-    "text": "Residuals\nThe errors \\(\\epsilon_1, \\ldots, \\epsilon_n\\) are not observed. To overcome this issue, we use the residuals of our model.\nSuppose that the multiple linear regression model is correct and consider the fitted responses \\(\\hat{y}_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_{i1} + \\cdots + \\hat{\\beta}_p X_{ip}\\), where \\(\\hat{\\beta}_{j}\\) is the least squares estimator for the j-th predictor.\nWe define the residual residuals \\(\\hat{\\epsilon}_i = y_i - \\hat{y}_i\\), \\(i = 1, \\ldots, n.\\)\n\nThe residuals \\(\\hat{\\epsilon}_i\\) are the estimates of the random errors \\(\\epsilon_i\\)."
+    "text": "Residuals\n\nThe errors \\(\\epsilon_1, \\ldots, \\epsilon_n\\) are not observed. To overcome this issue, we use the residuals of our model.\nSuppose that the multiple linear regression model is correct and consider the fitted responses \\(\\hat{y}_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_{i1} + \\cdots + \\hat{\\beta}_p X_{ip}\\), where \\(\\hat{\\beta}_{j}\\) is the least squares estimator for the j-th predictor.\nWe define the residual residuals \\(\\hat{\\epsilon}_i = y_i - \\hat{y}_i\\), \\(i = 1, \\ldots, n.\\)\n\nThe residuals \\(\\hat{\\epsilon}_i\\) are the estimates of the random errors \\(\\epsilon_i\\)."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section",
@@ -809,14 +809,14 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#residual-analysis-1",
     "title": "Model Evaluation and Inference",
     "section": "Residual Analysis",
-    "text": "Residual Analysis\nTo check the validity of these assumptions, we will follow a graphical approach. Specifically, we will construct three informative plots of the residuals.\n\n\nResiduals vs Fitted Values Plot. To assess the structure of the model and check for constant variance\nResiduals Vs Time Plot. To check independence.\nNormal Quantile-Quantile Plot. To assess if the residuals follow a normal distribution"
+    "text": "Residual Analysis\n\nTo check the validity of these assumptions, we will follow a graphical approach. Specifically, we will construct three informative plots of the residuals.\n\n\nResiduals vs Fitted Values Plot. To assess the structure of the model and check for constant variance\nResiduals Vs Time Plot. To check independence.\nNormal Quantile-Quantile Plot. To assess if the residuals follow a normal distribution"
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#example",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#example",
     "title": "Model Evaluation and Inference",
     "section": "Example",
-    "text": "Example\n\nThis example is inspired by Foster, Stine and Waterman (1997, pages 191–199).\nThe data are in the form of the time taken (in minutes) for a production run, \\(Y\\), and the number of items produced, \\(X\\), for 20 randomly selected orders as supervised by a manager.\nWe wish to develop an equation to model the relationship between the run time (\\(Y\\)) and the run size (\\(X\\))."
+    "text": "Example\nLet’s consider the “auto.xlsx” dataset.\n\nauto_data = pd.read_excel('auto.xlsx')\n\n\nLet’s assume that we want to study the following model.\n\\[\nY_i = \\beta_0 + \\beta_1 X_{i1}+ \\beta_2 X_{i2}+ \\epsilon_i,\n\\]\nwhere \\(y_i\\) is the mpg, \\(X_{i1}\\) is the weight, and \\(X_{i2}\\) is the acceleration of the \\(i\\)-th car, \\(i = 1, \\ldots, 392\\)."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#dataset",
@@ -844,7 +844,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#residuals-vs-fitted-values",
     "title": "Model Evaluation and Inference",
     "section": "Residuals vs Fitted Values",
-    "text": "Residuals vs Fitted Values\n\n\n\n\nCode\n# Residual vs Fitted Values Plot\nplt.figure(figsize=(5, 5))\nsns.scatterplot(x = prod_Y_train, y = residuals)\nplt.axhline(y=0, color='red', linestyle='--')\nplt.title('Residuals vs Fitted Values')\nplt.xlabel('Predicted Values')\nplt.ylabel('Residuals')\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\nIf there is a trend, the model is misspecified.\nA “funnel” shape indicates that the assumption of constant variance is not met."
+    "text": "Residuals vs Fitted Values\n\n\n\n\nCode\n# Residual vs Fitted Values Plot\nplt.figure(figsize=(5, 5))\nsns.scatterplot(x = prod_Y_pred, y = residuals)\nplt.axhline(y=0, color='red', linestyle='--')\nplt.title('Residuals vs Fitted Values')\nplt.xlabel('Predicted Values')\nplt.ylabel('Residuals')\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\n\nIf there is a trend, the model is misspecified.\nA “funnel” shape indicates that the assumption of constant variance is not met."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-1",
@@ -865,28 +865,28 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#residuals-vs-time-plot",
     "title": "Model Evaluation and Inference",
     "section": "Residuals vs Time Plot",
-    "text": "Residuals vs Time Plot\n\nBy “time,” we mean that time the observation was taken or the order in which it was taken. The plot should not show any structure or pattern in the residuals.\nDependence on time is a common source of lack of independence, but other plots might also detect lack of independence.\nIdeally, we plot the residuals versus each variable of interest we could think of, either included or excluded in the model.\nAssessing the assumption of independence is hard in practice."
+    "text": "Residuals vs Time Plot\n\n\nBy “time,” we mean that time the observation was taken or the order in which it was taken. The plot should not show any structure or pattern in the residuals.\nDependence on time is a common source of lack of independence, but other plots might also detect lack of independence.\nIdeally, we plot the residuals versus each variable of interest we could think of, either included or excluded in the model.\nAssessing the assumption of independence is hard in practice."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-3",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-3",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "Code\n# Residuals vs Time (Case) Plot\nplt.figure(figsize=(7, 5))\nsns.scatterplot(x = production_data['Case'], y = residuals)\nplt.title('Residuals vs Time (Case)')\nplt.xlabel('Case')\nplt.ylabel('Residuals')\nplt.show()"
+    "text": "Code\n# Residuals vs Time (Case) Plot\nplt.figure(figsize=(7, 5))\nsns.scatterplot(x = production_data['Case'], y = residuals)\nplt.title('Residuals vs Time (Case)')\nplt.xlabel('Case')\nplt.xticks(production_data['Case'])\nplt.ylabel('Residuals')\nplt.show()"
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-4",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-4",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "Example of plot that do not support the independence assumption."
+    "text": "Examples of plots that do and do not support the independence assumption."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#checking-for-normality",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#checking-for-normality",
     "title": "Model Evaluation and Inference",
     "section": "Checking for normality",
-    "text": "Checking for normality\nThis assumption is generally checked by looking at the distribution of the residuals.\nTwo plots:\n\nHistogram.\nNormal Quantile-Quantile Plot (also called normal probability plot)."
+    "text": "Checking for normality\n\nThis assumption is generally checked by looking at the distribution of the residuals.\nTwo plots:\n\nHistogram.\nNormal Quantile-Quantile Plot (also called normal probability plot)."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#histogram",
@@ -900,28 +900,28 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#normal-quantile-quantile-qq-plot",
     "title": "Model Evaluation and Inference",
     "section": "Normal Quantile-Quantile (QQ) Plot",
-    "text": "Normal Quantile-Quantile (QQ) Plot\nA normal QQ plot is helpful for deciding whether a sample was drawn from a distribution that is approximately normal.\nFirst, let \\(\\hat{\\epsilon}_{[1]}, \\hat{\\epsilon}_{[2]}, \\ldots, \\hat{\\epsilon}_{[n]}\\) be the residuals ranked in an increasing order, where \\(\\hat{\\epsilon}_{[1]}\\) is the minimum and \\(\\hat{\\epsilon}_{[n]}\\) is the maximum. These points define the sample percentiles (or quantiles) of the distribution of the residuals.\nNext, calculate the theoretical percentiles of a (standard) Normal distribution calculated using Python."
+    "text": "Normal Quantile-Quantile (QQ) Plot\n\nA normal QQ plot is helpful for deciding whether a sample was drawn from a distribution that is approximately normal.\n\nFirst, let \\(\\hat{\\epsilon}_{[1]}, \\hat{\\epsilon}_{[2]}, \\ldots, \\hat{\\epsilon}_{[n]}\\) be the residuals ranked in an increasing order, where \\(\\hat{\\epsilon}_{[1]}\\) is the minimum and \\(\\hat{\\epsilon}_{[n]}\\) is the maximum. These points define the sample percentiles (or quantiles) of the distribution of the residuals.\n\n\nNext, calculate the theoretical percentiles of a (standard) Normal distribution calculated using Python."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-5",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-5",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "The normal QQ plot displays the (sample) percentiles of the residuals versus the quantiles of a normal distribution.\nIf these quantiles agree with each other, then they would approximate a straight line.\nThe straight line is usually determined visually, with emphasis on the central values rather than the extremes.\nFor a nice explanation, see this YouTube video"
+    "text": "The normal QQ plot displays the (sample) percentiles of the residuals versus the percentiles of a normal distribution.\nIf these percentiles agree with each other, then they would approximate a straight line.\nThe straight line is usually determined visually, with emphasis on the central values rather than the extremes.\nFor a nice explanation, see this YouTube video."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#qq-plot-in-python",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#qq-plot-in-python",
     "title": "Model Evaluation and Inference",
     "section": "QQ plot in python",
-    "text": "QQ plot in python\nTo construct a QQ plot, we use the function qqplot() statsmodels library.\n\n# QQ plot to assess normality of residuals\nplt.figure(figsize=(5, 3))\nsm.qqplot(residuals, fit = True, line = '45')\nplt.title('QQ Plot of Residuals')\nplt.show()\n\n&lt;Figure size 480x288 with 0 Axes&gt;"
+    "text": "QQ plot in python\n\nTo construct a QQ plot, we use the function qqplot() statsmodels library.\n\n# QQ plot to assess normality of residuals\nplt.figure(figsize=(5, 3))\nsm.qqplot(residuals, fit = True, line = '45')\nplt.title('QQ Plot of Residuals')\nplt.show()"
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-6",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-6",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "&lt;Figure size 384x384 with 0 Axes&gt;\n\n\n\n\n\n\n\n\n\n\n\nSubstantial departures from a straight line indicate that the distribution is not normal.\nThis plot suggests that the residuals are consistent with a Normal curve."
+    "text": "Substantial departures from a straight line indicate that the distribution is not normal.\n\n\n&lt;Figure size 672x384 with 0 Axes&gt;"
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#comments",
@@ -935,7 +935,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-7",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "Normal probability plots for data sets following various distributions. 100 observations in each data set."
+    "text": "This plot suggests that the residuals are consistent with a Normal curve.\n\n\n&lt;Figure size 672x384 with 0 Axes&gt;"
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#consequences-of-faulty-assumptions",
@@ -949,14 +949,14 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-8",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "If the residuals do not have constant variance, then the linear model is incorrect and everything falls apart!\nIf the residuals are dependent, then the linear model is incorrect and everything falls apart!"
+    "text": "Normal probability plots for data sets following various distributions. 100 observations in each data set."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#example-1",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#example-1",
     "title": "Model Evaluation and Inference",
-    "section": "Example",
-    "text": "Example\nLet’s consider the “auto.xlsx” dataset.\n\nauto_data = pd.read_excel('auto.xlsx')\n\n\nLet’s assume that we want to study the following model.\n\\[\nY_i = \\beta_0 + \\beta_1 X_{i1}+ \\beta_2 X_{i2}+ \\epsilon_i,\n\\]\nwhere \\(y_i\\) is the mpg, \\(X_{i1}\\) is the weight, and \\(X_{i2}\\) is the acceleration of the \\(i\\)-th car, \\(i = 1, \\ldots, 392\\)."
+    "section": "Example 1",
+    "text": "Example 1\n\n\nThis example is inspired by Foster, Stine and Waterman (1997, pages 191–199).\nThe data are in the form of the time taken (in minutes) for a production run, \\(Y\\), and the number of items produced, \\(X\\), for 20 randomly selected orders as supervised by a manager.\nWe wish to develop an equation to model the relationship between the run time (\\(Y\\)) and the run size (\\(X\\))."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#research-question",
@@ -977,7 +977,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-9",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "The least squares estimators \\(\\hat{\\beta}_0, \\hat{\\beta}_1, \\ldots, \\hat{\\beta}_p\\) are subject to uncertainty, since they are calculated based on a random sample of data.\nTherefore, assessing the amount of the uncertainty in these estimators is important. To this end, we use hypothesis tests on individual coefficients."
+    "text": "If the residuals do not have constant variance, then the linear model is incorrect and everything falls apart!\nIf the residuals are dependent, then the linear model is incorrect and everything falls apart!"
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#hypothesis-test",
@@ -1005,14 +1005,14 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-10",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "Recall that we obtain the least squares estimates (\\(\\hat{\\beta}_{j}\\)) in python using:\n\n# Fitting the simple linear regression model.\nregr = sm.OLS(auto_Y_train, auto_X_train)\nlinear_model = regr.fit()\nlinear_model.params\n\nconst           41.095329\nweight          -0.007293\nacceleration     0.261650\ndtype: float64\n\n\nLater, we will see how to obtain the standard error of the estimate \\(\\hat{\\beta}_j\\)"
+    "text": "The least squares estimators \\(\\hat{\\beta}_0, \\hat{\\beta}_1, \\ldots, \\hat{\\beta}_p\\) are subject to uncertainty, since they are calculated based on a random sample of data.\nTherefore, assessing the amount of the uncertainty in these estimators is important. To this end, we use hypothesis tests on individual coefficients."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-11",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-11",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "\\[T = \\frac{\\hat{\\beta}_{j}}{\\sqrt{ \\hat{v}_{jj}} }\\]\n\nWe like this statistic because it follows a well-known distribution.\nIf the null hypothesis (\\(H_0: \\beta_j = 0\\)) is true, the statistic \\(T\\) follows a \\(t\\) distribution with \\(n-p-1\\) degrees of freedom\n(\\(n\\) is the number of observations and \\(p\\) the number of predictors)."
+    "text": "Recall that we obtain the least squares estimates (\\(\\hat{\\beta}_{j}\\)) in python using:\n\n# Fitting the simple linear regression model.\nregr = sm.OLS(auto_Y_train, auto_X_train)\nlinear_model = regr.fit()\nlinear_model.params\n\nconst           41.095329\nweight          -0.007293\nacceleration     0.261650\ndtype: float64\n\n\nLater, we will see how to obtain the standard error of the estimate \\(\\hat{\\beta}_j\\)"
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#t-distribution",
@@ -1026,7 +1026,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-12",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "The t-distribution resembles a standard normal distribution when \\(\\nu\\) goes to infinity."
+    "text": "\\[T = \\frac{\\hat{\\beta}_{j}}{\\sqrt{ \\hat{v}_{jj}} }\\]\n\nWe like this statistic because it follows a well-known distribution.\nIf the null hypothesis (\\(H_0: \\beta_j = 0\\)) is true, the statistic \\(T\\) follows a \\(t\\) distribution with \\(n-p-1\\) degrees of freedom\n(\\(n\\) is the number of observations and \\(p\\) the number of predictors)."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#step-3.-calculate-the-p-value",
@@ -1040,7 +1040,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-13",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "For example, consider a t-distribution with 18 degrees of freedom and an observed value of the statistic \\(t_0 = -2.20\\).\nWe sketch the critical region for \\(t_{18}\\), with \\(\\alpha = 0.05\\)."
+    "text": "The t-distribution resembles a standard normal distribution when \\(\\nu\\) goes to infinity."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#decision",
@@ -1061,7 +1061,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#t-tests-in-python",
     "title": "Model Evaluation and Inference",
     "section": "t-tests in python",
-    "text": "t-tests in python\nWe obtain the t-tests of the coefficients using the function summary() together with the lnear_regression object.\n\nmodel_summary = linear_model.summary()\nprint(model_summary)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.700\nModel:                            OLS   Adj. R-squared:                  0.698\nMethod:                 Least Squares   F-statistic:                     453.2\nDate:                Thu, 07 Nov 2024   Prob (F-statistic):          2.43e-102\nTime:                        11:12:09   Log-Likelihood:                -1125.4\nNo. Observations:                 392   AIC:                             2257.\nDf Residuals:                     389   BIC:                             2269.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nconst           41.0953      1.868     21.999      0.000      37.423      44.768\nweight          -0.0073      0.000    -25.966      0.000      -0.008      -0.007\nacceleration     0.2617      0.086      3.026      0.003       0.092       0.432\n==============================================================================\nOmnibus:                       31.397   Durbin-Watson:                   0.818\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               39.962\nSkew:                           0.632   Prob(JB):                     2.10e-09\nKurtosis:                       3.922   Cond. No.                     2.67e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 2.67e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
+    "text": "t-tests in python\nWe obtain the t-tests of the coefficients using the function summary() together with the lnear_regression object.\n\nmodel_summary = linear_model.summary()\nprint(model_summary)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.700\nModel:                            OLS   Adj. R-squared:                  0.698\nMethod:                 Least Squares   F-statistic:                     453.2\nDate:                Sun, 10 Nov 2024   Prob (F-statistic):          2.43e-102\nTime:                        14:34:49   Log-Likelihood:                -1125.4\nNo. Observations:                 392   AIC:                             2257.\nDf Residuals:                     389   BIC:                             2269.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nconst           41.0953      1.868     21.999      0.000      37.423      44.768\nweight          -0.0073      0.000    -25.966      0.000      -0.008      -0.007\nacceleration     0.2617      0.086      3.026      0.003       0.092       0.432\n==============================================================================\nOmnibus:                       31.397   Durbin-Watson:                   0.818\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               39.962\nSkew:                           0.632   Prob(JB):                     2.10e-09\nKurtosis:                       3.922   Cond. No.                     2.67e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 2.67e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#total-sum-of-squares",
@@ -1089,7 +1089,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-14",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "\\[R^2 = 1 - \\frac{RSS}{SS_{total}}\\]\n\nWhat would you conclude about RSS if \\(R^2 = 1\\)?\nIn this case, \\(RSS = 0\\) and the model fits the data perfectly.\nIf \\(R^2\\) is small, then large RSS: lots of scatter and the model’s fit is not good.\nIt turns out that \\(R^2\\) is the square of the correlation between the observed response and predictor values."
+    "text": "For example, consider a t-distribution with 18 degrees of freedom and an observed value of the statistic \\(t_0 = -2.20\\).\nWe sketch the critical region for \\(t_{18}\\), with \\(\\alpha = 0.05\\)."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#remarks-on-r2",
@@ -1110,14 +1110,14 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-17",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "Why is adjusted \\(R^2\\) more useful than \\(R^2\\) for adding new variables?\n\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\\]\n\nAs we explain more variability, the numerator gets smaller and adjusted \\(R^2\\) gets closer to 1. So, we want to make the numerator small.\nIf we add a “good” variable to the model, RSS will go down. However, \\(n - k - 1\\) will decrease a little bit (because k is now bigger by 1.) So the numerator does not go down by as much as it does in ‘plain’ \\(R^2\\)."
+    "text": "\\[R^2 = 1 - \\frac{RSS}{SS_{total}}\\]\n\nWhat would you conclude about RSS if \\(R^2 = 1\\)?\nIn this case, \\(RSS = 0\\) and the model fits the data perfectly.\nIf \\(R^2\\) is small, then large RSS: lots of scatter and the model’s fit is not good.\nIt turns out that \\(R^2\\) is the square of the correlation between the observed response and predictor values."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-18",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-18",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\\]\n\nIf we add a noise variable, RSS goes down a tiny bit, but because we divide by \\(n - k - 1\\), the numerator might actually get bigger or change very little.\nSo adjusted \\(R^2\\) is a better measure of whether adding a new variable is an improvement. If adjusted \\(R^2\\) goes down or stays the same, then new variable is irrelevant. If it goes up, then it probably useful."
+    "text": "Why is adjusted \\(R^2\\) more useful than \\(R^2\\) for adding new variables?\n\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\\]\n\nAs we explain more variability, the numerator gets smaller and adjusted \\(R^2\\) gets closer to 1. So, we want to make the numerator small.\nIf we add a “good” variable to the model, RSS will go down. However, \\(n - k - 1\\) will decrease a little bit (because k is now bigger by 1.) So the numerator does not go down by as much as it does in ‘plain’ \\(R^2\\)."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#in-python",
@@ -2301,5 +2301,54 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n2"
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#intuition-behind",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#intuition-behind",
+    "title": "Model Evaluation and Inference",
+    "section": "Intuition behind …",
+    "text": "Intuition behind …\nthe Residuals versus Fitted Values plot."
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#calculation-of-fitted-values-and-residuals",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#calculation-of-fitted-values-and-residuals",
+    "title": "Model Evaluation and Inference",
+    "section": "Calculation of fitted values and residuals",
+    "text": "Calculation of fitted values and residuals\nRecall that we can calculate the predicted values and residuals using commands from statsmodels.\n\n# Defining the predictor (X) and the response variable (Y).\nprod_Y_train = production_data['RunTime']\nprod_X_pred = production_data['RunSize']\nprod_X_train = sm.add_constant(prod_X_pred)\n\n# Fitting the simple linear regression model.\nregr = sm.OLS(prod_Y_train, prod_X_train)\nlinear_model = regr.fit()\n\n# Make predictions using the the model\nprod_Y_pred = linear_model.fittedvalues\n\n# Calculate residuals.\nresiduals = linear_model.resid"
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-15",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-15",
+    "title": "Model Evaluation and Inference",
+    "section": "",
+    "text": "\\[R^2 = 1 - \\frac{RSS}{SS_{total}}\\]\n\nWhat would you conclude about RSS if \\(R^2 = 1\\)?\nIn this case, \\(RSS = 0\\) and the model fits the data perfectly.\nIf \\(R^2\\) is small, then large RSS: lots of scatter and the model’s fit is not good.\nIt turns out that \\(R^2\\) is the square of the correlation between the observed response and predictor values."
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-19",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-19",
+    "title": "Model Evaluation and Inference",
+    "section": "",
+    "text": "\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\\]\n\nIf we add a noise variable, RSS goes down a tiny bit, but because we divide by \\(n - k - 1\\), the numerator might actually get bigger or change very little.\nSo adjusted \\(R^2\\) is a better measure of whether adding a new variable is an improvement. If adjusted \\(R^2\\) goes down or stays the same, then new variable is irrelevant. If it goes up, then it probably useful."
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-16",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-16",
+    "title": "Model Evaluation and Inference",
+    "section": "",
+    "text": "For example, consider a t-distribution with 18 degrees of freedom and an observed value of the statistic \\(t_0 = -2.20\\).\nWe sketch the critical region for \\(t_{18}\\), with \\(\\alpha = 0.05\\)."
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-20",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-20",
+    "title": "Model Evaluation and Inference",
+    "section": "",
+    "text": "Why is adjusted \\(R^2\\) more useful than \\(R^2\\) for adding new variables?\n\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\\]\n\nAs we explain more variability, the numerator gets smaller and adjusted \\(R^2\\) gets closer to 1. So, we want to make the numerator small.\nIf we add a “good” variable to the model, RSS will go down. However, \\(n - k - 1\\) will decrease a little bit (because k is now bigger by 1.) So the numerator does not go down by as much as it does in ‘plain’ \\(R^2\\)."
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-21",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-21",
+    "title": "Model Evaluation and Inference",
+    "section": "",
+    "text": "\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\\]\n\nIf we add a noise variable, RSS goes down a tiny bit, but because we divide by \\(n - k - 1\\), the numerator might actually get bigger or change very little.\nSo adjusted \\(R^2\\) is a better measure of whether adding a new variable is an improvement. If adjusted \\(R^2\\) goes down or stays the same, then new variable is irrelevant. If it goes up, then it probably useful."
   }
 ]
