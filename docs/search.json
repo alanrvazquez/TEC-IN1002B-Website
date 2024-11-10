@@ -459,7 +459,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-2",
     "title": "Additional Topics",
     "section": "",
-    "text": "print(summary_model)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.332\nModel:                            OLS   Adj. R-squared:                  0.328\nMethod:                 Least Squares   F-statistic:                     96.60\nDate:                Thu, 07 Nov 2024   Prob (F-statistic):           8.67e-35\nTime:                        11:12:13   Log-Likelihood:                -1282.2\nNo. Observations:                 392   AIC:                             2570.\nDf Residuals:                     389   BIC:                             2582.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         20.0335      0.409     49.025      0.000      19.230      20.837\nEuropean       7.5695      0.877      8.634      0.000       5.846       9.293\nJapanese      10.4172      0.828     12.588      0.000       8.790      12.044\n==============================================================================\nOmnibus:                       26.330   Durbin-Watson:                   0.763\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               30.217\nSkew:                           0.679   Prob(JB):                     2.74e-07\nKurtosis:                       3.066   Cond. No.                         3.16\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+    "text": "print(summary_model)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.332\nModel:                            OLS   Adj. R-squared:                  0.328\nMethod:                 Least Squares   F-statistic:                     96.60\nDate:                Sun, 10 Nov 2024   Prob (F-statistic):           8.67e-35\nTime:                        15:40:50   Log-Likelihood:                -1282.2\nNo. Observations:                 392   AIC:                             2570.\nDf Residuals:                     389   BIC:                             2582.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         20.0335      0.409     49.025      0.000      19.230      20.837\nEuropean       7.5695      0.877      8.634      0.000       5.846       9.293\nJapanese      10.4172      0.828     12.588      0.000       8.790      12.044\n==============================================================================\nOmnibus:                       26.330   Durbin-Watson:                   0.763\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               30.217\nSkew:                           0.679   Prob(JB):                     2.74e-07\nKurtosis:                       3.066   Cond. No.                         3.16\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#analysis-of-covariance",
@@ -494,7 +494,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#model-summary",
     "title": "Additional Topics",
     "section": "Model summary",
-    "text": "Model summary\n\n# Summary of the models.\nsummary_ancova = ancova_model.summary()\nprint(summary_ancova)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.702\nModel:                            OLS   Adj. R-squared:                  0.700\nMethod:                 Least Squares   F-statistic:                     304.7\nDate:                Thu, 07 Nov 2024   Prob (F-statistic):          1.28e-101\nTime:                        11:12:13   Log-Likelihood:                -1123.9\nNo. Observations:                 392   AIC:                             2256.\nDf Residuals:                     388   BIC:                             2272.\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         43.7322      1.113     39.277      0.000      41.543      45.921\nEuropean       0.9709      0.659      1.474      0.141      -0.324       2.266\nJapanese       2.3271      0.665      3.501      0.001       1.020       3.634\nweight        -0.0070      0.000    -21.956      0.000      -0.008      -0.006\n==============================================================================\nOmnibus:                       40.731   Durbin-Watson:                   0.832\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               61.938\nSkew:                           0.689   Prob(JB):                     3.55e-14\nKurtosis:                       4.377   Cond. No.                     1.83e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 1.83e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
+    "text": "Model summary\n\n# Summary of the models.\nsummary_ancova = ancova_model.summary()\nprint(summary_ancova)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.702\nModel:                            OLS   Adj. R-squared:                  0.700\nMethod:                 Least Squares   F-statistic:                     304.7\nDate:                Sun, 10 Nov 2024   Prob (F-statistic):          1.28e-101\nTime:                        15:40:50   Log-Likelihood:                -1123.9\nNo. Observations:                 392   AIC:                             2256.\nDf Residuals:                     388   BIC:                             2272.\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         43.7322      1.113     39.277      0.000      41.543      45.921\nEuropean       0.9709      0.659      1.474      0.141      -0.324       2.266\nJapanese       2.3271      0.665      3.501      0.001       1.020       3.634\nweight        -0.0070      0.000    -21.956      0.000      -0.008      -0.006\n==============================================================================\nOmnibus:                       40.731   Durbin-Watson:                   0.832\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               61.938\nSkew:                           0.689   Prob(JB):                     3.55e-14\nKurtosis:                       4.377   Cond. No.                     1.83e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 1.83e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#standardization",
@@ -564,7 +564,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-8",
     "title": "Additional Topics",
     "section": "",
-    "text": "print(std_summary_model)\n\n                                 OLS Regression Results                                \n=======================================================================================\nDep. Variable:                  Yield   R-squared (uncentered):                   0.002\nModel:                            OLS   Adj. R-squared (uncentered):             -0.330\nMethod:                 Least Squares   F-statistic:                           0.006694\nDate:                Thu, 07 Nov 2024   Prob (F-statistic):                       0.993\nTime:                        11:12:13   Log-Likelihood:                         -46.940\nNo. Observations:                   8   AIC:                                      97.88\nDf Residuals:                       6   BIC:                                      98.04\nDf Model:                           2                                                  \nCovariance Type:            nonrobust                                                  \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nx1             1.5000     34.907      0.043      0.967     -83.914      86.914\nx2             3.7500     34.907      0.107      0.918     -81.664      89.164\n==============================================================================\nOmnibus:                        2.258   Durbin-Watson:                   0.000\nProb(Omnibus):                  0.323   Jarque-Bera (JB):                0.627\nSkew:                           0.000   Prob(JB):                        0.731\nKurtosis:                       1.628   Cond. No.                         1.00\n==============================================================================\n\nNotes:\n[1] R² is computed without centering (uncentered) since the model does not contain a constant.\n[2] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+    "text": "print(std_summary_model)\n\n                                 OLS Regression Results                                \n=======================================================================================\nDep. Variable:                  Yield   R-squared (uncentered):                   0.002\nModel:                            OLS   Adj. R-squared (uncentered):             -0.330\nMethod:                 Least Squares   F-statistic:                           0.006694\nDate:                Sun, 10 Nov 2024   Prob (F-statistic):                       0.993\nTime:                        15:40:50   Log-Likelihood:                         -46.940\nNo. Observations:                   8   AIC:                                      97.88\nDf Residuals:                       6   BIC:                                      98.04\nDf Model:                           2                                                  \nCovariance Type:            nonrobust                                                  \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nx1             1.5000     34.907      0.043      0.967     -83.914      86.914\nx2             3.7500     34.907      0.107      0.918     -81.664      89.164\n==============================================================================\nOmnibus:                        2.258   Durbin-Watson:                   0.000\nProb(Omnibus):                  0.323   Jarque-Bera (JB):                0.627\nSkew:                           0.000   Prob(JB):                        0.731\nKurtosis:                       1.628   Cond. No.                         1.00\n==============================================================================\n\nNotes:\n[1] R² is computed without centering (uncentered) since the model does not contain a constant.\n[2] Standard Errors assume that the covariance matrix of the errors is correctly specified."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#discussion",
@@ -760,7 +760,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-13",
     "title": "Additional Topics",
     "section": "",
-    "text": "We compute the validation RMSE by first computing the validation MSE using a function with the same name of scikit-learn.\n\nmse = mean_squared_error(Y_valid, predicted_medv_val)\nrmse = mse**(1/2)\nprint( round(rmse, 3) )\n\n5.03\n\n\nThe lower the validation RMSE, the more accurate our model.\nInterpretation: On average, our predictions are off by \\(\\pm\\) 4,465 dollars."
+    "text": "We compute the validation RMSE by first computing the validation MSE using a function with the same name of scikit-learn.\n\nmse = mean_squared_error(Y_valid, predicted_medv_val)\nrmse = mse**(1/2)\nprint( round(rmse, 3) )\n\n4.816\n\n\nThe lower the validation RMSE, the more accurate our model.\nInterpretation: On average, our predictions are off by \\(\\pm\\) 4,465 dollars."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#agenda",
@@ -812,11 +812,11 @@
     "text": "Residual Analysis\n\nTo check the validity of these assumptions, we will follow a graphical approach. Specifically, we will construct three informative plots of the residuals.\n\n\nResiduals vs Fitted Values Plot. To assess the structure of the model and check for constant variance\nResiduals Vs Time Plot. To check independence.\nNormal Quantile-Quantile Plot. To assess if the residuals follow a normal distribution"
   },
   {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#example",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#example",
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#example-1",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#example-1",
     "title": "Model Evaluation and Inference",
-    "section": "Example",
-    "text": "Example\nLet’s consider the “auto.xlsx” dataset.\n\nauto_data = pd.read_excel('auto.xlsx')\n\n\nLet’s assume that we want to study the following model.\n\\[\nY_i = \\beta_0 + \\beta_1 X_{i1}+ \\beta_2 X_{i2}+ \\epsilon_i,\n\\]\nwhere \\(y_i\\) is the mpg, \\(X_{i1}\\) is the weight, and \\(X_{i2}\\) is the acceleration of the \\(i\\)-th car, \\(i = 1, \\ldots, 392\\)."
+    "section": "Example 1",
+    "text": "Example 1\n\n\nThis example is inspired by Foster, Stine and Waterman (1997, pages 191–199).\nThe data are in the form of the time taken (in minutes) for a production run, \\(Y\\), and the number of items produced, \\(X\\), for 20 randomly selected orders as supervised by a manager.\nWe wish to develop an equation to model the relationship between the run time (\\(Y\\)) and the run size (\\(X\\))."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#dataset",
@@ -826,18 +826,18 @@
     "text": "Dataset\nThe dataset is in the file “production.xlsx”.\n\nproduction_data = pd.read_excel('production.xlsx')\nproduction_data.head()\n\n\n\n\n\n\n\n\nCase\nRunTime\nRunSize\n\n\n\n\n0\n1\n195\n175\n\n\n1\n2\n215\n189\n\n\n2\n3\n243\n344\n\n\n3\n4\n162\n88\n\n\n4\n5\n185\n114"
   },
   {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#intuition-behind-the-plot",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#intuition-behind-the-plot",
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#intuition-behind",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#intuition-behind",
     "title": "Model Evaluation and Inference",
-    "section": "Intuition behind the plot",
-    "text": "Intuition behind the plot"
+    "section": "Intuition behind …",
+    "text": "Intuition behind …\nthe Residuals versus Fitted Values plot."
   },
   {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#calculation-of-predicted-values-and-residuals",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#calculation-of-predicted-values-and-residuals",
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#calculation-of-fitted-values-and-residuals",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#calculation-of-fitted-values-and-residuals",
     "title": "Model Evaluation and Inference",
-    "section": "Calculation of predicted values and residuals",
-    "text": "Calculation of predicted values and residuals\nRecall that we can calculate the predicted values and residuals using commands from statsmodels.\n\n# Defining the predictor (X) and the response variable (Y).\nprod_Y_train = production_data['RunTime']\nprod_X_pred = production_data['RunSize']\nprod_X_train = sm.add_constant(prod_X_pred)\n\n\n# Fitting the simple linear regression model.\nregr = sm.OLS(prod_Y_train, prod_X_train)\nlinear_model = regr.fit()\n\n# Make predictions using the the model\nprod_Y_pred = linear_model.fittedvalues\n\n# Calculate residuals.\nresiduals = linear_model.resid"
+    "section": "Calculation of fitted values and residuals",
+    "text": "Calculation of fitted values and residuals\nRecall that we can calculate the predicted values and residuals using commands from statsmodels.\n\n# Defining the predictor (X) and the response variable (Y).\nprod_Y_train = production_data['RunTime']\nprod_X_pred = production_data['RunSize']\nprod_X_train = sm.add_constant(prod_X_pred)\n\n# Fitting the simple linear regression model.\nregr = sm.OLS(prod_Y_train, prod_X_train)\nlinear_model = regr.fit()\n\n# Make predictions using the the model\nprod_Y_pred = linear_model.fittedvalues\n\n# Calculate residuals.\nresiduals = linear_model.resid"
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#residuals-vs-fitted-values",
@@ -924,13 +924,6 @@
     "text": "Substantial departures from a straight line indicate that the distribution is not normal.\n\n\n&lt;Figure size 672x384 with 0 Axes&gt;"
   },
   {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#comments",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#comments",
-    "title": "Model Evaluation and Inference",
-    "section": "Comments",
-    "text": "Comments\nThese data are truly Normally distributed. But note that we still see deviations. These are entirely due to chance.\n\nWhen \\(n\\) is relatively small, you tend to see deviations, particularly in the tails."
-  },
-  {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-7",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-7",
     "title": "Model Evaluation and Inference",
@@ -938,11 +931,11 @@
     "text": "This plot suggests that the residuals are consistent with a Normal curve.\n\n\n&lt;Figure size 672x384 with 0 Axes&gt;"
   },
   {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#consequences-of-faulty-assumptions",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#consequences-of-faulty-assumptions",
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#comments",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#comments",
     "title": "Model Evaluation and Inference",
-    "section": "Consequences of faulty assumptions",
-    "text": "Consequences of faulty assumptions\n\nIf the model structure is incorrect, the estimated coefficients \\(\\hat{\\beta}_j\\) will be biased and the predictions \\(\\hat{y}_i\\) will be inaccurate.\n\nIf the residuals do not follow a normal distribution, we have two cases:\n\nIf sample size is large, we still get accurate p-values for the t-tests (discussed later) for the coefficients thanks to the Central Limit Theorem.\nHowever, the t-tests and all inference tools are invalidated."
+    "section": "Comments",
+    "text": "Comments\nThese data are truly Normally distributed. But note that we still see deviations. These are entirely due to chance.\n\nWhen \\(n\\) is relatively small, you tend to see deviations, particularly in the tails."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-8",
@@ -952,11 +945,25 @@
     "text": "Normal probability plots for data sets following various distributions. 100 observations in each data set."
   },
   {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#example-1",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#example-1",
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#consequences-of-faulty-assumptions",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#consequences-of-faulty-assumptions",
     "title": "Model Evaluation and Inference",
-    "section": "Example 1",
-    "text": "Example 1\n\n\nThis example is inspired by Foster, Stine and Waterman (1997, pages 191–199).\nThe data are in the form of the time taken (in minutes) for a production run, \\(Y\\), and the number of items produced, \\(X\\), for 20 randomly selected orders as supervised by a manager.\nWe wish to develop an equation to model the relationship between the run time (\\(Y\\)) and the run size (\\(X\\))."
+    "section": "Consequences of faulty assumptions",
+    "text": "Consequences of faulty assumptions\n\nIf the model structure is incorrect, the estimated coefficients \\(\\hat{\\beta}_j\\) will be biased and the predictions \\(\\hat{y}_i\\) will be inaccurate.\n\nIf the residuals do not follow a normal distribution, we have two cases:\n\nIf sample size is large, we still get accurate p-values for the t-tests (discussed later) for the coefficients thanks to the Central Limit Theorem.\nHowever, the t-tests and all inference tools are invalidated."
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-9",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-9",
+    "title": "Model Evaluation and Inference",
+    "section": "",
+    "text": "If the residuals do not have constant variance, then the linear model is incorrect and everything falls apart!\nIf the residuals are dependent, then the linear model is incorrect and everything falls apart!"
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#example-2",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#example-2",
+    "title": "Model Evaluation and Inference",
+    "section": "Example 2",
+    "text": "Example 2\n\nLet’s consider the “auto.xlsx” dataset.\n\nauto_data = pd.read_excel('auto.xlsx')\n\n\nLet’s assume that we want to study the following model.\n\\[\nY_i = \\beta_0 + \\beta_1 X_{i1}+ \\beta_2 X_{i2}+ \\epsilon_i,\n\\]\nwhere \\(Y_i\\) is the mpg, \\(X_{i1}\\) is the weight, and \\(X_{i2}\\) is the acceleration of the \\(i\\)-th car, \\(i = 1, \\ldots, 392\\)."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#research-question",
@@ -973,11 +980,11 @@
     "text": "The two cultures of statistical models\n\n\n\nInference: develop a model that fits the data well. Then make inferences about the data-generating process based on the structure of such model.\nPrediction: Silent about the underlying mechanism generating the data and allow for many predictive algorithms, which only care about accuracy of predictions.\n\n\n\nThey overlap very often."
   },
   {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-9",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-9",
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-10",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-10",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "If the residuals do not have constant variance, then the linear model is incorrect and everything falls apart!\nIf the residuals are dependent, then the linear model is incorrect and everything falls apart!"
+    "text": "The least squares estimators \\(\\hat{\\beta}_0, \\hat{\\beta}_1, \\ldots, \\hat{\\beta}_p\\) are subject to uncertainty, since they are calculated based on a random sample of data.\nTherefore, assessing the amount of the uncertainty in these estimators is important. To this end, we use hypothesis tests on individual coefficients."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#hypothesis-test",
@@ -1001,25 +1008,11 @@
     "text": "Step 2. Test statistic\n\nThe test statistic is\n\\[T = \\frac{\\hat{\\beta}_{j}}{\\sqrt{ \\hat{v}_{jj}} }\\]\n\n\\(\\hat{\\beta}_j\\) is the least squares estimate of the true coefficient \\(\\beta_j\\).\n\\(\\hat{v}_{jj}\\) is the standard error of the estimate \\(\\hat{\\beta}_j\\) calculated using python."
   },
   {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-10",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-10",
-    "title": "Model Evaluation and Inference",
-    "section": "",
-    "text": "The least squares estimators \\(\\hat{\\beta}_0, \\hat{\\beta}_1, \\ldots, \\hat{\\beta}_p\\) are subject to uncertainty, since they are calculated based on a random sample of data.\nTherefore, assessing the amount of the uncertainty in these estimators is important. To this end, we use hypothesis tests on individual coefficients."
-  },
-  {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-11",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-11",
     "title": "Model Evaluation and Inference",
     "section": "",
     "text": "Recall that we obtain the least squares estimates (\\(\\hat{\\beta}_{j}\\)) in python using:\n\n# Fitting the simple linear regression model.\nregr = sm.OLS(auto_Y_train, auto_X_train)\nlinear_model = regr.fit()\nlinear_model.params\n\nconst           41.095329\nweight          -0.007293\nacceleration     0.261650\ndtype: float64\n\n\nLater, we will see how to obtain the standard error of the estimate \\(\\hat{\\beta}_j\\)."
-  },
-  {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#t-distribution",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#t-distribution",
-    "title": "Model Evaluation and Inference",
-    "section": "t distribution",
-    "text": "t distribution\n\nThis distribution is also known as the student’s t-distribution.\nIt was invented by William Gosset when he worked at the Guinness Brewery in Ireland.\nIt has one parameter \\(\\nu\\) which generally equals a number of degrees of freedom.\nThe parameter \\(\\nu\\) controls the shape of the distribution."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-12",
@@ -1029,11 +1022,11 @@
     "text": "\\[T = \\frac{\\hat{\\beta}_{j}}{\\sqrt{ \\hat{v}_{jj}} }\\]\n\n\nWe like this statistic because it follows a well-known distribution.\nIf the null hypothesis (\\(H_0: \\beta_j = 0\\)) is true, the statistic \\(T\\) follows a \\(t\\) distribution with \\(n-p-1\\) degrees of freedom\n\\(n\\) is the number of observations and \\(p\\) the number of predictors."
   },
   {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#step-3.-calculate-the-p-value",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#step-3.-calculate-the-p-value",
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#t-distribution",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#t-distribution",
     "title": "Model Evaluation and Inference",
-    "section": "Step 3. Calculate the p-value",
-    "text": "Step 3. Calculate the p-value\n\nThe p-value is the probability that the test statistic \\(T\\) will take on a value that is at least as extreme as the observed value of the statistic when the null hypothesis (\\(H_0\\)) is true."
+    "section": "t distribution",
+    "text": "t distribution\n\nThis distribution is also known as the student’s t-distribution.\nIt was invented by William Gosset when he worked at the Guinness Brewery in Ireland.\nIt has one parameter \\(\\nu\\) which generally equals a number of degrees of freedom.\nThe parameter \\(\\nu\\) controls the shape of the distribution."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-13",
@@ -1041,6 +1034,20 @@
     "title": "Model Evaluation and Inference",
     "section": "",
     "text": "The t-distribution resembles a standard normal distribution when \\(\\nu\\) goes to infinity."
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#step-3.-calculate-the-p-value",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#step-3.-calculate-the-p-value",
+    "title": "Model Evaluation and Inference",
+    "section": "Step 3. Calculate the p-value",
+    "text": "Step 3. Calculate the p-value\n\nThe p-value is the probability that the test statistic \\(T\\) will take on a value that is at least as extreme as the observed value of the statistic when the null hypothesis (\\(H_0\\)) is true."
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-14",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-14",
+    "title": "Model Evaluation and Inference",
+    "section": "",
+    "text": "For example, consider a t-distribution with 18 degrees of freedom and an observed value of the statistic \\(t_0 = -2.20\\).\nWe sketch the critical region for \\(t_{18}\\), with \\(\\alpha = 0.05\\)."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#decision",
@@ -1061,7 +1068,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#t-tests-in-python",
     "title": "Model Evaluation and Inference",
     "section": "t-tests in python",
-    "text": "t-tests in python\nWe obtain the t-tests of the coefficients using the function summary() together with the lnear_regression object.\n\nmodel_summary = linear_model.summary()\nprint(model_summary)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.700\nModel:                            OLS   Adj. R-squared:                  0.698\nMethod:                 Least Squares   F-statistic:                     453.2\nDate:                Sun, 10 Nov 2024   Prob (F-statistic):          2.43e-102\nTime:                        15:38:36   Log-Likelihood:                -1125.4\nNo. Observations:                 392   AIC:                             2257.\nDf Residuals:                     389   BIC:                             2269.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nconst           41.0953      1.868     21.999      0.000      37.423      44.768\nweight          -0.0073      0.000    -25.966      0.000      -0.008      -0.007\nacceleration     0.2617      0.086      3.026      0.003       0.092       0.432\n==============================================================================\nOmnibus:                       31.397   Durbin-Watson:                   0.818\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               39.962\nSkew:                           0.632   Prob(JB):                     2.10e-09\nKurtosis:                       3.922   Cond. No.                     2.67e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 2.67e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
+    "text": "t-tests in python\nWe obtain the t-tests of the coefficients using the function summary() together with the lnear_regression object.\n\nmodel_summary = linear_model.summary()\nprint(model_summary)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.700\nModel:                            OLS   Adj. R-squared:                  0.698\nMethod:                 Least Squares   F-statistic:                     453.2\nDate:                Sun, 10 Nov 2024   Prob (F-statistic):          2.43e-102\nTime:                        15:40:45   Log-Likelihood:                -1125.4\nNo. Observations:                 392   AIC:                             2257.\nDf Residuals:                     389   BIC:                             2269.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nconst           41.0953      1.868     21.999      0.000      37.423      44.768\nweight          -0.0073      0.000    -25.966      0.000      -0.008      -0.007\nacceleration     0.2617      0.086      3.026      0.003       0.092       0.432\n==============================================================================\nOmnibus:                       31.397   Durbin-Watson:                   0.818\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               39.962\nSkew:                           0.632   Prob(JB):                     2.10e-09\nKurtosis:                       3.922   Cond. No.                     2.67e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 2.67e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#total-sum-of-squares",
@@ -1085,11 +1092,11 @@
     "text": "Coefficient of determination\n\\[R^2 = 1 - \\frac{RSS}{SS_{total}}\\]\n\\(R^2\\) measures the “proportion of variation in the response explained by the full regression model.”"
   },
   {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-14",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-14",
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-15",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-15",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "For example, consider a t-distribution with 18 degrees of freedom and an observed value of the statistic \\(t_0 = -2.20\\).\nWe sketch the critical region for \\(t_{18}\\), with \\(\\alpha = 0.05\\)."
+    "text": "\\[R^2 = 1 - \\frac{RSS}{SS_{total}}\\]\nWhat would you conclude about RSS if \\(R^2 = 1\\)?\n\n\nIn this case, \\(RSS = 0\\) and the model fits the data perfectly.\nIf \\(R^2\\) is small, then large RSS: lots of scatter and the model’s fit is not good.\nIt turns out that \\(R^2\\) is the square of the correlation between the observed response and predicted values."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#remarks-on-r2",
@@ -1106,18 +1113,18 @@
     "text": "Adjusted \\(R^2\\) statistic\nAdjusted \\(R^2\\) is a better measure to decide whether to add a new variable into the model or not. It is:\n\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)},\\]\nwhere \\(k\\) is the number of variables in the model. For the full model, \\(k = p\\).\n\nIf adjusted \\(R^2\\) goes down or stays the same, then new variable is not important.\nIf adjusted \\(R^2\\) goes up, then it is probably useful."
   },
   {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-17",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-17",
-    "title": "Model Evaluation and Inference",
-    "section": "",
-    "text": "\\[R^2 = 1 - \\frac{RSS}{SS_{total}}\\]\n\nWhat would you conclude about RSS if \\(R^2 = 1\\)?\nIn this case, \\(RSS = 0\\) and the model fits the data perfectly.\nIf \\(R^2\\) is small, then large RSS: lots of scatter and the model’s fit is not good.\nIt turns out that \\(R^2\\) is the square of the correlation between the observed response and predictor values."
-  },
-  {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-18",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-18",
     "title": "Model Evaluation and Inference",
     "section": "",
     "text": "Why is adjusted \\(R^2\\) more useful than \\(R^2\\) for adding new variables?\n\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\\]\n\n\nAs we explain more variability, the numerator gets smaller and adjusted \\(R^2\\) gets closer to 1. So, we want to make the numerator small.\nIf we add a “good” variable to the model, RSS will go down. However, \\(n - k - 1\\) will decrease a little bit (because \\(k\\) is now bigger by 1.) So the numerator does not go down by as much as it does in ‘plain’ \\(R^2\\)."
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-19",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-19",
+    "title": "Model Evaluation and Inference",
+    "section": "",
+    "text": "\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\\]\n\nIf we add a noise variable, RSS goes down a tiny bit, but because we divide by \\(n - k - 1\\), the numerator might actually get bigger or change very little.\nSo, adjusted \\(R^2\\) is a better measure of whether adding a new variable is an improvement. If adjusted \\(R^2\\) goes down or stays the same, then new variable is irrelevant. If it goes up, then it probably useful."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#in-python",
@@ -1768,7 +1775,7 @@
     "href": "Classification/Classification.slides.html#section-9",
     "title": "Logistic Regression",
     "section": "",
-    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.025960\n         Iterations 14\nconst    -166.760352\nLeft      -11.796445\nRight      11.592724\nBottom      7.621694\nTop        11.628223\ndtype: float64"
+    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.045627\n         Iterations 12\nconst    -615.944304\nLeft       -1.935222\nRight       5.736024\nBottom      5.171569\nTop         7.018507\ndtype: float64"
   },
   {
     "objectID": "Classification/Classification.slides.html#parameter-testing",
@@ -1782,7 +1789,7 @@
     "href": "Classification/Classification.slides.html#section-10",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression classifier.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      135\nMethod:                           MLE   Df Model:                            4\nDate:                Thu, 07 Nov 2024   Pseudo R-squ.:                  0.9625\nTime:                        11:11:53   Log-Likelihood:                -3.6344\nconverged:                       True   LL-Null:                       -96.983\nCovariance Type:            nonrobust   LLR p-value:                 2.715e-39\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -166.7604    521.122     -0.320      0.749   -1188.140     854.619\nLeft         -11.7964      8.918     -1.323      0.186     -29.276       5.683\nRight         11.5927      7.040      1.647      0.100      -2.205      25.391\nBottom         7.6217      4.357      1.749      0.080      -0.918      16.161\nTop           11.6282      6.265      1.856      0.063      -0.652      23.908\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.79 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
+    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression classifier.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      135\nMethod:                           MLE   Df Model:                            4\nDate:                Sun, 10 Nov 2024   Pseudo R-squ.:                  0.9342\nTime:                        15:40:27   Log-Likelihood:                -6.3877\nconverged:                       True   LL-Null:                       -97.041\nCovariance Type:            nonrobust   LLR p-value:                 3.909e-38\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -615.9443    423.738     -1.454      0.146   -1446.455     214.566\nLeft          -1.9352      4.476     -0.432      0.666     -10.709       6.838\nRight          5.7360      4.310      1.331      0.183      -2.712      14.184\nBottom         5.1716      2.176      2.377      0.017       0.907       9.436\nTop            7.0185      2.915      2.408      0.016       1.306      12.731\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.60 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
   },
   {
     "objectID": "Classification/Classification.slides.html#evaluation",
@@ -1796,7 +1803,7 @@
     "href": "Classification/Classification.slides.html#section-11",
     "title": "Logistic Regression",
     "section": "",
-    "text": "Technically, the classifier outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n123    0.999998\n140    1.000000\n194    1.000000\n183    1.000000\n76     0.000525\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors)."
+    "text": "Technically, the classifier outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n28     0.000051\n152    0.996709\n134    1.000000\n190    0.999999\n43     0.000122\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors)."
   },
   {
     "objectID": "Classification/Classification.slides.html#section-12",
@@ -1810,7 +1817,7 @@
     "href": "Classification/Classification.slides.html#section-13",
     "title": "Logistic Regression",
     "section": "",
-    "text": "predicted_classes.head()\n\n123    1\n140    1\n194    1\n183    1\n76     0\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the test dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
+    "text": "predicted_classes.head()\n\n28     0\n152    1\n134    1\n190    1\n43     0\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the test dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
   },
   {
     "objectID": "Classification/Classification.slides.html#confusion-matrix",
@@ -1824,14 +1831,14 @@
     "href": "Classification/Classification.slides.html#in-python-1",
     "title": "Logistic Regression",
     "section": "In python",
-    "text": "In python\nWe compute the confusion matrix using the function with the same name of scikit-learn. To this end,\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[27  1]\n [ 3 29]]"
+    "text": "In python\nWe compute the confusion matrix using the function with the same name of scikit-learn. To this end,\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[29  1]\n [ 0 30]]"
   },
   {
     "objectID": "Classification/Classification.slides.html#accuracy",
     "href": "Classification/Classification.slides.html#accuracy",
     "title": "Logistic Regression",
     "section": "Accuracy",
-    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.93\n\n\nThe higher the accuracy, the better the performance of the classifier."
+    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.98\n\n\nThe higher the accuracy, the better the performance of the classifier."
   },
   {
     "objectID": "Classification/Classification.slides.html#remarks",
@@ -2301,61 +2308,5 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n2"
-  },
-  {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#intuition-behind",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#intuition-behind",
-    "title": "Model Evaluation and Inference",
-    "section": "Intuition behind …",
-    "text": "Intuition behind …\nthe Residuals versus Fitted Values plot."
-  },
-  {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#calculation-of-fitted-values-and-residuals",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#calculation-of-fitted-values-and-residuals",
-    "title": "Model Evaluation and Inference",
-    "section": "Calculation of fitted values and residuals",
-    "text": "Calculation of fitted values and residuals\nRecall that we can calculate the predicted values and residuals using commands from statsmodels.\n\n# Defining the predictor (X) and the response variable (Y).\nprod_Y_train = production_data['RunTime']\nprod_X_pred = production_data['RunSize']\nprod_X_train = sm.add_constant(prod_X_pred)\n\n# Fitting the simple linear regression model.\nregr = sm.OLS(prod_Y_train, prod_X_train)\nlinear_model = regr.fit()\n\n# Make predictions using the the model\nprod_Y_pred = linear_model.fittedvalues\n\n# Calculate residuals.\nresiduals = linear_model.resid"
-  },
-  {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-15",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-15",
-    "title": "Model Evaluation and Inference",
-    "section": "",
-    "text": "\\[R^2 = 1 - \\frac{RSS}{SS_{total}}\\]\nWhat would you conclude about RSS if \\(R^2 = 1\\)?\n\n\nIn this case, \\(RSS = 0\\) and the model fits the data perfectly.\nIf \\(R^2\\) is small, then large RSS: lots of scatter and the model’s fit is not good.\nIt turns out that \\(R^2\\) is the square of the correlation between the observed response and predicted values."
-  },
-  {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-19",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-19",
-    "title": "Model Evaluation and Inference",
-    "section": "",
-    "text": "\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\\]\n\nIf we add a noise variable, RSS goes down a tiny bit, but because we divide by \\(n - k - 1\\), the numerator might actually get bigger or change very little.\nSo, adjusted \\(R^2\\) is a better measure of whether adding a new variable is an improvement. If adjusted \\(R^2\\) goes down or stays the same, then new variable is irrelevant. If it goes up, then it probably useful."
-  },
-  {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-16",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-16",
-    "title": "Model Evaluation and Inference",
-    "section": "",
-    "text": "For example, consider a t-distribution with 18 degrees of freedom and an observed value of the statistic \\(t_0 = -2.20\\).\nWe sketch the critical region for \\(t_{18}\\), with \\(\\alpha = 0.05\\)."
-  },
-  {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-20",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-20",
-    "title": "Model Evaluation and Inference",
-    "section": "",
-    "text": "Why is adjusted \\(R^2\\) more useful than \\(R^2\\) for adding new variables?\n\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\\]\n\nAs we explain more variability, the numerator gets smaller and adjusted \\(R^2\\) gets closer to 1. So, we want to make the numerator small.\nIf we add a “good” variable to the model, RSS will go down. However, \\(n - k - 1\\) will decrease a little bit (because k is now bigger by 1.) So the numerator does not go down by as much as it does in ‘plain’ \\(R^2\\)."
-  },
-  {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-21",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-21",
-    "title": "Model Evaluation and Inference",
-    "section": "",
-    "text": "\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\\]\n\nIf we add a noise variable, RSS goes down a tiny bit, but because we divide by \\(n - k - 1\\), the numerator might actually get bigger or change very little.\nSo adjusted \\(R^2\\) is a better measure of whether adding a new variable is an improvement. If adjusted \\(R^2\\) goes down or stays the same, then new variable is irrelevant. If it goes up, then it probably useful."
-  },
-  {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#example-2",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#example-2",
-    "title": "Model Evaluation and Inference",
-    "section": "Example 2",
-    "text": "Example 2\n\nLet’s consider the “auto.xlsx” dataset.\n\nauto_data = pd.read_excel('auto.xlsx')\n\n\nLet’s assume that we want to study the following model.\n\\[\nY_i = \\beta_0 + \\beta_1 X_{i1}+ \\beta_2 X_{i2}+ \\epsilon_i,\n\\]\nwhere \\(Y_i\\) is the mpg, \\(X_{i1}\\) is the weight, and \\(X_{i2}\\) is the acceleration of the \\(i\\)-th car, \\(i = 1, \\ldots, 392\\)."
   }
 ]
