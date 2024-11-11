@@ -74,9 +74,9 @@ The error $\epsilon_i$’s must then satisfy the following assumptions:
 
 The errors $\epsilon_1, \ldots, \epsilon_n$ are not observed. To overcome this issue, we use the residuals of our model.
 
-Suppose that the multiple linear regression model is correct and consider the fitted responses $\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \cdots + \hat{\beta}_p X_{ip}$, where $\hat{\beta}_{j}$ is the least squares estimator for the j-th predictor.
+Suppose that the multiple linear regression model is correct and consider the fitted responses $\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \cdots + \hat{\beta}_p X_{ip}$, where $\hat{\beta}_{j}$ is the least squares estimator for the j-th predictor.
 
-We define the residual [**residuals**]{style="color:purple;"} $\hat{\epsilon}_i = y_i - \hat{y}_i$, $i = 1, \ldots, n.$
+We define the residual [**residuals**]{style="color:purple;"} $\hat{\epsilon}_i = Y_i - \hat{Y}_i$, $i = 1, \ldots, n.$
 
 ::: notes
 The residuals $\hat{\epsilon}_i$ are the estimates of the random errors $\epsilon_i$.
@@ -88,7 +88,7 @@ The residuals $\hat{\epsilon}_i$ are the estimates of the random errors $\epsilo
 
 If the model structure is correctly specified and assuming that the least-squares estimates $\hat{\beta}_j$’s are close to the true $\beta_j$’s, respectively, we have that
 
-$$\hat{\epsilon}_i = y_i - \hat{y}_i = y_i - \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \cdots + \hat{\beta}_p X_{ip} \approx \epsilon_i$$
+$$\hat{\epsilon}_i = Y_i - \hat{Y}_i = Y_i - \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \cdots + \hat{\beta}_p X_{ip} \approx \epsilon_i$$
 
 So, the residuals $\hat{\epsilon}_i$ should resemble the random errors $\epsilon$.
 
@@ -130,7 +130,7 @@ production_data = pd.read_excel('production.xlsx')
 production_data.head()
 ```
 
-## Intuition behind ... 
+## Intuition behind ...
 
 the Residuals versus Fitted Values plot.
 
@@ -198,14 +198,13 @@ plt.figure(figsize=(5, 5))
 sns.scatterplot(x = prod_Y_pred, y = residuals)
 plt.axhline(y=0, color='red', linestyle='--')
 plt.title('Residuals vs Fitted Values')
-plt.xlabel('Predicted Values')
+plt.xlabel('Fitted (predicted) Values')
 plt.ylabel('Residuals')
 plt.show()
 ```
 :::
 
 ::: {.column width="40%"}
-
 </br>
 
 -   If there is a trend, the model is misspecified.
@@ -262,7 +261,6 @@ plt.show()
 
 ::::: columns
 ::: {.column width="30%"}
-
 </br></br>
 
 Examples of plots that do and do not support the independence assumption.
@@ -382,7 +380,6 @@ plt.title('QQ Plot of Residuals')
 plt.show()
 ```
 
-
 ## Comments
 
 These data are truly Normally distributed. But note that we still see deviations. These are entirely due to chance.
@@ -475,7 +472,7 @@ Therefore, assessing the amount of the uncertainty in these estimators is import
 
 A statistical hypothesis is a statement about the coefficients of a model.
 
-:::{.r-stack}
+::: r-stack
 $H_0: \beta_j = 0$ v.s. $H_1: \beta_j \neq 0$ (Two-tailed Test)
 :::
 
@@ -540,11 +537,11 @@ $$T = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }$$
 :::
 
 ::: {.column width="70%"}
-- We like this statistic because it follows a well-known distribution.
+-   We like this statistic because it follows a well-known distribution.
 
-- If the null hypothesis ($H_0: \beta_j = 0$) is true, the statistic $T$ follows a [$t$ distribution]{style="color:purple;"} with $n-p-1$ degrees of freedom
+-   If the null hypothesis ($H_0: \beta_j = 0$) is true, the statistic $T$ follows a [$t$ distribution]{style="color:purple;"} with $n-p-1$ degrees of freedom
 
-- $n$ is the number of observations and $p$ the number of predictors.
+-   $n$ is the number of observations and $p$ the number of predictors.
 :::
 :::::
 
