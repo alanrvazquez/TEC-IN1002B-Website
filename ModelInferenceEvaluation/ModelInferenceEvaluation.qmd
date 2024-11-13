@@ -666,7 +666,7 @@ The column [**t**]{style="color:darkgreen;"} contains the values of the [observe
 
 The column [**P>|t|**]{style="color:pink;"} contains the [p-values]{style="color:pink;"} for the hypothesis tests.
 
-Since the p-value is smaler than $\alpha = 0.05$, we reject $H_0$ for acceleration and weight. Therefore, **weight and acceleration have a significant association with the mpg of a car**.
+Since the p-value is smaller than $\alpha = 0.05$, we reject $H_0$ for acceleration and weight. Therefore, **weight and acceleration have a significant association with the mpg of a car**.
 
 ##
 
