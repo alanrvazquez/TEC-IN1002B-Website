@@ -305,9 +305,9 @@ For example:
 
 Once we estimate the intercept and model coefficients, we make predictions as follows:
 
-$$\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \hat{\beta}_2 X_{i2} + \cdots + \hat{\beta}_p X_{ip}$$
+$$\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \hat{\beta}_2 X_{i2} + \cdots + \hat{\beta}_p X_{ip}$$
 
-where $\hat{y}_i$ is the i-th fitted or predicted response.
+where $\hat{Y}_i$ is the i-th fitted or predicted response.
 
 In python, we use the argument `fittedvalues` to show the predicted responses of the estimated model.
 
@@ -336,7 +336,7 @@ Now that we have introduced the estimator $\hat{\beta}_0, \hat{\beta}_1, \ldots,
 
 </br>
 
-The errors of the estimated model are called [**residuals**]{style="color:purple;"} $\hat{\epsilon}_i = y_i - \hat{y}_i$, $i = 1, \ldots, n.$
+The errors of the estimated model are called [**residuals**]{style="color:purple;"} $\hat{\epsilon}_i = Y_i - \hat{Y}_i$, $i = 1, \ldots, n.$
 
 </br>
 

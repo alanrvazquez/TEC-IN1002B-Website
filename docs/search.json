@@ -1600,7 +1600,7 @@
     "href": "LinearRegression/LinearRegression.slides.html#predictions",
     "title": "Multiple Linear Regression",
     "section": "Predictions",
-    "text": "Predictions\nOnce we estimate the intercept and model coefficients, we make predictions as follows:\n\\[\\hat{y}_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_{i1} + \\hat{\\beta}_2 X_{i2} + \\cdots + \\hat{\\beta}_p X_{ip}\\]\nwhere \\(\\hat{y}_i\\) is the i-th fitted or predicted response.\nIn python, we use the argument fittedvalues to show the predicted responses of the estimated model.\n\n# Make predictions using the the model\nrayon_Y_pred = linear_model.fittedvalues"
+    "text": "Predictions\nOnce we estimate the intercept and model coefficients, we make predictions as follows:\n\\[\\hat{Y}_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_{i1} + \\hat{\\beta}_2 X_{i2} + \\cdots + \\hat{\\beta}_p X_{ip}\\]\nwhere \\(\\hat{Y}_i\\) is the i-th fitted or predicted response.\nIn python, we use the argument fittedvalues to show the predicted responses of the estimated model.\n\n# Make predictions using the the model\nrayon_Y_pred = linear_model.fittedvalues"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#section-5",
@@ -1614,7 +1614,7 @@
     "href": "LinearRegression/LinearRegression.slides.html#residuals",
     "title": "Multiple Linear Regression",
     "section": "Residuals",
-    "text": "Residuals\nNow that we have introduced the estimator \\(\\hat{\\beta}_0, \\hat{\\beta}_1, \\ldots, \\hat{\\beta}_p\\), we can be more specific in our terminology of the linear model.\n\nThe errors of the estimated model are called residuals \\(\\hat{\\epsilon}_i = y_i - \\hat{y}_i\\), \\(i = 1, \\ldots, n.\\)\n\nIf the model is correct, the residuals \\(\\hat{\\epsilon}_1, \\hat{\\epsilon}_2, \\ldots, \\hat{\\epsilon}_n\\) give us a good idea of the errors \\(\\epsilon_1, \\epsilon_2, \\ldots, \\epsilon_n\\)."
+    "text": "Residuals\nNow that we have introduced the estimator \\(\\hat{\\beta}_0, \\hat{\\beta}_1, \\ldots, \\hat{\\beta}_p\\), we can be more specific in our terminology of the linear model.\n\nThe errors of the estimated model are called residuals \\(\\hat{\\epsilon}_i = Y_i - \\hat{Y}_i\\), \\(i = 1, \\ldots, n.\\)\n\nIf the model is correct, the residuals \\(\\hat{\\epsilon}_1, \\hat{\\epsilon}_2, \\ldots, \\hat{\\epsilon}_n\\) give us a good idea of the errors \\(\\epsilon_1, \\epsilon_2, \\ldots, \\epsilon_n\\)."
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#section-6",
