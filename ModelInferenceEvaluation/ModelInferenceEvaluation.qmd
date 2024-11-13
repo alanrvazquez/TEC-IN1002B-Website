@@ -398,7 +398,7 @@ When $n$ is relatively small, you tend to see deviations, particularly in the ta
 
 </br>
 
-[If the model structure is incorrect]{style="color:red;"}, the estimated coefficients $\hat{\beta}_j$ will be biased and the predictions $\hat{y}_i$ will be inaccurate.
+[If the model structure is incorrect]{style="color:red;"}, the estimated coefficients $\hat{\beta}_j$ will be biased and the predictions $\hat{Y}_i$ will be inaccurate.
 
 . . .
 
@@ -468,33 +468,53 @@ Therefore, assessing the amount of the uncertainty in these estimators is import
 
 ## Hypothesis test
 
-</br>
+> A statistical hypothesis is a statement about the coefficients of a model.
 
-A statistical hypothesis is a statement about the coefficients of a model.
+. . .
+
+In our case, we are interested in testing:
+
+::: r-stack
+$H_0: \beta_j = 0$ v.s. $H_1: \beta_j \neq 0$  (Two-tailed Test)
+:::
+
+::: incremental
+- Rejecting $H_0$ (in favor of $H_1$) implies that the predictor has a significant association with the response.
+- Not rejecting $H_0$ implies that the predictor does not have a significant association with the response.
+:::
+## 
+
+</br>
 
 ::: r-stack
 $H_0: \beta_j = 0$ v.s. $H_1: \beta_j \neq 0$ (Two-tailed Test)
 :::
 
+</br>
+
 Testing this hypothesis consists of the following steps:
 
 1.  Take a random sample.
 2.  Compute the appropriate test statistic.
-3.  Reject or fail to reject the null hypothesis based on the computed p-value.
+3.  Reject or fail to reject the null hypothesis based on a computed p-value.
 
 ## Step 1. Random sample
 
 </br></br>
 
-The random sample is our training data:
+The random sample is the data we use to train or fit the model.
 
 ```{python}
 #| echo: true
 #| output: true
 
+# Dataset with predictors.
 pred_auto = auto_data[['weight', 'acceleration']]
+
+# Add the column for the intercept.
 auto_X_train = sm.add_constant(pred_auto)
 
+# Dataset with the response only.
 auto_Y_train = auto_data['mpg']
 ```
 
@@ -529,10 +549,13 @@ Later, we will see how to obtain the *standard error* of the estimate $\hat{\bet
 
 ## 
 
-</br></br>
+</br>
 
 ::::: columns
 ::: {.column width="30%"}
+
+</br>
+
 $$T = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }$$
 :::
 
@@ -541,7 +564,7 @@ $$T = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }$$
 
 -   If the null hypothesis ($H_0: \beta_j = 0$) is true, the statistic $T$ follows a [$t$ distribution]{style="color:purple;"} with $n-p-1$ degrees of freedom
 
--   $n$ is the number of observations and $p$ the number of predictors.
+-   Remember that $n$ is the number of observations and $p$ the number of predictors.
 :::
 :::::
 
@@ -618,17 +641,17 @@ print(model_summary)
 
 Let’s consider the total sum of squares
 
-$$SS_{Total} = \sum_{i=1}^{n} (y_i - \bar{y})^2 \text{ where } \bar{y} = \sum_{i=1}^{n} \frac{y_i}{n}.$$
+$$SS_{Total} = \sum_{i=1}^{n} (Y_i - \bar{Y})^2 \text{ where } \bar{Y} = \sum_{i=1}^{n} \frac{Y_i}{n}.$$
 
 This quantity measures the total variation of the response.
 
-In other words, it is the amount of variability inherent in the response before regression is performed.
+In other words, it is the amount of variability inherent in the response before we fit a regression model.
 
 ## Residual Sum of Squares
 
 Let’s also consider the residual sum of squares
 
-$$RSS = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 \text{ where } \bar{y} = \sum_{i=1}^{n} \frac{y_i}{n}.$$
+$$RSS = \sum_{i=1}^{n} (Y_i - \hat{Y}_i)^2 \text{ where } \bar{Y} = \sum_{i=1}^{n} \frac{Y_i}{n}.$$
 
 RSS is the sum of squares due to residuals of the linear regression model; or, residual variation left unexplained by this model.
 
@@ -706,9 +729,9 @@ $$R_{adj}^2=1-\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}$$
 
 $$R_{adj}^2=1-\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}$$
 
--   If we add a noise variable, RSS goes down a tiny bit, but because we divide by $n - k - 1$, the numerator might actually get bigger or change very little.
+-   If we add a useless predictor, RSS goes down a tiny bit, but because we divide by $n - k - 1$, the numerator might actually get bigger or change very little.
 
--   So, adjusted $R^2$ is a better measure of whether adding a new variable is an improvement. If adjusted $R^2$ goes down or stays the same, then new variable is irrelevant. If it goes up, then it probably useful.
+-   So, adjusted $R^2$ is a better measure of whether adding a new predictor is an improvement. If adjusted $R^2$ goes down or stays the same, the new predictor is irrelevant. If it goes up, then it is probably useful.
 
 ## In python
 
