@@ -475,13 +475,14 @@ Therefore, assessing the amount of the uncertainty in these estimators is import
 In our case, we are interested in testing:
 
 ::: r-stack
-$H_0: \beta_j = 0$ v.s. $H_1: \beta_j \neq 0$  (Two-tailed Test)
+$H_0: \beta_j = 0$ v.s. $H_1: \beta_j \neq 0$ (Two-tailed Test)
 :::
 
 ::: incremental
-- Rejecting $H_0$ (in favor of $H_1$) implies that the predictor has a significant association with the response.
-- Not rejecting $H_0$ implies that the predictor does not have a significant association with the response.
+-   Rejecting $H_0$ (in favor of $H_1$) implies that the predictor has a significant association with the response.
+-   Not rejecting $H_0$ implies that the predictor does not have a significant association with the response.
 :::
+
 ## 
 
 </br>
@@ -524,7 +525,7 @@ auto_Y_train = auto_data['mpg']
 
 The test statistic is
 
-$$T = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }$$
+$$t_0 = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }$$
 
 -   $\hat{\beta}_j$ is the least squares estimate of the true coefficient $\beta_j$.
 -   $\hat{v}_{jj}$ is the *standard error* of the estimate $\hat{\beta}_j$ calculated using python.
@@ -553,16 +554,15 @@ Later, we will see how to obtain the *standard error* of the estimate $\hat{\bet
 
 ::::: columns
 ::: {.column width="30%"}
-
 </br>
 
-$$T = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }$$
+$$t_0 = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }$$
 :::
 
 ::: {.column width="70%"}
 -   We like this statistic because it follows a well-known distribution.
 
--   If the null hypothesis ($H_0: \beta_j = 0$) is true, the statistic $T$ follows a [$t$ distribution]{style="color:purple;"} with $n-p-1$ degrees of freedom
+-   If the null hypothesis ($H_0: \beta_j = 0$) is true, the statistic $t_0$ follows a [$t$ distribution]{style="color:purple;"} with $n-p-1$ degrees of freedom
 
 -   Remember that $n$ is the number of observations and $p$ the number of predictors.
 :::
@@ -590,15 +590,15 @@ The t-distribution resembles a standard normal distribution when $\nu$ goes to i
 
 </br></br></br>
 
-The **p-value** is the probability that the test statistic $T$ will take on a value that is at least as extreme as the observed value of the statistic when the null hypothesis ($H_0$) is true.
+The **p-value** is the probability that the test statistic $t_0$ will take on a value that is at least as extreme as the observed value of the statistic when the null hypothesis ($H_0$) is true.
 
 ## 
 
-For example, consider a t-distribution with 18 degrees of freedom and an observed value of the statistic $t_0 = -2.20$.
+For $H_0: \beta_j = 0$ v.s. $H_1: \beta_j \neq 0$, the p-value is calculated using both tails of the $t$ distribution. It is the blue area under the curve below.
 
-We sketch the critical region for $t_{18}$, with $\alpha = 0.05$.
+![](images/critical_region2.png){fig-align="center"}
 
-![](images/critical_region.png){fig-align="center"}
+We use the two tails because $H_1$ includes the possibility that the value of $\beta_j$ is positive or negative.
 
 ## Decision
 
@@ -632,6 +632,54 @@ We obtain the t-tests of the coefficients using the function `summary()` togethe
 model_summary = linear_model.summary()
 print(model_summary)
 ```
+
+## Table of t-tests
+
+|             | coef    | std err | t       | P>$|t|$ | $[0.025$   | $0.975 ]$ |
+|-------------|---------|---------|---------|-------|--------|--------|
+|const        | 41.0953 | 1.868   | 21.999  | 0.000 | 37.423 | 44.768 |
+|weight       | -0.0073 | 0.000   | -25.966 | 0.000 | -0.008 | -0.007 |
+|acceleration |  0.2617 | 0.086   | 3.026   | 0.003 | 0.092  | 0.432  |
+
+The column [**std err**]{style="color:darkblue;"} contains the values of the [estimated standard error]{style="color:darkblue;"} ($\hat{v}_{jj}$) of the estimates $\hat{\beta}_j$. They represent the variability in the estimates.
+
+##
+
+</br>
+
+|             | coef    | std err | t       | P>$|t|$ | $[0.025$   | $0.975 ]$ |
+|-------------|---------|---------|---------|-------|--------|--------|
+|const        | 41.0953 | 1.868   | 21.999  | 0.000 | 37.423 | 44.768 |
+|weight       | -0.0073 | 0.000   | -25.966 | 0.000 | -0.008 | -0.007 |
+|acceleration |  0.2617 | 0.086   | 3.026   | 0.003 | 0.092  | 0.432  |
+
+The column [**t**]{style="color:darkgreen;"} contains the values of the [observed statistic $t_0$]{style="color:darkgreen;"} for the hypothesis tests.
+
+##
+
+
+|             | coef    | std err | t       | P>$|t|$ | $[0.025$   | $0.975 ]$ |   
+|-------------|---------|---------|---------|-------|--------|--------|
+|const        | 41.0953 | 1.868   | 21.999  | 0.000 | 37.423 | 44.768 |
+|weight       | -0.0073 | 0.000   | -25.966 | 0.000 | -0.008 | -0.007 |
+|acceleration |  0.2617 | 0.086   | 3.026   | 0.003 | 0.092  | 0.432  |
+
+The column [**P>|t|**]{style="color:pink;"} contains the [p-values]{style="color:pink;"} for the hypothesis tests.
+
+Since the p-value is smaler than $\alpha = 0.05$, we reject $H_0$ for acceleration and weight. Therefore, **weight and acceleration have a significant association with the mpg of a car**.
+
+##
+
+</br>
+
+|             | coef    | std err | t       | P>$|t|$ | $[0.025$   | $0.975 ]$ |   
+|-------------|---------|---------|---------|-------|--------|--------|
+|const        | 41.0953 | 1.868   | 21.999  | 0.000 | 37.423 | 44.768 |
+|weight       | -0.0073 | 0.000   | -25.966 | 0.000 | -0.008 | -0.007 |
+|acceleration |  0.2617 | 0.086   | 3.026   | 0.003 | 0.092  | 0.432  |
+
+The columns **$[0.025$** and **$0.975]$** show the limits of a 95% confidence interval on each true coefficient $\beta_j$. This interval *contains* the true parameter value with a confidence of 95%.
+
 
 # Multiple and adjusted $R^2$ statistics
 

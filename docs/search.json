@@ -1005,7 +1005,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#step-2.-test-statistic",
     "title": "Model Evaluation and Inference",
     "section": "Step 2. Test statistic",
-    "text": "Step 2. Test statistic\n\nThe test statistic is\n\\[T = \\frac{\\hat{\\beta}_{j}}{\\sqrt{ \\hat{v}_{jj}} }\\]\n\n\\(\\hat{\\beta}_j\\) is the least squares estimate of the true coefficient \\(\\beta_j\\).\n\\(\\hat{v}_{jj}\\) is the standard error of the estimate \\(\\hat{\\beta}_j\\) calculated using python."
+    "text": "Step 2. Test statistic\n\nThe test statistic is\n\\[t_0 = \\frac{\\hat{\\beta}_{j}}{\\sqrt{ \\hat{v}_{jj}} }\\]\n\n\\(\\hat{\\beta}_j\\) is the least squares estimate of the true coefficient \\(\\beta_j\\).\n\\(\\hat{v}_{jj}\\) is the standard error of the estimate \\(\\hat{\\beta}_j\\) calculated using python."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-11",
@@ -1033,14 +1033,14 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-13",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "\\[T = \\frac{\\hat{\\beta}_{j}}{\\sqrt{ \\hat{v}_{jj}} }\\]\n\n\nWe like this statistic because it follows a well-known distribution.\nIf the null hypothesis (\\(H_0: \\beta_j = 0\\)) is true, the statistic \\(T\\) follows a \\(t\\) distribution with \\(n-p-1\\) degrees of freedom\nRemember that \\(n\\) is the number of observations and \\(p\\) the number of predictors."
+    "text": "\\[t_0 = \\frac{\\hat{\\beta}_{j}}{\\sqrt{ \\hat{v}_{jj}} }\\]\n\n\nWe like this statistic because it follows a well-known distribution.\nIf the null hypothesis (\\(H_0: \\beta_j = 0\\)) is true, the statistic \\(t_0\\) follows a \\(t\\) distribution with \\(n-p-1\\) degrees of freedom\nRemember that \\(n\\) is the number of observations and \\(p\\) the number of predictors."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#step-3.-calculate-the-p-value",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#step-3.-calculate-the-p-value",
     "title": "Model Evaluation and Inference",
     "section": "Step 3. Calculate the p-value",
-    "text": "Step 3. Calculate the p-value\n\nThe p-value is the probability that the test statistic \\(T\\) will take on a value that is at least as extreme as the observed value of the statistic when the null hypothesis (\\(H_0\\)) is true."
+    "text": "Step 3. Calculate the p-value\n\nThe p-value is the probability that the test statistic \\(t_0\\) will take on a value that is at least as extreme as the observed value of the statistic when the null hypothesis (\\(H_0\\)) is true."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-14",
@@ -1068,7 +1068,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#t-tests-in-python",
     "title": "Model Evaluation and Inference",
     "section": "t-tests in python",
-    "text": "t-tests in python\nWe obtain the t-tests of the coefficients using the function summary() together with the lnear_regression object.\n\nmodel_summary = linear_model.summary()\nprint(model_summary)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.700\nModel:                            OLS   Adj. R-squared:                  0.698\nMethod:                 Least Squares   F-statistic:                     453.2\nDate:                Tue, 12 Nov 2024   Prob (F-statistic):          2.43e-102\nTime:                        18:05:17   Log-Likelihood:                -1125.4\nNo. Observations:                 392   AIC:                             2257.\nDf Residuals:                     389   BIC:                             2269.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nconst           41.0953      1.868     21.999      0.000      37.423      44.768\nweight          -0.0073      0.000    -25.966      0.000      -0.008      -0.007\nacceleration     0.2617      0.086      3.026      0.003       0.092       0.432\n==============================================================================\nOmnibus:                       31.397   Durbin-Watson:                   0.818\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               39.962\nSkew:                           0.632   Prob(JB):                     2.10e-09\nKurtosis:                       3.922   Cond. No.                     2.67e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 2.67e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
+    "text": "t-tests in python\nWe obtain the t-tests of the coefficients using the function summary() together with the lnear_regression object.\n\nmodel_summary = linear_model.summary()\nprint(model_summary)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.700\nModel:                            OLS   Adj. R-squared:                  0.698\nMethod:                 Least Squares   F-statistic:                     453.2\nDate:                Tue, 12 Nov 2024   Prob (F-statistic):          2.43e-102\nTime:                        18:41:01   Log-Likelihood:                -1125.4\nNo. Observations:                 392   AIC:                             2257.\nDf Residuals:                     389   BIC:                             2269.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nconst           41.0953      1.868     21.999      0.000      37.423      44.768\nweight          -0.0073      0.000    -25.966      0.000      -0.008      -0.007\nacceleration     0.2617      0.086      3.026      0.003       0.092       0.432\n==============================================================================\nOmnibus:                       31.397   Durbin-Watson:                   0.818\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               39.962\nSkew:                           0.632   Prob(JB):                     2.10e-09\nKurtosis:                       3.922   Cond. No.                     2.67e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 2.67e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#total-sum-of-squares",
@@ -1096,7 +1096,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-15",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "For example, consider a t-distribution with 18 degrees of freedom and an observed value of the statistic \\(t_0 = -2.20\\).\nWe sketch the critical region for \\(t_{18}\\), with \\(\\alpha = 0.05\\)."
+    "text": "For \\(H_0: \\beta_j = 0\\) v.s. \\(H_1: \\beta_j \\neq 0\\), the p-value is calculated using both tails of the \\(t\\) distribution. It is the blue area under the curve below.\n\nWe use the two tails because \\(H_1\\) includes the possibility that the value of \\(\\beta_j\\) is positive or negative."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#remarks-on-r2",
@@ -1117,14 +1117,14 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-18",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "Why is adjusted \\(R^2\\) more useful than \\(R^2\\) for adding new variables?\n\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\\]\n\n\nAs we explain more variability, the numerator gets smaller and adjusted \\(R^2\\) gets closer to 1. So, we want to make the numerator small.\nIf we add a “good” variable to the model, RSS will go down. However, \\(n - k - 1\\) will decrease a little bit (because \\(k\\) is now bigger by 1.) So the numerator does not go down by as much as it does in ‘plain’ \\(R^2\\)."
+    "text": "coef\nstd err\nt\nP&gt;\\(|t|\\)\n\\([0.025\\)\n\\(0.975 ]\\)\n\n\n\n\nconst\n41.0953\n1.868\n21.999\n0.000\n37.423\n44.768\n\n\nweight\n-0.0073\n0.000\n-25.966\n0.000\n-0.008\n-0.007\n\n\nacceleration\n0.2617\n0.086\n3.026\n0.003\n0.092\n0.432\n\n\n\nThe columns \\([0.025\\) and \\(0.975]\\) show the limits of a 95% confidence interval on each true coefficient \\(\\beta_j\\). This interval contains the true parameter value with a confidence of 95%."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-19",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-19",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "Why is adjusted \\(R^2\\) more useful than \\(R^2\\) for adding new variables?\n\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\\]\n\n\nAs we explain more variability, the numerator gets smaller and adjusted \\(R^2\\) gets closer to 1. So, we want to make the numerator small.\nIf we add a “good” variable to the model, RSS will go down. However, \\(n - k - 1\\) will decrease a little bit (because \\(k\\) is now bigger by 1.) So the numerator does not go down by as much as it does in ‘plain’ \\(R^2\\)."
+    "text": "\\[R^2 = 1 - \\frac{RSS}{SS_{total}}\\]\nWhat would you conclude about RSS if \\(R^2 = 1\\)?\n\n\nIn this case, \\(RSS = 0\\) and the model fits the data perfectly.\nIf \\(R^2\\) is small, then large RSS: lots of scatter and the model’s fit is not good.\nIt turns out that \\(R^2\\) is the square of the correlation between the observed response and predicted values."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#in-python",
@@ -2314,11 +2314,53 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-16",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "\\[R^2 = 1 - \\frac{RSS}{SS_{total}}\\]\nWhat would you conclude about RSS if \\(R^2 = 1\\)?\n\n\nIn this case, \\(RSS = 0\\) and the model fits the data perfectly.\nIf \\(R^2\\) is small, then large RSS: lots of scatter and the model’s fit is not good.\nIt turns out that \\(R^2\\) is the square of the correlation between the observed response and predicted values."
+    "text": "coef\nstd err\nt\nP&gt;\\(|t|\\)\n\\([0.025\\)\n\\(0.975 ]\\)\n\n\n\n\nconst\n41.0953\n1.868\n21.999\n0.000\n37.423\n44.768\n\n\nweight\n-0.0073\n0.000\n-25.966\n0.000\n-0.008\n-0.007\n\n\nacceleration\n0.2617\n0.086\n3.026\n0.003\n0.092\n0.432\n\n\n\nThe column t contains the values of the observed statistic \\(t_0\\) for the hypothesis tests."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-20",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-20",
+    "title": "Model Evaluation and Inference",
+    "section": "",
+    "text": "\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\\]\n\nIf we add a useless predictor, RSS goes down a tiny bit, but because we divide by \\(n - k - 1\\), the numerator might actually get bigger or change very little.\nSo, adjusted \\(R^2\\) is a better measure of whether adding a new predictor is an improvement. If adjusted \\(R^2\\) goes down or stays the same, the new predictor is irrelevant. If it goes up, then it is probably useful."
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-17",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-17",
+    "title": "Model Evaluation and Inference",
+    "section": "",
+    "text": "coef\nstd err\nt\nP&gt;\\(|t|\\)\n\\([0.025\\)\n\\(0.975 ]\\)\n\n\n\n\nconst\n41.0953\n1.868\n21.999\n0.000\n37.423\n44.768\n\n\nweight\n-0.0073\n0.000\n-25.966\n0.000\n-0.008\n-0.007\n\n\nacceleration\n0.2617\n0.086\n3.026\n0.003\n0.092\n0.432\n\n\n\nThe column P&gt;|t| contains the p-values for the hypothesis tests.\nSince the p-value is smaler than \\(\\alpha = 0.05\\), we reject \\(H_0\\) for acceleration and weight. Therefore, weight and acceleration have a significant association with the mpg of a car."
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-21",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-21",
+    "title": "Model Evaluation and Inference",
+    "section": "",
+    "text": "\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\\]\n\nIf we add a useless predictor, RSS goes down a tiny bit, but because we divide by \\(n - k - 1\\), the numerator might actually get bigger or change very little.\nSo, adjusted \\(R^2\\) is a better measure of whether adding a new predictor is an improvement. If adjusted \\(R^2\\) goes down or stays the same, the new predictor is irrelevant. If it goes up, then it is probably useful."
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#table-of-t-tests",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#table-of-t-tests",
+    "title": "Model Evaluation and Inference",
+    "section": "Table of t-tests",
+    "text": "Table of t-tests\n\n\n\n\n\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;\\(|t|\\)\n\\([0.025\\)\n\\(0.975 ]\\)\n\n\n\n\nconst\n41.0953\n1.868\n21.999\n0.000\n37.423\n44.768\n\n\nweight\n-0.0073\n0.000\n-25.966\n0.000\n-0.008\n-0.007\n\n\nacceleration\n0.2617\n0.086\n3.026\n0.003\n0.092\n0.432\n\n\n\nThe column std err contains the values of the estimated standard error (\\(\\hat{v}_{jj}\\)) of the estimates \\(\\hat{\\beta}_j\\). They represent the variability in the estimates."
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#coef-std-err-t-pt-0.025-0.975",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#coef-std-err-t-pt-0.025-0.975",
+    "title": "Model Evaluation and Inference",
+    "section": "| |coef | std err t P>|t| [0.025 0.975]",
+    "text": "| |coef | std err t P&gt;|t| [0.025 0.975]\n\n\n\n\ncoef\nstd err\nt\nP&gt;\nt\n\n\n\n\n\nconst\n41.0953\n1.868\n21.999\n0.000\n37.423\n44.768\n\n\nweight\n-0.0073\n0.000\n-25.966\n0.000\n-0.008\n-0.007\n\n\nacceleration\n0.2617\n0.086\n3.026\n0.003\n0.092\n0.432\n\n\n\nThe values below the column std err are the values of the estimated standard error (\\(\\hat{v}_JJ\\)) of the estimates \\(\\hat{\\beta}_j\\)."
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-22",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-22",
+    "title": "Model Evaluation and Inference",
+    "section": "",
+    "text": "Why is adjusted \\(R^2\\) more useful than \\(R^2\\) for adding new variables?\n\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\\]\n\n\nAs we explain more variability, the numerator gets smaller and adjusted \\(R^2\\) gets closer to 1. So, we want to make the numerator small.\nIf we add a “good” variable to the model, RSS will go down. However, \\(n - k - 1\\) will decrease a little bit (because \\(k\\) is now bigger by 1.) So the numerator does not go down by as much as it does in ‘plain’ \\(R^2\\)."
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-23",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-23",
     "title": "Model Evaluation and Inference",
     "section": "",
     "text": "\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\\]\n\nIf we add a useless predictor, RSS goes down a tiny bit, but because we divide by \\(n - k - 1\\), the numerator might actually get bigger or change very little.\nSo, adjusted \\(R^2\\) is a better measure of whether adding a new predictor is an improvement. If adjusted \\(R^2\\) goes down or stays the same, the new predictor is irrelevant. If it goes up, then it is probably useful."

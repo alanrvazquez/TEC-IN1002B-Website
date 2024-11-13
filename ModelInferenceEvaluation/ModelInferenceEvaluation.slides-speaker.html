@@ -424,7 +424,7 @@ Alan R. Vazquez
 <h2>Load the libraries</h2>
 <p><br><br></p>
 <p>Let’s import <strong>statsmodels</strong> into python together with the other relevant libraries.</p>
-<div id="b1d2b42b" class="cell" data-execution_count="1">
+<div id="6c6eec97" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Importing necessary libraries</span></span>
 <span id="cb1-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -514,10 +514,10 @@ Alan R. Vazquez
 <section id="dataset" class="slide level2">
 <h2>Dataset</h2>
 <p>The dataset is in the file “production.xlsx”.</p>
-<div id="1674cd96" class="cell" data-execution_count="2">
+<div id="945ebd43" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>production_data <span class="op">=</span> pd.read_excel(<span class="st">'production.xlsx'</span>)</span>
 <span id="cb2-2"><a></a>production_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="338">
+<div class="cell-output cell-output-display" data-execution_count="370">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -583,7 +583,7 @@ Alan R. Vazquez
 <section id="intuition-behind" class="slide level2">
 <h2>Intuition behind …</h2>
 <p>the Residuals versus Fitted Values plot.</p>
-<div id="a83cd950" class="cell" data-execution_count="3">
+<div id="363bb766" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -596,7 +596,7 @@ Alan R. Vazquez
 <section id="calculation-of-fitted-values-and-residuals" class="slide level2">
 <h2>Calculation of fitted values and residuals</h2>
 <p>Recall that we can calculate the predicted values and residuals using commands from <strong>statsmodels</strong>.</p>
-<div id="a9b10d26" class="cell" data-execution_count="4">
+<div id="6dd7f157" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># Defining the predictor (X) and the response variable (Y).</span></span>
 <span id="cb3-2"><a></a>prod_Y_train <span class="op">=</span> production_data[<span class="st">'RunTime'</span>]</span>
 <span id="cb3-3"><a></a>prod_X_pred <span class="op">=</span> production_data[<span class="st">'RunSize'</span>]</span>
@@ -617,7 +617,7 @@ Alan R. Vazquez
 <h2>Residuals vs Fitted Values</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<div id="7c08ebff" class="cell" data-execution_count="5">
+<div id="bda43ed0" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co"># Residual vs Fitted Values Plot</span></span>
@@ -669,7 +669,7 @@ Alan R. Vazquez
 </section>
 <section id="section-3" class="slide level2">
 <h2></h2>
-<div id="870456ce" class="cell" data-execution_count="6">
+<div id="2901d172" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="co"># Residuals vs Time (Case) Plot</span></span>
@@ -718,7 +718,7 @@ Alan R. Vazquez
 <section id="histogram" class="slide level2">
 <h2>Histogram</h2>
 <p>Ideally, the histogram resembles a normal distribution around 0. If the number of observations is small, the histogram may not be an effective visualization.</p>
-<div id="39c3298f" class="cell" data-execution_count="7">
+<div id="215eef44" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="co"># Histogram of residuals</span></span>
@@ -760,7 +760,7 @@ Alan R. Vazquez
 <h2>QQ plot in python</h2>
 <p><br><br><br></p>
 <p>To construct a QQ plot, we use the function <code>qqplot()</code> <strong>statsmodels</strong> library.</p>
-<div id="1cbc6549" class="cell" data-execution_count="8">
+<div id="d972fdb6" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="co"># QQ plot to assess normality of residuals</span></span>
 <span id="cb7-2"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
 <span id="cb7-3"><a></a>sm.qqplot(residuals, fit <span class="op">=</span> <span class="va">True</span>, line <span class="op">=</span> <span class="st">'45'</span>)</span>
@@ -771,7 +771,7 @@ Alan R. Vazquez
 <section id="section-6" class="slide level2">
 <h2></h2>
 <p>Substantial departures from a straight line indicate that the distribution is not normal.</p>
-<div id="9ef183b6" class="cell" data-execution_count="9">
+<div id="51d9c071" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <pre><code>&lt;Figure size 672x384 with 0 Axes&gt;</code></pre>
 </div>
@@ -787,7 +787,7 @@ Alan R. Vazquez
 <section id="section-7" class="slide level2">
 <h2></h2>
 <p>This plot suggests that the residuals are consistent with a Normal curve.</p>
-<div id="3c3d64ac" class="cell" data-execution_count="10">
+<div id="4f661fa4" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <pre><code>&lt;Figure size 672x384 with 0 Axes&gt;</code></pre>
 </div>
@@ -838,7 +838,7 @@ Alan R. Vazquez
 <h2>Example 2</h2>
 <p><br></p>
 <p>Let’s consider the “auto.xlsx” dataset.</p>
-<div id="b75fae71" class="cell" data-execution_count="11">
+<div id="3bdc48ec" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>auto_data <span class="op">=</span> pd.read_excel(<span class="st">'auto.xlsx'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
@@ -910,7 +910,7 @@ Y_i = \beta_0 + \beta_1 X_{i1}+ \beta_2 X_{i2}+ \epsilon_i,
 <h2>Step 1. Random sample</h2>
 <p><br><br></p>
 <p>The random sample is the data we use to train or fit the model.</p>
-<div id="a415a436" class="cell" data-execution_count="12">
+<div id="28ef134c" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="co"># Dataset with predictors.</span></span>
 <span id="cb11-2"><a></a>pred_auto <span class="op">=</span> auto_data[[<span class="st">'weight'</span>, <span class="st">'acceleration'</span>]]</span>
 <span id="cb11-3"><a></a></span>
@@ -925,7 +925,7 @@ Y_i = \beta_0 + \beta_1 X_{i1}+ \beta_2 X_{i2}+ \epsilon_i,
 <h2>Step 2. Test statistic</h2>
 <p><br></p>
 <p>The test statistic is</p>
-<p><span class="math display">\[T = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }\]</span></p>
+<p><span class="math display">\[t_0 = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }\]</span></p>
 <ul>
 <li><span class="math inline">\(\hat{\beta}_j\)</span> is the least squares estimate of the true coefficient <span class="math inline">\(\beta_j\)</span>.</li>
 <li><span class="math inline">\(\hat{v}_{jj}\)</span> is the <em>standard error</em> of the estimate <span class="math inline">\(\hat{\beta}_j\)</span> calculated using python.</li>
@@ -935,12 +935,12 @@ Y_i = \beta_0 + \beta_1 X_{i1}+ \beta_2 X_{i2}+ \epsilon_i,
 <h2></h2>
 <p><br></p>
 <p>Recall that we obtain the least squares estimates (<span class="math inline">\(\hat{\beta}_{j}\)</span>) in python using:</p>
-<div id="151b4dda" class="cell" data-execution_count="13">
+<div id="9dd24879" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="co"># Fitting the simple linear regression model.</span></span>
 <span id="cb12-2"><a></a>regr <span class="op">=</span> sm.OLS(auto_Y_train, auto_X_train)</span>
 <span id="cb12-3"><a></a>linear_model <span class="op">=</span> regr.fit()</span>
 <span id="cb12-4"><a></a>linear_model.params</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="349">
+<div class="cell-output cell-output-display" data-execution_count="381">
 <pre><code>const           41.095329
 weight          -0.007293
 acceleration     0.261650
@@ -955,11 +955,11 @@ dtype: float64</code></pre>
 <div class="columns">
 <div class="column" style="width:30%;">
 <p><br></p>
-<p><span class="math display">\[T = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }\]</span></p>
+<p><span class="math display">\[t_0 = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }\]</span></p>
 </div><div class="column" style="width:70%;">
 <ul>
 <li><p>We like this statistic because it follows a well-known distribution.</p></li>
-<li><p>If the null hypothesis (<span class="math inline">\(H_0: \beta_j = 0\)</span>) is true, the statistic <span class="math inline">\(T\)</span> follows a <span style="color:purple;"><span class="math inline">\(t\)</span> distribution</span> with <span class="math inline">\(n-p-1\)</span> degrees of freedom</p></li>
+<li><p>If the null hypothesis (<span class="math inline">\(H_0: \beta_j = 0\)</span>) is true, the statistic <span class="math inline">\(t_0\)</span> follows a <span style="color:purple;"><span class="math inline">\(t\)</span> distribution</span> with <span class="math inline">\(n-p-1\)</span> degrees of freedom</p></li>
 <li><p>Remember that <span class="math inline">\(n\)</span> is the number of observations and <span class="math inline">\(p\)</span> the number of predictors.</p></li>
 </ul>
 </div></div>
@@ -980,14 +980,14 @@ dtype: float64</code></pre>
 <section id="step-3.-calculate-the-p-value" class="slide level2">
 <h2>Step 3. Calculate the p-value</h2>
 <p><br><br><br></p>
-<p>The <strong>p-value</strong> is the probability that the test statistic <span class="math inline">\(T\)</span> will take on a value that is at least as extreme as the observed value of the statistic when the null hypothesis (<span class="math inline">\(H_0\)</span>) is true.</p>
+<p>The <strong>p-value</strong> is the probability that the test statistic <span class="math inline">\(t_0\)</span> will take on a value that is at least as extreme as the observed value of the statistic when the null hypothesis (<span class="math inline">\(H_0\)</span>) is true.</p>
 </section>
 <section id="section-15" class="slide level2">
 <h2></h2>
-<p>For example, consider a t-distribution with 18 degrees of freedom and an observed value of the statistic <span class="math inline">\(t_0 = -2.20\)</span>.</p>
-<p>We sketch the critical region for <span class="math inline">\(t_{18}\)</span>, with <span class="math inline">\(\alpha = 0.05\)</span>.</p>
+<p>For <span class="math inline">\(H_0: \beta_j = 0\)</span> v.s. <span class="math inline">\(H_1: \beta_j \neq 0\)</span>, the p-value is calculated using both tails of the <span class="math inline">\(t\)</span> distribution. It is the blue area under the curve below.</p>
 
-<img data-src="images/critical_region.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<img data-src="images/critical_region2.png" class="quarto-figure quarto-figure-center r-stretch"><p>We use the two tails because <span class="math inline">\(H_1\)</span> includes the possibility that the value of <span class="math inline">\(\beta_j\)</span> is positive or negative.</p>
+</section>
 <section id="decision" class="slide level2">
 <h2>Decision</h2>
 <p><br><br></p>
@@ -1008,7 +1008,7 @@ dtype: float64</code></pre>
 <section id="t-tests-in-python" class="slide level2">
 <h2>t-tests in python</h2>
 <p>We obtain the t-tests of the coefficients using the function <code>summary()</code> together with the <code>lnear_regression</code> object.</p>
-<div id="fb36d050" class="cell" data-execution_count="14">
+<div id="88c4acfd" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>model_summary <span class="op">=</span> linear_model.summary()</span>
 <span id="cb14-2"><a></a><span class="bu">print</span>(model_summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1018,7 +1018,7 @@ Dep. Variable:                    mpg   R-squared:                       0.700
 Model:                            OLS   Adj. R-squared:                  0.698
 Method:                 Least Squares   F-statistic:                     453.2
 Date:                Tue, 12 Nov 2024   Prob (F-statistic):          2.43e-102
-Time:                        18:05:17   Log-Likelihood:                -1125.4
+Time:                        18:41:01   Log-Likelihood:                -1125.4
 No. Observations:                 392   AIC:                             2257.
 Df Residuals:                     389   BIC:                             2269.
 Df Model:                           2                                         
@@ -1042,6 +1042,229 @@ Notes:
 strong multicollinearity or other numerical problems.</code></pre>
 </div>
 </div>
+</section>
+<section id="table-of-t-tests" class="slide level2">
+<h2>Table of t-tests</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 11%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>coef</th>
+<th>std err</th>
+<th>t</th>
+<th>P&gt;<span class="math inline">\(|t|\)</span></th>
+<th><span class="math inline">\([0.025\)</span></th>
+<th><span class="math inline">\(0.975 ]\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>const</td>
+<td>41.0953</td>
+<td>1.868</td>
+<td>21.999</td>
+<td>0.000</td>
+<td>37.423</td>
+<td>44.768</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>-0.0073</td>
+<td>0.000</td>
+<td>-25.966</td>
+<td>0.000</td>
+<td>-0.008</td>
+<td>-0.007</td>
+</tr>
+<tr class="odd">
+<td>acceleration</td>
+<td>0.2617</td>
+<td>0.086</td>
+<td>3.026</td>
+<td>0.003</td>
+<td>0.092</td>
+<td>0.432</td>
+</tr>
+</tbody>
+</table>
+<p>The column <span style="color:darkblue;"><strong>std err</strong></span> contains the values of the <span style="color:darkblue;">estimated standard error</span> (<span class="math inline">\(\hat{v}_{jj}\)</span>) of the estimates <span class="math inline">\(\hat{\beta}_j\)</span>. They represent the variability in the estimates.</p>
+</section>
+<section id="section-16" class="slide level2">
+<h2></h2>
+<p><br></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 11%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>coef</th>
+<th>std err</th>
+<th>t</th>
+<th>P&gt;<span class="math inline">\(|t|\)</span></th>
+<th><span class="math inline">\([0.025\)</span></th>
+<th><span class="math inline">\(0.975 ]\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>const</td>
+<td>41.0953</td>
+<td>1.868</td>
+<td>21.999</td>
+<td>0.000</td>
+<td>37.423</td>
+<td>44.768</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>-0.0073</td>
+<td>0.000</td>
+<td>-25.966</td>
+<td>0.000</td>
+<td>-0.008</td>
+<td>-0.007</td>
+</tr>
+<tr class="odd">
+<td>acceleration</td>
+<td>0.2617</td>
+<td>0.086</td>
+<td>3.026</td>
+<td>0.003</td>
+<td>0.092</td>
+<td>0.432</td>
+</tr>
+</tbody>
+</table>
+<p>The column <span style="color:darkgreen;"><strong>t</strong></span> contains the values of the <span style="color:darkgreen;">observed statistic <span class="math inline">\(t_0\)</span></span> for the hypothesis tests.</p>
+</section>
+<section id="section-17" class="slide level2">
+<h2></h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 11%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>coef</th>
+<th>std err</th>
+<th>t</th>
+<th>P&gt;<span class="math inline">\(|t|\)</span></th>
+<th><span class="math inline">\([0.025\)</span></th>
+<th><span class="math inline">\(0.975 ]\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>const</td>
+<td>41.0953</td>
+<td>1.868</td>
+<td>21.999</td>
+<td>0.000</td>
+<td>37.423</td>
+<td>44.768</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>-0.0073</td>
+<td>0.000</td>
+<td>-25.966</td>
+<td>0.000</td>
+<td>-0.008</td>
+<td>-0.007</td>
+</tr>
+<tr class="odd">
+<td>acceleration</td>
+<td>0.2617</td>
+<td>0.086</td>
+<td>3.026</td>
+<td>0.003</td>
+<td>0.092</td>
+<td>0.432</td>
+</tr>
+</tbody>
+</table>
+<p>The column <span style="color:pink;"><strong>P&gt;|t|</strong></span> contains the <span style="color:pink;">p-values</span> for the hypothesis tests.</p>
+<p>Since the p-value is smaler than <span class="math inline">\(\alpha = 0.05\)</span>, we reject <span class="math inline">\(H_0\)</span> for acceleration and weight. Therefore, <strong>weight and acceleration have a significant association with the mpg of a car</strong>.</p>
+</section>
+<section id="section-18" class="slide level2">
+<h2></h2>
+<p><br></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 11%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>coef</th>
+<th>std err</th>
+<th>t</th>
+<th>P&gt;<span class="math inline">\(|t|\)</span></th>
+<th><span class="math inline">\([0.025\)</span></th>
+<th><span class="math inline">\(0.975 ]\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>const</td>
+<td>41.0953</td>
+<td>1.868</td>
+<td>21.999</td>
+<td>0.000</td>
+<td>37.423</td>
+<td>44.768</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>-0.0073</td>
+<td>0.000</td>
+<td>-25.966</td>
+<td>0.000</td>
+<td>-0.008</td>
+<td>-0.007</td>
+</tr>
+<tr class="odd">
+<td>acceleration</td>
+<td>0.2617</td>
+<td>0.086</td>
+<td>3.026</td>
+<td>0.003</td>
+<td>0.092</td>
+<td>0.432</td>
+</tr>
+</tbody>
+</table>
+<p>The columns <strong><span class="math inline">\([0.025\)</span></strong> and <strong><span class="math inline">\(0.975]\)</span></strong> show the limits of a 95% confidence interval on each true coefficient <span class="math inline">\(\beta_j\)</span>. This interval <em>contains</em> the true parameter value with a confidence of 95%.</p>
 </section></section>
 <section>
 <section id="multiple-and-adjusted-r2-statistics" class="title-slide slide level1 center">
@@ -1069,7 +1292,7 @@ strong multicollinearity or other numerical problems.</code></pre>
 <p><span class="math inline">\(R^2\)</span> measures the “proportion of variation in the response explained by the full regression model.”</p>
 
 <img data-src="images/example_R-01.png" class="r-stretch"></section>
-<section id="section-16" class="slide level2">
+<section id="section-19" class="slide level2">
 <h2></h2>
 <p><br></p>
 <p><span class="math display">\[R^2 = 1 - \frac{RSS}{SS_{total}}\]</span></p>
@@ -1082,7 +1305,7 @@ strong multicollinearity or other numerical problems.</code></pre>
 </ul>
 </div>
 </section>
-<section id="section-17" class="slide level2">
+<section id="section-20" class="slide level2">
 <h2></h2>
 <p><br></p>
 
@@ -1105,12 +1328,12 @@ strong multicollinearity or other numerical problems.</code></pre>
 <li>If adjusted <span class="math inline">\(R^2\)</span> goes up, then it is probably useful.</li>
 </ul>
 </section>
-<section id="section-18" class="slide level2">
+<section id="section-21" class="slide level2">
 <h2></h2>
 <p><br></p>
 
 <img data-src="images/Figures.005.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="section-19" class="slide level2">
+<section id="section-22" class="slide level2">
 <h2></h2>
 <p>Why is adjusted <span class="math inline">\(R^2\)</span> more useful than <span class="math inline">\(R^2\)</span> for adding new variables?</p>
 <p><span class="math display">\[R_{adj}^2=1-\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\]</span></p>
@@ -1121,7 +1344,7 @@ strong multicollinearity or other numerical problems.</code></pre>
 </ul>
 </div>
 </section>
-<section id="section-20" class="slide level2">
+<section id="section-23" class="slide level2">
 <h2></h2>
 <p><br></p>
 <p><span class="math display">\[R_{adj}^2=1-\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\]</span></p>
@@ -1134,14 +1357,14 @@ strong multicollinearity or other numerical problems.</code></pre>
 <h2>In python</h2>
 <p><br></p>
 <p>To show the <span class="math inline">\(R^2\)</span> value, we use the <code>rsquared</code> argument of the <code>linear_model</code> object.</p>
-<div id="c3498341" class="cell" data-execution_count="15">
+<div id="9006963e" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="bu">print</span>( <span class="bu">round</span>(linear_model.rsquared, <span class="dv">3</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.7</code></pre>
 </div>
 </div>
 <p>To show the adjusted <span class="math inline">\(R^2\)</span> value, we use the <code>rsquared</code> argument of the <code>estimated_model</code> object.</p>
-<div id="9d60da72" class="cell" data-execution_count="16">
+<div id="00d60ba8" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="bu">print</span>( <span class="bu">round</span>(linear_model.rsquared_adj, <span class="dv">3</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.698</code></pre>
