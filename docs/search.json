@@ -459,7 +459,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-2",
     "title": "Additional Topics",
     "section": "",
-    "text": "print(summary_model)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.332\nModel:                            OLS   Adj. R-squared:                  0.328\nMethod:                 Least Squares   F-statistic:                     96.60\nDate:                Wed, 13 Nov 2024   Prob (F-statistic):           8.67e-35\nTime:                        09:15:14   Log-Likelihood:                -1282.2\nNo. Observations:                 392   AIC:                             2570.\nDf Residuals:                     389   BIC:                             2582.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         20.0335      0.409     49.025      0.000      19.230      20.837\nEuropean       7.5695      0.877      8.634      0.000       5.846       9.293\nJapanese      10.4172      0.828     12.588      0.000       8.790      12.044\n==============================================================================\nOmnibus:                       26.330   Durbin-Watson:                   0.763\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               30.217\nSkew:                           0.679   Prob(JB):                     2.74e-07\nKurtosis:                       3.066   Cond. No.                         3.16\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+    "text": "print(summary_model)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.332\nModel:                            OLS   Adj. R-squared:                  0.328\nMethod:                 Least Squares   F-statistic:                     96.60\nDate:                Wed, 13 Nov 2024   Prob (F-statistic):           8.67e-35\nTime:                        14:53:24   Log-Likelihood:                -1282.2\nNo. Observations:                 392   AIC:                             2570.\nDf Residuals:                     389   BIC:                             2582.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         20.0335      0.409     49.025      0.000      19.230      20.837\nEuropean       7.5695      0.877      8.634      0.000       5.846       9.293\nJapanese      10.4172      0.828     12.588      0.000       8.790      12.044\n==============================================================================\nOmnibus:                       26.330   Durbin-Watson:                   0.763\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               30.217\nSkew:                           0.679   Prob(JB):                     2.74e-07\nKurtosis:                       3.066   Cond. No.                         3.16\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#analysis-of-covariance",
@@ -494,7 +494,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#model-summary",
     "title": "Additional Topics",
     "section": "Model summary",
-    "text": "Model summary\n\n# Summary of the models.\nsummary_ancova = ancova_model.summary()\nprint(summary_ancova)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.702\nModel:                            OLS   Adj. R-squared:                  0.700\nMethod:                 Least Squares   F-statistic:                     304.7\nDate:                Wed, 13 Nov 2024   Prob (F-statistic):          1.28e-101\nTime:                        09:15:14   Log-Likelihood:                -1123.9\nNo. Observations:                 392   AIC:                             2256.\nDf Residuals:                     388   BIC:                             2272.\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         43.7322      1.113     39.277      0.000      41.543      45.921\nEuropean       0.9709      0.659      1.474      0.141      -0.324       2.266\nJapanese       2.3271      0.665      3.501      0.001       1.020       3.634\nweight        -0.0070      0.000    -21.956      0.000      -0.008      -0.006\n==============================================================================\nOmnibus:                       40.731   Durbin-Watson:                   0.832\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               61.938\nSkew:                           0.689   Prob(JB):                     3.55e-14\nKurtosis:                       4.377   Cond. No.                     1.83e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 1.83e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
+    "text": "Model summary\n\n# Summary of the models.\nsummary_ancova = ancova_model.summary()\nprint(summary_ancova)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.702\nModel:                            OLS   Adj. R-squared:                  0.700\nMethod:                 Least Squares   F-statistic:                     304.7\nDate:                Wed, 13 Nov 2024   Prob (F-statistic):          1.28e-101\nTime:                        14:53:24   Log-Likelihood:                -1123.9\nNo. Observations:                 392   AIC:                             2256.\nDf Residuals:                     388   BIC:                             2272.\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         43.7322      1.113     39.277      0.000      41.543      45.921\nEuropean       0.9709      0.659      1.474      0.141      -0.324       2.266\nJapanese       2.3271      0.665      3.501      0.001       1.020       3.634\nweight        -0.0070      0.000    -21.956      0.000      -0.008      -0.006\n==============================================================================\nOmnibus:                       40.731   Durbin-Watson:                   0.832\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               61.938\nSkew:                           0.689   Prob(JB):                     3.55e-14\nKurtosis:                       4.377   Cond. No.                     1.83e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 1.83e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#standardization",
@@ -564,7 +564,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-8",
     "title": "Additional Topics",
     "section": "",
-    "text": "print(std_summary_model)\n\n                                 OLS Regression Results                                \n=======================================================================================\nDep. Variable:                  Yield   R-squared (uncentered):                   0.002\nModel:                            OLS   Adj. R-squared (uncentered):             -0.330\nMethod:                 Least Squares   F-statistic:                           0.006694\nDate:                Wed, 13 Nov 2024   Prob (F-statistic):                       0.993\nTime:                        09:15:14   Log-Likelihood:                         -46.940\nNo. Observations:                   8   AIC:                                      97.88\nDf Residuals:                       6   BIC:                                      98.04\nDf Model:                           2                                                  \nCovariance Type:            nonrobust                                                  \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nx1             1.5000     34.907      0.043      0.967     -83.914      86.914\nx2             3.7500     34.907      0.107      0.918     -81.664      89.164\n==============================================================================\nOmnibus:                        2.258   Durbin-Watson:                   0.000\nProb(Omnibus):                  0.323   Jarque-Bera (JB):                0.627\nSkew:                           0.000   Prob(JB):                        0.731\nKurtosis:                       1.628   Cond. No.                         1.00\n==============================================================================\n\nNotes:\n[1] R² is computed without centering (uncentered) since the model does not contain a constant.\n[2] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+    "text": "print(std_summary_model)\n\n                                 OLS Regression Results                                \n=======================================================================================\nDep. Variable:                  Yield   R-squared (uncentered):                   0.002\nModel:                            OLS   Adj. R-squared (uncentered):             -0.330\nMethod:                 Least Squares   F-statistic:                           0.006694\nDate:                Wed, 13 Nov 2024   Prob (F-statistic):                       0.993\nTime:                        14:53:24   Log-Likelihood:                         -46.940\nNo. Observations:                   8   AIC:                                      97.88\nDf Residuals:                       6   BIC:                                      98.04\nDf Model:                           2                                                  \nCovariance Type:            nonrobust                                                  \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nx1             1.5000     34.907      0.043      0.967     -83.914      86.914\nx2             3.7500     34.907      0.107      0.918     -81.664      89.164\n==============================================================================\nOmnibus:                        2.258   Durbin-Watson:                   0.000\nProb(Omnibus):                  0.323   Jarque-Bera (JB):                0.627\nSkew:                           0.000   Prob(JB):                        0.731\nKurtosis:                       1.628   Cond. No.                         1.00\n==============================================================================\n\nNotes:\n[1] R² is computed without centering (uncentered) since the model does not contain a constant.\n[2] Standard Errors assume that the covariance matrix of the errors is correctly specified."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#discussion",
@@ -760,7 +760,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-13",
     "title": "Additional Topics",
     "section": "",
-    "text": "We compute the validation RMSE by first computing the validation MSE using a function with the same name of scikit-learn.\n\nmse = mean_squared_error(Y_valid, predicted_medv_val)\nrmse = mse**(1/2)\nprint( round(rmse, 3) )\n\n5.018\n\n\nThe lower the validation RMSE, the more accurate our model.\nInterpretation: On average, our predictions are off by \\(\\pm\\) 4,465 dollars."
+    "text": "We compute the validation RMSE by first computing the validation MSE using a function with the same name of scikit-learn.\n\nmse = mean_squared_error(Y_valid, predicted_medv_val)\nrmse = mse**(1/2)\nprint( round(rmse, 3) )\n\n4.951\n\n\nThe lower the validation RMSE, the more accurate our model.\nInterpretation: On average, our predictions are off by \\(\\pm\\) 4,465 dollars."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#agenda",
@@ -1057,6 +1057,20 @@
     "text": "For \\(H_0: \\beta_j = 0\\) v.s. \\(H_1: \\beta_j \\neq 0\\), the p-value is calculated using both tails of the \\(t\\) distribution. It is the blue area under the curve below.\n\nWe use the two tails because \\(H_1\\) includes the possibility that the value of \\(\\beta_j\\) is positive or negative."
   },
   {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#the-p-value-is-not-the-probability-that-h_0-is-true",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#the-p-value-is-not-the-probability-that-h_0-is-true",
+    "title": "Model Evaluation and Inference",
+    "section": "The p-value is not the probability that \\(H_0\\) is true",
+    "text": "The p-value is not the probability that \\(H_0\\) is true\nSince the p-value is a probability, and since small p-values indicate that \\(H_0\\) is unlikely to be true, it is tempting to think that the p-value represents the probability that \\(H_0\\) is true.\n\n\n\nThis is not the case!\n\n\n\nRemember that the p-value is the probability that the \\(t\\) test statistic will get a value that is at least as extreme as the observed \\(t_0\\) value when \\(H_0\\) is true."
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#how-small-must-the-p-value-be-to-reject-h_0",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#how-small-must-the-p-value-be-to-reject-h_0",
+    "title": "Model Evaluation and Inference",
+    "section": "How small must the p-value be to reject \\(H_0\\)?",
+    "text": "How small must the p-value be to reject \\(H_0\\)?\n\n\n\n\nAnswer: Very small!\nBut, how small?\nAnswer: Very small!\nBut, tell me, how small?\nAnswer: Okay, it must be less than a value called \\(\\alpha\\) which is usually 0.1, 0.05, or 0.01.\nThank you!\n\n\n\n Sir Ronald Fisher"
+  },
+  {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#decision",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#decision",
     "title": "Model Evaluation and Inference",
@@ -1064,18 +1078,11 @@
     "text": "Decision\n\nFor a significance level of \\(\\alpha = 0.05\\):\n\nIf the p-value is smaller than \\(\\alpha\\), we reject \\(H_0: \\beta_j = 0\\) in favor of \\(H_1: \\beta_j \\neq 0\\).\nIf the p-value is larger than \\(\\alpha\\), we do not reject \\(H_0: \\beta_j = 0\\).\n\nNo scientific basis for this advice. In practice, report the p-value and explore the data using descriptive statistics."
   },
   {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#what-is-a-small-p-value",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#what-is-a-small-p-value",
-    "title": "Model Evaluation and Inference",
-    "section": "What is a small p-value?",
-    "text": "What is a small p-value?\n\nFor a significance level of \\(\\alpha = 0.05\\)\n\nIf the p-value is smaller than \\(\\alpha\\), we reject \\(H_0: \\beta_j = 0\\) in favor of \\(H_1: \\beta_j \\neq 0\\).\nIf the p-value is larger than \\(\\alpha\\), we do not reject \\(H_0: \\beta_j = 0\\).\n\nNo scientific basis for this advice. In practice, report the p-value and explore the data using descriptive statistics."
-  },
-  {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#t-tests-in-python",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#t-tests-in-python",
     "title": "Model Evaluation and Inference",
     "section": "t-tests in python",
-    "text": "t-tests in python\nWe obtain the t-tests of the coefficients using the function summary() together with the linear_model object.\n\nmodel_summary = linear_model.summary()\nprint(model_summary)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.700\nModel:                            OLS   Adj. R-squared:                  0.698\nMethod:                 Least Squares   F-statistic:                     453.2\nDate:                Wed, 13 Nov 2024   Prob (F-statistic):          2.43e-102\nTime:                        14:52:37   Log-Likelihood:                -1125.4\nNo. Observations:                 392   AIC:                             2257.\nDf Residuals:                     389   BIC:                             2269.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nconst           41.0953      1.868     21.999      0.000      37.423      44.768\nweight          -0.0073      0.000    -25.966      0.000      -0.008      -0.007\nacceleration     0.2617      0.086      3.026      0.003       0.092       0.432\n==============================================================================\nOmnibus:                       31.397   Durbin-Watson:                   0.818\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               39.962\nSkew:                           0.632   Prob(JB):                     2.10e-09\nKurtosis:                       3.922   Cond. No.                     2.67e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 2.67e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
+    "text": "t-tests in python\nWe obtain the t-tests of the coefficients using the function summary() together with the linear_model object.\n\nmodel_summary = linear_model.summary()\nprint(model_summary)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.700\nModel:                            OLS   Adj. R-squared:                  0.698\nMethod:                 Least Squares   F-statistic:                     453.2\nDate:                Wed, 13 Nov 2024   Prob (F-statistic):          2.43e-102\nTime:                        14:53:19   Log-Likelihood:                -1125.4\nNo. Observations:                 392   AIC:                             2257.\nDf Residuals:                     389   BIC:                             2269.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nconst           41.0953      1.868     21.999      0.000      37.423      44.768\nweight          -0.0073      0.000    -25.966      0.000      -0.008      -0.007\nacceleration     0.2617      0.086      3.026      0.003       0.092       0.432\n==============================================================================\nOmnibus:                       31.397   Durbin-Watson:                   0.818\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               39.962\nSkew:                           0.632   Prob(JB):                     2.10e-09\nKurtosis:                       3.922   Cond. No.                     2.67e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 2.67e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#table-of-t-tests",
@@ -1083,13 +1090,6 @@
     "title": "Model Evaluation and Inference",
     "section": "Table of t-tests",
     "text": "Table of t-tests\n\n\n\n\n\n\n\n\n\n\n\n\n\ncoef\nstd err\nt\nP&gt;\\(|t|\\)\n\\([0.025\\)\n\\(0.975 ]\\)\n\n\n\n\nconst\n41.0953\n1.868\n21.999\n0.000\n37.423\n44.768\n\n\nweight\n-0.0073\n0.000\n-25.966\n0.000\n-0.008\n-0.007\n\n\nacceleration\n0.2617\n0.086\n3.026\n0.003\n0.092\n0.432\n\n\n\nThe column std err contains the values of the estimated standard error (\\(\\hat{v}_{jj}\\)) of the estimates \\(\\hat{\\beta}_j\\). They represent the variability in the estimates."
-  },
-  {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-16",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-16",
-    "title": "Model Evaluation and Inference",
-    "section": "",
-    "text": "coef\nstd err\nt\nP&gt;\\(|t|\\)\n\\([0.025\\)\n\\(0.975 ]\\)\n\n\n\n\nconst\n41.0953\n1.868\n21.999\n0.000\n37.423\n44.768\n\n\nweight\n-0.0073\n0.000\n-25.966\n0.000\n-0.008\n-0.007\n\n\nacceleration\n0.2617\n0.086\n3.026\n0.003\n0.092\n0.432\n\n\n\nThe column t contains the values of the observed statistic \\(t_0\\) for the hypothesis tests."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-17",
@@ -1104,6 +1104,13 @@
     "title": "Model Evaluation and Inference",
     "section": "",
     "text": "coef\nstd err\nt\nP&gt;\\(|t|\\)\n\\([0.025\\)\n\\(0.975 ]\\)\n\n\n\n\nconst\n41.0953\n1.868\n21.999\n0.000\n37.423\n44.768\n\n\nweight\n-0.0073\n0.000\n-25.966\n0.000\n-0.008\n-0.007\n\n\nacceleration\n0.2617\n0.086\n3.026\n0.003\n0.092\n0.432\n\n\n\nThe column P&gt;|t| contains the p-values for the hypothesis tests.\nSince the p-value is smaller than \\(\\alpha = 0.05\\), we reject \\(H_0\\) for acceleration and weight. Therefore, weight and acceleration have a significant association with the mpg of a car."
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-19",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-19",
+    "title": "Model Evaluation and Inference",
+    "section": "",
+    "text": "coef\nstd err\nt\nP&gt;\\(|t|\\)\n\\([0.025\\)\n\\(0.975 ]\\)\n\n\n\n\nconst\n41.0953\n1.868\n21.999\n0.000\n37.423\n44.768\n\n\nweight\n-0.0073\n0.000\n-25.966\n0.000\n-0.008\n-0.007\n\n\nacceleration\n0.2617\n0.086\n3.026\n0.003\n0.092\n0.432\n\n\n\nThe columns \\([0.025\\) and \\(0.975]\\) show the limits of a 95% confidence interval on each true coefficient \\(\\beta_j\\). This interval contains the true parameter value with a confidence of 95%."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#total-sum-of-squares",
@@ -1127,11 +1134,11 @@
     "text": "Coefficient of determination\n\\[R^2 = 1 - \\frac{RSS}{SS_{total}}\\]\n\\(R^2\\) measures the “proportion of variation in the response explained by the full regression model.”"
   },
   {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-19",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-19",
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-20",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-20",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "coef\nstd err\nt\nP&gt;\\(|t|\\)\n\\([0.025\\)\n\\(0.975 ]\\)\n\n\n\n\nconst\n41.0953\n1.868\n21.999\n0.000\n37.423\n44.768\n\n\nweight\n-0.0073\n0.000\n-25.966\n0.000\n-0.008\n-0.007\n\n\nacceleration\n0.2617\n0.086\n3.026\n0.003\n0.092\n0.432\n\n\n\nThe columns \\([0.025\\) and \\(0.975]\\) show the limits of a 95% confidence interval on each true coefficient \\(\\beta_j\\). This interval contains the true parameter value with a confidence of 95%."
+    "text": "\\[R^2 = 1 - \\frac{RSS}{SS_{total}}\\]\nWhat would you conclude about RSS if \\(R^2 = 1\\)?\n\n\nIn this case, \\(RSS = 0\\) and the model fits the data perfectly.\nIf \\(R^2\\) is small, then large RSS: lots of scatter and the model’s fit is not good.\nIt turns out that \\(R^2\\) is the square of the correlation between the observed (\\(Y_i\\)) and predicted (\\(\\hat{Y}_i\\)) responses."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#remarks-on-r2",
@@ -1148,18 +1155,18 @@
     "text": "Adjusted \\(R^2\\) statistic\nAdjusted \\(R^2\\) is a better measure to decide whether to add a new variable into the model or not. It is:\n\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)},\\]\nwhere \\(k\\) is the number of variables in the model. For the full model, \\(k = p\\).\n\n\nIf adjusted \\(R^2\\) goes down or stays the same, then new variable is not important.\nIf adjusted \\(R^2\\) goes up, then it is probably useful."
   },
   {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-22",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-22",
-    "title": "Model Evaluation and Inference",
-    "section": "",
-    "text": "Why is adjusted \\(R^2\\) more useful than \\(R^2\\) for adding new variables?\n\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\\]\n\n\nAs we explain more variability, the numerator gets smaller and adjusted \\(R^2\\) gets closer to 1. So, we want to make the numerator small.\nIf we add a “good” variable to the model, RSS will go down. However, \\(n - k - 1\\) will decrease a little bit (because \\(k\\) is now bigger by 1.) So the numerator does not go down by as much as it does in ‘plain’ \\(R^2\\)."
-  },
-  {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-23",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-23",
     "title": "Model Evaluation and Inference",
     "section": "",
     "text": "Why is adjusted \\(R^2\\) more useful than \\(R^2\\) for adding new variables?\n\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\\]\n\n\nAs we explain more variability, the numerator gets smaller and adjusted \\(R^2\\) gets closer to 1. So, we want to make the numerator small.\nIf we add a “good” variable to the model, RSS will go down. However, \\(n - k - 1\\) will decrease a little bit (because \\(k\\) is now bigger by 1.) So the numerator does not go down by as much as it does in ‘plain’ \\(R^2\\)."
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-24",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-24",
+    "title": "Model Evaluation and Inference",
+    "section": "",
+    "text": "\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\\]\n\nIf we add a useless predictor, RSS goes down a tiny bit, but because we divide by \\(n - k - 1\\), the numerator might actually get bigger or change very little.\nSo, adjusted \\(R^2\\) is a better measure of whether adding a new predictor is an improvement. If adjusted \\(R^2\\) goes down or stays the same, the new predictor is irrelevant. If it goes up, then it is probably useful."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#in-python",
@@ -1176,11 +1183,11 @@
     "text": "Model building\n\nModel building refers to a set of techniques to reduce the full model to one that only includes significant predictors.\nNote that it is more a deconstruction than building an actual model. This is because the full model must be a valid one to begin with. Specifically, the full model must provide residuals that satisfy all the assumptions (1)-(4).\nAfter we have obtained a satisfactory full model, we can start the model building process."
   },
   {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#some-model-building-techniques",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#some-model-building-techniques",
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#two-model-building-techniques",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#two-model-building-techniques",
     "title": "Model Evaluation and Inference",
-    "section": "Some model building techniques",
-    "text": "Some model building techniques\n\n\nAdjusted \\(R^2\\) statistic. We add one variable at a time and see the change in adjusted \\(R^2\\) statistic. If the value decreases, then we stop and evaluate the resulting model.\nT-tests on the individual coefficients. If \\(H_0\\) is not rejected, this indicates that the predictor \\(X_j\\) can be deleted from the model. We can then delete the predictor and refit the model. We can repeat this process several times until we reach a model in which all variables are significant."
+    "section": "Two model building techniques",
+    "text": "Two model building techniques\n\n\n\nAdjusted \\(R^2\\) statistic. We add one variable at a time and see the change in adjusted \\(R^2\\) statistic. If the value decreases, then we stop and evaluate the resulting model.\nT-tests on the individual coefficients. If \\(H_0\\) is not rejected, this indicates that the predictor \\(X_j\\) can be deleted from the model. We can then delete the predictor and refit the model. We can repeat this process several times until we reach a model in which all variables are significant."
   },
   {
     "objectID": "Tools/Tools1.slides.html#agenda",
@@ -1810,7 +1817,7 @@
     "href": "Classification/Classification.slides.html#section-9",
     "title": "Logistic Regression",
     "section": "",
-    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.029184\n         Iterations 15\nconst    -916.950373\nLeft        7.789977\nRight      -2.149918\nBottom      8.048204\nTop        10.244673\ndtype: float64"
+    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.055433\n         Iterations 12\nconst    -514.769552\nLeft       -1.372795\nRight       4.546022\nBottom      4.647244\nTop         5.608148\ndtype: float64"
   },
   {
     "objectID": "Classification/Classification.slides.html#parameter-testing",
@@ -1824,7 +1831,7 @@
     "href": "Classification/Classification.slides.html#section-10",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression classifier.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      135\nMethod:                           MLE   Df Model:                            4\nDate:                Wed, 13 Nov 2024   Pseudo R-squ.:                  0.9579\nTime:                        09:14:53   Log-Likelihood:                -4.0858\nconverged:                       True   LL-Null:                       -97.041\nCovariance Type:            nonrobust   LLR p-value:                 4.010e-39\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -916.9504    725.259     -1.264      0.206   -2338.432     504.531\nLeft           7.7900      7.182      1.085      0.278      -6.286      21.866\nRight         -2.1499      4.080     -0.527      0.598     -10.147       5.847\nBottom         8.0482      5.387      1.494      0.135      -2.510      18.606\nTop           10.2447      5.376      1.906      0.057      -0.292      20.781\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.77 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
+    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression classifier.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      135\nMethod:                           MLE   Df Model:                            4\nDate:                Wed, 13 Nov 2024   Pseudo R-squ.:                  0.9200\nTime:                        14:53:02   Log-Likelihood:                -7.7607\nconverged:                       True   LL-Null:                       -96.983\nCovariance Type:            nonrobust   LLR p-value:                 1.608e-37\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -514.7696    379.942     -1.355      0.175   -1259.442     229.903\nLeft          -1.3728      3.901     -0.352      0.725      -9.019       6.274\nRight          4.5460      3.953      1.150      0.250      -3.202      12.294\nBottom         4.6472      1.712      2.715      0.007       1.292       8.003\nTop            5.6081      1.881      2.981      0.003       1.921       9.295\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.50 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
   },
   {
     "objectID": "Classification/Classification.slides.html#evaluation",
@@ -1838,7 +1845,7 @@
     "href": "Classification/Classification.slides.html#section-11",
     "title": "Logistic Regression",
     "section": "",
-    "text": "Technically, the classifier outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n120    1.000000e+00\n65     5.863699e-01\n195    1.000000e+00\n22     3.054733e-01\n61     4.765961e-08\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors)."
+    "text": "Technically, the classifier outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n64     0.023053\n165    1.000000\n163    0.999999\n191    0.915018\n83     0.003831\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors)."
   },
   {
     "objectID": "Classification/Classification.slides.html#section-12",
@@ -1852,7 +1859,7 @@
     "href": "Classification/Classification.slides.html#section-13",
     "title": "Logistic Regression",
     "section": "",
-    "text": "predicted_classes.head()\n\n120    1\n65     1\n195    1\n22     0\n61     0\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the test dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
+    "text": "predicted_classes.head()\n\n64     0\n165    1\n163    1\n191    1\n83     0\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the test dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
   },
   {
     "objectID": "Classification/Classification.slides.html#confusion-matrix",
@@ -1866,14 +1873,14 @@
     "href": "Classification/Classification.slides.html#in-python-1",
     "title": "Logistic Regression",
     "section": "In python",
-    "text": "In python\nWe compute the confusion matrix using the function with the same name of scikit-learn. To this end,\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[28  2]\n [ 0 30]]"
+    "text": "In python\nWe compute the confusion matrix using the function with the same name of scikit-learn. To this end,\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[28  0]\n [ 1 31]]"
   },
   {
     "objectID": "Classification/Classification.slides.html#accuracy",
     "href": "Classification/Classification.slides.html#accuracy",
     "title": "Logistic Regression",
     "section": "Accuracy",
-    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.97\n\n\nThe higher the accuracy, the better the performance of the classifier."
+    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.98\n\n\nThe higher the accuracy, the better the performance of the classifier."
   },
   {
     "objectID": "Classification/Classification.slides.html#remarks",
@@ -2343,40 +2350,5 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n2"
-  },
-  {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#the-p-value-is-not-the-probability-that-h_0-is-true",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#the-p-value-is-not-the-probability-that-h_0-is-true",
-    "title": "Model Evaluation and Inference",
-    "section": "The p-value is not the probability that \\(H_0\\) is true",
-    "text": "The p-value is not the probability that \\(H_0\\) is true\nSince the p-value is a probability, and since small p-values indicate that \\(H_0\\) is unlikely to be true, it is tempting to think that the p-value represents the probability that \\(H_0\\) is true.\n\n\n\nThis is not the case!\n\n\n\nRemember that the p-value is the probability that the \\(t\\) test statistic will get a value that is at least as extreme as the observed \\(t_0\\) value when \\(H_0\\) is true."
-  },
-  {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#how-small-must-the-p-value-be-to-reject-h_0",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#how-small-must-the-p-value-be-to-reject-h_0",
-    "title": "Model Evaluation and Inference",
-    "section": "How small must the p-value be to reject \\(H_0\\)?",
-    "text": "How small must the p-value be to reject \\(H_0\\)?\n\n\n\n\nAnswer: Very small!\nBut, how small?\nAnswer: Very small!\nBut, tell me, how small?\nAnswer: Okay, it must be less than a value called \\(\\alpha\\) which is usually 0.1, 0.05, or 0.01.\nThank you!\n\n\n\n Sir Ronald Fisher"
-  },
-  {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-20",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-20",
-    "title": "Model Evaluation and Inference",
-    "section": "",
-    "text": "\\[R^2 = 1 - \\frac{RSS}{SS_{total}}\\]\nWhat would you conclude about RSS if \\(R^2 = 1\\)?\n\n\nIn this case, \\(RSS = 0\\) and the model fits the data perfectly.\nIf \\(R^2\\) is small, then large RSS: lots of scatter and the model’s fit is not good.\nIt turns out that \\(R^2\\) is the square of the correlation between the observed (\\(Y_i\\)) and predicted (\\(\\hat{Y}_i\\)) responses."
-  },
-  {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-24",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-24",
-    "title": "Model Evaluation and Inference",
-    "section": "",
-    "text": "\\[R_{adj}^2=1-\\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}\\]\n\nIf we add a useless predictor, RSS goes down a tiny bit, but because we divide by \\(n - k - 1\\), the numerator might actually get bigger or change very little.\nSo, adjusted \\(R^2\\) is a better measure of whether adding a new predictor is an improvement. If adjusted \\(R^2\\) goes down or stays the same, the new predictor is irrelevant. If it goes up, then it is probably useful."
-  },
-  {
-    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#two-model-building-techniques",
-    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#two-model-building-techniques",
-    "title": "Model Evaluation and Inference",
-    "section": "Two model building techniques",
-    "text": "Two model building techniques\n\n\n\nAdjusted \\(R^2\\) statistic. We add one variable at a time and see the change in adjusted \\(R^2\\) statistic. If the value decreases, then we stop and evaluate the resulting model.\nT-tests on the individual coefficients. If \\(H_0\\) is not rejected, this indicates that the predictor \\(X_j\\) can be deleted from the model. We can then delete the predictor and refit the model. We can repeat this process several times until we reach a model in which all variables are significant."
   }
 ]
