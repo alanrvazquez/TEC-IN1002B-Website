@@ -224,7 +224,7 @@ Another example.
 
 ![](images/clipboard-890785179.png){fig-align="center"}
 
-The phenomenon of non-constant variance is called [**heteroscedasticity**]{style="color:red;"}
+The phenomenon of non-constant variance is called [**heteroscedasticity**]{style="color:red;"}.
 
 ## Residuals vs Time Plot
 
@@ -731,7 +731,7 @@ In other words, it is the amount of variability inherent in the response before 
 
 Let’s also consider the residual sum of squares
 
-$$RSS = \sum_{i=1}^{n} (Y_i - \hat{Y}_i)^2 \text{ where } \bar{Y} = \sum_{i=1}^{n} \frac{Y_i}{n}.$$
+$$RSS = \sum_{i=1}^{n} (Y_i - \hat{Y}_i)^2.$$
 
 RSS is the sum of squares due to residuals of the linear regression model; or, residual variation left unexplained by this model.
 
