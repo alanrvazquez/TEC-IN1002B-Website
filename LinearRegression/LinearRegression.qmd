@@ -372,4 +372,27 @@ error_variance = linear_model.scale
 print( round(error_variance, 3) )
 ```
 
+## 
+
+The smaller the value of $\hat{\sigma}^2$, the closer our predictions are to the actual responses.
+
+In practice, it is better to use the standard deviation of the errors. That is, 
+
+$$\hat{\sigma}=\left(\frac{1}{n-p-1}\sum_{i=1}^{n} \hat{\epsilon}_i^{2}\right)^{1/2}.$$
+In python, we compute $\hat{\sigma}$ as follows:
+
+```{python}
+#| echo: true
+#| output:  true
+
+print( round(error_variance**(1/2), 3) )
+```
+
+## Interpretation of $\hat{\sigma}$
+
+</br></br></br>
+
+- The smaller the $\hat{\sigma}$, the closer our predictions are to the actual responses.
+- The $\hat{\sigma} = 10.292$ implies that, on average, the predictions of our model are off or incorrect by 10.292 mpg.
+
 # [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)
