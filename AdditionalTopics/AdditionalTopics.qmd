@@ -537,7 +537,7 @@ $$\sqrt{Y} = \beta_0 + \beta_1 X + \epsilon$$ $$\sqrt{Y} = \beta_0 + \beta_1 \sq
 ::::: columns
 ::: {.column width="60%"}
 -   **numpy** is a powerful, open-source data manipulation and analysis library for python
--   It is the backbone**scikit-learn** and **pandas**
+-   It is the backbone for **scikit-learn** and **pandas**
 -   <https://numpy.org/>
 :::
 
