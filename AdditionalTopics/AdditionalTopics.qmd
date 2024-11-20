@@ -52,8 +52,8 @@ We will not use all the functions from the **scikit-learn** library. Instead, we
 ::: incremental
 -   A categorical predictor takes on values that are categories, say, names or labels.
 -   Their use in regression requires dummy variables, which are quantitative variables.
--   When a categorical variable has more than two levels, a single dummy variable cannot represent all possible values.
--   In general, a categorical variable with $k$ categories requires $k-1$ dummy variables.
+-   When a categorical predictor has more than two levels, a single dummy variable cannot represent all possible categories.
+-   In general, a categorical predictor with $k$ categories requires $k-1$ dummy variables.
 :::
 
 ## Dummy coding
@@ -138,7 +138,7 @@ $$Y_i= \beta_0+\beta_1 d_{1i} +\beta_2 d_{2i} +\epsilon_i \ \text{for} \ i=1,\ld
 
 Alternatively, we can write the regression model as:
 
-$$y_i= \beta_0+\beta_1 d_{1i} +\beta_2 d_{2i} +\epsilon_i = \begin{cases}
+$$Y_i= \beta_0+\beta_1 d_{1i} +\beta_2 d_{2i} +\epsilon_i = \begin{cases}
 \beta_0+\beta_1 +\epsilon_i \text{ if car is European}\\
 \beta_0+\beta_2 +\epsilon_i \text{ if car is Japanese} \\
 \beta_0 +\epsilon_i\;\;\;\;\;\;\ \text{ if car is American} 
