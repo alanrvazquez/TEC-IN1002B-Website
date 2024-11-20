@@ -43,14 +43,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 ```
 
-We will not use all the functions from the **scikit-learn** library. Instead, we will use specific functions from the sub-library **preprocessing**, **model_selection**, and **metrics**.
+We will not use all the functions from the **scikit-learn** library. Instead, we will use specific functions from the sub-libraries **preprocessing**, **model_selection**, and **metrics**.
 
 # Linear models with categorical predictors
 
 ## Categorical predictors
 
 ::: incremental
--   A categorical predictor takes on values that are names or labels.
+-   A categorical predictor takes on values that are categories, say, names or labels.
 -   Their use in regression requires dummy variables, which are quantitative variables.
 -   When a categorical variable has more than two levels, a single dummy variable cannot represent all possible values.
 -   In general, a categorical variable with $k$ categories requires $k-1$ dummy variables.
@@ -95,7 +95,7 @@ auto_data[['mpg', 'origin']].head(6)
 
 This variable has 3 categories: European, American, Japanese.
 
-2 dummy variables are required:
+So, 2 dummy variables are required:
 
 $$d_1 =
 \begin{cases}
@@ -113,6 +113,8 @@ $$d_2 =
 
 ## The multiple linear regression model
 
+</br> 
+
 $$Y_i= \beta_0+\beta_1 d_{1i} +\beta_2 d_{2i} +\epsilon_i \ \text{for} \ i=1,\ldots,n.$$
 
 -   $Y_i$ is the i-th response.
@@ -120,6 +122,8 @@ $$Y_i= \beta_0+\beta_1 d_{1i} +\beta_2 d_{2i} +\epsilon_i \ \text{for} \ i=1,\ld
 -   $d_{2i}$ is 1 if the i-th observation is from a Japanese car, and 0 otherwise.
 
 ## Model coefficients
+
+</br> 
 
 $$Y_i= \beta_0+\beta_1 d_{1i} +\beta_2 d_{2i} +\epsilon_i \ \text{for} \ i=1,\ldots,n.$$
 
@@ -148,6 +152,8 @@ Given this model representation:
 
 ## In python
 
+</br> 
+
 We follow three steps to fit a linear model with a categorical predictor. First, we compute the dummy variables.
 
 ```{python}
@@ -173,6 +179,8 @@ dummy_X_train
 
 ## 
 
+</br></br>  
+
 Finally, we fit the model using `OLS()` and `fit()` from **statsmodels**.
 
 ```{python}
@@ -190,6 +198,8 @@ summary_model = linear_model.summary()
 ```
 
 ## 
+
+</br> 
 
 ```{python}
 #| echo: true
@@ -210,7 +220,7 @@ where $X_i$ denotes the i-th observed value of weight and $\beta_3$ is the coeff
 
 ## ANCOVA model
 
-The components of the ANCOVA model are individual functions of the parameters.
+The components of the ANCOVA model are individual functions of the coefficients.
 
 To gain insight into the model, we write it as follows:
 
@@ -235,6 +245,8 @@ Note that these models have different intercepts but the same slope.
 -   However, better tests are possible such as overall and partial F-tests (not discussed here).
 
 ## In python
+
+</br> 
 
 To fit an ANCOVA model, we use similar steps as before. The only extra step is to concatenate the data with the dummy variables and the numerical predictor using the function `concat()` from **pandas**.
 
@@ -316,6 +328,8 @@ Interpretation:
 :::
 
 ## Example 2
+
+</br> 
 
 The yield of a chemical process ($Y$) is related to the concentration of the reactant ($X_1$) and the operating temperature ($X_2$).
 
@@ -424,6 +438,8 @@ Ideally, the dummy variables for the categorical predictors are standardized too
 
 ## Incorrect model
 
+</br></br> 
+
 A model is incorrect if
 
 ::: incremental
@@ -525,11 +541,12 @@ $$\sqrt{Y} = \beta_0 + \beta_1 X + \epsilon$$ $$\sqrt{Y} = \beta_0 + \beta_1 \sq
 
 ## Effect of transformations
 
+</br> 
+
 ::: incremental
 -   In many cases, the $\ln{(\cdot)}$ transformation Improves the relationship between predictor and response.
 -   Produces residuals that have constant variance (variance-stabilizing transformation).
--   The $\sqrt{\cdot}$ transformation provides similar benefits, except that
--   It is useful for response variables that are counts or follow a Poisson distribution.
+-   The $\sqrt{\cdot}$ transformation provides similar benefits, except that it is useful for response variables that are counts or follow a Poisson distribution.
 :::
 
 ## NumPy library
@@ -709,11 +726,14 @@ plt.show()
 
 ## Conclusions
 
+::: incremental
 -   Transformations may help us to develop models that better approximate the data. However, the interpretation of these models may be too complex. For instance, how can you interpret $\beta_1$ in $\log{(Y)} = \beta_0 + \beta_1\ X + \epsilon$?
 
 -   Therefore, transformations are more useful to build good predictive models. That is, models whose goal is to give accurate predictions of future observations.
 
 -   Note that, we need to transform back our response predictions to the original scale. For example, if $Y' = \ln{Y}$ is the transformed response, then our final prediction is $Y^\star = e^{{Y'}^\star}$.
+:::
+
 
 # Predicting future observations
 
@@ -766,6 +786,8 @@ In many practical situations, a test dataset is not available. To overcome this 
 **Idea**: Apply model to your [**validation dataset**]{style="color:orange;"} to mimic what will happen when you apply it to test dataset.
 
 ## Example 4
+
+</br> 
 
 The "BostonHousing.xlsx" contains data collected by the US Bureau of the Census concerning housing in the area of Boston, Massachusetts. The dataset includes data on 506 census housing tracts in the Boston area in 1970s.
 
@@ -831,7 +853,7 @@ The parameter `test_size` sets the portion of the dataset that will go to the te
 
 ## 
 
-</br>
+</br></br>
 
 -   The function makes a clever partition of the data using the *empirical* distribution of the response.
 
@@ -908,6 +930,8 @@ Benefits:
 :::
 
 ## In python
+
+</br>
 
 We first compute the predictions of our model on the validation dataset. That is, we use the values of the predictors in this dataset and use it as input to our model. Our model then computes the prediction of the response for each combination of values of the predictors.
 
