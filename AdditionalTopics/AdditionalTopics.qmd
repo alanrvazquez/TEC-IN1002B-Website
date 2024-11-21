@@ -93,7 +93,7 @@ auto_data[['mpg', 'origin']].head(6)
 
 ## Dummy variables
 
-This variable has 3 categories: European, American, Japanese.
+Origin has 3 categories: European, American, Japanese.
 
 So, 2 dummy variables are required:
 
@@ -110,6 +110,21 @@ $$d_2 =
 \end{cases}.$$
 
 “American” acts as the reference category.
+
+## 
+
+The dataset with the dummy variables looks like this:
+
+| origin        | $d_1$    | $d_2$    |
+|--------------|----------|----------|
+| American     | 0        | 0        |
+| American     | 0        | 0        |
+| European     | 1        | 0        |
+| European     | 1        | 0        |
+| American     | 0        | 0        |
+| Japanese     | 0        | 1        |
+| $\vdots$     | $\vdots$ | $\vdots$ |
+
 
 ## The multiple linear regression model
 
