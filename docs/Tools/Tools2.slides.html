@@ -451,7 +451,7 @@ Alan R. Vazquez
 <section id="example-1" class="slide level2">
 <h2>Example 1</h2>
 <p>Let’s load the data in “penguins.xlsx”.</p>
-<div id="03630318" class="cell" data-execution_count="1">
+<div id="8624a19f" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Load pandas.</span></span>
 <span id="cb1-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a></a></span>
@@ -545,7 +545,7 @@ Alan R. Vazquez
 <section id="section" class="slide level2">
 <h2></h2>
 <p>In python, we check the type of each variable in a dataset using the function <code>info()</code>.</p>
-<div id="cadcc6f6" class="cell" data-execution_count="2">
+<div id="8c68c680" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>penguins_data.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
@@ -577,12 +577,12 @@ memory usage: 21.6+ KB</code></pre>
 <section id="define-categorical-variables" class="slide level2">
 <h2>Define categorical variables</h2>
 <p>Technically, the variable <code>sex</code> in <code>penguins_data</code> is <span style="color:pink;"><strong>categorical</strong></span>. To explicitly tell this to python, we use the following code.</p>
-<div id="2a8dcf0a" class="cell" data-execution_count="3">
+<div id="514e002c" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>penguins_data[<span class="st">'sex'</span>] <span class="op">=</span> penguins_data[<span class="st">'sex'</span>].astype(<span class="st">'category'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Setting <code>sex</code> to categorical allows us to use effective visualization for this data.</p>
 <p>We do the same for the other categorical variables <code>species</code> and <code>island</code>.</p>
-<div id="e9c7a360" class="cell" data-execution_count="4">
+<div id="13638811" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>penguins_data[<span class="st">'species'</span>] <span class="op">=</span> penguins_data[<span class="st">'species'</span>].astype(<span class="st">'category'</span>)</span>
 <span id="cb5-2"><a></a>penguins_data[<span class="st">'island'</span>] <span class="op">=</span> penguins_data[<span class="st">'island'</span>].astype(<span class="st">'category'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -590,7 +590,7 @@ memory usage: 21.6+ KB</code></pre>
 <section id="section-1" class="slide level2">
 <h2></h2>
 <p>Let’s check the type of variables again.</p>
-<div id="cb25405a" class="cell" data-execution_count="5">
+<div id="5c1379f0" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>penguins_data.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
@@ -635,7 +635,7 @@ memory usage: 14.9 KB</code></pre>
 <section id="in-python" class="slide level2">
 <h2>In python</h2>
 <p>The sample mean is calculated using the function <code>mean()</code>.</p>
-<div id="55e8dbc8" class="cell" data-execution_count="6">
+<div id="d24f1a51" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a>bill_length_mean <span class="op">=</span> penguins_data[<span class="st">'bill_length_mm'</span>].mean()</span>
 <span id="cb8-2"><a></a><span class="bu">print</span>(bill_length_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -644,7 +644,7 @@ memory usage: 14.9 KB</code></pre>
 </div>
 <p>We use the function print to show the number. Otherwise, python will show the computer type of value stored in <code>bill_length_mean</code>.</p>
 <p>You can also round the result to, say, three decimals.</p>
-<div id="f9beaa45" class="cell" data-execution_count="7">
+<div id="c26ccb34" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="bu">print</span>( <span class="bu">round</span>(bill_length_mean, <span class="dv">3</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>43.922</code></pre>
@@ -667,7 +667,7 @@ s^2 = \frac{1}{n-1} \sum_{i=1}^{n} (y_i - \bar{y})^2 = \frac{(y_1 - \bar{y})^2  
 <h2></h2>
 <p><br><br></p>
 <p>In python, the sample variance is calculated using the function <code>var()</code>.</p>
-<div id="80e8cd22" class="cell" data-execution_count="8">
+<div id="d77b6ea8" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a>bill_length_var <span class="op">=</span> penguins_data[<span class="st">'bill_length_mm'</span>].var()</span>
 <span id="cb12-2"><a></a><span class="bu">print</span>( <span class="bu">round</span>(bill_length_var, <span class="dv">3</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -688,7 +688,7 @@ s = \left(\frac{1}{n-1} \sum_{i=1}^{n} (y_i - \bar{y})^2 \right)^{1/2}
 <h2></h2>
 <p><br><br></p>
 <p>In python, the sample variance is calculated using the function <code>std()</code>.</p>
-<div id="d764e72a" class="cell" data-execution_count="9">
+<div id="90bf8b2a" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>bill_length_std <span class="op">=</span> penguins_data[<span class="st">'bill_length_mm'</span>].std()</span>
 <span id="cb14-2"><a></a><span class="bu">print</span>( <span class="bu">round</span>(bill_length_std, <span class="dv">3</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -719,7 +719,7 @@ s = \left(\frac{1}{n-1} \sum_{i=1}^{n} (y_i - \bar{y})^2 \right)^{1/2}
 <h2></h2>
 <p><br></p>
 <p>In python, the quartiles are calculated using the function <code>quantile()</code>.</p>
-<div id="9a47d545" class="cell" data-execution_count="10">
+<div id="4adb1936" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="co"># Set the quantiles.</span></span>
 <span id="cb16-2"><a></a>set_quantiles <span class="op">=</span> [<span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>]</span>
 <span id="cb16-3"><a></a><span class="co"># Compute the quantiles.</span></span>
@@ -735,7 +735,7 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <section id="sample-maximum-and-minimum" class="slide level2">
 <h2>Sample maximum and minimum</h2>
 <p>Other relevant summary statistics are the <strong>maximum</strong> and <strong>minimum</strong>, which are calculated using the functions <code>max()</code> and <code>min()</code>, respectively.</p>
-<div id="507c6c38" class="cell" data-execution_count="11">
+<div id="6d60c5ff" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a>bill_length_max <span class="op">=</span> penguins_data[<span class="st">'bill_length_mm'</span>].<span class="bu">max</span>()</span>
 <span id="cb18-2"><a></a><span class="bu">print</span>(bill_length_max)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -743,7 +743,7 @@ Name: bill_length_mm, dtype: float64</code></pre>
 </div>
 </div>
 <p><br></p>
-<div id="e19ab620" class="cell" data-execution_count="12">
+<div id="f2076fcd" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a>bill_length_min <span class="op">=</span> penguins_data[<span class="st">'bill_length_mm'</span>].<span class="bu">min</span>()</span>
 <span id="cb20-2"><a></a><span class="bu">print</span>(bill_length_min)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -764,7 +764,7 @@ Name: bill_length_mm, dtype: float64</code></pre>
 <p>Summarizes a categorical variable by counting the values per category.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="3a7db6db" class="cell" data-execution_count="13">
+<div id="326d943a" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python code-overflow-wrap number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a></a>penguins_data[<span class="st">'species'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>species
@@ -830,7 +830,7 @@ Name: count, dtype: int64</code></pre>
 <p>Summarizes a categorical variable by calculating the <em>proportion of values</em> per category.</p>
 <div class="columns">
 <div class="column" style="width:55%;">
-<div id="f58a785e" class="cell" data-execution_count="14">
+<div id="4f350804" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python code-overflow-wrap number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a></a><span class="co"># Calculate number of observations in the dataset.</span></span>
 <span id="cb24-2"><a></a>n <span class="op">=</span> <span class="bu">len</span>(penguins_data) </span>
 <span id="cb24-3"><a></a></span>
@@ -905,13 +905,13 @@ Name: count, dtype: float64</code></pre>
 <h2></h2>
 <p><br></p>
 <p>The dataset is in the file “glass.xlsx”. Let’s load it using <strong>pandas</strong>.</p>
-<div id="6f2ffbf4" class="cell" data-execution_count="15">
+<div id="b11dd756" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a></a><span class="co"># Load the Excel file into a pandas DataFrame.</span></span>
 <span id="cb26-2"><a></a>glass_data <span class="op">=</span> pd.read_excel(<span class="st">"glass.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 <p>The variable <code>Type</code> is categorical. So, let’s ensure python knows this using the code below.</p>
-<div id="ca37a131" class="cell" data-execution_count="16">
+<div id="5fb2becb" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a></a>glass_data[<span class="st">'Type'</span>] <span class="op">=</span> glass_data[<span class="st">'Type'</span>].astype(<span class="st">'category'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -939,7 +939,7 @@ Name: count, dtype: float64</code></pre>
 <h2>Importing the libraries</h2>
 <p><br></p>
 <p>The <strong>matplotlib</strong> and <strong>seaborn</strong> libraries are pre-installed in Google Colab. However, we need to inform Google Colab that we want to use them and its functions using the following command:</p>
-<div id="df7fda84" class="cell" data-execution_count="17">
+<div id="ed7be58a" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb28-2"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -955,7 +955,7 @@ Name: count, dtype: float64</code></pre>
 <section id="histogram-of-na" class="slide level2">
 <h2>Histogram of Na</h2>
 <p>To create a histogram, we use the function <code>histplot()</code> from <strong>seabron</strong>.</p>
-<div id="a3ee70ad" class="cell" data-execution_count="18">
+<div id="8b2c12a0" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>,<span class="dv">4</span>)) <span class="co"># Create space for figure.</span></span>
@@ -988,7 +988,7 @@ Name: count, dtype: float64</code></pre>
 <section id="box-plot-of-na" class="slide level2">
 <h2>Box plot of Na</h2>
 <p>To create a boxplot, we use the function <code>boxplot()</code> from <strong>seabron</strong>.</p>
-<div id="787b945a" class="cell" data-execution_count="19">
+<div id="c3af3fa5" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>,<span class="dv">4</span>)) <span class="co"># Create space for the figure.</span></span>
@@ -1022,7 +1022,7 @@ Name: count, dtype: float64</code></pre>
 <section id="scatter-plot-of-na-versus-ri" class="slide level2">
 <h2>Scatter plot of Na versus RI</h2>
 <p>To create a scatter plot, we use the function <code>scatter()</code> from <strong>seabron</strong>. In this function, you must state the</p>
-<div id="5f0ae941" class="cell" data-execution_count="20">
+<div id="f31a9080" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>,<span class="dv">4</span>)) <span class="co"># Create space for the plot.</span></span>
@@ -1051,7 +1051,7 @@ Name: count, dtype: float64</code></pre>
 <section id="section-7" class="slide level2">
 <h2></h2>
 <p>We create the bar chart using the function <code>countplot()</code> from <strong>seaborn</strong>.</p>
-<div id="62a0d6ff" class="cell" data-execution_count="21">
+<div id="dbeaf977" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a></a><span class="co"># Create plot.</span></span>
@@ -1074,7 +1074,7 @@ Name: count, dtype: float64</code></pre>
 <h2>Saving plots</h2>
 <p><br></p>
 <p>We save a figure using the <code>save.fig</code> function from <strong>matplotlib</strong>. The <code>dpi</code> argument of this function sets the resolution of the image. The higher the <code>dpi</code>, the better the resolution.</p>
-<div id="0036d917" class="cell" data-execution_count="22">
+<div id="df5432bf" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">7</span>))</span>
 <span id="cb33-2"><a></a>sns.countplot(data <span class="op">=</span> glass_data, x <span class="op">=</span> <span class="st">'Type'</span>)</span>
 <span id="cb33-3"><a></a>plt.title(<span class="st">'Frequency of Each Category'</span>)</span>
@@ -1097,7 +1097,7 @@ Name: count, dtype: float64</code></pre>
 </section>
 <section id="section-8" class="slide level2">
 <h2></h2>
-<div id="fd2e7d81" class="cell" data-execution_count="23">
+<div id="f472d8ca" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</span>
 <span id="cb34-2"><a></a>sns.countplot(data <span class="op">=</span> glass_data, x <span class="op">=</span> <span class="st">'Type'</span>)</span>
 <span id="cb34-3"><a></a>plt.title(<span class="st">'Relative Frequency of Each Category'</span>, fontsize <span class="op">=</span> <span class="dv">12</span>)</span>
