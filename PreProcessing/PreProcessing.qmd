@@ -417,7 +417,7 @@ The variable Origin would then be replaced by the three dummy variables
 
 ## 
 
-The variable Origin would then be replaced by the three dummy variables
+The variable Origin would then be replaced by the three dummy variables.
 
 | Origin ($X$) | $d_2$    | $d_3$    |
 |--------------|----------|----------|
