@@ -222,7 +222,7 @@ Data science methodology is based on numerical data given in tables.
 Explanatory variables or predictors:
 
 -   $X$ represents an explanatory variable or predictor.
--   $\boldsymbol{X}$ represents a whole collection of predictors.
+-   $\boldsymbol{X} = (X_1, X_2, \ldots, X_p)$ represents a whole collection of $p$ predictors.
 
 Outcome or response:
 

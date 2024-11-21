@@ -318,6 +318,8 @@ The standard deviation of $\tilde{X}$ is 1.
 
 ## Benefits and limitations
 
+</br>
+
 Benefits:
 
 -   All quantitative predictors are on the same scale.
@@ -331,15 +333,15 @@ Limitations:
 
 ## Interpretation
 
-$$f(\tilde{\boldsymbol{X}}) = \beta_0 + \beta_1 \tilde{X}_1 + \beta_2 \tilde{X}_2 + \cdots + \beta_p \tilde{X}_p,$$
+$$Y = \beta_0 + \beta_1 \tilde{X}_1 + \beta_2 \tilde{X}_2 + \cdots + \beta_p \tilde{X}_p + \epsilon,$$
 
-where $\tilde{X}_i$ is the standardized version of the predictor $x_i$.
+where $\tilde{X}_i$ is the standardized version of the predictor $X_i$.
 
 Interpretation:
 
 ::: incremental
--   $\beta_0$ is the mean response when all predictors $X_1, X_2, \ldots, X_p$ are set to their average value.
--   $\beta_j$ is the amount of increase in the mean response by an increase of 1 standard deviation in the predictor $x_j$, *when all other predictors are fixed to an arbitrary value*.
+-   $\beta_0$ is the mean response when all [**original**]{style="color:darkblue;"} predictors $X_1, X_2, \ldots, X_p$ are set to their average value.
+-   $\beta_j$ is the amount of increase in the mean response by an increase of 1 standard deviation in the [**original**]{style="color:darkblue;"} predictor $X_j$, *when all other predictors are fixed to an arbitrary value*.
 :::
 
 ## Example 2
@@ -391,18 +393,20 @@ Xs_training = scaler.fit_transform(predictor_data)
 
 ## 
 
-</br>
-
 Now the predictors are on the same scale
 
 ```{python}
 #| echo: true
+#| code-fold: true
 #| output: true
 
-print( Xs_training )
+Xs_training = pd.DataFrame(Xs_training, columns = predictor_data.columns)
+Xs_training 
 ```
 
 ## 
+
+</br>
 
 To fit the model, we follow the same functions as before.
 
@@ -413,10 +417,10 @@ To fit the model, we follow the same functions as before.
 # Add the intercept.
 Xs_training_int = sm.add_constant(Xs_training)
 
-# Create linear regression object
+# Create linear regression object.
 std_regr = sm.OLS(catalyst_data['Yield'], Xs_training)
 
-# Train the model using the training sets
+# Train the model using the training sets.
 std_linear_model = std_regr.fit()
 
 # Summary of the model.
@@ -588,7 +592,7 @@ import numpy as np
 
 ## Continuation of Example 3
 
-To transform the response ($Y$) using $\ln{(Y)}$ or $\sqrt{(Y)}$ we use the functions `log()` and `sqrt()`, respectively, from **numpy**.
+To transform the response ($Y$) using $\ln{(Y)}$ or $\sqrt{Y}$ we use the functions `log()` and `sqrt()`, respectively, from **numpy**.
 
 ```{python}
 #| echo: true
@@ -659,17 +663,21 @@ plt.show()
 
 ## Quadratic model
 
+</br>
+
 Although there is an improvement in the **Residuals vs Fitted Values** plot when using the logarithm. The two plots suggests that we are missing a term in the model.
 
 </br>
 
 . . .
 
-In fact, a better model for the data is a quadratic model with the logarithm of the response.
+In fact, a better model for the data is a quadratic model with the logarithm of the response:
 
-$$\log{(Y_i)} = \beta_0 + \beta_1 X_i + \beta_2 X_i^2 +\epsilon_i$$
+$$\log{(Y_i)} = \beta_0 + \beta_1 X_i + \beta_2 X_i^2 +\epsilon_i.$$
 
 ## 
+
+</br>
 
 To fit this model to the data, we construct a new predictor matrix.
 
@@ -752,11 +760,24 @@ plt.show()
 
 # Predicting future observations
 
+## Recall that ...
+
+In data science, we assume that
+
+$$Y = f(\boldsymbol{X}) + \epsilon$$
+
+where $f(\boldsymbol{X})$ represents the true relationship between $\boldsymbol{X} = (X_1, X_2, \ldots, X_p)$ and $Y$, which is unknown and very complex!
+
+In our analysis, we further assume that 
+
+$$f(\boldsymbol{X}) = \beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p.$$
+
+
 ## Two datasets
 
 </br></br>
 
-The application of data science models necessitates two data sets:
+The application of data science models needs two data sets:
 
 ::: incremental
 -   [**Training data**]{style="color:blue;"} is data that we use to train or construct the estimated model $\hat{f}(\boldsymbol{X}) = \hat{\beta}_0 + \hat{\beta}_1 X_1 + \cdots + \hat{\beta}_p X_p$.
@@ -797,6 +818,8 @@ Use it to **evaluate** $\hat{f}(\boldsymbol{X})$.
 In many practical situations, a test dataset is not available. To overcome this issue, we use a [**validation dataset**]{style="color:orange;"}.
 
 ![](images/validation.png){fig-align="center" width="645"}
+
+. . .
 
 **Idea**: Apply model to your [**validation dataset**]{style="color:orange;"} to mimic what will happen when you apply it to test dataset.
 
