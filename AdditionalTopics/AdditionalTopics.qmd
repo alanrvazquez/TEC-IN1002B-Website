@@ -887,7 +887,7 @@ X_train, X_valid, Y_train, Y_valid = train_test_split(X_full, Y_full,
                                                       test_size=0.3)
 ```
 
-The parameter `test_size` sets the portion of the dataset that will go to the test set.
+The parameter `test_size` sets the portion of the dataset that will go to the validation set.
 
 ## 
 
@@ -895,9 +895,9 @@ The parameter `test_size` sets the portion of the dataset that will go to the te
 
 -   The function makes a clever partition of the data using the *empirical* distribution of the response.
 
--   Technically, it splits the data so that the distribution of the response under the training and test sets is similar.
+-   Technically, it splits the data so that the distribution of the response under the training and validation sets is similar.
 
--   Usually, the proportion of the dataset that goes to the test set is 20% or 30%.
+-   Usually, the proportion of the dataset that goes to the validation set is 20% or 30%.
 
 ## Fit a model using training data
 
