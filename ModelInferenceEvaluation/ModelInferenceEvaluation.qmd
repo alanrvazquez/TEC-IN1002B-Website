@@ -852,9 +852,9 @@ After we have obtained a satisfactory full model, we can start the model buildin
 </br>
 
 ::: incremental
-1. Adjusted $R^2$ statistic. We add one variable at a time and see the change in adjusted $R^2$ statistic. If the value decreases, then we stop and evaluate the resulting model.
+1.  Adjusted $R^2$ statistic. We add one variable at a time and see the change in adjusted $R^2$ statistic. If the value decreases, then we stop and evaluate the resulting model.
 
-2. T-tests on the individual coefficients. If $H_0$ is not rejected, this indicates that the predictor $X_j$ can be deleted from the model. We can then delete the predictor and refit the model. We can repeat this process several times until we reach a model in which all variables are significant.
+2.  T-tests on the individual coefficients. If $H_0$ is not rejected, this indicates that the predictor $X_j$ can be deleted from the model. We can then delete the predictor and refit the model. We can repeat this process several times until we reach a model in which all variables are significant.
 :::
 
 # [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)
