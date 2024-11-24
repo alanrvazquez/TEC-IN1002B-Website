@@ -28,6 +28,8 @@ jupyter: python3
 
 ## Load the libraries
 
+</br>
+
 Before we start, let's import the data science libraries into python.
 
 ```{python}
@@ -41,7 +43,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, accuracy_score
 ```
 
-Here, we will introduce the function `train_test_split()` to split a data set into training and test sets. We will also introduce the functions `confusion_matrix()` and `accuracy_score()` to evaluate the performance of classifiers.
+Here, we will introduce the functions `confusion_matrix()` and `accuracy_score()` to evaluate the performance of a logistic regression classifier.
 
 ## Two main problems
 
@@ -60,12 +62,15 @@ The predictors ($\boldsymbol{X}$) can be qualitative or quantitative.
 Explanatory variables or predictors:
 
 -   $X$ represents an explanatory variable or predictor.
--   $\boldsymbol{X}$ represents a whole collection of predictors.
+-   $\boldsymbol{X} = (X_1, X_2, \ldots, X_p)$ represents a collection of $p$ predictors.
 
 ## 
 
+</br>
+
 [Response]{style="text-decoration: underline;"}:
 
+::: incremental
 -   $Y$ is a [**categorical variable**]{style="color:darkgreen;"} taking [**2 categories**]{style="color:darkgreen;"} or [**classes**]{style="color:darkgreen;"}.
 
 -   For example, $Y$ can take [0]{style="color:darkgreen;"} or [1]{style="color:darkgreen;"}, [A]{style="color:darkgreen;"} or [B]{style="color:darkgreen;"}, [no]{style="color:darkgreen;"} or [yes]{style="color:darkgreen;"}, [spam]{style="color:darkgreen;"} or [not spam]{style="color:darkgreen;"}.
@@ -74,51 +79,66 @@ Explanatory variables or predictors:
 
     -   The **target class** is the one for which $Y = 1$.
     -   The **reference class** is the one for which $Y = 0$.
+:::
 
 ## 
 
-</br>
+</br></br>
 
-[**Goal**]{style="color:darkgreen;"}: Find the best function $C(\boldsymbol{x})$ for predicting $Y = \{0, 1\}$ from $\boldsymbol{x}$.
-
-</br>
-
-To achieve this, we will consider functions $C(\boldsymbol{x})$ that [**predict the probability**]{style="color:brown;"} that $Y$ takes the value of 1.
+[**Goal**]{style="color:darkgreen;"}: Find the best function $C(\boldsymbol{X})$ for predicting $Y = \{0, 1\}$ from $\boldsymbol{X}$.
 
 </br>
+
+. . .
+
+To achieve this goal, we will consider functions $C(\boldsymbol{X})$ that [**predict the probability**]{style="color:brown;"} that $Y$ takes the value of 1.
+
+</br>
+
+. . .
 
 A probability for each class can be very useful for gauging the model’s confidence about the predicted classification.
 
 ## Example 1
 
-Consider a spam e-mail filter.
+Consider a spam e-mail filter where $Y$ is the type of e-mail.
 
--   The target class is spam.
--   The reference class is not spam.
+-   The target class is spam. In this case, $Y=1$.
+-   The reference class is not spam. In this case, $Y=0$.
+
+. . .
 
 ![](images/spam.png){fig-align="center" width="556" height="178"}
+
+. . .
 
 Both e-mails would be classified as spam. However, we'd have more confidence in our classification for the second email.
 
 ## 
 
-In technical terms, $C(\boldsymbol{x})$ will work with the *conditional probability*:
+</br>
+
+Technically, $C(\boldsymbol{X})$ will work with the *conditional probability*:
 
 $$P(Y = 1 | X_1 = x_1, X_2 = x_2, \ldots, X_p = x_p) = P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})$$
 
-In words, this is the probability that $Y$ takes a value of 1 [**given that**]{style="color:brown;"} the predictors $\boldsymbol{X}$ have taken the values $x_1, x_2, \ldots, x_p$.
+In words, this is the probability that $Y$ takes a value of 1 [**given that**]{style="color:brown;"} the predictors $\boldsymbol{X}$ have taken the values $\boldsymbol{x} = (x_1, x_2, \ldots, x_p)$.
 
 </br>
 
-Note that the conditional probability that $Y$ takes the value of 0 is
+. . .
+
+The conditional probability that $Y$ takes the value of 0 is
 
 $$P(Y = 0 | \boldsymbol{X} = \boldsymbol{x}) = 1 - P(Y = 1 | \boldsymbol{X} = \boldsymbol{x}).$$
 
 ## Bayes Classifier
 
-It turns out that, if we have the true structure of $P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})$, we can build a good classification function called the [**Bayes classifier**]{style="color:darkblue;"}:
+</br>
 
-$$C(\boldsymbol{x}) =
+It turns out that, if we know the true structure of $P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})$, we can build a good classification function called the [**Bayes classifier**]{style="color:darkblue;"}:
+
+$$C(\boldsymbol{X}) =
     \begin{cases}
       1, & \text{if}\ P(Y = 1 | \boldsymbol{X} = \boldsymbol{x}) > 0.5 \\
       0, & \text{if}\ P(Y = 1 | \boldsymbol{X} = \boldsymbol{x}) \leq 0.5
@@ -130,11 +150,15 @@ This function classifies to the most probable class using the conditional distri
 
 </br>
 
-[HOWEVER, we don’t (and will never) know the true form of $P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})$!]{style="color:brown;"}
+[HOWEVER, we don’t (and will never) know the true form of $P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})$!]{style="color:red;"}
+
+. . .
 
 To overcome this issue, we have a standard solution:
 
 -   Impose an structure on $P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})$. [**Logistic Regression classifier**]{style="color:brown;"}.
+
+. . .
 
 Before discussing the logistic regression classifier, we need to introduce the training and test set for building and testing the model.
 
@@ -150,7 +174,7 @@ $$Y =
 
 We have four predictors:
 
-::: {style="font-size: 60%;"}
+::: {style="font-size: 80%;"}
 -   Left: length of left edge (mm)
 -   Right: length of right edge (mm)
 -   Top: distance from the image to top edge
@@ -170,7 +194,7 @@ The data is in the file “banknotes.xlsx”.
 #| output: true
 
 bank_data = pd.read_excel("banknotes.xlsx")
-
+# Set response variable as categorical.
 bank_data['Status'] = bank_data['Status'].astype('category')
 bank_data.head()
 ```

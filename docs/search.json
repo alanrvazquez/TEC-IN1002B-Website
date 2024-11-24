@@ -1677,7 +1677,7 @@
     "href": "Classification/Classification.slides.html#load-the-libraries",
     "title": "Logistic Regression",
     "section": "Load the libraries",
-    "text": "Load the libraries\nBefore we start, let’s import the data science libraries into python.\n\n# Importing necessary libraries\nimport pandas as pd\nimport statsmodels.api as sm\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import confusion_matrix, accuracy_score\n\nHere, we will introduce the function train_test_split() to split a data set into training and test sets. We will also introduce the functions confusion_matrix() and accuracy_score() to evaluate the performance of classifiers."
+    "text": "Load the libraries\n\nBefore we start, let’s import the data science libraries into python.\n\n# Importing necessary libraries\nimport pandas as pd\nimport statsmodels.api as sm\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import confusion_matrix, accuracy_score\n\nHere, we will introduce the functions confusion_matrix() and accuracy_score() to evaluate the performance of a logistic regression classifier."
   },
   {
     "objectID": "Classification/Classification.slides.html#two-main-problems",
@@ -1691,49 +1691,49 @@
     "href": "Classification/Classification.slides.html#terminology",
     "title": "Logistic Regression",
     "section": "Terminology",
-    "text": "Terminology\n\nExplanatory variables or predictors:\n\n\\(X\\) represents an explanatory variable or predictor.\n\\(\\boldsymbol{X}\\) represents a whole collection of predictors."
+    "text": "Terminology\n\nExplanatory variables or predictors:\n\n\\(X\\) represents an explanatory variable or predictor.\n\\(\\boldsymbol{X} = (X_1, X_2, \\ldots, X_p)\\) represents a collection of \\(p\\) predictors."
   },
   {
     "objectID": "Classification/Classification.slides.html#section",
     "href": "Classification/Classification.slides.html#section",
     "title": "Logistic Regression",
     "section": "",
-    "text": "Response:\n\n\\(Y\\) is a categorical variable taking 2 categories or classes.\nFor example, \\(Y\\) can take 0 or 1, A or B, no or yes, spam or not spam.\nWhen the classes are strings, it is customary to code them to 0 and 1.\n\nThe target class is the one for which \\(Y = 1\\).\nThe reference class is the one for which \\(Y = 0\\)."
+    "text": "Response:\n\n\n\\(Y\\) is a categorical variable taking 2 categories or classes.\nFor example, \\(Y\\) can take 0 or 1, A or B, no or yes, spam or not spam.\nWhen the classes are strings, it is customary to code them to 0 and 1.\n\nThe target class is the one for which \\(Y = 1\\).\nThe reference class is the one for which \\(Y = 0\\)."
   },
   {
     "objectID": "Classification/Classification.slides.html#section-1",
     "href": "Classification/Classification.slides.html#section-1",
     "title": "Logistic Regression",
     "section": "",
-    "text": "Goal: Find the best function \\(C(\\boldsymbol{x})\\) for predicting \\(Y = \\{0, 1\\}\\) from \\(\\boldsymbol{x}\\).\n\nTo achieve this, we will consider functions \\(C(\\boldsymbol{x})\\) that predict the probability that \\(Y\\) takes the value of 1.\n\nA probability for each class can be very useful for gauging the model’s confidence about the predicted classification."
+    "text": "Goal: Find the best function \\(C(\\boldsymbol{X})\\) for predicting \\(Y = \\{0, 1\\}\\) from \\(\\boldsymbol{X}\\).\n\n\nTo achieve this goal, we will consider functions \\(C(\\boldsymbol{X})\\) that predict the probability that \\(Y\\) takes the value of 1.\n\n\n\nA probability for each class can be very useful for gauging the model’s confidence about the predicted classification."
   },
   {
     "objectID": "Classification/Classification.slides.html#example-1",
     "href": "Classification/Classification.slides.html#example-1",
     "title": "Logistic Regression",
     "section": "Example 1",
-    "text": "Example 1\nConsider a spam e-mail filter.\n\nThe target class is spam.\nThe reference class is not spam.\n\n\n\n\n\n\nBoth e-mails would be classified as spam. However, we’d have more confidence in our classification for the second email."
+    "text": "Example 1\nConsider a spam e-mail filter where \\(Y\\) is the type of e-mail.\n\nThe target class is spam. In this case, \\(Y=1\\).\nThe reference class is not spam. In this case, \\(Y=0\\).\n\n\n\n\n\n\n\n\n\nBoth e-mails would be classified as spam. However, we’d have more confidence in our classification for the second email."
   },
   {
     "objectID": "Classification/Classification.slides.html#section-2",
     "href": "Classification/Classification.slides.html#section-2",
     "title": "Logistic Regression",
     "section": "",
-    "text": "In technical terms, \\(C(\\boldsymbol{x})\\) will work with the conditional probability:\n\\[P(Y = 1 | X_1 = x_1, X_2 = x_2, \\ldots, X_p = x_p) = P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\]\nIn words, this is the probability that \\(Y\\) takes a value of 1 given that the predictors \\(\\boldsymbol{X}\\) have taken the values \\(x_1, x_2, \\ldots, x_p\\).\n\nNote that the conditional probability that \\(Y\\) takes the value of 0 is\n\\[P(Y = 0 | \\boldsymbol{X} = \\boldsymbol{x}) = 1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x}).\\]"
+    "text": "Technically, \\(C(\\boldsymbol{X})\\) will work with the conditional probability:\n\\[P(Y = 1 | X_1 = x_1, X_2 = x_2, \\ldots, X_p = x_p) = P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\]\nIn words, this is the probability that \\(Y\\) takes a value of 1 given that the predictors \\(\\boldsymbol{X}\\) have taken the values \\(\\boldsymbol{x} = (x_1, x_2, \\ldots, x_p)\\).\n\n\nThe conditional probability that \\(Y\\) takes the value of 0 is\n\\[P(Y = 0 | \\boldsymbol{X} = \\boldsymbol{x}) = 1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x}).\\]"
   },
   {
     "objectID": "Classification/Classification.slides.html#bayes-classifier",
     "href": "Classification/Classification.slides.html#bayes-classifier",
     "title": "Logistic Regression",
     "section": "Bayes Classifier",
-    "text": "Bayes Classifier\nIt turns out that, if we have the true structure of \\(P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\), we can build a good classification function called the Bayes classifier:\n\\[C(\\boldsymbol{x}) =\n    \\begin{cases}\n      1, & \\text{if}\\ P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x}) &gt; 0.5 \\\\\n      0, & \\text{if}\\ P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x}) \\leq 0.5\n    \\end{cases}.\\]\nThis function classifies to the most probable class using the conditional distribution \\(P(Y | \\boldsymbol{X} = \\boldsymbol{x})\\)."
+    "text": "Bayes Classifier\n\nIt turns out that, if we know the true structure of \\(P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\), we can build a good classification function called the Bayes classifier:\n\\[C(\\boldsymbol{X}) =\n    \\begin{cases}\n      1, & \\text{if}\\ P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x}) &gt; 0.5 \\\\\n      0, & \\text{if}\\ P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x}) \\leq 0.5\n    \\end{cases}.\\]\nThis function classifies to the most probable class using the conditional distribution \\(P(Y | \\boldsymbol{X} = \\boldsymbol{x})\\)."
   },
   {
     "objectID": "Classification/Classification.slides.html#section-3",
     "href": "Classification/Classification.slides.html#section-3",
     "title": "Logistic Regression",
     "section": "",
-    "text": "HOWEVER, we don’t (and will never) know the true form of \\(P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\)!\nTo overcome this issue, we have a standard solution:\n\nImpose an structure on \\(P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\). Logistic Regression classifier.\n\nBefore discussing the logistic regression classifier, we need to introduce the training and test set for building and testing the model."
+    "text": "HOWEVER, we don’t (and will never) know the true form of \\(P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\)!\n\nTo overcome this issue, we have a standard solution:\n\nImpose an structure on \\(P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\). Logistic Regression classifier.\n\n\n\nBefore discussing the logistic regression classifier, we need to introduce the training and test set for building and testing the model."
   },
   {
     "objectID": "Classification/Classification.slides.html#example-2",
@@ -1754,7 +1754,7 @@
     "href": "Classification/Classification.slides.html#dataset",
     "title": "Logistic Regression",
     "section": "Dataset",
-    "text": "Dataset\nThe data is in the file “banknotes.xlsx”.\n\nbank_data = pd.read_excel(\"banknotes.xlsx\")\n\nbank_data['Status'] = bank_data['Status'].astype('category')\nbank_data.head()\n\n\n\n\n\n\n\n\nStatus\nLeft\nRight\nBottom\nTop\n\n\n\n\n0\ngenuine\n131.0\n131.1\n9.0\n9.7\n\n\n1\ngenuine\n129.7\n129.7\n8.1\n9.5\n\n\n2\ngenuine\n129.7\n129.7\n8.7\n9.6\n\n\n3\ngenuine\n129.7\n129.6\n7.5\n10.4\n\n\n4\ngenuine\n129.6\n129.7\n10.4\n7.7"
+    "text": "Dataset\nThe data is in the file “banknotes.xlsx”.\n\nbank_data = pd.read_excel(\"banknotes.xlsx\")\n# Set response variable as categorical.\nbank_data['Status'] = bank_data['Status'].astype('category')\nbank_data.head()\n\n\n\n\n\n\n\n\nStatus\nLeft\nRight\nBottom\nTop\n\n\n\n\n0\ngenuine\n131.0\n131.1\n9.0\n9.7\n\n\n1\ngenuine\n129.7\n129.7\n8.1\n9.5\n\n\n2\ngenuine\n129.7\n129.7\n8.7\n9.6\n\n\n3\ngenuine\n129.7\n129.6\n7.5\n10.4\n\n\n4\ngenuine\n129.6\n129.7\n10.4\n7.7"
   },
   {
     "objectID": "Classification/Classification.slides.html#how-do-we-estimate-cboldsymbolx",
@@ -1845,7 +1845,7 @@
     "href": "Classification/Classification.slides.html#section-9",
     "title": "Logistic Regression",
     "section": "",
-    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.051270\n         Iterations 13\nconst     163.458906\nLeft       -5.452339\nRight       3.203477\nBottom      5.776053\nTop         7.310938\ndtype: float64"
+    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.025080\n         Iterations 15\nconst    -960.932350\nLeft        3.884814\nRight       2.022942\nBottom      8.170533\nTop        10.958957\ndtype: float64"
   },
   {
     "objectID": "Classification/Classification.slides.html#parameter-testing",
@@ -1859,7 +1859,7 @@
     "href": "Classification/Classification.slides.html#section-10",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression classifier.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      135\nMethod:                           MLE   Df Model:                            4\nDate:                Thu, 21 Nov 2024   Pseudo R-squ.:                  0.9251\nTime:                        11:21:09   Log-Likelihood:                -7.1778\nconverged:                       True   LL-Null:                       -95.880\nCovariance Type:            nonrobust   LLR p-value:                 2.690e-37\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst        163.4589    548.057      0.298      0.766    -910.712    1237.630\nLeft          -5.4523      6.308     -0.864      0.387     -17.817       6.912\nRight          3.2035      3.464      0.925      0.355      -3.586       9.993\nBottom         5.7761      2.776      2.081      0.037       0.335      11.217\nTop            7.3109      3.022      2.419      0.016       1.388      13.234\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.56 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
+    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression classifier.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      135\nMethod:                           MLE   Df Model:                            4\nDate:                Sun, 24 Nov 2024   Pseudo R-squ.:                  0.9637\nTime:                        10:44:06   Log-Likelihood:                -3.5112\nconverged:                       True   LL-Null:                       -96.683\nCovariance Type:            nonrobust   LLR p-value:                 3.235e-39\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -960.9323   1081.522     -0.889      0.374   -3080.676    1158.811\nLeft           3.8848     12.852      0.302      0.762     -21.304      29.073\nRight          2.0229      6.513      0.311      0.756     -10.743      14.789\nBottom         8.1705      4.840      1.688      0.091      -1.315      17.656\nTop           10.9590      5.941      1.845      0.065      -0.686      22.604\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.77 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
   },
   {
     "objectID": "Classification/Classification.slides.html#evaluation",
@@ -1873,7 +1873,7 @@
     "href": "Classification/Classification.slides.html#section-11",
     "title": "Logistic Regression",
     "section": "",
-    "text": "Technically, the classifier outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n190    1.000000\n131    1.000000\n71     0.000686\n80     0.037623\n128    0.999991\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors)."
+    "text": "Technically, the classifier outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n4      6.709911e-12\n195    1.000000e+00\n115    1.636213e-01\n28     2.794161e-08\n168    9.999999e-01\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors)."
   },
   {
     "objectID": "Classification/Classification.slides.html#section-12",
@@ -1887,7 +1887,7 @@
     "href": "Classification/Classification.slides.html#section-13",
     "title": "Logistic Regression",
     "section": "",
-    "text": "predicted_classes.head()\n\n190    1\n131    1\n71     0\n80     0\n128    1\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the test dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
+    "text": "predicted_classes.head()\n\n4      0\n195    1\n115    0\n28     0\n168    1\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the test dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
   },
   {
     "objectID": "Classification/Classification.slides.html#confusion-matrix",
@@ -1901,14 +1901,14 @@
     "href": "Classification/Classification.slides.html#in-python-1",
     "title": "Logistic Regression",
     "section": "In python",
-    "text": "In python\nWe compute the confusion matrix using the function with the same name of scikit-learn. To this end,\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[37  2]\n [ 1 20]]"
+    "text": "In python\nWe compute the confusion matrix using the function with the same name of scikit-learn. To this end,\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[24  1]\n [ 1 34]]"
   },
   {
     "objectID": "Classification/Classification.slides.html#accuracy",
     "href": "Classification/Classification.slides.html#accuracy",
     "title": "Logistic Regression",
     "section": "Accuracy",
-    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.95\n\n\nThe higher the accuracy, the better the performance of the classifier."
+    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.97\n\n\nThe higher the accuracy, the better the performance of the classifier."
   },
   {
     "objectID": "Classification/Classification.slides.html#remarks",
