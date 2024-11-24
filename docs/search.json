@@ -466,7 +466,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-3",
     "title": "Additional Topics",
     "section": "",
-    "text": "print(summary_model)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.332\nModel:                            OLS   Adj. R-squared:                  0.328\nMethod:                 Least Squares   F-statistic:                     96.60\nDate:                Thu, 21 Nov 2024   Prob (F-statistic):           8.67e-35\nTime:                        11:21:30   Log-Likelihood:                -1282.2\nNo. Observations:                 392   AIC:                             2570.\nDf Residuals:                     389   BIC:                             2582.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         20.0335      0.409     49.025      0.000      19.230      20.837\nEuropean       7.5695      0.877      8.634      0.000       5.846       9.293\nJapanese      10.4172      0.828     12.588      0.000       8.790      12.044\n==============================================================================\nOmnibus:                       26.330   Durbin-Watson:                   0.763\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               30.217\nSkew:                           0.679   Prob(JB):                     2.74e-07\nKurtosis:                       3.066   Cond. No.                         3.16\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+    "text": "print(summary_model)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.332\nModel:                            OLS   Adj. R-squared:                  0.328\nMethod:                 Least Squares   F-statistic:                     96.60\nDate:                Sun, 24 Nov 2024   Prob (F-statistic):           8.67e-35\nTime:                        12:13:44   Log-Likelihood:                -1282.2\nNo. Observations:                 392   AIC:                             2570.\nDf Residuals:                     389   BIC:                             2582.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         20.0335      0.409     49.025      0.000      19.230      20.837\nEuropean       7.5695      0.877      8.634      0.000       5.846       9.293\nJapanese      10.4172      0.828     12.588      0.000       8.790      12.044\n==============================================================================\nOmnibus:                       26.330   Durbin-Watson:                   0.763\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               30.217\nSkew:                           0.679   Prob(JB):                     2.74e-07\nKurtosis:                       3.066   Cond. No.                         3.16\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#analysis-of-covariance",
@@ -501,7 +501,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#model-summary",
     "title": "Additional Topics",
     "section": "Model summary",
-    "text": "Model summary\n\n# Summary of the models.\nsummary_ancova = ancova_model.summary()\nprint(summary_ancova)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.702\nModel:                            OLS   Adj. R-squared:                  0.700\nMethod:                 Least Squares   F-statistic:                     304.7\nDate:                Thu, 21 Nov 2024   Prob (F-statistic):          1.28e-101\nTime:                        11:21:30   Log-Likelihood:                -1123.9\nNo. Observations:                 392   AIC:                             2256.\nDf Residuals:                     388   BIC:                             2272.\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         43.7322      1.113     39.277      0.000      41.543      45.921\nEuropean       0.9709      0.659      1.474      0.141      -0.324       2.266\nJapanese       2.3271      0.665      3.501      0.001       1.020       3.634\nweight        -0.0070      0.000    -21.956      0.000      -0.008      -0.006\n==============================================================================\nOmnibus:                       40.731   Durbin-Watson:                   0.832\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               61.938\nSkew:                           0.689   Prob(JB):                     3.55e-14\nKurtosis:                       4.377   Cond. No.                     1.83e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 1.83e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
+    "text": "Model summary\n\n# Summary of the models.\nsummary_ancova = ancova_model.summary()\nprint(summary_ancova)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.702\nModel:                            OLS   Adj. R-squared:                  0.700\nMethod:                 Least Squares   F-statistic:                     304.7\nDate:                Sun, 24 Nov 2024   Prob (F-statistic):          1.28e-101\nTime:                        12:13:44   Log-Likelihood:                -1123.9\nNo. Observations:                 392   AIC:                             2256.\nDf Residuals:                     388   BIC:                             2272.\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         43.7322      1.113     39.277      0.000      41.543      45.921\nEuropean       0.9709      0.659      1.474      0.141      -0.324       2.266\nJapanese       2.3271      0.665      3.501      0.001       1.020       3.634\nweight        -0.0070      0.000    -21.956      0.000      -0.008      -0.006\n==============================================================================\nOmnibus:                       40.731   Durbin-Watson:                   0.832\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               61.938\nSkew:                           0.689   Prob(JB):                     3.55e-14\nKurtosis:                       4.377   Cond. No.                     1.83e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 1.83e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#standardization",
@@ -571,7 +571,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-9",
     "title": "Additional Topics",
     "section": "",
-    "text": "print(std_summary_model)\n\n                                 OLS Regression Results                                \n=======================================================================================\nDep. Variable:                  Yield   R-squared (uncentered):                   0.002\nModel:                            OLS   Adj. R-squared (uncentered):             -0.330\nMethod:                 Least Squares   F-statistic:                           0.006694\nDate:                Thu, 21 Nov 2024   Prob (F-statistic):                       0.993\nTime:                        11:21:30   Log-Likelihood:                         -46.940\nNo. Observations:                   8   AIC:                                      97.88\nDf Residuals:                       6   BIC:                                      98.04\nDf Model:                           2                                                  \nCovariance Type:            nonrobust                                                  \n=================================================================================\n                    coef    std err          t      P&gt;|t|      [0.025      0.975]\n---------------------------------------------------------------------------------\nConcentration     1.5000     34.907      0.043      0.967     -83.914      86.914\nTemperature       3.7500     34.907      0.107      0.918     -81.664      89.164\n==============================================================================\nOmnibus:                        2.258   Durbin-Watson:                   0.000\nProb(Omnibus):                  0.323   Jarque-Bera (JB):                0.627\nSkew:                           0.000   Prob(JB):                        0.731\nKurtosis:                       1.628   Cond. No.                         1.00\n==============================================================================\n\nNotes:\n[1] R² is computed without centering (uncentered) since the model does not contain a constant.\n[2] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+    "text": "print(std_summary_model)\n\n                                 OLS Regression Results                                \n=======================================================================================\nDep. Variable:                  Yield   R-squared (uncentered):                   0.002\nModel:                            OLS   Adj. R-squared (uncentered):             -0.330\nMethod:                 Least Squares   F-statistic:                           0.006694\nDate:                Sun, 24 Nov 2024   Prob (F-statistic):                       0.993\nTime:                        12:13:44   Log-Likelihood:                         -46.940\nNo. Observations:                   8   AIC:                                      97.88\nDf Residuals:                       6   BIC:                                      98.04\nDf Model:                           2                                                  \nCovariance Type:            nonrobust                                                  \n=================================================================================\n                    coef    std err          t      P&gt;|t|      [0.025      0.975]\n---------------------------------------------------------------------------------\nConcentration     1.5000     34.907      0.043      0.967     -83.914      86.914\nTemperature       3.7500     34.907      0.107      0.918     -81.664      89.164\n==============================================================================\nOmnibus:                        2.258   Durbin-Watson:                   0.000\nProb(Omnibus):                  0.323   Jarque-Bera (JB):                0.627\nSkew:                           0.000   Prob(JB):                        0.731\nKurtosis:                       1.628   Cond. No.                         1.00\n==============================================================================\n\nNotes:\n[1] R² is computed without centering (uncentered) since the model does not contain a constant.\n[2] Standard Errors assume that the covariance matrix of the errors is correctly specified."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#discussion",
@@ -774,7 +774,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-14",
     "title": "Additional Topics",
     "section": "",
-    "text": "We compute the validation RMSE by first computing the validation MSE using a function with the same name of scikit-learn.\n\nmse = mean_squared_error(Y_valid, predicted_medv_val)\nrmse = mse**(1/2)\nprint( round(rmse, 3) )\n\n5.528\n\n\nThe lower the validation RMSE, the more accurate our model.\nInterpretation: On average, our predictions are off by \\(\\pm\\) 4,465 dollars."
+    "text": "We compute the validation RMSE by first computing the validation MSE using a function with the same name of scikit-learn.\n\nmse = mean_squared_error(Y_valid, predicted_medv_val)\nrmse = mse**(1/2)\nprint( round(rmse, 3) )\n\n5.25\n\n\nThe lower the validation RMSE, the more accurate our model.\nInterpretation: On average, our predictions are off by \\(\\pm\\) 4,465 dollars."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#agenda",
@@ -1096,7 +1096,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#t-tests-in-python",
     "title": "Model Evaluation and Inference",
     "section": "t-tests in python",
-    "text": "t-tests in python\nWe obtain the t-tests of the coefficients using the function summary() together with the linear_model object.\n\nmodel_summary = linear_model.summary()\nprint(model_summary)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.700\nModel:                            OLS   Adj. R-squared:                  0.698\nMethod:                 Least Squares   F-statistic:                     453.2\nDate:                Thu, 21 Nov 2024   Prob (F-statistic):          2.43e-102\nTime:                        11:21:26   Log-Likelihood:                -1125.4\nNo. Observations:                 392   AIC:                             2257.\nDf Residuals:                     389   BIC:                             2269.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nconst           41.0953      1.868     21.999      0.000      37.423      44.768\nweight          -0.0073      0.000    -25.966      0.000      -0.008      -0.007\nacceleration     0.2617      0.086      3.026      0.003       0.092       0.432\n==============================================================================\nOmnibus:                       31.397   Durbin-Watson:                   0.818\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               39.962\nSkew:                           0.632   Prob(JB):                     2.10e-09\nKurtosis:                       3.922   Cond. No.                     2.67e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 2.67e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
+    "text": "t-tests in python\nWe obtain the t-tests of the coefficients using the function summary() together with the linear_model object.\n\nmodel_summary = linear_model.summary()\nprint(model_summary)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.700\nModel:                            OLS   Adj. R-squared:                  0.698\nMethod:                 Least Squares   F-statistic:                     453.2\nDate:                Sun, 24 Nov 2024   Prob (F-statistic):          2.43e-102\nTime:                        12:13:40   Log-Likelihood:                -1125.4\nNo. Observations:                 392   AIC:                             2257.\nDf Residuals:                     389   BIC:                             2269.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nconst           41.0953      1.868     21.999      0.000      37.423      44.768\nweight          -0.0073      0.000    -25.966      0.000      -0.008      -0.007\nacceleration     0.2617      0.086      3.026      0.003       0.092       0.432\n==============================================================================\nOmnibus:                       31.397   Durbin-Watson:                   0.818\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               39.962\nSkew:                           0.632   Prob(JB):                     2.10e-09\nKurtosis:                       3.922   Cond. No.                     2.67e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 2.67e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#table-of-t-tests",
@@ -1757,34 +1757,6 @@
     "text": "Dataset\nThe data is in the file “banknotes.xlsx”.\n\nbank_data = pd.read_excel(\"banknotes.xlsx\")\n# Set response variable as categorical.\nbank_data['Status'] = bank_data['Status'].astype('category')\nbank_data.head()\n\n\n\n\n\n\n\n\nStatus\nLeft\nRight\nBottom\nTop\n\n\n\n\n0\ngenuine\n131.0\n131.1\n9.0\n9.7\n\n\n1\ngenuine\n129.7\n129.7\n8.1\n9.5\n\n\n2\ngenuine\n129.7\n129.7\n8.7\n9.6\n\n\n3\ngenuine\n129.7\n129.6\n7.5\n10.4\n\n\n4\ngenuine\n129.6\n129.7\n10.4\n7.7"
   },
   {
-    "objectID": "Classification/Classification.slides.html#how-do-we-estimate-cboldsymbolx",
-    "href": "Classification/Classification.slides.html#how-do-we-estimate-cboldsymbolx",
-    "title": "Logistic Regression",
-    "section": "How do we estimate \\(C(\\boldsymbol{x})\\)?",
-    "text": "How do we estimate \\(C(\\boldsymbol{x})\\)?\nWe use the training data to construct an estimated function \\(\\hat{C}(\\boldsymbol{x})\\).\n\n\n\n\n\n\n\n\n\nStatus\nLeft\nRight\nBottom\nTop\n\n\n\n\n0\ngenuine\n131.0\n131.1\n9.0\n9.7\n\n\n1\ngenuine\n129.7\n129.7\n8.1\n9.5\n\n\n2\ngenuine\n129.7\n129.7\n8.7\n9.6\n\n\n3\ngenuine\n129.7\n129.6\n7.5\n10.4\n\n\n\n\n\n\n\nIdeally, \\(\\hat{C}(\\boldsymbol{x})\\) approximates the true Bayes classifier."
-  },
-  {
-    "objectID": "Classification/Classification.slides.html#how-do-we-evaluate-hatcboldsymbolx",
-    "href": "Classification/Classification.slides.html#how-do-we-evaluate-hatcboldsymbolx",
-    "title": "Logistic Regression",
-    "section": "How do we evaluate \\(\\hat{C}(\\boldsymbol{x})\\)?",
-    "text": "How do we evaluate \\(\\hat{C}(\\boldsymbol{x})\\)?\n\nWe use test data!\nTest data is a random sample of \\(n_t\\) observations that\n\nis generated from the same (probabilistic) process that generated the training data,\nbut it is independent from the training data."
-  },
-  {
-    "objectID": "Classification/Classification.slides.html#how-do-we-generate-test-data",
-    "href": "Classification/Classification.slides.html#how-do-we-generate-test-data",
-    "title": "Logistic Regression",
-    "section": "How do we generate test data?",
-    "text": "How do we generate test data?\nWe split the current data set into a training and a test dataset.\nTo this end, we use the function train_test_split() from scikit-learn.\n\n# Set full matrix of predictors.\nX_full = bank_data.drop(columns = ['Status'])\n\n# Set full matrix of responses.\nY_full = bank_data['Status']\n\n# Split the dataset.\nX_train, X_test, Y_train, Y_test = train_test_split(X_full, Y_full, \n                                                    test_size=0.3)\n\nThe parameter test_size sets the portion of the dataset that will go to the test set."
-  },
-  {
-    "objectID": "Classification/Classification.slides.html#section-4",
-    "href": "Classification/Classification.slides.html#section-4",
-    "title": "Logistic Regression",
-    "section": "",
-    "text": "Consider the banknote classification problem where \\(Y = 1\\) implies counterfeit and \\(Y = 0\\) genuine note. We have four predictors in \\(\\boldsymbol{X} =  (X_1, X_2, X_3, X_4)\\) summarizing specific characteristics of a banknote.\n\nThe odds ratio is \\(e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\beta_3 X_3 + \\beta_p X_4} = \\frac{P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}{1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}\\)\n\n\nIf the ratio is 1, the odds are 50-50.\nIf the ratio is greater than 1, the banknote is more likely to be counterfeit than genuine.\nIf the ratio is smaller than 1, the banknote is more likely to be genuine than counterfeit."
-  },
-  {
     "objectID": "Classification/Classification.slides.html#logistic-regression-lr",
     "href": "Classification/Classification.slides.html#logistic-regression-lr",
     "title": "Logistic Regression",
@@ -1799,11 +1771,60 @@
     "text": "Why logistic regression?\nLet’s use some algebra to reveal some of interesting facts about logistic regression.\n\nWe start from\n\\[P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x}) = \\frac{e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p} }{1 + e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p}}.\\]\n\n\nNext, we have that\n\\[e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p} = \\frac{P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}{1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}.\\]"
   },
   {
+    "objectID": "Classification/Classification.slides.html#the-odds-ratio",
+    "href": "Classification/Classification.slides.html#the-odds-ratio",
+    "title": "Logistic Regression",
+    "section": "The Odds ratio",
+    "text": "The Odds ratio\nThe quantity \\[e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p} = \\frac{P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}{1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}\\] is known as the “odds” ratio.\n\nThe odds ratio is the probability that \\(Y = 1\\) divided by the probability that \\(Y = 0\\), given that the predictors \\(\\boldsymbol{X}\\) have taken the values \\(\\boldsymbol{x} = (x_1, x_2, \\ldots, x_p)\\)."
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#section-4",
+    "href": "Classification/Classification.slides.html#section-4",
+    "title": "Logistic Regression",
+    "section": "",
+    "text": "Consider the banknote classification problem where \\(Y = 1\\) implies counterfeit and \\(Y = 0\\) genuine note. We have four predictors in \\(\\boldsymbol{X} =  (X_1, X_2, X_3, X_4)\\) summarizing specific characteristics of a banknote.\n\nThe odds ratio is \\(e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\beta_3 X_3 + \\beta_p X_4} = \\frac{P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}{1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}\\)\n\n\nIf the ratio is 1, the odds are 50-50.\nIf the ratio is greater than 1, the banknote is more likely to be counterfeit than genuine.\nIf the ratio is smaller than 1, the banknote is more likely to be genuine than counterfeit."
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#the-logg-odds",
+    "href": "Classification/Classification.slides.html#the-logg-odds",
+    "title": "Logistic Regression",
+    "section": "The logg-odds",
+    "text": "The logg-odds\n\nIf we take logarithm on both sides, we obtain the “log-odds” or “logit”:\n\\[\\beta_0 + \\beta_1 X_1 + \\cdots + \\beta_p X_p = \\ln \\left( \\frac{P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x} )}{1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})} \\right).\\]\n\n\nThe log-odds can take any real value.\nThe log-odds is a linear combination of the predictors.\nThe log-odds resembles a multiple lienar regression model."
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#interpretation-of-coefficients",
+    "href": "Classification/Classification.slides.html#interpretation-of-coefficients",
+    "title": "Logistic Regression",
+    "section": "Interpretation of coefficients",
+    "text": "Interpretation of coefficients\nThe log-odds allows us to interpret the coefficients of the logistic regression model.\n\\[\\beta_0 + \\beta_1 X_1 + \\cdots + \\beta_p X_p = \\ln \\left( \\frac{P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x} )}{1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})} \\right).\\]\n\n\\(\\beta_0\\) can be interpreted as the average value of the log-odds ratio given that all predictors are equal to zero.\n\\(\\beta_j\\) can be interpreted as the average change in the log-odds ratio given by a one-unit increase in \\(X_j\\), when all the other predictors have fixed values."
+  },
+  {
     "objectID": "Classification/Classification.slides.html#section-5",
     "href": "Classification/Classification.slides.html#section-5",
     "title": "Logistic Regression",
     "section": "",
     "text": "If \\(\\beta_j\\) is positive, increasing the value of \\(X_j\\) will be associated with increasing the odds ratio or \\(P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\). In other words, increasing the value of \\(X_j\\) increases, on average, the probability that \\(Y = 1\\).\n\nIf \\(\\beta_j\\) is negative, increasing \\(X_j\\) will be associated with decreasing \\(P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\), and with increasing \\(P(Y = 0 | \\boldsymbol{X} = \\boldsymbol{x})\\). In other words, increasing the value of \\(X_j\\) increases, on average, the probability that \\(Y = 0\\).\n\nhttps://stats.idre.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/"
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#the-logistic-regression-model",
+    "href": "Classification/Classification.slides.html#the-logistic-regression-model",
+    "title": "Logistic Regression",
+    "section": "The logistic regression model",
+    "text": "The logistic regression model\n\nThe logistic regression model is\n\\[P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x}) = \\frac{e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p} }{1 + e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p}},\\]\nwhere the values of the coefficients \\(\\beta_0\\) and \\(\\beta_j\\) are unknown. Therefore, we need to calculate estimates for them.\n\n\\(\\hat{\\beta}_0\\) is the estimate for \\(\\beta_0\\).\n\\(\\hat{\\beta}_j\\) is the estimate for \\(\\beta_j\\)."
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#how-do-we-estimate-the-coefficients",
+    "href": "Classification/Classification.slides.html#how-do-we-estimate-the-coefficients",
+    "title": "Logistic Regression",
+    "section": "How do we estimate the coefficients?",
+    "text": "How do we estimate the coefficients?\n\nWe use the training data!\n\n\n\n\n\n\n\n\n\nStatus\nLeft\nRight\nBottom\nTop\n\n\n\n\n0\ngenuine\n131.0\n131.1\n9.0\n9.7\n\n\n1\ngenuine\n129.7\n129.7\n8.1\n9.5\n\n\n2\ngenuine\n129.7\n129.7\n8.7\n9.6\n\n\n3\ngenuine\n129.7\n129.6\n7.5\n10.4"
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#generate-training-data",
+    "href": "Classification/Classification.slides.html#generate-training-data",
+    "title": "Logistic Regression",
+    "section": "Generate training data",
+    "text": "Generate training data\nWe split the current data set into a training and a validation dataset. To this end, we use the function train_test_split() from scikit-learn.\n\n# Set full matrix of predictors.\nX_full = bank_data.drop(columns = ['Status'])\n\n# Set full matrix of responses.\nY_full = bank_data['Status']\n\n# Split the dataset.\nX_train, X_test, Y_train, Y_test = train_test_split(X_full, Y_full, \n                                                    test_size=0.3)\n\nThe parameter test_size sets the portion of the dataset that will go to the validation set."
   },
   {
     "objectID": "Classification/Classification.slides.html#section-6",
@@ -1813,25 +1834,11 @@
     "text": "The function makes a clever partition of the data using the empirical distribution of the response.\nTechnically, it splits the data so that the distribution of the response under the training and validation sets is similar.\nUsually, the proportion of the dataset that goes to the test set is 20% or 30%.\nWe will later use the validation dataset to evaluate the classification performance of the estimated logistic regression model for classifying unobserved data."
   },
   {
-    "objectID": "Classification/Classification.slides.html#section-7",
-    "href": "Classification/Classification.slides.html#section-7",
+    "objectID": "Classification/Classification.slides.html#coefficient-estimation",
+    "href": "Classification/Classification.slides.html#coefficient-estimation",
     "title": "Logistic Regression",
-    "section": "",
-    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nWarning: Maximum number of iterations has been exceeded.\n         Current function value: 0.000000\n         Iterations: 35\nconst    -101966.772372\nLeft        -761.095007\nRight       1419.429805\nBottom       740.323560\nTop          887.854888\ndtype: float64"
-  },
-  {
-    "objectID": "Classification/Classification.slides.html#section-8",
-    "href": "Classification/Classification.slides.html#section-8",
-    "title": "Logistic Regression",
-    "section": "",
-    "text": "Wald tests use the following test statistic:\n\\[W_j = \\frac{\\hat{\\beta}_j}{\\mbox{SE}(\\hat{\\beta}_j) } \\sim N(0,1).\\]\n\n\\(\\hat{\\beta}_j\\) is the estimate of the coefficient \\(\\beta_j\\).\n\\(\\mbox{SE}(\\hat{\\beta}_j)\\) is the standard error of the estimate \\(\\hat{\\beta}_j\\) (due to repeated random sampling)."
-  },
-  {
-    "objectID": "Classification/Classification.slides.html#parameter-estimation",
-    "href": "Classification/Classification.slides.html#parameter-estimation",
-    "title": "Logistic Regression",
-    "section": "Parameter estimation",
-    "text": "Parameter estimation\nWe estimate the parameters in the logistic function using maximum likelihood estimation.\nEssentially, we optimize a non-linear objective function using the so-called Iteratively Re-weighted Least Squares (IRLS) algorithm.\nThe IRLS algorithm (and consequently maximum likelihood estimation and Logistic Regression) fails when:\n\nThere is severe multicollinearity among the predictors.\nWe can perfectly separate the observations belonging to the two groups defined by \\(Y\\)."
+    "section": "Coefficient estimation",
+    "text": "Coefficient estimation\nWe estimate the coefficients in the logistic function using maximum likelihood estimation.\nEssentially, we optimize a non-linear objective function using the so-called Iteratively Re-weighted Least Squares (IRLS) algorithm.\n\nThe IRLS algorithm (and consequently maximum likelihood estimation and Logistic Regression) fails when:\n\nThere is severe multicollinearity among the predictors.\nWe can perfectly separate the observations belonging to the two groups defined by \\(Y\\)."
   },
   {
     "objectID": "Classification/Classification.slides.html#in-python",
@@ -1841,11 +1848,11 @@
     "text": "In python\nUsing the training dataset, we estimate a logistic regression classifier using the function Logit() from statsmodel. To this end, we first define the target category using the get_dummies().\n\n# Create dummy variables.\nY_dummies = pd.get_dummies(Y_train, dtype = 'int')\n\n# Select target variable.\nY_target_train = Y_dummies['counterfeit']\n\nWe also define the matrix of predictors with the intercept.\n\n# Add the intercept to the predictor matrix.\nX_train_int = sm.add_constant(X_train)"
   },
   {
-    "objectID": "Classification/Classification.slides.html#section-9",
-    "href": "Classification/Classification.slides.html#section-9",
+    "objectID": "Classification/Classification.slides.html#section-7",
+    "href": "Classification/Classification.slides.html#section-7",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression model.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      135\nMethod:                           MLE   Df Model:                            4\nDate:                Sun, 24 Nov 2024   Pseudo R-squ.:                   1.000\nTime:                        12:08:53   Log-Likelihood:            -2.1051e-10\nconverged:                      False   LL-Null:                       -97.026\nCovariance Type:            nonrobust   LLR p-value:                 7.134e-41\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -1.02e+05        nan        nan        nan         nan         nan\nLeft        -761.0950        nan        nan        nan         nan         nan\nRight       1419.4298   5.62e+10   2.52e-08      1.000    -1.1e+11     1.1e+11\nBottom       740.3236   4.18e+11   1.77e-09      1.000   -8.19e+11    8.19e+11\nTop          887.8549    5.5e+11   1.62e-09      1.000   -1.08e+12    1.08e+12\n==============================================================================\n\nComplete Separation: The results show that there iscomplete separation or perfect prediction.\nIn this case the Maximum Likelihood Estimator does not exist and the parameters\nare not identified."
+    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.042665\n         Iterations 12\nconst    -279.748896\nLeft       -1.277389\nRight       2.439334\nBottom      5.454120\nTop         7.434827\ndtype: float64"
   },
   {
     "objectID": "Classification/Classification.slides.html#parameter-testing",
@@ -1853,6 +1860,34 @@
     "title": "Logistic Regression",
     "section": "Parameter testing",
     "text": "Parameter testing\n\nWe can construct significance tests for each coefficient in the logistic regression model. They are called Wald tests.\n\nWald tests allow us to test the hypothesis:\n\\[H_0: \\beta_j = 0 \\text{ versus } H_1: \\beta_j \\neq 0\\]"
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#section-8",
+    "href": "Classification/Classification.slides.html#section-8",
+    "title": "Logistic Regression",
+    "section": "",
+    "text": "Wald tests use the following test statistic:\n\\[W_j = \\frac{\\hat{\\beta}_j}{\\mbox{SE}(\\hat{\\beta}_j) } \\sim N(0,1).\\]\n\n\\(\\hat{\\beta}_j\\) is the estimate of the coefficient \\(\\beta_j\\).\n\\(\\mbox{SE}(\\hat{\\beta}_j)\\) is the standard error of the estimate \\(\\hat{\\beta}_j\\) (due to repeated random sampling)."
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#important-predictors",
+    "href": "Classification/Classification.slides.html#important-predictors",
+    "title": "Logistic Regression",
+    "section": "Important predictors",
+    "text": "Important predictors\n\nWe can use the p-values of these tests to determine which predictor is important.\n\nThat is, a predictor is important if its p-value is, say, smaller than \\(\\alpha = 0.05\\).\n\nFor Wald tests to work well, the number of observations in the training data should be large."
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#section-9",
+    "href": "Classification/Classification.slides.html#section-9",
+    "title": "Logistic Regression",
+    "section": "",
+    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression model.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      135\nMethod:                           MLE   Df Model:                            4\nDate:                Sun, 24 Nov 2024   Pseudo R-squ.:                  0.9383\nTime:                        12:13:24   Log-Likelihood:                -5.9731\nconverged:                       True   LL-Null:                       -96.812\nCovariance Type:            nonrobust   LLR p-value:                 3.253e-38\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -279.7489    418.973     -0.668      0.504   -1100.922     541.424\nLeft          -1.2774      3.928     -0.325      0.745      -8.976       6.421\nRight          2.4393      3.678      0.663      0.507      -4.770       9.649\nBottom         5.4541      2.449      2.227      0.026       0.655      10.253\nTop            7.4348      2.884      2.578      0.010       1.782      13.088\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.61 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#estimated-classifier",
+    "href": "Classification/Classification.slides.html#estimated-classifier",
+    "title": "Logistic Regression",
+    "section": "Estimated classifier",
+    "text": "Estimated classifier\n\nAfter estimating the coefficients, we obtain the estimated logistic regression model\n\\[\\hat{P}(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x}) = \\frac{e^{\\hat{\\beta}_0 + \\hat{\\beta}_1 X_1 + \\hat{\\beta}_2 X_2 + \\cdots + \\hat{\\beta}_p X_p} }{1 + e^{\\hat{\\beta}_0 + \\hat{\\beta}_1 X_1 + \\hat{\\beta}_2 X_2 + \\cdots + \\hat{\\beta}_p X_p}},\\]\nwhere we have replaced the coefficients \\(\\beta_j\\)’s with their estimates \\(\\hat{\\beta}_j\\)’s."
   },
   {
     "objectID": "Classification/Classification.slides.html#section-10",
@@ -1873,21 +1908,14 @@
     "href": "Classification/Classification.slides.html#section-11",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The predict() function outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n185    1.0\n89     0.0\n79     0.0\n78     0.0\n175    1.0\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors).\n\nTo turn the probabilities to actual classes, we round them:\n\npredicted_classes = round(predicted_probability).astype('int')"
+    "text": "The predict() function outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n112    0.999999\n21     0.000188\n5      0.013133\n116    0.999998\n157    0.999996\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors).\n\nTo turn the probabilities to actual classes, we round them:\n\npredicted_classes = round(predicted_probability).astype('int')"
   },
   {
     "objectID": "Classification/Classification.slides.html#section-12",
     "href": "Classification/Classification.slides.html#section-12",
     "title": "Logistic Regression",
     "section": "",
-    "text": "predicted_classes.head()\n\n185    1\n89     0\n79     0\n78     0\n175    1\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the validation dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
-  },
-  {
-    "objectID": "Classification/Classification.slides.html#section-13",
-    "href": "Classification/Classification.slides.html#section-13",
-    "title": "Logistic Regression",
-    "section": "",
-    "text": "We can visualize the confusion matrix using the ConfusionMatrixDisplay() function.\n\nConfusionMatrixDisplay(cm).plot()"
+    "text": "predicted_classes.head()\n\n112    1\n21     0\n5      0\n116    1\n157    1\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the validation dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
   },
   {
     "objectID": "Classification/Classification.slides.html#confusion-matrix",
@@ -1901,14 +1929,21 @@
     "href": "Classification/Classification.slides.html#in-python-1",
     "title": "Logistic Regression",
     "section": "In python",
-    "text": "In python\n\nWe compute the confusion matrix using the function with the same name of scikit-learn.\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[29  0]\n [ 4 27]]"
+    "text": "In python\n\nWe compute the confusion matrix using the function with the same name of scikit-learn.\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[25  1]\n [ 0 34]]"
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#section-13",
+    "href": "Classification/Classification.slides.html#section-13",
+    "title": "Logistic Regression",
+    "section": "",
+    "text": "We can visualize the confusion matrix using the ConfusionMatrixDisplay() function.\n\nConfusionMatrixDisplay(cm).plot()"
   },
   {
     "objectID": "Classification/Classification.slides.html#accuracy",
     "href": "Classification/Classification.slides.html#accuracy",
     "title": "Logistic Regression",
     "section": "Accuracy",
-    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.93\n\n\n\n\nThe higher the accuracy, the better the performance of the classifier."
+    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.98\n\n\n\n\nThe higher the accuracy, the better the performance of the classifier."
   },
   {
     "objectID": "Classification/Classification.slides.html#remarks",
@@ -2378,82 +2413,5 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n2"
-  },
-  {
-    "objectID": "Classification/Classification.slides.html#odds-ratio",
-    "href": "Classification/Classification.slides.html#odds-ratio",
-    "title": "Logistic Regression",
-    "section": "Odds ratio",
-    "text": "Odds ratio\n\nThe quantity \\(e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p} = \\frac{P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}{1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}\\) is known as the “odds” ratio.\n\nThe odds ratio is the probability that \\(Y = 1\\) divided by the probability that \\(Y = 0\\), given that the predictors \\(\\boldsymbol{X}\\) have taken the values \\(\\boldsymbol{x} = (x_1, x_2, \\ldots, x_p)\\)."
-  },
-  {
-    "objectID": "Classification/Classification.slides.html#the-odds-ratio",
-    "href": "Classification/Classification.slides.html#the-odds-ratio",
-    "title": "Logistic Regression",
-    "section": "The Odds ratio",
-    "text": "The Odds ratio\nThe quantity \\[e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p} = \\frac{P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}{1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}\\] is known as the “odds” ratio.\n\nThe odds ratio is the probability that \\(Y = 1\\) divided by the probability that \\(Y = 0\\), given that the predictors \\(\\boldsymbol{X}\\) have taken the values \\(\\boldsymbol{x} = (x_1, x_2, \\ldots, x_p)\\)."
-  },
-  {
-    "objectID": "Classification/Classification.slides.html#the-logg-odds",
-    "href": "Classification/Classification.slides.html#the-logg-odds",
-    "title": "Logistic Regression",
-    "section": "The logg-odds",
-    "text": "The logg-odds\n\nIf we take logarithm on both sides, we obtain the “log-odds” or “logit”:\n\\[\\beta_0 + \\beta_1 X_1 + \\cdots + \\beta_p X_p = \\ln \\left( \\frac{P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x} )}{1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})} \\right).\\]\n\n\nThe log-odds can take any real value.\nThe log-odds is a linear combination of the predictors.\nThe log-odds resembles a multiple lienar regression model."
-  },
-  {
-    "objectID": "Classification/Classification.slides.html#interpretation-of-coefficients",
-    "href": "Classification/Classification.slides.html#interpretation-of-coefficients",
-    "title": "Logistic Regression",
-    "section": "Interpretation of coefficients",
-    "text": "Interpretation of coefficients\nThe log-odds allows us to interpret the coefficients of the logistic regression model.\n\\[\\beta_0 + \\beta_1 X_1 + \\cdots + \\beta_p X_p = \\ln \\left( \\frac{P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x} )}{1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})} \\right).\\]\n\n\\(\\beta_0\\) can be interpreted as the average value of the log-odds ratio given that all predictors are equal to zero.\n\\(\\beta_j\\) can be interpreted as the average change in the log-odds ratio given by a one-unit increase in \\(X_j\\), when all the other predictors have fixed values."
-  },
-  {
-    "objectID": "Classification/Classification.slides.html#the-logistic-regression-model",
-    "href": "Classification/Classification.slides.html#the-logistic-regression-model",
-    "title": "Logistic Regression",
-    "section": "The logistic regression model",
-    "text": "The logistic regression model\n\nThe logistic regression model is\n\\[P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x}) = \\frac{e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p} }{1 + e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p}},\\]\nwhere the values of the coefficients \\(\\beta_0\\) and \\(\\beta_j\\) are unknown. Therefore, we need to calculate estimates for them.\n\n\\(\\hat{\\beta}_0\\) is the estimate for \\(\\beta_0\\).\n\\(\\hat{\\beta}_j\\) is the estimate for \\(\\beta_j\\)."
-  },
-  {
-    "objectID": "Classification/Classification.slides.html#how-do-we-estimate-the-coefficients",
-    "href": "Classification/Classification.slides.html#how-do-we-estimate-the-coefficients",
-    "title": "Logistic Regression",
-    "section": "How do we estimate the coefficients?",
-    "text": "How do we estimate the coefficients?\n\nWe use the training data!\n\n\n\n\n\n\n\n\n\nStatus\nLeft\nRight\nBottom\nTop\n\n\n\n\n0\ngenuine\n131.0\n131.1\n9.0\n9.7\n\n\n1\ngenuine\n129.7\n129.7\n8.1\n9.5\n\n\n2\ngenuine\n129.7\n129.7\n8.7\n9.6\n\n\n3\ngenuine\n129.7\n129.6\n7.5\n10.4"
-  },
-  {
-    "objectID": "Classification/Classification.slides.html#generate-training-data",
-    "href": "Classification/Classification.slides.html#generate-training-data",
-    "title": "Logistic Regression",
-    "section": "Generate training data",
-    "text": "Generate training data\nWe split the current data set into a training and a validation dataset. To this end, we use the function train_test_split() from scikit-learn.\n\n# Set full matrix of predictors.\nX_full = bank_data.drop(columns = ['Status'])\n\n# Set full matrix of responses.\nY_full = bank_data['Status']\n\n# Split the dataset.\nX_train, X_test, Y_train, Y_test = train_test_split(X_full, Y_full, \n                                                    test_size=0.3)\n\nThe parameter test_size sets the portion of the dataset that will go to the validation set."
-  },
-  {
-    "objectID": "Classification/Classification.slides.html#coefficient-estimation",
-    "href": "Classification/Classification.slides.html#coefficient-estimation",
-    "title": "Logistic Regression",
-    "section": "Coefficient estimation",
-    "text": "Coefficient estimation\nWe estimate the coefficients in the logistic function using maximum likelihood estimation.\nEssentially, we optimize a non-linear objective function using the so-called Iteratively Re-weighted Least Squares (IRLS) algorithm.\n\nThe IRLS algorithm (and consequently maximum likelihood estimation and Logistic Regression) fails when:\n\nThere is severe multicollinearity among the predictors.\nWe can perfectly separate the observations belonging to the two groups defined by \\(Y\\)."
-  },
-  {
-    "objectID": "Classification/Classification.slides.html#important-predictors",
-    "href": "Classification/Classification.slides.html#important-predictors",
-    "title": "Logistic Regression",
-    "section": "Important predictors",
-    "text": "Important predictors\n\nWe can use the p-values of these tests to determine which predictor is important.\n\nThat is, a predictor is important if its p-value is, say, smaller than \\(\\alpha = 0.05\\).\n\nFor Wald tests to work well, the number of observations in the training data should be large."
-  },
-  {
-    "objectID": "Classification/Classification.slides.html#evaluation-1",
-    "href": "Classification/Classification.slides.html#evaluation-1",
-    "title": "Logistic Regression",
-    "section": "Evaluation",
-    "text": "Evaluation\nWe evaluate a the logistic regression classifier by classifying observations that were not used for training it.\nThat is, we use the classifier to predict the categories of the test dataset using the predictor values in this set only.\nIn python, we use the commands:\n\n# Add constant to the predictor matrix from the test set.\nX_test = sm.add_constant(X_test)\n\n# Predict probabilities.\npredicted_probability = logit_model.predict(X_test)"
-  },
-  {
-    "objectID": "Classification/Classification.slides.html#estimated-classifier",
-    "href": "Classification/Classification.slides.html#estimated-classifier",
-    "title": "Logistic Regression",
-    "section": "Estimated classifier",
-    "text": "Estimated classifier\n\nAfter estimating the coefficients, we obtain the estimated logistic regression model\n\\[\\hat{P}(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x}) = \\frac{e^{\\hat{\\beta}_0 + \\hat{\\beta}_1 X_1 + \\hat{\\beta}_2 X_2 + \\cdots + \\hat{\\beta}_p X_p} }{1 + e^{\\hat{\\beta}_0 + \\hat{\\beta}_1 X_1 + \\hat{\\beta}_2 X_2 + \\cdots + \\hat{\\beta}_p X_p}},\\]\nwhere we have replaced the coefficients \\(\\beta_j\\)’s with their estimates \\(\\hat{\\beta}_j\\)’s."
   }
 ]
