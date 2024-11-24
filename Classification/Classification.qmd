@@ -41,10 +41,10 @@ Before we start, let's import the data science libraries into python.
 import pandas as pd
 import statsmodels.api as sm
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, accuracy_score
 ```
 
-Here, we will introduce the functions `confusion_matrix()` and `accuracy_score()` to evaluate the performance of a logistic regression classifier.
+Here, we will introduce the functions `confusion_matrix()`, `ConfusionMatrixDisplay()` and `accuracy_score()` to evaluate the performance of a logistic regression classifier.
 
 ## Two main problems
 
@@ -319,7 +319,7 @@ where the values of the coefficients $\beta_0$ and $\beta_j$ are unknown. Theref
 
 </br>
 
-We use the training data!
+We use the [training data]{style="color:darkblue;"}!
 
 ```{python}
 #| echo: false
@@ -328,22 +328,9 @@ We use the training data!
 bank_data.head(4)
 ```
 
-## How do we evaluate $\hat{C}(\boldsymbol{x})$?
+## Generate training data
 
-</br>
-
-We use [**test data**]{style="color:purple;"}!
-
-Test data is a random sample of $n_t$ observations that
-
--   is generated from the same (probabilistic) process that generated the training data,
--   but it is **independent** from the training data.
-
-## How do we generate test data?
-
-We split the current data set into a training and a test dataset.
-
-To this end, we use the function `train_test_split()` from **scikit-learn**.
+We split the current data set into a training and a validation dataset. To this end, we use the function `train_test_split()` from **scikit-learn**.
 
 ```{python}
 #| echo: true
@@ -360,26 +347,28 @@ X_train, X_test, Y_train, Y_test = train_test_split(X_full, Y_full,
                                                     test_size=0.3)
 ```
 
-The parameter `test_size` sets the portion of the dataset that will go to the test set.
+The parameter `test_size` sets the portion of the dataset that will go to the validation set.
 
 ## 
 
-</br></br>
+</br>
 
 -   The function makes a clever partition of the data using the *empirical* distribution of the response.
 
--   Technically, it splits the data so that the distribution of the response under the training and test sets is similar.
+-   Technically, it splits the data so that the distribution of the response under the training and validation sets is similar.
 
 -   Usually, the proportion of the dataset that goes to the test set is 20% or 30%.
 
--   Strictly speaking, the test dataset must be named [**validation dataset**]{style="color:orange;"}.
+-   We will later use the [**validation dataset**]{style="color:orange;"} to evaluate the classification performance of the estimated logistic regression model for classifying unobserved data.
 
 
-## Parameter estimation
+## Coefficient estimation
 
-We estimate the parameters in the logistic function using ***maximum likelihood estimation***.
+We estimate the coefficients in the logistic function using ***maximum likelihood estimation***.
 
 Essentially, we optimize a non-linear objective function using the so-called Iteratively Re-weighted Least Squares (IRLS) algorithm.
+
+. . .
 
 The IRLS algorithm (and consequently maximum likelihood estimation and Logistic Regression) fails when:
 
@@ -413,6 +402,8 @@ X_train_int = sm.add_constant(X_train)
 
 ## 
 
+</br>
+
 After that, we fit the model using the function `Logit()`.
 
 ```{python}
@@ -431,17 +422,44 @@ print(logit_model.params)
 
 ## Parameter testing
 
-We can construct significance tests for each coefficient in the logistic regression model. They are called *Wald tests*.
+</br></br>
 
-$$W_j = \frac{\hat{\beta}_j}{\mbox{SE}(\hat{\beta}_j) } \sim N(0,1)$$
+We can construct significance tests for each coefficient in the logistic regression model. They are called [**Wald tests**]{style="color:gold;"}.
 
-We can use the p-values of these tests to determine what predictor is important. That is, those with a small p-value, say, smaller than 0.05.
+</br>
 
-Ideally, the number of observations in the training data ($n$) is large.
+Wald tests allow us to test the hypothesis:
+
+$$H_0: \beta_j = 0 \text{ versus } H_1: \beta_j \neq 0$$
 
 ## 
 
-The `summary()` function of **statsmodel** contains the Wald tests of the coefficients in the logistic regression classifier.
+</br>
+
+Wald tests use the following test statistic:
+
+$$W_j = \frac{\hat{\beta}_j}{\mbox{SE}(\hat{\beta}_j) } \sim N(0,1).$$
+
+- $\hat{\beta}_j$ is the estimate of the coefficient $\beta_j$.
+- $\mbox{SE}(\hat{\beta}_j)$ is the standard error of the estimate $\hat{\beta}_j$ (due to repeated random sampling).
+
+## Important predictors
+
+</br>
+
+We can use the p-values of these tests to determine which predictor is important. 
+
+</br>
+
+That is, a predictor is important if its p-value is, say, smaller than $\alpha = 0.05$.
+
+</br>
+
+For Wald tests to work well, the number of observations in the training data should be large.
+
+## 
+
+The `summary()` function of **statsmodel** contains the Wald tests of the coefficients in the logistic regression model.
 
 ```{python}
 #| echo: true
@@ -453,9 +471,38 @@ print(logit_summary)
 
 # Classification performance
 
+## Estimated classifier
+
+</br>
+
+After estimating the coefficients, we obtain the estimated logistic regression model 
+
+$$\hat{P}(Y = 1 | \boldsymbol{X} = \boldsymbol{x}) = \frac{e^{\hat{\beta}_0 + \hat{\beta}_1 X_1 + \hat{\beta}_2 X_2 + \cdots + \hat{\beta}_p X_p} }{1 + e^{\hat{\beta}_0 + \hat{\beta}_1 X_1 + \hat{\beta}_2 X_2 + \cdots + \hat{\beta}_p X_p}},$$
+
+where we have replaced the coefficients $\beta_j$'s with their estimates $\hat{\beta}_j$'s.
+
+## 
+
+Using the estimated logistic regression model, we can build an *approximation* to the Bayes classifier $C(\boldsymbol{X})$.
+
+</br>
+
+The approximation is
+
+$$\hat{C}(\boldsymbol{X}) =
+    \begin{cases}
+      1, & \text{if}\ \hat{P}(Y = 1 | \boldsymbol{X} = \boldsymbol{x}) > 0.5 \\
+      0, & \text{if}\ \hat{P}(Y = 1 | \boldsymbol{X} = \boldsymbol{x}) \leq 0.5
+    \end{cases}.$$
+
+- We call $\hat{C}(\boldsymbol{X})$ the **logistic regression classifier**.
+- $\hat{C}(\boldsymbol{X})$ can be used to classify new observations. 
+
 ## Evaluation
 
-We evaluate a the logistic regression classifier by classifying observations that were not used for training it.
+</br>
+
+We evaluate a the logistic regression classifier by classifying observations that were not used for training or estimating it.
 
 That is, we use the classifier to predict the categories of the test dataset using the predictor values in this set only.
 
@@ -473,9 +520,7 @@ predicted_probability = logit_model.predict(X_test)
 
 ## 
 
-</br>
-
-Technically, the classifier outputs [**probabilities**]{style="color:brown;"} instead of actual classes.
+The `predict()` function outputs  [**probabilities**]{style="color:brown;"} instead of actual classes.
 
 ```{python}
 #| echo: true
@@ -486,15 +531,9 @@ predicted_probability.head()
 
 These are the probabilities of a banknote being "counterfeit" according to its characteristics (values of the predictors).
 
-## 
-
 </br>
 
-As seen before, the logistic regression classifier tries to approximate the [**Bayes classifier**]{style="color:darkblue;"}, which predicts to the most probable class.
-
-</br>
-
-Therefore, we turn the probabilities to actual classes by rounding the probabilities.
+To turn the probabilities to actual classes, we round them:
 
 ```{python}
 #| echo: true
@@ -511,7 +550,7 @@ predicted_classes.head()
 -   Observations with probabilities higher than 0.5 are classified as "counterfeit".
 -   Observations with probabilities lower than 0.5 are classified as "genuine".
 
-Now, we compare the predictions with the actual categories in the test dataset. [A good logistic regression model has a good agreement between its predictions and the actual categories.]{style="color:darkblue;"}
+Now, we compare the predictions with the actual categories in the [**validation dataset**]{style="color:orange;"}. [A good logistic regression model has a good agreement between its predictions and the actual categories.]{style="color:darkblue;"}
 
 ## Confusion matrix
 
@@ -525,7 +564,9 @@ Now, we compare the predictions with the actual categories in the test dataset. 
 
 ## In python
 
-We compute the confusion matrix using the function with the same name of **scikit-learn**. To this end,
+</br>
+
+We compute the confusion matrix using the function with the same name of **scikit-learn**.
 
 ```{python}
 #| echo: true
@@ -544,6 +585,18 @@ cm = confusion_matrix(Y_target_test, predicted_classes)
 print(cm)
 ```
 
+##
+
+We can visualize the confusion matrix using the `ConfusionMatrixDisplay()` function.
+
+```{python}
+#| echo: true
+#| output: true
+#| fig-align: center
+
+ConfusionMatrixDisplay(cm).plot()
+```
+
 ## Accuracy
 
 A simple metric to summarize the information of the confusion matrix is **accuracy**. It is the proportion of correct classifications for both classes, out of the total classifications made.
@@ -558,15 +611,19 @@ accuracy = accuracy_score(Y_target_test, predicted_classes)
 print( round(accuracy, 2) )
 ```
 
-The higher the accuracy, the better the performance of the classifier.
+</br>
+
+> The higher the accuracy, the better the performance of the classifier.
 
 ## Remarks
 
+</br>
+
 -   Accuracy is simple to calculate and interpret.
 
--   It works well when the dataset has a balanced class distribution (i.e., roughly equal positive and negative cases).
+-   It works well when the dataset has a balanced class distribution (i.e., roughly equal 1 and 0 cases).
 
--   Not ideal for imbalanced datasets: When one class is much more frequent than the other, accuracy can be misleading.
+-   Not ideal for imbalanced datasets. When one class is much more frequent than the other, accuracy can be misleading.
 
 -   Other summaries of the confusion matrix such as **Precision**, **Recall**, and **F1-Score** are better suited for imbalanced data.
 

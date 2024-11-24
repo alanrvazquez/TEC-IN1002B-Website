@@ -1677,7 +1677,7 @@
     "href": "Classification/Classification.slides.html#load-the-libraries",
     "title": "Logistic Regression",
     "section": "Load the libraries",
-    "text": "Load the libraries\n\nBefore we start, let’s import the data science libraries into python.\n\n# Importing necessary libraries\nimport pandas as pd\nimport statsmodels.api as sm\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import confusion_matrix, accuracy_score\n\nHere, we will introduce the functions confusion_matrix() and accuracy_score() to evaluate the performance of a logistic regression classifier."
+    "text": "Load the libraries\n\nBefore we start, let’s import the data science libraries into python.\n\n# Importing necessary libraries\nimport pandas as pd\nimport statsmodels.api as sm\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, accuracy_score\n\nHere, we will introduce the functions confusion_matrix(), ConfusionMatrixDisplay() and accuracy_score() to evaluate the performance of a logistic regression classifier."
   },
   {
     "objectID": "Classification/Classification.slides.html#two-main-problems",
@@ -1810,21 +1810,21 @@
     "href": "Classification/Classification.slides.html#section-6",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The function makes a clever partition of the data using the empirical distribution of the response.\nTechnically, it splits the data so that the distribution of the response under the training and test sets is similar.\nUsually, the proportion of the dataset that goes to the test set is 20% or 30%.\nStrictly speaking, the test dataset must be named validation dataset."
+    "text": "The function makes a clever partition of the data using the empirical distribution of the response.\nTechnically, it splits the data so that the distribution of the response under the training and validation sets is similar.\nUsually, the proportion of the dataset that goes to the test set is 20% or 30%.\nWe will later use the validation dataset to evaluate the classification performance of the estimated logistic regression model for classifying unobserved data."
   },
   {
     "objectID": "Classification/Classification.slides.html#section-7",
     "href": "Classification/Classification.slides.html#section-7",
     "title": "Logistic Regression",
     "section": "",
-    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.019881\n         Iterations 20\nconst    -1857.438275\nLeft       -30.979013\nRight       42.518227\nBottom      19.550337\nTop         17.346395\ndtype: float64"
+    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nWarning: Maximum number of iterations has been exceeded.\n         Current function value: 0.000000\n         Iterations: 35\nconst    -101966.772372\nLeft        -761.095007\nRight       1419.429805\nBottom       740.323560\nTop          887.854888\ndtype: float64"
   },
   {
     "objectID": "Classification/Classification.slides.html#section-8",
     "href": "Classification/Classification.slides.html#section-8",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression classifier.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      135\nMethod:                           MLE   Df Model:                            4\nDate:                Sun, 24 Nov 2024   Pseudo R-squ.:                  0.9713\nTime:                        11:25:11   Log-Likelihood:                -2.7833\nconverged:                       True   LL-Null:                       -96.983\nCovariance Type:            nonrobust   LLR p-value:                 1.170e-39\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst      -1857.4383   2401.571     -0.773      0.439   -6564.432    2849.555\nLeft         -30.9790     23.674     -1.309      0.191     -77.378      15.420\nRight         42.5182     31.567      1.347      0.178     -19.353     104.389\nBottom        19.5503     12.762      1.532      0.126      -5.463      44.564\nTop           17.3464     11.133      1.558      0.119      -4.473      39.166\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.92 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
+    "text": "Wald tests use the following test statistic:\n\\[W_j = \\frac{\\hat{\\beta}_j}{\\mbox{SE}(\\hat{\\beta}_j) } \\sim N(0,1).\\]\n\n\\(\\hat{\\beta}_j\\) is the estimate of the coefficient \\(\\beta_j\\).\n\\(\\mbox{SE}(\\hat{\\beta}_j)\\) is the standard error of the estimate \\(\\hat{\\beta}_j\\) (due to repeated random sampling)."
   },
   {
     "objectID": "Classification/Classification.slides.html#parameter-estimation",
@@ -1845,49 +1845,49 @@
     "href": "Classification/Classification.slides.html#section-9",
     "title": "Logistic Regression",
     "section": "",
-    "text": "Technically, the classifier outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n66     5.441880e-21\n129    1.000000e+00\n8      4.048003e-01\n104    1.000000e+00\n182    1.000000e+00\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors)."
+    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression model.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      135\nMethod:                           MLE   Df Model:                            4\nDate:                Sun, 24 Nov 2024   Pseudo R-squ.:                   1.000\nTime:                        12:08:53   Log-Likelihood:            -2.1051e-10\nconverged:                      False   LL-Null:                       -97.026\nCovariance Type:            nonrobust   LLR p-value:                 7.134e-41\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -1.02e+05        nan        nan        nan         nan         nan\nLeft        -761.0950        nan        nan        nan         nan         nan\nRight       1419.4298   5.62e+10   2.52e-08      1.000    -1.1e+11     1.1e+11\nBottom       740.3236   4.18e+11   1.77e-09      1.000   -8.19e+11    8.19e+11\nTop          887.8549    5.5e+11   1.62e-09      1.000   -1.08e+12    1.08e+12\n==============================================================================\n\nComplete Separation: The results show that there iscomplete separation or perfect prediction.\nIn this case the Maximum Likelihood Estimator does not exist and the parameters\nare not identified."
   },
   {
     "objectID": "Classification/Classification.slides.html#parameter-testing",
     "href": "Classification/Classification.slides.html#parameter-testing",
     "title": "Logistic Regression",
     "section": "Parameter testing",
-    "text": "Parameter testing\nWe can construct significance tests for each coefficient in the logistic regression model. They are called Wald tests.\n\\[W_j = \\frac{\\hat{\\beta}_j}{\\mbox{SE}(\\hat{\\beta}_j) } \\sim N(0,1)\\]\nWe can use the p-values of these tests to determine what predictor is important. That is, those with a small p-value, say, smaller than 0.05.\nIdeally, the number of observations in the training data (\\(n\\)) is large."
+    "text": "Parameter testing\n\nWe can construct significance tests for each coefficient in the logistic regression model. They are called Wald tests.\n\nWald tests allow us to test the hypothesis:\n\\[H_0: \\beta_j = 0 \\text{ versus } H_1: \\beta_j \\neq 0\\]"
   },
   {
     "objectID": "Classification/Classification.slides.html#section-10",
     "href": "Classification/Classification.slides.html#section-10",
     "title": "Logistic Regression",
     "section": "",
-    "text": "As seen before, the logistic regression classifier tries to approximate the Bayes classifier, which predicts to the most probable class.\n\nTherefore, we turn the probabilities to actual classes by rounding the probabilities.\n\npredicted_classes = round(predicted_probability).astype('int')"
+    "text": "Using the estimated logistic regression model, we can build an approximation to the Bayes classifier \\(C(\\boldsymbol{X})\\).\n\nThe approximation is\n\\[\\hat{C}(\\boldsymbol{X}) =\n    \\begin{cases}\n      1, & \\text{if}\\ \\hat{P}(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x}) &gt; 0.5 \\\\\n      0, & \\text{if}\\ \\hat{P}(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x}) \\leq 0.5\n    \\end{cases}.\\]\n\nWe call \\(\\hat{C}(\\boldsymbol{X})\\) the logistic regression classifier.\n\\(\\hat{C}(\\boldsymbol{X})\\) can be used to classify new observations."
   },
   {
     "objectID": "Classification/Classification.slides.html#evaluation",
     "href": "Classification/Classification.slides.html#evaluation",
     "title": "Logistic Regression",
     "section": "Evaluation",
-    "text": "Evaluation\nWe evaluate a the logistic regression classifier by classifying observations that were not used for training it.\nThat is, we use the classifier to predict the categories of the test dataset using the predictor values in this set only.\nIn python, we use the commands:\n\n# Add constant to the predictor matrix from the test set.\nX_test = sm.add_constant(X_test)\n\n# Predict probabilities.\npredicted_probability = logit_model.predict(X_test)"
+    "text": "Evaluation\n\nWe evaluate a the logistic regression classifier by classifying observations that were not used for training or estimating it.\nThat is, we use the classifier to predict the categories of the test dataset using the predictor values in this set only.\nIn python, we use the commands:\n\n# Add constant to the predictor matrix from the test set.\nX_test = sm.add_constant(X_test)\n\n# Predict probabilities.\npredicted_probability = logit_model.predict(X_test)"
   },
   {
     "objectID": "Classification/Classification.slides.html#section-11",
     "href": "Classification/Classification.slides.html#section-11",
     "title": "Logistic Regression",
     "section": "",
-    "text": "predicted_classes.head()\n\n66     0\n129    1\n8      0\n104    1\n182    1\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the test dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
+    "text": "The predict() function outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n185    1.0\n89     0.0\n79     0.0\n78     0.0\n175    1.0\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors).\n\nTo turn the probabilities to actual classes, we round them:\n\npredicted_classes = round(predicted_probability).astype('int')"
   },
   {
     "objectID": "Classification/Classification.slides.html#section-12",
     "href": "Classification/Classification.slides.html#section-12",
     "title": "Logistic Regression",
     "section": "",
-    "text": "predicted_classes.head()\n\n111    1\n186    1\n1      0\n145    1\n199    1\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the test dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
+    "text": "predicted_classes.head()\n\n185    1\n89     0\n79     0\n78     0\n175    1\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the validation dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
   },
   {
     "objectID": "Classification/Classification.slides.html#section-13",
     "href": "Classification/Classification.slides.html#section-13",
     "title": "Logistic Regression",
     "section": "",
-    "text": "predicted_classes.head()\n\n33     0\n121    1\n108    1\n155    1\n196    1\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the test dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
+    "text": "We can visualize the confusion matrix using the ConfusionMatrixDisplay() function.\n\nConfusionMatrixDisplay(cm).plot()"
   },
   {
     "objectID": "Classification/Classification.slides.html#confusion-matrix",
@@ -1901,21 +1901,21 @@
     "href": "Classification/Classification.slides.html#in-python-1",
     "title": "Logistic Regression",
     "section": "In python",
-    "text": "In python\nWe compute the confusion matrix using the function with the same name of scikit-learn. To this end,\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[29  3]\n [ 4 24]]"
+    "text": "In python\n\nWe compute the confusion matrix using the function with the same name of scikit-learn.\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[29  0]\n [ 4 27]]"
   },
   {
     "objectID": "Classification/Classification.slides.html#accuracy",
     "href": "Classification/Classification.slides.html#accuracy",
     "title": "Logistic Regression",
     "section": "Accuracy",
-    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.88\n\n\nThe higher the accuracy, the better the performance of the classifier."
+    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.93\n\n\n\n\nThe higher the accuracy, the better the performance of the classifier."
   },
   {
     "objectID": "Classification/Classification.slides.html#remarks",
     "href": "Classification/Classification.slides.html#remarks",
     "title": "Logistic Regression",
     "section": "Remarks",
-    "text": "Remarks\n\nAccuracy is simple to calculate and interpret.\nIt works well when the dataset has a balanced class distribution (i.e., roughly equal positive and negative cases).\nNot ideal for imbalanced datasets: When one class is much more frequent than the other, accuracy can be misleading.\nOther summaries of the confusion matrix such as Precision, Recall, and F1-Score are better suited for imbalanced data."
+    "text": "Remarks\n\n\nAccuracy is simple to calculate and interpret.\nIt works well when the dataset has a balanced class distribution (i.e., roughly equal 1 and 0 cases).\nNot ideal for imbalanced datasets. When one class is much more frequent than the other, accuracy can be misleading.\nOther summaries of the confusion matrix such as Precision, Recall, and F1-Score are better suited for imbalanced data."
   },
   {
     "objectID": "Tools/Tools2.slides.html#agenda",
@@ -2420,5 +2420,40 @@
     "title": "Logistic Regression",
     "section": "How do we estimate the coefficients?",
     "text": "How do we estimate the coefficients?\n\nWe use the training data!\n\n\n\n\n\n\n\n\n\nStatus\nLeft\nRight\nBottom\nTop\n\n\n\n\n0\ngenuine\n131.0\n131.1\n9.0\n9.7\n\n\n1\ngenuine\n129.7\n129.7\n8.1\n9.5\n\n\n2\ngenuine\n129.7\n129.7\n8.7\n9.6\n\n\n3\ngenuine\n129.7\n129.6\n7.5\n10.4"
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#generate-training-data",
+    "href": "Classification/Classification.slides.html#generate-training-data",
+    "title": "Logistic Regression",
+    "section": "Generate training data",
+    "text": "Generate training data\nWe split the current data set into a training and a validation dataset. To this end, we use the function train_test_split() from scikit-learn.\n\n# Set full matrix of predictors.\nX_full = bank_data.drop(columns = ['Status'])\n\n# Set full matrix of responses.\nY_full = bank_data['Status']\n\n# Split the dataset.\nX_train, X_test, Y_train, Y_test = train_test_split(X_full, Y_full, \n                                                    test_size=0.3)\n\nThe parameter test_size sets the portion of the dataset that will go to the validation set."
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#coefficient-estimation",
+    "href": "Classification/Classification.slides.html#coefficient-estimation",
+    "title": "Logistic Regression",
+    "section": "Coefficient estimation",
+    "text": "Coefficient estimation\nWe estimate the coefficients in the logistic function using maximum likelihood estimation.\nEssentially, we optimize a non-linear objective function using the so-called Iteratively Re-weighted Least Squares (IRLS) algorithm.\n\nThe IRLS algorithm (and consequently maximum likelihood estimation and Logistic Regression) fails when:\n\nThere is severe multicollinearity among the predictors.\nWe can perfectly separate the observations belonging to the two groups defined by \\(Y\\)."
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#important-predictors",
+    "href": "Classification/Classification.slides.html#important-predictors",
+    "title": "Logistic Regression",
+    "section": "Important predictors",
+    "text": "Important predictors\n\nWe can use the p-values of these tests to determine which predictor is important.\n\nThat is, a predictor is important if its p-value is, say, smaller than \\(\\alpha = 0.05\\).\n\nFor Wald tests to work well, the number of observations in the training data should be large."
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#evaluation-1",
+    "href": "Classification/Classification.slides.html#evaluation-1",
+    "title": "Logistic Regression",
+    "section": "Evaluation",
+    "text": "Evaluation\nWe evaluate a the logistic regression classifier by classifying observations that were not used for training it.\nThat is, we use the classifier to predict the categories of the test dataset using the predictor values in this set only.\nIn python, we use the commands:\n\n# Add constant to the predictor matrix from the test set.\nX_test = sm.add_constant(X_test)\n\n# Predict probabilities.\npredicted_probability = logit_model.predict(X_test)"
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#estimated-classifier",
+    "href": "Classification/Classification.slides.html#estimated-classifier",
+    "title": "Logistic Regression",
+    "section": "Estimated classifier",
+    "text": "Estimated classifier\n\nAfter estimating the coefficients, we obtain the estimated logistic regression model\n\\[\\hat{P}(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x}) = \\frac{e^{\\hat{\\beta}_0 + \\hat{\\beta}_1 X_1 + \\hat{\\beta}_2 X_2 + \\cdots + \\hat{\\beta}_p X_p} }{1 + e^{\\hat{\\beta}_0 + \\hat{\\beta}_1 X_1 + \\hat{\\beta}_2 X_2 + \\cdots + \\hat{\\beta}_p X_p}},\\]\nwhere we have replaced the coefficients \\(\\beta_j\\)’s with their estimates \\(\\hat{\\beta}_j\\)’s."
   }
 ]
