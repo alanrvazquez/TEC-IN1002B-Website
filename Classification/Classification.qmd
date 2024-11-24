@@ -22,7 +22,8 @@ jupyter: python3
 
 1.  Introduction
 2.  Logistic regression
-3.  Classification performance
+3.  Estimating a logistic regression model
+4.  Classification performance
 
 # Introduction
 
@@ -152,15 +153,18 @@ This function classifies to the most probable class using the conditional distri
 
 [HOWEVER, we don’t (and will never) know the true form of $P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})$!]{style="color:red;"}
 
+</br>
+
 . . .
 
 To overcome this issue, we have a standard solution:
 
--   Impose an structure on $P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})$. [**Logistic Regression classifier**]{style="color:brown;"}.
+-   Impose an structure on $P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})$. 
+- This structure produces the [**Logistic Regression classifier**]{style="color:brown;"}.
 
 . . .
 
-Before discussing the logistic regression classifier, we need to introduce the training and test set for building and testing the model.
+Before we introduce logistic regression, we will present another motivating example.
 
 ## Example 2
 
@@ -174,14 +178,16 @@ $$Y =
 
 We have four predictors:
 
-::: {style="font-size: 80%;"}
--   Left: length of left edge (mm)
--   Right: length of right edge (mm)
--   Top: distance from the image to top edge
--   Bottom: distance from image to bottom
+::: {style="font-size: 90%;"}
+-   $X_1$: Left, which is the length of left edge (mm)
+-   $X_2$: Right, which is the length of right edge (mm)
+-   $X_3$: Top, which is the distance from the image to top edge
+-   $X_4$: Bottom, which is the distance from image to bottom
 :::
 
 ## Old-Swiss 1000-franc banknote
+
+</br>
 
 ![](images/clipboard-270396609.png)
 
@@ -199,9 +205,121 @@ bank_data['Status'] = bank_data['Status'].astype('category')
 bank_data.head()
 ```
 
-## How do we estimate $C(\boldsymbol{x})$?
+# Introduction to logistic regression
 
-We use the training data to construct an estimated function $\hat{C}(\boldsymbol{x})$.
+## Logistic Regression (LR)
+
+</br>
+
+[Basic Idea]{style="text-decoration: underline;"}: Impose an structure on $P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})$:
+
+</br>
+
+$$P(Y = 1 | \boldsymbol{X} = \boldsymbol{x}) = \frac{e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p} }{1 + e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p}}$$
+
+</br>
+
+- This structure is known as the [**logistic function**]{style="color:gold;"}.
+- The logistic function is always between 0 and 1.
+
+## Why logistic regression?
+
+Let’s use some algebra to reveal some of interesting facts about logistic regression.
+
+. . .
+
+We start from
+
+$$P(Y = 1 | \boldsymbol{X} = \boldsymbol{x}) = \frac{e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p} }{1 + e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p}}.$$
+
+. . .
+
+Next, we have that
+
+$$e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p} = \frac{P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}{1 - P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}.$$
+
+## The Odds ratio
+
+The quantity 
+$$e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p} = \frac{P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}{1 - P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}$$ 
+is known as the ["**odds**"]{style="color:gold;"} ratio.
+
+</br>
+
+The odds ratio is the probability that $Y = 1$ divided by the probability that $Y = 0$, given that the predictors $\boldsymbol{X}$ have taken the values $\boldsymbol{x} = (x_1, x_2, \ldots, x_p)$.
+
+## 
+
+Consider the banknote classification problem where $Y = 1$ implies counterfeit and $Y = 0$ genuine note. We have four predictors in $\boldsymbol{X} =  (X_1, X_2, X_3, X_4)$ summarizing specific characteristics of a banknote. 
+
+</br>
+
+The odds ratio is $e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \beta_p X_4} = \frac{P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}{1 - P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}$
+
+::: incremental
+-   If the ratio is 1, the odds are 50-50.
+-   If the ratio is greater than 1, the banknote is more likely to be counterfeit than genuine.
+-   If the ratio is smaller than 1, the banknote is more likely to be genuine than counterfeit.
+:::
+
+## The logg-odds
+
+</br>
+
+If we take logarithm on both sides, we obtain the "[log-odds]{style="color:brown;"}" or "[logit]{style="color:brown;"}":
+
+$$\beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p = \ln \left( \frac{P(Y = 1 | \boldsymbol{X} = \boldsymbol{x} )}{1 - P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})} \right).$$
+
+::: incremental
+-   The log-odds can take any real value.
+-   The log-odds is a linear combination of the predictors.
+-   The log-odds resembles a multiple lienar regression model.
+:::
+
+## Interpretation of coefficients
+
+The log-odds allows us to interpret the coefficients of the logistic regression model.
+
+$$\beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p = \ln \left( \frac{P(Y = 1 | \boldsymbol{X} = \boldsymbol{x} )}{1 - P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})} \right).$$
+
+-   $\beta_0$ can be [***interpreted***]{style="color:drakblue;"} as the average value of the log-odds ratio given that all predictors are equal to zero.
+
+-   $\beta_j$ can be [***interpreted***]{style="color:drakblue;"} as the average change in the log-odds ratio given by a one-unit increase in $X_j$, when all the other predictors have fixed values.
+
+
+## 
+
+If $\beta_j$ is positive, increasing the value of $X_j$ will be associated with increasing the odds ratio or $P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})$. [In other words, increasing the value of $X_j$ increases, on average, the probability that $Y = 1$.]{style="color:darkgreen;"}
+
+</br>
+
+If $\beta_j$ is negative, increasing $X_j$ will be associated with decreasing $P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})$, and with increasing $P(Y = 0 | \boldsymbol{X} = \boldsymbol{x})$. [In other words, increasing the value of $X_j$ increases, on average, the probability that $Y = 0$.]{style="color:darkgreen;"}
+
+</br>
+
+<https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/>
+
+# Estimating a logistic regression model
+
+## The logistic regression model 
+
+</br>
+
+The logistic regression model is
+
+$$P(Y = 1 | \boldsymbol{X} = \boldsymbol{x}) = \frac{e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p} }{1 + e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p}},$$
+
+where the values of the coefficients $\beta_0$ and $\beta_j$ are unknown. Therefore, we need to calculate estimates for them. 
+
+- $\hat{\beta}_0$ is the estimate for $\beta_0$. 
+- $\hat{\beta}_j$ is the estimate for $\beta_j$.
+
+
+## How do we estimate the coefficients?
+
+</br>
+
+We use the training data!
 
 ```{python}
 #| echo: false
@@ -209,8 +327,6 @@ We use the training data to construct an estimated function $\hat{C}(\boldsymbol
 
 bank_data.head(4)
 ```
-
-Ideally, $\hat{C}(\boldsymbol{x})$ approximates the true Bayes classifier.
 
 ## How do we evaluate $\hat{C}(\boldsymbol{x})$?
 
@@ -258,81 +374,6 @@ The parameter `test_size` sets the portion of the dataset that will go to the te
 
 -   Strictly speaking, the test dataset must be named [**validation dataset**]{style="color:orange;"}.
 
-# Introduction to logistic regression
-
-## Logistic Regression (LR)
-
-[Basic Idea]{style="text-decoration: underline;"}: Impose an structure on $P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})$:
-
-</br>
-
-$$P(Y = 1 | \boldsymbol{X} = \boldsymbol{x}) = \frac{e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p} }{1 + e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p}}$$
-
-</br>
-
-This structure is known as the [**logistic function**]{style="color:gold;"}.
-
-## Why logistic regression?
-
-Let’s use some algebra to reveal some of interesting facts about logistic regression.
-
-We start from
-
-$$P(Y = 1 | \boldsymbol{X} = \boldsymbol{x}) = \frac{e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p} }{1 + e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p}}.$$
-
-Next, we have that
-
-$$e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p} = \frac{P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}{1 - P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}.$$
-
-## 
-
-</br></br>
-
-The quantity $e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p} = \frac{P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}{1 - P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}$ is known as the "odds" ratio.
-
-</br>
-
-The odds ratio is the probability that $Y = 1$ divided by the probability that $Y = 0$, given that the predictors are $\boldsymbol{X}$.
-
-## 
-
-Consider the banknote classification problem where $Y = 1$ implies counterfeit and $Y = 0$ genuine note.
-
-</br>
-
-The odds ratio is $e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p} = \frac{P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}{1 - P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}$
-
-::: incremental
--   If the ratio is 1, the odds are 50-50.
--   If the ratio is greater than 1, the banknote is more likely to be counterfeit than genuine.
--   If the ratio is smaller than 1, it is more likely to be genuine than counterfeit.
-:::
-
-## 
-
-If we take logarithm on both sides, we obtain the "[log-odds]{style="color:brown;"}" or "[logit]{style="color:brown;"}":
-
-$$\beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p = \ln \left( \frac{P(Y = 1 | \boldsymbol{X} = \boldsymbol{x} )}{1 - P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})} \right).$$
-
-::: incremental
--   The log-odds can take any real value.
--   The log-odds is a linear combination of the predictors.
--   $\beta_j$ can then be [***interpreted***]{style="color:drakblue;"} as the average change in the log-odds ratio given by a one-unit increase in $X_j$ (when all the other predictors have fixed values).
-:::
-
-## 
-
-</br>
-
-If $\beta_j$ is positive, increasing $X_j$ will be associated with increasing the odds ratio or $P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})$.
-
-</br>
-
-If $\beta_j$ is negative, increasing $X_j$ will be associated with decreasing $P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})$, and with increasing $P(Y = 0 | \boldsymbol{X} = \boldsymbol{x})$.
-
-</br>
-
-<https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/>
 
 ## Parameter estimation
 

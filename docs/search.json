@@ -1670,7 +1670,7 @@
     "href": "Classification/Classification.slides.html#agenda",
     "title": "Logistic Regression",
     "section": "Agenda",
-    "text": "Agenda\n\nIntroduction\nLogistic regression\nClassification performance"
+    "text": "Agenda\n\nIntroduction\nLogistic regression\nEstimating a logistic regression model\nClassification performance"
   },
   {
     "objectID": "Classification/Classification.slides.html#load-the-libraries",
@@ -1733,14 +1733,14 @@
     "href": "Classification/Classification.slides.html#section-3",
     "title": "Logistic Regression",
     "section": "",
-    "text": "HOWEVER, we don’t (and will never) know the true form of \\(P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\)!\n\nTo overcome this issue, we have a standard solution:\n\nImpose an structure on \\(P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\). Logistic Regression classifier.\n\n\n\nBefore discussing the logistic regression classifier, we need to introduce the training and test set for building and testing the model."
+    "text": "HOWEVER, we don’t (and will never) know the true form of \\(P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\)!\n\n\nTo overcome this issue, we have a standard solution:\n\nImpose an structure on \\(P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\).\nThis structure produces the Logistic Regression classifier.\n\n\n\nBefore we introduce logistic regression, we will present another motivating example."
   },
   {
     "objectID": "Classification/Classification.slides.html#example-2",
     "href": "Classification/Classification.slides.html#example-2",
     "title": "Logistic Regression",
     "section": "Example 2",
-    "text": "Example 2\nConsider the task of identifying old-swiss counterfeit banknotes. The response under study is\n\\[Y =\n    \\begin{cases}\n      1, & \\text{if it is a counterfeit banknote} \\\\\n      0, & \\text{otherwise}\n    \\end{cases}.\\]\nWe have four predictors:\n\n\nLeft: length of left edge (mm)\nRight: length of right edge (mm)\nTop: distance from the image to top edge\nBottom: distance from image to bottom"
+    "text": "Example 2\nConsider the task of identifying old-swiss counterfeit banknotes. The response under study is\n\\[Y =\n    \\begin{cases}\n      1, & \\text{if it is a counterfeit banknote} \\\\\n      0, & \\text{otherwise}\n    \\end{cases}.\\]\nWe have four predictors:\n\n\n\\(X_1\\): Left, which is the length of left edge (mm)\n\\(X_2\\): Right, which is the length of right edge (mm)\n\\(X_3\\): Top, which is the distance from the image to top edge\n\\(X_4\\): Bottom, which is the distance from image to bottom"
   },
   {
     "objectID": "Classification/Classification.slides.html#old-swiss-1000-franc-banknote",
@@ -1782,49 +1782,49 @@
     "href": "Classification/Classification.slides.html#section-4",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The function makes a clever partition of the data using the empirical distribution of the response.\nTechnically, it splits the data so that the distribution of the response under the training and test sets is similar.\nUsually, the proportion of the dataset that goes to the test set is 20% or 30%.\nStrictly speaking, the test dataset must be named validation dataset."
+    "text": "Consider the banknote classification problem where \\(Y = 1\\) implies counterfeit and \\(Y = 0\\) genuine note. We have four predictors in \\(\\boldsymbol{X} =  (X_1, X_2, X_3, X_4)\\) summarizing specific characteristics of a banknote.\n\nThe odds ratio is \\(e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\beta_3 X_3 + \\beta_p X_4} = \\frac{P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}{1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}\\)\n\n\nIf the ratio is 1, the odds are 50-50.\nIf the ratio is greater than 1, the banknote is more likely to be counterfeit than genuine.\nIf the ratio is smaller than 1, the banknote is more likely to be genuine than counterfeit."
   },
   {
     "objectID": "Classification/Classification.slides.html#logistic-regression-lr",
     "href": "Classification/Classification.slides.html#logistic-regression-lr",
     "title": "Logistic Regression",
     "section": "Logistic Regression (LR)",
-    "text": "Logistic Regression (LR)\nBasic Idea: Impose an structure on \\(P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\):\n\n\\[P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x}) = \\frac{e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p} }{1 + e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p}}\\]\n\nThis structure is known as the logistic function."
+    "text": "Logistic Regression (LR)\n\nBasic Idea: Impose an structure on \\(P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\):\n\n\\[P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x}) = \\frac{e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p} }{1 + e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p}}\\]\n\n\nThis structure is known as the logistic function.\nThe logistic function is always between 0 and 1."
   },
   {
     "objectID": "Classification/Classification.slides.html#why-logistic-regression",
     "href": "Classification/Classification.slides.html#why-logistic-regression",
     "title": "Logistic Regression",
     "section": "Why logistic regression?",
-    "text": "Why logistic regression?\nLet’s use some algebra to reveal some of interesting facts about logistic regression.\nWe start from\n\\[P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x}) = \\frac{e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p} }{1 + e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p}}.\\]\nNext, we have that\n\\[e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p} = \\frac{P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}{1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}.\\]"
+    "text": "Why logistic regression?\nLet’s use some algebra to reveal some of interesting facts about logistic regression.\n\nWe start from\n\\[P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x}) = \\frac{e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p} }{1 + e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p}}.\\]\n\n\nNext, we have that\n\\[e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p} = \\frac{P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}{1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}.\\]"
   },
   {
     "objectID": "Classification/Classification.slides.html#section-5",
     "href": "Classification/Classification.slides.html#section-5",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The quantity \\(e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p} = \\frac{P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}{1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}\\) is known as the “odds” ratio.\n\nThe odds ratio is the probability that \\(Y = 1\\) divided by the probability that \\(Y = 0\\), given that the predictors are \\(\\boldsymbol{X}\\)."
+    "text": "If \\(\\beta_j\\) is positive, increasing the value of \\(X_j\\) will be associated with increasing the odds ratio or \\(P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\). In other words, increasing the value of \\(X_j\\) increases, on average, the probability that \\(Y = 1\\).\n\nIf \\(\\beta_j\\) is negative, increasing \\(X_j\\) will be associated with decreasing \\(P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\), and with increasing \\(P(Y = 0 | \\boldsymbol{X} = \\boldsymbol{x})\\). In other words, increasing the value of \\(X_j\\) increases, on average, the probability that \\(Y = 0\\).\n\nhttps://stats.idre.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/"
   },
   {
     "objectID": "Classification/Classification.slides.html#section-6",
     "href": "Classification/Classification.slides.html#section-6",
     "title": "Logistic Regression",
     "section": "",
-    "text": "Consider the banknote classification problem where \\(Y = 1\\) implies counterfeit and \\(Y = 0\\) genuine note.\n\nThe odds ratio is \\(e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p} = \\frac{P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}{1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}\\)\n\n\nIf the ratio is 1, the odds are 50-50.\nIf the ratio is greater than 1, the banknote is more likely to be counterfeit than genuine.\nIf the ratio is smaller than 1, it is more likely to be genuine than counterfeit."
+    "text": "The function makes a clever partition of the data using the empirical distribution of the response.\nTechnically, it splits the data so that the distribution of the response under the training and test sets is similar.\nUsually, the proportion of the dataset that goes to the test set is 20% or 30%.\nStrictly speaking, the test dataset must be named validation dataset."
   },
   {
     "objectID": "Classification/Classification.slides.html#section-7",
     "href": "Classification/Classification.slides.html#section-7",
     "title": "Logistic Regression",
     "section": "",
-    "text": "If we take logarithm on both sides, we obtain the “log-odds” or “logit”:\n\\[\\beta_0 + \\beta_1 X_1 + \\cdots + \\beta_p X_p = \\ln \\left( \\frac{P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x} )}{1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})} \\right).\\]\n\n\nThe log-odds can take any real value.\nThe log-odds is a linear combination of the predictors.\n\\(\\beta_j\\) can then be interpreted as the average change in the log-odds ratio given by a one-unit increase in \\(X_j\\) (when all the other predictors have fixed values)."
+    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.019881\n         Iterations 20\nconst    -1857.438275\nLeft       -30.979013\nRight       42.518227\nBottom      19.550337\nTop         17.346395\ndtype: float64"
   },
   {
     "objectID": "Classification/Classification.slides.html#section-8",
     "href": "Classification/Classification.slides.html#section-8",
     "title": "Logistic Regression",
     "section": "",
-    "text": "If \\(\\beta_j\\) is positive, increasing \\(X_j\\) will be associated with increasing the odds ratio or \\(P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\).\n\nIf \\(\\beta_j\\) is negative, increasing \\(X_j\\) will be associated with decreasing \\(P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\), and with increasing \\(P(Y = 0 | \\boldsymbol{X} = \\boldsymbol{x})\\).\n\nhttps://stats.idre.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/"
+    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression classifier.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      135\nMethod:                           MLE   Df Model:                            4\nDate:                Sun, 24 Nov 2024   Pseudo R-squ.:                  0.9713\nTime:                        11:25:11   Log-Likelihood:                -2.7833\nconverged:                       True   LL-Null:                       -96.983\nCovariance Type:            nonrobust   LLR p-value:                 1.170e-39\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst      -1857.4383   2401.571     -0.773      0.439   -6564.432    2849.555\nLeft         -30.9790     23.674     -1.309      0.191     -77.378      15.420\nRight         42.5182     31.567      1.347      0.178     -19.353     104.389\nBottom        19.5503     12.762      1.532      0.126      -5.463      44.564\nTop           17.3464     11.133      1.558      0.119      -4.473      39.166\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.92 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
   },
   {
     "objectID": "Classification/Classification.slides.html#parameter-estimation",
@@ -1845,7 +1845,7 @@
     "href": "Classification/Classification.slides.html#section-9",
     "title": "Logistic Regression",
     "section": "",
-    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.025080\n         Iterations 15\nconst    -960.932350\nLeft        3.884814\nRight       2.022942\nBottom      8.170533\nTop        10.958957\ndtype: float64"
+    "text": "Technically, the classifier outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n66     5.441880e-21\n129    1.000000e+00\n8      4.048003e-01\n104    1.000000e+00\n182    1.000000e+00\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors)."
   },
   {
     "objectID": "Classification/Classification.slides.html#parameter-testing",
@@ -1859,7 +1859,7 @@
     "href": "Classification/Classification.slides.html#section-10",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression classifier.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      135\nMethod:                           MLE   Df Model:                            4\nDate:                Sun, 24 Nov 2024   Pseudo R-squ.:                  0.9637\nTime:                        10:44:06   Log-Likelihood:                -3.5112\nconverged:                       True   LL-Null:                       -96.683\nCovariance Type:            nonrobust   LLR p-value:                 3.235e-39\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -960.9323   1081.522     -0.889      0.374   -3080.676    1158.811\nLeft           3.8848     12.852      0.302      0.762     -21.304      29.073\nRight          2.0229      6.513      0.311      0.756     -10.743      14.789\nBottom         8.1705      4.840      1.688      0.091      -1.315      17.656\nTop           10.9590      5.941      1.845      0.065      -0.686      22.604\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.77 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
+    "text": "As seen before, the logistic regression classifier tries to approximate the Bayes classifier, which predicts to the most probable class.\n\nTherefore, we turn the probabilities to actual classes by rounding the probabilities.\n\npredicted_classes = round(predicted_probability).astype('int')"
   },
   {
     "objectID": "Classification/Classification.slides.html#evaluation",
@@ -1873,21 +1873,21 @@
     "href": "Classification/Classification.slides.html#section-11",
     "title": "Logistic Regression",
     "section": "",
-    "text": "Technically, the classifier outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n4      6.709911e-12\n195    1.000000e+00\n115    1.636213e-01\n28     2.794161e-08\n168    9.999999e-01\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors)."
+    "text": "predicted_classes.head()\n\n66     0\n129    1\n8      0\n104    1\n182    1\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the test dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
   },
   {
     "objectID": "Classification/Classification.slides.html#section-12",
     "href": "Classification/Classification.slides.html#section-12",
     "title": "Logistic Regression",
     "section": "",
-    "text": "As seen before, the logistic regression classifier tries to approximate the Bayes classifier, which predicts to the most probable class.\n\nTherefore, we turn the probabilities to actual classes by rounding the probabilities.\n\npredicted_classes = round(predicted_probability).astype('int')"
+    "text": "predicted_classes.head()\n\n111    1\n186    1\n1      0\n145    1\n199    1\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the test dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
   },
   {
     "objectID": "Classification/Classification.slides.html#section-13",
     "href": "Classification/Classification.slides.html#section-13",
     "title": "Logistic Regression",
     "section": "",
-    "text": "predicted_classes.head()\n\n4      0\n195    1\n115    0\n28     0\n168    1\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the test dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
+    "text": "predicted_classes.head()\n\n33     0\n121    1\n108    1\n155    1\n196    1\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the test dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
   },
   {
     "objectID": "Classification/Classification.slides.html#confusion-matrix",
@@ -1901,14 +1901,14 @@
     "href": "Classification/Classification.slides.html#in-python-1",
     "title": "Logistic Regression",
     "section": "In python",
-    "text": "In python\nWe compute the confusion matrix using the function with the same name of scikit-learn. To this end,\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[24  1]\n [ 1 34]]"
+    "text": "In python\nWe compute the confusion matrix using the function with the same name of scikit-learn. To this end,\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[29  3]\n [ 4 24]]"
   },
   {
     "objectID": "Classification/Classification.slides.html#accuracy",
     "href": "Classification/Classification.slides.html#accuracy",
     "title": "Logistic Regression",
     "section": "Accuracy",
-    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.97\n\n\nThe higher the accuracy, the better the performance of the classifier."
+    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.88\n\n\nThe higher the accuracy, the better the performance of the classifier."
   },
   {
     "objectID": "Classification/Classification.slides.html#remarks",
@@ -2378,5 +2378,47 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n2"
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#odds-ratio",
+    "href": "Classification/Classification.slides.html#odds-ratio",
+    "title": "Logistic Regression",
+    "section": "Odds ratio",
+    "text": "Odds ratio\n\nThe quantity \\(e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p} = \\frac{P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}{1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}\\) is known as the “odds” ratio.\n\nThe odds ratio is the probability that \\(Y = 1\\) divided by the probability that \\(Y = 0\\), given that the predictors \\(\\boldsymbol{X}\\) have taken the values \\(\\boldsymbol{x} = (x_1, x_2, \\ldots, x_p)\\)."
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#the-odds-ratio",
+    "href": "Classification/Classification.slides.html#the-odds-ratio",
+    "title": "Logistic Regression",
+    "section": "The Odds ratio",
+    "text": "The Odds ratio\nThe quantity \\[e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p} = \\frac{P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}{1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}\\] is known as the “odds” ratio.\n\nThe odds ratio is the probability that \\(Y = 1\\) divided by the probability that \\(Y = 0\\), given that the predictors \\(\\boldsymbol{X}\\) have taken the values \\(\\boldsymbol{x} = (x_1, x_2, \\ldots, x_p)\\)."
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#the-logg-odds",
+    "href": "Classification/Classification.slides.html#the-logg-odds",
+    "title": "Logistic Regression",
+    "section": "The logg-odds",
+    "text": "The logg-odds\n\nIf we take logarithm on both sides, we obtain the “log-odds” or “logit”:\n\\[\\beta_0 + \\beta_1 X_1 + \\cdots + \\beta_p X_p = \\ln \\left( \\frac{P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x} )}{1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})} \\right).\\]\n\n\nThe log-odds can take any real value.\nThe log-odds is a linear combination of the predictors.\nThe log-odds resembles a multiple lienar regression model."
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#interpretation-of-coefficients",
+    "href": "Classification/Classification.slides.html#interpretation-of-coefficients",
+    "title": "Logistic Regression",
+    "section": "Interpretation of coefficients",
+    "text": "Interpretation of coefficients\nThe log-odds allows us to interpret the coefficients of the logistic regression model.\n\\[\\beta_0 + \\beta_1 X_1 + \\cdots + \\beta_p X_p = \\ln \\left( \\frac{P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x} )}{1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})} \\right).\\]\n\n\\(\\beta_0\\) can be interpreted as the average value of the log-odds ratio given that all predictors are equal to zero.\n\\(\\beta_j\\) can be interpreted as the average change in the log-odds ratio given by a one-unit increase in \\(X_j\\), when all the other predictors have fixed values."
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#the-logistic-regression-model",
+    "href": "Classification/Classification.slides.html#the-logistic-regression-model",
+    "title": "Logistic Regression",
+    "section": "The logistic regression model",
+    "text": "The logistic regression model\n\nThe logistic regression model is\n\\[P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x}) = \\frac{e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p} }{1 + e^{\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p}},\\]\nwhere the values of the coefficients \\(\\beta_0\\) and \\(\\beta_j\\) are unknown. Therefore, we need to calculate estimates for them.\n\n\\(\\hat{\\beta}_0\\) is the estimate for \\(\\beta_0\\).\n\\(\\hat{\\beta}_j\\) is the estimate for \\(\\beta_j\\)."
+  },
+  {
+    "objectID": "Classification/Classification.slides.html#how-do-we-estimate-the-coefficients",
+    "href": "Classification/Classification.slides.html#how-do-we-estimate-the-coefficients",
+    "title": "Logistic Regression",
+    "section": "How do we estimate the coefficients?",
+    "text": "How do we estimate the coefficients?\n\nWe use the training data!\n\n\n\n\n\n\n\n\n\nStatus\nLeft\nRight\nBottom\nTop\n\n\n\n\n0\ngenuine\n131.0\n131.1\n9.0\n9.7\n\n\n1\ngenuine\n129.7\n129.7\n8.1\n9.5\n\n\n2\ngenuine\n129.7\n129.7\n8.7\n9.6\n\n\n3\ngenuine\n129.7\n129.6\n7.5\n10.4"
   }
 ]
