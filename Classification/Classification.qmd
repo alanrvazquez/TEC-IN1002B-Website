@@ -39,6 +39,8 @@ Before we start, let's import the data science libraries into python.
 
 # Importing necessary libraries
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 import statsmodels.api as sm
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, accuracy_score
@@ -159,8 +161,8 @@ This function classifies to the most probable class using the conditional distri
 
 To overcome this issue, we have a standard solution:
 
--   Impose an structure on $P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})$. 
-- This structure produces the [**Logistic Regression classifier**]{style="color:brown;"}.
+-   Impose an structure on $P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})$.
+-   This structure produces the [**Logistic Regression classifier**]{style="color:brown;"}.
 
 . . .
 
@@ -205,6 +207,65 @@ bank_data['Status'] = bank_data['Status'].astype('category')
 bank_data.head()
 ```
 
+## Data pre-processing
+
+</br>
+
+Before we start, we ensure that there are no highly correlated predictors in the dataset. To this end, we construct the correlation plot.
+
+```{python}
+#| echo: true
+#| output: false
+#| fig-align: center
+#| code-fold: false
+
+# Remove response.
+predictors_full = bank_data.drop(columns = ['Status'])
+
+# Compute correlation matrix.
+correlation_matrix = predictors_full.corr()
+
+# Plot the correlation matrix
+sns.heatmap(correlation_matrix.abs(), cmap = 'coolwarm', annot = True)
+plt.title("Heatmap on correlations") # Set plot title.
+```
+
+## 
+
+</br>
+
+```{python}
+#| echo: false
+#| output: true
+#| fig-align: center
+
+# Remove response.
+predictors_full = bank_data.drop(columns = ['Status'])
+
+# Compute correlation matrix.
+correlation_matrix = predictors_full.corr()
+
+# Plot the correlation matrix
+sns.heatmap(correlation_matrix.abs(), cmap = 'coolwarm', annot = True)
+plt.title("Heatmap on correlations") # Set plot title.
+```
+
+##
+
+</br>
+
+The correlation plot shows that the predictors `Left` ($X_1$) and `Right` ($X_2$) have an absolute correlation of 0.74. Using a threshold for high correlation of 0.70, we thus remove one predictor from the database, say, `Right`.
+
+</br>
+
+Consequently, our database for this problem is
+```{python}
+#| echo: true
+#| output: true
+
+bank_data = bank_data.drop(columns = ['Right'])
+```
+
 # Introduction to logistic regression
 
 ## Logistic Regression (LR)
@@ -219,8 +280,8 @@ $$P(Y = 1 | \boldsymbol{X} = \boldsymbol{x}) = \frac{e^{\beta_0 + \beta_1 X_1 + 
 
 </br>
 
-- This structure is known as the [**logistic function**]{style="color:gold;"}.
-- The logistic function is always between 0 and 1.
+-   This structure is known as the [**logistic function**]{style="color:gold;"}.
+-   The logistic function is always between 0 and 1.
 
 ## Why logistic regression?
 
@@ -240,9 +301,7 @@ $$e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p} = \frac{P(Y = 1
 
 ## The Odds ratio
 
-The quantity 
-$$e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p} = \frac{P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}{1 - P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}$$ 
-is known as the ["**odds**"]{style="color:gold;"} ratio.
+The quantity $$e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p} = \frac{P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}{1 - P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}$$ is known as the ["**odds**"]{style="color:gold;"} ratio.
 
 </br>
 
@@ -250,11 +309,11 @@ The odds ratio is the probability that $Y = 1$ divided by the probability that $
 
 ## 
 
-Consider the banknote classification problem where $Y = 1$ implies counterfeit and $Y = 0$ genuine note. We have four predictors in $\boldsymbol{X} =  (X_1, X_2, X_3, X_4)$ summarizing specific characteristics of a banknote. 
+Consider the banknote classification problem where $Y = 1$ implies counterfeit and $Y = 0$ genuine note. We have three predictors in $\boldsymbol{X} =  (X_1, X_3, X_4)$ summarizing specific characteristics of a banknote.
 
 </br>
 
-The odds ratio is $e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \beta_p X_4} = \frac{P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}{1 - P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}$
+The odds ratio is $e^{\beta_0 + \beta_1 X_1 + \beta_3 X_3 + \beta_p X_4} = \frac{P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}{1 - P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}$
 
 ::: incremental
 -   If the ratio is 1, the odds are 50-50.
@@ -286,7 +345,6 @@ $$\beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p = \ln \left( \frac{P(Y = 1 | \bol
 
 -   $\beta_j$ can be [***interpreted***]{style="color:drakblue;"} as the average change in the log-odds ratio given by a one-unit increase in $X_j$, when all the other predictors have fixed values.
 
-
 ## 
 
 If $\beta_j$ is positive, increasing the value of $X_j$ will be associated with increasing the odds ratio or $P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})$. [In other words, increasing the value of $X_j$ increases, on average, the probability that $Y = 1$.]{style="color:darkgreen;"}
@@ -301,7 +359,7 @@ If $\beta_j$ is negative, increasing $X_j$ will be associated with decreasing $P
 
 # Estimating a logistic regression model
 
-## The logistic regression model 
+## The logistic regression model
 
 </br>
 
@@ -309,11 +367,10 @@ The logistic regression model is
 
 $$P(Y = 1 | \boldsymbol{X} = \boldsymbol{x}) = \frac{e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p} }{1 + e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p}},$$
 
-where the values of the coefficients $\beta_0$ and $\beta_j$ are unknown. Therefore, we need to calculate estimates for them. 
+where the values of the coefficients $\beta_0$ and $\beta_j$ are unknown. Therefore, we need to calculate estimates for them.
 
-- $\hat{\beta}_0$ is the estimate for $\beta_0$. 
-- $\hat{\beta}_j$ is the estimate for $\beta_j$.
-
+-   $\hat{\beta}_0$ is the estimate for $\beta_0$.
+-   $\hat{\beta}_j$ is the estimate for $\beta_j$.
 
 ## How do we estimate the coefficients?
 
@@ -360,7 +417,6 @@ The parameter `test_size` sets the portion of the dataset that will go to the va
 -   Usually, the proportion of the dataset that goes to the test set is 20% or 30%.
 
 -   We will later use the [**validation dataset**]{style="color:orange;"} to evaluate the classification performance of the estimated logistic regression model for classifying unobserved data.
-
 
 ## Coefficient estimation
 
@@ -440,14 +496,14 @@ Wald tests use the following test statistic:
 
 $$W_j = \frac{\hat{\beta}_j}{\mbox{SE}(\hat{\beta}_j) } \sim N(0,1).$$
 
-- $\hat{\beta}_j$ is the estimate of the coefficient $\beta_j$.
-- $\mbox{SE}(\hat{\beta}_j)$ is the standard error of the estimate $\hat{\beta}_j$ (due to repeated random sampling).
+-   $\hat{\beta}_j$ is the estimate of the coefficient $\beta_j$.
+-   $\mbox{SE}(\hat{\beta}_j)$ is the standard error of the estimate $\hat{\beta}_j$ (due to repeated random sampling).
 
 ## Important predictors
 
 </br>
 
-We can use the p-values of these tests to determine which predictor is important. 
+We can use the p-values of these tests to determine which predictor is important.
 
 </br>
 
@@ -475,7 +531,7 @@ print(logit_summary)
 
 </br>
 
-After estimating the coefficients, we obtain the estimated logistic regression model 
+After estimating the coefficients, we obtain the estimated logistic regression model
 
 $$\hat{P}(Y = 1 | \boldsymbol{X} = \boldsymbol{x}) = \frac{e^{\hat{\beta}_0 + \hat{\beta}_1 X_1 + \hat{\beta}_2 X_2 + \cdots + \hat{\beta}_p X_p} }{1 + e^{\hat{\beta}_0 + \hat{\beta}_1 X_1 + \hat{\beta}_2 X_2 + \cdots + \hat{\beta}_p X_p}},$$
 
@@ -495,8 +551,8 @@ $$\hat{C}(\boldsymbol{X}) =
       0, & \text{if}\ \hat{P}(Y = 1 | \boldsymbol{X} = \boldsymbol{x}) \leq 0.5
     \end{cases}.$$
 
-- We call $\hat{C}(\boldsymbol{X})$ the **logistic regression classifier**.
-- $\hat{C}(\boldsymbol{X})$ can be used to classify new observations. 
+-   We call $\hat{C}(\boldsymbol{X})$ the **logistic regression classifier**.
+-   $\hat{C}(\boldsymbol{X})$ can be used to classify new observations.
 
 ## Evaluation
 
@@ -520,7 +576,7 @@ predicted_probability = logit_model.predict(X_test)
 
 ## 
 
-The `predict()` function outputs  [**probabilities**]{style="color:brown;"} instead of actual classes.
+The `predict()` function outputs [**probabilities**]{style="color:brown;"} instead of actual classes.
 
 ```{python}
 #| echo: true
@@ -585,7 +641,7 @@ cm = confusion_matrix(Y_target_test, predicted_classes)
 print(cm)
 ```
 
-##
+## 
 
 We can visualize the confusion matrix using the `ConfusionMatrixDisplay()` function.
 
