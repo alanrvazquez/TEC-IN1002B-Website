@@ -1677,7 +1677,7 @@
     "href": "Classification/Classification.slides.html#load-the-libraries",
     "title": "Logistic Regression",
     "section": "Load the libraries",
-    "text": "Load the libraries\n\nBefore we start, let’s import the data science libraries into python.\n\n# Importing necessary libraries\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport statsmodels.api as sm\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, accuracy_score\n\nHere, we will introduce the functions confusion_matrix(), ConfusionMatrixDisplay() and accuracy_score() to evaluate the performance of a logistic regression classifier."
+    "text": "Load the libraries\n\nBefore we start, let’s import the data science libraries into Python.\n\n# Importing necessary libraries\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport statsmodels.api as sm\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, accuracy_score\n\nHere, we will introduce the functions confusion_matrix(), ConfusionMatrixDisplay() and accuracy_score() to evaluate the performance of a logistic regression classifier."
   },
   {
     "objectID": "Classification/Classification.slides.html#two-main-problems",
@@ -1865,15 +1865,15 @@
     "objectID": "Classification/Classification.slides.html#in-python",
     "href": "Classification/Classification.slides.html#in-python",
     "title": "Logistic Regression",
-    "section": "In python",
-    "text": "In python\nUsing the training dataset, we estimate a logistic regression classifier using the function Logit() from statsmodel. To this end, we first define the target category using the get_dummies().\n\n# Create dummy variables.\nY_dummies = pd.get_dummies(Y_train, dtype = 'int')\n\n# Select target variable.\nY_target_train = Y_dummies['counterfeit']\n\nWe also define the matrix of predictors with the intercept.\n\n# Add the intercept to the predictor matrix.\nX_train_int = sm.add_constant(X_train)"
+    "section": "In Python",
+    "text": "In Python\nUsing the training dataset, we estimate a logistic regression classifier using the function Logit() from statsmodel. To this end, we first define the target category using the get_dummies().\n\n# Create dummy variables.\nY_dummies = pd.get_dummies(Y_train, dtype = 'int')\n\n# Select target variable.\nY_target_train = Y_dummies['counterfeit']\n\nWe also define the matrix of predictors with the intercept.\n\n# Add the intercept to the predictor matrix.\nX_train_int = sm.add_constant(X_train)"
   },
   {
     "objectID": "Classification/Classification.slides.html#section-9",
     "href": "Classification/Classification.slides.html#section-9",
     "title": "Logistic Regression",
     "section": "",
-    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.058060\n         Iterations 12\nconst    -451.661687\nLeft        2.690302\nBottom      4.367140\nTop         5.707433\ndtype: float64"
+    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.042750\n         Iterations 12\nconst    -464.605587\nLeft        2.597782\nBottom      4.962042\nTop         7.555167\ndtype: float64"
   },
   {
     "objectID": "Classification/Classification.slides.html#parameter-testing",
@@ -1901,7 +1901,7 @@
     "href": "Classification/Classification.slides.html#section-11",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression model.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      136\nMethod:                           MLE   Df Model:                            3\nDate:                Mon, 25 Nov 2024   Pseudo R-squ.:                  0.9162\nTime:                        09:54:29   Log-Likelihood:                -8.1284\nconverged:                       True   LL-Null:                       -96.983\nCovariance Type:            nonrobust   LLR p-value:                 2.754e-38\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -451.6617    377.357     -1.197      0.231   -1191.267     287.944\nLeft           2.6903      2.891      0.931      0.352      -2.976       8.357\nBottom         4.3671      1.622      2.693      0.007       1.188       7.546\nTop            5.7074      1.928      2.960      0.003       1.928       9.487\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.45 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
+    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression model.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      136\nMethod:                           MLE   Df Model:                            3\nDate:                Wed, 07 May 2025   Pseudo R-squ.:                  0.9381\nTime:                        15:08:05   Log-Likelihood:                -5.9850\nconverged:                       True   LL-Null:                       -96.683\nCovariance Type:            nonrobust   LLR p-value:                 4.405e-39\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -464.6056    390.625     -1.189      0.234   -1230.216     301.005\nLeft           2.5978      2.965      0.876      0.381      -3.214       8.410\nBottom         4.9620      1.933      2.567      0.010       1.174       8.750\nTop            7.5552      2.868      2.635      0.008       1.934      13.176\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.64 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
   },
   {
     "objectID": "Classification/Classification.slides.html#estimated-classifier",
@@ -1922,21 +1922,21 @@
     "href": "Classification/Classification.slides.html#evaluation",
     "title": "Logistic Regression",
     "section": "Evaluation",
-    "text": "Evaluation\n\nWe evaluate a the logistic regression classifier by classifying observations that were not used for training or estimating it.\nThat is, we use the classifier to predict the categories of the test dataset using the predictor values in this set only.\nIn python, we use the commands:\n\n# Add constant to the predictor matrix from the test set.\nX_test = sm.add_constant(X_test)\n\n# Predict probabilities.\npredicted_probability = logit_model.predict(X_test)"
+    "text": "Evaluation\n\nWe evaluate a the logistic regression classifier by classifying observations that were not used for training or estimating it.\nThat is, we use the classifier to predict the categories of the test dataset using the predictor values in this set only.\nIn Python, we use the commands:\n\n# Add constant to the predictor matrix from the test set.\nX_test = sm.add_constant(X_test)\n\n# Predict probabilities.\npredicted_probability = logit_model.predict(X_test)"
   },
   {
     "objectID": "Classification/Classification.slides.html#section-13",
     "href": "Classification/Classification.slides.html#section-13",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The predict() function outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n53     0.002515\n95     0.000172\n63     0.004749\n130    0.994893\n135    0.999999\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors).\n\nTo turn the probabilities to actual classes, we round them:\n\npredicted_classes = round(predicted_probability).astype('int')"
+    "text": "The predict() function outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n76     0.000357\n91     0.000011\n19     0.000289\n152    0.999124\n115    0.366282\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors).\n\nTo turn the probabilities to actual classes, we round them:\n\npredicted_classes = round(predicted_probability).astype('int')"
   },
   {
     "objectID": "Classification/Classification.slides.html#section-14",
     "href": "Classification/Classification.slides.html#section-14",
     "title": "Logistic Regression",
     "section": "",
-    "text": "predicted_classes.head()\n\n53     0\n95     0\n63     0\n130    1\n135    1\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the validation dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
+    "text": "predicted_classes.head()\n\n76     0\n91     0\n19     0\n152    1\n115    0\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the validation dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
   },
   {
     "objectID": "Classification/Classification.slides.html#confusion-matrix",
@@ -1949,8 +1949,8 @@
     "objectID": "Classification/Classification.slides.html#in-python-1",
     "href": "Classification/Classification.slides.html#in-python-1",
     "title": "Logistic Regression",
-    "section": "In python",
-    "text": "In python\n\nWe compute the confusion matrix using the function with the same name of scikit-learn.\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[28  0]\n [ 1 31]]"
+    "section": "In Python",
+    "text": "In Python\n\nWe compute the confusion matrix using the function with the same name of scikit-learn.\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[34  1]\n [ 1 24]]"
   },
   {
     "objectID": "Classification/Classification.slides.html#section-15",
@@ -1964,7 +1964,7 @@
     "href": "Classification/Classification.slides.html#accuracy",
     "title": "Logistic Regression",
     "section": "Accuracy",
-    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.98\n\n\n\n\nThe higher the accuracy, the better the performance of the classifier."
+    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn Python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.97\n\n\n\n\nThe higher the accuracy, the better the performance of the classifier."
   },
   {
     "objectID": "Classification/Classification.slides.html#remarks",

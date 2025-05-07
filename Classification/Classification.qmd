@@ -31,7 +31,7 @@ jupyter: python3
 
 </br>
 
-Before we start, let's import the data science libraries into python.
+Before we start, let's import the data science libraries into Python.
 
 ```{python}
 #| echo: true
@@ -431,7 +431,7 @@ The IRLS algorithm (and consequently maximum likelihood estimation and Logistic 
 -   There is [***severe multicollinearity***]{style="color:purple;"} among the predictors.
 -   We can [***perfectly separate***]{style="color:purple;"} the observations belonging to the two groups defined by $Y$.
 
-## In python
+## In Python
 
 Using the training dataset, we estimate a logistic regression classifier using the function `Logit()` from **statsmodel**. To this end, we first define the target category using the `get_dummies()`.
 
@@ -562,7 +562,7 @@ We evaluate a the logistic regression classifier by classifying observations tha
 
 That is, we use the classifier to predict the categories of the test dataset using the predictor values in this set only.
 
-In python, we use the commands:
+In Python, we use the commands:
 
 ```{python}
 #| echo: true
@@ -618,7 +618,7 @@ Now, we compare the predictions with the actual categories in the [**validation 
 
 ![](images/confusion_matrix.png){fig-align="center"}
 
-## In python
+## In Python
 
 </br>
 
@@ -657,7 +657,7 @@ ConfusionMatrixDisplay(cm).plot()
 
 A simple metric to summarize the information of the confusion matrix is **accuracy**. It is the proportion of correct classifications for both classes, out of the total classifications made.
 
-In python, we compute the accuracy using the function `accuracy_score()` from **scikit-learn**.
+In Python, we compute the accuracy using the function `accuracy_score()` from **scikit-learn**.
 
 ```{python}
 #| echo: true
