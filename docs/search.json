@@ -1208,7 +1208,7 @@
     "href": "Tools/Tools1.slides.html#agenda",
     "title": "Tools for Data Science: Part I",
     "section": "Agenda",
-    "text": "Agenda\n\nIntroduction to python\nReading data with python"
+    "text": "Agenda\n\nIntroduction to Python\nReading data with Python"
   },
   {
     "objectID": "Tools/Tools1.slides.html#python",
@@ -1222,7 +1222,7 @@
     "href": "Tools/Tools1.slides.html#google-colab",
     "title": "Tools for Data Science: Part I",
     "section": "Google Colab",
-    "text": "Google Colab\nGoogle’s free cloud collaboration platform for creating python documents.\n\nRun python and collaborate on Jupyter notebooks for free.\nHarness the power of GPUs for free to accelerate your data science projects.\nEasily save and upload your notebooks to Google Drive."
+    "text": "Google Colab\nGoogle’s free cloud collaboration platform for creating Python documents.\n\nRun Python and collaborate on Jupyter notebooks for free.\nHarness the power of GPUs for free to accelerate your data science projects.\nEasily save and upload your notebooks to Google Drive."
   },
   {
     "objectID": "Tools/Tools1.slides.html#lets-try-a-command-in-r",
@@ -1242,15 +1242,15 @@
     "objectID": "Tools/Tools1.slides.html#use-python-as-a-basic-calculator",
     "href": "Tools/Tools1.slides.html#use-python-as-a-basic-calculator",
     "title": "Tools for Data Science: Part I",
-    "section": "Use python as a basic calculator",
-    "text": "Use python as a basic calculator\n\n5 + 1\n\n6\n\n\n\n10 - 3\n\n7\n\n\n\n2 * 4\n\n8\n\n\n\n9 / 3\n\n3.0"
+    "section": "Use Python as a basic calculator",
+    "text": "Use Python as a basic calculator\n\n5 + 1\n\n6\n\n\n\n10 - 3\n\n7\n\n\n\n2 * 4\n\n8\n\n\n\n9 / 3\n\n3.0"
   },
   {
     "objectID": "Tools/Tools1.slides.html#comments",
     "href": "Tools/Tools1.slides.html#comments",
     "title": "Tools for Data Science: Part I",
     "section": "Comments",
-    "text": "Comments\nSometimes we write things in the coding window that we want python to ignore. These are called comments and start with #.\n\nPython will ignore the comments and just execute the code.\n\n# you can put whatever after #\n# for example... blah blah blah\n\n\nSi desea escribir un comentario que ocupe más de una línea, es una buena idea poner un # al principio de cada línea."
+    "text": "Comments\nSometimes we write things in the coding window that we want Python to ignore. These are called comments and start with #.\n\nPython will ignore the comments and just execute the code.\n\n# you can put whatever after #\n# for example... blah blah blah\n\n\nSi desea escribir un comentario que ocupe más de una línea, es una buena idea poner un # al principio de cada línea."
   },
   {
     "objectID": "Tools/Tools1.slides.html#introduction-to-functions-in-r",
@@ -1270,8 +1270,8 @@
     "objectID": "Tools/Tools1.slides.html#save-your-work-in-python-objects",
     "href": "Tools/Tools1.slides.html#save-your-work-in-python-objects",
     "title": "Tools for Data Science: Part I",
-    "section": "Save your work in python objects",
-    "text": "Save your work in python objects\nVirtually anything, including the results of any python function, can be saved in an object.\nThis is accomplished by using an assignment operator, which can be an equals symbol (=).\n\nYou can make up any name you want for a python object. However, there are two basic rules for this:\n\n\nIt has to be different from a function name in python.\nIt has to be as specific as possible."
+    "section": "Save your work in Python objects",
+    "text": "Save your work in Python objects\nVirtually anything, including the results of any Python function, can be saved in an object.\nThis is accomplished by using an assignment operator, which can be an equals symbol (=).\n\nYou can make up any name you want for a Python object. However, there are two basic rules for this:\n\n\nIt has to be different from a function name in Python.\nIt has to be as specific as possible."
   },
   {
     "objectID": "Tools/Tools1.slides.html#for-example",
@@ -1285,7 +1285,7 @@
     "href": "Tools/Tools1.slides.html#lists",
     "title": "Tools for Data Science: Part I",
     "section": "Lists",
-    "text": "Lists\nSo far we have used python objects to store a single number. But in statistics we are dealing with variation, which by definition needs more than one number.\n\nA python object can also store a complete set of numbers, called a list.\nYou can think of a list as a vector of numbers (or values).\n\n\nThe [] command can be used to combine several individual values into a list.\n\npuedes pensar que el c es por combinar"
+    "text": "Lists\nSo far we have used Python objects to store a single number. But in statistics we are dealing with variation, which by definition needs more than one number.\n\nA Python object can also store a complete set of numbers, called a list.\nYou can think of a list as a vector of numbers (or values).\n\n\nThe [] command can be used to combine several individual values into a list.\n\npuedes pensar que el c es por combinar"
   },
   {
     "objectID": "Tools/Tools1.slides.html#for-example-1",
@@ -1312,8 +1312,8 @@
     "objectID": "Tools/Tools1.slides.html#a-little-more-about-objects-in-python",
     "href": "Tools/Tools1.slides.html#a-little-more-about-objects-in-python",
     "title": "Tools for Data Science: Part I",
-    "section": "A little more about objects in python",
-    "text": "A little more about objects in python\nYou can think of python objects as containers that hold values.\nA python object can hold a single value, or it can hold a group of values (as in a vector).\nSo far, we’ve only put numbers into python objects.\n\n\nPython objects can actually contain three types of values: numbers, characters, and booleans."
+    "section": "A little more about objects in Python",
+    "text": "A little more about objects in Python\nYou can think of Python objects as containers that hold values.\nA Python object can hold a single value, or it can hold a group of values (as in a vector).\nSo far, we’ve only put numbers into Python objects.\n\n\nPython objects can actually contain three types of values: numbers, characters, and booleans."
   },
   {
     "objectID": "Tools/Tools1.slides.html#character-values",
@@ -1327,14 +1327,14 @@
     "href": "Tools/Tools1.slides.html#boolean-values",
     "title": "Tools for Data Science: Part I",
     "section": "Boolean values",
-    "text": "Boolean values\nBoolean values are True or False.\nWe may have a question like:\n\nIs the first element of the vector many_greetings \"hola\"?\n\n\nWe can ask python to find out and return the answer True or False.\n\nmany_greetings[1] == \"hola\"\n\nFalse"
+    "text": "Boolean values\nBoolean values are True or False.\nWe may have a question like:\n\nIs the first element of the vector many_greetings \"hola\"?\n\n\nWe can ask Python to find out and return the answer True or False.\n\nmany_greetings[1] == \"hola\"\n\nFalse"
   },
   {
     "objectID": "Tools/Tools1.slides.html#logical-operators",
     "href": "Tools/Tools1.slides.html#logical-operators",
     "title": "Tools for Data Science: Part I",
     "section": "Logical operators",
-    "text": "Logical operators\nMost of the questions we ask python to answer with True or False involve comparison operators like &gt;, &lt;, &gt;=, &lt;=, and ==.\nThe double == sign checks whether two values are equal. There is even a comparison operator to check whether values are not equal: !=.\nFor example, 5 != 3 is a True statement."
+    "text": "Logical operators\nMost of the questions we ask Python to answer with True or False involve comparison operators like &gt;, &lt;, &gt;=, &lt;=, and ==.\nThe double == sign checks whether two values are equal. There is even a comparison operator to check whether values are not equal: !=.\nFor example, 5 != 3 is a True statement."
   },
   {
     "objectID": "Tools/Tools1.slides.html#common-logical-operators",
@@ -1362,7 +1362,7 @@
     "href": "Tools/Tools1.slides.html#python-libraries",
     "title": "Tools for Data Science: Part I",
     "section": "Python libraries",
-    "text": "Python libraries\nLibraries are the fundamental units of reproducible python code. They include reusable python functions, documentation describing how to use them, and sample data.\nIn this course, we will be working mostly with the following libraries:\n\npandas for data manipulation\nmatplotlib and seaborn for data visualization\nstatsmodels and scikit-learn for data modelling"
+    "text": "Python libraries\nLibraries are the fundamental units of reproducible Python code. They include reusable Python functions, documentation describing how to use them, and sample data.\nIn this course, we will be working mostly with the following libraries:\n\npandas for data manipulation\nmatplotlib and seaborn for data visualization\nstatsmodels and scikit-learn for data modelling"
   },
   {
     "objectID": "Tools/Tools1.slides.html#data-organization",
@@ -1389,8 +1389,8 @@
     "objectID": "Tools/Tools1.slides.html#loading-data-in-python",
     "href": "Tools/Tools1.slides.html#loading-data-in-python",
     "title": "Tools for Data Science: Part I",
-    "section": "Loading data in python",
-    "text": "Loading data in python\nIn this course, we will assume that data is stored in an Excel file with the above organization. As an example, let’s use the file penguins.xlsx.\n\n\n\n\n\n\n\nThe file must be previously uploaded to Google Colab."
+    "section": "Loading data in Python",
+    "text": "Loading data in Python\nIn this course, we will assume that data is stored in an Excel file with the above organization. As an example, let’s use the file penguins.xlsx.\n\n\n\n\n\n\n\nThe file must be previously uploaded to Google Colab."
   },
   {
     "objectID": "Tools/Tools1.slides.html#section-2",
@@ -1418,7 +1418,7 @@
     "href": "Tools/Tools1.slides.html#loading-data-using-pandas",
     "title": "Tools for Data Science: Part I",
     "section": "Loading data using pandas",
-    "text": "Loading data using pandas\nThe following code shows how to read the data in the file “penguins.xlsx” into python.\n\n# Load the Excel file into a pandas DataFrame.\npenguins_data = pd.read_excel(\"penguins.xlsx\")"
+    "text": "Loading data using pandas\nThe following code shows how to read the data in the file “penguins.xlsx” into Python.\n\n# Load the Excel file into a pandas DataFrame.\npenguins_data = pd.read_excel(\"penguins.xlsx\")"
   },
   {
     "objectID": "Tools/Tools1.slides.html#the-function-head",
@@ -1453,7 +1453,7 @@
     "href": "Tools/Tools1.slides.html#section-4",
     "title": "Tools for Data Science: Part I",
     "section": "",
-    "text": "rows_penguins_data\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007\n\n\n3\nAdelie\nTorgersen\nNaN\nNaN\nNaN\nNaN\nNaN\n2007\n\n\n4\nAdelie\nTorgersen\n36.7\n19.3\n193.0\n3450.0\nfemale\n2007\n\n\n5\nAdelie\nTorgersen\n39.3\n20.6\n190.0\n3650.0\nmale\n2007\n\n\n\n\n\n\n\nNote that the index 2 and 5 refer to observations 3 and 7, respectively, in the dataset. This is because the first index in python is 0."
+    "text": "rows_penguins_data\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007\n\n\n3\nAdelie\nTorgersen\nNaN\nNaN\nNaN\nNaN\nNaN\n2007\n\n\n4\nAdelie\nTorgersen\n36.7\n19.3\n193.0\n3450.0\nfemale\n2007\n\n\n5\nAdelie\nTorgersen\n39.3\n20.6\n190.0\n3650.0\nmale\n2007\n\n\n\n\n\n\n\nNote that the index 2 and 5 refer to observations 3 and 7, respectively, in the dataset. This is because the first index in Python is 0."
   },
   {
     "objectID": "Tools/Tools1.slides.html#indexing-rows-and-columns",
@@ -2511,5 +2511,19 @@
     "title": "Multiple Linear Regression",
     "section": "",
     "text": "The smaller the value of \\(\\hat{\\sigma}^2\\), the closer our predictions are to the actual responses.\nIn practice, it is better to use the standard deviation of the errors. That is,\n\\[\\hat{\\sigma}=\\left(\\frac{1}{n-p-1}\\sum_{i=1}^{n} \\hat{\\epsilon}_i^{2}\\right)^{1/2}.\\] In Python, we compute \\(\\hat{\\sigma}\\) as follows:\n\nprint( round(error_variance**(1/2), 3) )\n\n10.292"
+  },
+  {
+    "objectID": "Tools/Tools1.slides.html#lets-try-a-command-in-python",
+    "href": "Tools/Tools1.slides.html#lets-try-a-command-in-python",
+    "title": "Tools for Data Science: Part I",
+    "section": "Let’s try a command in Python",
+    "text": "Let’s try a command in Python\nWhat do you think will happen if we run this command?\n\nprint(\"Hello world!\")"
+  },
+  {
+    "objectID": "Tools/Tools1.slides.html#introduction-to-functions-in-python",
+    "href": "Tools/Tools1.slides.html#introduction-to-functions-in-python",
+    "title": "Tools for Data Science: Part I",
+    "section": "Introduction to functions in Python",
+    "text": "Introduction to functions in Python\nOne of the best things about Python is that there are many built-in commands you can use. These are called functions.\n\nFunctions have two basic parts:\n\n\nThe first part is the name of the function (for example, sum).\nThe second part is the input to the function, which goes inside the parentheses (sum([1, 5, 15]))."
   }
 ]

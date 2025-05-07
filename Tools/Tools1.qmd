@@ -20,10 +20,10 @@ jupyter: python3
 
 ## Agenda
 
-1.  Introduction to python
-2.  Reading data with python
+1.  Introduction to Python
+2.  Reading data with Python
 
-# Introduction to python
+# Introduction to Python
 
 ## Python
 
@@ -45,9 +45,9 @@ jupyter: python3
 
 ## Google Colab
 
-*Google's free cloud collaboration platform for creating python documents.*
+*Google's free cloud collaboration platform for creating Python documents.*
 
--   Run python and collaborate on Jupyter notebooks for free.
+-   Run Python and collaborate on Jupyter notebooks for free.
 
 -   Harness the power of GPUs for free to accelerate your data science projects.
 
@@ -55,7 +55,7 @@ jupyter: python3
 
 ![](images/Google_Colaboratory_SVG_Logo.svg.png){fig-align="right" width="2560"}
 
-## Let's try a command in R
+## Let's try a command in Python
 
 What do you think will happen if we run this command?
 
@@ -77,7 +77,7 @@ What do you think will happen if we run this command?
 sum([1, 5, 10])
 ```
 
-## Use python as a basic calculator
+## Use Python as a basic calculator
 
 ```{python}
 #| echo: true
@@ -109,7 +109,7 @@ sum([1, 5, 10])
 
 ## Comments
 
-Sometimes we write things in the coding window that we want python to ignore. These are called comments and start with `#`.
+Sometimes we write things in the coding window that we want Python to ignore. These are called comments and start with `#`.
 
 </br>
 
@@ -127,9 +127,9 @@ Python will ignore the comments and just execute the code.
 Si desea escribir un comentario que ocupe más de una línea, es una buena idea poner un \# al principio de cada línea.
 :::
 
-## Introduction to functions in R
+## Introduction to functions in Python
 
-One of the best things about python is that there are many built-in commands you can use. These are called *functions*.
+One of the best things about Python is that there are many built-in commands you can use. These are called *functions*.
 
 . . .
 
@@ -168,18 +168,18 @@ with the “s” capitalized, he will act like he has no idea what we are talkin
 lo mismo si olvidas incluir un parentesis
 :::
 
-## Save your work in python objects
+## Save your work in Python objects
 
-Virtually anything, including the results of any python function, can be saved in an *object*.
+Virtually anything, including the results of any Python function, can be saved in an *object*.
 
 This is accomplished by using an assignment operator, which can be an equals symbol (`=`).
 
 . . .
 
-You can make up any name you want for a python object. However, there are two basic rules for this:
+You can make up any name you want for a Python object. However, there are two basic rules for this:
 
 ::: incremental
-1.  It has to be different from a function name in python.
+1.  It has to be different from a function name in Python.
 2.  It has to be as specific as possible.
 :::
 
@@ -206,11 +206,11 @@ You can also use `print(my_favorite_number)`.
 
 ## Lists
 
-So far we have used python objects to store a single number. But in statistics we are dealing with variation, which by definition needs more than one number.
+So far we have used Python objects to store a single number. But in statistics we are dealing with variation, which by definition needs more than one number.
 
 . . .
 
-A python object can also store a complete set of numbers, called a *list*.
+A Python object can also store a complete set of numbers, called a *list*.
 
 You can think of a list as a vector of numbers (or values).
 
@@ -276,13 +276,13 @@ my_list[1]
 my_list[0]
 ```
 
-## A little more about objects in python
+## A little more about objects in Python
 
-You can think of python objects as containers that hold values.
+You can think of Python objects as containers that hold values.
 
-A python object can hold a single value, or it can hold a group of values (as in a vector).
+A Python object can hold a single value, or it can hold a group of values (as in a vector).
 
-So far, we've only put numbers into python objects.
+So far, we've only put numbers into Python objects.
 
 . . .
 
@@ -319,7 +319,7 @@ We may have a question like:
 
 . . .
 
-We can ask python to find out and return the answer `True` or `False`.
+We can ask Python to find out and return the answer `True` or `False`.
 
 ```{python}
 #| echo: true
@@ -329,7 +329,7 @@ many_greetings[1] == "hola"
 
 ## Logical operators
 
-Most of the questions we ask python to answer with `True` or `False` involve comparison operators like `>`, `<`, `>=`, `<=`, and `==`.
+Most of the questions we ask Python to answer with `True` or `False` involve comparison operators like `>`, `<`, `>=`, `<=`, and `==`.
 
 The double `==` sign checks whether two values are equal. There is even a comparison operator to check whether values are *not* equal: `!=`.
 
@@ -373,7 +373,7 @@ We often have to find these mistakes through trial and error.
 
 ## Python libraries
 
-Libraries are the fundamental units of reproducible python code. They include reusable python functions, documentation describing how to use them, and sample data.
+Libraries are the fundamental units of reproducible Python code. They include reusable Python functions, documentation describing how to use them, and sample data.
 
 In this course, we will be working mostly with the following libraries:
 
@@ -381,7 +381,7 @@ In this course, we will be working mostly with the following libraries:
 -   `matplotlib` and `seaborn` for data visualization
 -   `statsmodels` and `scikit-learn` for data modelling
 
-# Reading data with python
+# Reading data with Python
 
 ## Data organization
 
@@ -461,7 +461,7 @@ Therefore, the values in each row represent the values of that particular case i
 ¿Cuántas variables hay en este conjunto de datos?
 :::
 
-## Loading data in python
+## Loading data in Python
 
 In this course, we will assume that data is stored in an Excel file with the above organization. As an example, let's use the file `penguins.xlsx`.
 
@@ -479,7 +479,7 @@ In this course, we will assume that data is stored in an Excel file with the abo
 [***The file must be previously uploaded to Google Colab.***]{style="color:red;"}
 :::
 
-##
+## 
 
 The dataset `penguins.xlsx` contains data from penguins living in three islands.
 
@@ -520,7 +520,7 @@ The command `as pd` allows us to have a short name for **pandas**. To use a func
 
 ## Loading data using pandas
 
-The following code shows how to read the data in the file "penguins.xlsx" into python.
+The following code shows how to read the data in the file "penguins.xlsx" into Python.
 
 ```{python}
 #| echo: true
@@ -564,7 +564,7 @@ sub_penguins_data.head()
 
 ## Indexing rows
 
-To index rows in a dataset, we use the argument `loc` from **pandas**. For example, we select the rows 3 to 6 of the `penguins_dataset`  dataset:
+To index rows in a dataset, we use the argument `loc` from **pandas**. For example, we select the rows 3 to 6 of the `penguins_dataset` dataset:
 
 ```{python}
 #| echo: true
@@ -573,7 +573,7 @@ rows_penguins_data = penguins_data.loc[2:5]
 rows_penguins_data
 ```
 
-##
+## 
 
 ```{python}
 #| echo: true
@@ -581,7 +581,7 @@ rows_penguins_data
 rows_penguins_data
 ```
 
-Note that the index 2 and 5 refer to observations 3 and 7, respectively, in the dataset. This is because the first index in python is 0.
+Note that the index 2 and 5 refer to observations 3 and 7, respectively, in the dataset. This is because the first index in Python is 0.
 
 ## Indexing rows and columns
 
