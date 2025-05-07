@@ -168,7 +168,7 @@ penguins_data.info()
 
 ## 
 
-In the output of the function "non-null" refers to the number of entries in a column that have actual values. That is, the number of entries where there are no `NaN`.
+In the output of the function "non-null" refers to the number of entries in a column that have actual values. That is, the number of entries where there are not `NaN`.
 
 ```{python}
 #| echo: false
@@ -177,6 +177,21 @@ penguins_data.info()
 ```
 
 The value next to "RangeIndex" is the number of observations in the dataset.
+
+##
+
+</br>
+
+Alternatively, we can use the function `isnull()` together with `sum()` to determine the number of missing values for each column in the dataset.
+
+</br>
+
+```{python}
+#| echo: true
+
+missing_values = penguins_data.isnull().sum()
+missing_values
+```
 
 ## Removing missing values
 
