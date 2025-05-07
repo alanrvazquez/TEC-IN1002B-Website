@@ -26,7 +26,7 @@ jupyter: python3
 
 ## statsmodels library
 
--   **statsmodels** is a powerful python library for statistical modeling, data analysis, and hypothesis testing.
+-   **statsmodels** is a powerful Python library for statistical modeling, data analysis, and hypothesis testing.
 -   It provides classes and functions for estimating statistical models.
 -   It is built on top of libraries such as **NumPy**, **SciPy**, and **pandas**
 -   <https://www.statsmodels.org/stable/index.html>
@@ -35,7 +35,7 @@ jupyter: python3
 
 ## Load the libraries
 
-Let's import **statsmodels** into python together with the other relevant libraries.
+Let's import **statsmodels** into Python together with the other relevant libraries.
 
 ```{python}
 #| echo: true
@@ -192,30 +192,112 @@ The error $\epsilon_i$’s must satisfy the following assumptions:
 4.  How can we make predictions of future responses using the multiple linear regression model?
 :::
 
-# Parameter Estimation
+## Matrix notation
 
-## Parameter estimates
+In what follows, it is useful to denote the multiple linear regression model using matrix notation:
+
+$\mathbf{Y} = \begin{pmatrix} Y_1 \\ Y_2 \\ \vdots \\ Y_n \end{pmatrix}$ and $\mathbf{X} = \begin{pmatrix}
+1& X_{11} & X_{12} & \cdots & X_{1p} \\
+1& X_{21} & X_{22} & \cdots & X_{2p} \\
+\vdots &\vdots & \vdots & \cdots & \vdots \\
+1& X_{n1} & X_{n2} & \cdots & X_{np} \\
+\end{pmatrix}$, where
+
+-   $\mathbf{Y}$ is an $n \times 1$ vector.
+-   $\mathbf{X}$ is a $n \times (p+1)$ matrix.
+
+## 
 
 </br>
 
-***Goal***: estimate the parameters $\beta_0, \beta_1, \ldots, \beta_p$ and $\sigma^2$.
+And,
 
--   An estimate of $\beta_j$ is denoted by $\hat{\beta}_j$.
--   Similarly $\sigma^2$ is the estimate of $\hat{\sigma}^2$.
+$\boldsymbol{\beta} = \begin{pmatrix}\beta_0 \\ \beta_1 \\ \vdots \\ \beta_p \end{pmatrix}$ and $\boldsymbol{\epsilon} = \begin{pmatrix}\epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n \end{pmatrix}$, where
 
-We calculate the estimates using the training data on the factor values $X_{ij}$ and the response $Y_i$, $i = 1, \ldots, n$.
+-   $\boldsymbol{\beta}$ is an $(p+1) \times 1$ vector.
+-   $\boldsymbol{\epsilon}$ is an $n \times 1$ vector.
+
+## 
+
+</br>
+
+The multiple linear regression model then is
+
+$$\mathbf{Y} =  \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\epsilon}.$$ This expression means
+
+$\begin{pmatrix} Y_1 \\ Y_2 \\ \vdots \\ Y_n \end{pmatrix} = \begin{pmatrix}
+\beta_0 + \beta_1 X_{11} + \beta_2 X_{12} + \cdots + \beta_p X_{1p} \\
+\beta_0 + \beta_1 X_{21} + \beta_2 X_{22} + \cdots + \beta_p X_{2p} \\
+\vdots  \\
+\beta_0 + \beta_1 X_{n1} + \beta_2 X_{n2} + \cdots + \beta_p X_{np} \\
+\end{pmatrix} + \begin{pmatrix}\epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n \end{pmatrix}$
+
+# Parameter Estimation
+
+## An estimator for $\boldsymbol{\beta}$
+
+Our goal is to find an estimator for the vector $\boldsymbol{\beta}$ (and all its components). For the moment, let’s assume that we have one:
+
+$\hat{\boldsymbol{\beta}} = \begin{pmatrix} \hat{\beta}_0 \\ \hat{\beta}_1 \\ \vdots\\ \hat{\beta}_p \end{pmatrix}$, where $\hat{\beta}_j$ is an estimator for $\beta_j$, $j = 0, \ldots, p$.
+
+Using this estimator, we can compute the predicted responses of our model $\hat{\mathbf{Y}} = \mathbf{X}\hat{\boldsymbol{\beta}}$, where $\hat{\mathbf{Y}} = (\hat{Y}_1, \hat{Y}_2, \ldots, \hat{Y}_n)^{T}$ and $\hat{Y}_i$ is the i-th predicted response.
+
+## 
+
+</br>
+
+The expression $\hat{\mathbf{Y}} = \mathbf{X}\hat{\boldsymbol{\beta}}$ means
+
+$$\begin{pmatrix} \hat{Y}_1 \\ \hat{Y}_2 \\ \vdots \\ \hat{Y}_n \end{pmatrix}  = \begin{pmatrix}
+\hat{\beta}_0 + X_{11} \hat{\beta}_1 + X_{12} \hat{\beta}_2 + \cdots + X_{1p} \hat{\beta}_p\\
+\hat{\beta}_0 + X_{21} \hat{\beta}_1 + X_{22}\hat{\beta}_2 + \cdots + X_{2p}\hat{\beta}_p \\
+\vdots  \\
+\hat{\beta}_0 + X_{n1} \hat{\beta}_1 + X_{n2}\hat{\beta}_2 + \cdots + X_{np} \hat{\beta}_p \\
+\end{pmatrix}$$
+
+## 
+
+</br> </br>
+
+This means that the residuals of the estimated model are
+
+$$\hat{\boldsymbol{\epsilon}} = \mathbf{Y} - \hat{\mathbf{Y}} = \mathbf{Y} - \mathbf{X} \hat{\boldsymbol{\beta}},$$
+
+where $\hat{\boldsymbol{\epsilon}} = (\hat{\epsilon}_1, \hat{\epsilon}_2, \ldots, \hat{\epsilon}_n)^{T}$ and $\hat{\epsilon}_i = Y_i - \hat{Y}_i$ is the i-th residual.
 
 ## Least squares estimator
 
-To find the best estimator for $\beta_0, \beta_1, \ldots, \beta_p$, we use the method of least squares. This method finds the best $\hat{\beta}_0, \hat{\beta}_1, \ldots, \hat{\beta}_p$ that minimizes the residual sum of squares (RSS):
+To find the best estimator for $\boldsymbol{\beta}$ (and all its elements), we use the method of least squares. This method finds the best $\hat{\boldsymbol{\beta}}$ that minimizes the residual sum of squares (RSS):
 
-$$RSS = (Y_1 - \hat{Y}_1)^2 + (Y_2 - \hat{Y}_2)^2 + \cdots + (Y_n - \hat{Y}_n)^2,$$
+$$RSS = \left(\mathbf{y} - \mathbf{X} \hat{\boldsymbol{\beta}}\right)^{T} \left(\mathbf{y} - \mathbf{X} \hat{\boldsymbol{\beta}}\right) = \sum_{i=1}^{n} \hat{\epsilon}^2_i = \sum_{i=1}^{n} (Y_i - \hat{Y}_i)^2.$$
 
--   where $\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \hat{\beta}_2 X_{i2} + \cdots + \hat{\beta}_p X_{ip}$.
+The estimator that minimizes the expression above is called the [**least squares estimator**]{style="color:brown;"}:
 
-The estimators $\hat{\beta}_0, \hat{\beta}_1, \ldots, \hat{\beta}_p$ that minimizes the RSS is called the [**least squares estimators**]{style="color:brown;"}.
+$$\hat{\boldsymbol{\beta}} = (\mathbf{X}^{T}\mathbf{X})^{-1} \mathbf{X}^{T}\mathbf{y}$$
 
-## Computation of estimators
+## Computation of $\hat{\boldsymbol{\beta}} = (\mathbf{X}^{T}\mathbf{X})^{-1} \mathbf{X}^{T}\mathbf{y}$
+
+</br>
+
+1.  Compute the transpose of a matrix: $\mathbf{X}^{T}$.
+2.  Compute the product of a matrix and a vector: $\mathbf{X}^{T}\mathbf{Y}$.
+3.  Compute the product of two matrices: $\mathbf{X}^{T} \mathbf{X}$.
+4.  Compute the [**inverse**]{style="color:red;"} of a matrix: $(\mathbf{X}^{T} \mathbf{X})^{-1}$.
+
+## Remarks
+
+4.  Compute the [**inverse**]{style="color:red;"} of a matrix: $(\mathbf{X}^{T} \mathbf{X})^{-1}$.
+
+-   Not all matrices have an inverse.
+-   If it does not have an inverse then the matrix is called [**singular**]{style="color:darkblue;"}. Otherwise, it is called **non-singular**.
+-   For the inverse to exist, the columns in $\mathbf{X}$ must be *linearly independent*.
+-   Or, equivalently, the determinant $|\mathbf{X}^{T} \mathbf{X}| > 0$.
+
+## 
+
+![](images/clipboard-2523519923.png){fig-align="center"}
+
+## Computation in Python
 
 </br>
 
@@ -309,7 +391,7 @@ $$\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \hat{\beta}_2 X_{i2} + \cdo
 
 where $\hat{Y}_i$ is the i-th fitted or predicted response.
 
-In python, we use the argument `fittedvalues` to show the predicted responses of the estimated model.
+In Python, we use the argument `fittedvalues` to show the predicted responses of the estimated model.
 
 ```{python}
 #| echo: true
@@ -344,7 +426,7 @@ If the model is correct, the residuals $\hat{\epsilon}_1, \hat{\epsilon}_2, \ldo
 
 ## 
 
-In python, we compute the residuals using the following command.
+In Python, we compute the residuals using the following command.
 
 ```{python}
 #| echo: true
@@ -361,7 +443,7 @@ The variance $\sigma^2$ of the errors is estimated by
 
 $$\hat{\sigma}^2=\frac{1}{n-p-1}\sum_{i=1}^{n} \hat{\epsilon}_i^{2}.$$
 
-In python, we compute $\hat{\sigma}^2$ as follows.
+In Python, we compute $\hat{\sigma}^2$ as follows.
 
 ```{python}
 #| echo: true
@@ -378,7 +460,7 @@ The smaller the value of $\hat{\sigma}^2$, the closer our predictions are to the
 
 In practice, it is better to use the standard deviation of the errors. That is,
 
-$$\hat{\sigma}=\left(\frac{1}{n-p-1}\sum_{i=1}^{n} \hat{\epsilon}_i^{2}\right)^{1/2}.$$ In python, we compute $\hat{\sigma}$ as follows:
+$$\hat{\sigma}=\left(\frac{1}{n-p-1}\sum_{i=1}^{n} \hat{\epsilon}_i^{2}\right)^{1/2}.$$ In Python, we compute $\hat{\sigma}$ as follows:
 
 ```{python}
 #| echo: true

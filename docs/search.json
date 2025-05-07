@@ -1474,14 +1474,14 @@
     "href": "LinearRegression/LinearRegression.slides.html#statsmodels-library",
     "title": "Multiple Linear Regression",
     "section": "statsmodels library",
-    "text": "statsmodels library\n\nstatsmodels is a powerful python library for statistical modeling, data analysis, and hypothesis testing.\nIt provides classes and functions for estimating statistical models.\nIt is built on top of libraries such as NumPy, SciPy, and pandas\nhttps://www.statsmodels.org/stable/index.html"
+    "text": "statsmodels library\n\nstatsmodels is a powerful Python library for statistical modeling, data analysis, and hypothesis testing.\nIt provides classes and functions for estimating statistical models.\nIt is built on top of libraries such as NumPy, SciPy, and pandas\nhttps://www.statsmodels.org/stable/index.html"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#load-the-libraries",
     "href": "LinearRegression/LinearRegression.slides.html#load-the-libraries",
     "title": "Multiple Linear Regression",
     "section": "Load the libraries",
-    "text": "Load the libraries\nLet’s import statsmodels into python together with the other relevant libraries.\n\n# Importing necessary libraries\nimport pandas as pd\nimport statsmodels.api as sm"
+    "text": "Load the libraries\nLet’s import statsmodels into Python together with the other relevant libraries.\n\n# Importing necessary libraries\nimport pandas as pd\nimport statsmodels.api as sm"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#example",
@@ -1572,7 +1572,7 @@
     "href": "LinearRegression/LinearRegression.slides.html#least-squares-estimator",
     "title": "Multiple Linear Regression",
     "section": "Least squares estimator",
-    "text": "Least squares estimator\nTo find the best estimator for \\(\\beta_0, \\beta_1, \\ldots, \\beta_p\\), we use the method of least squares. This method finds the best \\(\\hat{\\beta}_0, \\hat{\\beta}_1, \\ldots, \\hat{\\beta}_p\\) that minimizes the residual sum of squares (RSS):\n\\[RSS = (Y_1 - \\hat{Y}_1)^2 + (Y_2 - \\hat{Y}_2)^2 + \\cdots + (Y_n - \\hat{Y}_n)^2,\\]\n\nwhere \\(\\hat{Y}_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_{i1} + \\hat{\\beta}_2 X_{i2} + \\cdots + \\hat{\\beta}_p X_{ip}\\).\n\nThe estimators \\(\\hat{\\beta}_0, \\hat{\\beta}_1, \\ldots, \\hat{\\beta}_p\\) that minimizes the RSS is called the least squares estimators."
+    "text": "Least squares estimator\nTo find the best estimator for \\(\\boldsymbol{\\beta}\\) (and all its elements), we use the method of least squares. This method finds the best \\(\\hat{\\boldsymbol{\\beta}}\\) that minimizes the residual sum of squares (RSS):\n\\[RSS = \\left(\\mathbf{y} - \\mathbf{X} \\hat{\\boldsymbol{\\beta}}\\right)^{T} \\left(\\mathbf{y} - \\mathbf{X} \\hat{\\boldsymbol{\\beta}}\\right) = \\sum_{i=1}^{n} \\hat{\\epsilon}^2_i = \\sum_{i=1}^{n} (Y_i - \\hat{Y}_i)^2.\\]\nThe estimator that minimizes the expression above is called the least squares estimator:\n\\[\\hat{\\boldsymbol{\\beta}} = (\\mathbf{X}^{T}\\mathbf{X})^{-1} \\mathbf{X}^{T}\\mathbf{y}\\]"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#computation-of-estimators",
@@ -1586,14 +1586,14 @@
     "href": "LinearRegression/LinearRegression.slides.html#section-2",
     "title": "Multiple Linear Regression",
     "section": "",
-    "text": "Next, we use the functions OLS() and fit() from statsmodels.\n\n# Create linear regression object\nregr = sm.OLS(rayon_Y_train, rayon_X_train)\n\n# Train the model using the training sets\nlinear_model = regr.fit()"
+    "text": "And,\n\\(\\boldsymbol{\\beta} = \\begin{pmatrix}\\beta_0 \\\\ \\beta_1 \\\\ \\vdots \\\\ \\beta_p \\end{pmatrix}\\) and \\(\\boldsymbol{\\epsilon} = \\begin{pmatrix}\\epsilon_1 \\\\ \\epsilon_2 \\\\ \\vdots \\\\ \\epsilon_n \\end{pmatrix}\\), where\n\n\\(\\boldsymbol{\\beta}\\) is an \\((p+1) \\times 1\\) vector.\n\\(\\boldsymbol{\\epsilon}\\) is an \\(n \\times 1\\) vector."
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#section-3",
     "href": "LinearRegression/LinearRegression.slides.html#section-3",
     "title": "Multiple Linear Regression",
     "section": "",
-    "text": "To show the estimated coefficients, we use the argument params of the linear_model object created previously.\n\n# The estimated coefficients.\nprint(linear_model.params)\n\nconst   -35.262607\nX1        0.745417\nX2       20.229167\nX3        0.793056\nX4       25.583333\nX5       17.208333\ndtype: float64\n\n\nThe elements in the vector above are the estimates \\(\\hat{\\beta}_0\\), \\(\\hat{\\beta}_1\\), \\(\\hat{\\beta}_2\\), \\(\\hat{\\beta}_3\\), \\(\\hat{\\beta}_4\\), and \\(\\hat{\\beta}_5\\)."
+    "text": "The multiple linear regression model then is\n\\[\\mathbf{Y} =  \\mathbf{X}\\boldsymbol{\\beta} + \\boldsymbol{\\epsilon}.\\] This expression means\n\\(\\begin{pmatrix} Y_1 \\\\ Y_2 \\\\ \\vdots \\\\ Y_n \\end{pmatrix} = \\begin{pmatrix}\n\\beta_0 + \\beta_1 X_{11} + \\beta_2 X_{12} + \\cdots + \\beta_p X_{1p} \\\\\n\\beta_0 + \\beta_1 X_{21} + \\beta_2 X_{22} + \\cdots + \\beta_p X_{2p} \\\\\n\\vdots  \\\\\n\\beta_0 + \\beta_1 X_{n1} + \\beta_2 X_{n2} + \\cdots + \\beta_p X_{np} \\\\\n\\end{pmatrix} + \\begin{pmatrix}\\epsilon_1 \\\\ \\epsilon_2 \\\\ \\vdots \\\\ \\epsilon_n \\end{pmatrix}\\)"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#interpretation-of-estimated-coefficients",
@@ -1607,7 +1607,7 @@
     "href": "LinearRegression/LinearRegression.slides.html#section-4",
     "title": "Multiple Linear Regression",
     "section": "",
-    "text": "Increasing the water temperature by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_3 = 0.793\\) units.\nIncreasing the sulfide concentration by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_4 = 25.583\\) units.\nIncreasing the amount of chlorine bleach by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_5 = 17.208\\) units."
+    "text": "The expression \\(\\hat{\\mathbf{Y}} = \\mathbf{X}\\hat{\\boldsymbol{\\beta}}\\) means\n\\[\\begin{pmatrix} \\hat{Y}_1 \\\\ \\hat{Y}_2 \\\\ \\vdots \\\\ \\hat{Y}_n \\end{pmatrix}  = \\begin{pmatrix}\n\\hat{\\beta}_0 + X_{11} \\hat{\\beta}_1 + X_{12} \\hat{\\beta}_2 + \\cdots + X_{1p} \\hat{\\beta}_p\\\\\n\\hat{\\beta}_0 + X_{21} \\hat{\\beta}_1 + X_{22}\\hat{\\beta}_2 + \\cdots + X_{2p}\\hat{\\beta}_p \\\\\n\\vdots  \\\\\n\\hat{\\beta}_0 + X_{n1} \\hat{\\beta}_1 + X_{n2}\\hat{\\beta}_2 + \\cdots + X_{np} \\hat{\\beta}_p \\\\\n\\end{pmatrix}\\]"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#properties-of-least-squares-estimators",
@@ -1621,14 +1621,14 @@
     "href": "LinearRegression/LinearRegression.slides.html#predictions",
     "title": "Multiple Linear Regression",
     "section": "Predictions",
-    "text": "Predictions\nOnce we estimate the intercept and model coefficients, we make predictions as follows:\n\\[\\hat{Y}_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_{i1} + \\hat{\\beta}_2 X_{i2} + \\cdots + \\hat{\\beta}_p X_{ip}\\]\nwhere \\(\\hat{Y}_i\\) is the i-th fitted or predicted response.\nIn python, we use the argument fittedvalues to show the predicted responses of the estimated model.\n\n# Make predictions using the the model\nrayon_Y_pred = linear_model.fittedvalues"
+    "text": "Predictions\nOnce we estimate the intercept and model coefficients, we make predictions as follows:\n\\[\\hat{Y}_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_{i1} + \\hat{\\beta}_2 X_{i2} + \\cdots + \\hat{\\beta}_p X_{ip}\\]\nwhere \\(\\hat{Y}_i\\) is the i-th fitted or predicted response.\nIn Python, we use the argument fittedvalues to show the predicted responses of the estimated model.\n\n# Make predictions using the the model\nrayon_Y_pred = linear_model.fittedvalues"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#section-5",
     "href": "LinearRegression/LinearRegression.slides.html#section-5",
     "title": "Multiple Linear Regression",
     "section": "",
-    "text": "Predictions of the 26 observations in the training dataset.\n\nprint(rayon_Y_pred)\n\n0      72.205449\n1      78.205449\n2      80.405449\n3      79.522115\n4      83.738782\n5      82.855449\n6      85.055449\n7      91.055449\n8      90.555449\n9      89.672115\n10     91.872115\n11     97.872115\n12     95.205449\n13    101.205449\n14    103.405449\n15    102.522115\n16     74.176282\n17    103.992949\n18     80.992949\n19     97.176282\n20     84.326282\n21     93.842949\n22     86.526282\n23     91.642949\n24     85.642949\n25     92.526282\ndtype: float64"
+    "text": "This means that the residuals of the estimated model are\n\\[\\hat{\\boldsymbol{\\epsilon}} = \\mathbf{Y} - \\hat{\\mathbf{Y}} = \\mathbf{Y} - \\mathbf{X} \\hat{\\boldsymbol{\\beta}},\\]\nwhere \\(\\hat{\\boldsymbol{\\epsilon}} = (\\hat{\\epsilon}_1, \\hat{\\epsilon}_2, \\ldots, \\hat{\\epsilon}_n)^{T}\\) and \\(\\hat{\\epsilon}_i = Y_i - \\hat{Y}_i\\) is the i-th residual."
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#residuals",
@@ -1642,21 +1642,21 @@
     "href": "LinearRegression/LinearRegression.slides.html#section-6",
     "title": "Multiple Linear Regression",
     "section": "",
-    "text": "In python, we compute the residuals using the following command.\n\nresiduals = linear_model.resid\n\nprint(residuals)\n\n0      4.294551\n1     -2.205449\n2     -0.505449\n3      3.977885\n4      5.761218\n5      1.344551\n6      0.644551\n7      8.444551\n8     -1.155449\n9      7.827885\n10    11.327885\n11    10.827885\n12    19.994551\n13    10.294551\n14    -1.105449\n15     5.577885\n16     6.023718\n17   -14.892949\n18    -3.792949\n19   -12.076282\n20   -12.826282\n21    -9.342949\n22    -9.026282\n23   -12.442949\n24   -14.642949\n25    -2.326282\ndtype: float64"
+    "text": "Next, we use the functions OLS() and fit() from statsmodels.\n\n# Create linear regression object\nregr = sm.OLS(rayon_Y_train, rayon_X_train)\n\n# Train the model using the training sets\nlinear_model = regr.fit()"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#estimation-of-variance",
     "href": "LinearRegression/LinearRegression.slides.html#estimation-of-variance",
     "title": "Multiple Linear Regression",
     "section": "Estimation of variance",
-    "text": "Estimation of variance\nThe variance \\(\\sigma^2\\) of the errors is estimated by\n\\[\\hat{\\sigma}^2=\\frac{1}{n-p-1}\\sum_{i=1}^{n} \\hat{\\epsilon}_i^{2}.\\]\nIn python, we compute \\(\\hat{\\sigma}^2\\) as follows.\n\nerror_variance = linear_model.scale\n\nprint( round(error_variance, 3) )\n\n105.931"
+    "text": "Estimation of variance\nThe variance \\(\\sigma^2\\) of the errors is estimated by\n\\[\\hat{\\sigma}^2=\\frac{1}{n-p-1}\\sum_{i=1}^{n} \\hat{\\epsilon}_i^{2}.\\]\nIn Python, we compute \\(\\hat{\\sigma}^2\\) as follows.\n\nerror_variance = linear_model.scale\n\nprint( round(error_variance, 3) )\n\n105.931"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#section-7",
     "href": "LinearRegression/LinearRegression.slides.html#section-7",
     "title": "Multiple Linear Regression",
     "section": "",
-    "text": "The smaller the value of \\(\\hat{\\sigma}^2\\), the closer our predictions are to the actual responses.\nIn practice, it is better to use the standard deviation of the errors. That is,\n\\[\\hat{\\sigma}=\\left(\\frac{1}{n-p-1}\\sum_{i=1}^{n} \\hat{\\epsilon}_i^{2}\\right)^{1/2}.\\] In python, we compute \\(\\hat{\\sigma}\\) as follows:\n\nprint( round(error_variance**(1/2), 3) )\n\n10.292"
+    "text": "Next, we use the functions OLS() and fit() from statsmodels.\n\n# Create linear regression object\nregr = sm.OLS(rayon_Y_train, rayon_X_train)\n\n# Train the model using the training sets\nlinear_model = regr.fit()"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#interpretation-of-hatsigma",
@@ -2434,5 +2434,82 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n2"
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#matrix-notation",
+    "href": "LinearRegression/LinearRegression.slides.html#matrix-notation",
+    "title": "Multiple Linear Regression",
+    "section": "Matrix notation",
+    "text": "Matrix notation\nIn what follows, it is useful to denote the multiple linear regression model using matrix notation:\n\\(\\mathbf{Y} = \\begin{pmatrix} Y_1 \\\\ Y_2 \\\\ \\vdots \\\\ Y_n \\end{pmatrix}\\) and \\(\\mathbf{X} = \\begin{pmatrix}\n1& X_{11} & X_{12} & \\cdots & X_{1p} \\\\\n1& X_{21} & X_{22} & \\cdots & X_{2p} \\\\\n\\vdots &\\vdots & \\vdots & \\cdots & \\vdots \\\\\n1& X_{n1} & X_{n2} & \\cdots & X_{np} \\\\\n\\end{pmatrix}\\), where\n\n\\(\\mathbf{Y}\\) is an \\(n \\times 1\\) vector.\n\\(\\mathbf{X}\\) is a \\(n \\times (p+1)\\) matrix."
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#section-8",
+    "href": "LinearRegression/LinearRegression.slides.html#section-8",
+    "title": "Multiple Linear Regression",
+    "section": "",
+    "text": "To show the estimated coefficients, we use the argument params of the linear_model object created previously.\n\n# The estimated coefficients.\nprint(linear_model.params)\n\nconst   -35.262607\nX1        0.745417\nX2       20.229167\nX3        0.793056\nX4       25.583333\nX5       17.208333\ndtype: float64\n\n\nThe elements in the vector above are the estimates \\(\\hat{\\beta}_0\\), \\(\\hat{\\beta}_1\\), \\(\\hat{\\beta}_2\\), \\(\\hat{\\beta}_3\\), \\(\\hat{\\beta}_4\\), and \\(\\hat{\\beta}_5\\)."
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#matrix-notation-1",
+    "href": "LinearRegression/LinearRegression.slides.html#matrix-notation-1",
+    "title": "Multiple Linear Regression",
+    "section": "Matrix notation",
+    "text": "Matrix notation\nIn what follows, it is useful to denote the multiple linear regression model using matrix notation:\n\\(\\mathbf{y} = \\begin{pmatrix} y_1 \\\\ y_2 \\\\ \\vdots \\\\ y_n \\end{pmatrix}\\), \\(\\mathbf{X} = \\begin{pmatrix}\n1& x_{11} & x_{12} & \\cdots & x_{1p} \\\\\n1& x_{21} & x_{22} & \\cdots & x_{2p} \\\\\n\\vdots &\\vdots & \\vdots & \\cdots & \\vdots \\\\\n1& x_{n1} & x_{n2} & \\cdots & x_{np} \\\\\n\\end{pmatrix}\\), \\(\\boldsymbol{\\beta} = \\begin{pmatrix}\\beta_0 \\\\ \\beta_1 \\\\ \\vdots \\\\ \\beta_p \\end{pmatrix}\\), and \\(\\boldsymbol{\\epsilon} = \\begin{pmatrix}\\epsilon_1 \\\\ \\epsilon_2 \\\\ \\vdots \\\\ \\epsilon_n \\end{pmatrix}\\)"
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#section-9",
+    "href": "LinearRegression/LinearRegression.slides.html#section-9",
+    "title": "Multiple Linear Regression",
+    "section": "",
+    "text": "Increasing the water temperature by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_3 = 0.793\\) units.\nIncreasing the sulfide concentration by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_4 = 25.583\\) units.\nIncreasing the amount of chlorine bleach by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_5 = 17.208\\) units."
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#an-estimator-for-boldsymbolbeta",
+    "href": "LinearRegression/LinearRegression.slides.html#an-estimator-for-boldsymbolbeta",
+    "title": "Multiple Linear Regression",
+    "section": "An estimator for \\(\\boldsymbol{\\beta}\\)",
+    "text": "An estimator for \\(\\boldsymbol{\\beta}\\)\nOur goal is to find an estimator for the vector \\(\\boldsymbol{\\beta}\\) (and all its components). For the moment, let’s assume that we have one:\n\\(\\hat{\\boldsymbol{\\beta}} = \\begin{pmatrix} \\hat{\\beta}_0 \\\\ \\hat{\\beta}_1 \\\\ \\vdots\\\\ \\hat{\\beta}_p \\end{pmatrix}\\), where \\(\\hat{\\beta}_j\\) is an estimator for \\(\\beta_j\\), \\(j = 0, \\ldots, p\\).\nUsing this estimator, we can compute the predicted responses of our model \\(\\hat{\\mathbf{Y}} = \\mathbf{X}\\hat{\\boldsymbol{\\beta}}\\), where \\(\\hat{\\mathbf{Y}} = (\\hat{Y}_1, \\hat{Y}_2, \\ldots, \\hat{Y}_n)^{T}\\) and \\(\\hat{Y}_i\\) is the i-th predicted response."
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#section-10",
+    "href": "LinearRegression/LinearRegression.slides.html#section-10",
+    "title": "Multiple Linear Regression",
+    "section": "",
+    "text": "Predictions of the 26 observations in the training dataset.\n\nprint(rayon_Y_pred)\n\n0      72.205449\n1      78.205449\n2      80.405449\n3      79.522115\n4      83.738782\n5      82.855449\n6      85.055449\n7      91.055449\n8      90.555449\n9      89.672115\n10     91.872115\n11     97.872115\n12     95.205449\n13    101.205449\n14    103.405449\n15    102.522115\n16     74.176282\n17    103.992949\n18     80.992949\n19     97.176282\n20     84.326282\n21     93.842949\n22     86.526282\n23     91.642949\n24     85.642949\n25     92.526282\ndtype: float64"
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#section-11",
+    "href": "LinearRegression/LinearRegression.slides.html#section-11",
+    "title": "Multiple Linear Regression",
+    "section": "",
+    "text": "In Python, we compute the residuals using the following command.\n\nresiduals = linear_model.resid\n\nprint(residuals)\n\n0      4.294551\n1     -2.205449\n2     -0.505449\n3      3.977885\n4      5.761218\n5      1.344551\n6      0.644551\n7      8.444551\n8     -1.155449\n9      7.827885\n10    11.327885\n11    10.827885\n12    19.994551\n13    10.294551\n14    -1.105449\n15     5.577885\n16     6.023718\n17   -14.892949\n18    -3.792949\n19   -12.076282\n20   -12.826282\n21    -9.342949\n22    -9.026282\n23   -12.442949\n24   -14.642949\n25    -2.326282\ndtype: float64"
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#computation-in-python",
+    "href": "LinearRegression/LinearRegression.slides.html#computation-in-python",
+    "title": "Multiple Linear Regression",
+    "section": "Computation in Python",
+    "text": "Computation in Python\n\nTo compute the least squares estimates, we first split the data set into a matrix with the values of the predictors only, and a matrix with the response values.\n\n# Matrix with predictors.\nrayon_predictors = rayon_data.drop(columns=['Y'])\n\n# Add intercept.\nrayon_X_train = sm.add_constant(rayon_predictors)\n\n# Matrix with response.\nrayon_Y_train = rayon_data['Y']"
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#computation-of-hatboldsymbolbeta-mathbfxtmathbfx-1-mathbfxtmathbfy",
+    "href": "LinearRegression/LinearRegression.slides.html#computation-of-hatboldsymbolbeta-mathbfxtmathbfx-1-mathbfxtmathbfy",
+    "title": "Multiple Linear Regression",
+    "section": "Computation of \\(\\hat{\\boldsymbol{\\beta}} = (\\mathbf{X}^{T}\\mathbf{X})^{-1} \\mathbf{X}^{T}\\mathbf{y}\\)",
+    "text": "Computation of \\(\\hat{\\boldsymbol{\\beta}} = (\\mathbf{X}^{T}\\mathbf{X})^{-1} \\mathbf{X}^{T}\\mathbf{y}\\)\n\n\nCompute the transpose of a matrix: \\(\\mathbf{X}^{T}\\).\nCompute the product of a matrix and a vector: \\(\\mathbf{X}^{T}\\mathbf{Y}\\).\nCompute the product of two matrices: \\(\\mathbf{X}^{T} \\mathbf{X}\\).\nCompute the inverse of a matrix: \\((\\mathbf{X}^{T} \\mathbf{X})^{-1}\\)."
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#remarks",
+    "href": "LinearRegression/LinearRegression.slides.html#remarks",
+    "title": "Multiple Linear Regression",
+    "section": "Remarks",
+    "text": "Remarks\n\nCompute the inverse of a matrix: \\((\\mathbf{X}^{T} \\mathbf{X})^{-1}\\).\n\n\nNot all matrices have an inverse.\nIf it does not have an inverse then the matrix is called singular. Otherwise, it is called non-singular.\nFor the inverse to exist, the columns in \\(\\mathbf{X}\\) must be linearly independent.\nOr, equivalently, the determinant \\(|\\mathbf{X}^{T} \\mathbf{X}| &gt; 0\\)."
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#section-12",
+    "href": "LinearRegression/LinearRegression.slides.html#section-12",
+    "title": "Multiple Linear Regression",
+    "section": "",
+    "text": "The smaller the value of \\(\\hat{\\sigma}^2\\), the closer our predictions are to the actual responses.\nIn practice, it is better to use the standard deviation of the errors. That is,\n\\[\\hat{\\sigma}=\\left(\\frac{1}{n-p-1}\\sum_{i=1}^{n} \\hat{\\epsilon}_i^{2}\\right)^{1/2}.\\] In Python, we compute \\(\\hat{\\sigma}\\) as follows:\n\nprint( round(error_variance**(1/2), 3) )\n\n10.292"
   }
 ]
