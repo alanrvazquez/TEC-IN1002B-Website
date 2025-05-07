@@ -203,7 +203,7 @@ The data is in the file “banknotes.xlsx”.
 
 bank_data = pd.read_excel("banknotes.xlsx")
 # Set response variable as categorical.
-bank_data['Status'] = bank_data['Status'].astype('category')
+bank_data['Status'] = pd.Categorical(bank_data['Status'])
 bank_data.head()
 ```
 
@@ -250,7 +250,7 @@ sns.heatmap(correlation_matrix.abs(), cmap = 'coolwarm', annot = True)
 plt.title("Heatmap on correlations") # Set plot title.
 ```
 
-##
+## 
 
 </br>
 
@@ -259,6 +259,7 @@ The correlation plot shows that the predictors `Left` ($X_1$) and `Right` ($X_2$
 </br>
 
 Consequently, our database for this problem is
+
 ```{python}
 #| echo: true
 #| output: true

@@ -80,7 +80,7 @@ The auto data set includes a categorical variable “Origin” which shows the o
 auto_data = pd.read_excel("auto.xlsx")
 
 # Set categorical variables.
-auto_data['origin'] = auto_data['origin'].astype('category')
+auto_data['origin'] = pd.Categorical(auto_data['origin'])
 ```
 
 ## Dataset
@@ -115,20 +115,19 @@ $$d_2 =
 
 The dataset with the dummy variables looks like this:
 
-| origin        | $d_1$    | $d_2$    |
-|--------------|----------|----------|
-| American     | 0        | 0        |
-| American     | 0        | 0        |
-| European     | 1        | 0        |
-| European     | 1        | 0        |
-| American     | 0        | 0        |
-| Japanese     | 0        | 1        |
-| $\vdots$     | $\vdots$ | $\vdots$ |
-
+| origin   | $d_1$    | $d_2$    |
+|----------|----------|----------|
+| American | 0        | 0        |
+| American | 0        | 0        |
+| European | 1        | 0        |
+| European | 1        | 0        |
+| American | 0        | 0        |
+| Japanese | 0        | 1        |
+| $\vdots$ | $\vdots$ | $\vdots$ |
 
 ## The multiple linear regression model
 
-</br> 
+</br>
 
 $$Y_i= \beta_0+\beta_1 d_{1i} +\beta_2 d_{2i} +\epsilon_i \ \text{for} \ i=1,\ldots,n.$$
 
@@ -138,7 +137,7 @@ $$Y_i= \beta_0+\beta_1 d_{1i} +\beta_2 d_{2i} +\epsilon_i \ \text{for} \ i=1,\ld
 
 ## Model coefficients
 
-</br> 
+</br>
 
 $$Y_i= \beta_0+\beta_1 d_{1i} +\beta_2 d_{2i} +\epsilon_i \ \text{for} \ i=1,\ldots,n.$$
 
@@ -167,7 +166,7 @@ Given this model representation:
 
 ## In python
 
-</br> 
+</br>
 
 We follow three steps to fit a linear model with a categorical predictor. First, we compute the dummy variables.
 
@@ -194,7 +193,7 @@ dummy_X_train
 
 ## 
 
-</br></br>  
+</br></br>
 
 Finally, we fit the model using `OLS()` and `fit()` from **statsmodels**.
 
@@ -214,7 +213,7 @@ summary_model = linear_model.summary()
 
 ## 
 
-</br> 
+</br>
 
 ```{python}
 #| echo: true
@@ -261,7 +260,7 @@ Note that these models have different intercepts but the same slope.
 
 ## In python
 
-</br> 
+</br>
 
 To fit an ANCOVA model, we use similar steps as before. The only extra step is to concatenate the data with the dummy variables and the numerical predictor using the function `concat()` from **pandas**.
 
@@ -346,7 +345,7 @@ Interpretation:
 
 ## Example 2
 
-</br> 
+</br>
 
 The yield of a chemical process ($Y$) is related to the concentration of the reactant ($X_1$) and the operating temperature ($X_2$).
 
@@ -457,7 +456,7 @@ Ideally, the dummy variables for the categorical predictors are standardized too
 
 ## Incorrect model
 
-</br></br> 
+</br></br>
 
 A model is incorrect if
 
@@ -560,7 +559,7 @@ $$\sqrt{Y} = \beta_0 + \beta_1 X + \epsilon$$ $$\sqrt{Y} = \beta_0 + \beta_1 \sq
 
 ## Effect of transformations
 
-</br> 
+</br>
 
 ::: incremental
 -   In many cases, the $\ln{(\cdot)}$ transformation Improves the relationship between predictor and response.
@@ -757,7 +756,6 @@ plt.show()
 -   Note that, we need to transform back our response predictions to the original scale. For example, if $Y' = \ln{Y}$ is the transformed response, then our final prediction is $Y^\star = e^{{Y'}^\star}$.
 :::
 
-
 # Predicting future observations
 
 ## Recall that ...
@@ -768,10 +766,9 @@ $$Y = f(\boldsymbol{X}) + \epsilon$$
 
 where $f(\boldsymbol{X})$ represents the true relationship between $\boldsymbol{X} = (X_1, X_2, \ldots, X_p)$ and $Y$, which is unknown and very complex!
 
-In our analysis, we further assume that 
+In our analysis, we further assume that
 
 $$f(\boldsymbol{X}) = \beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p.$$
-
 
 ## Two datasets
 
@@ -825,7 +822,7 @@ In many practical situations, a test dataset is not available. To overcome this 
 
 ## Example 4
 
-</br> 
+</br>
 
 The "BostonHousing.xlsx" contains data collected by the US Bureau of the Census concerning housing in the area of Boston, Massachusetts. The dataset includes data on 506 census housing tracts in the Boston area in 1970s.
 
@@ -862,7 +859,7 @@ We read the dataset and set the variable `CHAS` as categorical.
 Boston_data = pd.read_excel('BostonHousing.xlsx')
 
 # Drop the categorical variable.
-Boston_data['CHAS'] = Boston_data['CHAS'].astype('category')
+Boston_data['CHAS'] = pd.Categorical(Boston_data['CHAS'])
 
 # Preview the dataset.
 Boston_data.head(3)

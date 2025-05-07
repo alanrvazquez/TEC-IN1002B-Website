@@ -136,9 +136,9 @@ Let's use the penguins dataset available in the file `penguins.xlsx`.
 penguins_data = pd.read_excel("penguins.xlsx")
 
 # Set categorical variables.
-penguins_data['sex'] = penguins_data['sex'].astype('category')
-penguins_data['species'] = penguins_data['species'].astype('category')
-penguins_data['island'] = penguins_data['island'].astype('category')
+penguins_data['sex'] = pd.Categorical(penguins_data['sex'])
+penguins_data['species'] = pd.Categorical(penguins_data['species'])
+penguins_data['island'] = pd.Categorical(penguins_data['island'])
 ```
 
 ## 
@@ -357,7 +357,7 @@ The dataset is in the file "auto.xlsx". Let's read the data using **pandas**.
 auto_data = pd.read_excel("auto.xlsx")
 
 # Set categorical variables.
-auto_data['origin'] = auto_data['origin'].astype('category')
+auto_data['origin'] = pd.Categorical(auto_data['origin'])
 ```
 
 ## 

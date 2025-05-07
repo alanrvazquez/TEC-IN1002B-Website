@@ -89,7 +89,7 @@ Technically, the variable `sex` in `penguins_data` is [**categorical**]{style="c
 ```{python}
 #| echo: true
 
-penguins_data['sex'] = penguins_data['sex'].astype('category')
+penguins_data['sex'] = pd.Categorical(penguins_data['sex'])
 ```
 
 Setting `sex` to categorical allows us to use effective visualization for this data.
@@ -99,8 +99,8 @@ We do the same for the other categorical variables `species` and `island`.
 ```{python}
 #| echo: true
 
-penguins_data['species'] = penguins_data['species'].astype('category')
-penguins_data['island'] = penguins_data['island'].astype('category')
+penguins_data['species'] = pd.Categorical(penguins_data['species'])
+penguins_data['island'] = pd.Categorical(penguins_data['island'])
 ```
 
 ## 
@@ -393,7 +393,7 @@ The variable `Type` is categorical. So, let's ensure python knows this using the
 #| echo: true
 #| output: true
 
-glass_data['Type'] = glass_data['Type'].astype('category')
+glass_data['Type'] = pd.Categorical(glass_data['Type'])
 ```
 
 ## matplotlib library
