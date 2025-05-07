@@ -84,6 +84,13 @@
     "text": "In the output of the function “non-null” refers to the number of entries in a column that have actual values. That is, the number of entries where there are not NaN.\n\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 344 entries, 0 to 343\nData columns (total 8 columns):\n #   Column             Non-Null Count  Dtype   \n---  ------             --------------  -----   \n 0   species            344 non-null    category\n 1   island             344 non-null    category\n 2   bill_length_mm     342 non-null    float64 \n 3   bill_depth_mm      342 non-null    float64 \n 4   flipper_length_mm  342 non-null    float64 \n 5   body_mass_g        342 non-null    float64 \n 6   sex                333 non-null    category\n 7   year               344 non-null    int64   \ndtypes: category(3), float64(4), int64(1)\nmemory usage: 14.9 KB\n\n\nThe value next to “RangeIndex” is the number of observations in the dataset."
   },
   {
+    "objectID": "PreProcessing/PreProcessing.slides.html#section-7",
+    "href": "PreProcessing/PreProcessing.slides.html#section-7",
+    "title": "Data preprocessing",
+    "section": "",
+    "text": "Alternatively, we can use the function isnull() together with sum() to determine the number of missing values for each column in the dataset.\n\n\nmissing_values = penguins_data.isnull().sum()\nmissing_values\n\nspecies               0\nisland                0\nbill_length_mm        2\nbill_depth_mm         2\nflipper_length_mm     2\nbody_mass_g           2\nsex                  11\nyear                  0\ndtype: int64"
+  },
+  {
     "objectID": "PreProcessing/PreProcessing.slides.html#removing-missing-values",
     "href": "PreProcessing/PreProcessing.slides.html#removing-missing-values",
     "title": "Data preprocessing",
@@ -96,13 +103,6 @@
     "title": "Data preprocessing",
     "section": "Imputation using the mean",
     "text": "Imputation using the mean\nWe can impute the missing values of a numeric variable using the mean or median of its available values. For example, consider the variable bill_length_mm that has missing values.\n\npenguins_data['bill_length_mm'].head()\n\n0    39.1\n1    39.5\n2    40.3\n3     NaN\n4    36.7\nName: bill_length_mm, dtype: float64\n\n\nIn scikit-learn, we use the function SimpleImputer() to define the method of imputation of missing values."
-  },
-  {
-    "objectID": "PreProcessing/PreProcessing.slides.html#section-7",
-    "href": "PreProcessing/PreProcessing.slides.html#section-7",
-    "title": "Data preprocessing",
-    "section": "",
-    "text": "Alternatively, we can use the function isnull() together with sum() to determine the number of missing values for each column in the dataset.\n\n\nmissing_values = penguins_data.isnull().sum()\nmissing_values\n\nspecies               0\nisland                0\nbill_length_mm        2\nbill_depth_mm         2\nflipper_length_mm     2\nbody_mass_g           2\nsex                  11\nyear                  0\ndtype: int64"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#section-8",
@@ -119,6 +119,13 @@
     "text": "After imputation, the dataset looks like this.\n\npenguins_data.head()\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.10000\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.50000\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.30000\n18.0\n195.0\n3250.0\nfemale\n2007\n\n\n3\nAdelie\nTorgersen\n43.92193\nNaN\nNaN\nNaN\nNaN\n2007\n\n\n4\nAdelie\nTorgersen\n36.70000\n19.3\n193.0\n3450.0\nfemale\n2007\n\n\n\n\n\n\n\nNow, bill_length_mm has complete values."
   },
   {
+    "objectID": "PreProcessing/PreProcessing.slides.html#section-10",
+    "href": "PreProcessing/PreProcessing.slides.html#section-10",
+    "title": "Data preprocessing",
+    "section": "",
+    "text": "To imput the missing values using the median, we simply set this method in SimpleImputer(). For example, let’s imput the missing values of bill_depth_mm.\n\n# Imputation for numerical variables (using the mean)\nnum_imputer = SimpleImputer(strategy = 'median')\n\n# Replace the original variable with new version.\npenguins_data['bill_depth_mm'] = num_imputer.fit_transform(penguins_data[ ['bill_depth_mm'] ] )\n\n# Show the first 4 rows of the updated dataset.\npenguins_data.head(3)\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.5\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007"
+  },
+  {
     "objectID": "PreProcessing/PreProcessing.slides.html#using-the-mean-or-the-median",
     "href": "PreProcessing/PreProcessing.slides.html#using-the-mean-or-the-median",
     "title": "Data preprocessing",
@@ -126,11 +133,11 @@
     "text": "Using the mean or the median?\n\nWe use the sample mean when the data distribution is roughly symmetrical.\n\nPros: Simple and easy to implement.\nCons: Sensitive to outliers; may not be accurate for skewed distributions"
   },
   {
-    "objectID": "PreProcessing/PreProcessing.slides.html#section-10",
-    "href": "PreProcessing/PreProcessing.slides.html#section-10",
+    "objectID": "PreProcessing/PreProcessing.slides.html#section-11",
+    "href": "PreProcessing/PreProcessing.slides.html#section-11",
     "title": "Data preprocessing",
     "section": "",
-    "text": "To imput the missing values using the median, we simply set this method in SimpleImputer(). For example, let’s imput the missing values of bill_depth_mm.\n\n# Imputation for numerical variables (using the mean)\nnum_imputer = SimpleImputer(strategy = 'median')\n\n# Replace the original variable with new version.\npenguins_data['bill_depth_mm'] = num_imputer.fit_transform(penguins_data[ ['bill_depth_mm'] ] )\n\n# Show the first 4 rows of the updated dataset.\npenguins_data.head(3)\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.5\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007"
+    "text": "We use the sample median when the data is skewed (e.g., incomes, prices).\n\nPros: Less sensitive to outliers; robust for skewed distributions.\nCons: May reduce variability in the data."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#imputation-method-for-categorical-variable",
@@ -161,18 +168,18 @@
     "text": "Example 2\nA market analyst is studying quality characteristics of cars. Specifically, the analyst is investigating the miles per gallon (mpg) of cars can be predicted using:\n\n\\(X_1:\\) cylinders. Number of cylinders between 4 and 8\n\\(X_2:\\) displacement. Engine displacement (cu. inches)\n\\(X_3:\\) horsepower. Engine horsepower\n\\(X_4:\\) weight. Vehicle weight (lbs.)\n\\(X_5:\\) acceleration. Time to accelerate from 0 to 60 mph (sec.)\n\\(X_6:\\) origin. Origin of car (American, European, Japanese)"
   },
   {
-    "objectID": "PreProcessing/PreProcessing.slides.html#section-11",
-    "href": "PreProcessing/PreProcessing.slides.html#section-11",
-    "title": "Data preprocessing",
-    "section": "",
-    "text": "We use the sample median when the data is skewed (e.g., incomes, prices).\n\nPros: Less sensitive to outliers; robust for skewed distributions.\nCons: May reduce variability in the data."
-  },
-  {
     "objectID": "PreProcessing/PreProcessing.slides.html#section-12",
     "href": "PreProcessing/PreProcessing.slides.html#section-12",
     "title": "Data preprocessing",
     "section": "",
     "text": "The dataset is in the file “auto.xlsx”. Let’s read the data using pandas.\n\n# Load the Excel file into a pandas DataFrame.\nauto_data = pd.read_excel(\"auto.xlsx\")\n\n# Set categorical variables.\nauto_data['origin'] = pd.Categorical(auto_data['origin'])"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing.slides.html#section-13",
+    "href": "PreProcessing/PreProcessing.slides.html#section-13",
+    "title": "Data preprocessing",
+    "section": "",
+    "text": "observation\nmpg\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\nyear\norigin\nname\n\n\n\n\n0\n1\n18.0\n8\n307.0\n130\n3504\n12.0\n70\nAmerican\nchevrolet chevelle malibu\n\n\n1\n2\n15.0\n8\n350.0\n165\n3693\n11.5\n70\nAmerican\nbuick skylark 320\n\n\n2\n3\n18.0\n8\n318.0\n150\n3436\n11.0\n70\nAmerican\nplymouth satellite\n\n\n3\n4\n16.0\n8\n304.0\n150\n3433\n12.0\n70\nAmerican\namc rebel sst"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#dealing-with-missing-values-1",
@@ -189,11 +196,11 @@
     "text": "Example 2 (cont.)\nCategorical predictor: Origin of a car. Three categories: American, European and Japanese.\nInitially, 3 dummy variables are required:\n\\[d_1 =\n\\begin{cases}\n1 \\text{ if observation is from an American car}\\\\\n0 \\text{ otherwise}\n\\end{cases}\\] \\[d_2 =\n\\begin{cases}\n1 \\text{ if observation is from an European car}\\\\\n0 \\text{ otherwise}\n\\end{cases}\\] \\[d_3 =\n\\begin{cases}\n1 \\text{ if observation is from a Japanese car}\\\\\n0 \\text{ otherwise}\n\\end{cases}\\]"
   },
   {
-    "objectID": "PreProcessing/PreProcessing.slides.html#section-13",
-    "href": "PreProcessing/PreProcessing.slides.html#section-13",
+    "objectID": "PreProcessing/PreProcessing.slides.html#section-14",
+    "href": "PreProcessing/PreProcessing.slides.html#section-14",
     "title": "Data preprocessing",
     "section": "",
-    "text": "observation\nmpg\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\nyear\norigin\nname\n\n\n\n\n0\n1\n18.0\n8\n307.0\n130\n3504\n12.0\n70\nAmerican\nchevrolet chevelle malibu\n\n\n1\n2\n15.0\n8\n350.0\n165\n3693\n11.5\n70\nAmerican\nbuick skylark 320\n\n\n2\n3\n18.0\n8\n318.0\n150\n3436\n11.0\n70\nAmerican\nplymouth satellite\n\n\n3\n4\n16.0\n8\n304.0\n150\n3433\n12.0\n70\nAmerican\namc rebel sst"
+    "text": "The variable Origin would then be replaced by the three dummy variables\n\n\n\nOrigin (\\(X\\))\n\\(d_1\\)\n\\(d_2\\)\n\\(d_3\\)\n\n\n\n\nAmerican\n1\n0\n0\n\n\nAmerican\n1\n0\n0\n\n\nEuropean\n0\n1\n0\n\n\nEuropean\n0\n1\n0\n\n\nAmerican\n1\n0\n0\n\n\nJapanese\n0\n0\n1\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#a-drawback",
@@ -203,11 +210,11 @@
     "text": "A drawback\n\n\n\nA drawback with the initial dummy variables is that they are linearly dependent. That is, \\(d_1 + d_2 + d_3 = 1\\).\nTherefore, we can determine the value of \\(d_1 = 1- d_2 - d_3.\\)\nPredictive models such as linear regression are sensitive to linear dependencies among predictors.\nThe solution is to drop one of the predictor, say, \\(d_1\\), from the data."
   },
   {
-    "objectID": "PreProcessing/PreProcessing.slides.html#section-14",
-    "href": "PreProcessing/PreProcessing.slides.html#section-14",
+    "objectID": "PreProcessing/PreProcessing.slides.html#section-15",
+    "href": "PreProcessing/PreProcessing.slides.html#section-15",
     "title": "Data preprocessing",
     "section": "",
-    "text": "The variable Origin would then be replaced by the three dummy variables\n\n\n\nOrigin (\\(X\\))\n\\(d_1\\)\n\\(d_2\\)\n\\(d_3\\)\n\n\n\n\nAmerican\n1\n0\n0\n\n\nAmerican\n1\n0\n0\n\n\nEuropean\n0\n1\n0\n\n\nEuropean\n0\n1\n0\n\n\nAmerican\n1\n0\n0\n\n\nJapanese\n0\n0\n1\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)"
+    "text": "The variable Origin would then be replaced by the three dummy variables.\n\n\n\nOrigin (\\(X\\))\n\\(d_2\\)\n\\(d_3\\)\n\n\n\n\nAmerican\n0\n0\n\n\nAmerican\n0\n0\n\n\nEuropean\n1\n0\n\n\nEuropean\n1\n0\n\n\nAmerican\n0\n0\n\n\nJapanese\n0\n1\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#dummy-variables-in-python",
@@ -217,18 +224,18 @@
     "text": "Dummy variables in python\n\nWe can get the dummy variables of a categorical variable using the function pd.get_dummies() from pandas.\nThe input of the function is the categorical variable.\nThe function has an extra argument called drop_first to drop the first dummy variable. It also has the argument dtype to show the values as integers.\n\ndummy_data = pd.get_dummies(complete_Auto['origin'], drop_first = True, \n                            dtype = 'int')"
   },
   {
-    "objectID": "PreProcessing/PreProcessing.slides.html#section-15",
-    "href": "PreProcessing/PreProcessing.slides.html#section-15",
-    "title": "Data preprocessing",
-    "section": "",
-    "text": "The variable Origin would then be replaced by the three dummy variables.\n\n\n\nOrigin (\\(X\\))\n\\(d_2\\)\n\\(d_3\\)\n\n\n\n\nAmerican\n0\n0\n\n\nAmerican\n0\n0\n\n\nEuropean\n1\n0\n\n\nEuropean\n1\n0\n\n\nAmerican\n0\n0\n\n\nJapanese\n0\n1\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)"
-  },
-  {
     "objectID": "PreProcessing/PreProcessing.slides.html#section-16",
     "href": "PreProcessing/PreProcessing.slides.html#section-16",
     "title": "Data preprocessing",
     "section": "",
     "text": "dummy_data.head()\n\n\n\n\n\n\n\n\nEuropean\nJapanese\n\n\n\n\n0\n0\n0\n\n\n1\n0\n0\n\n\n2\n0\n0\n\n\n3\n0\n0\n\n\n4\n0\n0"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing.slides.html#section-17",
+    "href": "PreProcessing/PreProcessing.slides.html#section-17",
+    "title": "Data preprocessing",
+    "section": "",
+    "text": "Now, to add the dummy variables to the dataset, we use the function concat() from pandas.\n\naugmented_auto = pd.concat([complete_Auto, dummy_data], axis = 1)\naugmented_auto.head()\n\n\n\n\n\n\n\n\nobservation\nmpg\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\nyear\norigin\nname\nEuropean\nJapanese\n\n\n\n\n0\n1\n18.0\n8\n307.0\n130\n3504\n12.0\n70\nAmerican\nchevrolet chevelle malibu\n0\n0\n\n\n1\n2\n15.0\n8\n350.0\n165\n3693\n11.5\n70\nAmerican\nbuick skylark 320\n0\n0\n\n\n2\n3\n18.0\n8\n318.0\n150\n3436\n11.0\n70\nAmerican\nplymouth satellite\n0\n0\n\n\n3\n4\n16.0\n8\n304.0\n150\n3433\n12.0\n70\nAmerican\namc rebel sst\n0\n0\n\n\n4\n5\n17.0\n8\n302.0\n140\n3449\n10.5\n70\nAmerican\nford torino\n0\n0"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#removing-predictors",
@@ -259,11 +266,11 @@
     "text": "In python\nWe use the function VarianceThreshold() to set the threshold for determining a low sample variance. We also use other functions such as selector.fit() and selector.get_support().\n\n# Set threshold\nselector = VarianceThreshold(threshold=0.01)\n\n# Apply threshold.\nselector.fit(sb_glass)\n\n# Identify predictors with low variance.\nlow_variance_cols = sb_glass.columns[~selector.get_support()]\n\n# Print the list of predictors.\nprint(f\"Low variance columns: {low_variance_cols}\")\n\nLow variance columns: Index(['RI', 'Fe'], dtype='object')"
   },
   {
-    "objectID": "PreProcessing/PreProcessing.slides.html#section-17",
-    "href": "PreProcessing/PreProcessing.slides.html#section-17",
+    "objectID": "PreProcessing/PreProcessing.slides.html#section-18",
+    "href": "PreProcessing/PreProcessing.slides.html#section-18",
     "title": "Data preprocessing",
     "section": "",
-    "text": "Now, to add the dummy variables to the dataset, we use the function concat() from pandas.\n\naugmented_auto = pd.concat([complete_Auto, dummy_data], axis = 1)\naugmented_auto.head()\n\n\n\n\n\n\n\n\nobservation\nmpg\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\nyear\norigin\nname\nEuropean\nJapanese\n\n\n\n\n0\n1\n18.0\n8\n307.0\n130\n3504\n12.0\n70\nAmerican\nchevrolet chevelle malibu\n0\n0\n\n\n1\n2\n15.0\n8\n350.0\n165\n3693\n11.5\n70\nAmerican\nbuick skylark 320\n0\n0\n\n\n2\n3\n18.0\n8\n318.0\n150\n3436\n11.0\n70\nAmerican\nplymouth satellite\n0\n0\n\n\n3\n4\n16.0\n8\n304.0\n150\n3433\n12.0\n70\nAmerican\namc rebel sst\n0\n0\n\n\n4\n5\n17.0\n8\n302.0\n140\n3449\n10.5\n70\nAmerican\nford torino\n0\n0"
+    "text": "After identifying predictors with low variability, we remove them from the problem because they do not add much to the problem. To this end, we use the command below.\n\n\n# Removing problematic predictors\nsb_reduced_glass = sb_glass.drop(columns=low_variance_cols)"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#between-predictor-correlation",
@@ -287,18 +294,18 @@
     "text": "Correlation matrix\n\nIn python, we calculate the correlation matrix using the command below.\n\ncorrelation_matrix = complete_sbAuto.corr()\nprint(correlation_matrix)\n\n              cylinders  displacement  horsepower    weight  acceleration\ncylinders      1.000000      0.950823    0.842983  0.897527     -0.504683\ndisplacement   0.950823      1.000000    0.897257  0.932994     -0.543800\nhorsepower     0.842983      0.897257    1.000000  0.864538     -0.689196\nweight         0.897527      0.932994    0.864538  1.000000     -0.416839\nacceleration  -0.504683     -0.543800   -0.689196 -0.416839      1.000000"
   },
   {
-    "objectID": "PreProcessing/PreProcessing.slides.html#section-18",
-    "href": "PreProcessing/PreProcessing.slides.html#section-18",
-    "title": "Data preprocessing",
-    "section": "",
-    "text": "After identifying predictors with low variability, we remove them from the problem because they do not add much to the problem. To this end, we use the command below.\n\n\n# Removing problematic predictors\nsb_reduced_glass = sb_glass.drop(columns=low_variance_cols)"
-  },
-  {
     "objectID": "PreProcessing/PreProcessing.slides.html#section-19",
     "href": "PreProcessing/PreProcessing.slides.html#section-19",
     "title": "Data preprocessing",
     "section": "",
     "text": "Next, we plot the correlation matrix using the function heatmap() from seaborn. The argument annot shows the actual value of the pair-wise correlations, and cmap shows a nice color theme.\n\nplt.figure(figsize=(3,3))\nsns.heatmap(correlation_matrix, cmap='coolwarm', annot = True)"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing.slides.html#section-20",
+    "href": "PreProcessing/PreProcessing.slides.html#section-20",
+    "title": "Data preprocessing",
+    "section": "",
+    "text": "The predictors cylinders and displacement are highly correlated. In fact, their correlation is 0.95."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#in-practice",
@@ -315,11 +322,11 @@
     "text": "Predictors with different units\nMany good predictive models have issues with numeric predictors with different units:\n\nMethods such as K-nearest neighbors are based on the distance between observations. If the predictors are on different units or scales, then some predictors will have a larger weight for computing the distance.\nOther methods such as LASSO use the variances of the predictors in their calculations. Predictors with different scales will have different variances and so, those with a higher variance will play a bigger role in the calculations."
   },
   {
-    "objectID": "PreProcessing/PreProcessing.slides.html#section-20",
-    "href": "PreProcessing/PreProcessing.slides.html#section-20",
+    "objectID": "PreProcessing/PreProcessing.slides.html#section-21",
+    "href": "PreProcessing/PreProcessing.slides.html#section-21",
     "title": "Data preprocessing",
     "section": "",
-    "text": "The predictors cylinders and displacement are highly correlated. In fact, their correlation is 0.95."
+    "text": "In a nutshell, some predictors will have a higher impact in the model due to its unit and not its information provided to it."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#standarization-1",
@@ -329,11 +336,11 @@
     "text": "Standarization\n\nStandardization refers to centering and scaling each numeric predictor individually. It puts every predictor on the same scale.\nTo center a predictor variable, the average predictor value is subtracted from all the values.\nTherefore, the centered predictor has a zero mean (that is, its average value is zero)."
   },
   {
-    "objectID": "PreProcessing/PreProcessing.slides.html#section-21",
-    "href": "PreProcessing/PreProcessing.slides.html#section-21",
+    "objectID": "PreProcessing/PreProcessing.slides.html#section-22",
+    "href": "PreProcessing/PreProcessing.slides.html#section-22",
     "title": "Data preprocessing",
     "section": "",
-    "text": "In a nutshell, some predictors will have a higher impact in the model due to its unit and not its information provided to it."
+    "text": "To scale a predictor, each of its value is divided by its standard deviation.\nScaling the data coerce the values to have a common standard deviation of one.\nIn mathematical terms, we standardize a predictor as:\n\\[{\\color{blue} \\tilde{x}_{i}} = \\frac{{ x_{i} - \\bar{x}}}{ \\sqrt{\\frac{1}{n -1} \\sum_{i=1}^{n} (x_{i} - \\bar{x})^2}},\\]\nwith \\(\\bar{x} = \\sum_{i=1}^n \\frac{x_i}{n}\\)."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#two-predictors-in-original-units",
@@ -350,11 +357,11 @@
     "text": "Standarization in python\n\nTo standardize numerical predictors, we use the function StandardScaler(). Moreover, we apply the function to the variables using the function fit_transform().\n\n\nscaler = StandardScaler()\nXs = scaler.fit_transform(complete_sbAuto)"
   },
   {
-    "objectID": "PreProcessing/PreProcessing.slides.html#section-22",
-    "href": "PreProcessing/PreProcessing.slides.html#section-22",
+    "objectID": "PreProcessing/PreProcessing.slides.html#section-23",
+    "href": "PreProcessing/PreProcessing.slides.html#section-23",
     "title": "Data preprocessing",
     "section": "",
-    "text": "To scale a predictor, each of its value is divided by its standard deviation.\nScaling the data coerce the values to have a common standard deviation of one.\nIn mathematical terms, we standardize a predictor as:\n\\[{\\color{blue} \\tilde{x}_{i}} = \\frac{{ x_{i} - \\bar{x}}}{ \\sqrt{\\frac{1}{n -1} \\sum_{i=1}^{n} (x_{i} - \\bar{x})^2}},\\]\nwith \\(\\bar{x} = \\sum_{i=1}^n \\frac{x_i}{n}\\)."
+    "text": "Unfortunately, the resulting object is not a pandas data frame. We then convert this object to this format. \n\nscaled_df = pd.DataFrame(Xs, columns = complete_sbAuto.columns)\nscaled_df.head()\n\n\n\n\n\n\n\n\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\n\n\n\n\n0\n1.483947\n1.077290\n0.664133\n0.620540\n-1.285258\n\n\n1\n1.483947\n1.488732\n1.574594\n0.843334\n-1.466724\n\n\n2\n1.483947\n1.182542\n1.184397\n0.540382\n-1.648189\n\n\n3\n1.483947\n1.048584\n1.184397\n0.536845\n-1.285258\n\n\n4\n1.483947\n1.029447\n0.924265\n0.555706\n-1.829655"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#two-predictors-in-standardized-units",
@@ -466,7 +473,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-3",
     "title": "Additional Topics",
     "section": "",
-    "text": "print(summary_model)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.332\nModel:                            OLS   Adj. R-squared:                  0.328\nMethod:                 Least Squares   F-statistic:                     96.60\nDate:                Wed, 07 May 2025   Prob (F-statistic):           8.67e-35\nTime:                        15:39:39   Log-Likelihood:                -1282.2\nNo. Observations:                 392   AIC:                             2570.\nDf Residuals:                     389   BIC:                             2582.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         20.0335      0.409     49.025      0.000      19.230      20.837\nEuropean       7.5695      0.877      8.634      0.000       5.846       9.293\nJapanese      10.4172      0.828     12.588      0.000       8.790      12.044\n==============================================================================\nOmnibus:                       26.330   Durbin-Watson:                   0.763\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               30.217\nSkew:                           0.679   Prob(JB):                     2.74e-07\nKurtosis:                       3.066   Cond. No.                         3.16\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+    "text": "print(summary_model)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.332\nModel:                            OLS   Adj. R-squared:                  0.328\nMethod:                 Least Squares   F-statistic:                     96.60\nDate:                Wed, 07 May 2025   Prob (F-statistic):           8.67e-35\nTime:                        15:41:20   Log-Likelihood:                -1282.2\nNo. Observations:                 392   AIC:                             2570.\nDf Residuals:                     389   BIC:                             2582.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         20.0335      0.409     49.025      0.000      19.230      20.837\nEuropean       7.5695      0.877      8.634      0.000       5.846       9.293\nJapanese      10.4172      0.828     12.588      0.000       8.790      12.044\n==============================================================================\nOmnibus:                       26.330   Durbin-Watson:                   0.763\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               30.217\nSkew:                           0.679   Prob(JB):                     2.74e-07\nKurtosis:                       3.066   Cond. No.                         3.16\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#analysis-of-covariance",
@@ -501,7 +508,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#model-summary",
     "title": "Additional Topics",
     "section": "Model summary",
-    "text": "Model summary\n\n# Summary of the models.\nsummary_ancova = ancova_model.summary()\nprint(summary_ancova)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.702\nModel:                            OLS   Adj. R-squared:                  0.700\nMethod:                 Least Squares   F-statistic:                     304.7\nDate:                Wed, 07 May 2025   Prob (F-statistic):          1.28e-101\nTime:                        15:39:39   Log-Likelihood:                -1123.9\nNo. Observations:                 392   AIC:                             2256.\nDf Residuals:                     388   BIC:                             2272.\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         43.7322      1.113     39.277      0.000      41.543      45.921\nEuropean       0.9709      0.659      1.474      0.141      -0.324       2.266\nJapanese       2.3271      0.665      3.501      0.001       1.020       3.634\nweight        -0.0070      0.000    -21.956      0.000      -0.008      -0.006\n==============================================================================\nOmnibus:                       40.731   Durbin-Watson:                   0.832\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               61.938\nSkew:                           0.689   Prob(JB):                     3.55e-14\nKurtosis:                       4.377   Cond. No.                     1.83e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 1.83e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
+    "text": "Model summary\n\n# Summary of the models.\nsummary_ancova = ancova_model.summary()\nprint(summary_ancova)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.702\nModel:                            OLS   Adj. R-squared:                  0.700\nMethod:                 Least Squares   F-statistic:                     304.7\nDate:                Wed, 07 May 2025   Prob (F-statistic):          1.28e-101\nTime:                        15:41:20   Log-Likelihood:                -1123.9\nNo. Observations:                 392   AIC:                             2256.\nDf Residuals:                     388   BIC:                             2272.\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         43.7322      1.113     39.277      0.000      41.543      45.921\nEuropean       0.9709      0.659      1.474      0.141      -0.324       2.266\nJapanese       2.3271      0.665      3.501      0.001       1.020       3.634\nweight        -0.0070      0.000    -21.956      0.000      -0.008      -0.006\n==============================================================================\nOmnibus:                       40.731   Durbin-Watson:                   0.832\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               61.938\nSkew:                           0.689   Prob(JB):                     3.55e-14\nKurtosis:                       4.377   Cond. No.                     1.83e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 1.83e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#standardization",
@@ -571,7 +578,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-9",
     "title": "Additional Topics",
     "section": "",
-    "text": "print(std_summary_model)\n\n                                 OLS Regression Results                                \n=======================================================================================\nDep. Variable:                  Yield   R-squared (uncentered):                   0.002\nModel:                            OLS   Adj. R-squared (uncentered):             -0.330\nMethod:                 Least Squares   F-statistic:                           0.006694\nDate:                Wed, 07 May 2025   Prob (F-statistic):                       0.993\nTime:                        15:39:39   Log-Likelihood:                         -46.940\nNo. Observations:                   8   AIC:                                      97.88\nDf Residuals:                       6   BIC:                                      98.04\nDf Model:                           2                                                  \nCovariance Type:            nonrobust                                                  \n=================================================================================\n                    coef    std err          t      P&gt;|t|      [0.025      0.975]\n---------------------------------------------------------------------------------\nConcentration     1.5000     34.907      0.043      0.967     -83.914      86.914\nTemperature       3.7500     34.907      0.107      0.918     -81.664      89.164\n==============================================================================\nOmnibus:                        2.258   Durbin-Watson:                   0.000\nProb(Omnibus):                  0.323   Jarque-Bera (JB):                0.627\nSkew:                           0.000   Prob(JB):                        0.731\nKurtosis:                       1.628   Cond. No.                         1.00\n==============================================================================\n\nNotes:\n[1] R² is computed without centering (uncentered) since the model does not contain a constant.\n[2] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+    "text": "print(std_summary_model)\n\n                                 OLS Regression Results                                \n=======================================================================================\nDep. Variable:                  Yield   R-squared (uncentered):                   0.002\nModel:                            OLS   Adj. R-squared (uncentered):             -0.330\nMethod:                 Least Squares   F-statistic:                           0.006694\nDate:                Wed, 07 May 2025   Prob (F-statistic):                       0.993\nTime:                        15:41:20   Log-Likelihood:                         -46.940\nNo. Observations:                   8   AIC:                                      97.88\nDf Residuals:                       6   BIC:                                      98.04\nDf Model:                           2                                                  \nCovariance Type:            nonrobust                                                  \n=================================================================================\n                    coef    std err          t      P&gt;|t|      [0.025      0.975]\n---------------------------------------------------------------------------------\nConcentration     1.5000     34.907      0.043      0.967     -83.914      86.914\nTemperature       3.7500     34.907      0.107      0.918     -81.664      89.164\n==============================================================================\nOmnibus:                        2.258   Durbin-Watson:                   0.000\nProb(Omnibus):                  0.323   Jarque-Bera (JB):                0.627\nSkew:                           0.000   Prob(JB):                        0.731\nKurtosis:                       1.628   Cond. No.                         1.00\n==============================================================================\n\nNotes:\n[1] R² is computed without centering (uncentered) since the model does not contain a constant.\n[2] Standard Errors assume that the covariance matrix of the errors is correctly specified."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#discussion",
@@ -774,7 +781,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-14",
     "title": "Additional Topics",
     "section": "",
-    "text": "We compute the validation RMSE by first computing the validation MSE using a function with the same name of scikit-learn.\n\nmse = mean_squared_error(Y_valid, predicted_medv_val)\nrmse = mse**(1/2)\nprint( round(rmse, 3) )\n\n4.389\n\n\nThe lower the validation RMSE, the more accurate our model.\nInterpretation: On average, our predictions are off by \\(\\pm\\) 4,465 dollars."
+    "text": "We compute the validation RMSE by first computing the validation MSE using a function with the same name of scikit-learn.\n\nmse = mean_squared_error(Y_valid, predicted_medv_val)\nrmse = mse**(1/2)\nprint( round(rmse, 3) )\n\n5.797\n\n\nThe lower the validation RMSE, the more accurate our model.\nInterpretation: On average, our predictions are off by \\(\\pm\\) 4,465 dollars."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#agenda",
@@ -1096,7 +1103,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#t-tests-in-python",
     "title": "Model Evaluation and Inference",
     "section": "t-tests in python",
-    "text": "t-tests in python\nWe obtain the t-tests of the coefficients using the function summary() together with the linear_model object.\n\nmodel_summary = linear_model.summary()\nprint(model_summary)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.700\nModel:                            OLS   Adj. R-squared:                  0.698\nMethod:                 Least Squares   F-statistic:                     453.2\nDate:                Mon, 25 Nov 2024   Prob (F-statistic):          2.43e-102\nTime:                        09:54:46   Log-Likelihood:                -1125.4\nNo. Observations:                 392   AIC:                             2257.\nDf Residuals:                     389   BIC:                             2269.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nconst           41.0953      1.868     21.999      0.000      37.423      44.768\nweight          -0.0073      0.000    -25.966      0.000      -0.008      -0.007\nacceleration     0.2617      0.086      3.026      0.003       0.092       0.432\n==============================================================================\nOmnibus:                       31.397   Durbin-Watson:                   0.818\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               39.962\nSkew:                           0.632   Prob(JB):                     2.10e-09\nKurtosis:                       3.922   Cond. No.                     2.67e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 2.67e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
+    "text": "t-tests in python\nWe obtain the t-tests of the coefficients using the function summary() together with the linear_model object.\n\nmodel_summary = linear_model.summary()\nprint(model_summary)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.700\nModel:                            OLS   Adj. R-squared:                  0.698\nMethod:                 Least Squares   F-statistic:                     453.2\nDate:                Wed, 07 May 2025   Prob (F-statistic):          2.43e-102\nTime:                        15:41:15   Log-Likelihood:                -1125.4\nNo. Observations:                 392   AIC:                             2257.\nDf Residuals:                     389   BIC:                             2269.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nconst           41.0953      1.868     21.999      0.000      37.423      44.768\nweight          -0.0073      0.000    -25.966      0.000      -0.008      -0.007\nacceleration     0.2617      0.086      3.026      0.003       0.092       0.432\n==============================================================================\nOmnibus:                       31.397   Durbin-Watson:                   0.818\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               39.962\nSkew:                           0.632   Prob(JB):                     2.10e-09\nKurtosis:                       3.922   Cond. No.                     2.67e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 2.67e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#table-of-t-tests",
@@ -1225,11 +1232,11 @@
     "text": "Google Colab\nGoogle’s free cloud collaboration platform for creating Python documents.\n\nRun Python and collaborate on Jupyter notebooks for free.\nHarness the power of GPUs for free to accelerate your data science projects.\nEasily save and upload your notebooks to Google Drive."
   },
   {
-    "objectID": "Tools/Tools1.slides.html#lets-try-a-command-in-r",
-    "href": "Tools/Tools1.slides.html#lets-try-a-command-in-r",
+    "objectID": "Tools/Tools1.slides.html#lets-try-a-command-in-python",
+    "href": "Tools/Tools1.slides.html#lets-try-a-command-in-python",
     "title": "Tools for Data Science: Part I",
-    "section": "Let’s try a command in R",
-    "text": "Let’s try a command in R\nWhat do you think will happen if we run this command?\n\nprint(\"Hello world!\")"
+    "section": "Let’s try a command in Python",
+    "text": "Let’s try a command in Python\nWhat do you think will happen if we run this command?\n\nprint(\"Hello world!\")"
   },
   {
     "objectID": "Tools/Tools1.slides.html#lets-try-another-command",
@@ -1253,11 +1260,11 @@
     "text": "Comments\nSometimes we write things in the coding window that we want Python to ignore. These are called comments and start with #.\n\nPython will ignore the comments and just execute the code.\n\n# you can put whatever after #\n# for example... blah blah blah\n\n\nSi desea escribir un comentario que ocupe más de una línea, es una buena idea poner un # al principio de cada línea."
   },
   {
-    "objectID": "Tools/Tools1.slides.html#introduction-to-functions-in-r",
-    "href": "Tools/Tools1.slides.html#introduction-to-functions-in-r",
+    "objectID": "Tools/Tools1.slides.html#introduction-to-functions-in-python",
+    "href": "Tools/Tools1.slides.html#introduction-to-functions-in-python",
     "title": "Tools for Data Science: Part I",
-    "section": "Introduction to functions in R",
-    "text": "Introduction to functions in R\nOne of the best things about python is that there are many built-in commands you can use. These are called functions.\n\nFunctions have two basic parts:\n\n\nThe first part is the name of the function (for example, sum).\nThe second part is the input to the function, which goes inside the parentheses (sum([1, 5, 15]))."
+    "section": "Introduction to functions in Python",
+    "text": "Introduction to functions in Python\nOne of the best things about Python is that there are many built-in commands you can use. These are called functions.\n\nFunctions have two basic parts:\n\n\nThe first part is the name of the function (for example, sum).\nThe second part is the input to the function, which goes inside the parentheses (sum([1, 5, 15]))."
   },
   {
     "objectID": "Tools/Tools1.slides.html#python-is-strict",
@@ -1463,6 +1470,146 @@
     "text": "Indexing rows and columns\nUsing loc, we can also retrieve a subset from the dataset by selecting specific columns and rows.\n\nsub_rows_pdata = penguins_data.loc[2:5, ['bill_length_mm',  'species', 'island'] ]\nsub_rows_pdata\n\n\n\n\n\n\n\n\nbill_length_mm\nspecies\nisland\n\n\n\n\n2\n40.3\nAdelie\nTorgersen\n\n\n3\nNaN\nAdelie\nTorgersen\n\n\n4\n36.7\nAdelie\nTorgersen\n\n\n5\n39.3\nAdelie\nTorgersen"
   },
   {
+    "objectID": "Tools/Tools1.slides.html#chaining-operations-with-pandas",
+    "href": "Tools/Tools1.slides.html#chaining-operations-with-pandas",
+    "title": "Tools for Data Science: Part I",
+    "section": "Chaining operations with pandas",
+    "text": "Chaining operations with pandas\nOne of the most important techniques in pandas is chaining, which allows for cleaner and more readable data manipulation.\nThe general structure of chaining looks like this:"
+  },
+  {
+    "objectID": "Tools/Tools1.slides.html#key-pandas-methods",
+    "href": "Tools/Tools1.slides.html#key-pandas-methods",
+    "title": "Tools for Data Science: Part I",
+    "section": "Key pandas methods",
+    "text": "Key pandas methods\npandas provides methods or functions to solve common data manipulation tasks:\n\n\n.filter() selects specific columns or rows.\n.query() filters observations based on conditions.\n.assign() adds new variables that are functions of existing variables.\n.sort_values() changes the order of rows.\n.agg() reduces multiple values to a single numerical summary."
+  },
+  {
+    "objectID": "Tools/Tools1.slides.html#section-5",
+    "href": "Tools/Tools1.slides.html#section-5",
+    "title": "Tools for Data Science: Part I",
+    "section": "",
+    "text": "To practice, we will use the dataset penguins_data."
+  },
+  {
+    "objectID": "Tools/Tools1.slides.html#selecting-columns-with-.filter",
+    "href": "Tools/Tools1.slides.html#selecting-columns-with-.filter",
+    "title": "Tools for Data Science: Part I",
+    "section": "Selecting columns with .filter()",
+    "text": "Selecting columns with .filter()\nSelect the columns species, body_mass_g and sex.\n\n(penguins_data\n  .filter([\"species\", \"body_mass_g\", \"sex\"], axis = 1)\n).head()\n\n\n\n\n\n\n\n\nspecies\nbody_mass_g\nsex\n\n\n\n\n0\nAdelie\n3750.0\nmale\n\n\n1\nAdelie\n3800.0\nfemale\n\n\n2\nAdelie\n3250.0\nfemale\n\n\n3\nAdelie\nNaN\nNaN\n\n\n4\nAdelie\n3450.0\nfemale"
+  },
+  {
+    "objectID": "Tools/Tools1.slides.html#section-6",
+    "href": "Tools/Tools1.slides.html#section-6",
+    "title": "Tools for Data Science: Part I",
+    "section": "",
+    "text": "The axis argument tells .filter() whether to select rows (0) or columns (1) from the dataframe.\n\n(penguins_data\n  .filter([\"species\", \"body_mass_g\", \"sex\"], axis = 1)\n).head()\n\n\n\nThe .head() command allows us to print the first six rows of the newly produced dataframe. We must remove it to have the entire new dataframe."
+  },
+  {
+    "objectID": "Tools/Tools1.slides.html#section-7",
+    "href": "Tools/Tools1.slides.html#section-7",
+    "title": "Tools for Data Science: Part I",
+    "section": "",
+    "text": "We can also use .filter() to select rows too. To this end, we set axis = 1. We can select specific rows, such as 0 and 10.\n\n(penguins_data\n  .filter([0, 10], axis = 0)\n)\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n10\nAdelie\nTorgersen\n37.8\n17.1\n186.0\n3300.0\nNaN\n2007"
+  },
+  {
+    "objectID": "Tools/Tools1.slides.html#section-8",
+    "href": "Tools/Tools1.slides.html#section-8",
+    "title": "Tools for Data Science: Part I",
+    "section": "",
+    "text": "Or, we can select a set of rows using the function range(). For example, let’s select the first 5 rows.\n\n(penguins_data\n  .filter(range(5), axis = 0)\n)\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.5\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007\n\n\n3\nAdelie\nTorgersen\nNaN\nNaN\nNaN\nNaN\nNaN\n2007\n\n\n4\nAdelie\nTorgersen\n36.7\n19.3\n193.0\n3450.0\nfemale\n2007"
+  },
+  {
+    "objectID": "Tools/Tools1.slides.html#filtering-rows-with-.query",
+    "href": "Tools/Tools1.slides.html#filtering-rows-with-.query",
+    "title": "Tools for Data Science: Part I",
+    "section": "Filtering rows with .query()",
+    "text": "Filtering rows with .query()\n\nAn alternative way of selecting rows is .query(). Compared to .filter(), .query() allows us to filter the data using statements or queries involving the variables.\n\nFor example, let’s filter the data for the species “Gentoo.”\n\n(penguins_data\n  .query(\"species == 'Gentoo'\")\n)"
+  },
+  {
+    "objectID": "Tools/Tools1.slides.html#section-9",
+    "href": "Tools/Tools1.slides.html#section-9",
+    "title": "Tools for Data Science: Part I",
+    "section": "",
+    "text": "(penguins_data\n  .query(\"species == 'Gentoo'\")\n).head()\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n152\nGentoo\nBiscoe\n46.1\n13.2\n211.0\n4500.0\nfemale\n2007\n\n\n153\nGentoo\nBiscoe\n50.0\n16.3\n230.0\n5700.0\nmale\n2007\n\n\n154\nGentoo\nBiscoe\n48.7\n14.1\n210.0\n4450.0\nfemale\n2007\n\n\n155\nGentoo\nBiscoe\n50.0\n15.2\n218.0\n5700.0\nmale\n2007\n\n\n156\nGentoo\nBiscoe\n47.6\n14.5\n215.0\n5400.0\nmale\n2007"
+  },
+  {
+    "objectID": "Tools/Tools1.slides.html#section-10",
+    "href": "Tools/Tools1.slides.html#section-10",
+    "title": "Tools for Data Science: Part I",
+    "section": "",
+    "text": "We can also filter the data to get penguins with a body mass greater than 5000g.\n\n(penguins_data\n  .query(\"body_mass_g &gt; 5000\")\n).head()\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n153\nGentoo\nBiscoe\n50.0\n16.3\n230.0\n5700.0\nmale\n2007\n\n\n155\nGentoo\nBiscoe\n50.0\n15.2\n218.0\n5700.0\nmale\n2007\n\n\n156\nGentoo\nBiscoe\n47.6\n14.5\n215.0\n5400.0\nmale\n2007\n\n\n159\nGentoo\nBiscoe\n46.7\n15.3\n219.0\n5200.0\nmale\n2007\n\n\n161\nGentoo\nBiscoe\n46.8\n15.4\n215.0\n5150.0\nmale\n2007"
+  },
+  {
+    "objectID": "Tools/Tools1.slides.html#section-11",
+    "href": "Tools/Tools1.slides.html#section-11",
+    "title": "Tools for Data Science: Part I",
+    "section": "",
+    "text": "We can even combine .filter() and .query(). For example, let’s select the columns species, body_mass_g and sex, then filter the data for the “Gentoo” species.\n\n(penguins_data\n  .filter([\"species\", \"body_mass_g\", \"sex\"], axis = 1)\n  .query(\"species == 'Gentoo'\")\n).head(4)\n\n\n\n\n\n\n\n\nspecies\nbody_mass_g\nsex\n\n\n\n\n152\nGentoo\n4500.0\nfemale\n\n\n153\nGentoo\n5700.0\nmale\n\n\n154\nGentoo\n4450.0\nfemale\n\n\n155\nGentoo\n5700.0\nmale"
+  },
+  {
+    "objectID": "Tools/Tools1.slides.html#create-new-columns-with-.assign",
+    "href": "Tools/Tools1.slides.html#create-new-columns-with-.assign",
+    "title": "Tools for Data Science: Part I",
+    "section": "Create new columns with .assign()",
+    "text": "Create new columns with .assign()\nWith .assign(), we can create new columns (variables) that are functions of existing ones. This function uses a special Python keyword called lambda. Technically, this keyword defines an anonymous function.\nFor example, we create a new variable LDRatio equaling the ratio of bill_length_mm and bill_depth_mm.\n\n(penguins_data\n  .assign(LDRatio = lambda df: df[\"bill_length_mm\"] / df[\"bill_depth_mm\"])\n)"
+  },
+  {
+    "objectID": "Tools/Tools1.slides.html#section-12",
+    "href": "Tools/Tools1.slides.html#section-12",
+    "title": "Tools for Data Science: Part I",
+    "section": "",
+    "text": "In this code, the df after lambda indicates that the dataframe (penguins_data) will be referred to as df inside the function. The colon : sets the start of the function.\n\n(penguins_data\n  .assign(LDRatio = lambda df: df[\"bill_length_mm\"] / df[\"bill_depth_mm\"])\n)\n\nThe code appends the new variable to the end of the resulting dataframe."
+  },
+  {
+    "objectID": "Tools/Tools1.slides.html#section-13",
+    "href": "Tools/Tools1.slides.html#section-13",
+    "title": "Tools for Data Science: Part I",
+    "section": "",
+    "text": "We can see the new variable using .filter().\n\n(penguins_data\n  .assign(LDRatio = lambda df: df[\"bill_length_mm\"] / df[\"bill_depth_mm\"])\n  .filter([\"bill_length_mm\", \"bill_depth_mm\", \"LDRatio\"], axis = 1)\n).head()\n\n\n\n\n\n\n\n\nbill_length_mm\nbill_depth_mm\nLDRatio\n\n\n\n\n0\n39.1\n18.7\n2.090909\n\n\n1\n39.5\n17.4\n2.270115\n\n\n2\n40.3\n18.0\n2.238889\n\n\n3\nNaN\nNaN\nNaN\n\n\n4\n36.7\n19.3\n1.901554"
+  },
+  {
+    "objectID": "Tools/Tools1.slides.html#sorting-with-.sort_values",
+    "href": "Tools/Tools1.slides.html#sorting-with-.sort_values",
+    "title": "Tools for Data Science: Part I",
+    "section": "Sorting with .sort_values()",
+    "text": "Sorting with .sort_values()\nWe can sort the data based on a column like bill_length_mm.\n\n(penguins_data\n  .sort_values(\"bill_length_mm\")\n).head(4)\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n142\nAdelie\nDream\n32.1\n15.5\n188.0\n3050.0\nfemale\n2009\n\n\n98\nAdelie\nDream\n33.1\n16.1\n178.0\n2900.0\nfemale\n2008\n\n\n70\nAdelie\nTorgersen\n33.5\n19.0\n190.0\n3600.0\nfemale\n2008\n\n\n92\nAdelie\nDream\n34.0\n17.1\n185.0\n3400.0\nfemale\n2008"
+  },
+  {
+    "objectID": "Tools/Tools1.slides.html#section-14",
+    "href": "Tools/Tools1.slides.html#section-14",
+    "title": "Tools for Data Science: Part I",
+    "section": "",
+    "text": "To sort in descending order, use ascending=False inside sort_values().\n\n(penguins_data\n  .sort_values(\"bill_length_mm\", ascending=False)\n).head()\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n185\nGentoo\nBiscoe\n59.6\n17.0\n230.0\n6050.0\nmale\n2007\n\n\n293\nChinstrap\nDream\n58.0\n17.8\n181.0\n3700.0\nfemale\n2007\n\n\n253\nGentoo\nBiscoe\n55.9\n17.0\n228.0\n5600.0\nmale\n2009\n\n\n339\nChinstrap\nDream\n55.8\n19.8\n207.0\n4000.0\nmale\n2009\n\n\n267\nGentoo\nBiscoe\n55.1\n16.0\n230.0\n5850.0\nmale\n2009"
+  },
+  {
+    "objectID": "Tools/Tools1.slides.html#summarizing-with-.agg",
+    "href": "Tools/Tools1.slides.html#summarizing-with-.agg",
+    "title": "Tools for Data Science: Part I",
+    "section": "Summarizing with .agg()",
+    "text": "Summarizing with .agg()\nWe can calculate summary statistics of the columns bill_length_mm, bill_depth_mm, and body_mass_g.\n\n(penguins_data\n  .filter([\"bill_length_mm\", \"bill_depth_mm\", \"body_mass_g\"], axis = 1)\n  .agg([\"mean\"])\n)\n\n\n\n\n\n\n\n\nbill_length_mm\nbill_depth_mm\nbody_mass_g\n\n\n\n\nmean\n43.92193\n17.15117\n4201.754386\n\n\n\n\n\n\n\n\n\nBy default, agg() ignores missing values."
+  },
+  {
+    "objectID": "Tools/Tools1.slides.html#saving-results-in-new-objects",
+    "href": "Tools/Tools1.slides.html#saving-results-in-new-objects",
+    "title": "Tools for Data Science: Part I",
+    "section": "Saving results in new objects",
+    "text": "Saving results in new objects\n\nAfter performing operations on our data, we can save the modified dataset as a new object.\n\nmean_penguins_data = (penguins_data\n  .filter([\"bill_length_mm\", \"bill_depth_mm\", \"body_mass_g\"], axis = 1)\n  .agg([\"mean\"])\n)\n\nmean_penguins_data\n\n\n\n\n\n\n\n\nbill_length_mm\nbill_depth_mm\nbody_mass_g\n\n\n\n\nmean\n43.92193\n17.15117\n4201.754386"
+  },
+  {
+    "objectID": "Tools/Tools1.slides.html#more-on-pandas",
+    "href": "Tools/Tools1.slides.html#more-on-pandas",
+    "title": "Tools for Data Science: Part I",
+    "section": "More on pandas",
+    "text": "More on pandas\n\n\nhttps://wesmckinney.com/book/"
+  },
+  {
+    "objectID": "Tools/Tools1.slides.html#final-remarks",
+    "href": "Tools/Tools1.slides.html#final-remarks",
+    "title": "Tools for Data Science: Part I",
+    "section": "Final remarks",
+    "text": "Final remarks\n\n\npandas is a Python library for data manipulation.\nUnderstanding variable types helps determine the best operations and visualizations.\nThere are specific charts for numerical and categorical variables.\nThroughout this course, we will explore various visualizations for different types of data."
+  },
+  {
     "objectID": "LinearRegression/LinearRegression.slides.html#agenda",
     "href": "LinearRegression/LinearRegression.slides.html#agenda",
     "title": "Multiple Linear Regression",
@@ -1561,25 +1708,11 @@
     "text": "Questions\n\n\n\nHow can we estimate \\(\\beta_0, \\beta_1, \\ldots, \\beta_p\\) and \\(\\sigma^2\\)?\nHow can we make inferences about \\(\\beta_0, \\beta_1, \\ldots, \\beta_p\\)?\nHow can we validate the model and all its assumptions?\nHow can we make predictions of future responses using the multiple linear regression model?"
   },
   {
-    "objectID": "LinearRegression/LinearRegression.slides.html#parameter-estimates",
-    "href": "LinearRegression/LinearRegression.slides.html#parameter-estimates",
+    "objectID": "LinearRegression/LinearRegression.slides.html#matrix-notation",
+    "href": "LinearRegression/LinearRegression.slides.html#matrix-notation",
     "title": "Multiple Linear Regression",
-    "section": "Parameter estimates",
-    "text": "Parameter estimates\n\nGoal: estimate the parameters \\(\\beta_0, \\beta_1, \\ldots, \\beta_p\\) and \\(\\sigma^2\\).\n\nAn estimate of \\(\\beta_j\\) is denoted by \\(\\hat{\\beta}_j\\).\nSimilarly \\(\\sigma^2\\) is the estimate of \\(\\hat{\\sigma}^2\\).\n\nWe calculate the estimates using the training data on the factor values \\(X_{ij}\\) and the response \\(Y_i\\), \\(i = 1, \\ldots, n\\)."
-  },
-  {
-    "objectID": "LinearRegression/LinearRegression.slides.html#least-squares-estimator",
-    "href": "LinearRegression/LinearRegression.slides.html#least-squares-estimator",
-    "title": "Multiple Linear Regression",
-    "section": "Least squares estimator",
-    "text": "Least squares estimator\nTo find the best estimator for \\(\\boldsymbol{\\beta}\\) (and all its elements), we use the method of least squares. This method finds the best \\(\\hat{\\boldsymbol{\\beta}}\\) that minimizes the residual sum of squares (RSS):\n\\[RSS = \\left(\\mathbf{y} - \\mathbf{X} \\hat{\\boldsymbol{\\beta}}\\right)^{T} \\left(\\mathbf{y} - \\mathbf{X} \\hat{\\boldsymbol{\\beta}}\\right) = \\sum_{i=1}^{n} \\hat{\\epsilon}^2_i = \\sum_{i=1}^{n} (Y_i - \\hat{Y}_i)^2.\\]\nThe estimator that minimizes the expression above is called the least squares estimator:\n\\[\\hat{\\boldsymbol{\\beta}} = (\\mathbf{X}^{T}\\mathbf{X})^{-1} \\mathbf{X}^{T}\\mathbf{y}\\]"
-  },
-  {
-    "objectID": "LinearRegression/LinearRegression.slides.html#computation-of-estimators",
-    "href": "LinearRegression/LinearRegression.slides.html#computation-of-estimators",
-    "title": "Multiple Linear Regression",
-    "section": "Computation of estimators",
-    "text": "Computation of estimators\n\nTo compute the least squares estimates, we first split the data set into a matrix with the values of the predictors only, and a matrix with the response values.\n\n# Matrix with predictors.\nrayon_predictors = rayon_data.drop(columns=['Y'])\n\n# Add intercept.\nrayon_X_train = sm.add_constant(rayon_predictors)\n\n# Matrix with response.\nrayon_Y_train = rayon_data['Y']"
+    "section": "Matrix notation",
+    "text": "Matrix notation\nIn what follows, it is useful to denote the multiple linear regression model using matrix notation:\n\\(\\mathbf{Y} = \\begin{pmatrix} Y_1 \\\\ Y_2 \\\\ \\vdots \\\\ Y_n \\end{pmatrix}\\) and \\(\\mathbf{X} = \\begin{pmatrix}\n1& X_{11} & X_{12} & \\cdots & X_{1p} \\\\\n1& X_{21} & X_{22} & \\cdots & X_{2p} \\\\\n\\vdots &\\vdots & \\vdots & \\cdots & \\vdots \\\\\n1& X_{n1} & X_{n2} & \\cdots & X_{np} \\\\\n\\end{pmatrix}\\), where\n\n\\(\\mathbf{Y}\\) is an \\(n \\times 1\\) vector.\n\\(\\mathbf{X}\\) is a \\(n \\times (p+1)\\) matrix."
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#section-2",
@@ -1596,11 +1729,11 @@
     "text": "The multiple linear regression model then is\n\\[\\mathbf{Y} =  \\mathbf{X}\\boldsymbol{\\beta} + \\boldsymbol{\\epsilon}.\\] This expression means\n\\(\\begin{pmatrix} Y_1 \\\\ Y_2 \\\\ \\vdots \\\\ Y_n \\end{pmatrix} = \\begin{pmatrix}\n\\beta_0 + \\beta_1 X_{11} + \\beta_2 X_{12} + \\cdots + \\beta_p X_{1p} \\\\\n\\beta_0 + \\beta_1 X_{21} + \\beta_2 X_{22} + \\cdots + \\beta_p X_{2p} \\\\\n\\vdots  \\\\\n\\beta_0 + \\beta_1 X_{n1} + \\beta_2 X_{n2} + \\cdots + \\beta_p X_{np} \\\\\n\\end{pmatrix} + \\begin{pmatrix}\\epsilon_1 \\\\ \\epsilon_2 \\\\ \\vdots \\\\ \\epsilon_n \\end{pmatrix}\\)"
   },
   {
-    "objectID": "LinearRegression/LinearRegression.slides.html#interpretation-of-estimated-coefficients",
-    "href": "LinearRegression/LinearRegression.slides.html#interpretation-of-estimated-coefficients",
+    "objectID": "LinearRegression/LinearRegression.slides.html#an-estimator-for-boldsymbolbeta",
+    "href": "LinearRegression/LinearRegression.slides.html#an-estimator-for-boldsymbolbeta",
     "title": "Multiple Linear Regression",
-    "section": "Interpretation of estimated coefficients",
-    "text": "Interpretation of estimated coefficients\n\n\nThe average whiteness of a rayon is \\(\\hat{\\beta}_0 = -35.26\\) when all predictors are equal to 0.\nIncreasing the acid bath temperature by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_1 = 0.745\\) units.\nIncreasing the cascade acid concentration by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_2 = 20.23\\) units."
+    "section": "An estimator for \\(\\boldsymbol{\\beta}\\)",
+    "text": "An estimator for \\(\\boldsymbol{\\beta}\\)\nOur goal is to find an estimator for the vector \\(\\boldsymbol{\\beta}\\) (and all its components). For the moment, let’s assume that we have one:\n\\(\\hat{\\boldsymbol{\\beta}} = \\begin{pmatrix} \\hat{\\beta}_0 \\\\ \\hat{\\beta}_1 \\\\ \\vdots\\\\ \\hat{\\beta}_p \\end{pmatrix}\\), where \\(\\hat{\\beta}_j\\) is an estimator for \\(\\beta_j\\), \\(j = 0, \\ldots, p\\).\nUsing this estimator, we can compute the predicted responses of our model \\(\\hat{\\mathbf{Y}} = \\mathbf{X}\\hat{\\boldsymbol{\\beta}}\\), where \\(\\hat{\\mathbf{Y}} = (\\hat{Y}_1, \\hat{Y}_2, \\ldots, \\hat{Y}_n)^{T}\\) and \\(\\hat{Y}_i\\) is the i-th predicted response."
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#section-4",
@@ -1608,6 +1741,69 @@
     "title": "Multiple Linear Regression",
     "section": "",
     "text": "The expression \\(\\hat{\\mathbf{Y}} = \\mathbf{X}\\hat{\\boldsymbol{\\beta}}\\) means\n\\[\\begin{pmatrix} \\hat{Y}_1 \\\\ \\hat{Y}_2 \\\\ \\vdots \\\\ \\hat{Y}_n \\end{pmatrix}  = \\begin{pmatrix}\n\\hat{\\beta}_0 + X_{11} \\hat{\\beta}_1 + X_{12} \\hat{\\beta}_2 + \\cdots + X_{1p} \\hat{\\beta}_p\\\\\n\\hat{\\beta}_0 + X_{21} \\hat{\\beta}_1 + X_{22}\\hat{\\beta}_2 + \\cdots + X_{2p}\\hat{\\beta}_p \\\\\n\\vdots  \\\\\n\\hat{\\beta}_0 + X_{n1} \\hat{\\beta}_1 + X_{n2}\\hat{\\beta}_2 + \\cdots + X_{np} \\hat{\\beta}_p \\\\\n\\end{pmatrix}\\]"
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#section-5",
+    "href": "LinearRegression/LinearRegression.slides.html#section-5",
+    "title": "Multiple Linear Regression",
+    "section": "",
+    "text": "This means that the residuals of the estimated model are\n\\[\\hat{\\boldsymbol{\\epsilon}} = \\mathbf{Y} - \\hat{\\mathbf{Y}} = \\mathbf{Y} - \\mathbf{X} \\hat{\\boldsymbol{\\beta}},\\]\nwhere \\(\\hat{\\boldsymbol{\\epsilon}} = (\\hat{\\epsilon}_1, \\hat{\\epsilon}_2, \\ldots, \\hat{\\epsilon}_n)^{T}\\) and \\(\\hat{\\epsilon}_i = Y_i - \\hat{Y}_i\\) is the i-th residual."
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#least-squares-estimator",
+    "href": "LinearRegression/LinearRegression.slides.html#least-squares-estimator",
+    "title": "Multiple Linear Regression",
+    "section": "Least squares estimator",
+    "text": "Least squares estimator\nTo find the best estimator for \\(\\boldsymbol{\\beta}\\) (and all its elements), we use the method of least squares. This method finds the best \\(\\hat{\\boldsymbol{\\beta}}\\) that minimizes the residual sum of squares (RSS):\n\\[RSS = \\left(\\mathbf{y} - \\mathbf{X} \\hat{\\boldsymbol{\\beta}}\\right)^{T} \\left(\\mathbf{y} - \\mathbf{X} \\hat{\\boldsymbol{\\beta}}\\right) = \\sum_{i=1}^{n} \\hat{\\epsilon}^2_i = \\sum_{i=1}^{n} (Y_i - \\hat{Y}_i)^2.\\]\nThe estimator that minimizes the expression above is called the least squares estimator:\n\\[\\hat{\\boldsymbol{\\beta}} = (\\mathbf{X}^{T}\\mathbf{X})^{-1} \\mathbf{X}^{T}\\mathbf{y}\\]"
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#computation-of-hatboldsymbolbeta-mathbfxtmathbfx-1-mathbfxtmathbfy",
+    "href": "LinearRegression/LinearRegression.slides.html#computation-of-hatboldsymbolbeta-mathbfxtmathbfx-1-mathbfxtmathbfy",
+    "title": "Multiple Linear Regression",
+    "section": "Computation of \\(\\hat{\\boldsymbol{\\beta}} = (\\mathbf{X}^{T}\\mathbf{X})^{-1} \\mathbf{X}^{T}\\mathbf{y}\\)",
+    "text": "Computation of \\(\\hat{\\boldsymbol{\\beta}} = (\\mathbf{X}^{T}\\mathbf{X})^{-1} \\mathbf{X}^{T}\\mathbf{y}\\)\n\n\nCompute the transpose of a matrix: \\(\\mathbf{X}^{T}\\).\nCompute the product of a matrix and a vector: \\(\\mathbf{X}^{T}\\mathbf{Y}\\).\nCompute the product of two matrices: \\(\\mathbf{X}^{T} \\mathbf{X}\\).\nCompute the inverse of a matrix: \\((\\mathbf{X}^{T} \\mathbf{X})^{-1}\\)."
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#remarks",
+    "href": "LinearRegression/LinearRegression.slides.html#remarks",
+    "title": "Multiple Linear Regression",
+    "section": "Remarks",
+    "text": "Remarks\n\nCompute the inverse of a matrix: \\((\\mathbf{X}^{T} \\mathbf{X})^{-1}\\).\n\n\nNot all matrices have an inverse.\nIf it does not have an inverse then the matrix is called singular. Otherwise, it is called non-singular.\nFor the inverse to exist, the columns in \\(\\mathbf{X}\\) must be linearly independent.\nOr, equivalently, the determinant \\(|\\mathbf{X}^{T} \\mathbf{X}| &gt; 0\\)."
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#computation-in-python",
+    "href": "LinearRegression/LinearRegression.slides.html#computation-in-python",
+    "title": "Multiple Linear Regression",
+    "section": "Computation in Python",
+    "text": "Computation in Python\n\nTo compute the least squares estimates, we first split the data set into a matrix with the values of the predictors only, and a matrix with the response values.\n\n# Matrix with predictors.\nrayon_predictors = rayon_data.drop(columns=['Y'])\n\n# Add intercept.\nrayon_X_train = sm.add_constant(rayon_predictors)\n\n# Matrix with response.\nrayon_Y_train = rayon_data['Y']"
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#section-7",
+    "href": "LinearRegression/LinearRegression.slides.html#section-7",
+    "title": "Multiple Linear Regression",
+    "section": "",
+    "text": "Next, we use the functions OLS() and fit() from statsmodels.\n\n# Create linear regression object\nregr = sm.OLS(rayon_Y_train, rayon_X_train)\n\n# Train the model using the training sets\nlinear_model = regr.fit()"
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#section-8",
+    "href": "LinearRegression/LinearRegression.slides.html#section-8",
+    "title": "Multiple Linear Regression",
+    "section": "",
+    "text": "To show the estimated coefficients, we use the argument params of the linear_model object created previously.\n\n# The estimated coefficients.\nprint(linear_model.params)\n\nconst   -35.262607\nX1        0.745417\nX2       20.229167\nX3        0.793056\nX4       25.583333\nX5       17.208333\ndtype: float64\n\n\nThe elements in the vector above are the estimates \\(\\hat{\\beta}_0\\), \\(\\hat{\\beta}_1\\), \\(\\hat{\\beta}_2\\), \\(\\hat{\\beta}_3\\), \\(\\hat{\\beta}_4\\), and \\(\\hat{\\beta}_5\\)."
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#interpretation-of-estimated-coefficients",
+    "href": "LinearRegression/LinearRegression.slides.html#interpretation-of-estimated-coefficients",
+    "title": "Multiple Linear Regression",
+    "section": "Interpretation of estimated coefficients",
+    "text": "Interpretation of estimated coefficients\n\n\nThe average whiteness of a rayon is \\(\\hat{\\beta}_0 = -35.26\\) when all predictors are equal to 0.\nIncreasing the acid bath temperature by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_1 = 0.745\\) units.\nIncreasing the cascade acid concentration by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_2 = 20.23\\) units."
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#section-9",
+    "href": "LinearRegression/LinearRegression.slides.html#section-9",
+    "title": "Multiple Linear Regression",
+    "section": "",
+    "text": "Increasing the water temperature by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_3 = 0.793\\) units.\nIncreasing the sulfide concentration by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_4 = 25.583\\) units.\nIncreasing the amount of chlorine bleach by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_5 = 17.208\\) units."
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#properties-of-least-squares-estimators",
@@ -1624,11 +1820,11 @@
     "text": "Predictions\nOnce we estimate the intercept and model coefficients, we make predictions as follows:\n\\[\\hat{Y}_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_{i1} + \\hat{\\beta}_2 X_{i2} + \\cdots + \\hat{\\beta}_p X_{ip}\\]\nwhere \\(\\hat{Y}_i\\) is the i-th fitted or predicted response.\nIn Python, we use the argument fittedvalues to show the predicted responses of the estimated model.\n\n# Make predictions using the the model\nrayon_Y_pred = linear_model.fittedvalues"
   },
   {
-    "objectID": "LinearRegression/LinearRegression.slides.html#section-5",
-    "href": "LinearRegression/LinearRegression.slides.html#section-5",
+    "objectID": "LinearRegression/LinearRegression.slides.html#section-10",
+    "href": "LinearRegression/LinearRegression.slides.html#section-10",
     "title": "Multiple Linear Regression",
     "section": "",
-    "text": "This means that the residuals of the estimated model are\n\\[\\hat{\\boldsymbol{\\epsilon}} = \\mathbf{Y} - \\hat{\\mathbf{Y}} = \\mathbf{Y} - \\mathbf{X} \\hat{\\boldsymbol{\\beta}},\\]\nwhere \\(\\hat{\\boldsymbol{\\epsilon}} = (\\hat{\\epsilon}_1, \\hat{\\epsilon}_2, \\ldots, \\hat{\\epsilon}_n)^{T}\\) and \\(\\hat{\\epsilon}_i = Y_i - \\hat{Y}_i\\) is the i-th residual."
+    "text": "Predictions of the 26 observations in the training dataset.\n\nprint(rayon_Y_pred)\n\n0      72.205449\n1      78.205449\n2      80.405449\n3      79.522115\n4      83.738782\n5      82.855449\n6      85.055449\n7      91.055449\n8      90.555449\n9      89.672115\n10     91.872115\n11     97.872115\n12     95.205449\n13    101.205449\n14    103.405449\n15    102.522115\n16     74.176282\n17    103.992949\n18     80.992949\n19     97.176282\n20     84.326282\n21     93.842949\n22     86.526282\n23     91.642949\n24     85.642949\n25     92.526282\ndtype: float64"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#residuals",
@@ -1638,11 +1834,11 @@
     "text": "Residuals\nNow that we have introduced the estimator \\(\\hat{\\beta}_0, \\hat{\\beta}_1, \\ldots, \\hat{\\beta}_p\\), we can be more specific in our terminology of the linear model.\n\nThe errors of the estimated model are called residuals \\(\\hat{\\epsilon}_i = Y_i - \\hat{Y}_i\\), \\(i = 1, \\ldots, n.\\)\n\nIf the model is correct, the residuals \\(\\hat{\\epsilon}_1, \\hat{\\epsilon}_2, \\ldots, \\hat{\\epsilon}_n\\) give us a good idea of the errors \\(\\epsilon_1, \\epsilon_2, \\ldots, \\epsilon_n\\)."
   },
   {
-    "objectID": "LinearRegression/LinearRegression.slides.html#section-6",
-    "href": "LinearRegression/LinearRegression.slides.html#section-6",
+    "objectID": "LinearRegression/LinearRegression.slides.html#section-11",
+    "href": "LinearRegression/LinearRegression.slides.html#section-11",
     "title": "Multiple Linear Regression",
     "section": "",
-    "text": "Next, we use the functions OLS() and fit() from statsmodels.\n\n# Create linear regression object\nregr = sm.OLS(rayon_Y_train, rayon_X_train)\n\n# Train the model using the training sets\nlinear_model = regr.fit()"
+    "text": "In Python, we compute the residuals using the following command.\n\nresiduals = linear_model.resid\n\nprint(residuals)\n\n0      4.294551\n1     -2.205449\n2     -0.505449\n3      3.977885\n4      5.761218\n5      1.344551\n6      0.644551\n7      8.444551\n8     -1.155449\n9      7.827885\n10    11.327885\n11    10.827885\n12    19.994551\n13    10.294551\n14    -1.105449\n15     5.577885\n16     6.023718\n17   -14.892949\n18    -3.792949\n19   -12.076282\n20   -12.826282\n21    -9.342949\n22    -9.026282\n23   -12.442949\n24   -14.642949\n25    -2.326282\ndtype: float64"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#estimation-of-variance",
@@ -1652,11 +1848,11 @@
     "text": "Estimation of variance\nThe variance \\(\\sigma^2\\) of the errors is estimated by\n\\[\\hat{\\sigma}^2=\\frac{1}{n-p-1}\\sum_{i=1}^{n} \\hat{\\epsilon}_i^{2}.\\]\nIn Python, we compute \\(\\hat{\\sigma}^2\\) as follows.\n\nerror_variance = linear_model.scale\n\nprint( round(error_variance, 3) )\n\n105.931"
   },
   {
-    "objectID": "LinearRegression/LinearRegression.slides.html#section-7",
-    "href": "LinearRegression/LinearRegression.slides.html#section-7",
+    "objectID": "LinearRegression/LinearRegression.slides.html#section-12",
+    "href": "LinearRegression/LinearRegression.slides.html#section-12",
     "title": "Multiple Linear Regression",
     "section": "",
-    "text": "Next, we use the functions OLS() and fit() from statsmodels.\n\n# Create linear regression object\nregr = sm.OLS(rayon_Y_train, rayon_X_train)\n\n# Train the model using the training sets\nlinear_model = regr.fit()"
+    "text": "The smaller the value of \\(\\hat{\\sigma}^2\\), the closer our predictions are to the actual responses.\nIn practice, it is better to use the standard deviation of the errors. That is,\n\\[\\hat{\\sigma}=\\left(\\frac{1}{n-p-1}\\sum_{i=1}^{n} \\hat{\\epsilon}_i^{2}\\right)^{1/2}.\\] In Python, we compute \\(\\hat{\\sigma}\\) as follows:\n\nprint( round(error_variance**(1/2), 3) )\n\n10.292"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#interpretation-of-hatsigma",
@@ -1873,7 +2069,7 @@
     "href": "Classification/Classification.slides.html#section-9",
     "title": "Logistic Regression",
     "section": "",
-    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.037602\n         Iterations 13\nconst    -125.566142\nLeft       -0.120141\nBottom      5.991245\nTop         8.108102\ndtype: float64"
+    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.035229\n         Iterations 13\nconst     57.511715\nLeft      -1.599913\nBottom     6.248731\nTop        8.682450\ndtype: float64"
   },
   {
     "objectID": "Classification/Classification.slides.html#parameter-testing",
@@ -1901,7 +2097,7 @@
     "href": "Classification/Classification.slides.html#section-11",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression model.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      136\nMethod:                           MLE   Df Model:                            3\nDate:                Wed, 07 May 2025   Pseudo R-squ.:                  0.9457\nTime:                        15:40:13   Log-Likelihood:                -5.2643\nconverged:                       True   LL-Null:                       -97.026\nCovariance Type:            nonrobust   LLR p-value:                 1.529e-39\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -125.5661    432.696     -0.290      0.772    -973.635     722.502\nLeft          -0.1201      3.481     -0.035      0.972      -6.942       6.702\nBottom         5.9912      2.713      2.208      0.027       0.673      11.309\nTop            8.1081      3.388      2.393      0.017       1.468      14.749\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.61 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
+    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression model.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      136\nMethod:                           MLE   Df Model:                            3\nDate:                Wed, 07 May 2025   Pseudo R-squ.:                  0.9491\nTime:                        15:40:57   Log-Likelihood:                -4.9320\nconverged:                       True   LL-Null:                       -96.983\nCovariance Type:            nonrobust   LLR p-value:                 1.146e-39\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         57.5117    396.544      0.145      0.885    -719.700     834.724\nLeft          -1.5999      3.382     -0.473      0.636      -8.228       5.029\nBottom         6.2487      3.455      1.808      0.071      -0.524      13.021\nTop            8.6824      4.255      2.041      0.041       0.343      17.022\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.72 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
   },
   {
     "objectID": "Classification/Classification.slides.html#estimated-classifier",
@@ -1929,14 +2125,14 @@
     "href": "Classification/Classification.slides.html#section-13",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The predict() function outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n133    1.000000\n195    1.000000\n108    1.000000\n166    0.630805\n25     0.016088\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors).\n\nTo turn the probabilities to actual classes, we round them:\n\npredicted_classes = round(predicted_probability).astype('int')"
+    "text": "The predict() function outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n57     5.554155e-08\n150    9.999998e-01\n144    9.996305e-01\n87     1.527298e-04\n166    1.951533e-01\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors).\n\nTo turn the probabilities to actual classes, we round them:\n\npredicted_classes = round(predicted_probability).astype('int')"
   },
   {
     "objectID": "Classification/Classification.slides.html#section-14",
     "href": "Classification/Classification.slides.html#section-14",
     "title": "Logistic Regression",
     "section": "",
-    "text": "predicted_classes.head()\n\n133    1\n195    1\n108    1\n166    1\n25     0\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the validation dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
+    "text": "predicted_classes.head()\n\n57     0\n150    1\n144    1\n87     0\n166    0\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the validation dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
   },
   {
     "objectID": "Classification/Classification.slides.html#confusion-matrix",
@@ -1950,7 +2146,7 @@
     "href": "Classification/Classification.slides.html#in-python-1",
     "title": "Logistic Regression",
     "section": "In Python",
-    "text": "In Python\n\nWe compute the confusion matrix using the function with the same name of scikit-learn.\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[28  1]\n [ 2 29]]"
+    "text": "In Python\n\nWe compute the confusion matrix using the function with the same name of scikit-learn.\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[28  0]\n [ 5 27]]"
   },
   {
     "objectID": "Classification/Classification.slides.html#section-15",
@@ -1964,7 +2160,7 @@
     "href": "Classification/Classification.slides.html#accuracy",
     "title": "Logistic Regression",
     "section": "Accuracy",
-    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn Python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.95\n\n\n\n\nThe higher the accuracy, the better the performance of the classifier."
+    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn Python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.92\n\n\n\n\nThe higher the accuracy, the better the performance of the classifier."
   },
   {
     "objectID": "Classification/Classification.slides.html#remarks",
@@ -2434,243 +2630,5 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n2"
-  },
-  {
-    "objectID": "LinearRegression/LinearRegression.slides.html#matrix-notation",
-    "href": "LinearRegression/LinearRegression.slides.html#matrix-notation",
-    "title": "Multiple Linear Regression",
-    "section": "Matrix notation",
-    "text": "Matrix notation\nIn what follows, it is useful to denote the multiple linear regression model using matrix notation:\n\\(\\mathbf{Y} = \\begin{pmatrix} Y_1 \\\\ Y_2 \\\\ \\vdots \\\\ Y_n \\end{pmatrix}\\) and \\(\\mathbf{X} = \\begin{pmatrix}\n1& X_{11} & X_{12} & \\cdots & X_{1p} \\\\\n1& X_{21} & X_{22} & \\cdots & X_{2p} \\\\\n\\vdots &\\vdots & \\vdots & \\cdots & \\vdots \\\\\n1& X_{n1} & X_{n2} & \\cdots & X_{np} \\\\\n\\end{pmatrix}\\), where\n\n\\(\\mathbf{Y}\\) is an \\(n \\times 1\\) vector.\n\\(\\mathbf{X}\\) is a \\(n \\times (p+1)\\) matrix."
-  },
-  {
-    "objectID": "LinearRegression/LinearRegression.slides.html#section-8",
-    "href": "LinearRegression/LinearRegression.slides.html#section-8",
-    "title": "Multiple Linear Regression",
-    "section": "",
-    "text": "To show the estimated coefficients, we use the argument params of the linear_model object created previously.\n\n# The estimated coefficients.\nprint(linear_model.params)\n\nconst   -35.262607\nX1        0.745417\nX2       20.229167\nX3        0.793056\nX4       25.583333\nX5       17.208333\ndtype: float64\n\n\nThe elements in the vector above are the estimates \\(\\hat{\\beta}_0\\), \\(\\hat{\\beta}_1\\), \\(\\hat{\\beta}_2\\), \\(\\hat{\\beta}_3\\), \\(\\hat{\\beta}_4\\), and \\(\\hat{\\beta}_5\\)."
-  },
-  {
-    "objectID": "LinearRegression/LinearRegression.slides.html#matrix-notation-1",
-    "href": "LinearRegression/LinearRegression.slides.html#matrix-notation-1",
-    "title": "Multiple Linear Regression",
-    "section": "Matrix notation",
-    "text": "Matrix notation\nIn what follows, it is useful to denote the multiple linear regression model using matrix notation:\n\\(\\mathbf{y} = \\begin{pmatrix} y_1 \\\\ y_2 \\\\ \\vdots \\\\ y_n \\end{pmatrix}\\), \\(\\mathbf{X} = \\begin{pmatrix}\n1& x_{11} & x_{12} & \\cdots & x_{1p} \\\\\n1& x_{21} & x_{22} & \\cdots & x_{2p} \\\\\n\\vdots &\\vdots & \\vdots & \\cdots & \\vdots \\\\\n1& x_{n1} & x_{n2} & \\cdots & x_{np} \\\\\n\\end{pmatrix}\\), \\(\\boldsymbol{\\beta} = \\begin{pmatrix}\\beta_0 \\\\ \\beta_1 \\\\ \\vdots \\\\ \\beta_p \\end{pmatrix}\\), and \\(\\boldsymbol{\\epsilon} = \\begin{pmatrix}\\epsilon_1 \\\\ \\epsilon_2 \\\\ \\vdots \\\\ \\epsilon_n \\end{pmatrix}\\)"
-  },
-  {
-    "objectID": "LinearRegression/LinearRegression.slides.html#section-9",
-    "href": "LinearRegression/LinearRegression.slides.html#section-9",
-    "title": "Multiple Linear Regression",
-    "section": "",
-    "text": "Increasing the water temperature by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_3 = 0.793\\) units.\nIncreasing the sulfide concentration by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_4 = 25.583\\) units.\nIncreasing the amount of chlorine bleach by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_5 = 17.208\\) units."
-  },
-  {
-    "objectID": "LinearRegression/LinearRegression.slides.html#an-estimator-for-boldsymbolbeta",
-    "href": "LinearRegression/LinearRegression.slides.html#an-estimator-for-boldsymbolbeta",
-    "title": "Multiple Linear Regression",
-    "section": "An estimator for \\(\\boldsymbol{\\beta}\\)",
-    "text": "An estimator for \\(\\boldsymbol{\\beta}\\)\nOur goal is to find an estimator for the vector \\(\\boldsymbol{\\beta}\\) (and all its components). For the moment, let’s assume that we have one:\n\\(\\hat{\\boldsymbol{\\beta}} = \\begin{pmatrix} \\hat{\\beta}_0 \\\\ \\hat{\\beta}_1 \\\\ \\vdots\\\\ \\hat{\\beta}_p \\end{pmatrix}\\), where \\(\\hat{\\beta}_j\\) is an estimator for \\(\\beta_j\\), \\(j = 0, \\ldots, p\\).\nUsing this estimator, we can compute the predicted responses of our model \\(\\hat{\\mathbf{Y}} = \\mathbf{X}\\hat{\\boldsymbol{\\beta}}\\), where \\(\\hat{\\mathbf{Y}} = (\\hat{Y}_1, \\hat{Y}_2, \\ldots, \\hat{Y}_n)^{T}\\) and \\(\\hat{Y}_i\\) is the i-th predicted response."
-  },
-  {
-    "objectID": "LinearRegression/LinearRegression.slides.html#section-10",
-    "href": "LinearRegression/LinearRegression.slides.html#section-10",
-    "title": "Multiple Linear Regression",
-    "section": "",
-    "text": "Predictions of the 26 observations in the training dataset.\n\nprint(rayon_Y_pred)\n\n0      72.205449\n1      78.205449\n2      80.405449\n3      79.522115\n4      83.738782\n5      82.855449\n6      85.055449\n7      91.055449\n8      90.555449\n9      89.672115\n10     91.872115\n11     97.872115\n12     95.205449\n13    101.205449\n14    103.405449\n15    102.522115\n16     74.176282\n17    103.992949\n18     80.992949\n19     97.176282\n20     84.326282\n21     93.842949\n22     86.526282\n23     91.642949\n24     85.642949\n25     92.526282\ndtype: float64"
-  },
-  {
-    "objectID": "LinearRegression/LinearRegression.slides.html#section-11",
-    "href": "LinearRegression/LinearRegression.slides.html#section-11",
-    "title": "Multiple Linear Regression",
-    "section": "",
-    "text": "In Python, we compute the residuals using the following command.\n\nresiduals = linear_model.resid\n\nprint(residuals)\n\n0      4.294551\n1     -2.205449\n2     -0.505449\n3      3.977885\n4      5.761218\n5      1.344551\n6      0.644551\n7      8.444551\n8     -1.155449\n9      7.827885\n10    11.327885\n11    10.827885\n12    19.994551\n13    10.294551\n14    -1.105449\n15     5.577885\n16     6.023718\n17   -14.892949\n18    -3.792949\n19   -12.076282\n20   -12.826282\n21    -9.342949\n22    -9.026282\n23   -12.442949\n24   -14.642949\n25    -2.326282\ndtype: float64"
-  },
-  {
-    "objectID": "LinearRegression/LinearRegression.slides.html#computation-in-python",
-    "href": "LinearRegression/LinearRegression.slides.html#computation-in-python",
-    "title": "Multiple Linear Regression",
-    "section": "Computation in Python",
-    "text": "Computation in Python\n\nTo compute the least squares estimates, we first split the data set into a matrix with the values of the predictors only, and a matrix with the response values.\n\n# Matrix with predictors.\nrayon_predictors = rayon_data.drop(columns=['Y'])\n\n# Add intercept.\nrayon_X_train = sm.add_constant(rayon_predictors)\n\n# Matrix with response.\nrayon_Y_train = rayon_data['Y']"
-  },
-  {
-    "objectID": "LinearRegression/LinearRegression.slides.html#computation-of-hatboldsymbolbeta-mathbfxtmathbfx-1-mathbfxtmathbfy",
-    "href": "LinearRegression/LinearRegression.slides.html#computation-of-hatboldsymbolbeta-mathbfxtmathbfx-1-mathbfxtmathbfy",
-    "title": "Multiple Linear Regression",
-    "section": "Computation of \\(\\hat{\\boldsymbol{\\beta}} = (\\mathbf{X}^{T}\\mathbf{X})^{-1} \\mathbf{X}^{T}\\mathbf{y}\\)",
-    "text": "Computation of \\(\\hat{\\boldsymbol{\\beta}} = (\\mathbf{X}^{T}\\mathbf{X})^{-1} \\mathbf{X}^{T}\\mathbf{y}\\)\n\n\nCompute the transpose of a matrix: \\(\\mathbf{X}^{T}\\).\nCompute the product of a matrix and a vector: \\(\\mathbf{X}^{T}\\mathbf{Y}\\).\nCompute the product of two matrices: \\(\\mathbf{X}^{T} \\mathbf{X}\\).\nCompute the inverse of a matrix: \\((\\mathbf{X}^{T} \\mathbf{X})^{-1}\\)."
-  },
-  {
-    "objectID": "LinearRegression/LinearRegression.slides.html#remarks",
-    "href": "LinearRegression/LinearRegression.slides.html#remarks",
-    "title": "Multiple Linear Regression",
-    "section": "Remarks",
-    "text": "Remarks\n\nCompute the inverse of a matrix: \\((\\mathbf{X}^{T} \\mathbf{X})^{-1}\\).\n\n\nNot all matrices have an inverse.\nIf it does not have an inverse then the matrix is called singular. Otherwise, it is called non-singular.\nFor the inverse to exist, the columns in \\(\\mathbf{X}\\) must be linearly independent.\nOr, equivalently, the determinant \\(|\\mathbf{X}^{T} \\mathbf{X}| &gt; 0\\)."
-  },
-  {
-    "objectID": "LinearRegression/LinearRegression.slides.html#section-12",
-    "href": "LinearRegression/LinearRegression.slides.html#section-12",
-    "title": "Multiple Linear Regression",
-    "section": "",
-    "text": "The smaller the value of \\(\\hat{\\sigma}^2\\), the closer our predictions are to the actual responses.\nIn practice, it is better to use the standard deviation of the errors. That is,\n\\[\\hat{\\sigma}=\\left(\\frac{1}{n-p-1}\\sum_{i=1}^{n} \\hat{\\epsilon}_i^{2}\\right)^{1/2}.\\] In Python, we compute \\(\\hat{\\sigma}\\) as follows:\n\nprint( round(error_variance**(1/2), 3) )\n\n10.292"
-  },
-  {
-    "objectID": "Tools/Tools1.slides.html#lets-try-a-command-in-python",
-    "href": "Tools/Tools1.slides.html#lets-try-a-command-in-python",
-    "title": "Tools for Data Science: Part I",
-    "section": "Let’s try a command in Python",
-    "text": "Let’s try a command in Python\nWhat do you think will happen if we run this command?\n\nprint(\"Hello world!\")"
-  },
-  {
-    "objectID": "Tools/Tools1.slides.html#introduction-to-functions-in-python",
-    "href": "Tools/Tools1.slides.html#introduction-to-functions-in-python",
-    "title": "Tools for Data Science: Part I",
-    "section": "Introduction to functions in Python",
-    "text": "Introduction to functions in Python\nOne of the best things about Python is that there are many built-in commands you can use. These are called functions.\n\nFunctions have two basic parts:\n\n\nThe first part is the name of the function (for example, sum).\nThe second part is the input to the function, which goes inside the parentheses (sum([1, 5, 15]))."
-  },
-  {
-    "objectID": "Tools/Tools1.slides.html#chaining-operations-with-pandas",
-    "href": "Tools/Tools1.slides.html#chaining-operations-with-pandas",
-    "title": "Tools for Data Science: Part I",
-    "section": "Chaining operations with pandas",
-    "text": "Chaining operations with pandas\nOne of the most important techniques in pandas is chaining, which allows for cleaner and more readable data manipulation.\nThe general structure of chaining looks like this:"
-  },
-  {
-    "objectID": "Tools/Tools1.slides.html#key-pandas-methods",
-    "href": "Tools/Tools1.slides.html#key-pandas-methods",
-    "title": "Tools for Data Science: Part I",
-    "section": "Key pandas methods",
-    "text": "Key pandas methods\npandas provides methods or functions to solve common data manipulation tasks:\n\n\n.filter() selects specific columns or rows.\n.query() filters observations based on conditions.\n.assign() adds new variables that are functions of existing variables.\n.sort_values() changes the order of rows.\n.agg() reduces multiple values to a single numerical summary."
-  },
-  {
-    "objectID": "Tools/Tools1.slides.html#section-5",
-    "href": "Tools/Tools1.slides.html#section-5",
-    "title": "Tools for Data Science: Part I",
-    "section": "",
-    "text": "To practice, we will use the dataset penguins_data."
-  },
-  {
-    "objectID": "Tools/Tools1.slides.html#selecting-columns-with-.filter",
-    "href": "Tools/Tools1.slides.html#selecting-columns-with-.filter",
-    "title": "Tools for Data Science: Part I",
-    "section": "Selecting columns with .filter()",
-    "text": "Selecting columns with .filter()\nSelect the columns species, body_mass_g and sex.\n\n(penguins_data\n  .filter([\"species\", \"body_mass_g\", \"sex\"], axis = 1)\n).head()\n\n\n\n\n\n\n\n\nspecies\nbody_mass_g\nsex\n\n\n\n\n0\nAdelie\n3750.0\nmale\n\n\n1\nAdelie\n3800.0\nfemale\n\n\n2\nAdelie\n3250.0\nfemale\n\n\n3\nAdelie\nNaN\nNaN\n\n\n4\nAdelie\n3450.0\nfemale"
-  },
-  {
-    "objectID": "Tools/Tools1.slides.html#section-6",
-    "href": "Tools/Tools1.slides.html#section-6",
-    "title": "Tools for Data Science: Part I",
-    "section": "",
-    "text": "The axis argument tells .filter() whether to select rows (0) or columns (1) from the dataframe.\n\n(penguins_data\n  .filter([\"species\", \"body_mass_g\", \"sex\"], axis = 1)\n).head()\n\n\n\nThe .head() command allows us to print the first six rows of the newly produced dataframe. We must remove it to have the entire new dataframe."
-  },
-  {
-    "objectID": "Tools/Tools1.slides.html#section-7",
-    "href": "Tools/Tools1.slides.html#section-7",
-    "title": "Tools for Data Science: Part I",
-    "section": "",
-    "text": "We can also use .filter() to select rows too. To this end, we set axis = 1. We can select specific rows, such as 0 and 10.\n\n(penguins_data\n  .filter([0, 10], axis = 0)\n)\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n10\nAdelie\nTorgersen\n37.8\n17.1\n186.0\n3300.0\nNaN\n2007"
-  },
-  {
-    "objectID": "Tools/Tools1.slides.html#section-8",
-    "href": "Tools/Tools1.slides.html#section-8",
-    "title": "Tools for Data Science: Part I",
-    "section": "",
-    "text": "Or, we can select a set of rows using the function range(). For example, let’s select the first 5 rows.\n\n(penguins_data\n  .filter(range(5), axis = 0)\n)\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.5\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007\n\n\n3\nAdelie\nTorgersen\nNaN\nNaN\nNaN\nNaN\nNaN\n2007\n\n\n4\nAdelie\nTorgersen\n36.7\n19.3\n193.0\n3450.0\nfemale\n2007"
-  },
-  {
-    "objectID": "Tools/Tools1.slides.html#filtering-rows-with-.query",
-    "href": "Tools/Tools1.slides.html#filtering-rows-with-.query",
-    "title": "Tools for Data Science: Part I",
-    "section": "Filtering rows with .query()",
-    "text": "Filtering rows with .query()\n\nAn alternative way of selecting rows is .query(). Compared to .filter(), .query() allows us to filter the data using statements or queries involving the variables.\n\nFor example, let’s filter the data for the species “Gentoo.”\n\n(penguins_data\n  .query(\"species == 'Gentoo'\")\n)"
-  },
-  {
-    "objectID": "Tools/Tools1.slides.html#section-9",
-    "href": "Tools/Tools1.slides.html#section-9",
-    "title": "Tools for Data Science: Part I",
-    "section": "",
-    "text": "(penguins_data\n  .query(\"species == 'Gentoo'\")\n).head()\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n152\nGentoo\nBiscoe\n46.1\n13.2\n211.0\n4500.0\nfemale\n2007\n\n\n153\nGentoo\nBiscoe\n50.0\n16.3\n230.0\n5700.0\nmale\n2007\n\n\n154\nGentoo\nBiscoe\n48.7\n14.1\n210.0\n4450.0\nfemale\n2007\n\n\n155\nGentoo\nBiscoe\n50.0\n15.2\n218.0\n5700.0\nmale\n2007\n\n\n156\nGentoo\nBiscoe\n47.6\n14.5\n215.0\n5400.0\nmale\n2007"
-  },
-  {
-    "objectID": "Tools/Tools1.slides.html#section-10",
-    "href": "Tools/Tools1.slides.html#section-10",
-    "title": "Tools for Data Science: Part I",
-    "section": "",
-    "text": "We can also filter the data to get penguins with a body mass greater than 5000g.\n\n(penguins_data\n  .query(\"body_mass_g &gt; 5000\")\n).head()\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n153\nGentoo\nBiscoe\n50.0\n16.3\n230.0\n5700.0\nmale\n2007\n\n\n155\nGentoo\nBiscoe\n50.0\n15.2\n218.0\n5700.0\nmale\n2007\n\n\n156\nGentoo\nBiscoe\n47.6\n14.5\n215.0\n5400.0\nmale\n2007\n\n\n159\nGentoo\nBiscoe\n46.7\n15.3\n219.0\n5200.0\nmale\n2007\n\n\n161\nGentoo\nBiscoe\n46.8\n15.4\n215.0\n5150.0\nmale\n2007"
-  },
-  {
-    "objectID": "Tools/Tools1.slides.html#section-11",
-    "href": "Tools/Tools1.slides.html#section-11",
-    "title": "Tools for Data Science: Part I",
-    "section": "",
-    "text": "We can even combine .filter() and .query(). For example, let’s select the columns species, body_mass_g and sex, then filter the data for the “Gentoo” species.\n\n(penguins_data\n  .filter([\"species\", \"body_mass_g\", \"sex\"], axis = 1)\n  .query(\"species == 'Gentoo'\")\n).head(4)\n\n\n\n\n\n\n\n\nspecies\nbody_mass_g\nsex\n\n\n\n\n152\nGentoo\n4500.0\nfemale\n\n\n153\nGentoo\n5700.0\nmale\n\n\n154\nGentoo\n4450.0\nfemale\n\n\n155\nGentoo\n5700.0\nmale"
-  },
-  {
-    "objectID": "Tools/Tools1.slides.html#create-new-columns-with-.assign",
-    "href": "Tools/Tools1.slides.html#create-new-columns-with-.assign",
-    "title": "Tools for Data Science: Part I",
-    "section": "Create new columns with .assign()",
-    "text": "Create new columns with .assign()\nWith .assign(), we can create new columns (variables) that are functions of existing ones. This function uses a special Python keyword called lambda. Technically, this keyword defines an anonymous function.\nFor example, we create a new variable LDRatio equaling the ratio of bill_length_mm and bill_depth_mm.\n\n(penguins_data\n  .assign(LDRatio = lambda df: df[\"bill_length_mm\"] / df[\"bill_depth_mm\"])\n)"
-  },
-  {
-    "objectID": "Tools/Tools1.slides.html#section-12",
-    "href": "Tools/Tools1.slides.html#section-12",
-    "title": "Tools for Data Science: Part I",
-    "section": "",
-    "text": "In this code, the df after lambda indicates that the dataframe (penguins_data) will be referred to as df inside the function. The colon : sets the start of the function.\n\n(penguins_data\n  .assign(LDRatio = lambda df: df[\"bill_length_mm\"] / df[\"bill_depth_mm\"])\n)\n\nThe code appends the new variable to the end of the resulting dataframe."
-  },
-  {
-    "objectID": "Tools/Tools1.slides.html#section-13",
-    "href": "Tools/Tools1.slides.html#section-13",
-    "title": "Tools for Data Science: Part I",
-    "section": "",
-    "text": "We can see the new variable using .filter().\n\n(penguins_data\n  .assign(LDRatio = lambda df: df[\"bill_length_mm\"] / df[\"bill_depth_mm\"])\n  .filter([\"bill_length_mm\", \"bill_depth_mm\", \"LDRatio\"], axis = 1)\n).head()\n\n\n\n\n\n\n\n\nbill_length_mm\nbill_depth_mm\nLDRatio\n\n\n\n\n0\n39.1\n18.7\n2.090909\n\n\n1\n39.5\n17.4\n2.270115\n\n\n2\n40.3\n18.0\n2.238889\n\n\n3\nNaN\nNaN\nNaN\n\n\n4\n36.7\n19.3\n1.901554"
-  },
-  {
-    "objectID": "Tools/Tools1.slides.html#sorting-with-.sort_values",
-    "href": "Tools/Tools1.slides.html#sorting-with-.sort_values",
-    "title": "Tools for Data Science: Part I",
-    "section": "Sorting with .sort_values()",
-    "text": "Sorting with .sort_values()\nWe can sort the data based on a column like bill_length_mm.\n\n(penguins_data\n  .sort_values(\"bill_length_mm\")\n).head(4)\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n142\nAdelie\nDream\n32.1\n15.5\n188.0\n3050.0\nfemale\n2009\n\n\n98\nAdelie\nDream\n33.1\n16.1\n178.0\n2900.0\nfemale\n2008\n\n\n70\nAdelie\nTorgersen\n33.5\n19.0\n190.0\n3600.0\nfemale\n2008\n\n\n92\nAdelie\nDream\n34.0\n17.1\n185.0\n3400.0\nfemale\n2008"
-  },
-  {
-    "objectID": "Tools/Tools1.slides.html#section-14",
-    "href": "Tools/Tools1.slides.html#section-14",
-    "title": "Tools for Data Science: Part I",
-    "section": "",
-    "text": "To sort in descending order, use ascending=False inside sort_values().\n\n(penguins_data\n  .sort_values(\"bill_length_mm\", ascending=False)\n).head()\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n185\nGentoo\nBiscoe\n59.6\n17.0\n230.0\n6050.0\nmale\n2007\n\n\n293\nChinstrap\nDream\n58.0\n17.8\n181.0\n3700.0\nfemale\n2007\n\n\n253\nGentoo\nBiscoe\n55.9\n17.0\n228.0\n5600.0\nmale\n2009\n\n\n339\nChinstrap\nDream\n55.8\n19.8\n207.0\n4000.0\nmale\n2009\n\n\n267\nGentoo\nBiscoe\n55.1\n16.0\n230.0\n5850.0\nmale\n2009"
-  },
-  {
-    "objectID": "Tools/Tools1.slides.html#summarizing-with-.agg",
-    "href": "Tools/Tools1.slides.html#summarizing-with-.agg",
-    "title": "Tools for Data Science: Part I",
-    "section": "Summarizing with .agg()",
-    "text": "Summarizing with .agg()\nWe can calculate summary statistics of the columns bill_length_mm, bill_depth_mm, and body_mass_g.\n\n(penguins_data\n  .filter([\"bill_length_mm\", \"bill_depth_mm\", \"body_mass_g\"], axis = 1)\n  .agg([\"mean\"])\n)\n\n\n\n\n\n\n\n\nbill_length_mm\nbill_depth_mm\nbody_mass_g\n\n\n\n\nmean\n43.92193\n17.15117\n4201.754386\n\n\n\n\n\n\n\n\n\nBy default, agg() ignores missing values."
-  },
-  {
-    "objectID": "Tools/Tools1.slides.html#saving-results-in-new-objects",
-    "href": "Tools/Tools1.slides.html#saving-results-in-new-objects",
-    "title": "Tools for Data Science: Part I",
-    "section": "Saving results in new objects",
-    "text": "Saving results in new objects\n\nAfter performing operations on our data, we can save the modified dataset as a new object.\n\nmean_penguins_data = (penguins_data\n  .filter([\"bill_length_mm\", \"bill_depth_mm\", \"body_mass_g\"], axis = 1)\n  .agg([\"mean\"])\n)\n\nmean_penguins_data\n\n\n\n\n\n\n\n\nbill_length_mm\nbill_depth_mm\nbody_mass_g\n\n\n\n\nmean\n43.92193\n17.15117\n4201.754386"
-  },
-  {
-    "objectID": "Tools/Tools1.slides.html#more-on-pandas",
-    "href": "Tools/Tools1.slides.html#more-on-pandas",
-    "title": "Tools for Data Science: Part I",
-    "section": "More on pandas",
-    "text": "More on pandas\n\n\nhttps://wesmckinney.com/book/"
-  },
-  {
-    "objectID": "Tools/Tools1.slides.html#final-remarks",
-    "href": "Tools/Tools1.slides.html#final-remarks",
-    "title": "Tools for Data Science: Part I",
-    "section": "Final remarks",
-    "text": "Final remarks\n\n\npandas is a Python library for data manipulation.\nUnderstanding variable types helps determine the best operations and visualizations.\nThere are specific charts for numerical and categorical variables.\nThroughout this course, we will explore various visualizations for different types of data."
-  },
-  {
-    "objectID": "PreProcessing/PreProcessing.slides.html#section-23",
-    "href": "PreProcessing/PreProcessing.slides.html#section-23",
-    "title": "Data preprocessing",
-    "section": "",
-    "text": "Unfortunately, the resulting object is not a pandas data frame. We then convert this object to this format. \n\nscaled_df = pd.DataFrame(Xs, columns = complete_sbAuto.columns)\nscaled_df.head()\n\n\n\n\n\n\n\n\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\n\n\n\n\n0\n1.483947\n1.077290\n0.664133\n0.620540\n-1.285258\n\n\n1\n1.483947\n1.488732\n1.574594\n0.843334\n-1.466724\n\n\n2\n1.483947\n1.182542\n1.184397\n0.540382\n-1.648189\n\n\n3\n1.483947\n1.048584\n1.184397\n0.536845\n-1.285258\n\n\n4\n1.483947\n1.029447\n0.924265\n0.555706\n-1.829655"
   }
 ]
