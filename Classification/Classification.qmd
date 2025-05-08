@@ -20,6 +20,8 @@ jupyter: python3
 
 ## Agenda
 
+</br>
+
 1.  Introduction
 2.  Logistic regression
 3.  Estimating a logistic regression model
@@ -28,8 +30,6 @@ jupyter: python3
 # Introduction
 
 ## Load the libraries
-
-</br>
 
 Before we start, let's import the data science libraries into Python.
 

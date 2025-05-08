@@ -20,6 +20,8 @@ jupyter: python3
 
 ## Agenda
 
+</br>
+
 1.  Introduction to data science
 2.  Basic notation and terminology
 
@@ -121,6 +123,8 @@ Dillman said
 
 ## Business understanding
 
+</br>
+
 -   Business understanding refers to defining the business problem to be solved.
 
 -   The goal is to reframe the business problem as a data science problem.
@@ -128,6 +132,8 @@ Dillman said
 -   Often, reframing the problem and designing a solution is an iterative process.
 
 ## Common data science problems
+
+</br>
 
 [**Regression**]{style="color:blue;"} attempts to estimate or predict, for each individual, the numerical value of some variable for that individual. For example, “How much will a given customer use the service?”
 
@@ -143,6 +149,8 @@ Dillman said
 
 ## Discussion
 
+</br>
+
 -   Often, recasting the problem and designing a solution is an iterative process.
 
 -   The initial formulation may not be complete or optimal, so multiple iterations may be necessary for an acceptable solution formulation.
@@ -150,6 +158,8 @@ Dillman said
 -   They key to a great success is a creative problem formulation by some analyst regarding how to cast the business problem as one or more data science problems.
 
 ## Data understanding I
+
+</br>
 
 ::: incremental
 -   If the goal is to solve a business problem, the data that makes up the raw material available from which the solution will be built.
@@ -160,6 +170,8 @@ Dillman said
 :::
 
 ## Data understanding II
+
+</br>
 
 -   The costs of data vary. Some data will be available for free while others will require effort to obtain.
 
@@ -205,6 +217,8 @@ Dillman said
 
 ## Numerical data
 
+</br>
+
 Data science methodology is based on numerical data given in tables.
 
 ![](images/9a292b70-64d7-475e-9ffa-22c019609752_lossy.png){fig-align="center"}
@@ -219,6 +233,8 @@ Data science methodology is based on numerical data given in tables.
 
 ## Notation and terminology
 
+</br>
+
 Explanatory variables or predictors:
 
 -   $X$ represents an explanatory variable or predictor.
@@ -229,6 +245,8 @@ Outcome or response:
 -   $Y$ represents the response variable, which we’ll try to predict.
 
 ## Two main problems
+
+</br>
 
 [**Regression problems**]{style="color:blue;"}. The response $Y$ is quantitative. For example, a person’s income, the value of a house, the blood pressure of a patient.
 
@@ -248,6 +266,8 @@ What factors explain the presence of Type II diabetes on a person?
 
 ## A statistical model
 
+</br>
+
 A **statistical model** is a mathematical equation that embodies statistical assumptions concerning the generation of *data*.
 
 Technically, it has the following form:
@@ -257,6 +277,8 @@ $$Y = f(\boldsymbol{X}) + \epsilon $$
 where $Y$ is a quantitative response, $f(\boldsymbol{X})$ is the function that relates the predictors, $\boldsymbol{X}$, to the $Y$, and $\epsilon$ is the (random) error term.
 
 ## True and estimated models
+
+</br>
 
 $f(\boldsymbol{X})$ represents the TRUTH. The true relationship between $\boldsymbol{X}$ and $Y$.
 

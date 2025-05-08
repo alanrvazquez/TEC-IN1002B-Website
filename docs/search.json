@@ -4,7 +4,7 @@
     "href": "PreProcessing/PreProcessing.slides.html#agenda",
     "title": "Data preprocessing",
     "section": "Agenda",
-    "text": "Agenda\n\nIntroduction\nDealing with missing values\nTransforming categorical predictors\nFiltering\nStandarization"
+    "text": "Agenda\n\n\nIntroduction\nDealing with missing values\nTransforming categorical predictors\nFiltering\nStandarization"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#data-preprocessing",
@@ -32,7 +32,7 @@
     "href": "PreProcessing/PreProcessing.slides.html#section-1",
     "title": "Data preprocessing",
     "section": "",
-    "text": "Let’s import scikit-learn into python together with the other relevant libraries.\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom sklearn.impute import SimpleImputer\nfrom sklearn.feature_selection import VarianceThreshold\nfrom sklearn.preprocessing import StandardScaler\n\nWe will not use all the functions from the scikit-learn library. Instead, we will use specific functions from the sub-libraries preprocessing, feature_selection, and impute."
+    "text": "Let’s import scikit-learn into Python together with the other relevant libraries.\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom sklearn.impute import SimpleImputer\nfrom sklearn.feature_selection import VarianceThreshold\nfrom sklearn.preprocessing import StandardScaler\n\nWe will not use all the functions from the scikit-learn library. Instead, we will use specific functions from the sub-libraries preprocessing, feature_selection, and impute."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#missing-values",
@@ -220,8 +220,8 @@
     "objectID": "PreProcessing/PreProcessing.slides.html#dummy-variables-in-python",
     "href": "PreProcessing/PreProcessing.slides.html#dummy-variables-in-python",
     "title": "Data preprocessing",
-    "section": "Dummy variables in python",
-    "text": "Dummy variables in python\n\nWe can get the dummy variables of a categorical variable using the function pd.get_dummies() from pandas.\nThe input of the function is the categorical variable.\nThe function has an extra argument called drop_first to drop the first dummy variable. It also has the argument dtype to show the values as integers.\n\ndummy_data = pd.get_dummies(complete_Auto['origin'], drop_first = True, \n                            dtype = 'int')"
+    "section": "Dummy variables in Python",
+    "text": "Dummy variables in Python\n\nWe can get the dummy variables of a categorical variable using the function pd.get_dummies() from pandas.\nThe input of the function is the categorical variable.\nThe function has an extra argument called drop_first to drop the first dummy variable. It also has the argument dtype to show the values as integers.\n\ndummy_data = pd.get_dummies(complete_Auto['origin'], drop_first = True, \n                            dtype = 'int')"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#section-16",
@@ -242,28 +242,28 @@
     "href": "PreProcessing/PreProcessing.slides.html#removing-predictors",
     "title": "Data preprocessing",
     "section": "Removing predictors",
-    "text": "Removing predictors\nThere are potential advantages to removing predictors prior to modeling:\n\n\nFewer predictors means decreased computational time and complexity.\nIf two predictors are highly-correlated, they are measuring the same underlying information. So, removing one should not compromise the performance of the model.\n\n\n\nHere, we will see two techniques to remove predictors."
+    "text": "Removing predictors\n\nThere are potential advantages to removing predictors prior to modeling:\n\n\nFewer predictors means decreased computational time and complexity.\nIf two predictors are highly-correlated, they are measuring the same underlying information. So, removing one should not compromise the performance of the model.\n\n\n\nHere, we will see two techniques to remove predictors."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#near-zero-variance-predictors",
     "href": "PreProcessing/PreProcessing.slides.html#near-zero-variance-predictors",
     "title": "Data preprocessing",
     "section": "Near-Zero variance predictors",
-    "text": "Near-Zero variance predictors\nA near-zero variance predictor variable is one that has only a handful of unique values that occur with very low frequencies.\n\n\nIf the predictor has a single unique value, then it is called a zero-variance predictor variable.\n\n\n\nSince the values of this predictor variable do not vary or change at all, this predictor does not provide any information to the model and must be discarded."
+    "text": "Near-Zero variance predictors\n\nA near-zero variance predictor variable is one that has only a handful of unique values that occur with very low frequencies.\n\n\nIf the predictor has a single unique value, then it is called a zero-variance predictor variable.\n\n\n\nSince the values of this predictor variable do not vary or change at all, this predictor does not provide any information to the model and must be discarded."
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#example-3",
     "href": "PreProcessing/PreProcessing.slides.html#example-3",
     "title": "Data preprocessing",
     "section": "Example 3",
-    "text": "Example 3\nWe consider a data set related to Glass identification. The data has 214 glass samples labeled as one of seven glass categories. There are nine predictors including the refractive index (RI) and percentages of eight elements: Na, Mg, Al, Si, K, Ca, Ba, and Fe.\nLet’s read the data set. Note that this is a modified version of the original data.\n\n# Load Excel file (make sure the file is in your Colab)\nglass_data = pd.read_excel('glass.xlsx')\n\n# Drop the categorical variable.\nsb_glass = glass_data.drop(columns=['Type'])"
+    "text": "Example 3\n\nWe consider a data set related to Glass identification. The data has 214 glass samples labeled as one of seven glass categories. There are nine predictors including the refractive index (RI) and percentages of eight elements: Na, Mg, Al, Si, K, Ca, Ba, and Fe.\nLet’s read the data set. Note that this is a modified version of the original data.\n\n# Load Excel file (make sure the file is in your Colab)\nglass_data = pd.read_excel('glass.xlsx')\n\n# Drop the categorical variable.\nsb_glass = glass_data.drop(columns=['Type'])"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#in-python",
     "href": "PreProcessing/PreProcessing.slides.html#in-python",
     "title": "Data preprocessing",
-    "section": "In python",
-    "text": "In python\nWe use the function VarianceThreshold() to set the threshold for determining a low sample variance. We also use other functions such as selector.fit() and selector.get_support().\n\n# Set threshold\nselector = VarianceThreshold(threshold=0.01)\n\n# Apply threshold.\nselector.fit(sb_glass)\n\n# Identify predictors with low variance.\nlow_variance_cols = sb_glass.columns[~selector.get_support()]\n\n# Print the list of predictors.\nprint(f\"Low variance columns: {low_variance_cols}\")\n\nLow variance columns: Index(['RI', 'Fe'], dtype='object')"
+    "section": "In Python",
+    "text": "In Python\nWe use the function VarianceThreshold() to set the threshold for determining a low sample variance. We also use other functions such as selector.fit() and selector.get_support().\n\n# Set threshold\nselector = VarianceThreshold(threshold=0.01)\n\n# Apply threshold.\nselector.fit(sb_glass)\n\n# Identify predictors with low variance.\nlow_variance_cols = sb_glass.columns[~selector.get_support()]\n\n# Print the list of predictors.\nprint(f\"Low variance columns: {low_variance_cols}\")\n\nLow variance columns: Index(['RI', 'Fe'], dtype='object')"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#section-18",
@@ -291,7 +291,7 @@
     "href": "PreProcessing/PreProcessing.slides.html#correlation-matrix",
     "title": "Data preprocessing",
     "section": "Correlation matrix",
-    "text": "Correlation matrix\n\nIn python, we calculate the correlation matrix using the command below.\n\ncorrelation_matrix = complete_sbAuto.corr()\nprint(correlation_matrix)\n\n              cylinders  displacement  horsepower    weight  acceleration\ncylinders      1.000000      0.950823    0.842983  0.897527     -0.504683\ndisplacement   0.950823      1.000000    0.897257  0.932994     -0.543800\nhorsepower     0.842983      0.897257    1.000000  0.864538     -0.689196\nweight         0.897527      0.932994    0.864538  1.000000     -0.416839\nacceleration  -0.504683     -0.543800   -0.689196 -0.416839      1.000000"
+    "text": "Correlation matrix\n\nIn Python, we calculate the correlation matrix using the command below.\n\ncorrelation_matrix = complete_sbAuto.corr()\nprint(correlation_matrix)\n\n              cylinders  displacement  horsepower    weight  acceleration\ncylinders      1.000000      0.950823    0.842983  0.897527     -0.504683\ndisplacement   0.950823      1.000000    0.897257  0.932994     -0.543800\nhorsepower     0.842983      0.897257    1.000000  0.864538     -0.689196\nweight         0.897527      0.932994    0.864538  1.000000     -0.416839\nacceleration  -0.504683     -0.543800   -0.689196 -0.416839      1.000000"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#section-19",
@@ -353,8 +353,8 @@
     "objectID": "PreProcessing/PreProcessing.slides.html#standarization-in-python",
     "href": "PreProcessing/PreProcessing.slides.html#standarization-in-python",
     "title": "Data preprocessing",
-    "section": "Standarization in python",
-    "text": "Standarization in python\n\nTo standardize numerical predictors, we use the function StandardScaler(). Moreover, we apply the function to the variables using the function fit_transform().\n\n\nscaler = StandardScaler()\nXs = scaler.fit_transform(complete_sbAuto)"
+    "section": "Standarization in Python",
+    "text": "Standarization in Python\n\nTo standardize numerical predictors, we use the function StandardScaler(). Moreover, we apply the function to the variables using the function fit_transform().\n\n\nscaler = StandardScaler()\nXs = scaler.fit_transform(complete_sbAuto)"
   },
   {
     "objectID": "PreProcessing/PreProcessing.slides.html#section-23",
@@ -382,14 +382,14 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#agenda",
     "title": "Additional Topics",
     "section": "Agenda",
-    "text": "Agenda\n\nLinear models with categorical variables\nLinear models with standardized numerical predictors\nRemedies for faulty assumptions\nPredicting future observations"
+    "text": "Agenda\n\n\nLinear models with categorical variables\nLinear models with standardized numerical predictors\nRemedies for faulty assumptions\nPredicting future observations"
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#load-the-libraries",
     "href": "AdditionalTopics/AdditionalTopics.slides.html#load-the-libraries",
     "title": "Additional Topics",
     "section": "Load the libraries",
-    "text": "Load the libraries\nLet’s import scikit-learn into python together with the other relevant libraries.\n\n# Importing necessary libraries\nimport pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt\nimport statsmodels.api as sm\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import mean_squared_error\n\nWe will not use all the functions from the scikit-learn library. Instead, we will use specific functions from the sub-libraries preprocessing, model_selection, and metrics."
+    "text": "Load the libraries\n\nLet’s import scikit-learn into Python together with the other relevant libraries.\n\n# Importing necessary libraries\nimport pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt\nimport statsmodels.api as sm\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import mean_squared_error\n\nWe will not use all the functions from the scikit-learn library. Instead, we will use specific functions from the sub-libraries preprocessing, model_selection, and metrics."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#categorical-predictors",
@@ -424,7 +424,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#dummy-variables",
     "title": "Additional Topics",
     "section": "Dummy variables",
-    "text": "Dummy variables\nOrigin has 3 categories: European, American, Japanese.\nSo, 2 dummy variables are required:\n\\[d_1 =\n\\begin{cases}\n1 \\text{ if car is European}\\\\\n0 \\text{ if car is not European}\n\\end{cases} \\text{ and }\\]\n\\[d_2 =\n\\begin{cases}\n1 \\text{ if car is Japanese}\\\\\n0 \\text{ if car is not Japanese}\n\\end{cases}.\\]\n“American” acts as the reference category."
+    "text": "Dummy variables\n\nOrigin has 3 categories: European, American, Japanese.\nSo, 2 dummy variables are required:\n\\[d_1 =\n\\begin{cases}\n1 \\text{ if car is European}\\\\\n0 \\text{ if car is not European}\n\\end{cases} \\text{ and }\\]\n\\[d_2 =\n\\begin{cases}\n1 \\text{ if car is Japanese}\\\\\n0 \\text{ if car is not Japanese}\n\\end{cases}.\\]\n“American” acts as the reference category."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#section",
@@ -458,8 +458,8 @@
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#in-python",
     "href": "AdditionalTopics/AdditionalTopics.slides.html#in-python",
     "title": "Additional Topics",
-    "section": "In python",
-    "text": "In python\n\nWe follow three steps to fit a linear model with a categorical predictor. First, we compute the dummy variables.\n\n# Create linear regression object\ndummy_data = pd.get_dummies(auto_data['origin'], drop_first = True, \n                            dtype = 'int')\ndummy_data.head()\n\nNext, we construct the matrix of predictors with the intercept.\n\n# Create linear regression object\ndummy_X_train = sm.add_constant(dummy_data)\ndummy_X_train"
+    "section": "In Python",
+    "text": "In Python\n\nWe follow three steps to fit a linear model with a categorical predictor. First, we compute the dummy variables.\n\n# Create linear regression object\ndummy_data = pd.get_dummies(auto_data['origin'], drop_first = True, \n                            dtype = 'int')\ndummy_data.head()\n\nNext, we construct the matrix of predictors with the intercept.\n\n# Create linear regression object\ndummy_X_train = sm.add_constant(dummy_data)\ndummy_X_train"
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#section-2",
@@ -473,7 +473,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-3",
     "title": "Additional Topics",
     "section": "",
-    "text": "print(summary_model)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.332\nModel:                            OLS   Adj. R-squared:                  0.328\nMethod:                 Least Squares   F-statistic:                     96.60\nDate:                Wed, 07 May 2025   Prob (F-statistic):           8.67e-35\nTime:                        15:41:20   Log-Likelihood:                -1282.2\nNo. Observations:                 392   AIC:                             2570.\nDf Residuals:                     389   BIC:                             2582.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         20.0335      0.409     49.025      0.000      19.230      20.837\nEuropean       7.5695      0.877      8.634      0.000       5.846       9.293\nJapanese      10.4172      0.828     12.588      0.000       8.790      12.044\n==============================================================================\nOmnibus:                       26.330   Durbin-Watson:                   0.763\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               30.217\nSkew:                           0.679   Prob(JB):                     2.74e-07\nKurtosis:                       3.066   Cond. No.                         3.16\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+    "text": "print(summary_model)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.332\nModel:                            OLS   Adj. R-squared:                  0.328\nMethod:                 Least Squares   F-statistic:                     96.60\nDate:                Wed, 07 May 2025   Prob (F-statistic):           8.67e-35\nTime:                        20:39:31   Log-Likelihood:                -1282.2\nNo. Observations:                 392   AIC:                             2570.\nDf Residuals:                     389   BIC:                             2582.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         20.0335      0.409     49.025      0.000      19.230      20.837\nEuropean       7.5695      0.877      8.634      0.000       5.846       9.293\nJapanese      10.4172      0.828     12.588      0.000       8.790      12.044\n==============================================================================\nOmnibus:                       26.330   Durbin-Watson:                   0.763\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               30.217\nSkew:                           0.679   Prob(JB):                     2.74e-07\nKurtosis:                       3.066   Cond. No.                         3.16\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#analysis-of-covariance",
@@ -500,15 +500,15 @@
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#in-python-1",
     "href": "AdditionalTopics/AdditionalTopics.slides.html#in-python-1",
     "title": "Additional Topics",
-    "section": "In python",
-    "text": "In python\n\nTo fit an ANCOVA model, we use similar steps as before. The only extra step is to concatenate the data with the dummy variables and the numerical predictor using the function concat() from pandas.\n\n# Concatenate the two data sets.\nX_train = pd.concat([dummy_X_train, auto_data['weight']], axis = 1)\n\n# Create linear regression object\nregr = sm.OLS(auto_data['mpg'], X_train)\n\n# Train the model using the training sets\nancova_model = regr.fit()"
+    "section": "In Python",
+    "text": "In Python\n\nTo fit an ANCOVA model, we use similar steps as before. The only extra step is to concatenate the data with the dummy variables and the numerical predictor using the function concat() from pandas.\n\n# Concatenate the two data sets.\nX_train = pd.concat([dummy_X_train, auto_data['weight']], axis = 1)\n\n# Create linear regression object\nregr = sm.OLS(auto_data['mpg'], X_train)\n\n# Train the model using the training sets\nancova_model = regr.fit()"
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#model-summary",
     "href": "AdditionalTopics/AdditionalTopics.slides.html#model-summary",
     "title": "Additional Topics",
     "section": "Model summary",
-    "text": "Model summary\n\n# Summary of the models.\nsummary_ancova = ancova_model.summary()\nprint(summary_ancova)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.702\nModel:                            OLS   Adj. R-squared:                  0.700\nMethod:                 Least Squares   F-statistic:                     304.7\nDate:                Wed, 07 May 2025   Prob (F-statistic):          1.28e-101\nTime:                        15:41:20   Log-Likelihood:                -1123.9\nNo. Observations:                 392   AIC:                             2256.\nDf Residuals:                     388   BIC:                             2272.\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         43.7322      1.113     39.277      0.000      41.543      45.921\nEuropean       0.9709      0.659      1.474      0.141      -0.324       2.266\nJapanese       2.3271      0.665      3.501      0.001       1.020       3.634\nweight        -0.0070      0.000    -21.956      0.000      -0.008      -0.006\n==============================================================================\nOmnibus:                       40.731   Durbin-Watson:                   0.832\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               61.938\nSkew:                           0.689   Prob(JB):                     3.55e-14\nKurtosis:                       4.377   Cond. No.                     1.83e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 1.83e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
+    "text": "Model summary\n\n# Summary of the models.\nsummary_ancova = ancova_model.summary()\nprint(summary_ancova)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.702\nModel:                            OLS   Adj. R-squared:                  0.700\nMethod:                 Least Squares   F-statistic:                     304.7\nDate:                Wed, 07 May 2025   Prob (F-statistic):          1.28e-101\nTime:                        20:39:31   Log-Likelihood:                -1123.9\nNo. Observations:                 392   AIC:                             2256.\nDf Residuals:                     388   BIC:                             2272.\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         43.7322      1.113     39.277      0.000      41.543      45.921\nEuropean       0.9709      0.659      1.474      0.141      -0.324       2.266\nJapanese       2.3271      0.665      3.501      0.001       1.020       3.634\nweight        -0.0070      0.000    -21.956      0.000      -0.008      -0.006\n==============================================================================\nOmnibus:                       40.731   Durbin-Watson:                   0.832\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               61.938\nSkew:                           0.689   Prob(JB):                     3.55e-14\nKurtosis:                       4.377   Cond. No.                     1.83e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 1.83e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#standardization",
@@ -536,7 +536,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#interpretation",
     "title": "Additional Topics",
     "section": "Interpretation",
-    "text": "Interpretation\n\\[Y = \\beta_0 + \\beta_1 \\tilde{X}_1 + \\beta_2 \\tilde{X}_2 + \\cdots + \\beta_p \\tilde{X}_p + \\epsilon,\\]\nwhere \\(\\tilde{X}_i\\) is the standardized version of the predictor \\(X_i\\).\nInterpretation:\n\n\n\\(\\beta_0\\) is the mean response when all original predictors \\(X_1, X_2, \\ldots, X_p\\) are set to their average value.\n\\(\\beta_j\\) is the amount of increase in the mean response by an increase of 1 standard deviation in the original predictor \\(X_j\\), when all other predictors are fixed to an arbitrary value."
+    "text": "Interpretation\n\\[Y = \\beta_0 + \\beta_1 \\tilde{X}_1 + \\beta_2 \\tilde{X}_2 + \\cdots + \\beta_p \\tilde{X}_p + \\epsilon,\\]\nwhere \\(\\tilde{X}_i\\) is the standardized version of the predictor \\(X_i\\).\nInterpretation:\n\n\n\\(\\beta_0\\) is the mean response when all original predictors \\(X_1, X_2, \\ldots, X_p\\) are set to their average value.\n\\(\\beta_j\\) is the amount of increase in the mean response by an increase of 1 standard deviation in the original predictor \\(X_j,\\) when all other predictors are fixed to an arbitrary value."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#example-2",
@@ -556,8 +556,8 @@
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#standarization-in-python",
     "href": "AdditionalTopics/AdditionalTopics.slides.html#standarization-in-python",
     "title": "Additional Topics",
-    "section": "Standarization in python",
-    "text": "Standarization in python\n\nRecall that we standardize numerical predictors using the scaler() function from scikit-learn.\n\n# Select predictor matrix.\npredictor_data = catalyst_data[['Concentration', 'Temperature']]\n\n# Define the scaling operator.\nscaler = StandardScaler()\n\n# Apply the scaling operator.\nXs_training = scaler.fit_transform(predictor_data)"
+    "section": "Standarization in Python",
+    "text": "Standarization in Python\n\nRecall that we standardize numerical predictors using the scaler() function from scikit-learn.\n\n# Select predictor matrix.\npredictor_data = catalyst_data[['Concentration', 'Temperature']]\n\n# Define the scaling operator.\nscaler = StandardScaler()\n\n# Apply the scaling operator.\nXs_training = scaler.fit_transform(predictor_data)"
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#section-7",
@@ -578,7 +578,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-9",
     "title": "Additional Topics",
     "section": "",
-    "text": "print(std_summary_model)\n\n                                 OLS Regression Results                                \n=======================================================================================\nDep. Variable:                  Yield   R-squared (uncentered):                   0.002\nModel:                            OLS   Adj. R-squared (uncentered):             -0.330\nMethod:                 Least Squares   F-statistic:                           0.006694\nDate:                Wed, 07 May 2025   Prob (F-statistic):                       0.993\nTime:                        15:41:20   Log-Likelihood:                         -46.940\nNo. Observations:                   8   AIC:                                      97.88\nDf Residuals:                       6   BIC:                                      98.04\nDf Model:                           2                                                  \nCovariance Type:            nonrobust                                                  \n=================================================================================\n                    coef    std err          t      P&gt;|t|      [0.025      0.975]\n---------------------------------------------------------------------------------\nConcentration     1.5000     34.907      0.043      0.967     -83.914      86.914\nTemperature       3.7500     34.907      0.107      0.918     -81.664      89.164\n==============================================================================\nOmnibus:                        2.258   Durbin-Watson:                   0.000\nProb(Omnibus):                  0.323   Jarque-Bera (JB):                0.627\nSkew:                           0.000   Prob(JB):                        0.731\nKurtosis:                       1.628   Cond. No.                         1.00\n==============================================================================\n\nNotes:\n[1] R² is computed without centering (uncentered) since the model does not contain a constant.\n[2] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+    "text": "print(std_summary_model)\n\n                                 OLS Regression Results                                \n=======================================================================================\nDep. Variable:                  Yield   R-squared (uncentered):                   0.002\nModel:                            OLS   Adj. R-squared (uncentered):             -0.330\nMethod:                 Least Squares   F-statistic:                           0.006694\nDate:                Wed, 07 May 2025   Prob (F-statistic):                       0.993\nTime:                        20:39:31   Log-Likelihood:                         -46.940\nNo. Observations:                   8   AIC:                                      97.88\nDf Residuals:                       6   BIC:                                      98.04\nDf Model:                           2                                                  \nCovariance Type:            nonrobust                                                  \n=================================================================================\n                    coef    std err          t      P&gt;|t|      [0.025      0.975]\n---------------------------------------------------------------------------------\nConcentration     1.5000     34.907      0.043      0.967     -83.914      86.914\nTemperature       3.7500     34.907      0.107      0.918     -81.664      89.164\n==============================================================================\nOmnibus:                        2.258   Durbin-Watson:                   0.000\nProb(Omnibus):                  0.323   Jarque-Bera (JB):                0.627\nSkew:                           0.000   Prob(JB):                        0.731\nKurtosis:                       1.628   Cond. No.                         1.00\n==============================================================================\n\nNotes:\n[1] R² is computed without centering (uncentered) since the model does not contain a constant.\n[2] Standard Errors assume that the covariance matrix of the errors is correctly specified."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#discussion",
@@ -634,7 +634,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#numpy-library",
     "title": "Additional Topics",
     "section": "NumPy library",
-    "text": "NumPy library\n\n\n\nnumpy is a powerful, open-source data manipulation and analysis library for python\nIt is the backbone for scikit-learn and pandas\nhttps://numpy.org/\n\n\n\n\n\n\n\n\nLoad it using:\n\nimport numpy as np"
+    "text": "NumPy library\n\n\n\nnumpy is a powerful, open-source data manipulation and analysis library for Python\nIt is the backbone for scikit-learn and pandas\nhttps://numpy.org/\n\n\n\n\n\n\n\n\nLoad it using:\n\nimport numpy as np"
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#continuation-of-example-3",
@@ -773,29 +773,29 @@
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#in-python-2",
     "href": "AdditionalTopics/AdditionalTopics.slides.html#in-python-2",
     "title": "Additional Topics",
-    "section": "In python",
-    "text": "In python\n\nWe first compute the predictions of our model on the validation dataset. That is, we use the values of the predictors in this dataset and use it as input to our model. Our model then computes the prediction of the response for each combination of values of the predictors.\n\n# Add constant to the predictor matrix from the validation set.\nBoston_X_val = sm.add_constant(X_valid)\n\n# Predict responses using validation data.\npredicted_medv_val = linear_model.predict(Boston_X_val)"
+    "section": "In Python",
+    "text": "In Python\n\nWe first compute the predictions of our model on the validation dataset. That is, we use the values of the predictors in this dataset and use it as input to our model. Our model then computes the prediction of the response for each combination of values of the predictors.\n\n# Add constant to the predictor matrix from the validation set.\nBoston_X_val = sm.add_constant(X_valid)\n\n# Predict responses using validation data.\npredicted_medv_val = linear_model.predict(Boston_X_val)"
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#section-14",
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-14",
     "title": "Additional Topics",
     "section": "",
-    "text": "We compute the validation RMSE by first computing the validation MSE using a function with the same name of scikit-learn.\n\nmse = mean_squared_error(Y_valid, predicted_medv_val)\nrmse = mse**(1/2)\nprint( round(rmse, 3) )\n\n5.797\n\n\nThe lower the validation RMSE, the more accurate our model.\nInterpretation: On average, our predictions are off by \\(\\pm\\) 4,465 dollars."
+    "text": "We compute the validation RMSE by first computing the validation MSE using a function with the same name of scikit-learn.\n\nmse = mean_squared_error(Y_valid, predicted_medv_val)\nrmse = mse**(1/2)\nprint( round(rmse, 3) )\n\n5.793\n\n\nThe lower the validation RMSE, the more accurate our model.\nInterpretation: On average, our predictions are off by \\(\\pm\\) 4,465 dollars."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#agenda",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#agenda",
     "title": "Model Evaluation and Inference",
     "section": "Agenda",
-    "text": "Agenda\n\nResidual analysis\nInference about individual \\(\\beta\\)’s using t-tests\nMultiple and adjusted \\(R^2\\) statistics"
+    "text": "Agenda\n\n\nResidual analysis\nInference about individual \\(\\beta\\)’s using t-tests\nMultiple and adjusted \\(R^2\\) statistics"
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#load-the-libraries",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#load-the-libraries",
     "title": "Model Evaluation and Inference",
     "section": "Load the libraries",
-    "text": "Load the libraries\n\nLet’s import statsmodels into python together with the other relevant libraries.\n\n# Importing necessary libraries\nimport pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt\nimport statsmodels.api as sm"
+    "text": "Load the libraries\n\nLet’s import statsmodels into Python together with the other relevant libraries.\n\n# Importing necessary libraries\nimport pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt\nimport statsmodels.api as sm"
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#multiple-linear-regression-model",
@@ -934,8 +934,8 @@
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#qq-plot-in-python",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#qq-plot-in-python",
     "title": "Model Evaluation and Inference",
-    "section": "QQ plot in python",
-    "text": "QQ plot in python\n\nTo construct a QQ plot, we use the function qqplot() statsmodels library.\n\n# QQ plot to assess normality of residuals\nplt.figure(figsize=(5, 3))\nsm.qqplot(residuals, fit = True, line = '45')\nplt.title('QQ Plot of Residuals')\nplt.show()"
+    "section": "QQ plot in Python",
+    "text": "QQ plot in Python\n\nTo construct a QQ plot, we use the function qqplot() statsmodels library.\n\n# QQ plot to assess normality of residuals\nplt.figure(figsize=(5, 3))\nsm.qqplot(residuals, fit = True, line = '45')\nplt.title('QQ Plot of Residuals')\nplt.show()"
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-6",
@@ -1012,7 +1012,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#hypothesis-test",
     "title": "Model Evaluation and Inference",
     "section": "Hypothesis test",
-    "text": "Hypothesis test\n\nA statistical hypothesis is a statement about the coefficients of a model.\n\n\nIn our case, we are interested in testing:\n\n\\(H_0: \\beta_j = 0\\) v.s. \\(H_1: \\beta_j \\neq 0\\) (Two-tailed Test)\n\n\n\nRejecting \\(H_0\\) (in favor of \\(H_1\\)) implies that the predictor has a significant association with the response.\nNot rejecting \\(H_0\\) implies that the predictor does not have a significant association with the response."
+    "text": "Hypothesis test\n\n\nA statistical hypothesis is a statement about the coefficients of a model.\n\n\nIn our case, we are interested in testing:\n\n\\(H_0: \\beta_j = 0\\) v.s. \\(H_1: \\beta_j \\neq 0\\) (Two-tailed Test)\n\n\n\nRejecting \\(H_0\\) (in favor of \\(H_1\\)) implies that the predictor has a significant association with the response.\nNot rejecting \\(H_0\\) implies that the predictor does not have a significant association with the response."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-11",
@@ -1033,14 +1033,14 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#step-2.-test-statistic",
     "title": "Model Evaluation and Inference",
     "section": "Step 2. Test statistic",
-    "text": "Step 2. Test statistic\n\nThe test statistic is\n\\[t_0 = \\frac{\\hat{\\beta}_{j}}{\\sqrt{ \\hat{v}_{jj}} }\\]\n\n\\(\\hat{\\beta}_j\\) is the least squares estimate of the true coefficient \\(\\beta_j\\).\n\\(\\hat{v}_{jj}\\) is the standard error of the estimate \\(\\hat{\\beta}_j\\) calculated using python."
+    "text": "Step 2. Test statistic\n\nThe test statistic is\n\\[t_0 = \\frac{\\hat{\\beta}_{j}}{\\sqrt{ \\hat{v}_{jj}} }\\]\n\n\\(\\hat{\\beta}_j\\) is the least squares estimate of the true coefficient \\(\\beta_j\\).\n\\(\\hat{v}_{jj}\\) is the standard error of the estimate \\(\\hat{\\beta}_j\\) calculated using Python."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-12",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-12",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "Recall that we obtain the least squares estimates (\\(\\hat{\\beta}_{j}\\)) in python using:\n\n# Fitting the simple linear regression model.\nregr = sm.OLS(auto_Y_train, auto_X_train)\nlinear_model = regr.fit()\nlinear_model.params\n\nconst           41.095329\nweight          -0.007293\nacceleration     0.261650\ndtype: float64\n\n\nLater, we will see how to obtain the standard error of the estimate \\(\\hat{\\beta}_j\\)."
+    "text": "Recall that we obtain the least squares estimates (\\(\\hat{\\beta}_{j}\\)) in Python using:\n\n# Fitting the simple linear regression model.\nregr = sm.OLS(auto_Y_train, auto_X_train)\nlinear_model = regr.fit()\nlinear_model.params\n\nconst           41.095329\nweight          -0.007293\nacceleration     0.261650\ndtype: float64\n\n\nLater, we will see how to obtain the standard error of the estimate \\(\\hat{\\beta}_j\\)."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-13",
@@ -1102,8 +1102,8 @@
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#t-tests-in-python",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#t-tests-in-python",
     "title": "Model Evaluation and Inference",
-    "section": "t-tests in python",
-    "text": "t-tests in python\nWe obtain the t-tests of the coefficients using the function summary() together with the linear_model object.\n\nmodel_summary = linear_model.summary()\nprint(model_summary)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.700\nModel:                            OLS   Adj. R-squared:                  0.698\nMethod:                 Least Squares   F-statistic:                     453.2\nDate:                Wed, 07 May 2025   Prob (F-statistic):          2.43e-102\nTime:                        15:41:15   Log-Likelihood:                -1125.4\nNo. Observations:                 392   AIC:                             2257.\nDf Residuals:                     389   BIC:                             2269.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nconst           41.0953      1.868     21.999      0.000      37.423      44.768\nweight          -0.0073      0.000    -25.966      0.000      -0.008      -0.007\nacceleration     0.2617      0.086      3.026      0.003       0.092       0.432\n==============================================================================\nOmnibus:                       31.397   Durbin-Watson:                   0.818\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               39.962\nSkew:                           0.632   Prob(JB):                     2.10e-09\nKurtosis:                       3.922   Cond. No.                     2.67e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 2.67e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
+    "section": "t-tests in Python",
+    "text": "t-tests in Python\nWe obtain the t-tests of the coefficients using the function summary() together with the linear_model object.\n\nmodel_summary = linear_model.summary()\nprint(model_summary)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.700\nModel:                            OLS   Adj. R-squared:                  0.698\nMethod:                 Least Squares   F-statistic:                     453.2\nDate:                Wed, 07 May 2025   Prob (F-statistic):          2.43e-102\nTime:                        20:36:01   Log-Likelihood:                -1125.4\nNo. Observations:                 392   AIC:                             2257.\nDf Residuals:                     389   BIC:                             2269.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nconst           41.0953      1.868     21.999      0.000      37.423      44.768\nweight          -0.0073      0.000    -25.966      0.000      -0.008      -0.007\nacceleration     0.2617      0.086      3.026      0.003       0.092       0.432\n==============================================================================\nOmnibus:                       31.397   Durbin-Watson:                   0.818\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               39.962\nSkew:                           0.632   Prob(JB):                     2.10e-09\nKurtosis:                       3.922   Cond. No.                     2.67e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 2.67e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#table-of-t-tests",
@@ -1193,8 +1193,8 @@
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#in-python",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#in-python",
     "title": "Model Evaluation and Inference",
-    "section": "In python",
-    "text": "In python\n\nTo show the \\(R^2\\) value, we use the rsquared argument of the linear_model object.\n\nprint( round(linear_model.rsquared, 3) )\n\n0.7\n\n\nTo show the adjusted \\(R^2\\) value, we use the rsquared argument of the linear_model object.\n\nprint( round(linear_model.rsquared_adj, 3) )\n\n0.698"
+    "section": "In Python",
+    "text": "In Python\n\nTo show the \\(R^2\\) value, we use the rsquared argument of the linear_model object.\n\nprint( round(linear_model.rsquared, 3) )\n\n0.7\n\n\nTo show the adjusted \\(R^2\\) value, we use the rsquared argument of the linear_model object.\n\nprint( round(linear_model.rsquared_adj, 3) )\n\n0.698"
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#model-building",
@@ -1215,7 +1215,7 @@
     "href": "Tools/Tools1.slides.html#agenda",
     "title": "Tools for Data Science: Part I",
     "section": "Agenda",
-    "text": "Agenda\n\nIntroduction to Python\nReading data with Python\nData manipulation with pandas"
+    "text": "Agenda\n\n\nIntroduction to Python\nReading data with Python\nData manipulation with pandas"
   },
   {
     "objectID": "Tools/Tools1.slides.html#python",
@@ -1257,119 +1257,119 @@
     "href": "Tools/Tools1.slides.html#comments",
     "title": "Tools for Data Science: Part I",
     "section": "Comments",
-    "text": "Comments\nSometimes we write things in the coding window that we want Python to ignore. These are called comments and start with #.\n\nPython will ignore the comments and just execute the code.\n\n# you can put whatever after #\n# for example... blah blah blah\n\n\nSi desea escribir un comentario que ocupe más de una línea, es una buena idea poner un # al principio de cada línea."
+    "text": "Comments\n\nSometimes we write things in the coding window that we want Python to ignore. These are called comments and start with #.\n\nPython will ignore the comments and just execute the code.\n\n# you can put whatever after #\n# for example... blah blah blah\n\n\nSi desea escribir un comentario que ocupe más de una línea, es una buena idea poner un # al principio de cada línea."
   },
   {
     "objectID": "Tools/Tools1.slides.html#introduction-to-functions-in-python",
     "href": "Tools/Tools1.slides.html#introduction-to-functions-in-python",
     "title": "Tools for Data Science: Part I",
     "section": "Introduction to functions in Python",
-    "text": "Introduction to functions in Python\nOne of the best things about Python is that there are many built-in commands you can use. These are called functions.\n\nFunctions have two basic parts:\n\n\nThe first part is the name of the function (for example, sum).\nThe second part is the input to the function, which goes inside the parentheses (sum([1, 5, 15]))."
+    "text": "Introduction to functions in Python\n\nOne of the best things about Python is that there are many built-in commands you can use. These are called functions.\n\nFunctions have two basic parts:\n\n\nThe first part is the name of the function (for example, sum).\nThe second part is the input to the function, which goes inside the parentheses (sum([1, 5, 15]))."
   },
   {
     "objectID": "Tools/Tools1.slides.html#python-is-strict",
     "href": "Tools/Tools1.slides.html#python-is-strict",
     "title": "Tools for Data Science: Part I",
     "section": "Python is strict",
-    "text": "Python is strict\nPython, like all programming languages, is very strict. For example, if you write\n\nsum([1, 100])\n\n101\n\n\nit will tell you the answer, 101.\n\nBut if you write\n\nSum([1, 100])\n\n\n---------------------------------------------------------------------------\nNameError                                 Traceback (most recent call last)\nCell In[9], line 1\n----&gt; 1 Sum([1, 100])\n\nNameError: name 'Sum' is not defined\n\n\n\nwith the “s” capitalized, he will act like he has no idea what we are talking about!\n\nlo mismo si olvidas incluir un parentesis"
+    "text": "Python is strict\nPython, like all programming languages, is very strict. For example, if you write\n\nsum([1, 100])\n\n101\n\n\nit will tell you the answer, 101.\n\nBut if you write\n\nSum([1, 100])\n\n\n---------------------------------------------------------------------------\nNameError                                 Traceback (most recent call last)\nCell In[568], line 1\n----&gt; 1 Sum([1, 100])\n\nNameError: name 'Sum' is not defined\n\n\n\nwith the “s” capitalized, he will act like he has no idea what we are talking about!\n\nlo mismo si olvidas incluir un parentesis"
   },
   {
     "objectID": "Tools/Tools1.slides.html#save-your-work-in-python-objects",
     "href": "Tools/Tools1.slides.html#save-your-work-in-python-objects",
     "title": "Tools for Data Science: Part I",
     "section": "Save your work in Python objects",
-    "text": "Save your work in Python objects\nVirtually anything, including the results of any Python function, can be saved in an object.\nThis is accomplished by using an assignment operator, which can be an equals symbol (=).\n\nYou can make up any name you want for a Python object. However, there are two basic rules for this:\n\n\nIt has to be different from a function name in Python.\nIt has to be as specific as possible."
+    "text": "Save your work in Python objects\n\nVirtually anything, including the results of any Python function, can be saved in an object.\nThis is accomplished by using an assignment operator, which can be an equals symbol (=).\n\nYou can make up any name you want for a Python object. However, there are two basic rules for this:\n\n\nIt has to be different from a function name in Python.\nIt has to be as specific as possible."
   },
   {
     "objectID": "Tools/Tools1.slides.html#for-example",
     "href": "Tools/Tools1.slides.html#for-example",
     "title": "Tools for Data Science: Part I",
     "section": "For example",
-    "text": "For example\n\n# This code will assign the number 18\n# to the object called my_favorite_number\n\nmy_favorite_number = 18\n\nAfter running this code, nothing happens. But if we run the object on its own, we can see what’s inside it.\n\nmy_favorite_number\n\n18\n\n\nYou can also use print(my_favorite_number)."
+    "text": "For example\n\n\n# This code will assign the number 18\n# to the object called my_favorite_number\n\nmy_favorite_number = 18\n\nAfter running this code, nothing happens. But if we run the object on its own, we can see what’s inside it.\n\nmy_favorite_number\n\n18\n\n\nYou can also use print(my_favorite_number)."
   },
   {
     "objectID": "Tools/Tools1.slides.html#lists",
     "href": "Tools/Tools1.slides.html#lists",
     "title": "Tools for Data Science: Part I",
     "section": "Lists",
-    "text": "Lists\nSo far we have used Python objects to store a single number. But in statistics we are dealing with variation, which by definition needs more than one number.\n\nA Python object can also store a complete set of numbers, called a list.\nYou can think of a list as a vector of numbers (or values).\n\n\nThe [] command can be used to combine several individual values into a list.\n\npuedes pensar que el c es por combinar"
+    "text": "Lists\n\nSo far we have used Python objects to store a single number. But in statistics we are dealing with variation, which by definition needs more than one number.\n\nA Python object can also store a complete set of numbers, called a list.\nYou can think of a list as a vector of numbers (or values).\n\n\nThe [] command can be used to combine several individual values into a list.\n\npuedes pensar que el c es por combinar"
   },
   {
     "objectID": "Tools/Tools1.slides.html#for-example-1",
     "href": "Tools/Tools1.slides.html#for-example-1",
     "title": "Tools for Data Science: Part I",
     "section": "For example",
-    "text": "For example\nThis code creates two vectors\n\nmy_list = [1, 2, 3, 4, 5]\nmy_list_2 = [10, 10, 10, 10, 10]\n\nLet’s see its content\n\nmy_list\n\n[1, 2, 3, 4, 5]\n\n\n\nmy_list_2\n\n[10, 10, 10, 10, 10]"
+    "text": "For example\n\nThis code creates two vectors\n\nmy_list = [1, 2, 3, 4, 5]\nmy_list_2 = [10, 10, 10, 10, 10]\n\nLet’s see its content\n\nmy_list\n\n[1, 2, 3, 4, 5]\n\n\n\nmy_list_2\n\n[10, 10, 10, 10, 10]"
   },
   {
     "objectID": "Tools/Tools1.slides.html#operations",
     "href": "Tools/Tools1.slides.html#operations",
     "title": "Tools for Data Science: Part I",
     "section": "Operations",
-    "text": "Operations\nWe can do simple operations with vectors. For example, we can sum all the elements of a list.\n\nmy_list = [1, 2, 3, 4, 5]\nsum(my_list)\n\n15"
+    "text": "Operations\n\nWe can do simple operations with vectors. For example, we can sum all the elements of a list.\n\nmy_list = [1, 2, 3, 4, 5]\nsum(my_list)\n\n15"
   },
   {
     "objectID": "Tools/Tools1.slides.html#indexing",
     "href": "Tools/Tools1.slides.html#indexing",
     "title": "Tools for Data Science: Part I",
     "section": "Indexing",
-    "text": "Indexing\nWe can index a position in the vector using square brackets with a number like this: [1].\nSo, if we wanted to print the contents of the first position in my_list, we could write\n\nmy_list[1]\n\n2\n\n\nAn feature of Python is that the first element of a list or vector is indexed using the number 0.\n\nmy_list[0]\n\n1"
+    "text": "Indexing\n\nWe can index a position in the vector using square brackets with a number like this: [1].\nSo, if we wanted to print the contents of the first position in my_list, we could write\n\nmy_list[1]\n\n2\n\n\nAn feature of Python is that the first element of a list or vector is indexed using the number 0.\n\nmy_list[0]\n\n1"
   },
   {
     "objectID": "Tools/Tools1.slides.html#a-little-more-about-objects-in-python",
     "href": "Tools/Tools1.slides.html#a-little-more-about-objects-in-python",
     "title": "Tools for Data Science: Part I",
     "section": "A little more about objects in Python",
-    "text": "A little more about objects in Python\nYou can think of Python objects as containers that hold values.\nA Python object can hold a single value, or it can hold a group of values (as in a vector).\nSo far, we’ve only put numbers into Python objects.\n\n\nPython objects can actually contain three types of values: numbers, characters, and booleans."
+    "text": "A little more about objects in Python\n\nYou can think of Python objects as containers that hold values.\nA Python object can hold a single value, or it can hold a group of values (as in a vector).\nSo far, we’ve only put numbers into Python objects.\n\n\nPython objects can actually contain three types of values: numbers, characters, and booleans."
   },
   {
     "objectID": "Tools/Tools1.slides.html#character-values",
     "href": "Tools/Tools1.slides.html#character-values",
     "title": "Tools for Data Science: Part I",
     "section": "Character values",
-    "text": "Character values\nCharacters are made up of text, such as words or sentences. An example of a list with characters as elements is:\n\n\nmany_greetings = [\"hi\", \"hello\", \"hola\", \"bonjour\", \"ni hao\", \"merhaba\"]\nmany_greetings\n\n['hi', 'hello', 'hola', 'bonjour', 'ni hao', 'merhaba']\n\n\n\n\nIt is important to know that numbers can also be treated as characters, depending on the context.\nFor example, when 20 is enclosed in quotes (\"20\") it will be treated as a character value, even though it encloses a number in quotes."
+    "text": "Character values\n\nCharacters are made up of text, such as words or sentences. An example of a list with characters as elements is:\n\n\nmany_greetings = [\"hi\", \"hello\", \"hola\", \"bonjour\", \"ni hao\", \"merhaba\"]\nmany_greetings\n\n['hi', 'hello', 'hola', 'bonjour', 'ni hao', 'merhaba']\n\n\n\n\nIt is important to know that numbers can also be treated as characters, depending on the context.\nFor example, when 20 is enclosed in quotes (\"20\") it will be treated as a character value, even though it encloses a number in quotes."
   },
   {
     "objectID": "Tools/Tools1.slides.html#boolean-values",
     "href": "Tools/Tools1.slides.html#boolean-values",
     "title": "Tools for Data Science: Part I",
     "section": "Boolean values",
-    "text": "Boolean values\nBoolean values are True or False.\nWe may have a question like:\n\nIs the first element of the vector many_greetings \"hola\"?\n\n\nWe can ask Python to find out and return the answer True or False.\n\nmany_greetings[1] == \"hola\"\n\nFalse"
+    "text": "Boolean values\n\nBoolean values are True or False.\nWe may have a question like:\n\nIs the first element of the vector many_greetings \"hola\"?\n\n\nWe can ask Python to find out and return the answer True or False.\n\nmany_greetings[1] == \"hola\"\n\nFalse"
   },
   {
     "objectID": "Tools/Tools1.slides.html#logical-operators",
     "href": "Tools/Tools1.slides.html#logical-operators",
     "title": "Tools for Data Science: Part I",
     "section": "Logical operators",
-    "text": "Logical operators\nMost of the questions we ask Python to answer with True or False involve comparison operators like &gt;, &lt;, &gt;=, &lt;=, and ==.\nThe double == sign checks whether two values are equal. There is even a comparison operator to check whether values are not equal: !=.\nFor example, 5 != 3 is a True statement."
+    "text": "Logical operators\n\nMost of the questions we ask Python to answer with True or False involve comparison operators like &gt;, &lt;, &gt;=, &lt;=, and ==.\nThe double == sign checks whether two values are equal. There is even a comparison operator to check whether values are not equal: !=.\nFor example, 5 != 3 is a True statement."
   },
   {
     "objectID": "Tools/Tools1.slides.html#common-logical-operators",
     "href": "Tools/Tools1.slides.html#common-logical-operators",
     "title": "Tools for Data Science: Part I",
     "section": "Common logical operators",
-    "text": "Common logical operators\n\n&gt; (larger than)\n&gt;= (larger than or equal to)\n&lt; (smaller than)\n&lt;= (smaller than or equal to)\n== (equal to)\n!= (not equal to)"
+    "text": "Common logical operators\n\n\n&gt; (larger than)\n&gt;= (larger than or equal to)\n&lt; (smaller than)\n&lt;= (smaller than or equal to)\n== (equal to)\n!= (not equal to)"
   },
   {
     "objectID": "Tools/Tools1.slides.html#question",
     "href": "Tools/Tools1.slides.html#question",
     "title": "Tools for Data Science: Part I",
     "section": "Question",
-    "text": "Question\nRead this code and predict its response. Then, run the code in Google Colab and validate if you were correct.\n\nA = 1\nB = 5\ncompare = A &gt; B\ncompare"
+    "text": "Question\n\nRead this code and predict its response. Then, run the code in Google Colab and validate if you were correct.\n\nA = 1\nB = 5\ncompare = A &gt; B\ncompare"
   },
   {
     "objectID": "Tools/Tools1.slides.html#programming-culture-trial-and-error",
     "href": "Tools/Tools1.slides.html#programming-culture-trial-and-error",
     "title": "Tools for Data Science: Part I",
     "section": "Programming culture: Trial and error",
-    "text": "Programming culture: Trial and error\nThe best way to learn programming is to try things out and see what happens. Write some code, run it, and think about why it didn’t work.\nThere are many ways to make small mistakes in programming (for example, typing a capital letter when a lowercase letter is needed).\nWe often have to find these mistakes through trial and error."
+    "text": "Programming culture: Trial and error\n\nThe best way to learn programming is to try things out and see what happens. Write some code, run it, and think about why it didn’t work.\nThere are many ways to make small mistakes in programming (for example, typing a capital letter when a lowercase letter is needed).\nWe often have to find these mistakes through trial and error."
   },
   {
     "objectID": "Tools/Tools1.slides.html#python-libraries",
     "href": "Tools/Tools1.slides.html#python-libraries",
     "title": "Tools for Data Science: Part I",
     "section": "Python libraries",
-    "text": "Python libraries\nLibraries are the fundamental units of reproducible Python code. They include reusable Python functions, documentation describing how to use them, and sample data.\nIn this course, we will be working mostly with the following libraries:\n\npandas for data manipulation\nmatplotlib and seaborn for data visualization\nstatsmodels and scikit-learn for data modelling"
+    "text": "Python libraries\n\nLibraries are the fundamental units of reproducible Python code. They include reusable Python functions, documentation describing how to use them, and sample data.\nIn this course, we will be working mostly with the following libraries:\n\npandas for data manipulation\nmatplotlib and seaborn for data visualization\nstatsmodels and scikit-learn for data modelling"
   },
   {
     "objectID": "Tools/Tools1.slides.html#data-organization",
@@ -1411,7 +1411,7 @@
     "href": "Tools/Tools1.slides.html#pandas-library",
     "title": "Tools for Data Science: Part I",
     "section": "pandas library",
-    "text": "pandas library\n\n\n\n\n\n\n\n\n\npandas is an open-source Python library for data manipulation and analysis.\nIt is built on top of numpy for high-performance data operations..\nIt allows the user to import, clean, transform, and analyze data efficiently\nhttps://pandas.pydata.org/"
+    "text": "pandas library\n\n\n\n\n\n\n\n\n\n\npandas is an open-source Python library for data manipulation and analysis.\nIt is built on top of numpy for high-performance data operations..\nIt allows the user to import, clean, transform, and analyze data efficiently\nhttps://pandas.pydata.org/"
   },
   {
     "objectID": "Tools/Tools1.slides.html#importing-pandas",
@@ -1425,7 +1425,7 @@
     "href": "Tools/Tools1.slides.html#loading-data-using-pandas",
     "title": "Tools for Data Science: Part I",
     "section": "Loading data using pandas",
-    "text": "Loading data using pandas\nThe following code shows how to read the data in the file “penguins.xlsx” into Python.\n\n# Load the Excel file into a pandas DataFrame.\npenguins_data = pd.read_excel(\"penguins.xlsx\")"
+    "text": "Loading data using pandas\n\nThe following code shows how to read the data in the file “penguins.xlsx” into Python.\n\n# Load the Excel file into a pandas DataFrame.\npenguins_data = pd.read_excel(\"penguins.xlsx\")"
   },
   {
     "objectID": "Tools/Tools1.slides.html#the-function-head",
@@ -1614,7 +1614,7 @@
     "href": "LinearRegression/LinearRegression.slides.html#agenda",
     "title": "Multiple Linear Regression",
     "section": "Agenda",
-    "text": "Agenda\n\nIntroduction\nMultiple linear regression model\nParameter estimation"
+    "text": "Agenda\n\n\nIntroduction\nMultiple linear regression model\nParameter estimation"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#statsmodels-library",
@@ -1628,21 +1628,21 @@
     "href": "LinearRegression/LinearRegression.slides.html#load-the-libraries",
     "title": "Multiple Linear Regression",
     "section": "Load the libraries",
-    "text": "Load the libraries\nLet’s import statsmodels into Python together with the other relevant libraries.\n\n# Importing necessary libraries\nimport pandas as pd\nimport statsmodels.api as sm"
+    "text": "Load the libraries\n\nLet’s import statsmodels into Python together with the other relevant libraries.\n\n# Importing necessary libraries\nimport pandas as pd\nimport statsmodels.api as sm"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#example",
     "href": "LinearRegression/LinearRegression.slides.html#example",
     "title": "Multiple Linear Regression",
     "section": "Example",
-    "text": "Example\nA group of engineers conducted an experiment to determine the influence of five factors on an appropriate measure of the whiteness of rayon (\\(Y\\)). The factors (predictors) are\n\n\\(X_1\\): acid bath temperature.\n\\(X_2\\): cascade acid concentration.\n\\(X_3\\): water temperature.\n\\(X_4\\): sulfide concentration.\n\\(X_5\\): amount of chlorine bleach."
+    "text": "Example\n\nA group of engineers conducted an experiment to determine the influence of five factors on an appropriate measure of the whiteness of rayon (\\(Y\\)). The factors (predictors) are\n\n\\(X_1\\): acid bath temperature.\n\\(X_2\\): cascade acid concentration.\n\\(X_3\\): water temperature.\n\\(X_4\\): sulfide concentration.\n\\(X_5\\): amount of chlorine bleach."
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#the-dataset",
     "href": "LinearRegression/LinearRegression.slides.html#the-dataset",
     "title": "Multiple Linear Regression",
     "section": "The dataset",
-    "text": "The dataset\nThe dataset for the file is in “rayon.xlsx”. It has 26 observations.\n\nrayon_data = pd.read_excel(\"rayon.xlsx\")\nrayon_data.head()\n\n\n\n\n\n\n\n\nX1\nX2\nX3\nX4\nX5\nY\n\n\n\n\n0\n35\n0.3\n82\n0.2\n0.3\n76.5\n\n\n1\n35\n0.3\n82\n0.3\n0.5\n76.0\n\n\n2\n35\n0.3\n88\n0.2\n0.5\n79.9\n\n\n3\n35\n0.3\n88\n0.3\n0.3\n83.5\n\n\n4\n35\n0.7\n82\n0.2\n0.5\n89.5"
+    "text": "The dataset\n\nThe dataset for the file is in “rayon.xlsx”. It has 26 observations.\n\nrayon_data = pd.read_excel(\"rayon.xlsx\")\nrayon_data.head()\n\n\n\n\n\n\n\n\nX1\nX2\nX3\nX4\nX5\nY\n\n\n\n\n0\n35\n0.3\n82\n0.2\n0.3\n76.5\n\n\n1\n35\n0.3\n82\n0.3\n0.5\n76.0\n\n\n2\n35\n0.3\n88\n0.2\n0.5\n79.9\n\n\n3\n35\n0.3\n88\n0.3\n0.3\n83.5\n\n\n4\n35\n0.7\n82\n0.2\n0.5\n89.5"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#multiple-linear-regression-model-1",
@@ -1817,7 +1817,7 @@
     "href": "LinearRegression/LinearRegression.slides.html#predictions",
     "title": "Multiple Linear Regression",
     "section": "Predictions",
-    "text": "Predictions\nOnce we estimate the intercept and model coefficients, we make predictions as follows:\n\\[\\hat{Y}_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_{i1} + \\hat{\\beta}_2 X_{i2} + \\cdots + \\hat{\\beta}_p X_{ip}\\]\nwhere \\(\\hat{Y}_i\\) is the i-th fitted or predicted response.\nIn Python, we use the argument fittedvalues to show the predicted responses of the estimated model.\n\n# Make predictions using the the model\nrayon_Y_pred = linear_model.fittedvalues"
+    "text": "Predictions\n\nOnce we estimate the intercept and model coefficients, we make predictions as follows:\n\\[\\hat{Y}_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_{i1} + \\hat{\\beta}_2 X_{i2} + \\cdots + \\hat{\\beta}_p X_{ip}\\]\nwhere \\(\\hat{Y}_i\\) is the i-th fitted or predicted response.\nIn Python, we use the argument fittedvalues to show the predicted responses of the estimated model.\n\n# Make predictions using the the model\nrayon_Y_pred = linear_model.fittedvalues"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#section-10",
@@ -1831,7 +1831,7 @@
     "href": "LinearRegression/LinearRegression.slides.html#residuals",
     "title": "Multiple Linear Regression",
     "section": "Residuals",
-    "text": "Residuals\nNow that we have introduced the estimator \\(\\hat{\\beta}_0, \\hat{\\beta}_1, \\ldots, \\hat{\\beta}_p\\), we can be more specific in our terminology of the linear model.\n\nThe errors of the estimated model are called residuals \\(\\hat{\\epsilon}_i = Y_i - \\hat{Y}_i\\), \\(i = 1, \\ldots, n.\\)\n\nIf the model is correct, the residuals \\(\\hat{\\epsilon}_1, \\hat{\\epsilon}_2, \\ldots, \\hat{\\epsilon}_n\\) give us a good idea of the errors \\(\\epsilon_1, \\epsilon_2, \\ldots, \\epsilon_n\\)."
+    "text": "Residuals\n\nNow that we have introduced the estimator \\(\\hat{\\beta}_0, \\hat{\\beta}_1, \\ldots, \\hat{\\beta}_p\\), we can be more specific in our terminology of the linear model.\n\nThe errors of the estimated model are called residuals \\(\\hat{\\epsilon}_i = Y_i - \\hat{Y}_i\\), \\(i = 1, \\ldots, n.\\)\n\nIf the model is correct, the residuals \\(\\hat{\\epsilon}_1, \\hat{\\epsilon}_2, \\ldots, \\hat{\\epsilon}_n\\) give us a good idea of the errors \\(\\epsilon_1, \\epsilon_2, \\ldots, \\epsilon_n\\)."
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#section-11",
@@ -1845,7 +1845,7 @@
     "href": "LinearRegression/LinearRegression.slides.html#estimation-of-variance",
     "title": "Multiple Linear Regression",
     "section": "Estimation of variance",
-    "text": "Estimation of variance\nThe variance \\(\\sigma^2\\) of the errors is estimated by\n\\[\\hat{\\sigma}^2=\\frac{1}{n-p-1}\\sum_{i=1}^{n} \\hat{\\epsilon}_i^{2}.\\]\nIn Python, we compute \\(\\hat{\\sigma}^2\\) as follows.\n\nerror_variance = linear_model.scale\n\nprint( round(error_variance, 3) )\n\n105.931"
+    "text": "Estimation of variance\n\nThe variance \\(\\sigma^2\\) of the errors is estimated by\n\\[\\hat{\\sigma}^2=\\frac{1}{n-p-1}\\sum_{i=1}^{n} \\hat{\\epsilon}_i^{2}.\\]\nIn Python, we compute \\(\\hat{\\sigma}^2\\) as follows.\n\nerror_variance = linear_model.scale\n\nprint( round(error_variance, 3) )\n\n105.931"
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#section-12",
@@ -1866,14 +1866,14 @@
     "href": "Classification/Classification.slides.html#agenda",
     "title": "Logistic Regression",
     "section": "Agenda",
-    "text": "Agenda\n\nIntroduction\nLogistic regression\nEstimating a logistic regression model\nClassification performance"
+    "text": "Agenda\n\n\nIntroduction\nLogistic regression\nEstimating a logistic regression model\nClassification performance"
   },
   {
     "objectID": "Classification/Classification.slides.html#load-the-libraries",
     "href": "Classification/Classification.slides.html#load-the-libraries",
     "title": "Logistic Regression",
     "section": "Load the libraries",
-    "text": "Load the libraries\n\nBefore we start, let’s import the data science libraries into Python.\n\n# Importing necessary libraries\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport statsmodels.api as sm\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, accuracy_score\n\nHere, we will introduce the functions confusion_matrix(), ConfusionMatrixDisplay() and accuracy_score() to evaluate the performance of a logistic regression classifier."
+    "text": "Load the libraries\nBefore we start, let’s import the data science libraries into Python.\n\n# Importing necessary libraries\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport statsmodels.api as sm\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, accuracy_score\n\nHere, we will introduce the functions confusion_matrix(), ConfusionMatrixDisplay() and accuracy_score() to evaluate the performance of a logistic regression classifier."
   },
   {
     "objectID": "Classification/Classification.slides.html#two-main-problems",
@@ -2069,7 +2069,7 @@
     "href": "Classification/Classification.slides.html#section-9",
     "title": "Logistic Regression",
     "section": "",
-    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.035229\n         Iterations 13\nconst     57.511715\nLeft      -1.599913\nBottom     6.248731\nTop        8.682450\ndtype: float64"
+    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.040709\n         Iterations 12\nconst    -405.568176\nLeft        2.122109\nBottom      5.229510\nTop         7.590119\ndtype: float64"
   },
   {
     "objectID": "Classification/Classification.slides.html#parameter-testing",
@@ -2097,7 +2097,7 @@
     "href": "Classification/Classification.slides.html#section-11",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression model.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      136\nMethod:                           MLE   Df Model:                            3\nDate:                Wed, 07 May 2025   Pseudo R-squ.:                  0.9491\nTime:                        15:40:57   Log-Likelihood:                -4.9320\nconverged:                       True   LL-Null:                       -96.983\nCovariance Type:            nonrobust   LLR p-value:                 1.146e-39\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         57.5117    396.544      0.145      0.885    -719.700     834.724\nLeft          -1.5999      3.382     -0.473      0.636      -8.228       5.029\nBottom         6.2487      3.455      1.808      0.071      -0.524      13.021\nTop            8.6824      4.255      2.041      0.041       0.343      17.022\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.72 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
+    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression model.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      136\nMethod:                           MLE   Df Model:                            3\nDate:                Wed, 07 May 2025   Pseudo R-squ.:                  0.9411\nTime:                        20:41:24   Log-Likelihood:                -5.6993\nconverged:                       True   LL-Null:                       -96.683\nCovariance Type:            nonrobust   LLR p-value:                 3.315e-39\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -405.5682    392.401     -1.034      0.301   -1174.661     363.524\nLeft           2.1221      2.977      0.713      0.476      -3.712       7.957\nBottom         5.2295      2.022      2.586      0.010       1.266       9.194\nTop            7.5901      2.819      2.693      0.007       2.065      13.115\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.59 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
   },
   {
     "objectID": "Classification/Classification.slides.html#estimated-classifier",
@@ -2125,14 +2125,14 @@
     "href": "Classification/Classification.slides.html#section-13",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The predict() function outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n57     5.554155e-08\n150    9.999998e-01\n144    9.996305e-01\n87     1.527298e-04\n166    1.951533e-01\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors).\n\nTo turn the probabilities to actual classes, we round them:\n\npredicted_classes = round(predicted_probability).astype('int')"
+    "text": "The predict() function outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n165    1.000000\n109    0.999983\n146    0.999995\n178    1.000000\n58     0.009217\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors).\n\nTo turn the probabilities to actual classes, we round them:\n\npredicted_classes = round(predicted_probability).astype('int')"
   },
   {
     "objectID": "Classification/Classification.slides.html#section-14",
     "href": "Classification/Classification.slides.html#section-14",
     "title": "Logistic Regression",
     "section": "",
-    "text": "predicted_classes.head()\n\n57     0\n150    1\n144    1\n87     0\n166    0\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the validation dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
+    "text": "predicted_classes.head()\n\n165    1\n109    1\n146    1\n178    1\n58     0\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the validation dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
   },
   {
     "objectID": "Classification/Classification.slides.html#confusion-matrix",
@@ -2146,7 +2146,7 @@
     "href": "Classification/Classification.slides.html#in-python-1",
     "title": "Logistic Regression",
     "section": "In Python",
-    "text": "In Python\n\nWe compute the confusion matrix using the function with the same name of scikit-learn.\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[28  0]\n [ 5 27]]"
+    "text": "In Python\n\nWe compute the confusion matrix using the function with the same name of scikit-learn.\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[24  1]\n [ 1 34]]"
   },
   {
     "objectID": "Classification/Classification.slides.html#section-15",
@@ -2160,7 +2160,7 @@
     "href": "Classification/Classification.slides.html#accuracy",
     "title": "Logistic Regression",
     "section": "Accuracy",
-    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn Python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.92\n\n\n\n\nThe higher the accuracy, the better the performance of the classifier."
+    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn Python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.97\n\n\n\n\nThe higher the accuracy, the better the performance of the classifier."
   },
   {
     "objectID": "Classification/Classification.slides.html#remarks",
@@ -2174,7 +2174,7 @@
     "href": "Tools/Tools2.slides.html#agenda",
     "title": "Tools for Data Science: Part II",
     "section": "Agenda",
-    "text": "Agenda\n\nReview of data types and summary statistics\nData visualizations"
+    "text": "Agenda\n\n\nReview of data types and summary statistics\nData visualizations"
   },
   {
     "objectID": "Tools/Tools2.slides.html#types-of-data-i",
@@ -2209,21 +2209,21 @@
     "href": "Tools/Tools2.slides.html#section",
     "title": "Tools for Data Science: Part II",
     "section": "",
-    "text": "In python, we check the type of each variable in a dataset using the function info().\n\npenguins_data.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 344 entries, 0 to 343\nData columns (total 8 columns):\n #   Column             Non-Null Count  Dtype  \n---  ------             --------------  -----  \n 0   species            344 non-null    object \n 1   island             344 non-null    object \n 2   bill_length_mm     342 non-null    float64\n 3   bill_depth_mm      342 non-null    float64\n 4   flipper_length_mm  342 non-null    float64\n 5   body_mass_g        342 non-null    float64\n 6   sex                333 non-null    object \n 7   year               344 non-null    int64  \ndtypes: float64(4), int64(1), object(3)\nmemory usage: 21.6+ KB"
+    "text": "In Python, we check the type of each variable in a dataset using the function info().\n\npenguins_data.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 344 entries, 0 to 343\nData columns (total 8 columns):\n #   Column             Non-Null Count  Dtype  \n---  ------             --------------  -----  \n 0   species            344 non-null    object \n 1   island             344 non-null    object \n 2   bill_length_mm     342 non-null    float64\n 3   bill_depth_mm      342 non-null    float64\n 4   flipper_length_mm  342 non-null    float64\n 5   body_mass_g        342 non-null    float64\n 6   sex                333 non-null    object \n 7   year               344 non-null    int64  \ndtypes: float64(4), int64(1), object(3)\nmemory usage: 21.6+ KB"
   },
   {
     "objectID": "Tools/Tools2.slides.html#general-python-formats",
     "href": "Tools/Tools2.slides.html#general-python-formats",
     "title": "Tools for Data Science: Part II",
-    "section": "General python formats",
-    "text": "General python formats\n\nfloat64 format for numerical variables with decimals.\nint64 format for numerical variables with integers.\nobject format for general variables with characters."
+    "section": "General Python formats",
+    "text": "General Python formats\n\n\nfloat64 format for numerical variables with decimals.\nint64 format for numerical variables with integers.\nobject format for general variables with characters."
   },
   {
     "objectID": "Tools/Tools2.slides.html#define-categorical-variables",
     "href": "Tools/Tools2.slides.html#define-categorical-variables",
     "title": "Tools for Data Science: Part II",
     "section": "Define categorical variables",
-    "text": "Define categorical variables\nTechnically, the variable sex in penguins_data is categorical. To explicitly tell this to python, we use the following code.\n\npenguins_data['sex'] = pd.Categorical(penguins_data['sex'])\n\nSetting sex to categorical allows us to use effective visualization for this data.\nWe do the same for the other categorical variables species and island.\n\npenguins_data['species'] = pd.Categorical(penguins_data['species'])\npenguins_data['island'] = pd.Categorical(penguins_data['island'])"
+    "text": "Define categorical variables\nTechnically, the variable sex in penguins_data is categorical. To explicitly tell this to Python, we use the following code.\n\npenguins_data['sex'] = pd.Categorical(penguins_data['sex'])\n\nSetting sex to categorical allows us to use effective visualization for this data.\nWe do the same for the other categorical variables species and island.\n\npenguins_data['species'] = pd.Categorical(penguins_data['species'])\npenguins_data['island'] = pd.Categorical(penguins_data['island'])"
   },
   {
     "objectID": "Tools/Tools2.slides.html#section-1",
@@ -2237,7 +2237,7 @@
     "href": "Tools/Tools2.slides.html#summary-statistics",
     "title": "Tools for Data Science: Part II",
     "section": "Summary statistics",
-    "text": "Summary statistics\nA sample is often a long list of numbers. To help make the important features of a sample stand out, we compute summary statistics.\nFor numerical data, the most popular summary statistics are:\n\n\nSample mean\nSample variance and sample standard deviation\nSample quartiles\nSample maximum and minimum"
+    "text": "Summary statistics\n\nA sample is often a long list of numbers. To help make the important features of a sample stand out, we compute summary statistics.\nFor numerical data, the most popular summary statistics are:\n\n\nSample mean\nSample variance and sample standard deviation\nSample quartiles\nSample maximum and minimum"
   },
   {
     "objectID": "Tools/Tools2.slides.html#sample-mean",
@@ -2250,8 +2250,8 @@
     "objectID": "Tools/Tools2.slides.html#in-python",
     "href": "Tools/Tools2.slides.html#in-python",
     "title": "Tools for Data Science: Part II",
-    "section": "In python",
-    "text": "In python\nThe sample mean is calculated using the function mean().\n\nbill_length_mean = penguins_data['bill_length_mm'].mean()\nprint(bill_length_mean)\n\n43.9219298245614\n\n\nWe use the function print to show the number. Otherwise, python will show the computer type of value stored in bill_length_mean.\nYou can also round the result to, say, three decimals.\n\nprint( round(bill_length_mean, 3) )\n\n43.922"
+    "section": "In Python",
+    "text": "In Python\n\nThe sample mean is calculated using the function mean().\n\nbill_length_mean = penguins_data['bill_length_mm'].mean()\nprint(bill_length_mean)\n\n43.9219298245614\n\n\nWe use the function print to show the number. Otherwise, Python will show the computer type of value stored in bill_length_mean.\nYou can also round the result to, say, three decimals.\n\nprint( round(bill_length_mean, 3) )\n\n43.922"
   },
   {
     "objectID": "Tools/Tools2.slides.html#sample-variance",
@@ -2265,7 +2265,7 @@
     "href": "Tools/Tools2.slides.html#section-2",
     "title": "Tools for Data Science: Part II",
     "section": "",
-    "text": "In python, the sample variance is calculated using the function var().\n\nbill_length_var = penguins_data['bill_length_mm'].var()\nprint( round(bill_length_var, 3) )\n\n29.807"
+    "text": "In Python, the sample variance is calculated using the function var().\n\nbill_length_var = penguins_data['bill_length_mm'].var()\nprint( round(bill_length_var, 3) )\n\n29.807"
   },
   {
     "objectID": "Tools/Tools2.slides.html#sample-standard-deviation",
@@ -2279,35 +2279,35 @@
     "href": "Tools/Tools2.slides.html#section-3",
     "title": "Tools for Data Science: Part II",
     "section": "",
-    "text": "In python, the sample variance is calculated using the function std().\n\nbill_length_std = penguins_data['bill_length_mm'].std()\nprint( round(bill_length_std, 3) )\n\n5.46"
+    "text": "In Python, the sample variance is calculated using the function std().\n\nbill_length_std = penguins_data['bill_length_mm'].std()\nprint( round(bill_length_std, 3) )\n\n5.46"
   },
   {
     "objectID": "Tools/Tools2.slides.html#sample-quartiles",
     "href": "Tools/Tools2.slides.html#sample-quartiles",
     "title": "Tools for Data Science: Part II",
     "section": "Sample quartiles",
-    "text": "Sample quartiles\nThe sample median is the middle number of the ordered data values.\n\nSample quartiles divide the data as nearly as possible into quarters:\n\n\nFirst quartile (\\(Q_1\\)) is the median of the lower half of the data.\nSecond quartile (\\(Q_2\\)) is the median of the data.\nThird quartile (\\(Q_3\\)) is the median of the upper half of the data."
+    "text": "Sample quartiles\n\nThe sample median is the middle number of the ordered data values.\n\nSample quartiles divide the data as nearly as possible into quarters:\n\n\nFirst quartile (\\(Q_1\\)) is the median of the lower half of the data.\nSecond quartile (\\(Q_2\\)) is the median of the data.\nThird quartile (\\(Q_3\\)) is the median of the upper half of the data."
   },
   {
     "objectID": "Tools/Tools2.slides.html#section-5",
     "href": "Tools/Tools2.slides.html#section-5",
     "title": "Tools for Data Science: Part II",
     "section": "",
-    "text": "In python, the quartiles are calculated using the function quantile().\n\n# Set the quantiles.\nset_quantiles = [0.25, 0.5, 0.75]\n# Compute the quantiles.\npenguins_data['bill_length_mm'].quantile(set_quantiles)\n\n0.25    39.225\n0.50    44.450\n0.75    48.500\nName: bill_length_mm, dtype: float64"
+    "text": "In Python, the quartiles are calculated using the function quantile().\n\n# Set the quantiles.\nset_quantiles = [0.25, 0.5, 0.75]\n# Compute the quantiles.\npenguins_data['bill_length_mm'].quantile(set_quantiles)\n\n0.25    39.225\n0.50    44.450\n0.75    48.500\nName: bill_length_mm, dtype: float64"
   },
   {
     "objectID": "Tools/Tools2.slides.html#sample-maximum-and-minimum",
     "href": "Tools/Tools2.slides.html#sample-maximum-and-minimum",
     "title": "Tools for Data Science: Part II",
     "section": "Sample maximum and minimum",
-    "text": "Sample maximum and minimum\nOther relevant summary statistics are the maximum and minimum, which are calculated using the functions max() and min(), respectively.\n\nbill_length_max = penguins_data['bill_length_mm'].max()\nprint(bill_length_max)\n\n59.6\n\n\n\n\nbill_length_min = penguins_data['bill_length_mm'].min()\nprint(bill_length_min)\n\n32.1"
+    "text": "Sample maximum and minimum\n\nOther relevant summary statistics are the maximum and minimum, which are calculated using the functions max() and min(), respectively.\n\nbill_length_max = penguins_data['bill_length_mm'].max()\nprint(bill_length_max)\n\n59.6\n\n\n\n\nbill_length_min = penguins_data['bill_length_mm'].min()\nprint(bill_length_min)\n\n32.1"
   },
   {
     "objectID": "Tools/Tools2.slides.html#summary-statistics-for-categorical-data",
     "href": "Tools/Tools2.slides.html#summary-statistics-for-categorical-data",
     "title": "Tools for Data Science: Part II",
     "section": "Summary statistics for categorical data",
-    "text": "Summary statistics for categorical data\nThe most commonly used statistical summaries for categorical data are:\n\nThe frequency of a category is the number of observations that belong to that category.\nThe relative frequency is the frequency divided by the total number of observations."
+    "text": "Summary statistics for categorical data\n\nThe most commonly used statistical summaries for categorical data are:\n\nThe frequency of a category is the number of observations that belong to that category.\nThe relative frequency is the frequency divided by the total number of observations."
   },
   {
     "objectID": "Tools/Tools2.slides.html#frequency-table",
@@ -2335,7 +2335,7 @@
     "href": "Tools/Tools2.slides.html#section-6",
     "title": "Tools for Data Science: Part II",
     "section": "",
-    "text": "The dataset is in the file “glass.xlsx”. Let’s load it using pandas.\n\n# Load the Excel file into a pandas DataFrame.\nglass_data = pd.read_excel(\"glass.xlsx\")\n\n\nThe variable Type is categorical. So, let’s ensure python knows this using the code below.\n\nglass_data['Type'] = pd.Categorical(glass_data['Type'])"
+    "text": "The dataset is in the file “glass.xlsx”. Let’s load it using pandas.\n\n# Load the Excel file into a pandas DataFrame.\nglass_data = pd.read_excel(\"glass.xlsx\")\n\n\nThe variable Type is categorical. So, let’s ensure Python knows this using the code below.\n\nglass_data['Type'] = pd.Categorical(glass_data['Type'])"
   },
   {
     "objectID": "Tools/Tools2.slides.html#matplotlib-library",
@@ -2454,7 +2454,7 @@
     "href": "IntroductionDS/Introduction.slides.html#agenda",
     "title": "Introduction to Data Science",
     "section": "Agenda",
-    "text": "Agenda\n\nIntroduction to data science\nBasic notation and terminology"
+    "text": "Agenda\n\n\nIntroduction to data science\nBasic notation and terminology"
   },
   {
     "objectID": "IntroductionDS/Introduction.slides.html#data-science-is",
@@ -2496,14 +2496,14 @@
     "href": "IntroductionDS/Introduction.slides.html#business-understanding",
     "title": "Introduction to Data Science",
     "section": "Business understanding",
-    "text": "Business understanding\n\nBusiness understanding refers to defining the business problem to be solved.\nThe goal is to reframe the business problem as a data science problem.\nOften, reframing the problem and designing a solution is an iterative process."
+    "text": "Business understanding\n\n\nBusiness understanding refers to defining the business problem to be solved.\nThe goal is to reframe the business problem as a data science problem.\nOften, reframing the problem and designing a solution is an iterative process."
   },
   {
     "objectID": "IntroductionDS/Introduction.slides.html#common-data-science-problems",
     "href": "IntroductionDS/Introduction.slides.html#common-data-science-problems",
     "title": "Introduction to Data Science",
     "section": "Common data science problems",
-    "text": "Common data science problems\nRegression attempts to estimate or predict, for each individual, the numerical value of some variable for that individual. For example, “How much will a given customer use the service?”\n\nClassification (or class probability estimation) attempts to predict, for each individual in a population, which of a (small) set of classes this individual belongs to. For example, “Among all customers of T-Mobile, which are likely to respond to a given offer?”"
+    "text": "Common data science problems\n\nRegression attempts to estimate or predict, for each individual, the numerical value of some variable for that individual. For example, “How much will a given customer use the service?”\n\nClassification (or class probability estimation) attempts to predict, for each individual in a population, which of a (small) set of classes this individual belongs to. For example, “Among all customers of T-Mobile, which are likely to respond to a given offer?”"
   },
   {
     "objectID": "IntroductionDS/Introduction.slides.html#other-problems",
@@ -2517,21 +2517,21 @@
     "href": "IntroductionDS/Introduction.slides.html#discussion",
     "title": "Introduction to Data Science",
     "section": "Discussion",
-    "text": "Discussion\n\nOften, recasting the problem and designing a solution is an iterative process.\nThe initial formulation may not be complete or optimal, so multiple iterations may be necessary for an acceptable solution formulation.\nThey key to a great success is a creative problem formulation by some analyst regarding how to cast the business problem as one or more data science problems."
+    "text": "Discussion\n\n\nOften, recasting the problem and designing a solution is an iterative process.\nThe initial formulation may not be complete or optimal, so multiple iterations may be necessary for an acceptable solution formulation.\nThey key to a great success is a creative problem formulation by some analyst regarding how to cast the business problem as one or more data science problems."
   },
   {
     "objectID": "IntroductionDS/Introduction.slides.html#data-understanding-i",
     "href": "IntroductionDS/Introduction.slides.html#data-understanding-i",
     "title": "Introduction to Data Science",
     "section": "Data understanding I",
-    "text": "Data understanding I\n\n\nIf the goal is to solve a business problem, the data that makes up the raw material available from which the solution will be built.\nThe available data rarely matches the problem.\nFor example, historical data is often collected for purposes unrelated to the current business problem or for no explicit purpose at all."
+    "text": "Data understanding I\n\n\n\nIf the goal is to solve a business problem, the data that makes up the raw material available from which the solution will be built.\nThe available data rarely matches the problem.\nFor example, historical data is often collected for purposes unrelated to the current business problem or for no explicit purpose at all."
   },
   {
     "objectID": "IntroductionDS/Introduction.slides.html#data-understanding-ii",
     "href": "IntroductionDS/Introduction.slides.html#data-understanding-ii",
     "title": "Introduction to Data Science",
     "section": "Data understanding II",
-    "text": "Data understanding II\n\nThe costs of data vary. Some data will be available for free while others will require effort to obtain.\n\n\n\nA critical part of the data understanding phase is estimating the costs and benefits of each data source and deciding wether further investment is merited.\nEven after all datasets are acquired, collating them may require additional effort."
+    "text": "Data understanding II\n\n\nThe costs of data vary. Some data will be available for free while others will require effort to obtain.\n\n\n\nA critical part of the data understanding phase is estimating the costs and benefits of each data source and deciding wether further investment is merited.\nEven after all datasets are acquired, collating them may require additional effort."
   },
   {
     "objectID": "IntroductionDS/Introduction.slides.html#our-goal",
@@ -2552,21 +2552,21 @@
     "href": "IntroductionDS/Introduction.slides.html#numerical-data",
     "title": "Introduction to Data Science",
     "section": "Numerical data",
-    "text": "Numerical data\nData science methodology is based on numerical data given in tables.\n\n\nIn fact, texts, images, videos or audios are transformed into this format to process them.\n\n\nIn this course, we will assume that the data is in a table."
+    "text": "Numerical data\n\nData science methodology is based on numerical data given in tables.\n\n\nIn fact, texts, images, videos or audios are transformed into this format to process them.\n\n\nIn this course, we will assume that the data is in a table."
   },
   {
     "objectID": "IntroductionDS/Introduction.slides.html#notation-and-terminology",
     "href": "IntroductionDS/Introduction.slides.html#notation-and-terminology",
     "title": "Introduction to Data Science",
     "section": "Notation and terminology",
-    "text": "Notation and terminology\nExplanatory variables or predictors:\n\n\\(X\\) represents an explanatory variable or predictor.\n\\(\\boldsymbol{X} = (X_1, X_2, \\ldots, X_p)\\) represents a whole collection of \\(p\\) predictors.\n\nOutcome or response:\n\n\\(Y\\) represents the response variable, which we’ll try to predict."
+    "text": "Notation and terminology\n\nExplanatory variables or predictors:\n\n\\(X\\) represents an explanatory variable or predictor.\n\\(\\boldsymbol{X} = (X_1, X_2, \\ldots, X_p)\\) represents a whole collection of \\(p\\) predictors.\n\nOutcome or response:\n\n\\(Y\\) represents the response variable, which we’ll try to predict."
   },
   {
     "objectID": "IntroductionDS/Introduction.slides.html#two-main-problems",
     "href": "IntroductionDS/Introduction.slides.html#two-main-problems",
     "title": "Introduction to Data Science",
     "section": "Two main problems",
-    "text": "Two main problems\nRegression problems. The response \\(Y\\) is quantitative. For example, a person’s income, the value of a house, the blood pressure of a patient.\nClassification problems. The response \\(Y\\) is qualitative and has \\(K\\) different categories. For example, the brand of a product purchased (A, B, C), or whether a person defaults on a debt (yes or no).\nThe predictors (\\(\\boldsymbol{X}\\)) can be qualitative or quantitative."
+    "text": "Two main problems\n\nRegression problems. The response \\(Y\\) is quantitative. For example, a person’s income, the value of a house, the blood pressure of a patient.\nClassification problems. The response \\(Y\\) is qualitative and has \\(K\\) different categories. For example, the brand of a product purchased (A, B, C), or whether a person defaults on a debt (yes or no).\nThe predictors (\\(\\boldsymbol{X}\\)) can be qualitative or quantitative."
   },
   {
     "objectID": "IntroductionDS/Introduction.slides.html#example",
@@ -2580,14 +2580,14 @@
     "href": "IntroductionDS/Introduction.slides.html#a-statistical-model",
     "title": "Introduction to Data Science",
     "section": "A statistical model",
-    "text": "A statistical model\nA statistical model is a mathematical equation that embodies statistical assumptions concerning the generation of data.\nTechnically, it has the following form:\n\\[Y = f(\\boldsymbol{X}) + \\epsilon \\]\nwhere \\(Y\\) is a quantitative response, \\(f(\\boldsymbol{X})\\) is the function that relates the predictors, \\(\\boldsymbol{X}\\), to the \\(Y\\), and \\(\\epsilon\\) is the (random) error term."
+    "text": "A statistical model\n\nA statistical model is a mathematical equation that embodies statistical assumptions concerning the generation of data.\nTechnically, it has the following form:\n\\[Y = f(\\boldsymbol{X}) + \\epsilon \\]\nwhere \\(Y\\) is a quantitative response, \\(f(\\boldsymbol{X})\\) is the function that relates the predictors, \\(\\boldsymbol{X}\\), to the \\(Y\\), and \\(\\epsilon\\) is the (random) error term."
   },
   {
     "objectID": "IntroductionDS/Introduction.slides.html#true-and-estimated-models",
     "href": "IntroductionDS/Introduction.slides.html#true-and-estimated-models",
     "title": "Introduction to Data Science",
     "section": "True and estimated models",
-    "text": "True and estimated models\n\\(f(\\boldsymbol{X})\\) represents the TRUTH. The true relationship between \\(\\boldsymbol{X}\\) and \\(Y\\).\n\nUnknown\nVery complex\n\n\n\\(\\hat{f}(\\boldsymbol{X})\\) represents an approximation or estimate of the true model constructed using data.\n\nIdeally, interpretable (but not necessarily)"
+    "text": "True and estimated models\n\n\\(f(\\boldsymbol{X})\\) represents the TRUTH. The true relationship between \\(\\boldsymbol{X}\\) and \\(Y\\).\n\nUnknown\nVery complex\n\n\n\\(\\hat{f}(\\boldsymbol{X})\\) represents an approximation or estimate of the true model constructed using data.\n\nIdeally, interpretable (but not necessarily)"
   },
   {
     "objectID": "IntroductionDS/Introduction.slides.html#two-datasets",

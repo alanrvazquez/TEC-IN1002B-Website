@@ -20,6 +20,8 @@ jupyter: python3
 
 ## Agenda
 
+</br>
+
 1.  Linear models with categorical variables
 2.  Linear models with standardized numerical predictors
 3.  Remedies for faulty assumptions
@@ -27,7 +29,9 @@ jupyter: python3
 
 ## Load the libraries
 
-Let's import **scikit-learn** into python together with the other relevant libraries.
+</br>
+
+Let's import **scikit-learn** into Python together with the other relevant libraries.
 
 ```{python}
 #| echo: true
@@ -92,6 +96,8 @@ auto_data[['mpg', 'origin']].head(6)
 ```
 
 ## Dummy variables
+
+</br>
 
 Origin has 3 categories: European, American, Japanese.
 
@@ -164,7 +170,7 @@ Given this model representation:
 -   $\beta_1$ is the difference in the mean mpg between European and American cars, and
 -   $\beta_2$ is the difference in the mean mpg between Japanese and American cars.
 
-## In python
+## In Python
 
 </br>
 
@@ -258,7 +264,7 @@ Note that these models have different intercepts but the same slope.
 -   We could make individual inferences on $\beta_1$ and $\beta_2$ using t-tests and confidence intervals.
 -   However, better tests are possible such as overall and partial F-tests (not discussed here).
 
-## In python
+## In Python
 
 </br>
 
@@ -340,7 +346,7 @@ Interpretation:
 
 ::: incremental
 -   $\beta_0$ is the mean response when all [**original**]{style="color:darkblue;"} predictors $X_1, X_2, \ldots, X_p$ are set to their average value.
--   $\beta_j$ is the amount of increase in the mean response by an increase of 1 standard deviation in the [**original**]{style="color:darkblue;"} predictor $X_j$, *when all other predictors are fixed to an arbitrary value*.
+-   $\beta_j$ is the amount of increase in the mean response by an increase of 1 standard deviation in the [**original**]{style="color:darkblue;"} predictor $X_j,$ *when all other predictors are fixed to an arbitrary value*.
 :::
 
 ## Example 2
@@ -370,7 +376,7 @@ catalyst_data = pd.read_excel("catalyst.xlsx")
 print(catalyst_data)
 ```
 
-## Standarization in python
+## Standarization in Python
 
 </br>
 
@@ -571,7 +577,7 @@ $$\sqrt{Y} = \beta_0 + \beta_1 X + \epsilon$$ $$\sqrt{Y} = \beta_0 + \beta_1 \sq
 
 ::::: columns
 ::: {.column width="60%"}
--   **numpy** is a powerful, open-source data manipulation and analysis library for python
+-   **numpy** is a powerful, open-source data manipulation and analysis library for Python
 -   It is the backbone for **scikit-learn** and **pandas**
 -   <https://numpy.org/>
 :::
@@ -964,7 +970,7 @@ Benefits:
 -   It can also be interpreted as the average distance between the observed response values and the model predictions.
 :::
 
-## In python
+## In Python
 
 </br>
 

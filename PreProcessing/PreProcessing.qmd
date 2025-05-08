@@ -20,6 +20,8 @@ jupyter: python3
 
 ## Agenda
 
+</br>
+
 1.  Introduction
 2.  Dealing with missing values
 3.  Transforming categorical predictors
@@ -70,7 +72,7 @@ In particular, we will review:
 
 </br>
 
-Let's import **scikit-learn** into python together with the other relevant libraries.
+Let's import **scikit-learn** into Python together with the other relevant libraries.
 
 ```{python}
 #| echo: true
@@ -178,7 +180,7 @@ penguins_data.info()
 
 The value next to "RangeIndex" is the number of observations in the dataset.
 
-##
+## 
 
 </br>
 
@@ -444,7 +446,7 @@ The variable Origin would then be replaced by the three dummy variables.
 | Japanese     | 0        | 1        |
 | $\vdots$     | $\vdots$ | $\vdots$ |
 
-## Dummy variables in python
+## Dummy variables in Python
 
 </br>
 
@@ -486,6 +488,8 @@ augmented_auto.head()
 
 ## Removing predictors
 
+</br>
+
 There are potential advantages to removing predictors prior to modeling:
 
 ::: incremental
@@ -499,6 +503,8 @@ There are potential advantages to removing predictors prior to modeling:
 Here, we will see two techniques to remove predictors.
 
 ## Near-Zero variance predictors
+
+</br>
 
 A **near-zero variance predictor variable** is one that has only a handful of unique values that occur with very low frequencies.
 
@@ -516,6 +522,8 @@ Since the values of this predictor variable do not vary or change at all, this p
 
 ## Example 3
 
+</br>
+
 We consider a data set related to Glass identification. The data has 214 glass samples labeled as one of seven glass categories. There are nine predictors including the refractive index (RI) and percentages of eight elements: Na, Mg, Al, Si, K, Ca, Ba, and Fe.
 
 Let's read the data set. Note that this is a modified version of the original data.
@@ -531,7 +539,7 @@ glass_data = pd.read_excel('glass.xlsx')
 sb_glass = glass_data.drop(columns=['Type'])
 ```
 
-## In python
+## In Python
 
 We use the function `VarianceThreshold()` to set the threshold for determining a *low* sample variance. We also use other functions such as `selector.fit()` and `selector.get_support()`.
 
@@ -597,7 +605,7 @@ complete_sbAuto = complete_Auto[['cylinders', 'displacement',
 
 </br>
 
-In python, we calculate the correlation matrix using the command below.
+In Python, we calculate the correlation matrix using the command below.
 
 ```{python}
 #| echo: true
@@ -724,7 +732,7 @@ The distance between these points is $\sqrt{(69 - 175)^2 + (1613-5140)^2}$ $= \s
 :::
 :::::
 
-## Standarization in python
+## Standarization in Python
 
 </br>
 

@@ -20,6 +20,8 @@ jupyter: python3
 
 ## Agenda
 
+</br>
+
 1.  Residual analysis
 2.  Inference about individual $\beta$'s using t-tests
 3.  Multiple and adjusted $R^2$ statistics
@@ -28,7 +30,7 @@ jupyter: python3
 
 </br></br>
 
-Let's import **statsmodels** into python together with the other relevant libraries.
+Let's import **statsmodels** into Python together with the other relevant libraries.
 
 ```{python}
 #| echo: true
@@ -327,7 +329,7 @@ The straight line is usually determined visually, with emphasis on the central v
 
 For a nice explanation, see this [YouTube video](https://www.youtube.com/watch?v=okjYjClSjOg&ab_channel=StatQuestwithJoshStarmer).
 
-## QQ plot in python
+## QQ plot in Python
 
 </br></br></br>
 
@@ -468,6 +470,8 @@ Therefore, assessing the amount of the uncertainty in these estimators is import
 
 ## Hypothesis test
 
+</br>
+
 > A statistical hypothesis is a statement about the coefficients of a model.
 
 . . .
@@ -528,13 +532,13 @@ The test statistic is
 $$t_0 = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }$$
 
 -   $\hat{\beta}_j$ is the least squares estimate of the true coefficient $\beta_j$.
--   $\hat{v}_{jj}$ is the *standard error* of the estimate $\hat{\beta}_j$ calculated using python.
+-   $\hat{v}_{jj}$ is the *standard error* of the estimate $\hat{\beta}_j$ calculated using Python.
 
 ## 
 
 </br>
 
-Recall that we obtain the least squares estimates ($\hat{\beta}_{j}$) in python using:
+Recall that we obtain the least squares estimates ($\hat{\beta}_{j}$) in Python using:
 
 ```{python}
 #| echo: true
@@ -656,7 +660,7 @@ No scientific basis for this advice. In practice, report the p-value and explore
 
 ![](images/clipboard-1571120222.png){fig-align="center"}
 
-## t-tests in python
+## t-tests in Python
 
 We obtain the t-tests of the coefficients using the function `summary()` together with the `linear_model` object.
 
@@ -815,7 +819,7 @@ $$R_{adj}^2=1-\frac{RSS/(n-k-1)}{SS_{total}/(n-1)}$$
 
 -   So, adjusted $R^2$ is a better measure of whether adding a new predictor is an improvement. If adjusted $R^2$ goes down or stays the same, the new predictor is irrelevant. If it goes up, then it is probably useful.
 
-## In python
+## In Python
 
 </br>
 

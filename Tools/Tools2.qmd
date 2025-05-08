@@ -20,6 +20,8 @@ jupyter: python3
 
 ## Agenda
 
+</br>
+
 1.  Review of data types and summary statistics
 2.  Data visualizations
 
@@ -68,7 +70,9 @@ penguins_data.head(4)
 
 ## 
 
-In python, we check the type of each variable in a dataset using the function `info()`.
+</br>
+
+In Python, we check the type of each variable in a dataset using the function `info()`.
 
 ```{python}
 #| echo: true
@@ -76,7 +80,9 @@ In python, we check the type of each variable in a dataset using the function `i
 penguins_data.info()
 ```
 
-## General python formats
+## General Python formats
+
+</br>
 
 -   `float64` format for numerical variables with decimals.
 -   `int64` format for numerical variables with integers.
@@ -84,7 +90,7 @@ penguins_data.info()
 
 ## Define categorical variables
 
-Technically, the variable `sex` in `penguins_data` is [**categorical**]{style="color:pink;"}. To explicitly tell this to python, we use the following code.
+Technically, the variable `sex` in `penguins_data` is [**categorical**]{style="color:pink;"}. To explicitly tell this to Python, we use the following code.
 
 ```{python}
 #| echo: true
@@ -105,6 +111,8 @@ penguins_data['island'] = pd.Categorical(penguins_data['island'])
 
 ## 
 
+</br>
+
 Let's check the type of variables again.
 
 ```{python}
@@ -114,6 +122,8 @@ penguins_data.info()
 ```
 
 ## Summary statistics
+
+</br>
 
 A sample is often a long list of numbers. To help make the important features of a sample stand out, we compute summary statistics.
 
@@ -138,7 +148,9 @@ $$\bar{y} = \frac{1}{n}\sum_{i=1}^{n} y_i = \frac{y_1 + y_2 + \cdots + y_n}{n}.$
 
 The sample mean gives an indication of the center of the data.
 
-## In python
+## In Python
+
+</br>
 
 The sample mean is calculated using the function `mean()`.
 
@@ -150,7 +162,7 @@ bill_length_mean = penguins_data['bill_length_mm'].mean()
 print(bill_length_mean)
 ```
 
-We use the function print to show the number. Otherwise, python will show the computer type of value stored in `bill_length_mean`.
+We use the function print to show the number. Otherwise, Python will show the computer type of value stored in `bill_length_mean`.
 
 You can also round the result to, say, three decimals.
 
@@ -181,7 +193,7 @@ It gives an indication of how spread out the data are.
 
 </br></br>
 
-In python, the sample variance is calculated using the function `var()`.
+In Python, the sample variance is calculated using the function `var()`.
 
 ```{python}
 #| echo: true
@@ -207,7 +219,7 @@ This quantity is known as the sample standard deviation. [*It is in the same uni
 
 </br></br>
 
-In python, the sample variance is calculated using the function `std()`.
+In Python, the sample variance is calculated using the function `std()`.
 
 ```{python}
 #| echo: true
@@ -218,6 +230,8 @@ print( round(bill_length_std, 3) )
 ```
 
 ## Sample quartiles
+
+</br>
 
 The [**sample median**]{style="color:darkgreen;"} is the middle number of the ordered data values.
 
@@ -243,7 +257,7 @@ The [**sample median**]{style="color:darkgreen;"} is the middle number of the or
 
 </br>
 
-In python, the quartiles are calculated using the function `quantile()`.
+In Python, the quartiles are calculated using the function `quantile()`.
 
 ```{python}
 #| echo: true
@@ -256,6 +270,8 @@ penguins_data['bill_length_mm'].quantile(set_quantiles)
 ```
 
 ## Sample maximum and minimum
+
+</br>
 
 Other relevant summary statistics are the **maximum** and **minimum**, which are calculated using the functions `max()` and `min()`, respectively.
 
@@ -278,6 +294,8 @@ print(bill_length_min)
 ```
 
 ## Summary statistics for categorical data
+
+</br>
 
 The most commonly used statistical summaries for categorical data are:
 
@@ -387,7 +405,7 @@ glass_data = pd.read_excel("glass.xlsx")
 
 </br>
 
-The variable `Type` is categorical. So, let's ensure python knows this using the code below.
+The variable `Type` is categorical. So, let's ensure Python knows this using the code below.
 
 ```{python}
 #| echo: true

@@ -20,6 +20,8 @@ jupyter: python3
 
 ## Agenda
 
+</br>
+
 1.  Introduction
 2.  Multiple linear regression model
 3.  Parameter estimation
@@ -34,6 +36,8 @@ jupyter: python3
 ![](images/statsmodels-logo-v2-horizontal-dark.svg){fig-align="center"}
 
 ## Load the libraries
+
+</br></br>
 
 Let's import **statsmodels** into Python together with the other relevant libraries.
 
@@ -50,6 +54,8 @@ import statsmodels.api as sm
 
 ## Example
 
+</br>
+
 A group of engineers conducted an experiment to determine the influence of five factors on an appropriate measure of the whiteness of rayon ($Y$). The factors (predictors) are
 
 -   $X_1$: acid bath temperature.
@@ -59,6 +65,8 @@ A group of engineers conducted an experiment to determine the influence of five 
 -   $X_5$: amount of chlorine bleach.
 
 ## The dataset
+
+</br>
 
 The dataset for the file is in "rayon.xlsx". It has 26 observations.
 
@@ -385,6 +393,8 @@ For example:
 
 ## Predictions
 
+</br>
+
 Once we estimate the intercept and model coefficients, we make predictions as follows:
 
 $$\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \hat{\beta}_2 X_{i2} + \cdots + \hat{\beta}_p X_{ip}$$
@@ -403,6 +413,8 @@ rayon_Y_pred = linear_model.fittedvalues
 
 ## 
 
+</br>
+
 Predictions of the 26 observations in the training dataset.
 
 ```{python}
@@ -413,6 +425,8 @@ print(rayon_Y_pred)
 ```
 
 ## Residuals
+
+</br>
 
 Now that we have introduced the estimator $\hat{\beta}_0, \hat{\beta}_1, \ldots, \hat{\beta}_p$, we can be more specific in our terminology of the linear model.
 
@@ -439,6 +453,8 @@ print(residuals)
 
 ## Estimation of variance
 
+</br>
+
 The variance $\sigma^2$ of the errors is estimated by
 
 $$\hat{\sigma}^2=\frac{1}{n-p-1}\sum_{i=1}^{n} \hat{\epsilon}_i^{2}.$$
@@ -455,6 +471,8 @@ print( round(error_variance, 3) )
 ```
 
 ## 
+
+</br>
 
 The smaller the value of $\hat{\sigma}^2$, the closer our predictions are to the actual responses.
 
