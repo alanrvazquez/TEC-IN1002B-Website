@@ -95,7 +95,7 @@ Backed by trillions of bytes of shopper history stored in Wal-Mart’s data ware
 ::::::
 :::::::
 
-## In fact, that's what happened!
+## The result
 
 ::::::: columns
 :::: {.column width="50%"}

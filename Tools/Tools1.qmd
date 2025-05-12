@@ -69,6 +69,15 @@ What do you think will happen if we run this command?
 print("Hello world!")
 ```
 
+. . .
+
+```{python}
+#| echo: false
+#| output: true
+
+print("Hello world!")
+```
+
 ## Let's try another command
 
 What do you think will happen if we run this command?
@@ -79,6 +88,16 @@ What do you think will happen if we run this command?
 
 sum([1, 5, 10])
 ```
+
+. . .
+
+```{python}
+#| echo: false
+#| output: true
+
+sum([1, 5, 10])
+```
+
 
 ## Use Python as a basic calculator
 
