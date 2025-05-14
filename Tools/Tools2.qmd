@@ -152,17 +152,24 @@ The sample mean gives an indication of the center of the data.
 
 </br>
 
-The sample mean is calculated using the function `mean()`.
+The sample mean is calculated using the function `.agg()` with "mean".
 
 ```{python}
 #| echo: true
 #| output: true
 
-bill_length_mean = penguins_data['bill_length_mm'].mean()
+bill_length_mean = (penguins_data
+                    .filter(['bill_length_mm'], axis = 1)
+                    .agg("mean")
+                    )
 print(bill_length_mean)
 ```
 
 We use the function print to show the number. Otherwise, Python will show the computer type of value stored in `bill_length_mean`.
+
+## 
+
+</br></br>
 
 You can also round the result to, say, three decimals.
 
@@ -193,13 +200,16 @@ It gives an indication of how spread out the data are.
 
 </br></br>
 
-In Python, the sample variance is calculated using the function `var()`.
+In Python, the sample variance is calculated using the function  `agg()` with "var".
 
 ```{python}
 #| echo: true
 #| output: true
 
-bill_length_var = penguins_data['bill_length_mm'].var()
+bill_length_var = (penguins_data
+                    .filter(['bill_length_mm'], axis = 1)
+                    .agg("var")
+                    )
 print( round(bill_length_var, 3) )
 ```
 
@@ -219,13 +229,16 @@ This quantity is known as the sample standard deviation. [*It is in the same uni
 
 </br></br>
 
-In Python, the sample variance is calculated using the function `std()`.
+In Python, the sample variance is calculated using the function `agg()` with "std".
 
 ```{python}
 #| echo: true
 #| output: true
 
-bill_length_std = penguins_data['bill_length_mm'].std()
+bill_length_std = (penguins_data
+                    .filter(['bill_length_mm'], axis = 1)
+                    .agg("std")
+                    )
 print( round(bill_length_std, 3) )
 ```
 
@@ -266,12 +279,13 @@ In Python, the quartiles are calculated using the function `quantile()`.
 # Set the quantiles.
 set_quantiles = [0.25, 0.5, 0.75]
 # Compute the quantiles.
-penguins_data['bill_length_mm'].quantile(set_quantiles)
+(penguins_data
+ .filter(['bill_length_mm'], axis = 1)
+ .agg("quantile", q = set_quantiles)
+)
 ```
 
 ## Sample maximum and minimum
-
-</br>
 
 Other relevant summary statistics are the **maximum** and **minimum**, which are calculated using the functions `max()` and `min()`, respectively.
 
@@ -279,17 +293,21 @@ Other relevant summary statistics are the **maximum** and **minimum**, which are
 #| echo: true
 #| output: true
 
-bill_length_max = penguins_data['bill_length_mm'].max()
+bill_length_max = (penguins_data
+                   .filter(['bill_length_mm'], axis = 1)
+                   .agg("max")
+                  )
 print(bill_length_max)
 ```
-
-</br>
 
 ```{python}
 #| echo: true
 #| output: true
 
-bill_length_min = penguins_data['bill_length_mm'].min()
+bill_length_min = (penguins_data
+                   .filter(['bill_length_mm'], axis = 1)
+                   .agg("min")
+                  )
 print(bill_length_min)
 ```
 
@@ -314,7 +332,10 @@ Summarizes a categorical variable by counting the values per category.
 #| output: true
 #| code-overflow: wrap
 
-penguins_data['species'].value_counts()
+(penguins_data
+  .filter(['species'], axis = 1)
+  .value_counts()
+)  
 ```
 :::
 
@@ -353,11 +374,10 @@ Summarizes a categorical variable by calculating the *proportion of values* per 
 #| output: true
 #| code-overflow: wrap
 
-# Calculate number of observations in the dataset.
-n = len(penguins_data) 
-
-# Calculate relative frequency.
-penguins_data['species'].value_counts()/n
+(penguins_data
+ .filter(['species'], axis = 1)
+ .value_counts(normalize = True)
+)
 ```
 :::
 

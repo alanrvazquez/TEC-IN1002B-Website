@@ -921,13 +921,5 @@ mean_penguins_data
 <https://wesmckinney.com/book/>
 :::
 
-## Final remarks
-
-</br>
-
--   **pandas** is a Python library for data manipulation.
--   Understanding variable types helps determine the best operations and visualizations.
--   There are specific charts for numerical and categorical variables.
--   Throughout this course, we will explore various visualizations for different types of data.
 
 # [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)

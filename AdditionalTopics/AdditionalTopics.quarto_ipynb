@@ -40,7 +40,7 @@
         "\n",
         "Let's import **scikit-learn** into Python together with the other relevant libraries.\n"
       ],
-      "id": "32bb93f4"
+      "id": "e9c5c8a2"
     },
     {
       "cell_type": "code",
@@ -58,7 +58,7 @@
         "from sklearn.model_selection import train_test_split\n",
         "from sklearn.metrics import mean_squared_error"
       ],
-      "id": "88bc8768",
+      "id": "97bce896",
       "execution_count": null,
       "outputs": []
     },
@@ -96,7 +96,7 @@
         "\n",
         "The auto data set includes a categorical variable “Origin” which shows the origin of each car.\n"
       ],
-      "id": "90066eb7"
+      "id": "d1b205eb"
     },
     {
       "cell_type": "code",
@@ -110,7 +110,7 @@
         "# Set categorical variables.\n",
         "auto_data['origin'] = pd.Categorical(auto_data['origin'])"
       ],
-      "id": "5c8bfb11",
+      "id": "9b35459f",
       "execution_count": null,
       "outputs": []
     },
@@ -120,7 +120,7 @@
       "source": [
         "## Dataset\n"
       ],
-      "id": "43c7bd96"
+      "id": "33a1e26e"
     },
     {
       "cell_type": "code",
@@ -130,7 +130,7 @@
         "# Show dataset.\n",
         "auto_data[['mpg', 'origin']].head(6)"
       ],
-      "id": "a891813f",
+      "id": "d5228670",
       "execution_count": null,
       "outputs": []
     },
@@ -219,7 +219,7 @@
         "\n",
         "We follow three steps to fit a linear model with a categorical predictor. First, we compute the dummy variables.\n"
       ],
-      "id": "3e4337da"
+      "id": "3e39e920"
     },
     {
       "cell_type": "code",
@@ -233,7 +233,7 @@
         "                            dtype = 'int')\n",
         "dummy_data.head()"
       ],
-      "id": "0618ee21",
+      "id": "ca30ccc6",
       "execution_count": null,
       "outputs": []
     },
@@ -243,7 +243,7 @@
       "source": [
         "Next, we construct the matrix of predictors with the intercept.\n"
       ],
-      "id": "f199b75c"
+      "id": "5e86d5f6"
     },
     {
       "cell_type": "code",
@@ -256,7 +256,7 @@
         "dummy_X_train = sm.add_constant(dummy_data)\n",
         "dummy_X_train"
       ],
-      "id": "444a9d9c",
+      "id": "56cd4c4e",
       "execution_count": null,
       "outputs": []
     },
@@ -270,7 +270,7 @@
         "\n",
         "Finally, we fit the model using `OLS()` and `fit()` from **statsmodels**.\n"
       ],
-      "id": "9855622e"
+      "id": "e58698fb"
     },
     {
       "cell_type": "code",
@@ -288,7 +288,7 @@
         "# Summary of the models.\n",
         "summary_model = linear_model.summary()"
       ],
-      "id": "e78aaa4f",
+      "id": "b449fba9",
       "execution_count": null,
       "outputs": []
     },
@@ -300,7 +300,7 @@
         "\n",
         "</br>\n"
       ],
-      "id": "7eaae6c3"
+      "id": "7bda34c8"
     },
     {
       "cell_type": "code",
@@ -311,7 +311,7 @@
         "\n",
         "print(summary_model)"
       ],
-      "id": "0185019b",
+      "id": "bd7792e2",
       "execution_count": null,
       "outputs": []
     },
@@ -361,7 +361,7 @@
         "\n",
         "To fit an ANCOVA model, we use similar steps as before. The only extra step is to concatenate the data with the dummy variables and the numerical predictor using the function `concat()` from **pandas**.\n"
       ],
-      "id": "c3c60beb"
+      "id": "3c0c2d78"
     },
     {
       "cell_type": "code",
@@ -379,7 +379,7 @@
         "# Train the model using the training sets\n",
         "ancova_model = regr.fit()"
       ],
-      "id": "33bf30b8",
+      "id": "d348f576",
       "execution_count": null,
       "outputs": []
     },
@@ -389,7 +389,7 @@
       "source": [
         "## Model summary\n"
       ],
-      "id": "817721b9"
+      "id": "c881621a"
     },
     {
       "cell_type": "code",
@@ -402,7 +402,7 @@
         "summary_ancova = ancova_model.summary()\n",
         "print(summary_ancova)"
       ],
-      "id": "1f327baf",
+      "id": "e0d66ef8",
       "execution_count": null,
       "outputs": []
     },
@@ -484,7 +484,7 @@
         "\n",
         "The units of concentration and temperature are percentages and Farenheit degrees, respectively.\n"
       ],
-      "id": "84bc3919"
+      "id": "4d35f5a0"
     },
     {
       "cell_type": "code",
@@ -495,7 +495,7 @@
         "catalyst_data = pd.read_excel(\"catalyst.xlsx\")\n",
         "print(catalyst_data)"
       ],
-      "id": "d36a7c29",
+      "id": "61b49684",
       "execution_count": null,
       "outputs": []
     },
@@ -509,7 +509,7 @@
         "\n",
         "Recall that we standardize numerical predictors using the `scaler()` function from **scikit-learn**.\n"
       ],
-      "id": "af2ece5d"
+      "id": "41550782"
     },
     {
       "cell_type": "code",
@@ -527,7 +527,7 @@
         "# Apply the scaling operator.\n",
         "Xs_training = scaler.fit_transform(predictor_data)"
       ],
-      "id": "7083bad9",
+      "id": "e611bd6b",
       "execution_count": null,
       "outputs": []
     },
@@ -539,7 +539,7 @@
         "\n",
         "Now the predictors are on the same scale\n"
       ],
-      "id": "01a9577a"
+      "id": "01b98846"
     },
     {
       "cell_type": "code",
@@ -552,7 +552,7 @@
         "Xs_training = pd.DataFrame(Xs_training, columns = predictor_data.columns)\n",
         "Xs_training "
       ],
-      "id": "decfcd30",
+      "id": "97eebed8",
       "execution_count": null,
       "outputs": []
     },
@@ -566,7 +566,7 @@
         "\n",
         "To fit the model, we follow the same functions as before.\n"
       ],
-      "id": "58b056dd"
+      "id": "5d88f6b2"
     },
     {
       "cell_type": "code",
@@ -587,7 +587,7 @@
         "# Summary of the model.\n",
         "std_summary_model = std_linear_model.summary()"
       ],
-      "id": "800502b4",
+      "id": "5c786724",
       "execution_count": null,
       "outputs": []
     },
@@ -597,7 +597,7 @@
       "source": [
         "## \n"
       ],
-      "id": "db86aa70"
+      "id": "342effb6"
     },
     {
       "cell_type": "code",
@@ -607,7 +607,7 @@
         "\n",
         "print(std_summary_model)"
       ],
-      "id": "192087c0",
+      "id": "d51091a4",
       "execution_count": null,
       "outputs": []
     },
@@ -658,7 +658,7 @@
         "\n",
         "We fit the model:\n"
       ],
-      "id": "d27cce55"
+      "id": "be474d5f"
     },
     {
       "cell_type": "code",
@@ -671,7 +671,7 @@
         "regr = sm.OLS(auto_data['mpg'], X_train)\n",
         "linear_model = regr.fit()"
       ],
-      "id": "8f607269",
+      "id": "84a72200",
       "execution_count": null,
       "outputs": []
     },
@@ -681,7 +681,7 @@
       "source": [
         "## Residual analysis\n"
       ],
-      "id": "81a03941"
+      "id": "4c7f33c9"
     },
     {
       "cell_type": "code",
@@ -694,7 +694,7 @@
         "Y_pred = linear_model.fittedvalues\n",
         "residuals = linear_model.resid"
       ],
-      "id": "2659a147",
+      "id": "8323f3d7",
       "execution_count": null,
       "outputs": []
     },
@@ -705,7 +705,7 @@
         "::::: columns\n",
         "::: {.column width=\"50%\"}"
       ],
-      "id": "dad086e9"
+      "id": "03fceefa"
     },
     {
       "cell_type": "code",
@@ -723,7 +723,7 @@
         "plt.ylabel('Residuals')\n",
         "plt.show()"
       ],
-      "id": "4dc59fe7",
+      "id": "bfa548b0",
       "execution_count": null,
       "outputs": []
     },
@@ -735,7 +735,7 @@
         "\n",
         "::: {.column width=\"50%\"}"
       ],
-      "id": "de55940a"
+      "id": "b4b514d8"
     },
     {
       "cell_type": "code",
@@ -754,7 +754,7 @@
         "plt.ylabel('Residuals')\n",
         "plt.show()"
       ],
-      "id": "52b4aee7",
+      "id": "0fc9ff55",
       "execution_count": null,
       "outputs": []
     },
@@ -816,7 +816,7 @@
         "\n",
         "Load it using:\n"
       ],
-      "id": "d3ce0378"
+      "id": "84016521"
     },
     {
       "cell_type": "code",
@@ -826,7 +826,7 @@
         "\n",
         "import numpy as np"
       ],
-      "id": "28c09bcc",
+      "id": "02591ac1",
       "execution_count": null,
       "outputs": []
     },
@@ -838,7 +838,7 @@
         "\n",
         "To transform the response ($Y$) using $\\ln{(Y)}$ or $\\sqrt{Y}$ we use the functions `log()` and `sqrt()`, respectively, from **numpy**.\n"
       ],
-      "id": "21051c47"
+      "id": "41ff88c2"
     },
     {
       "cell_type": "code",
@@ -850,7 +850,7 @@
         "sqrt_Y = np.sqrt( auto_data['mpg'] )\n",
         "log_Y = np.log( auto_data['mpg'] )"
       ],
-      "id": "e0e90708",
+      "id": "479ba7f2",
       "execution_count": null,
       "outputs": []
     },
@@ -864,7 +864,7 @@
         "\n",
         "which we fit using the code below.\n"
       ],
-      "id": "cd123993"
+      "id": "b6f4e92d"
     },
     {
       "cell_type": "code",
@@ -876,7 +876,7 @@
         "log_regr = sm.OLS(log_Y, X_train)\n",
         "log_linear_model = log_regr.fit()"
       ],
-      "id": "fe97f849",
+      "id": "5cbecd82",
       "execution_count": null,
       "outputs": []
     },
@@ -886,7 +886,7 @@
       "source": [
         "## New residual analysis\n"
       ],
-      "id": "65a21750"
+      "id": "fe9faad9"
     },
     {
       "cell_type": "code",
@@ -898,7 +898,7 @@
         "Y_pred = log_linear_model.fittedvalues\n",
         "residuals = log_linear_model.resid"
       ],
-      "id": "fe344f3b",
+      "id": "4581aea5",
       "execution_count": null,
       "outputs": []
     },
@@ -909,7 +909,7 @@
         "::::: columns\n",
         "::: {.column width=\"50%\"}"
       ],
-      "id": "d524a12b"
+      "id": "5dc2f2d2"
     },
     {
       "cell_type": "code",
@@ -927,7 +927,7 @@
         "plt.ylabel('Residuals')\n",
         "plt.show()"
       ],
-      "id": "33177897",
+      "id": "70cf2b2b",
       "execution_count": null,
       "outputs": []
     },
@@ -939,7 +939,7 @@
         "\n",
         "::: {.column width=\"50%\"}"
       ],
-      "id": "1959870f"
+      "id": "c349b6d9"
     },
     {
       "cell_type": "code",
@@ -958,7 +958,7 @@
         "plt.ylabel('Residuals')\n",
         "plt.show()"
       ],
-      "id": "a9e1599f",
+      "id": "01de9a6d",
       "execution_count": null,
       "outputs": []
     },
@@ -989,7 +989,7 @@
         "\n",
         "To fit this model to the data, we construct a new predictor matrix.\n"
       ],
-      "id": "7e05a7ac"
+      "id": "9f287eb1"
     },
     {
       "cell_type": "code",
@@ -1000,7 +1000,7 @@
         "\n",
         "X_quad = pd.concat([X_train, auto_data['horsepower']**2], axis = 1)"
       ],
-      "id": "e1975a45",
+      "id": "f4c0e9de",
       "execution_count": null,
       "outputs": []
     },
@@ -1010,7 +1010,7 @@
       "source": [
         "Next, we fit the model as before.\n"
       ],
-      "id": "46148cac"
+      "id": "b9dddce3"
     },
     {
       "cell_type": "code",
@@ -1022,7 +1022,7 @@
         "quad_regr = sm.OLS(log_Y, X_quad)\n",
         "quadratic_model = quad_regr.fit()"
       ],
-      "id": "5ec5b3da",
+      "id": "69adeb35",
       "execution_count": null,
       "outputs": []
     },
@@ -1032,7 +1032,7 @@
       "source": [
         "And calculate the residuals and predicted values.\n"
       ],
-      "id": "0aff86c8"
+      "id": "8547c344"
     },
     {
       "cell_type": "code",
@@ -1044,7 +1044,7 @@
         "Y_pred = quadratic_model.fittedvalues\n",
         "residuals = quadratic_model.resid"
       ],
-      "id": "4d1affa2",
+      "id": "0e643491",
       "execution_count": null,
       "outputs": []
     },
@@ -1057,7 +1057,7 @@
         "::::: columns\n",
         "::: {.column width=\"50%\"}"
       ],
-      "id": "90457438"
+      "id": "abb1fe64"
     },
     {
       "cell_type": "code",
@@ -1076,7 +1076,7 @@
         "plt.ylabel('Residuals')\n",
         "plt.show()"
       ],
-      "id": "ae5e6118",
+      "id": "b116d60c",
       "execution_count": null,
       "outputs": []
     },
@@ -1088,7 +1088,7 @@
         "\n",
         "::: {.column width=\"50%\"}"
       ],
-      "id": "a5c7da77"
+      "id": "8a585195"
     },
     {
       "cell_type": "code",
@@ -1108,7 +1108,7 @@
         "plt.ylabel('Residuals')\n",
         "plt.show()"
       ],
-      "id": "0f29d314",
+      "id": "10a65a2e",
       "execution_count": null,
       "outputs": []
     },
@@ -1224,7 +1224,7 @@
         "\n",
         "We read the dataset and set the variable `CHAS` as categorical.\n"
       ],
-      "id": "5085edd7"
+      "id": "6be23bc0"
     },
     {
       "cell_type": "code",
@@ -1242,7 +1242,7 @@
         "# Preview the dataset.\n",
         "Boston_data.head(3)"
       ],
-      "id": "d40420c4",
+      "id": "19f6536f",
       "execution_count": null,
       "outputs": []
     },
@@ -1254,7 +1254,7 @@
         "\n",
         "We split the current dataset into a training and a validation dataset. To this end, we use the function `train_test_split()` from **scikit-learn**.\n"
       ],
-      "id": "b1d7f23a"
+      "id": "4bd3281b"
     },
     {
       "cell_type": "code",
@@ -1273,7 +1273,7 @@
         "X_train, X_valid, Y_train, Y_valid = train_test_split(X_full, Y_full, \n",
         "                                                      test_size=0.3)"
       ],
-      "id": "8067759b",
+      "id": "7a9d6b1e",
       "execution_count": null,
       "outputs": []
     },
@@ -1299,7 +1299,7 @@
         "\n",
         "We fit a multiple linear regression model to predict the `MEDV` in terms of the 12 predictors using the functions `OLS()` and `fit()` from **statsmodels**.\n"
       ],
-      "id": "321093f1"
+      "id": "2c8128a3"
     },
     {
       "cell_type": "code",
@@ -1317,7 +1317,7 @@
         "# Train the model using the training sets\n",
         "linear_model = regr.fit()"
       ],
-      "id": "68b9c93d",
+      "id": "e12b0189",
       "execution_count": null,
       "outputs": []
     },
@@ -1329,7 +1329,7 @@
         "\n",
         "We evaluate the model using a \"Residual versus Fitted Values\" plot. The plot does not show concerning patterns in the residuals. So, we assume that the model satisfices the assumption of constant variance.\n"
       ],
-      "id": "6499703f"
+      "id": "ca866e91"
     },
     {
       "cell_type": "code",
@@ -1349,7 +1349,7 @@
         "plt.ylabel('Residuals')\n",
         "plt.show()"
       ],
-      "id": "25cb36cc",
+      "id": "55bc86a6",
       "execution_count": null,
       "outputs": []
     },
@@ -1391,7 +1391,7 @@
         "\n",
         "We first compute the predictions of our model on the validation dataset. That is, we use the values of the predictors in this dataset and use it as input to our model. Our model then computes the prediction of the response for each combination of values of the predictors.\n"
       ],
-      "id": "a43bd9fe"
+      "id": "c46491aa"
     },
     {
       "cell_type": "code",
@@ -1405,7 +1405,7 @@
         "# Predict responses using validation data.\n",
         "predicted_medv_val = linear_model.predict(Boston_X_val)"
       ],
-      "id": "38721ef4",
+      "id": "93b8b16c",
       "execution_count": null,
       "outputs": []
     },
@@ -1419,7 +1419,7 @@
         "\n",
         "We compute the validation RMSE by first computing the validation MSE using a function with the same name of **scikit-learn**.\n"
       ],
-      "id": "e00bc2a6"
+      "id": "009a6e08"
     },
     {
       "cell_type": "code",
@@ -1431,7 +1431,7 @@
         "rmse = mse**(1/2)\n",
         "print( round(rmse, 3) )"
       ],
-      "id": "08f98ff9",
+      "id": "fe84fc96",
       "execution_count": null,
       "outputs": []
     },
@@ -1445,7 +1445,7 @@
         "\n",
         "# [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)"
       ],
-      "id": "f230b1f9"
+      "id": "88a91da8"
     }
   ],
   "metadata": {
