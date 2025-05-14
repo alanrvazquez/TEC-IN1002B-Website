@@ -23,10 +23,12 @@ jupyter: python3
 </br>
 
 1.  Introduction
-2.  Dealing with missing values
-3.  Transforming categorical predictors
-4.  Filtering
+2.  Training, validation, and test datasets
+3.  Dealing with missing values
+4.  Transforming predictors
 5.  Standarization
+6.  Dimension reduction
+
 
 # Introduction
 
@@ -82,10 +84,194 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.impute import SimpleImputer
 from sklearn.feature_selection import VarianceThreshold
-from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import power_transform, StandardScaler 
 ```
 
-We will not use all the functions from the **scikit-learn** library. Instead, we will use specific functions from the sub-libraries **preprocessing**, **feature_selection**, and **impute**.
+We will not use all the functions from the **scikit-learn** library. Instead, we will use specific functions from the sub-libraries **preprocessing**, **feature_selection**, **model_selection** and **impute**.
+
+# Training, validation, and test datasets
+
+## Recall that ...
+
+</br></br>
+
+In data science, we assume that
+
+$$Y = f(\boldsymbol{X}) + \epsilon$$
+
+where $f(\boldsymbol{X})$ represents the true relationship between $\boldsymbol{X} = (X_1, X_2, \ldots, X_p)$ and $Y$.
+
+- $f(\boldsymbol{X})$ is unknown and very complex!
+
+
+## Two datasets
+
+</br></br>
+
+The application of data science models needs two data sets:
+
+::: incremental
+-   [**Training data**]{style="color:blue;"} is data that we use to train or construct the estimated function $\hat{f}(\boldsymbol{X})$.
+
+-   [**Test data**]{style="color:green;"} is data that we use to evaluate the predictive performance of $\hat{f}(\boldsymbol{X})$ only.
+:::
+
+## 
+
+::::: columns
+::: {.column width="30%"}
+![](images/training.png){width="256"}
+:::
+
+::: {.column width="70%"}
+</br>
+
+A random sample of $n$ observations.
+
+Use it to **construct** $\hat{f}(\boldsymbol{X})$.
+:::
+:::::
+
+::::: columns
+::: {.column width="30%"}
+![](images/test.png){width="262"}
+:::
+
+::: {.column width="70%"}
+Another random sample of $n_t$ observations, which is independent of the training data.
+
+Use it to **evaluate** $\hat{f}(\boldsymbol{X})$.
+:::
+:::::
+
+## Validation Dataset
+
+In many practical situations, a test dataset is not available. To overcome this issue, we use a [**validation dataset**]{style="color:orange;"}.
+
+![](images/validation.png){fig-align="center" width="645"}
+
+. . .
+
+**Idea**: Apply model to your [**validation dataset**]{style="color:orange;"} to mimic what will happen when you apply it to test dataset.
+
+## Example 1
+
+</br>
+
+The "BostonHousing.xlsx" contains data collected by the US Bureau of the Census concerning housing in the area of Boston, Massachusetts. The dataset includes data on 506 census housing tracts in the Boston area in 1970s.
+
+The goal is to predict the median house price in new tracts based on information such as crime rate, pollution, and number of rooms.
+
+The response is the median value of owner-occupied homes in \$1000s, contained in the column `MEDV`.
+
+## The predictors
+
+::: {style="font-size: 70%;"}
+-   `CRIM`: per capita crime rate by town.
+-   `ZN`: proportion of residential land zoned for lots over 25,000 sq.ft.
+-   `INDUS`: proportion of non-retail business acres per town.
+-   `CHAS`: Charles River dummy variable (= 1 if tract bounds river; 0 otherwise).
+-   `NOX`: nitrogen oxides concentration (parts per 10 million).
+-   `RM`: average number of rooms per dwelling.
+-   `AGE`: proportion of owner-occupied units built prior to 1940.
+-   `DIS`: weighted mean of distances to five Boston employment centers
+-   `RAD`: index of accessibility to radial highways.
+-   `TAX`: full-value property-tax rate per \$10,000.
+-   `PTRATIO`: pupil-teacher ratio by town.
+-   `LSTAT`: lower status of the population (percent).
+:::
+
+## Read the dataset
+
+We read the dataset and set the variable `CHAS` as categorical.
+
+```{python}
+#| echo: true
+#| output: true
+
+# Load Excel file (make sure the file is in your Colab)
+Boston_data = pd.read_excel('BostonHousing.xlsx')
+
+# Drop the categorical variable.
+Boston_data['CHAS'] = pd.Categorical(Boston_data['CHAS'])
+
+# Preview the dataset.
+Boston_data.head(3)
+```
+
+## How do we generate validation data?
+
+We split the current dataset into a training and a validation dataset. To this end, we use the function `train_test_split()` from **scikit-learn**.
+
+```{python}
+#| echo: true
+#| output: true
+
+# Set full matrix of predictors.
+X_full = Boston_data.drop(columns = ['MEDV']) 
+
+# Set full matrix of responses.
+Y_full = Boston_data['MEDV']
+
+# Split the dataset into training and validation.
+X_train, X_valid, Y_train, Y_valid = train_test_split(X_full, Y_full, 
+                                                      test_size=0.3)
+```
+
+The parameter `test_size` sets the portion of the dataset that will go to the validation set.
+
+## 
+
+</br></br>
+
+-   The function makes a clever partition of the data using the *empirical* distribution of the response.
+
+-   Technically, it splits the data so that the distribution of the response under the training and validation sets is similar.
+
+-   Usually, the proportion of the dataset that goes to the validation set is 20% or 30%.
+
+
+##
+
+The predictors and response in the training dataset are in the objects `X_train` and `Y_train`, respectively. We can compile these objects into a single dataset using the function `.concat` from **pandas**.
+
+```{python}
+#| echo: true
+#| output: true
+
+
+# Split the dataset into training and validation.
+training_dataset = pd.concat([X_train, Y_train])
+training_dataset.head(4)
+```
+
+
+##
+
+Equivalently, the predictors and response in the validation dataset are in the objects `X_valid` and `Y_valid`, respectively. 
+
+```{python}
+#| echo: true
+#| output: true
+
+
+# Split the dataset into training and validation.
+validation_dataset = pd.concat([X_valid, Y_valid])
+validation_dataset.head(4)
+```
+
+
+## Work on your training dataset
+
+After we have partitioned the data, we **work on the** [**training data**]{style="color:blue;"} to develop our predictive pipeline.
+
+The pipeline has two main steps:
+
+1. Data preprocessing.
+2. Model development.
+
+We will now discuss preprocessing techniques applied to the training dataset. Note that all the techniques applied to this dataset will also be applied to the [**validation dataset**]{style="color:orange;"} and [**test dataset**]{style="color:green;"} to prepare it for your model. 
 
 # Dealing with missing values
 
@@ -125,7 +311,7 @@ In a smaller data sets, there is a high price in removing observations. To overc
 
 Here, we will introduce three simple methods for imputing missing values in categorical and numerical variables.
 
-## Example 1
+## Example 2
 
 </br>
 
@@ -288,7 +474,7 @@ We use the **sample median** when the data is skewed (e.g., incomes, prices).
 
 -   Cons: May reduce variability in the data.
 
-## Imputation method for categorical variable
+## Imputation method for a categorical variable
 
 If a categorical variable has missing values, we can use the **most frequent** of the available values to replace the missing values. To this end, we use similar commands as before.
 
@@ -305,7 +491,7 @@ cat_imputer = SimpleImputer(strategy = 'most_frequent')
 penguins_data['sex'] = cat_imputer.fit_transform(penguins_data[ ['sex'] ]).ravel()
 ```
 
-# Transforming categorical predictors
+# Transforming predictors
 
 ## Categorical predictors
 
@@ -484,7 +670,254 @@ augmented_auto = pd.concat([complete_Auto, dummy_data], axis = 1)
 augmented_auto.head()
 ```
 
-# Filtering
+## Transforming numerical predictors
+
+</br>
+
+A common problem with a predictor is that it may have a *skewed distribution*. That is, a distribution that accumulates many observations in smaller or larger values of the predictor. 
+
+For example, consider the distribution of the predictor `DIS` (weighted mean of distances to five Boston employment centers) in the `Boston_data`.
+
+##
+
+```{python}
+#| echo: true
+#| code-fold: true
+#| fig-align: center
+
+plt.figure(figsize=(7,4)) # Create space for figure.
+sns.histplot(data = Boston_data, x = 'DIS') # Create the histogram.
+plt.title("Histogram of DIS") # Plot title.
+plt.xlabel("DIS") # X label
+plt.show() # Display the plot
+```
+
+
+We see that many of the predictor values are on the right of the plot, while few are on the left.
+
+## Problems with strong skewness
+
+</br>
+
+Strong skewness in a predictor can:
+
+- Distort the relationship with the response.
+- Violate the assumptions of the linear regression model (e.g., linearity, homoscedasticity).
+- Lead to influential outliers or poor model fit.
+
+To correct the skewness of a predictor's distribution, we can transform the predictor using the [**Box-Cox transformation**]{style="color:orange;"}
+
+## Box-Cox Transformation
+
+</br>
+
+The Box-Cox transformation uses a family of power transformations on a predictor $X$ such that $X' = X^{\lambda}$, where $\lambda$ is a parameter to be determined using the data. When $\lambda = 0,$ this means $X' = \ln(X)$, where $\ln(\cdot)$ is the natural logarithm.
+
+The Box-Cox transformation is the element of this family that results in a transformed variable that follows a normal distribution (approximately).
+
+The variable $X$ must be strictly positive.
+
+## In Python
+
+In Python, we can apply Box-Cox transformation using the `power_transformation` function of the **scikit-learn** library.
+
+```{python}
+#| echo: true
+
+DIS_transform = power_transform(Boston_data[ ['DIS']], method = "box-cox")
+DIS_transform
+```
+
+```{python}
+#| echo: true
+#| code-fold: true
+#| fig-align: center
+
+plt.figure(figsize=(7,4)) # Create space for figure.
+sns.histplot(x = DIS_transform) # Create the histogram.
+plt.title("Histogram of DIS") # Plot title.
+plt.xlabel("DIS") # X label
+plt.show() # Display the plot
+```
+
+## Discussion
+
+</br></br>
+
+The Box-Cox transformation can:
+
+- Make the distribution of a predictor more symmetric.
+
+- Help to linearize the relationship with the response.
+
+After transformation, the predictor $X'$ must be used instead of the original predictor $X$.
+
+# Standarization
+
+## Predictors with different units
+
+Many good predictive models have issues with [**numeric predictors**]{style="color:blue;"} with different units:
+
+1.  Methods such as K-nearest neighbors are based on the distance between observations. If the predictors are on different units or scales, then some predictors will have a larger weight for computing the distance.
+
+2.  Other methods such as LASSO use the variances of the predictors in their calculations. Predictors with different scales will have different variances and so, those with a higher variance will play a bigger role in the calculations.
+
+## 
+
+</br></br></br></br>
+
+::: {style="font-size: 150%;"}
+[***In a nutshell, some predictors will have a higher impact in the model due to its unit and not its information provided to it.***]{style="color:purple;"}
+:::
+
+## Standarization
+
+</br>
+
+Standardization refers to *centering* and *scaling* each numeric predictor individually. It puts every predictor on the same scale.
+
+To **center** a predictor variable, the average predictor value is subtracted from all the values.
+
+Therefore, the centered predictor has a zero mean (that is, its average value is zero).
+
+## 
+
+</br>
+
+To **scale** a predictor, each of its value is divided by its standard deviation.
+
+Scaling the data coerce the values to have a common standard deviation of one.
+
+In mathematical terms, we standardize a predictor as:
+
+$${\color{blue} \tilde{x}_{i}} = \frac{{ x_{i} - \bar{x}}}{ \sqrt{\frac{1}{n -1} \sum_{i=1}^{n} (x_{i} - \bar{x})^2}},$$
+
+with $\bar{x} = \sum_{i=1}^n \frac{x_i}{n}$.
+
+## Example 2 (cont.)
+
+</br>
+
+We concentrate on the five numerical predictors in the `complete_Auto` dataset.
+
+```{python}
+#| echo: true
+
+# Select specific variables.
+complete_sbAuto = complete_Auto[['cylinders', 'displacement', 
+                                 'horsepower', 'weight', 
+                                 'acceleration']]
+```
+
+## Two predictors in original units
+
+Consider the `complete_sbAuto` dataset created previously. Consider two points in the plot: $(175, 5140)$ and $(69, 1613)$.
+
+::::: columns
+::: {.column width="50%"}
+```{python}
+#| echo: false
+#| output: true
+#| fig-align: center
+
+plt.figure(figsize=(5,5))
+sns.scatterplot(data = complete_sbAuto, x = 'horsepower', y = 'weight')
+plt.scatter(x = 175, y = 5140, color = 'red')
+plt.scatter(x = 69, y = 1613, color = 'red')
+plt.xlabel('Horsepower', fontsize=14)
+plt.ylabel('Weight', fontsize=14)
+plt.show()
+```
+:::
+
+::: {.column width="50%"}
+</br>
+
+The distance between these points is $\sqrt{(69 - 175)^2 + (1613-5140)^2}$ $= \sqrt{11236 + 12439729}$ $= 3528.592$.
+:::
+:::::
+
+## Standarization in Python
+
+</br>
+
+To standardize **numerical** predictors, we use the function `StandardScaler()`. Moreover, we apply the function to the variables using the function `fit_transform()`.
+
+</br>
+
+```{python}
+#| echo: true
+
+scaler = StandardScaler()
+Xs = scaler.fit_transform(complete_sbAuto)
+```
+
+## 
+
+Unfortunately, the resulting object is not a pandas data frame. We then convert this object to this format. </br>
+
+```{python}
+#| echo: true
+
+scaled_df = pd.DataFrame(Xs, columns = complete_sbAuto.columns)
+scaled_df.head()
+```
+
+## Two predictors in standardized units
+
+In the new scale, the two points are now: $(1.82, 2.53)$ and $(-0.91, -1.60)$.
+
+::::: columns
+::: {.column width="50%"}
+```{python}
+#| echo: false
+#| output: true
+#| fig-align: center
+
+plt.figure(figsize=(5,5))
+sns.scatterplot(data = scaled_df, x = 'horsepower', y = 'weight')
+plt.scatter(x = 1.83, y = 2.54, color = 'red')
+plt.scatter(x = -0.915, y = -1.605, color = 'red')
+plt.xlabel('Standardized horsepower', fontsize=14)
+plt.ylabel('Standardized weight', fontsize=14)
+plt.show()
+```
+:::
+
+::: {.column width="50%"}
+</br>
+
+The distance between these points is $\sqrt{(-0.91 - 1.82)^2 + (-1.60-2.53)^2}$ $= \sqrt{7.45 + 17.05} = 4.95$.
+:::
+:::::
+
+## Discussion
+
+::: incremental
+-   Standardized predictors are generally used to improve the numerical stability of some calculations.
+
+-   It is generally recommended to always standardize numeric predictors. Perhaps the only exception would be if we consider a linear regression model.
+
+-   A drawback of these transformations is the [***loss of interpretability***]{style="color:pink;"} since the data are no longer in the original units.
+
+-   Standardizing the predictors does not affect their correlation.
+:::
+
+# [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)
+
+
+# Dimension reduction
+
+## Dimension reduction
+
+Here, we will discuss methods to reduce the number of predictors in a dataset. In other words, to reduce the dimension of the dataset.
+
+High-dimensional datasets can cause problems when training or fitting linear regression models. It also happens that a high-dimensional dataset can also have poorer predictive performance than a dataset with few, well selected predictors.
+
+In particular, we will discuss the methods:
+
+1. Filtering predictors based on near-zero variance and correlation.
+2. Principal component analysis.
 
 ## Removing predictors
 
@@ -662,140 +1095,3 @@ We can identify the variables that are highly correlated using quite complex cod
 reduced_auto = complete_sbAuto[ ['weight', 'acceleration']]
 ```
 
-# Standarization
-
-## Predictors with different units
-
-Many good predictive models have issues with [**numeric predictors**]{style="color:blue;"} with different units:
-
-1.  Methods such as K-nearest neighbors are based on the distance between observations. If the predictors are on different units or scales, then some predictors will have a larger weight for computing the distance.
-
-2.  Other methods such as LASSO use the variances of the predictors in their calculations. Predictors with different scales will have different variances and so, those with a higher variance will play a bigger role in the calculations.
-
-## 
-
-</br></br></br></br>
-
-::: {style="font-size: 150%;"}
-[***In a nutshell, some predictors will have a higher impact in the model due to its unit and not its information provided to it.***]{style="color:purple;"}
-:::
-
-## Standarization
-
-</br>
-
-Standardization refers to *centering* and *scaling* each numeric predictor individually. It puts every predictor on the same scale.
-
-To **center** a predictor variable, the average predictor value is subtracted from all the values.
-
-Therefore, the centered predictor has a zero mean (that is, its average value is zero).
-
-## 
-
-</br>
-
-To **scale** a predictor, each of its value is divided by its standard deviation.
-
-Scaling the data coerce the values to have a common standard deviation of one.
-
-In mathematical terms, we standardize a predictor as:
-
-$${\color{blue} \tilde{x}_{i}} = \frac{{ x_{i} - \bar{x}}}{ \sqrt{\frac{1}{n -1} \sum_{i=1}^{n} (x_{i} - \bar{x})^2}},$$
-
-with $\bar{x} = \sum_{i=1}^n \frac{x_i}{n}$.
-
-## Two predictors in original units
-
-Consider the `complete_sbAuto` dataset created previously. Consider two points in the plot: $(175, 5140)$ and $(69, 1613)$.
-
-::::: columns
-::: {.column width="50%"}
-```{python}
-#| echo: false
-#| output: true
-#| fig-align: center
-
-plt.figure(figsize=(5,5))
-sns.scatterplot(data = complete_sbAuto, x = 'horsepower', y = 'weight')
-plt.scatter(x = 175, y = 5140, color = 'red')
-plt.scatter(x = 69, y = 1613, color = 'red')
-plt.xlabel('Horsepower', fontsize=14)
-plt.ylabel('Weight', fontsize=14)
-plt.show()
-```
-:::
-
-::: {.column width="50%"}
-</br>
-
-The distance between these points is $\sqrt{(69 - 175)^2 + (1613-5140)^2}$ $= \sqrt{11236 + 12439729}$ $= 3528.592$.
-:::
-:::::
-
-## Standarization in Python
-
-</br>
-
-To standardize **numerical** predictors, we use the function `StandardScaler()`. Moreover, we apply the function to the variables using the function `fit_transform()`.
-
-</br>
-
-```{python}
-#| echo: true
-
-scaler = StandardScaler()
-Xs = scaler.fit_transform(complete_sbAuto)
-```
-
-## 
-
-Unfortunately, the resulting object is not a pandas data frame. We then convert this object to this format. </br>
-
-```{python}
-#| echo: true
-
-scaled_df = pd.DataFrame(Xs, columns = complete_sbAuto.columns)
-scaled_df.head()
-```
-
-## Two predictors in standardized units
-
-In the new scale, the two points are now: $(1.82, 2.53)$ and $(-0.91, -1.60)$.
-
-::::: columns
-::: {.column width="50%"}
-```{python}
-#| echo: false
-#| output: true
-#| fig-align: center
-
-plt.figure(figsize=(5,5))
-sns.scatterplot(data = scaled_df, x = 'horsepower', y = 'weight')
-plt.scatter(x = 1.83, y = 2.54, color = 'red')
-plt.scatter(x = -0.915, y = -1.605, color = 'red')
-plt.xlabel('Standardized horsepower', fontsize=14)
-plt.ylabel('Standardized weight', fontsize=14)
-plt.show()
-```
-:::
-
-::: {.column width="50%"}
-</br>
-
-The distance between these points is $\sqrt{(-0.91 - 1.82)^2 + (-1.60-2.53)^2}$ $= \sqrt{7.45 + 17.05} = 4.95$.
-:::
-:::::
-
-## Discussion
-
-::: incremental
--   Standardized predictors are generally used to improve the numerical stability of some calculations.
-
--   It is generally recommended to always standardize numeric predictors. Perhaps the only exception would be if we consider a linear regression model.
-
--   A drawback of these transformations is the [***loss of interpretability***]{style="color:pink;"} since the data are no longer in the original units.
-
--   Standardizing the predictors does not affect their correlation.
-:::
-
-# [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)
