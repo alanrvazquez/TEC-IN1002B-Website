@@ -1,0 +1,488 @@
+---
+title: "Data preprocessing: Part I"
+subtitle: "IN1002B: Introduction to Data Science Projects"
+author: 
+  - name: Alan R. Vazquez
+    affiliations:
+      - name: Department of Industrial Engineering
+format: 
+  revealjs:
+    chalkboard: false
+    multiplex: true
+    footer: "Tecnologico de Monterrey"
+    logo: IN1002b_logo.png
+    css: style.css
+    slide-number: True
+    html-math-method: mathjax
+editor: visual
+jupyter: python3
+---
+
+## Agenda
+
+</br>
+
+1.  Introduction
+2.  Training, validation, and test datasets
+3.  Dealing with missing values
+4.  Transforming predictors
+5.  Standarization
+6.  Dimension reduction
+
+# Introduction
+
+## Data preprocessing
+
+[**Data pre-processing**]{style="color:lightblue;"} techniques generally refer to the addition, deletion, or transformation of data.
+
+</br>
+
+> It can make or break a model’s predictive ability.
+
+</br>
+
+For example, linear regression models (to be discussed later) are relatively insensitive to the characteristics of the predictor data, but advanced methods like K-nearest neighbors, principal component regression, and LASSO are not.
+
+## 
+
+</br>
+
+We will review some common strategies for processing predictors from the data, without considering how they might be related to the response.
+
+. . .
+
+In particular, we will review:
+
+::: incremental
+-   Dealing with missing values.
+-   Transforming predictors.
+-   Reducing the number of predictors.
+-   Standardizing the units of the predictors.
+:::
+
+## scikit-learn library
+
+-   **scikit-learn** is a robust and popular library for machine learning in Python
+-   It provides simple, efficient tools for data mining and data analysis
+-   It is built on top of libraries such as **NumPy**, **SciPy**, and **Matplotlib**
+-   <https://scikit-learn.org/stable/>
+
+![](images/scikitlearn.png){fig-align="center"}
+
+## 
+
+</br>
+
+Let's import **scikit-learn** into Python together with the other relevant libraries.
+
+```{python}
+#| echo: true
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.impute import SimpleImputer
+from sklearn.feature_selection import VarianceThreshold
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import power_transform, StandardScaler 
+```
+
+We will not use all the functions from the **scikit-learn** library. Instead, we will use specific functions from the sub-libraries **preprocessing**, **feature_selection**, **model_selection** and **impute**.
+
+# Training, validation, and test datasets
+
+## Recall that ...
+
+</br></br>
+
+In data science, we assume that
+
+$$Y = f(\boldsymbol{X}) + \epsilon$$
+
+where $f(\boldsymbol{X})$ represents the true relationship between $\boldsymbol{X} = (X_1, X_2, \ldots, X_p)$ and $Y$.
+
+-   $f(\boldsymbol{X})$ is unknown and very complex!
+
+## Two datasets
+
+</br></br>
+
+The application of data science models needs two data sets:
+
+::: incremental
+-   [**Training data**]{style="color:blue;"} is data that we use to train or construct the estimated function $\hat{f}(\boldsymbol{X})$.
+
+-   [**Test data**]{style="color:green;"} is data that we use to evaluate the predictive performance of $\hat{f}(\boldsymbol{X})$ only.
+:::
+
+## 
+
+::::: columns
+::: {.column width="30%"}
+![](images/training.png){width="256"}
+:::
+
+::: {.column width="70%"}
+</br>
+
+A random sample of $n$ observations.
+
+Use it to **construct** $\hat{f}(\boldsymbol{X})$.
+:::
+:::::
+
+::::: columns
+::: {.column width="30%"}
+![](images/test.png){width="262"}
+:::
+
+::: {.column width="70%"}
+Another random sample of $n_t$ observations, which is independent of the training data.
+
+Use it to **evaluate** $\hat{f}(\boldsymbol{X})$.
+:::
+:::::
+
+## Validation Dataset
+
+In many practical situations, a test dataset is not available. To overcome this issue, we use a [**validation dataset**]{style="color:orange;"}.
+
+![](images/validation.png){fig-align="center" width="645"}
+
+. . .
+
+**Idea**: Apply model to your [**validation dataset**]{style="color:orange;"} to mimic what will happen when you apply it to test dataset.
+
+## Example 1
+
+</br>
+
+The "BostonHousing.xlsx" contains data collected by the US Bureau of the Census concerning housing in the area of Boston, Massachusetts. The dataset includes data on 506 census housing tracts in the Boston area in 1970s.
+
+The goal is to predict the median house price in new tracts based on information such as crime rate, pollution, and number of rooms.
+
+The response is the median value of owner-occupied homes in \$1000s, contained in the column `MEDV`.
+
+## The predictors
+
+::: {style="font-size: 70%;"}
+-   `CRIM`: per capita crime rate by town.
+-   `ZN`: proportion of residential land zoned for lots over 25,000 sq.ft.
+-   `INDUS`: proportion of non-retail business acres per town.
+-   `CHAS`: Charles River dummy variable (= 1 if tract bounds river; 0 otherwise).
+-   `NOX`: nitrogen oxides concentration (parts per 10 million).
+-   `RM`: average number of rooms per dwelling.
+-   `AGE`: proportion of owner-occupied units built prior to 1940.
+-   `DIS`: weighted mean of distances to five Boston employment centers
+-   `RAD`: index of accessibility to radial highways.
+-   `TAX`: full-value property-tax rate per \$10,000.
+-   `PTRATIO`: pupil-teacher ratio by town.
+-   `LSTAT`: lower status of the population (percent).
+:::
+
+## Read the dataset
+
+We read the dataset and set the variable `CHAS` as categorical.
+
+```{python}
+#| echo: true
+#| output: true
+
+# Load Excel file (make sure the file is in your Colab)
+Boston_data = pd.read_excel('BostonHousing.xlsx')
+
+# Drop the categorical variable.
+Boston_data['CHAS'] = pd.Categorical(Boston_data['CHAS'])
+
+# Preview the dataset.
+Boston_data.head(3)
+```
+
+## How do we generate validation data?
+
+We split the current dataset into a training and a validation dataset. To this end, we use the function `train_test_split()` from **scikit-learn**.
+
+```{python}
+#| echo: true
+#| output: true
+
+# Set full matrix of predictors.
+X_full = Boston_data.drop(columns = ['MEDV']) 
+
+# Set full matrix of responses.
+Y_full = Boston_data['MEDV']
+
+# Split the dataset into training and validation.
+X_train, X_valid, Y_train, Y_valid = train_test_split(X_full, Y_full, 
+                                                      test_size=0.3)
+```
+
+The parameter `test_size` sets the portion of the dataset that will go to the validation set.
+
+## 
+
+</br></br>
+
+-   The function makes a clever partition of the data using the *empirical* distribution of the response.
+
+-   Technically, it splits the data so that the distribution of the response under the training and validation sets is similar.
+
+-   Usually, the proportion of the dataset that goes to the validation set is 20% or 30%.
+
+## 
+
+The predictors and response in the training dataset are in the objects `X_train` and `Y_train`, respectively. We can compile these objects into a single dataset using the function `.concat` from **pandas**.
+
+```{python}
+#| echo: true
+#| output: true
+
+
+# Split the dataset into training and validation.
+training_dataset = pd.concat([X_train, Y_train])
+training_dataset.head(4)
+```
+
+## 
+
+Equivalently, the predictors and response in the validation dataset are in the objects `X_valid` and `Y_valid`, respectively.
+
+```{python}
+#| echo: true
+#| output: true
+
+
+# Split the dataset into training and validation.
+validation_dataset = pd.concat([X_valid, Y_valid])
+validation_dataset.head(4)
+```
+
+## Work on your training dataset
+
+After we have partitioned the data, we **work on the** [**training data**]{style="color:blue;"} to develop our predictive pipeline.
+
+The pipeline has two main steps:
+
+1.  Data preprocessing.
+2.  Model development.
+
+We will now discuss preprocessing techniques applied to the training dataset. Note that all the techniques applied to this dataset will also be applied to the [**validation dataset**]{style="color:orange;"} and [**test dataset**]{style="color:green;"} to prepare it for your model.
+
+# Dealing with missing values
+
+## Missing values
+
+In many cases, some predictors have no values for a given observation. It is important to understand why the values are missing.
+
+</br>
+
+. . .
+
+There four main types of missing data:
+
+::: incremental
+-   *Structurally missing* data is data that is missing for a logical reason or because it should not exist.
+
+-   *Missing completely at random* assumes that the fact that the data is missing is unrelated to the other information in the data.
+:::
+
+## 
+
+</br></br>
+
+-   *Missing at random* assumes that we can predict the value that is missing based on the other available data.
+
+-   *Missing not at random* assumes that there is a mechanism that generates the missing values, which may include observed and unobserved predictors.
+
+## 
+
+For large data sets, removal of observations based on missing values is not a problem, assuming that the type of missing data is completely at random.
+
+</br>
+
+In a smaller data sets, there is a high price in removing observations. To overcome this issue, we can use methods of imputation, which try to estimate the missing values of a predictor variable using the other predictors' values.
+
+</br>
+
+Here, we will introduce three simple methods for imputing missing values in categorical and numerical variables.
+
+## Example 2
+
+</br>
+
+Let's use the penguins dataset available in the file `penguins.xlsx`.
+
+```{python}
+#| echo: true
+
+# Load the Excel file into a pandas DataFrame.
+penguins_data = pd.read_excel("penguins.xlsx")
+
+# Set categorical variables.
+penguins_data['sex'] = pd.Categorical(penguins_data['sex'])
+penguins_data['species'] = pd.Categorical(penguins_data['species'])
+penguins_data['island'] = pd.Categorical(penguins_data['island'])
+```
+
+## 
+
+</br>
+
+The dataset has some missing values denoted as `NaN`.
+
+```{python}
+#| echo: false
+
+# Print the first 4 rows of the dataset.
+penguins_data.head(5)
+```
+
+## 
+
+</br>
+
+One way to know what variables have missing data is using the function `info()` from **pandas**.
+
+```{python}
+#| echo: true
+
+penguins_data.info()
+```
+
+## 
+
+In the output of the function "non-null" refers to the number of entries in a column that have actual values. That is, the number of entries where there are not `NaN`.
+
+```{python}
+#| echo: false
+
+penguins_data.info()
+```
+
+The value next to "RangeIndex" is the number of observations in the dataset.
+
+## 
+
+</br>
+
+Alternatively, we can use the function `isnull()` together with `sum()` to determine the number of missing values for each column in the dataset.
+
+</br>
+
+```{python}
+#| echo: true
+
+missing_values = penguins_data.isnull().sum()
+missing_values
+```
+
+## Removing missing values
+
+If we want to remove all rows in the dataset that have at least one missing value, we use the function `dropna()`.
+
+```{python}
+#| echo: true
+#| output: true
+
+complete_penguins = penguins_data.dropna()
+complete_penguins.head()
+```
+
+## Imputation using the mean
+
+We can impute the missing values of a numeric variable using the **mean** or **median** of its available values. For example, consider the variable `bill_length_mm` that has missing values.
+
+```{python}
+#| echo: true
+#| output: true
+
+penguins_data['bill_length_mm'].head()
+```
+
+In **scikit-learn**, we use the function `SimpleImputer()` to define the method of imputation of missing values.
+
+## 
+
+</br>
+
+Using `SimpleImputer()`, we set the method to imput missing values using the **mean**. We also use the function `fit_transform()` to apply the imputation method to the variable.
+
+```{python}
+#| echo: true
+#| output: true
+
+# Imputation for numerical variables (using the mean)
+num_imputer = SimpleImputer(strategy='mean')
+
+# Replace the original variable with new version.
+penguins_data['bill_length_mm'] = num_imputer.fit_transform(penguins_data[ ['bill_length_mm'] ] )
+```
+
+## 
+
+After imputation, the dataset looks like this.
+
+```{python}
+#| echo: true
+#| output: true
+
+penguins_data.head()
+```
+
+Now, `bill_length_mm` has complete values.
+
+## 
+
+To imput the missing values using the **median**, we simply set this method in `SimpleImputer()`. For example, let's imput the missing values of `bill_depth_mm`.
+
+```{python}
+#| echo: true
+#| output: true
+
+# Imputation for numerical variables (using the mean)
+num_imputer = SimpleImputer(strategy = 'median')
+
+# Replace the original variable with new version.
+penguins_data['bill_depth_mm'] = num_imputer.fit_transform(penguins_data[ ['bill_depth_mm'] ] )
+
+# Show the first 4 rows of the updated dataset.
+penguins_data.head(3)
+```
+
+## Using the mean or the median?
+
+</br></br>
+
+We use the **sample mean** when the data distribution is roughly symmetrical.
+
+-   Pros: Simple and easy to implement.
+
+-   Cons: Sensitive to outliers; may not be accurate for skewed distributions
+
+## 
+
+</br></br>
+
+We use the **sample median** when the data is skewed (e.g., incomes, prices).
+
+-   Pros: Less sensitive to outliers; robust for skewed distributions.
+
+-   Cons: May reduce variability in the data.
+
+## Imputation method for a categorical variable
+
+If a categorical variable has missing values, we can use the **most frequent** of the available values to replace the missing values. To this end, we use similar commands as before.
+
+For example, let's imput the missing values of `sex` using this strategy.
+
+```{python}
+#| echo: true
+#| output: true
+
+# Imputation for categorical variables (using the most frequent value)
+cat_imputer = SimpleImputer(strategy = 'most_frequent')
+
+# Apply imputation strategy for categorical variables.
+penguins_data['sex'] = cat_imputer.fit_transform(penguins_data[ ['sex'] ]).ravel()
+```
+
