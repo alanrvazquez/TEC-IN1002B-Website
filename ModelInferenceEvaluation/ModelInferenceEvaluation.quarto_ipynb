@@ -39,7 +39,7 @@
         "\n",
         "Let's import **statsmodels** into Python together with the other relevant libraries.\n"
       ],
-      "id": "60216560"
+      "id": "ded2e46c"
     },
     {
       "cell_type": "code",
@@ -54,7 +54,7 @@
         "import matplotlib.pyplot as plt\n",
         "import statsmodels.api as sm"
       ],
-      "id": "a3579c3d",
+      "id": "119cc4f2",
       "execution_count": null,
       "outputs": []
     },
@@ -143,7 +143,7 @@
         "\n",
         "The dataset is in the file \"production.xlsx\".\n"
       ],
-      "id": "5aa47d16"
+      "id": "13ae7abb"
     },
     {
       "cell_type": "code",
@@ -155,7 +155,7 @@
         "production_data = pd.read_excel('production.xlsx')\n",
         "production_data.head()"
       ],
-      "id": "7bf2f085",
+      "id": "1eefdce1",
       "execution_count": null,
       "outputs": []
     },
@@ -167,7 +167,7 @@
         "\n",
         "the Residuals versus Fitted Values plot.\n"
       ],
-      "id": "c7cd230e"
+      "id": "b6dc8c34"
     },
     {
       "cell_type": "code",
@@ -196,7 +196,7 @@
         "plt.ylabel(\"Run time\", fontsize = 14)\n",
         "plt.show()"
       ],
-      "id": "c7fa31f7",
+      "id": "41bff645",
       "execution_count": null,
       "outputs": []
     },
@@ -208,7 +208,7 @@
         "\n",
         "Recall that we can calculate the predicted values and residuals using commands from **statsmodels**.\n"
       ],
-      "id": "8755d0ba"
+      "id": "15705980"
     },
     {
       "cell_type": "code",
@@ -232,7 +232,7 @@
         "# Calculate residuals.\n",
         "residuals = linear_model.resid"
       ],
-      "id": "709a0ecb",
+      "id": "b5b36ee8",
       "execution_count": null,
       "outputs": []
     },
@@ -245,7 +245,7 @@
         "::::: columns\n",
         "::: {.column width=\"60%\"}"
       ],
-      "id": "09c23ebd"
+      "id": "5b196a63"
     },
     {
       "cell_type": "code",
@@ -265,7 +265,7 @@
         "plt.ylabel('Residuals')\n",
         "plt.show()"
       ],
-      "id": "994659e2",
+      "id": "6853440e",
       "execution_count": null,
       "outputs": []
     },
@@ -311,7 +311,7 @@
         "\n",
         "## \n"
       ],
-      "id": "d6443922"
+      "id": "d065cd07"
     },
     {
       "cell_type": "code",
@@ -332,7 +332,7 @@
         "plt.ylabel('Residuals')\n",
         "plt.show()"
       ],
-      "id": "e3111d66",
+      "id": "4a438577",
       "execution_count": null,
       "outputs": []
     },
@@ -370,7 +370,7 @@
         "\n",
         "Ideally, the histogram resembles a normal distribution around 0. If the number of observations is small, the histogram may not be an effective visualization.\n"
       ],
-      "id": "1a5a1903"
+      "id": "442b47b0"
     },
     {
       "cell_type": "code",
@@ -388,7 +388,7 @@
         "plt.xlabel('Residuals')\n",
         "plt.show()"
       ],
-      "id": "b079e0fc",
+      "id": "c7d9ae8e",
       "execution_count": null,
       "outputs": []
     },
@@ -428,7 +428,7 @@
         "\n",
         "To construct a QQ plot, we use the function `qqplot()` **statsmodels** library.\n"
       ],
-      "id": "4ed750a7"
+      "id": "c110f730"
     },
     {
       "cell_type": "code",
@@ -445,7 +445,7 @@
         "plt.title('QQ Plot of Residuals')\n",
         "plt.show()"
       ],
-      "id": "7dc2444a",
+      "id": "3ae18dee",
       "execution_count": null,
       "outputs": []
     },
@@ -457,7 +457,7 @@
         "\n",
         "Substantial departures from a straight line indicate that the distribution is not normal.\n"
       ],
-      "id": "c989a5de"
+      "id": "47435f07"
     },
     {
       "cell_type": "code",
@@ -474,7 +474,7 @@
         "plt.title('QQ Plot of Residuals')\n",
         "plt.show()"
       ],
-      "id": "97f772c6",
+      "id": "9933ecf8",
       "execution_count": null,
       "outputs": []
     },
@@ -486,7 +486,7 @@
         "\n",
         "This plot suggests that the residuals are consistent with a Normal curve.\n"
       ],
-      "id": "24d55df9"
+      "id": "455d6d05"
     },
     {
       "cell_type": "code",
@@ -503,7 +503,7 @@
         "plt.title('QQ Plot of Residuals')\n",
         "plt.show()"
       ],
-      "id": "24c9a4c0",
+      "id": "9746e56a",
       "execution_count": null,
       "outputs": []
     },
@@ -554,7 +554,7 @@
         "\n",
         "Let's consider the \"auto.xlsx\" dataset.\n"
       ],
-      "id": "ce738468"
+      "id": "cb8eeada"
     },
     {
       "cell_type": "code",
@@ -563,7 +563,7 @@
         "#| echo: true\n",
         "auto_data = pd.read_excel('auto.xlsx')"
       ],
-      "id": "66e3e40b",
+      "id": "ef749e18",
       "execution_count": null,
       "outputs": []
     },
@@ -650,7 +650,7 @@
         "\n",
         "The random sample is the data we use to train or fit the model.\n"
       ],
-      "id": "75c4f1c7"
+      "id": "2d80c5b9"
     },
     {
       "cell_type": "code",
@@ -668,7 +668,7 @@
         "# Dataset with the response only.\n",
         "auto_Y_train = auto_data['mpg']"
       ],
-      "id": "afdf5f36",
+      "id": "6c99a630",
       "execution_count": null,
       "outputs": []
     },
@@ -693,7 +693,7 @@
         "\n",
         "Recall that we obtain the least squares estimates ($\\hat{\\beta}_{j}$) in Python using:\n"
       ],
-      "id": "26b8b9a2"
+      "id": "a3ac6008"
     },
     {
       "cell_type": "code",
@@ -707,7 +707,7 @@
         "linear_model = regr.fit()\n",
         "linear_model.params"
       ],
-      "id": "4c33de44",
+      "id": "b6ba789a",
       "execution_count": null,
       "outputs": []
     },
@@ -829,7 +829,7 @@
         "\n",
         "We obtain the t-tests of the coefficients using the function `summary()` together with the `linear_model` object.\n"
       ],
-      "id": "f2763181"
+      "id": "32a515cf"
     },
     {
       "cell_type": "code",
@@ -840,7 +840,7 @@
         "model_summary = linear_model.summary()\n",
         "print(model_summary)"
       ],
-      "id": "6341426e",
+      "id": "38aac42e",
       "execution_count": null,
       "outputs": []
     },
@@ -1002,7 +1002,7 @@
         "\n",
         "To show the $R^2$ value, we use the `rsquared` argument of the `linear_model` object.\n"
       ],
-      "id": "5b5135b0"
+      "id": "91578c16"
     },
     {
       "cell_type": "code",
@@ -1013,7 +1013,7 @@
         "\n",
         "print( round(linear_model.rsquared, 3) )"
       ],
-      "id": "b4dc7f20",
+      "id": "df134b7f",
       "execution_count": null,
       "outputs": []
     },
@@ -1023,7 +1023,7 @@
       "source": [
         "To show the adjusted $R^2$ value, we use the `rsquared` argument of the `linear_model` object.\n"
       ],
-      "id": "b884397b"
+      "id": "f30c2862"
     },
     {
       "cell_type": "code",
@@ -1034,7 +1034,7 @@
         "\n",
         "print( round(linear_model.rsquared_adj, 3) )"
       ],
-      "id": "35606543",
+      "id": "d8ef9bb9",
       "execution_count": null,
       "outputs": []
     },
@@ -1064,7 +1064,7 @@
         "\n",
         "# [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)"
       ],
-      "id": "47c77a83"
+      "id": "d2788c19"
     }
   ],
   "metadata": {

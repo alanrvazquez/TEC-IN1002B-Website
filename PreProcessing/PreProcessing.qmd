@@ -725,8 +725,13 @@ In Python, we can apply Box-Cox transformation using the `power_transformation` 
 #| echo: true
 
 DIS_transform = power_transform(Boston_data[ ['DIS']], method = "box-cox")
-DIS_transform
+DIS_transform_df = pd.DataFrame(DIS_transform, columns=['DIS_boxcox'])
+DIS_transform_df.head(3)
 ```
+
+In the code above, we use the `pd.DataFrame` to turn the transformed column into a pandas dataframe.
+
+##
 
 ```{python}
 #| echo: true
@@ -734,7 +739,7 @@ DIS_transform
 #| fig-align: center
 
 plt.figure(figsize=(7,4)) # Create space for figure.
-sns.histplot(x = DIS_transform) # Create the histogram.
+sns.histplot(data = DIS_transform_df, x = 'DIS_boxcox') # Create the histogram.
 plt.title("Histogram of DIS") # Plot title.
 plt.xlabel("DIS") # X label
 plt.show() # Display the plot

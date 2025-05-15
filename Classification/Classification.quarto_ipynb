@@ -40,7 +40,7 @@
         "\n",
         "Before we start, let's import the data science libraries into Python.\n"
       ],
-      "id": "fe86cecc"
+      "id": "98ba01ae"
     },
     {
       "cell_type": "code",
@@ -57,7 +57,7 @@
         "from sklearn.model_selection import train_test_split\n",
         "from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, accuracy_score"
       ],
-      "id": "e9fe941c",
+      "id": "71178b29",
       "execution_count": null,
       "outputs": []
     },
@@ -216,7 +216,7 @@
         "\n",
         "The data is in the file “banknotes.xlsx”.\n"
       ],
-      "id": "d6d6f203"
+      "id": "6b692d45"
     },
     {
       "cell_type": "code",
@@ -230,7 +230,7 @@
         "bank_data['Status'] = pd.Categorical(bank_data['Status'])\n",
         "bank_data.head()"
       ],
-      "id": "ddcbd2e7",
+      "id": "7e5974a8",
       "execution_count": null,
       "outputs": []
     },
@@ -244,7 +244,7 @@
         "\n",
         "Before we start, we ensure that there are no highly correlated predictors in the dataset. To this end, we construct the correlation plot.\n"
       ],
-      "id": "da1bab85"
+      "id": "73f23232"
     },
     {
       "cell_type": "code",
@@ -265,7 +265,7 @@
         "sns.heatmap(correlation_matrix.abs(), cmap = 'coolwarm', annot = True)\n",
         "plt.title(\"Heatmap on correlations\") # Set plot title."
       ],
-      "id": "603826d3",
+      "id": "130633ab",
       "execution_count": null,
       "outputs": []
     },
@@ -277,7 +277,7 @@
         "\n",
         "</br>\n"
       ],
-      "id": "36d80e38"
+      "id": "b488cc20"
     },
     {
       "cell_type": "code",
@@ -297,7 +297,7 @@
         "sns.heatmap(correlation_matrix.abs(), cmap = 'coolwarm', annot = True)\n",
         "plt.title(\"Heatmap on correlations\") # Set plot title."
       ],
-      "id": "f60dd777",
+      "id": "1e6420eb",
       "execution_count": null,
       "outputs": []
     },
@@ -315,7 +315,7 @@
         "\n",
         "Consequently, our database for this problem is\n"
       ],
-      "id": "9f3840d8"
+      "id": "d564eee1"
     },
     {
       "cell_type": "code",
@@ -326,7 +326,7 @@
         "\n",
         "bank_data = bank_data.drop(columns = ['Right'])"
       ],
-      "id": "f66a168f",
+      "id": "7d6a36fd",
       "execution_count": null,
       "outputs": []
     },
@@ -446,7 +446,7 @@
         "\n",
         "We use the [training data]{style=\"color:darkblue;\"}!\n"
       ],
-      "id": "e433f47b"
+      "id": "bbb966b1"
     },
     {
       "cell_type": "code",
@@ -457,7 +457,7 @@
         "\n",
         "bank_data.head(4)"
       ],
-      "id": "5d508c69",
+      "id": "c0830a54",
       "execution_count": null,
       "outputs": []
     },
@@ -469,7 +469,7 @@
         "\n",
         "We split the current data set into a training and a validation dataset. To this end, we use the function `train_test_split()` from **scikit-learn**.\n"
       ],
-      "id": "1dcb5e63"
+      "id": "93a40aaa"
     },
     {
       "cell_type": "code",
@@ -488,7 +488,7 @@
         "X_train, X_test, Y_train, Y_test = train_test_split(X_full, Y_full, \n",
         "                                                    test_size=0.3)"
       ],
-      "id": "34c5bad7",
+      "id": "21764315",
       "execution_count": null,
       "outputs": []
     },
@@ -527,7 +527,7 @@
         "\n",
         "Using the training dataset, we estimate a logistic regression classifier using the function `Logit()` from **statsmodel**. To this end, we first define the target category using the `get_dummies()`.\n"
       ],
-      "id": "76b61c4f"
+      "id": "abb10c84"
     },
     {
       "cell_type": "code",
@@ -542,7 +542,7 @@
         "# Select target variable.\n",
         "Y_target_train = Y_dummies['counterfeit']"
       ],
-      "id": "a15da13c",
+      "id": "b62bc0e3",
       "execution_count": null,
       "outputs": []
     },
@@ -552,7 +552,7 @@
       "source": [
         "We also define the matrix of predictors with the intercept.\n"
       ],
-      "id": "50739dee"
+      "id": "c144c7d1"
     },
     {
       "cell_type": "code",
@@ -564,7 +564,7 @@
         "# Add the intercept to the predictor matrix.\n",
         "X_train_int = sm.add_constant(X_train)"
       ],
-      "id": "54218320",
+      "id": "cb9fd8ad",
       "execution_count": null,
       "outputs": []
     },
@@ -578,7 +578,7 @@
         "\n",
         "After that, we fit the model using the function `Logit()`.\n"
       ],
-      "id": "2d005968"
+      "id": "d2c3356f"
     },
     {
       "cell_type": "code",
@@ -596,7 +596,7 @@
         "# Show estimated coefficients.\n",
         "print(logit_model.params)"
       ],
-      "id": "8bfd8a82",
+      "id": "7fae1766",
       "execution_count": null,
       "outputs": []
     },
@@ -645,7 +645,7 @@
         "\n",
         "The `summary()` function of **statsmodel** contains the Wald tests of the coefficients in the logistic regression model.\n"
       ],
-      "id": "e8199c49"
+      "id": "141edc43"
     },
     {
       "cell_type": "code",
@@ -657,7 +657,7 @@
         "logit_summary = logit_model.summary()\n",
         "print(logit_summary)"
       ],
-      "id": "9e778d9a",
+      "id": "d58c545f",
       "execution_count": null,
       "outputs": []
     },
@@ -704,7 +704,7 @@
         "\n",
         "In Python, we use the commands:\n"
       ],
-      "id": "dde86aa9"
+      "id": "5d146ec8"
     },
     {
       "cell_type": "code",
@@ -718,7 +718,7 @@
         "# Predict probabilities.\n",
         "predicted_probability = logit_model.predict(X_test)"
       ],
-      "id": "856d67fa",
+      "id": "dd5731a5",
       "execution_count": null,
       "outputs": []
     },
@@ -730,7 +730,7 @@
         "\n",
         "The `predict()` function outputs [**probabilities**]{style=\"color:brown;\"} instead of actual classes.\n"
       ],
-      "id": "58bbed99"
+      "id": "7ec6e707"
     },
     {
       "cell_type": "code",
@@ -741,7 +741,7 @@
         "\n",
         "predicted_probability.head()"
       ],
-      "id": "2c5df39c",
+      "id": "f099ecd4",
       "execution_count": null,
       "outputs": []
     },
@@ -755,7 +755,7 @@
         "\n",
         "To turn the probabilities to actual classes, we round them:\n"
       ],
-      "id": "e0d291b7"
+      "id": "2275dea9"
     },
     {
       "cell_type": "code",
@@ -764,7 +764,7 @@
         "#| echo: true\n",
         "predicted_classes = round(predicted_probability).astype('int')"
       ],
-      "id": "1fa32e45",
+      "id": "23c72149",
       "execution_count": null,
       "outputs": []
     },
@@ -774,7 +774,7 @@
       "source": [
         "## \n"
       ],
-      "id": "469cc1e1"
+      "id": "94360df5"
     },
     {
       "cell_type": "code",
@@ -783,7 +783,7 @@
         "#| echo: true\n",
         "predicted_classes.head()"
       ],
-      "id": "c1b7679c",
+      "id": "e02a5b52",
       "execution_count": null,
       "outputs": []
     },
@@ -812,7 +812,7 @@
         "\n",
         "We compute the confusion matrix using the function with the same name of **scikit-learn**.\n"
       ],
-      "id": "45bc921c"
+      "id": "c73944bc"
     },
     {
       "cell_type": "code",
@@ -833,7 +833,7 @@
         "# Show confusion matrix.\n",
         "print(cm)"
       ],
-      "id": "e268549f",
+      "id": "fe0c8188",
       "execution_count": null,
       "outputs": []
     },
@@ -845,7 +845,7 @@
         "\n",
         "We can visualize the confusion matrix using the `ConfusionMatrixDisplay()` function.\n"
       ],
-      "id": "c29b083b"
+      "id": "bfd772fb"
     },
     {
       "cell_type": "code",
@@ -857,7 +857,7 @@
         "\n",
         "ConfusionMatrixDisplay(cm).plot()"
       ],
-      "id": "13919540",
+      "id": "fd5fb085",
       "execution_count": null,
       "outputs": []
     },
@@ -871,7 +871,7 @@
         "\n",
         "In Python, we compute the accuracy using the function `accuracy_score()` from **scikit-learn**.\n"
       ],
-      "id": "bb513b95"
+      "id": "fee98c7b"
     },
     {
       "cell_type": "code",
@@ -883,7 +883,7 @@
         "accuracy = accuracy_score(Y_target_test, predicted_classes)\n",
         "print( round(accuracy, 2) )"
       ],
-      "id": "83639142",
+      "id": "68a622e7",
       "execution_count": null,
       "outputs": []
     },
@@ -909,7 +909,7 @@
         "\n",
         "# [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)"
       ],
-      "id": "75ce79de"
+      "id": "c5b0aa49"
     }
   ],
   "metadata": {
