@@ -48,7 +48,7 @@ For example, linear regression models (to be discussed later) are relatively ins
 
 </br>
 
-We will review some common strategies for removing predictors from the data, without considering how they might be related to the response.
+We will review some common strategies for processing predictors from the data, without considering how they might be related to the response.
 
 . . .
 
@@ -56,9 +56,9 @@ In particular, we will review:
 
 ::: incremental
 -   Dealing with missing values.
--   Transforming categorical predictors.
--   Filtering: Removing non-informative or correlated predictors.
--   Standardization.
+-   Transforming predictors.
+-   Reducing the number of predictors.
+-   Standardizing the units of the predictors.
 :::
 
 ## scikit-learn library
@@ -715,24 +715,44 @@ The Box-Cox transformation uses a family of power transformations on a predictor
 
 The Box-Cox transformation is the element of this family that results in a transformed variable that follows a normal distribution (approximately).
 
-The variable $X$ must be strictly positive.
+[The variable $X$ must be strictly positive!]{style="color:blue;"}
 
 ## In Python
 
-In Python, we can apply Box-Cox transformation using the `power_transformation` function of the **scikit-learn** library.
+We apply the Box-Cox transformation using the `power_transformation` function of the **scikit-learn** library.
 
 ```{python}
 #| echo: true
 
-DIS_transform = power_transform(Boston_data[ ['DIS']], method = "box-cox")
+DIS_transform = power_transform(Boston_data[['DIS']], method = "box-cox")
 DIS_transform_df = pd.DataFrame(DIS_transform, columns=['DIS_boxcox'])
 DIS_transform_df.head(3)
 ```
 
-In the code above, we use the `pd.DataFrame` to turn the transformed column into a pandas dataframe.
+In the code above, we use the `pd.DataFrame()` to turn the transformed column into a pandas dataframe.
 
 ##
 
+</br>
+
+::::: columns
+::: {.column width="50%"}
+Original predictor
+```{python}
+#| echo: true
+#| code-fold: true
+#| fig-align: center
+
+plt.figure(figsize=(7,4)) # Create space for figure.
+sns.histplot(data = Boston_data, x = 'DIS') # Create the histogram.
+plt.title("Histogram of DIS") # Plot title.
+plt.xlabel("DIS") # X label
+plt.show() # Display the plot
+```
+:::
+
+::: {.column width="50%"}
+Box-Cox transformation
 ```{python}
 #| echo: true
 #| code-fold: true
@@ -740,10 +760,15 @@ In the code above, we use the `pd.DataFrame` to turn the transformed column into
 
 plt.figure(figsize=(7,4)) # Create space for figure.
 sns.histplot(data = DIS_transform_df, x = 'DIS_boxcox') # Create the histogram.
-plt.title("Histogram of DIS") # Plot title.
-plt.xlabel("DIS") # X label
+plt.title("Histogram of transformed DIS") # Plot title.
+plt.xlabel("DIS (Box-Cox transformation") # X label
 plt.show() # Display the plot
 ```
+:::
+:::::
+
+
+
 
 ## Discussion
 
@@ -907,8 +932,6 @@ The distance between these points is $\sqrt{(-0.91 - 1.82)^2 + (-1.60-2.53)^2}$ 
 
 -   Standardizing the predictors does not affect their correlation.
 :::
-
-# [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)
 
 
 # Dimension reduction
@@ -1099,4 +1122,6 @@ We can identify the variables that are highly correlated using quite complex cod
 # Dataset without highly correlated predictors.
 reduced_auto = complete_sbAuto[ ['weight', 'acceleration']]
 ```
+
+# [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)
 
