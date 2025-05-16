@@ -2594,7 +2594,7 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-1",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "Let’s import scikit-learn into Python together with the other relevant libraries.\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom sklearn.impute import SimpleImputer\nfrom sklearn.feature_selection import VarianceThreshold\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import power_transform, StandardScaler \n\nWe will not use all the functions from the scikit-learn library. Instead, we will use specific functions from the sub-libraries preprocessing, feature_selection, model_selection and impute."
+    "text": "Let’s import scikit-learn into Python together with the other relevant libraries.\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom sklearn.impute import SimpleImputer, KNNImputer\nfrom sklearn.feature_selection import VarianceThreshold\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import power_transform, StandardScaler \n\nWe will not use all the functions from the scikit-learn library. Instead, we will use specific functions from the sub-libraries preprocessing, feature_selection, model_selection and impute."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#recall-that",
@@ -2657,14 +2657,14 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-3",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "The predictors and response in the training dataset are in the objects X_train and Y_train, respectively. We compile these objects into a single dataset using the function .concat() from pandas. The argument axis = 1 tells .concat() to concatenate the datasets by their rows.\n\ntraining_dataset = pd.concat([X_train, Y_train], axis = 1)\ntraining_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n170\n1.20742\n0.0\n19.58\n0\n0.605\n5.875\n94.6\n2.4259\n5\n403\n14.7\n14.43\n17.4\n\n\n373\n11.10810\n0.0\n18.10\n0\n0.668\n4.906\n100.0\n1.1742\n24\n666\n20.2\n34.77\n13.8\n\n\n388\n14.33370\n0.0\n18.10\n0\n0.700\n4.880\n100.0\n1.5895\n24\n666\n20.2\n30.62\n10.2\n\n\n55\n0.01311\n90.0\n1.22\n0\n0.403\n7.249\n21.9\n8.6966\n5\n226\n17.9\n4.81\n35.4"
+    "text": "The predictors and response in the training dataset are in the objects X_train and Y_train, respectively. We compile these objects into a single dataset using the function .concat() from pandas. The argument axis = 1 tells .concat() to concatenate the datasets by their rows.\n\ntraining_dataset = pd.concat([X_train, Y_train], axis = 1)\ntraining_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n269\n0.09065\n20.0\n6.96\n1\n0.464\n5.920\n61.5\n3.9175\n3\n223\n18.6\n13.65\n20.7\n\n\n66\n0.04379\n80.0\n3.37\n0\n0.398\n5.787\n31.1\n6.6115\n4\n337\n16.1\n10.24\n19.4\n\n\n239\n0.09252\n30.0\n4.93\n0\n0.428\n6.606\n42.2\n6.1899\n6\n300\n16.6\n7.37\n23.3\n\n\n302\n0.09266\n34.0\n6.09\n0\n0.433\n6.495\n18.4\n5.4917\n7\n329\n16.1\n8.67\n26.4"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-4",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-4",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "Equivalently, the predictors and response in the validation dataset are in the objects X_valid and Y_valid, respectively.\n\nvalidation_dataset = pd.concat([X_valid, Y_valid], axis = 1)\nvalidation_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n501\n0.06263\n0.0\n11.93\n0\n0.573\n6.593\n69.1\n2.4786\n1\n273\n21.0\n9.67\n22.4\n\n\n505\n0.04741\n0.0\n11.93\n0\n0.573\n6.030\n80.8\n2.5050\n1\n273\n21.0\n7.88\n11.9\n\n\n6\n0.08829\n12.5\n7.87\n0\n0.524\n6.012\n66.6\n5.5605\n5\n311\n15.2\n12.43\n22.9\n\n\n107\n0.13117\n0.0\n8.56\n0\n0.520\n6.127\n85.2\n2.1224\n5\n384\n20.9\n14.09\n20.4"
+    "text": "Equivalently, the predictors and response in the validation dataset are in the objects X_valid and Y_valid, respectively.\n\nvalidation_dataset = pd.concat([X_valid, Y_valid], axis = 1)\nvalidation_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n140\n0.29090\n0.0\n21.89\n0\n0.624\n6.174\n93.6\n1.6119\n4\n437\n21.2\n24.16\n14.0\n\n\n196\n0.04011\n80.0\n1.52\n0\n0.404\n7.287\n34.1\n7.3090\n2\n329\n12.6\n4.08\n33.3\n\n\n244\n0.20608\n22.0\n5.86\n0\n0.431\n5.593\n76.5\n7.9549\n7\n330\n19.1\n12.50\n17.6\n\n\n86\n0.05188\n0.0\n4.49\n0\n0.449\n6.015\n45.1\n4.4272\n3\n247\n18.5\n12.86\n22.5"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-5",
@@ -2825,7 +2825,7 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-16",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "To imput the missing values using the median, we simply set this method in SimpleImputer(). For example, let’s imput the missing values of bill_depth_mm.\n\n# Imputation for numerical variables (using the mean)\nnum_imputer = SimpleImputer(strategy = 'median')\n\n# Replace the original variable with new version.\nX_train_p['bill_depth_mm'] = num_imputer.fit_transform(X_train_p[ ['bill_depth_mm'] ] )\n\n# Show the information of the predictor.\nX_train_p['bill_depth_mm'].info(3)\n\n&lt;class 'pandas.core.series.Series'&gt;\nIndex: 240 entries, 31 to 293\nSeries name: bill_depth_mm\nNon-Null Count  Dtype  \n--------------  -----  \n240 non-null    float64\ndtypes: float64(1)\nmemory usage: 3.8 KB"
+    "text": "To imput the missing values using the median, we simply set this method in SimpleImputer(). For example, let’s imput the missing values of bill_depth_mm.\n\n# Imputation for numerical variables (using the mean)\nnum_imputer = SimpleImputer(strategy = 'median')\n\n# Replace the original variable with new version.\nX_train_p['bill_depth_mm'] = num_imputer.fit_transform(X_train_p[ ['bill_depth_mm'] ] )\n\n# Show the information of the predictor.\nX_train_p['bill_depth_mm'].info()\n\n&lt;class 'pandas.core.series.Series'&gt;\nIndex: 240 entries, 31 to 293\nSeries name: bill_depth_mm\nNon-Null Count  Dtype  \n--------------  -----  \n240 non-null    float64\ndtypes: float64(1)\nmemory usage: 3.8 KB"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-17",
@@ -2840,5 +2840,40 @@
     "title": "Data preprocessing: Part I",
     "section": "",
     "text": "Let’s now have a look at the information of the dataset.\n\n# Apply imputation strategy for categorical variables.\nX_train_p.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nIndex: 240 entries, 31 to 293\nData columns (total 5 columns):\n #   Column             Non-Null Count  Dtype  \n---  ------             --------------  -----  \n 0   bill_length_mm     240 non-null    float64\n 1   bill_depth_mm      240 non-null    float64\n 2   flipper_length_mm  238 non-null    float64\n 3   body_mass_g        238 non-null    float64\n 4   sex                240 non-null    object \ndtypes: float64(4), object(1)\nmemory usage: 11.2+ KB\n\n\nThe columns bill_length_mm, bill_depth_mm, and sex have 240 complete values."
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#multivariate-imputation-using-k-nearest-neighbours",
+    "href": "PreProcessing/PreProcessing_Part1.slides.html#multivariate-imputation-using-k-nearest-neighbours",
+    "title": "Data preprocessing: Part I",
+    "section": "Multivariate imputation using K-nearest neighbours",
+    "text": "Multivariate imputation using K-nearest neighbours\nK-nearest neighbours (KNN) is a multiple imputation method to fill in the missing values of a predictor using the available values from this and the other predictors.\nBasic idea:\nFor each missing value in a predictor \\(X\\): 1. Find the \\(K\\) most similar rows based on the other predictors. 2. Impute the missing value of \\(X\\) using the average of the available values of \\(X\\) in the $K $ closest rows."
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-19",
+    "href": "PreProcessing/PreProcessing_Part1.slides.html#section-19",
+    "title": "Data preprocessing: Part I",
+    "section": "",
+    "text": "KNN captures local patterns better than individual predictor imputation using the mean or the median.\nHowever, it only works for numeric predictors!"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#in-python",
+    "href": "PreProcessing/PreProcessing_Part1.slides.html#in-python",
+    "title": "Data preprocessing: Part I",
+    "section": "In Python",
+    "text": "In Python\nYou can use KNN using the function KNNImputer(). Its main input is the number of nearest neighbours to use. You set this value using the parameter n_neighbors.\n\n# Set the KNN imputer using two neighbours.\nKNN_imputer = KNNImputer(n_neighbors = 2)\n\n# Select numeric predictors.\nX_train_num_p = X_train_p.drop(columns = ['sex']) \n\n# Apply imputer and store the rulst in a pandas data frame.\nX_train_num_p = pd.DataFrame(KNN_imputer.fit_transform(X_train_num_p), \n                            columns = X_train_num_p.columns)"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#some-remarks",
+    "href": "PreProcessing/PreProcessing_Part1.slides.html#some-remarks",
+    "title": "Data preprocessing: Part I",
+    "section": "Some remarks",
+    "text": "Some remarks\n\n\nIn KNN the distance between two rows is calculated using Euclidean distance.\nKNN only considers rows without missing values in the columns being used.\nKNN works best when the features are on similar scales and missingness is not too high."
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-20",
+    "href": "PreProcessing/PreProcessing_Part1.slides.html#section-20",
+    "title": "Data preprocessing: Part I",
+    "section": "",
+    "text": "Let’s look at the new dataset.\n\nX_train_num_p.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 240 entries, 0 to 239\nData columns (total 4 columns):\n #   Column             Non-Null Count  Dtype  \n---  ------             --------------  -----  \n 0   bill_length_mm     240 non-null    float64\n 1   bill_depth_mm      240 non-null    float64\n 2   flipper_length_mm  240 non-null    float64\n 3   body_mass_g        240 non-null    float64\ndtypes: float64(4)\nmemory usage: 7.6 KB\n\n\nAll predictors have 240 complete entries."
   }
 ]

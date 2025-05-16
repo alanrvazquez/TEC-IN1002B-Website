@@ -78,7 +78,7 @@ Let's import **scikit-learn** into Python together with the other relevant libra
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.impute import SimpleImputer
+from sklearn.impute import SimpleImputer, KNNImputer
 from sklearn.feature_selection import VarianceThreshold
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import power_transform, StandardScaler 
@@ -536,7 +536,7 @@ num_imputer = SimpleImputer(strategy = 'median')
 X_train_p['bill_depth_mm'] = num_imputer.fit_transform(X_train_p[ ['bill_depth_mm'] ] )
 
 # Show the information of the predictor.
-X_train_p['bill_depth_mm'].info(3)
+X_train_p['bill_depth_mm'].info()
 ```
 
 ## Using the mean or the median?
@@ -589,5 +589,67 @@ X_train_p.info()
 ```
 
 The columns `bill_length_mm`, `bill_depth_mm`, and `sex` have 240 complete values.
+
+## Multivariate imputation using K-nearest neighbours 
+
+K-nearest neighbours (KNN) is a multiple imputation method to fill in the missing values of a predictor using the available values from this and the other predictors. 
+
+**Basic idea**:
+
+For each missing value in a predictor $X$:
+  1. Find the $K$ most similar rows based on the other predictors.
+  2. Impute the missing value of $X$ using the *average* of the available values of $X$ in the $K $ closest rows.
+
+##
+
+</br>
+
+- KNN captures *local patterns* better than individual predictor imputation using the mean or the median. 
+
+- However, it only works for numeric predictors!
+
+## In Python
+
+You can use KNN using the function `KNNImputer()`. Its main input is the number of nearest neighbours to use. You set this value using the parameter `n_neighbors`.
+
+```{python}
+#| echo: true
+#| output: true
+
+# Set the KNN imputer using two neighbours.
+KNN_imputer = KNNImputer(n_neighbors = 2)
+
+# Select numeric predictors.
+X_train_num_p = X_train_p.drop(columns = ['sex']) 
+
+# Apply imputer and store the rulst in a pandas data frame.
+X_train_num_p = pd.DataFrame(KNN_imputer.fit_transform(X_train_num_p), 
+                            columns = X_train_num_p.columns)
+```
+
+## 
+
+</br>
+
+Let's look at the new dataset.
+
+```{python}
+#| echo: true
+#| output: true
+
+X_train_num_p.info()
+```
+
+All predictors have 240 complete entries.
+
+## Some remarks
+
+</br>
+
+- In KNN the distance between two rows is calculated using *Euclidean* distance.
+
+- KNN only considers rows without missing values in the columns being used.
+
+- KNN works best when the features are on similar scales and missingness is not too high.
 
 # [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)
