@@ -319,14 +319,14 @@
     "href": "index.html",
     "title": "IN1002B Introduction to Data Science Projects",
     "section": "",
-    "text": "Course topics\n\nModule 2\n\nIntroduction to Data Science (slides)\nTools: Part 1 (slides) (colab)\nTools: Part 2 (slides) (colab)\nPreprocessing: Part 1 (slides) (colab)\nPreprocessing: Part 2 (slides) (colab)\n\n\n\nModule 3\n\nIntroduction to Linear Regression (slides) (colab)\nModel Inference and Evaluation (slides) (colab)\nAdditional Topics (slides) (colab)\nLogistic Regression (slides) (colab)\n\n\n\n\nAbout the author\nAlan R. Vazquez (website) is a Research Professor at the Department of Industrial Engineering at Tecnologico de Monterrey, Monterrey campus.\n\nLicense\n\nIN1002B Introduction to Data Science Projects by Alan Roberto Vazquez is licensed under CC BY-NC-SA 4.0"
+    "text": "Course topics\n\nModule 2\n\nIntroduction to Data Science (slides)\nTools: Part 1 (slides) (colab)\nTools: Part 2 (slides) (colab)\nPreprocessing: Part 1 (slides) (colab)\nPreprocessing: Part 2 (slides)\n\n\n\nModule 3\n\nIntroduction to Linear Regression (slides) (colab)\nModel Inference and Evaluation (slides) (colab)\nAdditional Topics (slides) (colab)\nLogistic Regression (slides) (colab)\n\n\n\n\nAbout the author\nAlan R. Vazquez (website) is a Research Professor at the Department of Industrial Engineering at Tecnologico de Monterrey, Monterrey campus.\n\nLicense\n\nIN1002B Introduction to Data Science Projects by Alan Roberto Vazquez is licensed under CC BY-NC-SA 4.0"
   },
   {
     "objectID": "index.slides.html#course-topics",
     "href": "index.slides.html#course-topics",
     "title": "IN1002B Introduction to Data Science Projects",
     "section": "Course topics",
-    "text": "Course topics\nModule 2\n\nIntroduction to Data Science (slides)\nTools: Part 1 (slides) (colab)\nTools: Part 2 (slides) (colab)\nPreprocessing: Part 1 (slides) (colab)\nPreprocessing: Part 2 (slides) (colab)\n\nModule 3\n\nIntroduction to Linear Regression (slides) (colab)\nModel Inference and Evaluation (slides) (colab)\nAdditional Topics (slides) (colab)\nLogistic Regression (slides) (colab)"
+    "text": "Course topics\nModule 2\n\nIntroduction to Data Science (slides)\nTools: Part 1 (slides) (colab)\nTools: Part 2 (slides) (colab)\nPreprocessing: Part 1 (slides) (colab)\nPreprocessing: Part 2 (slides)\n\nModule 3\n\nIntroduction to Linear Regression (slides) (colab)\nModel Inference and Evaluation (slides) (colab)\nAdditional Topics (slides) (colab)\nLogistic Regression (slides) (colab)"
   },
   {
     "objectID": "index.slides.html#about-the-author",
@@ -984,7 +984,7 @@
     "href": "Classification/Classification.slides.html#section-9",
     "title": "Logistic Regression",
     "section": "",
-    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nWarning: Maximum number of iterations has been exceeded.\n         Current function value: 0.000000\n         Iterations: 35\nconst    -2996.175618\nLeft         4.723466\nBottom     101.912752\nTop        136.185057\ndtype: float64"
+    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.052631\n         Iterations 12\nconst    -103.499580\nLeft       -0.068777\nBottom      4.602238\nTop         6.545577\ndtype: float64"
   },
   {
     "objectID": "Classification/Classification.slides.html#parameter-testing",
@@ -1012,7 +1012,7 @@
     "href": "Classification/Classification.slides.html#section-11",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression model.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      136\nMethod:                           MLE   Df Model:                            3\nDate:                Wed, 14 May 2025   Pseudo R-squ.:                   1.000\nTime:                        18:49:39   Log-Likelihood:            -6.4368e-07\nconverged:                      False   LL-Null:                       -96.683\nCovariance Type:            nonrobust   LLR p-value:                 1.144e-41\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst      -2996.1756   2.68e+06     -0.001      0.999   -5.25e+06    5.25e+06\nLeft           4.7235   3.63e+04      0.000      1.000   -7.12e+04    7.12e+04\nBottom       101.9128   9.27e+04      0.001      0.999   -1.82e+05    1.82e+05\nTop          136.1851   1.16e+05      0.001      0.999   -2.28e+05    2.28e+05\n==============================================================================\n\nComplete Separation: The results show that there iscomplete separation or perfect prediction.\nIn this case the Maximum Likelihood Estimator does not exist and the parameters\nare not identified."
+    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression model.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      136\nMethod:                           MLE   Df Model:                            3\nDate:                Fri, 16 May 2025   Pseudo R-squ.:                  0.9240\nTime:                        10:49:47   Log-Likelihood:                -7.3684\nconverged:                       True   LL-Null:                       -96.983\nCovariance Type:            nonrobust   LLR p-value:                 1.293e-38\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -103.4996    352.096     -0.294      0.769    -793.595     586.596\nLeft          -0.0688      2.785     -0.025      0.980      -5.528       5.390\nBottom         4.6022      1.852      2.485      0.013       0.972       8.232\nTop            6.5456      2.225      2.941      0.003       2.184      10.907\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.51 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
   },
   {
     "objectID": "Classification/Classification.slides.html#estimated-classifier",
@@ -1040,14 +1040,14 @@
     "href": "Classification/Classification.slides.html#section-13",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The predict() function outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n150    1.000000e+00\n153    1.000000e+00\n120    1.000000e+00\n81     1.529611e-94\n134    1.000000e+00\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors).\n\nTo turn the probabilities to actual classes, we round them:\n\npredicted_classes = round(predicted_probability).astype('int')"
+    "text": "The predict() function outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n28     0.000064\n30     0.002347\n196    0.999963\n77     0.000125\n52     0.005469\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors).\n\nTo turn the probabilities to actual classes, we round them:\n\npredicted_classes = round(predicted_probability).astype('int')"
   },
   {
     "objectID": "Classification/Classification.slides.html#section-14",
     "href": "Classification/Classification.slides.html#section-14",
     "title": "Logistic Regression",
     "section": "",
-    "text": "predicted_classes.head()\n\n150    1\n153    1\n120    1\n81     0\n134    1\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the validation dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
+    "text": "predicted_classes.head()\n\n28     0\n30     0\n196    1\n77     0\n52     0\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the validation dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
   },
   {
     "objectID": "Classification/Classification.slides.html#confusion-matrix",
@@ -1061,7 +1061,7 @@
     "href": "Classification/Classification.slides.html#in-python-1",
     "title": "Logistic Regression",
     "section": "In Python",
-    "text": "In Python\n\nWe compute the confusion matrix using the function with the same name of scikit-learn.\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[23  2]\n [ 2 33]]"
+    "text": "In Python\n\nWe compute the confusion matrix using the function with the same name of scikit-learn.\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[32  0]\n [ 2 26]]"
   },
   {
     "objectID": "Classification/Classification.slides.html#section-15",
@@ -1075,7 +1075,7 @@
     "href": "Classification/Classification.slides.html#accuracy",
     "title": "Logistic Regression",
     "section": "Accuracy",
-    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn Python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.93\n\n\n\n\nThe higher the accuracy, the better the performance of the classifier."
+    "text": "Accuracy\nA simple metric to summarize the information of the confusion matrix is accuracy. It is the proportion of correct classifications for both classes, out of the total classifications made.\nIn Python, we compute the accuracy using the function accuracy_score() from scikit-learn.\n\naccuracy = accuracy_score(Y_target_test, predicted_classes)\nprint( round(accuracy, 2) )\n\n0.97\n\n\n\n\nThe higher the accuracy, the better the performance of the classifier."
   },
   {
     "objectID": "Classification/Classification.slides.html#remarks",
@@ -2048,7 +2048,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#t-tests-in-python",
     "title": "Model Evaluation and Inference",
     "section": "t-tests in Python",
-    "text": "t-tests in Python\nWe obtain the t-tests of the coefficients using the function summary() together with the linear_model object.\n\nmodel_summary = linear_model.summary()\nprint(model_summary)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.700\nModel:                            OLS   Adj. R-squared:                  0.698\nMethod:                 Least Squares   F-statistic:                     453.2\nDate:                Wed, 14 May 2025   Prob (F-statistic):          2.43e-102\nTime:                        18:49:58   Log-Likelihood:                -1125.4\nNo. Observations:                 392   AIC:                             2257.\nDf Residuals:                     389   BIC:                             2269.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nconst           41.0953      1.868     21.999      0.000      37.423      44.768\nweight          -0.0073      0.000    -25.966      0.000      -0.008      -0.007\nacceleration     0.2617      0.086      3.026      0.003       0.092       0.432\n==============================================================================\nOmnibus:                       31.397   Durbin-Watson:                   0.818\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               39.962\nSkew:                           0.632   Prob(JB):                     2.10e-09\nKurtosis:                       3.922   Cond. No.                     2.67e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 2.67e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
+    "text": "t-tests in Python\nWe obtain the t-tests of the coefficients using the function summary() together with the linear_model object.\n\nmodel_summary = linear_model.summary()\nprint(model_summary)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.700\nModel:                            OLS   Adj. R-squared:                  0.698\nMethod:                 Least Squares   F-statistic:                     453.2\nDate:                Fri, 16 May 2025   Prob (F-statistic):          2.43e-102\nTime:                        10:50:05   Log-Likelihood:                -1125.4\nNo. Observations:                 392   AIC:                             2257.\nDf Residuals:                     389   BIC:                             2269.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nconst           41.0953      1.868     21.999      0.000      37.423      44.768\nweight          -0.0073      0.000    -25.966      0.000      -0.008      -0.007\nacceleration     0.2617      0.086      3.026      0.003       0.092       0.432\n==============================================================================\nOmnibus:                       31.397   Durbin-Watson:                   0.818\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               39.962\nSkew:                           0.632   Prob(JB):                     2.10e-09\nKurtosis:                       3.922   Cond. No.                     2.67e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 2.67e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#table-of-t-tests",
@@ -2251,7 +2251,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-3",
     "title": "Additional Topics",
     "section": "",
-    "text": "print(summary_model)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.332\nModel:                            OLS   Adj. R-squared:                  0.328\nMethod:                 Least Squares   F-statistic:                     96.60\nDate:                Wed, 14 May 2025   Prob (F-statistic):           8.67e-35\nTime:                        18:50:03   Log-Likelihood:                -1282.2\nNo. Observations:                 392   AIC:                             2570.\nDf Residuals:                     389   BIC:                             2582.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         20.0335      0.409     49.025      0.000      19.230      20.837\nEuropean       7.5695      0.877      8.634      0.000       5.846       9.293\nJapanese      10.4172      0.828     12.588      0.000       8.790      12.044\n==============================================================================\nOmnibus:                       26.330   Durbin-Watson:                   0.763\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               30.217\nSkew:                           0.679   Prob(JB):                     2.74e-07\nKurtosis:                       3.066   Cond. No.                         3.16\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+    "text": "print(summary_model)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.332\nModel:                            OLS   Adj. R-squared:                  0.328\nMethod:                 Least Squares   F-statistic:                     96.60\nDate:                Fri, 16 May 2025   Prob (F-statistic):           8.67e-35\nTime:                        10:50:10   Log-Likelihood:                -1282.2\nNo. Observations:                 392   AIC:                             2570.\nDf Residuals:                     389   BIC:                             2582.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         20.0335      0.409     49.025      0.000      19.230      20.837\nEuropean       7.5695      0.877      8.634      0.000       5.846       9.293\nJapanese      10.4172      0.828     12.588      0.000       8.790      12.044\n==============================================================================\nOmnibus:                       26.330   Durbin-Watson:                   0.763\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               30.217\nSkew:                           0.679   Prob(JB):                     2.74e-07\nKurtosis:                       3.066   Cond. No.                         3.16\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#analysis-of-covariance",
@@ -2286,7 +2286,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#model-summary",
     "title": "Additional Topics",
     "section": "Model summary",
-    "text": "Model summary\n\n# Summary of the models.\nsummary_ancova = ancova_model.summary()\nprint(summary_ancova)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.702\nModel:                            OLS   Adj. R-squared:                  0.700\nMethod:                 Least Squares   F-statistic:                     304.7\nDate:                Wed, 14 May 2025   Prob (F-statistic):          1.28e-101\nTime:                        18:50:03   Log-Likelihood:                -1123.9\nNo. Observations:                 392   AIC:                             2256.\nDf Residuals:                     388   BIC:                             2272.\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         43.7322      1.113     39.277      0.000      41.543      45.921\nEuropean       0.9709      0.659      1.474      0.141      -0.324       2.266\nJapanese       2.3271      0.665      3.501      0.001       1.020       3.634\nweight        -0.0070      0.000    -21.956      0.000      -0.008      -0.006\n==============================================================================\nOmnibus:                       40.731   Durbin-Watson:                   0.832\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               61.938\nSkew:                           0.689   Prob(JB):                     3.55e-14\nKurtosis:                       4.377   Cond. No.                     1.83e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 1.83e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
+    "text": "Model summary\n\n# Summary of the models.\nsummary_ancova = ancova_model.summary()\nprint(summary_ancova)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.702\nModel:                            OLS   Adj. R-squared:                  0.700\nMethod:                 Least Squares   F-statistic:                     304.7\nDate:                Fri, 16 May 2025   Prob (F-statistic):          1.28e-101\nTime:                        10:50:11   Log-Likelihood:                -1123.9\nNo. Observations:                 392   AIC:                             2256.\nDf Residuals:                     388   BIC:                             2272.\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         43.7322      1.113     39.277      0.000      41.543      45.921\nEuropean       0.9709      0.659      1.474      0.141      -0.324       2.266\nJapanese       2.3271      0.665      3.501      0.001       1.020       3.634\nweight        -0.0070      0.000    -21.956      0.000      -0.008      -0.006\n==============================================================================\nOmnibus:                       40.731   Durbin-Watson:                   0.832\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               61.938\nSkew:                           0.689   Prob(JB):                     3.55e-14\nKurtosis:                       4.377   Cond. No.                     1.83e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 1.83e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#standardization",
@@ -2356,7 +2356,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-9",
     "title": "Additional Topics",
     "section": "",
-    "text": "print(std_summary_model)\n\n                                 OLS Regression Results                                \n=======================================================================================\nDep. Variable:                  Yield   R-squared (uncentered):                   0.002\nModel:                            OLS   Adj. R-squared (uncentered):             -0.330\nMethod:                 Least Squares   F-statistic:                           0.006694\nDate:                Wed, 14 May 2025   Prob (F-statistic):                       0.993\nTime:                        18:50:03   Log-Likelihood:                         -46.940\nNo. Observations:                   8   AIC:                                      97.88\nDf Residuals:                       6   BIC:                                      98.04\nDf Model:                           2                                                  \nCovariance Type:            nonrobust                                                  \n=================================================================================\n                    coef    std err          t      P&gt;|t|      [0.025      0.975]\n---------------------------------------------------------------------------------\nConcentration     1.5000     34.907      0.043      0.967     -83.914      86.914\nTemperature       3.7500     34.907      0.107      0.918     -81.664      89.164\n==============================================================================\nOmnibus:                        2.258   Durbin-Watson:                   0.000\nProb(Omnibus):                  0.323   Jarque-Bera (JB):                0.627\nSkew:                           0.000   Prob(JB):                        0.731\nKurtosis:                       1.628   Cond. No.                         1.00\n==============================================================================\n\nNotes:\n[1] R² is computed without centering (uncentered) since the model does not contain a constant.\n[2] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+    "text": "print(std_summary_model)\n\n                                 OLS Regression Results                                \n=======================================================================================\nDep. Variable:                  Yield   R-squared (uncentered):                   0.002\nModel:                            OLS   Adj. R-squared (uncentered):             -0.330\nMethod:                 Least Squares   F-statistic:                           0.006694\nDate:                Fri, 16 May 2025   Prob (F-statistic):                       0.993\nTime:                        10:50:11   Log-Likelihood:                         -46.940\nNo. Observations:                   8   AIC:                                      97.88\nDf Residuals:                       6   BIC:                                      98.04\nDf Model:                           2                                                  \nCovariance Type:            nonrobust                                                  \n=================================================================================\n                    coef    std err          t      P&gt;|t|      [0.025      0.975]\n---------------------------------------------------------------------------------\nConcentration     1.5000     34.907      0.043      0.967     -83.914      86.914\nTemperature       3.7500     34.907      0.107      0.918     -81.664      89.164\n==============================================================================\nOmnibus:                        2.258   Durbin-Watson:                   0.000\nProb(Omnibus):                  0.323   Jarque-Bera (JB):                0.627\nSkew:                           0.000   Prob(JB):                        0.731\nKurtosis:                       1.628   Cond. No.                         1.00\n==============================================================================\n\nNotes:\n[1] R² is computed without centering (uncentered) since the model does not contain a constant.\n[2] Standard Errors assume that the covariance matrix of the errors is correctly specified."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#discussion",
@@ -2559,7 +2559,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-14",
     "title": "Additional Topics",
     "section": "",
-    "text": "We compute the validation RMSE by first computing the validation MSE using a function with the same name of scikit-learn.\n\nmse = mean_squared_error(Y_valid, predicted_medv_val)\nrmse = mse**(1/2)\nprint( round(rmse, 3) )\n\n5.425\n\n\nThe lower the validation RMSE, the more accurate our model.\nInterpretation: On average, our predictions are off by \\(\\pm\\) 4,465 dollars."
+    "text": "We compute the validation RMSE by first computing the validation MSE using a function with the same name of scikit-learn.\n\nmse = mean_squared_error(Y_valid, predicted_medv_val)\nrmse = mse**(1/2)\nprint( round(rmse, 3) )\n\n5.13\n\n\nThe lower the validation RMSE, the more accurate our model.\nInterpretation: On average, our predictions are off by \\(\\pm\\) 4,465 dollars."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#agenda",
@@ -2653,25 +2653,39 @@
     "text": "How do we generate validation data?\n\nWe split the current dataset into a training and a validation dataset. To this end, we use the function train_test_split() from scikit-learn.\nThe function has three main inputs:\n\nA pandas data frame with the predictor columns only.\nA pandas data frame with the response column only.\nThe parameter test_size which sets the portion of the dataset that will go to the validation set."
   },
   {
+    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#create-the-predictor-matrix",
+    "href": "PreProcessing/PreProcessing_Part1.slides.html#create-the-predictor-matrix",
+    "title": "Data preprocessing: Part I",
+    "section": "Create the predictor matrix",
+    "text": "Create the predictor matrix\nWe use the function .drop() from pandas. This function drops one or more columns from a data frame. Let’s drop the response column MEDV and store the result in X_full.\n\n# Set full matrix of predictors.\nX_full = Boston_data.drop(columns = ['MEDV']) \nX_full.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\n\n\n\n\n0\n0.00632\n18.0\n2.31\n0\n0.538\n6.575\n65.2\n4.0900\n1\n296\n15.3\n4.98\n\n\n1\n0.02731\n0.0\n7.07\n0\n0.469\n6.421\n78.9\n4.9671\n2\n242\n17.8\n9.14\n\n\n2\n0.02729\n0.0\n7.07\n0\n0.469\n7.185\n61.1\n4.9671\n2\n242\n17.8\n4.03\n\n\n3\n0.03237\n0.0\n2.18\n0\n0.458\n6.998\n45.8\n6.0622\n3\n222\n18.7\n2.94"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#create-the-response-column",
+    "href": "PreProcessing/PreProcessing_Part1.slides.html#create-the-response-column",
+    "title": "Data preprocessing: Part I",
+    "section": "Create the response column",
+    "text": "Create the response column\nWe use the function .filter() from pandas to extract the column MEDV from the data frame. We store the result in Y_full.\n\n# Set full matrix of responses.\nY_full = Boston_data.filter(['MEDV'])\nY_full.head(4)\n\n\n\n\n\n\n\n\nMEDV\n\n\n\n\n0\n24.0\n\n\n1\n21.6\n\n\n2\n34.7\n\n\n3\n33.4"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#lets-partition-the-dataset",
+    "href": "PreProcessing/PreProcessing_Part1.slides.html#lets-partition-the-dataset",
+    "title": "Data preprocessing: Part I",
+    "section": "Let’s partition the dataset",
+    "text": "Let’s partition the dataset\n\n\n# Split the dataset into training and validation.\nX_train, X_valid, Y_train, Y_valid = train_test_split(X_full, Y_full, \n                                                      test_size = 0.3)\n\n\nThe function makes a clever partition of the data using the empirical distribution of the response.\nTechnically, it splits the data so that the distribution of the response under the training and validation sets is similar.\nUsually, the proportion of the dataset that goes to the validation set is 20% or 30%."
+  },
+  {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-3",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-3",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "The predictors and response in the training dataset are in the objects X_train and Y_train, respectively. We compile these objects into a single dataset using the function .concat() from pandas. The argument axis = 1 tells .concat() to concatenate the datasets by their rows.\n\ntraining_dataset = pd.concat([X_train, Y_train], axis = 1)\ntraining_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n269\n0.09065\n20.0\n6.96\n1\n0.464\n5.920\n61.5\n3.9175\n3\n223\n18.6\n13.65\n20.7\n\n\n66\n0.04379\n80.0\n3.37\n0\n0.398\n5.787\n31.1\n6.6115\n4\n337\n16.1\n10.24\n19.4\n\n\n239\n0.09252\n30.0\n4.93\n0\n0.428\n6.606\n42.2\n6.1899\n6\n300\n16.6\n7.37\n23.3\n\n\n302\n0.09266\n34.0\n6.09\n0\n0.433\n6.495\n18.4\n5.4917\n7\n329\n16.1\n8.67\n26.4"
+    "text": "The predictors and response in the training dataset are in the objects X_train and Y_train, respectively. We compile these objects into a single dataset using the function .concat() from pandas. The argument axis = 1 tells .concat() to concatenate the datasets by their rows.\n\ntraining_dataset = pd.concat([X_train, Y_train], axis = 1)\ntraining_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n21\n0.85204\n0.0\n8.14\n0\n0.538\n5.965\n89.2\n4.0123\n4\n307\n21.0\n13.83\n19.6\n\n\n235\n0.33045\n0.0\n6.20\n0\n0.507\n6.086\n61.5\n3.6519\n8\n307\n17.4\n10.88\n24.0\n\n\n108\n0.12802\n0.0\n8.56\n0\n0.520\n6.474\n97.1\n2.4329\n5\n384\n20.9\n12.27\n19.8\n\n\n370\n6.53876\n0.0\n18.10\n1\n0.631\n7.016\n97.5\n1.2024\n24\n666\n20.2\n2.96\n50.0"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-4",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-4",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "Equivalently, the predictors and response in the validation dataset are in the objects X_valid and Y_valid, respectively.\n\nvalidation_dataset = pd.concat([X_valid, Y_valid], axis = 1)\nvalidation_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n140\n0.29090\n0.0\n21.89\n0\n0.624\n6.174\n93.6\n1.6119\n4\n437\n21.2\n24.16\n14.0\n\n\n196\n0.04011\n80.0\n1.52\n0\n0.404\n7.287\n34.1\n7.3090\n2\n329\n12.6\n4.08\n33.3\n\n\n244\n0.20608\n22.0\n5.86\n0\n0.431\n5.593\n76.5\n7.9549\n7\n330\n19.1\n12.50\n17.6\n\n\n86\n0.05188\n0.0\n4.49\n0\n0.449\n6.015\n45.1\n4.4272\n3\n247\n18.5\n12.86\n22.5"
-  },
-  {
-    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-5",
-    "href": "PreProcessing/PreProcessing_Part1.slides.html#section-5",
-    "title": "Data preprocessing: Part I",
-    "section": "",
-    "text": "Missing at random assumes that we can predict the value that is missing based on the other available data.\nMissing not at random assumes that there is a mechanism that generates the missing values, which may include observed and unobserved predictors."
+    "text": "Equivalently, the predictors and response in the validation dataset are in the objects X_valid and Y_valid, respectively.\n\nvalidation_dataset = pd.concat([X_valid, Y_valid], axis = 1)\nvalidation_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n186\n0.05602\n0.0\n2.46\n0\n0.488\n7.831\n53.6\n3.1992\n3\n193\n17.8\n4.45\n50.0\n\n\n53\n0.04981\n21.0\n5.64\n0\n0.439\n5.998\n21.4\n6.8147\n4\n243\n16.8\n8.43\n23.4\n\n\n455\n4.75237\n0.0\n18.10\n0\n0.713\n6.525\n86.5\n2.4358\n24\n666\n20.2\n18.13\n14.1\n\n\n353\n0.01709\n90.0\n2.02\n0\n0.410\n6.728\n36.1\n12.1265\n5\n187\n17.0\n4.50\n30.1"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#work-on-your-training-dataset",
@@ -2688,6 +2702,13 @@
     "text": "Missing values\nIn many cases, some predictors have no values for a given observation. It is important to understand why the values are missing.\n\n\nThere four main types of missing data:\n\n\nStructurally missing data is data that is missing for a logical reason or because it should not exist.\nMissing completely at random assumes that the fact that the data is missing is unrelated to the other information in the data."
   },
   {
+    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-5",
+    "href": "PreProcessing/PreProcessing_Part1.slides.html#section-5",
+    "title": "Data preprocessing: Part I",
+    "section": "",
+    "text": "Missing at random assumes that we can predict the value that is missing based on the other available data.\nMissing not at random assumes that there is a mechanism that generates the missing values, which may include observed and unobserved predictors."
+  },
+  {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-6",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-6",
     "title": "Data preprocessing: Part I",
@@ -2695,18 +2716,25 @@
     "text": "For large data sets, removal of observations based on missing values is not a problem, assuming that the type of missing data is completely at random.\n\nIn a smaller data sets, there is a high price in removing observations. To overcome this issue, we can use methods of imputation, which try to estimate the missing values of a predictor variable using the other predictors’ values.\n\nHere, we will introduce some simple methods for imputing missing values in categorical and numerical variables."
   },
   {
-    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-7",
-    "href": "PreProcessing/PreProcessing_Part1.slides.html#section-7",
-    "title": "Data preprocessing: Part I",
-    "section": "",
-    "text": "We will use a validation dataset with 20% of the observations in penguins_data. The other 80% will be in the training dataset.\n\n# Split the dataset into training and validation.\nX_train_p, X_valid_p, Y_train_p, Y_valid_p = train_test_split(X_full_p, Y_full_p, \n                                                      test_size = 0.3,\n                                                      random_state = 59227)\n\nIn train_test_split, we use the input random_state to set a random seed. Essentially, this allows you to obtain the same training and validation datasets every time you run the code. The advice is setting random_state to a big integer number generated at random."
-  },
-  {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#example-2",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#example-2",
     "title": "Data preprocessing: Part I",
     "section": "Example 2",
     "text": "Example 2\n\nLet’s use the penguins dataset available in the file “penguins.xlsx”.\n\n# Load the Excel file into a pandas DataFrame.\npenguins_data = pd.read_excel(\"penguins.xlsx\")\n\n# Set categorical variables.\npenguins_data['sex'] = pd.Categorical(penguins_data['sex'])\npenguins_data['species'] = pd.Categorical(penguins_data['species'])\npenguins_data['island'] = pd.Categorical(penguins_data['island'])"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#training-and-validation-datasets",
+    "href": "PreProcessing/PreProcessing_Part1.slides.html#training-and-validation-datasets",
+    "title": "Data preprocessing: Part I",
+    "section": "Training and validation datasets",
+    "text": "Training and validation datasets\nFor illustrative purposes, we assume that we want to predict the species (in the column species) of a penguin using the predictors bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, and sex.\n\nWe create the predictor matrix and response column.\n\n# Set full matrix of predictors.\nX_full_p = (penguins_data\n           .filter(['bill_length_mm', 'bill_depth_mm', \n           'flipper_length_mm', 'body_mass_g', 'sex']))\n\n# Set full matrix of responses.\nY_full_p = penguins_data.filter(['species'])"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-7",
+    "href": "PreProcessing/PreProcessing_Part1.slides.html#section-7",
+    "title": "Data preprocessing: Part I",
+    "section": "",
+    "text": "We will use a validation dataset with 20% of the observations in penguins_data. The other 80% will be in the training dataset.\n\n# Split the dataset into training and validation.\nX_train_p, X_valid_p, Y_train_p, Y_valid_p = train_test_split(X_full_p, Y_full_p, \n                                                      test_size = 0.3,\n                                                      random_state = 59227)\n\nIn train_test_split, we use the input random_state to set a random seed. Essentially, this allows you to obtain the same training and validation datasets every time you run the code. The advice is setting random_state to a big integer number generated at random."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-8",
@@ -2737,25 +2765,18 @@
     "text": "The output below shows that there are 240 entries but bill_length_mm has 238 that are “non-null”. Therefore, this column has two missing observations.\n\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nIndex: 240 entries, 31 to 293\nData columns (total 5 columns):\n #   Column             Non-Null Count  Dtype   \n---  ------             --------------  -----   \n 0   bill_length_mm     238 non-null    float64 \n 1   bill_depth_mm      238 non-null    float64 \n 2   flipper_length_mm  238 non-null    float64 \n 3   body_mass_g        238 non-null    float64 \n 4   sex                232 non-null    category\ndtypes: category(1), float64(4)\nmemory usage: 9.7 KB\n\n\nThe same is true for the other predictors."
   },
   {
-    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#removing-missing-values",
-    "href": "PreProcessing/PreProcessing_Part1.slides.html#removing-missing-values",
-    "title": "Data preprocessing: Part I",
-    "section": "Removing missing values",
-    "text": "Removing missing values\nIf we want to remove all rows in the dataset that have at least one missing value, we use the function .dropna().\n\ncomplete_predictors = X_train_p.dropna()\ncomplete_predictors.head()\n\n\n\n\n\n\n\n\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\n\n\n\n\n31\n37.2\n18.1\n178.0\n3900.0\nmale\n\n\n46\n41.1\n19.0\n182.0\n3425.0\nmale\n\n\n195\n49.6\n15.0\n216.0\n4750.0\nmale\n\n\n43\n44.1\n19.7\n196.0\n4400.0\nmale\n\n\n196\n50.5\n15.9\n222.0\n5550.0\nmale"
-  },
-  {
-    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#imputation-using-the-mean",
-    "href": "PreProcessing/PreProcessing_Part1.slides.html#imputation-using-the-mean",
-    "title": "Data preprocessing: Part I",
-    "section": "Imputation using the mean",
-    "text": "Imputation using the mean\nWe can impute the missing values of a numeric variable using the mean or median of its available values. For example, consider the variable bill_length_mm that has two missing values.\n\nX_train_p['bill_length_mm'].info()\n\n&lt;class 'pandas.core.series.Series'&gt;\nIndex: 240 entries, 31 to 293\nSeries name: bill_length_mm\nNon-Null Count  Dtype  \n--------------  -----  \n238 non-null    float64\ndtypes: float64(1)\nmemory usage: 3.8 KB\n\n\nIn scikit-learn, we use the function SimpleImputer() to define the method of imputation of missing values."
-  },
-  {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-12",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-12",
     "title": "Data preprocessing: Part I",
     "section": "",
     "text": "Alternatively, we can use the function .isnull() together with sum() to determine the number of missing values for each column in the dataset.\n\n\nmissing_values = X_train_p.isnull().sum()\nmissing_values\n\nbill_length_mm       2\nbill_depth_mm        2\nflipper_length_mm    2\nbody_mass_g          2\nsex                  8\ndtype: int64\n\n\n\nWe see that each predictor column has two missing values."
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#removing-missing-values",
+    "href": "PreProcessing/PreProcessing_Part1.slides.html#removing-missing-values",
+    "title": "Data preprocessing: Part I",
+    "section": "Removing missing values",
+    "text": "Removing missing values\nIf we want to remove all rows in the dataset that have at least one missing value, we use the function .dropna().\n\ncomplete_predictors = X_train_p.dropna()\ncomplete_predictors.head()\n\n\n\n\n\n\n\n\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\n\n\n\n\n31\n37.2\n18.1\n178.0\n3900.0\nmale\n\n\n46\n41.1\n19.0\n182.0\n3425.0\nmale\n\n\n195\n49.6\n15.0\n216.0\n4750.0\nmale\n\n\n43\n44.1\n19.7\n196.0\n4400.0\nmale\n\n\n196\n50.5\n15.9\n222.0\n5550.0\nmale"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-13",
@@ -2765,18 +2786,18 @@
     "text": "complete_predictors.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nIndex: 232 entries, 31 to 293\nData columns (total 5 columns):\n #   Column             Non-Null Count  Dtype   \n---  ------             --------------  -----   \n 0   bill_length_mm     232 non-null    float64 \n 1   bill_depth_mm      232 non-null    float64 \n 2   flipper_length_mm  232 non-null    float64 \n 3   body_mass_g        232 non-null    float64 \n 4   sex                232 non-null    category\ndtypes: category(1), float64(4)\nmemory usage: 9.4 KB\n\n\nThe new data is complete because each column has 232 “non-null” values; the total number of observations in complete_predictors.\nHowever, note that we have lost eight of the original observations in X_train_p!"
   },
   {
+    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#imputation-using-the-mean",
+    "href": "PreProcessing/PreProcessing_Part1.slides.html#imputation-using-the-mean",
+    "title": "Data preprocessing: Part I",
+    "section": "Imputation using the mean",
+    "text": "Imputation using the mean\nWe can impute the missing values of a numeric variable using the mean or median of its available values. For example, consider the variable bill_length_mm that has two missing values.\n\nX_train_p['bill_length_mm'].info()\n\n&lt;class 'pandas.core.series.Series'&gt;\nIndex: 240 entries, 31 to 293\nSeries name: bill_length_mm\nNon-Null Count  Dtype  \n--------------  -----  \n238 non-null    float64\ndtypes: float64(1)\nmemory usage: 3.8 KB\n\n\nIn scikit-learn, we use the function SimpleImputer() to define the method of imputation of missing values."
+  },
+  {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-14",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-14",
     "title": "Data preprocessing: Part I",
     "section": "",
     "text": "Using SimpleImputer(), we set the method to imput missing values using the mean. We also use the function fit_transform() to apply the imputation method to the variable.\n\n# Imputation for numerical variables (using the mean)\nnum_imputer = SimpleImputer(strategy='mean')\n\n# Replace the original variable with new version.\nX_train_p['bill_length_mm'] = num_imputer.fit_transform(X_train_p[ ['bill_length_mm'] ] )"
-  },
-  {
-    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#using-the-mean-or-the-median",
-    "href": "PreProcessing/PreProcessing_Part1.slides.html#using-the-mean-or-the-median",
-    "title": "Data preprocessing: Part I",
-    "section": "Using the mean or the median?",
-    "text": "Using the mean or the median?\n\nWe use the sample mean when the data distribution is roughly symmetrical.\n\nPros: Simple and easy to implement.\nCons: Sensitive to outliers; may not be accurate for skewed distributions"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-15",
@@ -2786,41 +2807,6 @@
     "text": "After imputation, the information of the predictors in the dataset looks like this.\n\nX_train_p.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nIndex: 240 entries, 31 to 293\nData columns (total 5 columns):\n #   Column             Non-Null Count  Dtype   \n---  ------             --------------  -----   \n 0   bill_length_mm     240 non-null    float64 \n 1   bill_depth_mm      238 non-null    float64 \n 2   flipper_length_mm  238 non-null    float64 \n 3   body_mass_g        238 non-null    float64 \n 4   sex                232 non-null    category\ndtypes: category(1), float64(4)\nmemory usage: 9.7 KB\n\n\nNow, bill_length_mm has 240 complete values."
   },
   {
-    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#imputation-method-for-a-categorical-variable",
-    "href": "PreProcessing/PreProcessing_Part1.slides.html#imputation-method-for-a-categorical-variable",
-    "title": "Data preprocessing: Part I",
-    "section": "Imputation method for a categorical variable",
-    "text": "Imputation method for a categorical variable\nIf a categorical variable has missing values, we can use the most frequent of the available values to replace the missing values. To this end, we use similar commands as before.\nFor example, let’s impute the missing values of sex using this strategy.\n\n# Imputation for categorical variables (using the most frequent value)\ncat_imputer = SimpleImputer(strategy = 'most_frequent')\n\n# Apply imputation strategy for categorical variables.\nX_train_p['sex'] = cat_imputer.fit_transform(X_train_p[ ['sex'] ]).ravel()"
-  },
-  {
-    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#training-and-validation-datasets",
-    "href": "PreProcessing/PreProcessing_Part1.slides.html#training-and-validation-datasets",
-    "title": "Data preprocessing: Part I",
-    "section": "Training and validation datasets",
-    "text": "Training and validation datasets\nFor illustrative purposes, we assume that we want to predict the species (in the column species) of a penguin using the predictors bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, and sex.\n\nWe create the predictor matrix and response column.\n\n# Set full matrix of predictors.\nX_full_p = (penguins_data\n           .filter(['bill_length_mm', 'bill_depth_mm', \n           'flipper_length_mm', 'body_mass_g', 'sex']))\n\n# Set full matrix of responses.\nY_full_p = penguins_data.filter(['species'])"
-  },
-  {
-    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#create-the-predictor-matrix",
-    "href": "PreProcessing/PreProcessing_Part1.slides.html#create-the-predictor-matrix",
-    "title": "Data preprocessing: Part I",
-    "section": "Create the predictor matrix",
-    "text": "Create the predictor matrix\nWe use the function .drop() from pandas. This function drops one or more columns from a data frame. Let’s drop the response column MEDV and store the result in X_full.\n\n# Set full matrix of predictors.\nX_full = Boston_data.drop(columns = ['MEDV']) \nX_full.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\n\n\n\n\n0\n0.00632\n18.0\n2.31\n0\n0.538\n6.575\n65.2\n4.0900\n1\n296\n15.3\n4.98\n\n\n1\n0.02731\n0.0\n7.07\n0\n0.469\n6.421\n78.9\n4.9671\n2\n242\n17.8\n9.14\n\n\n2\n0.02729\n0.0\n7.07\n0\n0.469\n7.185\n61.1\n4.9671\n2\n242\n17.8\n4.03\n\n\n3\n0.03237\n0.0\n2.18\n0\n0.458\n6.998\n45.8\n6.0622\n3\n222\n18.7\n2.94"
-  },
-  {
-    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#create-the-response-column",
-    "href": "PreProcessing/PreProcessing_Part1.slides.html#create-the-response-column",
-    "title": "Data preprocessing: Part I",
-    "section": "Create the response column",
-    "text": "Create the response column\nWe use the function .filter() from pandas to extract the column MEDV from the data frame. We store the result in Y_full.\n\n# Set full matrix of responses.\nY_full = Boston_data.filter(['MEDV'])\nY_full.head(4)\n\n\n\n\n\n\n\n\nMEDV\n\n\n\n\n0\n24.0\n\n\n1\n21.6\n\n\n2\n34.7\n\n\n3\n33.4"
-  },
-  {
-    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#lets-partition-the-dataset",
-    "href": "PreProcessing/PreProcessing_Part1.slides.html#lets-partition-the-dataset",
-    "title": "Data preprocessing: Part I",
-    "section": "Let’s partition the dataset",
-    "text": "Let’s partition the dataset\n\n\n# Split the dataset into training and validation.\nX_train, X_valid, Y_train, Y_valid = train_test_split(X_full, Y_full, \n                                                      test_size = 0.3)\n\n\nThe function makes a clever partition of the data using the empirical distribution of the response.\nTechnically, it splits the data so that the distribution of the response under the training and validation sets is similar.\nUsually, the proportion of the dataset that goes to the validation set is 20% or 30%."
-  },
-  {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-16",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-16",
     "title": "Data preprocessing: Part I",
@@ -2828,11 +2814,25 @@
     "text": "To imput the missing values using the median, we simply set this method in SimpleImputer(). For example, let’s imput the missing values of bill_depth_mm.\n\n# Imputation for numerical variables (using the mean)\nnum_imputer = SimpleImputer(strategy = 'median')\n\n# Replace the original variable with new version.\nX_train_p['bill_depth_mm'] = num_imputer.fit_transform(X_train_p[ ['bill_depth_mm'] ] )\n\n# Show the information of the predictor.\nX_train_p['bill_depth_mm'].info()\n\n&lt;class 'pandas.core.series.Series'&gt;\nIndex: 240 entries, 31 to 293\nSeries name: bill_depth_mm\nNon-Null Count  Dtype  \n--------------  -----  \n240 non-null    float64\ndtypes: float64(1)\nmemory usage: 3.8 KB"
   },
   {
+    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#using-the-mean-or-the-median",
+    "href": "PreProcessing/PreProcessing_Part1.slides.html#using-the-mean-or-the-median",
+    "title": "Data preprocessing: Part I",
+    "section": "Using the mean or the median?",
+    "text": "Using the mean or the median?\n\nWe use the sample mean when the data distribution is roughly symmetrical.\n\nPros: Simple and easy to implement.\nCons: Sensitive to outliers; may not be accurate for skewed distributions"
+  },
+  {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-17",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-17",
     "title": "Data preprocessing: Part I",
     "section": "",
     "text": "We use the sample median when the data is skewed (e.g., incomes, prices).\n\nPros: Less sensitive to outliers; robust for skewed distributions.\nCons: May reduce variability in the data."
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#imputation-method-for-a-categorical-variable",
+    "href": "PreProcessing/PreProcessing_Part1.slides.html#imputation-method-for-a-categorical-variable",
+    "title": "Data preprocessing: Part I",
+    "section": "Imputation method for a categorical variable",
+    "text": "Imputation method for a categorical variable\nIf a categorical variable has missing values, we can use the most frequent of the available values to replace the missing values. To this end, we use similar commands as before.\nFor example, let’s impute the missing values of sex using this strategy.\n\n# Imputation for categorical variables (using the most frequent value)\ncat_imputer = SimpleImputer(strategy = 'most_frequent')\n\n# Apply imputation strategy for categorical variables.\nX_train_p['sex'] = cat_imputer.fit_transform(X_train_p[ ['sex'] ]).ravel()"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-18",
@@ -2863,17 +2863,17 @@
     "text": "In Python\nYou can use KNN using the function KNNImputer(). Its main input is the number of nearest neighbours to use. You set this value using the parameter n_neighbors.\n\n# Set the KNN imputer using two neighbours.\nKNN_imputer = KNNImputer(n_neighbors = 2)\n\n# Select numeric predictors.\nX_train_num_p = X_train_p.drop(columns = ['sex']) \n\n# Apply imputer and store the rulst in a pandas data frame.\nX_train_num_p = pd.DataFrame(KNN_imputer.fit_transform(X_train_num_p), \n                            columns = X_train_num_p.columns)"
   },
   {
-    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#some-remarks",
-    "href": "PreProcessing/PreProcessing_Part1.slides.html#some-remarks",
-    "title": "Data preprocessing: Part I",
-    "section": "Some remarks",
-    "text": "Some remarks\n\n\nIn KNN the distance between two rows is calculated using Euclidean distance.\nKNN only considers rows without missing values in the columns being used.\nKNN works best when the features are on similar scales and missingness is not too high."
-  },
-  {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-20",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-20",
     "title": "Data preprocessing: Part I",
     "section": "",
     "text": "Let’s look at the new dataset.\n\nX_train_num_p.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 240 entries, 0 to 239\nData columns (total 4 columns):\n #   Column             Non-Null Count  Dtype  \n---  ------             --------------  -----  \n 0   bill_length_mm     240 non-null    float64\n 1   bill_depth_mm      240 non-null    float64\n 2   flipper_length_mm  240 non-null    float64\n 3   body_mass_g        240 non-null    float64\ndtypes: float64(4)\nmemory usage: 7.6 KB\n\n\nAll predictors have 240 complete entries."
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#some-remarks",
+    "href": "PreProcessing/PreProcessing_Part1.slides.html#some-remarks",
+    "title": "Data preprocessing: Part I",
+    "section": "Some remarks",
+    "text": "Some remarks\n\n\nIn KNN the distance between two rows is calculated using Euclidean distance.\nKNN only considers rows without missing values in the columns being used.\nKNN works best when the features are on similar scales and missingness is not too high."
   }
 ]
