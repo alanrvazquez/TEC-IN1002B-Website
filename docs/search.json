@@ -2678,14 +2678,14 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-3",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "The predictors and response in the training dataset are in the objects X_train and Y_train, respectively. We compile these objects into a single dataset using the function .concat() from pandas. The argument axis = 1 tells .concat() to concatenate the datasets by their rows.\n\ntraining_dataset = pd.concat([X_train, Y_train], axis = 1)\ntraining_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n21\n0.85204\n0.0\n8.14\n0\n0.538\n5.965\n89.2\n4.0123\n4\n307\n21.0\n13.83\n19.6\n\n\n235\n0.33045\n0.0\n6.20\n0\n0.507\n6.086\n61.5\n3.6519\n8\n307\n17.4\n10.88\n24.0\n\n\n108\n0.12802\n0.0\n8.56\n0\n0.520\n6.474\n97.1\n2.4329\n5\n384\n20.9\n12.27\n19.8\n\n\n370\n6.53876\n0.0\n18.10\n1\n0.631\n7.016\n97.5\n1.2024\n24\n666\n20.2\n2.96\n50.0"
+    "text": "The predictors and response in the training dataset are in the objects X_train and Y_train, respectively. We compile these objects into a single dataset using the function .concat() from pandas. The argument axis = 1 tells .concat() to concatenate the datasets by their rows.\n\ntraining_dataset = pd.concat([X_train, Y_train], axis = 1)\ntraining_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n63\n0.12650\n25.0\n5.13\n0\n0.453\n6.762\n43.4\n7.9809\n8\n284\n19.7\n9.50\n25.0\n\n\n307\n0.04932\n33.0\n2.18\n0\n0.472\n6.849\n70.3\n3.1827\n7\n222\n18.4\n7.53\n28.2\n\n\n365\n4.55587\n0.0\n18.10\n0\n0.718\n3.561\n87.9\n1.6132\n24\n666\n20.2\n7.12\n27.5\n\n\n73\n0.19539\n0.0\n10.81\n0\n0.413\n6.245\n6.2\n5.2873\n4\n305\n19.2\n7.54\n23.4"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-4",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-4",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "Equivalently, the predictors and response in the validation dataset are in the objects X_valid and Y_valid, respectively.\n\nvalidation_dataset = pd.concat([X_valid, Y_valid], axis = 1)\nvalidation_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n186\n0.05602\n0.0\n2.46\n0\n0.488\n7.831\n53.6\n3.1992\n3\n193\n17.8\n4.45\n50.0\n\n\n53\n0.04981\n21.0\n5.64\n0\n0.439\n5.998\n21.4\n6.8147\n4\n243\n16.8\n8.43\n23.4\n\n\n455\n4.75237\n0.0\n18.10\n0\n0.713\n6.525\n86.5\n2.4358\n24\n666\n20.2\n18.13\n14.1\n\n\n353\n0.01709\n90.0\n2.02\n0\n0.410\n6.728\n36.1\n12.1265\n5\n187\n17.0\n4.50\n30.1"
+    "text": "Equivalently, the predictors and response in the validation dataset are in the objects X_valid and Y_valid, respectively.\n\nvalidation_dataset = pd.concat([X_valid, Y_valid], axis = 1)\nvalidation_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n135\n0.55778\n0.0\n21.89\n0\n0.624\n6.335\n98.2\n2.1107\n4\n437\n21.2\n16.96\n18.1\n\n\n230\n0.53700\n0.0\n6.20\n0\n0.504\n5.981\n68.1\n3.6715\n8\n307\n17.4\n11.65\n24.3\n\n\n28\n0.77299\n0.0\n8.14\n0\n0.538\n6.495\n94.4\n4.4547\n4\n307\n21.0\n12.80\n18.4\n\n\n347\n0.01870\n85.0\n4.15\n0\n0.429\n6.516\n27.7\n8.5353\n4\n351\n17.9\n6.36\n23.1"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#work-on-your-training-dataset",
@@ -2846,14 +2846,14 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#multivariate-imputation-using-k-nearest-neighbours",
     "title": "Data preprocessing: Part I",
     "section": "Multivariate imputation using K-nearest neighbours",
-    "text": "Multivariate imputation using K-nearest neighbours\nK-nearest neighbours (KNN) is a multiple imputation method to fill in the missing values of a predictor using the available values from this and the other predictors.\nBasic idea:\nFor each missing value in a predictor \\(X\\): 1. Find the \\(K\\) most similar rows based on the other predictors. 2. Impute the missing value of \\(X\\) using the average of the available values of \\(X\\) in the $K $ closest rows."
+    "text": "Multivariate imputation using K-nearest neighbours\nK-nearest neighbours (KNN) is a multiple imputation method to fill in the missing values of a predictor using the available values from this and the other predictors.\n\nFor each missing value in a predictor \\(X\\):\n\nFind the \\(K\\) most similar rows based on the other predictors.\nImpute the missing value of \\(X\\) using the average of the available values of \\(X\\) in the \\(K\\) closest rows."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-19",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-19",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "KNN captures local patterns better than individual predictor imputation using the mean or the median.\nHowever, it only works for numeric predictors!"
+    "text": "Let’s look at the new dataset.\n\nX_train_num_p.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 240 entries, 0 to 239\nData columns (total 4 columns):\n #   Column             Non-Null Count  Dtype  \n---  ------             --------------  -----  \n 0   bill_length_mm     240 non-null    float64\n 1   bill_depth_mm      240 non-null    float64\n 2   flipper_length_mm  240 non-null    float64\n 3   body_mass_g        240 non-null    float64\ndtypes: float64(4)\nmemory usage: 7.6 KB\n\n\nAll predictors have 240 complete entries."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#in-python",
@@ -2875,5 +2875,12 @@
     "title": "Data preprocessing: Part I",
     "section": "Some remarks",
     "text": "Some remarks\n\n\nIn KNN the distance between two rows is calculated using Euclidean distance.\nKNN only considers rows without missing values in the columns being used.\nKNN works best when the features are on similar scales and missingness is not too high."
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#notes-on-its-implementation",
+    "href": "PreProcessing/PreProcessing_Part1.slides.html#notes-on-its-implementation",
+    "title": "Data preprocessing: Part I",
+    "section": "Notes on its implementation",
+    "text": "Notes on its implementation\n\n\nKNN captures local patterns better than individual predictor imputation using the mean or the median.\nHowever, it only works for numeric predictors!\nThe distance between two rows is calculated using Euclidean distance.\nKNN only considers rows without missing values in the predictor columns being used."
   }
 ]

@@ -594,19 +594,24 @@ The columns `bill_length_mm`, `bill_depth_mm`, and `sex` have 240 complete value
 
 K-nearest neighbours (KNN) is a multiple imputation method to fill in the missing values of a predictor using the available values from this and the other predictors. 
 
-**Basic idea**:
+</br>
 
 For each missing value in a predictor $X$:
-  1. Find the $K$ most similar rows based on the other predictors.
-  2. Impute the missing value of $X$ using the *average* of the available values of $X$ in the $K $ closest rows.
 
-##
+  1. Find the $K$ most similar rows based on the other predictors.
+  2. Impute the missing value of $X$ using the *average* of the available values of $X$ in the $K$ closest rows.
+
+## Notes on its implementation
 
 </br>
 
 - KNN captures *local patterns* better than individual predictor imputation using the mean or the median. 
 
 - However, it only works for numeric predictors!
+
+- The distance between two rows is calculated using *Euclidean* distance.
+
+- KNN only considers rows without missing values in the predictor columns being used.
 
 ## In Python
 
