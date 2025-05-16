@@ -69,7 +69,7 @@
         "\n",
         "What do you think will happen if we run this command?\n"
       ],
-      "id": "553ff20a"
+      "id": "989ac20d"
     },
     {
       "cell_type": "code",
@@ -80,7 +80,7 @@
         "\n",
         "print(\"Hello world!\")"
       ],
-      "id": "d9a68b49",
+      "id": "7f7ab20c",
       "execution_count": null,
       "outputs": []
     },
@@ -90,7 +90,7 @@
       "source": [
         ". . .\n"
       ],
-      "id": "87d6ae38"
+      "id": "434b570a"
     },
     {
       "cell_type": "code",
@@ -101,7 +101,7 @@
         "\n",
         "print(\"Hello world!\")"
       ],
-      "id": "737b7391",
+      "id": "4e324bcc",
       "execution_count": null,
       "outputs": []
     },
@@ -113,7 +113,7 @@
         "\n",
         "What do you think will happen if we run this command?\n"
       ],
-      "id": "355ed66b"
+      "id": "98d1ddfb"
     },
     {
       "cell_type": "code",
@@ -124,7 +124,7 @@
         "\n",
         "sum([1, 5, 10])"
       ],
-      "id": "6b1d7bb1",
+      "id": "0e49728a",
       "execution_count": null,
       "outputs": []
     },
@@ -134,7 +134,7 @@
       "source": [
         ". . .\n"
       ],
-      "id": "91767284"
+      "id": "fceb21a4"
     },
     {
       "cell_type": "code",
@@ -145,7 +145,7 @@
         "\n",
         "sum([1, 5, 10])"
       ],
-      "id": "30f1eaf3",
+      "id": "8e792d38",
       "execution_count": null,
       "outputs": []
     },
@@ -155,7 +155,7 @@
       "source": [
         "## Use Python as a basic calculator\n"
       ],
-      "id": "e09a9b14"
+      "id": "a29e052e"
     },
     {
       "cell_type": "code",
@@ -166,7 +166,7 @@
         "\n",
         "5 + 1"
       ],
-      "id": "6b83f5fa",
+      "id": "e9266aaf",
       "execution_count": null,
       "outputs": []
     },
@@ -179,7 +179,7 @@
         "\n",
         "10 - 3"
       ],
-      "id": "140e0466",
+      "id": "78c7920a",
       "execution_count": null,
       "outputs": []
     },
@@ -192,7 +192,7 @@
         "\n",
         "2 * 4"
       ],
-      "id": "406053c0",
+      "id": "68ea1171",
       "execution_count": null,
       "outputs": []
     },
@@ -205,7 +205,7 @@
         "\n",
         "9 / 3"
       ],
-      "id": "cd2ca3cb",
+      "id": "43cb9c8b",
       "execution_count": null,
       "outputs": []
     },
@@ -223,7 +223,7 @@
         "\n",
         "Python will ignore the comments and just execute the code.\n"
       ],
-      "id": "8cfd3a5b"
+      "id": "053e4442"
     },
     {
       "cell_type": "code",
@@ -235,7 +235,7 @@
         "# you can put whatever after #\n",
         "# for example... blah blah blah"
       ],
-      "id": "34373d6f",
+      "id": "5b455b2b",
       "execution_count": null,
       "outputs": []
     },
@@ -267,7 +267,7 @@
         "\n",
         "Python, like all programming languages, is very strict. For example, if you write\n"
       ],
-      "id": "67063816"
+      "id": "cf9de323"
     },
     {
       "cell_type": "code",
@@ -276,7 +276,7 @@
         "#| echo: true\n",
         "sum([1, 100])"
       ],
-      "id": "39e86f10",
+      "id": "82ff02ef",
       "execution_count": null,
       "outputs": []
     },
@@ -290,7 +290,7 @@
         "\n",
         "But if you write\n"
       ],
-      "id": "53688313"
+      "id": "2c1f496a"
     },
     {
       "cell_type": "code",
@@ -300,7 +300,7 @@
         "#| error: true\n",
         "Sum([1, 100])"
       ],
-      "id": "6a79c400",
+      "id": "38f1c445",
       "execution_count": null,
       "outputs": []
     },
@@ -335,7 +335,7 @@
         "\n",
         "</br>\n"
       ],
-      "id": "6b5ff4b3"
+      "id": "0a7b6ade"
     },
     {
       "cell_type": "code",
@@ -348,7 +348,7 @@
         "\n",
         "my_favorite_number = 18"
       ],
-      "id": "c6bc9cf9",
+      "id": "4f311414",
       "execution_count": null,
       "outputs": []
     },
@@ -358,7 +358,7 @@
       "source": [
         "After running this code, nothing happens. But if we run the object on its own, we can see what's inside it.\n"
       ],
-      "id": "d10e6096"
+      "id": "7730e18b"
     },
     {
       "cell_type": "code",
@@ -368,7 +368,7 @@
         "\n",
         "my_favorite_number"
       ],
-      "id": "30f6a3d3",
+      "id": "2e87aab8",
       "execution_count": null,
       "outputs": []
     },
@@ -404,7 +404,7 @@
         "\n",
         "This code creates two vectors\n"
       ],
-      "id": "2c5aba60"
+      "id": "3f5a7434"
     },
     {
       "cell_type": "code",
@@ -415,7 +415,7 @@
         "my_list = [1, 2, 3, 4, 5]\n",
         "my_list_2 = [10, 10, 10, 10, 10]"
       ],
-      "id": "9c474174",
+      "id": "a7a1ec54",
       "execution_count": null,
       "outputs": []
     },
@@ -425,7 +425,7 @@
       "source": [
         "Let's see its content\n"
       ],
-      "id": "47e31a3e"
+      "id": "08bcd4c5"
     },
     {
       "cell_type": "code",
@@ -434,7 +434,7 @@
         "#| echo: true\n",
         "my_list"
       ],
-      "id": "09028763",
+      "id": "cde7514d",
       "execution_count": null,
       "outputs": []
     },
@@ -445,7 +445,7 @@
         "#| echo: true\n",
         "my_list_2"
       ],
-      "id": "c55885ef",
+      "id": "6fbab73d",
       "execution_count": null,
       "outputs": []
     },
@@ -459,7 +459,7 @@
         "\n",
         "We can do simple operations with vectors. For example, we can sum all the elements of a list.\n"
       ],
-      "id": "c8402bea"
+      "id": "d289106f"
     },
     {
       "cell_type": "code",
@@ -470,7 +470,7 @@
         "my_list = [1, 2, 3, 4, 5]\n",
         "sum(my_list)"
       ],
-      "id": "950ed832",
+      "id": "48bae26d",
       "execution_count": null,
       "outputs": []
     },
@@ -486,7 +486,7 @@
         "\n",
         "So, if we wanted to print the contents of the first position in `my_list`, we could write\n"
       ],
-      "id": "9b189a59"
+      "id": "4f6b6a7e"
     },
     {
       "cell_type": "code",
@@ -496,7 +496,7 @@
         "\n",
         "my_list[1]"
       ],
-      "id": "fce9ee31",
+      "id": "c71cbedc",
       "execution_count": null,
       "outputs": []
     },
@@ -506,7 +506,7 @@
       "source": [
         "[**An feature of Python is that the first element of a list or vector is indexed using the number 0.**]{style=\"color:red;\"}\n"
       ],
-      "id": "9ba84228"
+      "id": "24c1cd7f"
     },
     {
       "cell_type": "code",
@@ -516,7 +516,7 @@
         "\n",
         "my_list[0]"
       ],
-      "id": "5373adbe",
+      "id": "1436f9a7",
       "execution_count": null,
       "outputs": []
     },
@@ -548,7 +548,7 @@
         "\n",
         ". . .\n"
       ],
-      "id": "86f4baf1"
+      "id": "fc98e80c"
     },
     {
       "cell_type": "code",
@@ -559,7 +559,7 @@
         "many_greetings = [\"hi\", \"hello\", \"hola\", \"bonjour\", \"ni hao\", \"merhaba\"]\n",
         "many_greetings"
       ],
-      "id": "89e3286f",
+      "id": "58309ab4",
       "execution_count": null,
       "outputs": []
     },
@@ -587,7 +587,7 @@
         "\n",
         "We can ask Python to find out and return the answer `True` or `False`.\n"
       ],
-      "id": "623c7c6a"
+      "id": "af044046"
     },
     {
       "cell_type": "code",
@@ -597,7 +597,7 @@
         "\n",
         "many_greetings[1] == \"hola\""
       ],
-      "id": "44edaa23",
+      "id": "eba9eef1",
       "execution_count": null,
       "outputs": []
     },
@@ -637,7 +637,7 @@
         "\n",
         "Read this code and predict its response. Then, run the code in Google Colab and validate if you were correct.\n"
       ],
-      "id": "219bafbd"
+      "id": "188d7baf"
     },
     {
       "cell_type": "code",
@@ -651,7 +651,7 @@
         "compare = A > B\n",
         "compare"
       ],
-      "id": "ea686c75",
+      "id": "bf103677",
       "execution_count": null,
       "outputs": []
     },
@@ -810,7 +810,7 @@
         "\n",
         "However, we need to inform Google Colab that we want to use **pandas** and its functions using the following command:\n"
       ],
-      "id": "3537d781"
+      "id": "35a373f4"
     },
     {
       "cell_type": "code",
@@ -820,7 +820,7 @@
         "\n",
         "import pandas as pd"
       ],
-      "id": "3dd4fcba",
+      "id": "626763fc",
       "execution_count": null,
       "outputs": []
     },
@@ -838,7 +838,7 @@
         "\n",
         "The following code shows how to read the data in the file \"penguins.xlsx\" into Python.\n"
       ],
-      "id": "f7a858d3"
+      "id": "6d383685"
     },
     {
       "cell_type": "code",
@@ -849,7 +849,7 @@
         "# Load the Excel file into a pandas DataFrame.\n",
         "penguins_data = pd.read_excel(\"penguins.xlsx\")"
       ],
-      "id": "f09f566d",
+      "id": "9f9969f0",
       "execution_count": null,
       "outputs": []
     },
@@ -861,7 +861,7 @@
         "\n",
         "The function `head()` allows you to print the first rows of a pandas data frame.\n"
       ],
-      "id": "c510fde7"
+      "id": "ce80dc34"
     },
     {
       "cell_type": "code",
@@ -871,7 +871,7 @@
         "# Print the first 4 rows of the dataset.\n",
         "penguins_data.head(4)"
       ],
-      "id": "4afe126c",
+      "id": "d9dec67c",
       "execution_count": null,
       "outputs": []
     },
@@ -883,7 +883,7 @@
         "\n",
         "We can select a specific variables of a data frame using the syntaxis below.\n"
       ],
-      "id": "492ad250"
+      "id": "c70bb818"
     },
     {
       "cell_type": "code",
@@ -893,7 +893,7 @@
         "\n",
         "penguins_data['bill_length_mm']"
       ],
-      "id": "1570c3cb",
+      "id": "a7b59200",
       "execution_count": null,
       "outputs": []
     },
@@ -907,7 +907,7 @@
         "\n",
         "To index multiple variables of a data frame, we put the names of the variables in a list object. For example, we select `bill_length_mm`, `species`, and `island` as follows:\n"
       ],
-      "id": "676f8288"
+      "id": "a51f432d"
     },
     {
       "cell_type": "code",
@@ -918,7 +918,7 @@
         "sub_penguins_data = penguins_data[ ['bill_length_mm',  'species', 'island'] ]\n",
         "sub_penguins_data.head()"
       ],
-      "id": "60009d5c",
+      "id": "1e6a99db",
       "execution_count": null,
       "outputs": []
     },
@@ -930,7 +930,7 @@
         "\n",
         "To index rows in a dataset, we use the argument `loc` from **pandas**. For example, we select the rows 3 to 6 of the `penguins_dataset` dataset:\n"
       ],
-      "id": "0f89fe1c"
+      "id": "dda3bd84"
     },
     {
       "cell_type": "code",
@@ -941,7 +941,7 @@
         "rows_penguins_data = penguins_data.loc[2:5]\n",
         "rows_penguins_data"
       ],
-      "id": "deffb9f5",
+      "id": "ce188c3c",
       "execution_count": null,
       "outputs": []
     },
@@ -953,7 +953,7 @@
         "\n",
         "</br>\n"
       ],
-      "id": "bf3696df"
+      "id": "8e061494"
     },
     {
       "cell_type": "code",
@@ -963,7 +963,7 @@
         "\n",
         "rows_penguins_data"
       ],
-      "id": "3a9af773",
+      "id": "54043bc0",
       "execution_count": null,
       "outputs": []
     },
@@ -977,7 +977,7 @@
         "\n",
         "Using `loc`, we can also retrieve a subset from the dataset by selecting specific columns and rows.\n"
       ],
-      "id": "d008db1f"
+      "id": "452f61dc"
     },
     {
       "cell_type": "code",
@@ -988,7 +988,7 @@
         "sub_rows_pdata = penguins_data.loc[2:5, ['bill_length_mm',  'species', 'island'] ]\n",
         "sub_rows_pdata"
       ],
-      "id": "72cc9533",
+      "id": "aa04399d",
       "execution_count": null,
       "outputs": []
     },
@@ -1032,7 +1032,7 @@
         "\n",
         "Select the columns `species`, `body_mass_g` and `sex`.\n"
       ],
-      "id": "c18299da"
+      "id": "3b5e2675"
     },
     {
       "cell_type": "code",
@@ -1045,7 +1045,7 @@
         "  .filter([\"species\", \"body_mass_g\", \"sex\"], axis = 1)\n",
         ").head()"
       ],
-      "id": "1fae2377",
+      "id": "792606c7",
       "execution_count": null,
       "outputs": []
     },
@@ -1059,7 +1059,7 @@
         "\n",
         "The `axis` argument tells `.filter()` whether to select rows (`0`) or columns (`1`) from the dataframe.\n"
       ],
-      "id": "9e7dc02f"
+      "id": "6726cc78"
     },
     {
       "cell_type": "code",
@@ -1072,7 +1072,7 @@
         "  .filter([\"species\", \"body_mass_g\", \"sex\"], axis = 1)\n",
         ").head()"
       ],
-      "id": "705c694e",
+      "id": "c7dc892f",
       "execution_count": null,
       "outputs": []
     },
@@ -1090,7 +1090,7 @@
         "\n",
         "We can also use `.filter()` to select rows too. To this end, we set `axis = 1`. We can select specific rows, such as 0 and 10.\n"
       ],
-      "id": "d8afacbf"
+      "id": "973f1c52"
     },
     {
       "cell_type": "code",
@@ -1103,7 +1103,7 @@
         "  .filter([0, 10], axis = 0)\n",
         ")"
       ],
-      "id": "26c5e073",
+      "id": "5b90e879",
       "execution_count": null,
       "outputs": []
     },
@@ -1115,7 +1115,7 @@
         "\n",
         "Or, we can select a set of rows using the function `range()`. For example, let's select the first 5 rows.\n"
       ],
-      "id": "b6157f4f"
+      "id": "330b05b1"
     },
     {
       "cell_type": "code",
@@ -1128,7 +1128,7 @@
         "  .filter(range(5), axis = 0)\n",
         ")"
       ],
-      "id": "14f53ba6",
+      "id": "5c7cceef",
       "execution_count": null,
       "outputs": []
     },
@@ -1146,7 +1146,7 @@
         "\n",
         "For example, let's filter the data for the species \"Gentoo.\"\n"
       ],
-      "id": "8d53ba75"
+      "id": "a1331df6"
     },
     {
       "cell_type": "code",
@@ -1159,7 +1159,7 @@
         "  .query(\"species == 'Gentoo'\")\n",
         ")"
       ],
-      "id": "0662ef6c",
+      "id": "7d9c321f",
       "execution_count": null,
       "outputs": []
     },
@@ -1171,7 +1171,7 @@
         "\n",
         "</br>\n"
       ],
-      "id": "09e430eb"
+      "id": "39651113"
     },
     {
       "cell_type": "code",
@@ -1184,7 +1184,7 @@
         "  .query(\"species == 'Gentoo'\")\n",
         ").head()"
       ],
-      "id": "7d5fb30a",
+      "id": "9c7ad562",
       "execution_count": null,
       "outputs": []
     },
@@ -1196,7 +1196,7 @@
         "\n",
         "We can also filter the data to get penguins with a body mass greater than 5000g.\n"
       ],
-      "id": "8e3f2b63"
+      "id": "022c0f0e"
     },
     {
       "cell_type": "code",
@@ -1209,7 +1209,7 @@
         "  .query(\"body_mass_g > 5000\")\n",
         ").head()"
       ],
-      "id": "d9f0f06d",
+      "id": "56ce00e6",
       "execution_count": null,
       "outputs": []
     },
@@ -1221,7 +1221,7 @@
         "\n",
         "We can even **combine** `.filter()` and `.query()`. For example, let's select the columns `species`, `body_mass_g` and `sex`, then filter the data for the \"Gentoo\" species.\n"
       ],
-      "id": "daed7592"
+      "id": "48c9d432"
     },
     {
       "cell_type": "code",
@@ -1235,7 +1235,7 @@
         "  .query(\"species == 'Gentoo'\")\n",
         ").head(4)"
       ],
-      "id": "e21f05f8",
+      "id": "b06c7f1f",
       "execution_count": null,
       "outputs": []
     },
@@ -1249,7 +1249,7 @@
         "\n",
         "For example, we create a new variable `LDRatio` equaling the ratio of `bill_length_mm` and `bill_depth_mm`.\n"
       ],
-      "id": "d28b6d99"
+      "id": "3a41c831"
     },
     {
       "cell_type": "code",
@@ -1262,7 +1262,7 @@
         "  .assign(LDRatio = lambda df: df[\"bill_length_mm\"] / df[\"bill_depth_mm\"])\n",
         ")"
       ],
-      "id": "085502d0",
+      "id": "2162e3ee",
       "execution_count": null,
       "outputs": []
     },
@@ -1276,7 +1276,7 @@
         "\n",
         "In this code, the `df` after `lambda` indicates that the dataframe (`penguins_data`) will be referred to as `df` inside the function. The colon `:` sets the start of the function.\n"
       ],
-      "id": "95b25d1a"
+      "id": "1c5ea2cb"
     },
     {
       "cell_type": "code",
@@ -1289,7 +1289,7 @@
         "  .assign(LDRatio = lambda df: df[\"bill_length_mm\"] / df[\"bill_depth_mm\"])\n",
         ")"
       ],
-      "id": "f0f59de3",
+      "id": "698d4d73",
       "execution_count": null,
       "outputs": []
     },
@@ -1303,7 +1303,7 @@
         "\n",
         "We can see the new variable using `.filter()`.\n"
       ],
-      "id": "ff82b6b8"
+      "id": "5f84cb93"
     },
     {
       "cell_type": "code",
@@ -1317,7 +1317,7 @@
         "  .filter([\"bill_length_mm\", \"bill_depth_mm\", \"LDRatio\"], axis = 1)\n",
         ").head()"
       ],
-      "id": "dfb16c29",
+      "id": "d677c854",
       "execution_count": null,
       "outputs": []
     },
@@ -1329,7 +1329,7 @@
         "\n",
         "We can sort the data based on a column like `bill_length_mm`.\n"
       ],
-      "id": "a67c92a1"
+      "id": "a7fb1942"
     },
     {
       "cell_type": "code",
@@ -1342,7 +1342,7 @@
         "  .sort_values(\"bill_length_mm\")\n",
         ").head(4)"
       ],
-      "id": "d6ede85c",
+      "id": "ebe791dd",
       "execution_count": null,
       "outputs": []
     },
@@ -1354,7 +1354,7 @@
         "\n",
         "To sort in descending order, use `ascending=False` inside `sort_values()`.\n"
       ],
-      "id": "bedd0cec"
+      "id": "d5943970"
     },
     {
       "cell_type": "code",
@@ -1367,7 +1367,7 @@
         "  .sort_values(\"bill_length_mm\", ascending=False)\n",
         ").head()"
       ],
-      "id": "801cdcbf",
+      "id": "684f377b",
       "execution_count": null,
       "outputs": []
     },
@@ -1379,7 +1379,7 @@
         "\n",
         "We can calculate summary statistics of the columns `bill_length_mm`, `bill_depth_mm`, and `body_mass_g`.\n"
       ],
-      "id": "ba0f44ab"
+      "id": "c719fef0"
     },
     {
       "cell_type": "code",
@@ -1393,7 +1393,7 @@
         "  .agg([\"mean\"])\n",
         ")"
       ],
-      "id": "856e822e",
+      "id": "1df9fc37",
       "execution_count": null,
       "outputs": []
     },
@@ -1411,7 +1411,7 @@
         "\n",
         "After performing operations on our data, we can save the modified dataset as a new object.\n"
       ],
-      "id": "05ba187c"
+      "id": "0e56361f"
     },
     {
       "cell_type": "code",
@@ -1427,7 +1427,7 @@
         "\n",
         "mean_penguins_data"
       ],
-      "id": "03b9ac47",
+      "id": "61cd253b",
       "execution_count": null,
       "outputs": []
     },
@@ -1446,7 +1446,7 @@
         "\n",
         "# [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)"
       ],
-      "id": "74fbe184"
+      "id": "9760f1a2"
     }
   ],
   "metadata": {

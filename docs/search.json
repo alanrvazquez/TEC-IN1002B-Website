@@ -641,14 +641,14 @@
     "href": "Tools/Tools2.slides.html#frequency-table",
     "title": "Tools for Data Science: Part II",
     "section": "Frequency table",
-    "text": "Frequency table\nSummarizes a categorical variable by counting the values per category.\n\n\n\n(penguins_data\n  .filter(['species'], axis = 1)\n  .value_counts()\n)  \n\nspecies  \nAdelie       152\nGentoo       124\nChinstrap     68\nName: count, dtype: int64\n\n\n\n\n\n\nEspecie\nFrecuencia\n\n\n\n\nAdelie\n152\n\n\nChinstrap\n68\n\n\nGentoo\n124\n\n\nTotal\n344\n\n\n\n\n\nFrequency: Number of observations in each category.\nTotal: Total sum of observations.\n\n\n\nVentajas de las frequencias.\nResumen claro y conciso de los datos categóricos.\nFacilita la identificación de patrones y tendencias.\nAyuda en la toma de decisiones informadas."
+    "text": "Frequency table\nSummarizes a categorical variable by counting the values per category.\n\n\n\n(penguins_data\n  .filter(['species'], axis = 1)\n  .value_counts()\n)  \n\nspecies  \nAdelie       152\nGentoo       124\nChinstrap     68\nName: count, dtype: int64\n\n\n\n\n\n\nSpecie\nFrequency\n\n\n\n\nAdelie\n152\n\n\nChinstrap\n68\n\n\nGentoo\n124\n\n\nTotal\n344\n\n\n\n\n\nFrequency: Number of observations in each category.\nTotal: Total sum of observations.\n\n\n\nVentajas de las frequencias.\nResumen claro y conciso de los datos categóricos.\nFacilita la identificación de patrones y tendencias.\nAyuda en la toma de decisiones informadas."
   },
   {
     "objectID": "Tools/Tools2.slides.html#relative-frequency-table",
     "href": "Tools/Tools2.slides.html#relative-frequency-table",
     "title": "Tools for Data Science: Part II",
     "section": "Relative Frequency Table",
-    "text": "Relative Frequency Table\nSummarizes a categorical variable by calculating the proportion of values per category.\n\n\n\n(penguins_data\n .filter(['species'], axis = 1)\n .value_counts(normalize = True)\n)\n\nspecies  \nAdelie       0.441860\nGentoo       0.360465\nChinstrap    0.197674\nName: proportion, dtype: float64\n\n\n\n\n\n\nSpecie\nRelative Frequency\n\n\n\n\nAdelie\n0.4418605\n\n\nChinstrap\n0.1976744\n\n\nGentoo\n0.3604651\n\n\nSuma\n1\n\n\n\n\n\nRelative frequency: Number of observations in each category divided by the total.\n\n\nLa ventaja de la frequencia relativa es que se puede interpretar como una probabilidad. Lo que da mas información."
+    "text": "Relative Frequency Table\nSummarizes a categorical variable by calculating the proportion of values per category.\n\n\n\n(penguins_data\n .filter(['species'], axis = 1)\n .value_counts(normalize = True)\n)\n\nspecies  \nAdelie       0.441860\nGentoo       0.360465\nChinstrap    0.197674\nName: proportion, dtype: float64\n\n\n\n\n\n\nSpecie\nRelative Frequency\n\n\n\n\nAdelie\n0.4418605\n\n\nChinstrap\n0.1976744\n\n\nGentoo\n0.3604651\n\n\nSum\n1\n\n\n\n\n\nRelative frequency: Number of observations in each category divided by the total.\n\n\nLa ventaja de la frequencia relativa es que se puede interpretar como una probabilidad. Lo que da mas información."
   },
   {
     "objectID": "Tools/Tools2.slides.html#example-2",

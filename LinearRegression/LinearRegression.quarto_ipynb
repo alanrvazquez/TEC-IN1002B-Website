@@ -48,7 +48,7 @@
         "\n",
         "Let's import **statsmodels** into Python together with the other relevant libraries.\n"
       ],
-      "id": "1fcfaabc"
+      "id": "e733b2bc"
     },
     {
       "cell_type": "code",
@@ -61,7 +61,7 @@
         "import pandas as pd\n",
         "import statsmodels.api as sm"
       ],
-      "id": "9c0f3019",
+      "id": "f9cbba67",
       "execution_count": null,
       "outputs": []
     },
@@ -89,7 +89,7 @@
         "\n",
         "The dataset for the file is in \"rayon.xlsx\". It has 26 observations.\n"
       ],
-      "id": "7e41dd80"
+      "id": "13c81e7a"
     },
     {
       "cell_type": "code",
@@ -101,7 +101,7 @@
         "rayon_data = pd.read_excel(\"rayon.xlsx\")\n",
         "rayon_data.head()"
       ],
-      "id": "2714c32a",
+      "id": "3a034b49",
       "execution_count": null,
       "outputs": []
     },
@@ -169,7 +169,7 @@
         "\n",
         "The parameters $\\beta_0, \\beta_1, \\ldots, \\beta_p$ and $\\sigma^2$ are unknown. To learn about them, we use our [**training**]{style=\"color:blue;\"} data.\n"
       ],
-      "id": "4267217f"
+      "id": "32feacba"
     },
     {
       "cell_type": "code",
@@ -180,7 +180,7 @@
         "\n",
         "rayon_data.head()"
       ],
-      "id": "eeb58588",
+      "id": "355c7ddd",
       "execution_count": null,
       "outputs": []
     },
@@ -193,7 +193,7 @@
         "-   $X_{ij}$ denotes the i-th observed value of predictor $X_j$.\n",
         "-   $Y_i$ denotes the i-th observed value of response $Y$.\n"
       ],
-      "id": "07158c34"
+      "id": "17d37a3a"
     },
     {
       "cell_type": "code",
@@ -204,7 +204,7 @@
         "\n",
         "rayon_data.head()"
       ],
-      "id": "45a682cb",
+      "id": "8bb4a25a",
       "execution_count": null,
       "outputs": []
     },
@@ -366,7 +366,7 @@
         "\n",
         "To compute the least squares estimates, we first split the data set into a matrix with the values of the predictors only, and a matrix with the response values.\n"
       ],
-      "id": "3219f1c1"
+      "id": "0a1e6b0c"
     },
     {
       "cell_type": "code",
@@ -384,7 +384,7 @@
         "# Matrix with response.\n",
         "rayon_Y_train = rayon_data['Y']"
       ],
-      "id": "59b8db09",
+      "id": "8816a983",
       "execution_count": null,
       "outputs": []
     },
@@ -398,7 +398,7 @@
         "\n",
         "Next, we use the functions `OLS()` and `fit()` from **statsmodels**.\n"
       ],
-      "id": "17501199"
+      "id": "f141c2e1"
     },
     {
       "cell_type": "code",
@@ -413,7 +413,7 @@
         "# Train the model using the training sets\n",
         "linear_model = regr.fit()"
       ],
-      "id": "682bfb0d",
+      "id": "95773f73",
       "execution_count": null,
       "outputs": []
     },
@@ -427,7 +427,7 @@
         "\n",
         "To show the estimated coefficients, we use the argument `params` of the `linear_model` object created previously.\n"
       ],
-      "id": "0a6f1c8e"
+      "id": "7167a1f2"
     },
     {
       "cell_type": "code",
@@ -439,7 +439,7 @@
         "# The estimated coefficients.\n",
         "print(linear_model.params)"
       ],
-      "id": "d45a042b",
+      "id": "9bb5733b",
       "execution_count": null,
       "outputs": []
     },
@@ -494,7 +494,7 @@
         "\n",
         "In Python, we use the argument `fittedvalues` to show the predicted responses of the estimated model.\n"
       ],
-      "id": "649cf0b8"
+      "id": "b0a06a7c"
     },
     {
       "cell_type": "code",
@@ -506,7 +506,7 @@
         "# Make predictions using the the model\n",
         "rayon_Y_pred = linear_model.fittedvalues"
       ],
-      "id": "d002ef04",
+      "id": "8dceb060",
       "execution_count": null,
       "outputs": []
     },
@@ -520,7 +520,7 @@
         "\n",
         "Predictions of the 26 observations in the training dataset.\n"
       ],
-      "id": "6f21b922"
+      "id": "729a411b"
     },
     {
       "cell_type": "code",
@@ -531,7 +531,7 @@
         "\n",
         "print(rayon_Y_pred)"
       ],
-      "id": "00640261",
+      "id": "eb4ecda0",
       "execution_count": null,
       "outputs": []
     },
@@ -557,7 +557,7 @@
         "\n",
         "In Python, we compute the residuals using the following command.\n"
       ],
-      "id": "2ba0d441"
+      "id": "b307550f"
     },
     {
       "cell_type": "code",
@@ -570,7 +570,7 @@
         "\n",
         "print(residuals)"
       ],
-      "id": "6fc63056",
+      "id": "f4e0fa73",
       "execution_count": null,
       "outputs": []
     },
@@ -588,7 +588,7 @@
         "\n",
         "In Python, we compute $\\hat{\\sigma}^2$ as follows.\n"
       ],
-      "id": "22ca5f9a"
+      "id": "93398474"
     },
     {
       "cell_type": "code",
@@ -601,7 +601,7 @@
         "\n",
         "print( round(error_variance, 3) )"
       ],
-      "id": "a8248a64",
+      "id": "18aa59ea",
       "execution_count": null,
       "outputs": []
     },
@@ -619,7 +619,7 @@
         "\n",
         "$$\\hat{\\sigma}=\\left(\\frac{1}{n-p-1}\\sum_{i=1}^{n} \\hat{\\epsilon}_i^{2}\\right)^{1/2}.$$ In Python, we compute $\\hat{\\sigma}$ as follows:\n"
       ],
-      "id": "b0c2ec3e"
+      "id": "58f78957"
     },
     {
       "cell_type": "code",
@@ -630,7 +630,7 @@
         "\n",
         "print( round(error_variance**(1/2), 3) )"
       ],
-      "id": "2f5dc75c",
+      "id": "42a0cb4b",
       "execution_count": null,
       "outputs": []
     },
@@ -647,7 +647,7 @@
         "\n",
         "# [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)"
       ],
-      "id": "f5258a19"
+      "id": "c199bab3"
     }
   ],
   "metadata": {

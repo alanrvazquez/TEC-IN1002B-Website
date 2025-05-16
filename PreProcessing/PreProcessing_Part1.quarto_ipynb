@@ -79,7 +79,7 @@
         "\n",
         "Let's import **scikit-learn** into Python together with the other relevant libraries.\n"
       ],
-      "id": "0b7f4113"
+      "id": "a0d98182"
     },
     {
       "cell_type": "code",
@@ -95,7 +95,7 @@
         "from sklearn.model_selection import train_test_split\n",
         "from sklearn.preprocessing import power_transform, StandardScaler "
       ],
-      "id": "dda09a0c",
+      "id": "9a84c10c",
       "execution_count": null,
       "outputs": []
     },
@@ -200,7 +200,7 @@
         "\n",
         "We read the dataset and set the variable `CHAS` as categorical.\n"
       ],
-      "id": "a123cedd"
+      "id": "dda3d998"
     },
     {
       "cell_type": "code",
@@ -215,7 +215,7 @@
         "\n",
         "Boston_data.head(4)"
       ],
-      "id": "2222b8c9",
+      "id": "720497f1",
       "execution_count": null,
       "outputs": []
     },
@@ -239,7 +239,7 @@
         "\n",
         "We use the function `.drop()` from **pandas**. This function drops one or more columns from a data frame. Let's drop the response column `MEDV` and store the result in `X_full`.\n"
       ],
-      "id": "c1933451"
+      "id": "611c72e6"
     },
     {
       "cell_type": "code",
@@ -252,7 +252,7 @@
         "X_full = Boston_data.drop(columns = ['MEDV']) \n",
         "X_full.head(4)"
       ],
-      "id": "0d82e246",
+      "id": "6b971de9",
       "execution_count": null,
       "outputs": []
     },
@@ -264,7 +264,7 @@
         "\n",
         "We use the function `.filter()` from **pandas** to extract the column `MEDV` from the data frame. We store the result in `Y_full`.\n"
       ],
-      "id": "28478c07"
+      "id": "694a9b9c"
     },
     {
       "cell_type": "code",
@@ -277,7 +277,7 @@
         "Y_full = Boston_data.filter(['MEDV'])\n",
         "Y_full.head(4)"
       ],
-      "id": "ad937362",
+      "id": "696bdacd",
       "execution_count": null,
       "outputs": []
     },
@@ -289,7 +289,7 @@
         "\n",
         "</br>\n"
       ],
-      "id": "e9695f66"
+      "id": "c2473b45"
     },
     {
       "cell_type": "code",
@@ -302,7 +302,7 @@
         "X_train, X_valid, Y_train, Y_valid = train_test_split(X_full, Y_full, \n",
         "                                                      test_size = 0.3)"
       ],
-      "id": "84aefefd",
+      "id": "f1b15bd4",
       "execution_count": null,
       "outputs": []
     },
@@ -320,7 +320,7 @@
         "\n",
         "The predictors and response in the training dataset are in the objects `X_train` and `Y_train`, respectively. We compile these objects into a single dataset using the function `.concat()` from **pandas**. The argument `axis = 1` tells `.concat()` to concatenate the datasets by their rows.\n"
       ],
-      "id": "c693a3c1"
+      "id": "897349ae"
     },
     {
       "cell_type": "code",
@@ -332,7 +332,7 @@
         "training_dataset = pd.concat([X_train, Y_train], axis = 1)\n",
         "training_dataset.head(4)"
       ],
-      "id": "277fe391",
+      "id": "2da10376",
       "execution_count": null,
       "outputs": []
     },
@@ -346,7 +346,7 @@
         "\n",
         "Equivalently, the predictors and response in the validation dataset are in the objects `X_valid` and `Y_valid`, respectively.\n"
       ],
-      "id": "c07cfd8a"
+      "id": "b90c7710"
     },
     {
       "cell_type": "code",
@@ -358,7 +358,7 @@
         "validation_dataset = pd.concat([X_valid, Y_valid], axis = 1)\n",
         "validation_dataset.head(4)"
       ],
-      "id": "5d7ab9b4",
+      "id": "9ad2efbc",
       "execution_count": null,
       "outputs": []
     },
@@ -423,7 +423,7 @@
         "\n",
         "Let's use the penguins dataset available in the file \"penguins.xlsx\".\n"
       ],
-      "id": "ee9a6f79"
+      "id": "81f67048"
     },
     {
       "cell_type": "code",
@@ -439,7 +439,7 @@
         "penguins_data['species'] = pd.Categorical(penguins_data['species'])\n",
         "penguins_data['island'] = pd.Categorical(penguins_data['island'])"
       ],
-      "id": "55f8766d",
+      "id": "a52ea774",
       "execution_count": null,
       "outputs": []
     },
@@ -455,7 +455,7 @@
         "\n",
         "We create the predictor matrix and response column.\n"
       ],
-      "id": "a11ec45f"
+      "id": "88e0069e"
     },
     {
       "cell_type": "code",
@@ -471,7 +471,7 @@
         "# Set full matrix of responses.\n",
         "Y_full_p = penguins_data.filter(['species'])"
       ],
-      "id": "823d372b",
+      "id": "7833e9b2",
       "execution_count": null,
       "outputs": []
     },
@@ -485,7 +485,7 @@
         "\n",
         "We will use a validation dataset with 20\\% of the observations in `penguins_data`. The other 80\\% will be in the training dataset.\n"
       ],
-      "id": "0193af48"
+      "id": "bf212336"
     },
     {
       "cell_type": "code",
@@ -498,7 +498,7 @@
         "                                                      test_size = 0.3,\n",
         "                                                      random_state = 59227)"
       ],
-      "id": "cd47cc97",
+      "id": "7eab9c5a",
       "execution_count": null,
       "outputs": []
     },
@@ -514,7 +514,7 @@
         "\n",
         "Since preprocessing techniques are meant for the predictors, we will work on the `X_train_p` data frame.\n"
       ],
-      "id": "e9125ff1"
+      "id": "46a7163e"
     },
     {
       "cell_type": "code",
@@ -524,7 +524,7 @@
         "\n",
         "X_train_p.head()"
       ],
-      "id": "46680cd0",
+      "id": "3d9717c5",
       "execution_count": null,
       "outputs": []
     },
@@ -538,7 +538,7 @@
         "\n",
         "Let's check if the dataset has have missing observations is using the function `.info()` from **pandas**.\n"
       ],
-      "id": "1fcf764d"
+      "id": "bb399074"
     },
     {
       "cell_type": "code",
@@ -548,7 +548,7 @@
         "\n",
         "X_train_p.info()"
       ],
-      "id": "be92d8d0",
+      "id": "ccc03b14",
       "execution_count": null,
       "outputs": []
     },
@@ -560,7 +560,7 @@
         "\n",
         "In the output of the function, \"non-null\" refers to the number of entries in a column that have actual values. That is, the number of entries where there are not `NaN`.\n"
       ],
-      "id": "36aefe61"
+      "id": "d674164d"
     },
     {
       "cell_type": "code",
@@ -570,7 +570,7 @@
         "\n",
         "X_train_p.info()"
       ],
-      "id": "e860bc14",
+      "id": "515fb4b3",
       "execution_count": null,
       "outputs": []
     },
@@ -584,7 +584,7 @@
         "\n",
         "The output below shows that there are 240 entries but `bill_length_mm` has 238 that are \"non-null\". Therefore, this column has **two** missing observations. \n"
       ],
-      "id": "f449957f"
+      "id": "42006622"
     },
     {
       "cell_type": "code",
@@ -594,7 +594,7 @@
         "\n",
         "X_train_p.info()"
       ],
-      "id": "afb2c75a",
+      "id": "3ec306ac",
       "execution_count": null,
       "outputs": []
     },
@@ -611,7 +611,7 @@
         "\n",
         "</br>\n"
       ],
-      "id": "680e6468"
+      "id": "7d4fb37e"
     },
     {
       "cell_type": "code",
@@ -622,7 +622,7 @@
         "missing_values = X_train_p.isnull().sum()\n",
         "missing_values"
       ],
-      "id": "c3745115",
+      "id": "ace1ad71",
       "execution_count": null,
       "outputs": []
     },
@@ -638,7 +638,7 @@
         "\n",
         "If we want to remove all rows in the dataset that have at least one missing value, we use the function `.dropna()`.\n"
       ],
-      "id": "695b3085"
+      "id": "f47fa06e"
     },
     {
       "cell_type": "code",
@@ -650,7 +650,7 @@
         "complete_predictors = X_train_p.dropna()\n",
         "complete_predictors.head()"
       ],
-      "id": "85bcb41e",
+      "id": "44723e74",
       "execution_count": null,
       "outputs": []
     },
@@ -660,7 +660,7 @@
       "source": [
         "##\n"
       ],
-      "id": "69fc1af0"
+      "id": "b1a2fec1"
     },
     {
       "cell_type": "code",
@@ -671,7 +671,7 @@
         "\n",
         "complete_predictors.info()"
       ],
-      "id": "dce299bf",
+      "id": "de38b6eb",
       "execution_count": null,
       "outputs": []
     },
@@ -688,7 +688,7 @@
         "\n",
         "We can impute the missing values of a numeric variable using the **mean** or **median** of its available values. For example, consider the variable `bill_length_mm` that has two missing values.\n"
       ],
-      "id": "b63e6323"
+      "id": "4d6efe12"
     },
     {
       "cell_type": "code",
@@ -699,7 +699,7 @@
         "\n",
         "X_train_p['bill_length_mm'].info()"
       ],
-      "id": "875ef76a",
+      "id": "c37d63f7",
       "execution_count": null,
       "outputs": []
     },
@@ -715,7 +715,7 @@
         "\n",
         "Using `SimpleImputer()`, we set the method to imput missing values using the **mean**. We also use the function `fit_transform()` to apply the imputation method to the variable.\n"
       ],
-      "id": "c1e8c05a"
+      "id": "dad49945"
     },
     {
       "cell_type": "code",
@@ -730,7 +730,7 @@
         "# Replace the original variable with new version.\n",
         "X_train_p['bill_length_mm'] = num_imputer.fit_transform(X_train_p[ ['bill_length_mm'] ] )"
       ],
-      "id": "6ddcbfd6",
+      "id": "5d9e8c9f",
       "execution_count": null,
       "outputs": []
     },
@@ -742,7 +742,7 @@
         "\n",
         "After imputation, the information of the predictors in the dataset looks like this.\n"
       ],
-      "id": "e79e1382"
+      "id": "63c06a3b"
     },
     {
       "cell_type": "code",
@@ -753,7 +753,7 @@
         "\n",
         "X_train_p.info()"
       ],
-      "id": "d2e59f3e",
+      "id": "73a35a44",
       "execution_count": null,
       "outputs": []
     },
@@ -767,7 +767,7 @@
         "\n",
         "To imput the missing values using the **median**, we simply set this method in `SimpleImputer()`. For example, let's imput the missing values of `bill_depth_mm`.\n"
       ],
-      "id": "eca74666"
+      "id": "e6263ad1"
     },
     {
       "cell_type": "code",
@@ -785,7 +785,7 @@
         "# Show the information of the predictor.\n",
         "X_train_p['bill_depth_mm'].info()"
       ],
-      "id": "252bfdb8",
+      "id": "717c5036",
       "execution_count": null,
       "outputs": []
     },
@@ -819,7 +819,7 @@
         "\n",
         "For example, let's impute the missing values of `sex` using this strategy.\n"
       ],
-      "id": "b9f9ec2a"
+      "id": "6a0f18bf"
     },
     {
       "cell_type": "code",
@@ -834,7 +834,7 @@
         "# Apply imputation strategy for categorical variables.\n",
         "X_train_p['sex'] = cat_imputer.fit_transform(X_train_p[ ['sex'] ]).ravel()"
       ],
-      "id": "e3e45652",
+      "id": "4ca6d162",
       "execution_count": null,
       "outputs": []
     },
@@ -846,7 +846,7 @@
         "\n",
         "Let's now have a look at the information of the dataset.\n"
       ],
-      "id": "20d9bd7d"
+      "id": "fc262337"
     },
     {
       "cell_type": "code",
@@ -858,7 +858,7 @@
         "# Apply imputation strategy for categorical variables.\n",
         "X_train_p.info()"
       ],
-      "id": "64a3ad27",
+      "id": "0a46061b",
       "execution_count": null,
       "outputs": []
     },
@@ -895,7 +895,7 @@
         "\n",
         "You can use KNN using the function `KNNImputer()`. Its main input is the number of nearest neighbours to use. You set this value using the parameter `n_neighbors`.\n"
       ],
-      "id": "3ea12d17"
+      "id": "ff3a40e5"
     },
     {
       "cell_type": "code",
@@ -914,7 +914,7 @@
         "X_train_num_p = pd.DataFrame(KNN_imputer.fit_transform(X_train_num_p), \n",
         "                            columns = X_train_num_p.columns)"
       ],
-      "id": "2c6eaeab",
+      "id": "95de9556",
       "execution_count": null,
       "outputs": []
     },
@@ -928,7 +928,7 @@
         "\n",
         "Let's look at the new dataset.\n"
       ],
-      "id": "b712dbbd"
+      "id": "bc8729aa"
     },
     {
       "cell_type": "code",
@@ -939,7 +939,7 @@
         "\n",
         "X_train_num_p.info()"
       ],
-      "id": "09ca439b",
+      "id": "07992c83",
       "execution_count": null,
       "outputs": []
     },
@@ -952,7 +952,7 @@
         "\n",
         "# [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)"
       ],
-      "id": "d27c5f41"
+      "id": "cb714b58"
     }
   ],
   "metadata": {
