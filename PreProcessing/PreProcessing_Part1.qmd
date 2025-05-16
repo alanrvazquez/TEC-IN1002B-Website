@@ -647,14 +647,5 @@ X_train_num_p.info()
 
 All predictors have 240 complete entries.
 
-## Some remarks
-
-</br>
-
-- In KNN the distance between two rows is calculated using *Euclidean* distance.
-
-- KNN only considers rows without missing values in the columns being used.
-
-- KNN works best when the features are on similar scales and missingness is not too high.
 
 # [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)
