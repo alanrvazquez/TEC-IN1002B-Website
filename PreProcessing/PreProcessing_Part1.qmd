@@ -179,7 +179,7 @@ The [response]{style="color:darkred;"} is the median value of owner-occupied hom
 
 ## Read the dataset
 
-We read the dataset and set the variable `CHAS` as categorical.
+We read the dataset and set the variable `CHAS` and `RAD` as categorical.
 
 ```{python}
 #| echo: true
@@ -188,6 +188,7 @@ We read the dataset and set the variable `CHAS` as categorical.
 Boston_data = pd.read_excel('BostonHousing.xlsx')
 
 Boston_data['CHAS'] = pd.Categorical(Boston_data['CHAS'])
+Boston_data['RAD'] = pd.Categorical(Boston_data['RAD'])
 
 Boston_data.head(4)
 ```
@@ -200,9 +201,9 @@ We split the current dataset into a training and a validation dataset. To this e
 
 The function has three main inputs:
 
-- A pandas data frame with the predictor columns only.
-- A pandas data frame with the response column only.
-- The parameter `test_size` which sets the portion of the dataset that will go to the validation set.
+-   A pandas data frame with the predictor columns only.
+-   A pandas data frame with the response column only.
+-   The parameter `test_size` which sets the portion of the dataset that will go to the validation set.
 
 ## Create the predictor matrix
 
@@ -242,7 +243,6 @@ Y_full.head(4)
 X_train, X_valid, Y_train, Y_valid = train_test_split(X_full, Y_full, 
                                                       test_size = 0.3)
 ```
-
 
 -   The function makes a clever partition of the data using the *empirical* distribution of the response.
 
@@ -285,7 +285,7 @@ The pipeline has two main steps:
 1.  Data preprocessing.
 2.  Model development.
 
-We will now discuss preprocessing techniques applied to the predictor columns in the training dataset. 
+We will now discuss preprocessing techniques applied to the predictor columns in the training dataset.
 
 Note that all preprocessing techniques will also be applied to the [**validation dataset**]{style="color:orange;"} and [**test dataset**]{style="color:green;"} to prepare it for your model!
 
@@ -347,7 +347,7 @@ penguins_data['island'] = pd.Categorical(penguins_data['island'])
 
 ## Training and validation datasets
 
-For illustrative purposes, we assume that we want to predict the species (in the column `species`) of a penguin using  the predictors `bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, `body_mass_g`, and `sex`.
+For illustrative purposes, we assume that we want to predict the species (in the column `species`) of a penguin using the predictors `bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, `body_mass_g`, and `sex`.
 
 </br>
 
@@ -365,12 +365,11 @@ X_full_p = (penguins_data
 Y_full_p = penguins_data.filter(['species'])
 ```
 
-
-##
+## 
 
 </br>
 
-We will use a validation dataset with 20\% of the observations in `penguins_data`. The other 80\% will be in the training dataset.
+We will use a validation dataset with 20% of the observations in `penguins_data`. The other 80% will be in the training dataset.
 
 ```{python}
 #| echo: true
@@ -383,7 +382,7 @@ X_train_p, X_valid_p, Y_train_p, Y_valid_p = train_test_split(X_full_p, Y_full_p
 
 In `train_test_split`, we use the input `random_state` to set a *random seed*. Essentially, this allows you to obtain the same training and validation datasets every time you run the code. *The advice is setting* `random_state` *to a big integer number generated at random.*
 
-##
+## 
 
 </br>
 
@@ -395,8 +394,7 @@ Since preprocessing techniques are meant for the predictors, we will work on the
 X_train_p.head()
 ```
 
-
-##
+## 
 
 </br>
 
@@ -420,9 +418,9 @@ X_train_p.info()
 
 The value next to "RangeIndex" is the number of observations in the dataset.
 
-##
+## 
 
-The output below shows that there are 240 entries but `bill_length_mm` has 238 that are "non-null". Therefore, this column has **two** missing observations. 
+The output below shows that there are 240 entries but `bill_length_mm` has 238 that are "non-null". Therefore, this column has **two** missing observations.
 
 ```{python}
 #| echo: false
@@ -433,7 +431,6 @@ X_train_p.info()
 The same is true for the other predictors.
 
 ## 
-
 
 Alternatively, we can use the function `.isnull()` together with `sum()` to determine the number of missing values for each column in the dataset.
 
@@ -462,8 +459,7 @@ complete_predictors = X_train_p.dropna()
 complete_predictors.head()
 ```
 
-
-##
+## 
 
 ```{python}
 #| echo: true
@@ -472,11 +468,9 @@ complete_predictors.head()
 complete_predictors.info()
 ```
 
-
 The new data is complete because each column has 232 "non-null" values; the total number of observations in `complete_predictors`.
 
 However, note that we have lost eight of the original observations in `X_train_p`!
-
 
 ## Imputation using the mean
 
@@ -590,28 +584,28 @@ X_train_p.info()
 
 The columns `bill_length_mm`, `bill_depth_mm`, and `sex` have 240 complete values.
 
-## Multivariate imputation using K-nearest neighbours 
+## Multivariate imputation using K-nearest neighbours
 
-K-nearest neighbours (KNN) is a multiple imputation method to fill in the missing values of a predictor using the available values from this and the other predictors. 
+K-nearest neighbours (KNN) is a multiple imputation method to fill in the missing values of a predictor using the available values from this and the other predictors.
 
 </br>
 
 For each missing value in a predictor $X$:
 
-  1. Find the $K$ most similar rows based on the other predictors.
-  2. Impute the missing value of $X$ using the *average* of the available values of $X$ in the $K$ closest rows.
+1.  Find the $K$ most similar rows based on the other predictors.
+2.  Impute the missing value of $X$ using the *average* of the available values of $X$ in the $K$ closest rows.
 
 ## Notes on its implementation
 
 </br>
 
-- KNN captures *local patterns* better than individual predictor imputation using the mean or the median. 
+-   KNN captures *local patterns* better than individual predictor imputation using the mean or the median.
 
-- However, it only works for numeric predictors!
+-   However, it only works for numeric predictors!
 
-- The distance between two rows is calculated using *Euclidean* distance.
+-   The distance between two rows is calculated using *Euclidean* distance.
 
-- KNN only considers rows without missing values in the predictor columns being used.
+-   KNN only considers rows without missing values in the predictor columns being used.
 
 ## In Python
 
@@ -646,6 +640,5 @@ X_train_num_p.info()
 ```
 
 All predictors have 240 complete entries.
-
 
 # [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)

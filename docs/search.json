@@ -4,35 +4,35 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#agenda",
     "title": "Data preprocessing: Part II",
     "section": "Agenda",
-    "text": "Agenda\n\n\nTransforming predictors\nStandarization\nDimension reduction"
+    "text": "Agenda\n\n\nTransforming predictors\nReducing the number of predictors\nStandardizing the units of the predictors"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#before-we-start",
     "href": "PreProcessing/PreProcessing_Part2.slides.html#before-we-start",
     "title": "Data preprocessing: Part II",
     "section": "Before we start",
-    "text": "Before we start\n\nLet’s import scikit-learn into Python together with the other relevant libraries.\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom sklearn.impute import SimpleImputer\nfrom sklearn.feature_selection import VarianceThreshold\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import power_transform, StandardScaler \n\nWe will not use all the functions from the scikit-learn library. Instead, we will use specific functions from the sub-libraries preprocessing, feature_selection, model_selection and impute."
+    "text": "Before we start\n\nLet’s import scikit-learn into Python together with the other relevant libraries.\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom sklearn.impute import SimpleImputer, KNNImputer\nfrom sklearn.feature_selection import VarianceThreshold\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import power_transform, StandardScaler \n\nWe will not use all the functions from the scikit-learn library. Instead, we will use specific functions from the sub-libraries preprocessing, feature_selection, model_selection and impute."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#categorical-predictors",
     "href": "PreProcessing/PreProcessing_Part2.slides.html#categorical-predictors",
     "title": "Data preprocessing: Part II",
     "section": "Categorical predictors",
-    "text": "Categorical predictors\nA categorical predictor takes on values that are nominal categories.\n\nFor example:\n\nType of school: Public or private.\nTreatment: New or placebo.\nGrade: Passed or not passed.\n\n\n\nThe categories can be represented by names, labels or even numbers. Their use in regression requires dummy variables, which are numeric variables."
+    "text": "Categorical predictors\nA categorical predictor takes on values that are categories or groups.\n\nFor example:\n\nType of school: Public or private.\nTreatment: New or placebo.\nGrade: Passed or not passed.\n\n\n\nThe categories can be represented by names, labels or even numbers. For a nominal categorical variable, their use in regression requires dummy variables, which are numeric."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#dummy-variables",
     "href": "PreProcessing/PreProcessing_Part2.slides.html#dummy-variables",
     "title": "Data preprocessing: Part II",
     "section": "Dummy variables",
-    "text": "Dummy variables\n\n\nThe traditional choice for a dummy variable is a binary variable, which can only take the values 0 and 1.\n\n\nInitially, a categorical variable with \\(k\\) categories requires \\(k\\) dummy variables."
+    "text": "Dummy variables\n\n\nThe traditional choice for a dummy variable is a binary variable, which can only take the values 0 and 1.\n\n\nInitially, a nominal categorical variable with \\(k\\) categories requires \\(k\\) dummy variables."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#example-2",
     "href": "PreProcessing/PreProcessing_Part2.slides.html#example-2",
     "title": "Data preprocessing: Part II",
     "section": "Example 2",
-    "text": "Example 2\nA market analyst is studying quality characteristics of cars. Specifically, the analyst is investigating the miles per gallon (mpg) of cars can be predicted using:\n\n\\(X_1:\\) cylinders. Number of cylinders between 4 and 8\n\\(X_2:\\) displacement. Engine displacement (cu. inches)\n\\(X_3:\\) horsepower. Engine horsepower\n\\(X_4:\\) weight. Vehicle weight (lbs.)\n\\(X_5:\\) acceleration. Time to accelerate from 0 to 60 mph (sec.)\n\\(X_6:\\) origin. Origin of car (American, European, Japanese)"
+    "text": "Example 2\n\nWe revisit the “BostonHousing.xlsx” dataset that contains data of houses in Boston, Massachusetts.\n\nThe goal is to predict the median house price in new tracts based on information such as crime rate, pollution, and number of rooms.\n\nThe response is the median value of owner-occupied homes in $1000s, contained in the column MEDV."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#section",
@@ -46,28 +46,28 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-1",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "observation\nmpg\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\nyear\norigin\nname\n\n\n\n\n0\n1\n18.0\n8\n307.0\n130\n3504\n12.0\n70\nAmerican\nchevrolet chevelle malibu\n\n\n1\n2\n15.0\n8\n350.0\n165\n3693\n11.5\n70\nAmerican\nbuick skylark 320\n\n\n2\n3\n18.0\n8\n318.0\n150\n3436\n11.0\n70\nAmerican\nplymouth satellite\n\n\n3\n4\n16.0\n8\n304.0\n150\n3433\n12.0\n70\nAmerican\namc rebel sst"
+    "text": "We will use a validation dataset with 20% of the observations in auto_data. The other 80% will be in the training dataset.\n\n# Split the dataset into training and validation.\nX_train_c, X_valid_c, Y_train_c, Y_valid_c = train_test_split(X_full_c, Y_full_c, \n                                                      test_size = 0.3,\n                                                      random_state = 59227)"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#dealing-with-missing-values",
     "href": "PreProcessing/PreProcessing_Part2.slides.html#dealing-with-missing-values",
     "title": "Data preprocessing: Part II",
     "section": "Dealing with missing values",
-    "text": "Dealing with missing values\n\nThe dataset has missing values. In this example, we remove each row with at least one missing value.\n\n\n# Remove rows with missing values.\ncomplete_Auto = auto_data.dropna()"
+    "text": "Dealing with missing values\n\nThe dataset has missing values. In this example, we remove each row with at least one missing value.\n\n\n# Remove rows with missing values.\ncomplete_Auto = training_auto.dropna()"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#example-2-cont.",
     "href": "PreProcessing/PreProcessing_Part2.slides.html#example-2-cont.",
     "title": "Data preprocessing: Part II",
     "section": "Example 2 (cont.)",
-    "text": "Example 2 (cont.)\nCategorical predictor: Origin of a car. Three categories: American, European and Japanese.\nInitially, 3 dummy variables are required:\n\\[d_1 =\n\\begin{cases}\n1 \\text{ if observation is from an American car}\\\\\n0 \\text{ otherwise}\n\\end{cases}\\] \\[d_2 =\n\\begin{cases}\n1 \\text{ if observation is from an European car}\\\\\n0 \\text{ otherwise}\n\\end{cases}\\] \\[d_3 =\n\\begin{cases}\n1 \\text{ if observation is from a Japanese car}\\\\\n0 \\text{ otherwise}\n\\end{cases}\\]"
+    "text": "Example 2 (cont.)\n\nWe concentrate on the five numerical predictors in the complete_Auto dataset.\n\n# Select specific variables.\ncomplete_sbAuto = complete_Auto[['cylinders', 'displacement', \n                                 'horsepower', 'weight', \n                                 'acceleration']]"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#section-2",
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-2",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "The variable Origin would then be replaced by the three dummy variables\n\n\n\nOrigin (\\(X\\))\n\\(d_1\\)\n\\(d_2\\)\n\\(d_3\\)\n\n\n\n\nAmerican\n1\n0\n0\n\n\nAmerican\n1\n0\n0\n\n\nEuropean\n0\n1\n0\n\n\nEuropean\n0\n1\n0\n\n\nAmerican\n1\n0\n0\n\n\nJapanese\n0\n0\n1\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)"
+    "text": "Let’s look at the full training dataset.\n\ntraining_auto = pd.concat([X_train_c, Y_train_c], axis = 1)\ntraining_auto.head()\n\n\n\n\n\n\n\n\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\norigin\nmpg\n\n\n\n\n46\n6\n250.0\n100\n3282\n15.0\nAmerican\n19.0\n\n\n72\n8\n307.0\n130\n4098\n14.0\nAmerican\n13.0\n\n\n389\n4\n135.0\n84\n2295\n11.6\nAmerican\n32.0\n\n\n145\n4\n90.0\n75\n2108\n15.5\nEuropean\n24.0\n\n\n11\n8\n340.0\n160\n3609\n8.0\nAmerican\n14.0"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#a-drawback",
@@ -81,7 +81,7 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-3",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "The variable Origin would then be replaced by the three dummy variables.\n\n\n\nOrigin (\\(X\\))\n\\(d_2\\)\n\\(d_3\\)\n\n\n\n\nAmerican\n0\n0\n\n\nAmerican\n0\n0\n\n\nEuropean\n1\n0\n\n\nEuropean\n1\n0\n\n\nAmerican\n0\n0\n\n\nJapanese\n0\n1\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)"
+    "text": "The variable Origin would then be replaced by the three dummy variables\n\n\n\nOrigin (\\(X\\))\n\\(d_1\\)\n\\(d_2\\)\n\\(d_3\\)\n\n\n\n\nAmerican\n1\n0\n0\n\n\nAmerican\n1\n0\n0\n\n\nEuropean\n0\n1\n0\n\n\nEuropean\n0\n1\n0\n\n\nAmerican\n1\n0\n0\n\n\nJapanese\n0\n0\n1\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#dummy-variables-in-python",
@@ -95,28 +95,28 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-4",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "dummy_data.head()\n\n\n\n\n\n\n\n\nEuropean\nJapanese\n\n\n\n\n0\n0\n0\n\n\n1\n0\n0\n\n\n2\n0\n0\n\n\n3\n0\n0\n\n\n4\n0\n0"
+    "text": "The variable Origin would then be replaced by the three dummy variables.\n\n\n\nOrigin (\\(X\\))\n\\(d_2\\)\n\\(d_3\\)\n\n\n\n\nAmerican\n0\n0\n\n\nAmerican\n0\n0\n\n\nEuropean\n1\n0\n\n\nEuropean\n1\n0\n\n\nAmerican\n0\n0\n\n\nJapanese\n0\n1\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#section-5",
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-5",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "Now, to add the dummy variables to the dataset, we use the function concat() from pandas.\n\naugmented_auto = pd.concat([complete_Auto, dummy_data], axis = 1)\naugmented_auto.head()\n\n\n\n\n\n\n\n\nobservation\nmpg\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\nyear\norigin\nname\nEuropean\nJapanese\n\n\n\n\n0\n1\n18.0\n8\n307.0\n130\n3504\n12.0\n70\nAmerican\nchevrolet chevelle malibu\n0\n0\n\n\n1\n2\n15.0\n8\n350.0\n165\n3693\n11.5\n70\nAmerican\nbuick skylark 320\n0\n0\n\n\n2\n3\n18.0\n8\n318.0\n150\n3436\n11.0\n70\nAmerican\nplymouth satellite\n0\n0\n\n\n3\n4\n16.0\n8\n304.0\n150\n3433\n12.0\n70\nAmerican\namc rebel sst\n0\n0\n\n\n4\n5\n17.0\n8\n302.0\n140\n3449\n10.5\n70\nAmerican\nford torino\n0\n0"
+    "text": "dummy_data.head()\n\n\n\n\n\n\n\n\nEuropean\nJapanese\n\n\n\n\n46\n0\n0\n\n\n72\n0\n0\n\n\n389\n0\n0\n\n\n145\n1\n0\n\n\n11\n0\n0"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#transforming-numerical-predictors",
     "href": "PreProcessing/PreProcessing_Part2.slides.html#transforming-numerical-predictors",
     "title": "Data preprocessing: Part II",
     "section": "Transforming numerical predictors",
-    "text": "Transforming numerical predictors\n\nA common problem with a predictor is that it may have a skewed distribution. That is, a distribution that accumulates many observations in smaller or larger values of the predictor.\nFor example, consider the distribution of the predictor DIS (weighted mean of distances to five Boston employment centers) in the Boston_data.\n\n# Load Excel file (make sure the file is in your Colab)\nBoston_data = pd.read_excel('BostonHousing.xlsx')\n\n# Drop the categorical variable.\nBoston_data['CHAS'] = pd.Categorical(Boston_data['CHAS'])"
+    "text": "Transforming numerical predictors\n\nA common problem with a predictor is that it may have a skewed distribution. That is, a distribution that accumulates many observations in smaller or larger values of the predictor.\nFor example, consider the distribution of the predictor DIS (weighted mean of distances to five Boston employment centers) in Boston_training."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#section-6",
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-6",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "Code\nplt.figure(figsize=(7,4)) # Create space for figure.\nsns.histplot(data = Boston_data, x = 'DIS') # Create the histogram.\nplt.title(\"Histogram of DIS\") # Plot title.\nplt.xlabel(\"DIS\") # X label\nplt.show() # Display the plot\n\n\n\n\n\n\n\n\n\nWe see that many of the predictor values are on the right of the plot, while few are on the left."
+    "text": "Now, to add the dummy variables to the dataset, we use the function concat() from pandas.\n\naugmented_auto = pd.concat([complete_Auto, dummy_data], axis = 1)\naugmented_auto.head()\n\n\n\n\n\n\n\n\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\norigin\nmpg\nEuropean\nJapanese\n\n\n\n\n46\n6\n250.0\n100\n3282\n15.0\nAmerican\n19.0\n0\n0\n\n\n72\n8\n307.0\n130\n4098\n14.0\nAmerican\n13.0\n0\n0\n\n\n389\n4\n135.0\n84\n2295\n11.6\nAmerican\n32.0\n0\n0\n\n\n145\n4\n90.0\n75\n2108\n15.5\nEuropean\n24.0\n1\n0\n\n\n11\n8\n340.0\n160\n3609\n8.0\nAmerican\n14.0\n0\n0"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#problems-with-strong-skewness",
@@ -137,14 +137,14 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#in-python",
     "title": "Data preprocessing: Part II",
     "section": "In Python",
-    "text": "In Python\nWe apply the Box-Cox transformation using the power_transformation function of the scikit-learn library.\n\nDIS_transform = power_transform(Boston_data[['DIS']], method = \"box-cox\")\nDIS_transform_df = pd.DataFrame(DIS_transform, columns=['DIS_boxcox'])\nDIS_transform_df.head(3)\n\n\n\n\n\n\n\n\nDIS_boxcox\n\n\n\n\n0\n0.445390\n\n\n1\n0.789572\n\n\n2\n0.789572\n\n\n\n\n\n\n\nIn the code above, we use the pd.DataFrame() to turn the transformed column into a pandas dataframe."
+    "text": "In Python\nWe apply the Box-Cox transformation using the power_transformation function of the scikit-learn library.\n\nDIS_transform = power_transform(Boston_training[['DIS']], method = \"box-cox\")\nDIS_transform_df = pd.DataFrame(DIS_transform, columns=['DIS_boxcox'])\nDIS_transform_df.head(3)\n\n\n\n\n\n\n\n\nDIS_boxcox\n\n\n\n\n0\n-0.751123\n\n\n1\n-0.553869\n\n\n2\n0.137651\n\n\n\n\n\n\n\nIn the code above, we use the pd.DataFrame() to turn the transformed column into a pandas dataframe."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#section-7",
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-7",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "Original predictor\n\n\nCode\nplt.figure(figsize=(7,4)) # Create space for figure.\nsns.histplot(data = Boston_data, x = 'DIS') # Create the histogram.\nplt.title(\"Histogram of DIS\") # Plot title.\nplt.xlabel(\"DIS\") # X label\nplt.show() # Display the plot\n\n\n\n\n\n\n\n\n\n\nBox-Cox transformation\n\n\nCode\nplt.figure(figsize=(7,4)) # Create space for figure.\nsns.histplot(data = DIS_transform_df, x = 'DIS_boxcox') # Create the histogram.\nplt.title(\"Histogram of transformed DIS\") # Plot title.\nplt.xlabel(\"DIS (Box-Cox transformation\") # X label\nplt.show() # Display the plot"
+    "text": "The variable RAD is an ordinal categorical variable because it is the index of accessibility to radial highways. The categories of thei variable are Low, Medium, and High.\n\nTo turn the predictor into categorical, we use .Categorical() function from pandas. However, we must use two extra inputs to ensure that Python knows the right order of the categories. These inputs are categories and ordered.\n\nBoston_data['RAD'] = pd.Categorical(Boston_data['RAD'], \n                                      categories=[\"Low\", \"Medium\", \"High\"], \n                                      ordered=True)"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#discussion",
@@ -165,7 +165,7 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-8",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "In a nutshell, some predictors will have a higher impact in the model due to its unit and not its information provided to it."
+    "text": "Before we continue, we generate a training dataset with 80% of the observations. To this end, let’s create the predictor matrix and response column.\n\n# Set full matrix of predictors.\nX_full_b = Boston_data.drop(columns = ['MEDV']) \n\n# Set full matrix of responses.\nY_full_b = Boston_data.filter(['MEDV'])\n\n# Split the dataset into training and validation.\nX_train_b, X_valid_b, Y_train_b, Y_valid_b = train_test_split(X_full_b, \n                                                      Y_full_b, \n                                                      test_size = 0.2,\n                                                      random_state = 59227)"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#standarization-1",
@@ -179,7 +179,7 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-9",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "To scale a predictor, each of its value is divided by its standard deviation.\nScaling the data coerce the values to have a common standard deviation of one.\nIn mathematical terms, we standardize a predictor as:\n\\[{\\color{blue} \\tilde{x}_{i}} = \\frac{{ x_{i} - \\bar{x}}}{ \\sqrt{\\frac{1}{n -1} \\sum_{i=1}^{n} (x_{i} - \\bar{x})^2}},\\]\nwith \\(\\bar{x} = \\sum_{i=1}^n \\frac{x_i}{n}\\)."
+    "text": "The new training dataset we will work with is:\n\nBoston_training = pd.concat([X_train_b, Y_train_b], axis = 1)\nBoston_training.head()\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n432\n6.44405\n0.0\n18.10\n0\n0.584\n6.425\n74.8\n2.2004\nNaN\n666\n20.2\n12.03\n16.1\n\n\n108\n0.12802\n0.0\n8.56\n0\n0.520\n6.474\n97.1\n2.4329\nNaN\n384\n20.9\n12.27\n19.8\n\n\n97\n0.12083\n0.0\n2.89\n0\n0.445\n8.069\n76.0\n3.4952\nNaN\n276\n18.0\n4.21\n38.7\n\n\n484\n2.37857\n0.0\n18.10\n0\n0.583\n5.871\n41.9\n3.7240\nNaN\n666\n20.2\n13.34\n20.6\n\n\n217\n0.07013\n0.0\n13.89\n0\n0.550\n6.642\n85.1\n3.4211\nNaN\n276\n16.4\n9.69\n28.7"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#example-2-cont.-1",
@@ -207,7 +207,7 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-10",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "Unfortunately, the resulting object is not a pandas data frame. We then convert this object to this format. \n\nscaled_df = pd.DataFrame(Xs, columns = complete_sbAuto.columns)\nscaled_df.head()\n\n\n\n\n\n\n\n\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\n\n\n\n\n0\n1.483947\n1.077290\n0.664133\n0.620540\n-1.285258\n\n\n1\n1.483947\n1.488732\n1.574594\n0.843334\n-1.466724\n\n\n2\n1.483947\n1.182542\n1.184397\n0.540382\n-1.648189\n\n\n3\n1.483947\n1.048584\n1.184397\n0.536845\n-1.285258\n\n\n4\n1.483947\n1.029447\n0.924265\n0.555706\n-1.829655"
+    "text": "Code\nplt.figure(figsize=(7,4)) # Create space for figure.\nsns.histplot(data = Boston_training, x = 'DIS') # Create the histogram.\nplt.title(\"Histogram of DIS\") # Plot title.\nplt.xlabel(\"DIS\") # X label\nplt.show() # Display the plot\n\n\n\n\n\n\n\n\n\nWe see that many of the predictor values are on the right of the plot, while few are on the left."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#two-predictors-in-standardized-units",
@@ -263,7 +263,7 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-11",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "After identifying predictors with low variability, we remove them from the problem because they do not add much to the problem. To this end, we use the command below.\n\n\n# Removing problematic predictors\nsb_reduced_glass = sb_glass.drop(columns=low_variance_cols)"
+    "text": "Original predictor\n\n\nCode\nplt.figure(figsize=(7,4)) # Create space for figure.\nsns.histplot(data = Boston_training, x = 'DIS') # Create the histogram.\nplt.title(\"Histogram of DIS\") # Plot title.\nplt.xlabel(\"DIS\") # X label\nplt.show() # Display the plot\n\n\n\n\n\n\n\n\n\n\nBox-Cox transformation\n\n\nCode\nplt.figure(figsize=(7,4)) # Create space for figure.\nsns.histplot(data = DIS_transform_df, x = 'DIS_boxcox') # Create the histogram.\nplt.title(\"Histogram of transformed DIS\") # Plot title.\nplt.xlabel(\"DIS (Box-Cox transformation\") # X label\nplt.show() # Display the plot"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#between-predictor-correlation",
@@ -284,21 +284,21 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#correlation-matrix",
     "title": "Data preprocessing: Part II",
     "section": "Correlation matrix",
-    "text": "Correlation matrix\n\nIn Python, we calculate the correlation matrix using the command below.\n\ncorrelation_matrix = complete_sbAuto.corr()\nprint(correlation_matrix)\n\n              cylinders  displacement  horsepower    weight  acceleration\ncylinders      1.000000      0.950823    0.842983  0.897527     -0.504683\ndisplacement   0.950823      1.000000    0.897257  0.932994     -0.543800\nhorsepower     0.842983      0.897257    1.000000  0.864538     -0.689196\nweight         0.897527      0.932994    0.864538  1.000000     -0.416839\nacceleration  -0.504683     -0.543800   -0.689196 -0.416839      1.000000"
+    "text": "Correlation matrix\n\nIn Python, we calculate the correlation matrix using the command below.\n\ncorrelation_matrix = complete_sbAuto.corr()\nprint(correlation_matrix)\n\n              cylinders  displacement  horsepower    weight  acceleration\ncylinders      1.000000      0.948230    0.838415  0.893440     -0.503982\ndisplacement   0.948230      1.000000    0.900045  0.929755     -0.549727\nhorsepower     0.838415      0.900045    1.000000  0.850926     -0.702888\nweight         0.893440      0.929755    0.850926  1.000000     -0.413908\nacceleration  -0.503982     -0.549727   -0.702888 -0.413908      1.000000"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#section-12",
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-12",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "Next, we plot the correlation matrix using the function heatmap() from seaborn. The argument annot shows the actual value of the pair-wise correlations, and cmap shows a nice color theme.\n\nplt.figure(figsize=(3,3))\nsns.heatmap(correlation_matrix, cmap='coolwarm', annot = True)"
+    "text": "In a nutshell, some predictors will have a higher impact in the model due to its unit and not its information provided to it."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#section-13",
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-13",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "The predictors cylinders and displacement are highly correlated. In fact, their correlation is 0.95."
+    "text": "To scale a predictor, each of its value is divided by its standard deviation.\nScaling the data coerce the values to have a common standard deviation of one.\nIn mathematical terms, we standardize a predictor as:\n\\[{\\color{blue} \\tilde{x}_{i}} = \\frac{{ x_{i} - \\bar{x}}}{ \\sqrt{\\frac{1}{n -1} \\sum_{i=1}^{n} (x_{i} - \\bar{x})^2}},\\]\nwith \\(\\bar{x} = \\sum_{i=1}^n \\frac{x_i}{n}\\)."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#in-practice",
@@ -2868,5 +2868,124 @@
     "title": "Data preprocessing: Part I",
     "section": "",
     "text": "Let’s look at the new dataset.\n\nX_train_num_p.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 240 entries, 0 to 239\nData columns (total 4 columns):\n #   Column             Non-Null Count  Dtype  \n---  ------             --------------  -----  \n 0   bill_length_mm     240 non-null    float64\n 1   bill_depth_mm      240 non-null    float64\n 2   flipper_length_mm  240 non-null    float64\n 3   body_mass_g        240 non-null    float64\ndtypes: float64(4)\nmemory usage: 7.6 KB\n\n\nAll predictors have 240 complete entries."
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part2.slides.html#training-and-validation-datasets",
+    "href": "PreProcessing/PreProcessing_Part2.slides.html#training-and-validation-datasets",
+    "title": "Data preprocessing: Part II",
+    "section": "Training and validation datasets",
+    "text": "Training and validation datasets\n\nFor illustrative purposes, we assume that we want to predict the miles per gallon of a car using the six predictors, \\(X_1, \\ldots, X_6\\).\nWe create the predictor matrix and response column.\n\n# Set full matrix of predictors.\nX_full_c = (auto_data\n           .filter(['cylinders', 'displacement', \n           'horsepower', 'weight', 'acceleration', 'origin']))\n\n# Set full matrix of responses.\nY_full_c = auto_data.filter(['mpg'])"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part2.slides.html#section-14",
+    "href": "PreProcessing/PreProcessing_Part2.slides.html#section-14",
+    "title": "Data preprocessing: Part II",
+    "section": "",
+    "text": "Unfortunately, the resulting object is not a pandas data frame. We then convert this object to this format. \n\nscaled_df = pd.DataFrame(Xs, columns = complete_sbAuto.columns)\nscaled_df.head()\n\n\n\n\n\n\n\n\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\n\n\n\n\n0\n0.370463\n0.574266\n-0.089095\n0.426617\n-0.205840\n\n\n1\n1.564660\n1.118000\n0.685890\n1.410503\n-0.561901\n\n\n2\n-0.823735\n-0.522741\n-0.502421\n-0.763451\n-1.416449\n\n\n3\n-0.823735\n-0.952004\n-0.734916\n-0.988925\n-0.027809\n\n\n4\n1.564660\n1.432793\n1.460876\n0.820895\n-2.698270"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part2.slides.html#example-1",
+    "href": "PreProcessing/PreProcessing_Part2.slides.html#example-1",
+    "title": "Data preprocessing: Part II",
+    "section": "Example 1",
+    "text": "Example 1\nA market analyst is studying quality characteristics of cars. Specifically, the analyst is investigating the miles per gallon (mpg) of cars can be predicted using:\n\n\\(X_1:\\) cylinders. Number of cylinders between 4 and 8\n\\(X_2:\\) displacement. Engine displacement (cu. inches)\n\\(X_3:\\) horsepower. Engine horsepower\n\\(X_4:\\) weight. Vehicle weight (lbs.)\n\\(X_5:\\) acceleration. Time to accelerate from 0 to 60 mph (sec.)\n\\(X_6:\\) origin. Origin of car (American, European, Japanese)"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part2.slides.html#example-1-cont.",
+    "href": "PreProcessing/PreProcessing_Part2.slides.html#example-1-cont.",
+    "title": "Data preprocessing: Part II",
+    "section": "Example 1 (cont.)",
+    "text": "Example 1 (cont.)\nCategorical predictor: Origin of a car. Three categories: American, European and Japanese.\nInitially, 3 dummy variables are required:\n\\[d_1 =\n\\begin{cases}\n1 \\text{ if observation is from an American car}\\\\\n0 \\text{ otherwise}\n\\end{cases}\\] \\[d_2 =\n\\begin{cases}\n1 \\text{ if observation is from an European car}\\\\\n0 \\text{ otherwise}\n\\end{cases}\\] \\[d_3 =\n\\begin{cases}\n1 \\text{ if observation is from a Japanese car}\\\\\n0 \\text{ otherwise}\n\\end{cases}\\]"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part2.slides.html#coding-ordinal-categorical-variables",
+    "href": "PreProcessing/PreProcessing_Part2.slides.html#coding-ordinal-categorical-variables",
+    "title": "Data preprocessing: Part II",
+    "section": "Coding ordinal categorical variables",
+    "text": "Coding ordinal categorical variables\n\nAn ordinal categorical variable has categories with a natural order.\nFor example:\n\nEducation level (high school, college, graduate)\nPain intensity (none, mild, moderate, severe)\n\nOne way to turn an ordinal categorical variable into a series of numeric ones is using polynomial contrasts."
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part2.slides.html#polynomial-contrasts",
+    "href": "PreProcessing/PreProcessing_Part2.slides.html#polynomial-contrasts",
+    "title": "Data preprocessing: Part II",
+    "section": "Polynomial contrasts",
+    "text": "Polynomial contrasts\n\nPolynomial contrasts encode the order and trend of an ordinal variable.\nThey can capture:\n\nA linear trend: the (linear) change in the response when we increase the level of the ordinal variable.\nA quadratic trend: a nonlinear relationship between the response and the ordinal variable."
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part2.slides.html#the-predictors",
+    "href": "PreProcessing/PreProcessing_Part2.slides.html#the-predictors",
+    "title": "Data preprocessing: Part II",
+    "section": "The predictors",
+    "text": "The predictors\n\n\nCRIM: per capita crime rate by town.\nZN: proportion of residential land zoned for lots over 25,000 sq.ft.\nINDUS: proportion of non-retail business acres per town.\nCHAS: Charles River dummy variable (= 1 if tract bounds river; 0 otherwise).\nNOX: nitrogen oxides concentration (parts per 10 million).\nRM: average number of rooms per dwelling.\nAGE: proportion of owner-occupied units built prior to 1940.\nDIS: weighted mean of distances to five Boston employment centers\nRAD: index of accessibility to radial highways.\nTAX: full-value property-tax rate per $10,000.\nPTRATIO: pupil-teacher ratio by town.\nLSTAT: lower status of the population (percent)."
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part2.slides.html#read-the-dataset",
+    "href": "PreProcessing/PreProcessing_Part2.slides.html#read-the-dataset",
+    "title": "Data preprocessing: Part II",
+    "section": "Read the dataset",
+    "text": "Read the dataset\nWe read the dataset.\n\nBoston_data = pd.read_excel('BostonHousing.xlsx')\n\n\nThe variable CHAS is a nominal categorical variable because it categories (“0” and “1”) denote whether the house is next to the Charles river.\nTherefore, we turn the predictor into categorical using .Categorical() function from pandas.\n\nBoston_data['CHAS'] = pd.Categorical(Boston_data['CHAS'])"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part2.slides.html#how-do-we-generate-validation-data",
+    "href": "PreProcessing/PreProcessing_Part2.slides.html#how-do-we-generate-validation-data",
+    "title": "Data preprocessing: Part II",
+    "section": "How do we generate validation data?",
+    "text": "How do we generate validation data?\n\nWe split the current dataset into a training and a validation dataset. To this end, we use the function train_test_split() from scikit-learn.\nThe function has three main inputs:\n\nA pandas data frame with the predictor columns only.\nA pandas data frame with the response column only.\nThe parameter test_size which sets the portion of the dataset that will go to the validation set."
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part2.slides.html#create-the-predictor-matrix",
+    "href": "PreProcessing/PreProcessing_Part2.slides.html#create-the-predictor-matrix",
+    "title": "Data preprocessing: Part II",
+    "section": "Create the predictor matrix",
+    "text": "Create the predictor matrix\nWe use the function .drop() from pandas. This function drops one or more columns from a data frame. Let’s drop the response column MEDV and store the result in X_full.\n\n# Set full matrix of predictors.\nX_full = Boston_data.drop(columns = ['MEDV']) \nX_full.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\n\n\n\n\n0\n0.00632\n18.0\n2.31\n0\n0.538\n6.575\n65.2\n4.0900\n1\n296\n15.3\n4.98\n\n\n1\n0.02731\n0.0\n7.07\n0\n0.469\n6.421\n78.9\n4.9671\n2\n242\n17.8\n9.14\n\n\n2\n0.02729\n0.0\n7.07\n0\n0.469\n7.185\n61.1\n4.9671\n2\n242\n17.8\n4.03\n\n\n3\n0.03237\n0.0\n2.18\n0\n0.458\n6.998\n45.8\n6.0622\n3\n222\n18.7\n2.94"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part2.slides.html#create-the-response-column",
+    "href": "PreProcessing/PreProcessing_Part2.slides.html#create-the-response-column",
+    "title": "Data preprocessing: Part II",
+    "section": "Create the response column",
+    "text": "Create the response column\nWe use the function .filter() from pandas to extract the column MEDV from the data frame. We store the result in Y_full.\n\n# Set full matrix of responses.\nY_full = Boston_data.filter(['MEDV'])\nY_full.head(4)\n\n\n\n\n\n\n\n\nMEDV\n\n\n\n\n0\n24.0\n\n\n1\n21.6\n\n\n2\n34.7\n\n\n3\n33.4"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part2.slides.html#lets-partition-the-dataset",
+    "href": "PreProcessing/PreProcessing_Part2.slides.html#lets-partition-the-dataset",
+    "title": "Data preprocessing: Part II",
+    "section": "Let’s partition the dataset",
+    "text": "Let’s partition the dataset\n\n\n# Split the dataset into training and validation.\nX_train, X_valid, Y_train, Y_valid = train_test_split(X_full, Y_full, \n                                                      test_size = 0.3)\n\n\nThe function makes a clever partition of the data using the empirical distribution of the response.\nTechnically, it splits the data so that the distribution of the response under the training and validation sets is similar.\nUsually, the proportion of the dataset that goes to the validation set is 20% or 30%."
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part2.slides.html#section-15",
+    "href": "PreProcessing/PreProcessing_Part2.slides.html#section-15",
+    "title": "Data preprocessing: Part II",
+    "section": "",
+    "text": "After identifying predictors with low variability, we remove them from the problem because they do not add much to the problem. To this end, we use the command below.\n\n\n# Removing problematic predictors\nsb_reduced_glass = sb_glass.drop(columns=low_variance_cols)"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part2.slides.html#section-16",
+    "href": "PreProcessing/PreProcessing_Part2.slides.html#section-16",
+    "title": "Data preprocessing: Part II",
+    "section": "",
+    "text": "Next, we plot the correlation matrix using the function heatmap() from seaborn. The argument annot shows the actual value of the pair-wise correlations, and cmap shows a nice color theme.\n\nplt.figure(figsize=(3,3))\nsns.heatmap(correlation_matrix, cmap='coolwarm', annot = True)"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part2.slides.html#section-17",
+    "href": "PreProcessing/PreProcessing_Part2.slides.html#section-17",
+    "title": "Data preprocessing: Part II",
+    "section": "",
+    "text": "The predictors cylinders and displacement are highly correlated. In fact, their correlation is 0.95."
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part2.slides.html#section-18",
+    "href": "PreProcessing/PreProcessing_Part2.slides.html#section-18",
+    "title": "Data preprocessing: Part II",
+    "section": "",
+    "text": "The predictors cylinders and displacement are highly correlated. In fact, their correlation is 0.95."
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part2.slides.html#section-19",
+    "href": "PreProcessing/PreProcessing_Part2.slides.html#section-19",
+    "title": "Data preprocessing: Part II",
+    "section": "",
+    "text": "The predictors cylinders and displacement are highly correlated. In fact, their correlation is 0.95."
   }
 ]

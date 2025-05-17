@@ -23,8 +23,8 @@ jupyter: python3
 </br>
 
 1.  Transforming predictors
-2.  Standarization
-3.  Dimension reduction
+2.  Reducing the number of predictors
+2.  Standardizing the units of the predictors
 
 ## Before we start
 
@@ -38,7 +38,7 @@ Let's import **scikit-learn** into Python together with the other relevant libra
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.impute import SimpleImputer
+from sklearn.impute import SimpleImputer, KNNImputer
 from sklearn.feature_selection import VarianceThreshold
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import power_transform, StandardScaler 
@@ -46,12 +46,11 @@ from sklearn.preprocessing import power_transform, StandardScaler
 
 We will not use all the functions from the **scikit-learn** library. Instead, we will use specific functions from the sub-libraries **preprocessing**, **feature_selection**, **model_selection** and **impute**.
 
-
 # Transforming predictors
 
 ## Categorical predictors
 
-A [**categorical predictor**]{style="color:darkgreen;"} takes on values that are nominal categories.
+A [**categorical predictor**]{style="color:darkgreen;"} takes on values that are categories or groups.
 
 . . .
 
@@ -65,7 +64,7 @@ For example:
 
 . . .
 
-The categories can be represented by names, labels or even numbers. Their use in regression requires **dummy variables**, which are numeric variables.
+The categories can be represented by names, labels or even numbers. For a nominal categorical variable, their use in regression requires **dummy variables**, which are numeric.
 
 ## Dummy variables
 
@@ -75,9 +74,9 @@ The categories can be represented by names, labels or even numbers. Their use in
 
 </br>
 
-***Initially, a categorical variable with*** $k$ ***categories requires*** $k$ ***dummy variables.***
+***Initially, a nominal categorical variable with*** $k$ ***categories requires*** $k$ ***dummy variables.***
 
-## Example 2
+## Example 1
 
 A market analyst is studying quality characteristics of cars. Specifically, the analyst is investigating the miles per gallon (mpg) of cars can be predicted using:
 
@@ -104,11 +103,52 @@ auto_data = pd.read_excel("auto.xlsx")
 auto_data['origin'] = pd.Categorical(auto_data['origin'])
 ```
 
-## 
+## Training and validation datasets
+
+</br>
+
+For illustrative purposes, we assume that we want to predict the miles per gallon of a car using the six predictors, $X_1, \ldots, X_6$.
+
+We create the predictor matrix and response column.
 
 ```{python}
-# Print the first 4 rows of the dataset.
-auto_data.head(4)
+#| echo: true
+
+# Set full matrix of predictors.
+X_full_c = (auto_data
+           .filter(['cylinders', 'displacement', 
+           'horsepower', 'weight', 'acceleration', 'origin']))
+
+# Set full matrix of responses.
+Y_full_c = auto_data.filter(['mpg'])
+```
+
+## 
+
+</br>
+
+We will use a validation dataset with 20% of the observations in `auto_data`. The other 80% will be in the training dataset.
+
+```{python}
+#| echo: true
+
+# Split the dataset into training and validation.
+X_train_c, X_valid_c, Y_train_c, Y_valid_c = train_test_split(X_full_c, Y_full_c, 
+                                                      test_size = 0.3,
+                                                      random_state = 59227)
+```
+
+
+## 
+
+Let's look at the full training dataset.
+
+```{python}
+#| echo: true
+#| code-fold: false
+
+training_auto = pd.concat([X_train_c, Y_train_c], axis = 1)
+training_auto.head()
 ```
 
 ## Dealing with missing values
@@ -123,10 +163,10 @@ The dataset has missing values. In this example, we remove each row with at leas
 #| echo: true
 
 # Remove rows with missing values.
-complete_Auto = auto_data.dropna()
+complete_Auto = training_auto.dropna()
 ```
 
-## Example 2 (cont.)
+## Example 1 (cont.)
 
 Categorical predictor: Origin of a car. Three categories: American, European and Japanese.
 
@@ -226,24 +266,149 @@ augmented_auto = pd.concat([complete_Auto, dummy_data], axis = 1)
 augmented_auto.head()
 ```
 
+## Coding ordinal categorical variables
+
+</br>
+
+An ordinal categorical variable has categories with a natural order.
+
+For example:
+
+- Education level (high school, college, graduate)
+- Pain intensity (none, mild, moderate, severe)
+
+One way to turn an ordinal categorical variable into a series of numeric ones is using [**polynomial contrasts**]{style="color:green;"}.
+
+## Polynomial contrasts
+
+</br>
+
+Polynomial contrasts encode the **order and trend** of an ordinal variable.
+
+They can capture:
+
+- A *linear* trend: the (linear) change in the response when we increase the level of the ordinal variable.
+
+- A *quadratic* trend: a nonlinear relationship between the response and the ordinal variable.
+
+## Example 2
+
+</br>
+
+We revisit the "BostonHousing.xlsx" dataset that contains data of houses in Boston, Massachusetts.
+
+</br>
+
+The **goal** is to predict the median house price in new tracts based on information such as crime rate, pollution, and number of rooms.
+
+</br>
+
+The [response]{style="color:darkred;"} is the median value of owner-occupied homes in \$1000s, contained in the column `MEDV`.
+
+## The predictors
+
+::: {style="font-size: 70%;"}
+-   `CRIM`: per capita crime rate by town.
+-   `ZN`: proportion of residential land zoned for lots over 25,000 sq.ft.
+-   `INDUS`: proportion of non-retail business acres per town.
+-   `CHAS`: Charles River dummy variable (= 1 if tract bounds river; 0 otherwise).
+-   `NOX`: nitrogen oxides concentration (parts per 10 million).
+-   `RM`: average number of rooms per dwelling.
+-   `AGE`: proportion of owner-occupied units built prior to 1940.
+-   `DIS`: weighted mean of distances to five Boston employment centers
+-   `RAD`: index of accessibility to radial highways.
+-   `TAX`: full-value property-tax rate per \$10,000.
+-   `PTRATIO`: pupil-teacher ratio by town.
+-   `LSTAT`: lower status of the population (percent).
+:::
+
+## Read the dataset
+
+We read the dataset.
+
+```{python}
+#| echo: true
+#| output: true
+
+Boston_data = pd.read_excel('BostonHousing.xlsx')
+```
+
+</br>
+
+The variable `CHAS` is a nominal categorical variable because it categories ("0" and "1") denote whether the house is next to the Charles river.
+
+Therefore, we turn the predictor into categorical using `.Categorical()` function from **pandas**. 
+
+```{python}
+#| echo: true
+#| output: true
+
+Boston_data['CHAS'] = pd.Categorical(Boston_data['CHAS'])
+```
+
+##
+
+The variable `RAD` is an ordinal categorical variable because it is the index of accessibility to radial highways. The categories of thei variable are `Low`, `Medium`, and `High`.
+
+</br>
+
+To turn the predictor into categorical, we use `.Categorical()` function from **pandas**. However, we must use two extra inputs to ensure that Python knows the right order of the categories. These inputs are `categories` and `ordered`.  
+
+```{python}
+#| echo: true
+#| output: true
+
+Boston_data['RAD'] = pd.Categorical(Boston_data['RAD'], 
+                                      categories=["Low", "Medium", "High"], 
+                                      ordered=True)
+```
+
+
+## 
+
+</br>
+
+Before we continue, we generate a training dataset with 80\% of the observations. To this end, let's create the predictor matrix and response column.
+
+```{python}
+#| echo: true
+#| output: true
+
+# Set full matrix of predictors.
+X_full_b = Boston_data.drop(columns = ['MEDV']) 
+
+# Set full matrix of responses.
+Y_full_b = Boston_data.filter(['MEDV'])
+
+# Split the dataset into training and validation.
+X_train_b, X_valid_b, Y_train_b, Y_valid_b = train_test_split(X_full_b, 
+                                                      Y_full_b, 
+                                                      test_size = 0.2,
+                                                      random_state = 59227)
+```
+
+
+## 
+
+The new training dataset we will work with is:
+
+```{python}
+#| echo: true
+#| output: true
+
+Boston_training = pd.concat([X_train_b, Y_train_b], axis = 1)
+Boston_training.head()
+```
+
+
 ## Transforming numerical predictors
 
 </br>
 
 A common problem with a predictor is that it may have a *skewed distribution*. That is, a distribution that accumulates many observations in smaller or larger values of the predictor.
 
-For example, consider the distribution of the predictor `DIS` (weighted mean of distances to five Boston employment centers) in the `Boston_data`.
+For example, consider the distribution of the predictor `DIS` (weighted mean of distances to five Boston employment centers) in `Boston_training`.
 
-```{python}
-#| echo: true
-#| output: true
-
-# Load Excel file (make sure the file is in your Colab)
-Boston_data = pd.read_excel('BostonHousing.xlsx')
-
-# Drop the categorical variable.
-Boston_data['CHAS'] = pd.Categorical(Boston_data['CHAS'])
-```
 
 ## 
 
@@ -253,7 +418,7 @@ Boston_data['CHAS'] = pd.Categorical(Boston_data['CHAS'])
 #| fig-align: center
 
 plt.figure(figsize=(7,4)) # Create space for figure.
-sns.histplot(data = Boston_data, x = 'DIS') # Create the histogram.
+sns.histplot(data = Boston_training, x = 'DIS') # Create the histogram.
 plt.title("Histogram of DIS") # Plot title.
 plt.xlabel("DIS") # X label
 plt.show() # Display the plot
@@ -290,7 +455,7 @@ We apply the Box-Cox transformation using the `power_transformation` function of
 ```{python}
 #| echo: true
 
-DIS_transform = power_transform(Boston_data[['DIS']], method = "box-cox")
+DIS_transform = power_transform(Boston_training[['DIS']], method = "box-cox")
 DIS_transform_df = pd.DataFrame(DIS_transform, columns=['DIS_boxcox'])
 DIS_transform_df.head(3)
 ```
@@ -311,7 +476,7 @@ Original predictor
 #| fig-align: center
 
 plt.figure(figsize=(7,4)) # Create space for figure.
-sns.histplot(data = Boston_data, x = 'DIS') # Create the histogram.
+sns.histplot(data = Boston_training, x = 'DIS') # Create the histogram.
 plt.title("Histogram of DIS") # Plot title.
 plt.xlabel("DIS") # X label
 plt.show() # Display the plot
