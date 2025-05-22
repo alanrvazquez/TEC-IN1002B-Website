@@ -24,7 +24,7 @@ jupyter: python3
 
 1.  Transforming predictors
 2.  Reducing the number of predictors
-2.  Standardizing the units of the predictors
+3.  Standardizing the units of the predictors
 
 ## Before we start
 
@@ -38,10 +38,11 @@ Let's import **scikit-learn** into Python together with the other relevant libra
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.impute import SimpleImputer, KNNImputer
-from sklearn.feature_selection import VarianceThreshold
 from sklearn.model_selection import train_test_split
+from sklearn.impute import SimpleImputer, KNNImputer
 from sklearn.preprocessing import power_transform, StandardScaler 
+from sklearn.preprocessing import PolynomialFeatures, OrdinalEncoder 
+from sklearn.feature_selection import VarianceThreshold
 ```
 
 We will not use all the functions from the **scikit-learn** library. Instead, we will use specific functions from the sub-libraries **preprocessing**, **feature_selection**, **model_selection** and **impute**.
@@ -64,7 +65,7 @@ For example:
 
 . . .
 
-The categories can be represented by names, labels or even numbers. For a nominal categorical variable, their use in regression requires **dummy variables**, which are numeric.
+The categories can be represented by names, labels or even numbers. For a [nominal]{style="color:darkred;"} categorical variable, their use in regression requires **dummy variables**, which are numeric.
 
 ## Dummy variables
 
@@ -137,7 +138,6 @@ X_train_c, X_valid_c, Y_train_c, Y_valid_c = train_test_split(X_full_c, Y_full_c
                                                       test_size = 0.3,
                                                       random_state = 59227)
 ```
-
 
 ## 
 
@@ -270,26 +270,57 @@ augmented_auto.head()
 
 </br>
 
-An ordinal categorical variable has categories with a natural order.
+An [ordinal]{style="color:darkblue;"} categorical variable has categories with a natural order.
 
 For example:
 
-- Education level (high school, college, graduate)
-- Pain intensity (none, mild, moderate, severe)
+-   Education level (high school, college, graduate)
+-   Pain intensity (none, mild, moderate, severe)
 
 One way to turn an ordinal categorical variable into a series of numeric ones is using [**polynomial contrasts**]{style="color:green;"}.
 
 ## Polynomial contrasts
 
-</br>
-
 Polynomial contrasts encode the **order and trend** of an ordinal variable.
 
 They can capture:
 
-- A *linear* trend: the (linear) change in the response when we increase the level of the ordinal variable.
+-   A *linear* trend: the linear change in the response when we increase the level of the ordinal variable.
 
-- A *quadratic* trend: a nonlinear relationship between the response and the ordinal variable.
+-   A *quadratic* trend: the quadratic change in the response when we increase the level of the ordinal variable.
+
+-   A *cubic* trend: a nonlinear relationship between the response and the ordinal variable.
+
+##
+
+</br>
+
+```{python}
+#| echo: false
+#| output: true
+#| fig-align: "center"
+
+df = pd.DataFrame(columns=['Level', 'Linear', 'Quadratic', 'Cubic'])
+df['Level'] = ['Poor', 'Fair', 'Good', 'Excellent']
+df['Linear'] = [65, 70, 75, 80]
+df['Quadratic'] = [65, 80, 80, 65]
+df['Cubic'] = [65, 75, 70, 75]
+
+# Plot
+plt.figure(figsize=(8, 5))
+for col in ['Linear', 'Quadratic', 'Cubic']:
+    plt.plot(df['Level'], df[col], marker='o', label=col)
+
+plt.title('Polynomial Contrasts for an Ordinal Variable with 4 Levels', fontsize = 12)
+plt.xlabel('Material Quality', fontsize = 14)
+plt.ylabel('Efficiency', fontsize = 14)
+plt.grid(True)
+plt.legend()
+plt.xticks(fontsize = 16)
+plt.yticks(fontsize = 16)
+plt.tight_layout()
+plt.show()
+```
 
 ## Example 2
 
@@ -311,12 +342,12 @@ The [response]{style="color:darkred;"} is the median value of owner-occupied hom
 -   `CRIM`: per capita crime rate by town.
 -   `ZN`: proportion of residential land zoned for lots over 25,000 sq.ft.
 -   `INDUS`: proportion of non-retail business acres per town.
--   `CHAS`: Charles River dummy variable (= 1 if tract bounds river; 0 otherwise).
+-   `CHAS`: Charles River ('Yes' if tract bounds river; 'No' otherwise).
 -   `NOX`: nitrogen oxides concentration (parts per 10 million).
 -   `RM`: average number of rooms per dwelling.
 -   `AGE`: proportion of owner-occupied units built prior to 1940.
 -   `DIS`: weighted mean of distances to five Boston employment centers
--   `RAD`: index of accessibility to radial highways.
+-   `RAD`: index of accessibility to radial highways ('Low', 'Medium', 'High').
 -   `TAX`: full-value property-tax rate per \$10,000.
 -   `PTRATIO`: pupil-teacher ratio by town.
 -   `LSTAT`: lower status of the population (percent).
@@ -335,9 +366,9 @@ Boston_data = pd.read_excel('BostonHousing.xlsx')
 
 </br>
 
-The variable `CHAS` is a nominal categorical variable because it categories ("0" and "1") denote whether the house is next to the Charles river.
+The variable `CHAS` is a nominal categorical variable because it categories ("No" and "Yes") denote whether the house is next to the Charles river.
 
-Therefore, we turn the predictor into categorical using `.Categorical()` function from **pandas**. 
+Therefore, we turn the predictor into categorical using `.Categorical()` function from **pandas**.
 
 ```{python}
 #| echo: true
@@ -346,13 +377,13 @@ Therefore, we turn the predictor into categorical using `.Categorical()` functio
 Boston_data['CHAS'] = pd.Categorical(Boston_data['CHAS'])
 ```
 
-##
+## 
 
 The variable `RAD` is an ordinal categorical variable because it is the index of accessibility to radial highways. The categories of thei variable are `Low`, `Medium`, and `High`.
 
 </br>
 
-To turn the predictor into categorical, we use `.Categorical()` function from **pandas**. However, we must use two extra inputs to ensure that Python knows the right order of the categories. These inputs are `categories` and `ordered`.  
+To turn the predictor into categorical, we use `.Categorical()` function from **pandas**. However, we must use two extra inputs to ensure that Python knows the right order of the categories. These inputs are `categories` and `ordered`.
 
 ```{python}
 #| echo: true
@@ -363,12 +394,11 @@ Boston_data['RAD'] = pd.Categorical(Boston_data['RAD'],
                                       ordered=True)
 ```
 
-
 ## 
 
 </br>
 
-Before we continue, we generate a training dataset with 80\% of the observations. To this end, let's create the predictor matrix and response column.
+Before we continue, we generate a training dataset with 80% of the observations. To this end, let's create the predictor matrix and response column.
 
 ```{python}
 #| echo: true
@@ -387,7 +417,6 @@ X_train_b, X_valid_b, Y_train_b, Y_valid_b = train_test_split(X_full_b,
                                                       random_state = 59227)
 ```
 
-
 ## 
 
 The new training dataset we will work with is:
@@ -401,6 +430,7 @@ Boston_training.head()
 ```
 
 
+
 ## Transforming numerical predictors
 
 </br>
@@ -408,7 +438,6 @@ Boston_training.head()
 A common problem with a predictor is that it may have a *skewed distribution*. That is, a distribution that accumulates many observations in smaller or larger values of the predictor.
 
 For example, consider the distribution of the predictor `DIS` (weighted mean of distances to five Boston employment centers) in `Boston_training`.
-
 
 ## 
 

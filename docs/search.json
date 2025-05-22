@@ -11,7 +11,7 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#before-we-start",
     "title": "Data preprocessing: Part II",
     "section": "Before we start",
-    "text": "Before we start\n\nLet’s import scikit-learn into Python together with the other relevant libraries.\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom sklearn.impute import SimpleImputer, KNNImputer\nfrom sklearn.feature_selection import VarianceThreshold\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import power_transform, StandardScaler \n\nWe will not use all the functions from the scikit-learn library. Instead, we will use specific functions from the sub-libraries preprocessing, feature_selection, model_selection and impute."
+    "text": "Before we start\n\nLet’s import scikit-learn into Python together with the other relevant libraries.\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.impute import SimpleImputer, KNNImputer\nfrom sklearn.preprocessing import power_transform, StandardScaler \nfrom sklearn.preprocessing import PolynomialFeatures, OrdinalEncoder \nfrom sklearn.feature_selection import VarianceThreshold\n\nWe will not use all the functions from the scikit-learn library. Instead, we will use specific functions from the sub-libraries preprocessing, feature_selection, model_selection and impute."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#categorical-predictors",
@@ -165,7 +165,7 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-8",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "Before we continue, we generate a training dataset with 80% of the observations. To this end, let’s create the predictor matrix and response column.\n\n# Set full matrix of predictors.\nX_full_b = Boston_data.drop(columns = ['MEDV']) \n\n# Set full matrix of responses.\nY_full_b = Boston_data.filter(['MEDV'])\n\n# Split the dataset into training and validation.\nX_train_b, X_valid_b, Y_train_b, Y_valid_b = train_test_split(X_full_b, \n                                                      Y_full_b, \n                                                      test_size = 0.2,\n                                                      random_state = 59227)"
+    "text": "The variable RAD is an ordinal categorical variable because it is the index of accessibility to radial highways. The categories of thei variable are Low, Medium, and High.\n\nTo turn the predictor into categorical, we use .Categorical() function from pandas. However, we must use two extra inputs to ensure that Python knows the right order of the categories. These inputs are categories and ordered.\n\nBoston_data['RAD'] = pd.Categorical(Boston_data['RAD'], \n                                      categories=[\"Low\", \"Medium\", \"High\"], \n                                      ordered=True)"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#standarization-1",
@@ -179,7 +179,7 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-9",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "The new training dataset we will work with is:\n\nBoston_training = pd.concat([X_train_b, Y_train_b], axis = 1)\nBoston_training.head()\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n432\n6.44405\n0.0\n18.10\n0\n0.584\n6.425\n74.8\n2.2004\nNaN\n666\n20.2\n12.03\n16.1\n\n\n108\n0.12802\n0.0\n8.56\n0\n0.520\n6.474\n97.1\n2.4329\nNaN\n384\n20.9\n12.27\n19.8\n\n\n97\n0.12083\n0.0\n2.89\n0\n0.445\n8.069\n76.0\n3.4952\nNaN\n276\n18.0\n4.21\n38.7\n\n\n484\n2.37857\n0.0\n18.10\n0\n0.583\n5.871\n41.9\n3.7240\nNaN\n666\n20.2\n13.34\n20.6\n\n\n217\n0.07013\n0.0\n13.89\n0\n0.550\n6.642\n85.1\n3.4211\nNaN\n276\n16.4\n9.69\n28.7"
+    "text": "Before we continue, we generate a training dataset with 80% of the observations. To this end, let’s create the predictor matrix and response column.\n\n# Set full matrix of predictors.\nX_full_b = Boston_data.drop(columns = ['MEDV']) \n\n# Set full matrix of responses.\nY_full_b = Boston_data.filter(['MEDV'])\n\n# Split the dataset into training and validation.\nX_train_b, X_valid_b, Y_train_b, Y_valid_b = train_test_split(X_full_b, \n                                                      Y_full_b, \n                                                      test_size = 0.2,\n                                                      random_state = 59227)"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#example-2-cont.-1",
@@ -207,7 +207,7 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-10",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "Code\nplt.figure(figsize=(7,4)) # Create space for figure.\nsns.histplot(data = Boston_training, x = 'DIS') # Create the histogram.\nplt.title(\"Histogram of DIS\") # Plot title.\nplt.xlabel(\"DIS\") # X label\nplt.show() # Display the plot\n\n\n\n\n\n\n\n\n\nWe see that many of the predictor values are on the right of the plot, while few are on the left."
+    "text": "The new training dataset we will work with is:\n\nBoston_training = pd.concat([X_train_b, Y_train_b], axis = 1)\nBoston_training.head()\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n432\n6.44405\n0.0\n18.10\nNo\n0.584\n6.425\n74.8\n2.2004\nHigh\n666\n20.2\n12.03\n16.1\n\n\n108\n0.12802\n0.0\n8.56\nNo\n0.520\n6.474\n97.1\n2.4329\nMedium\n384\n20.9\n12.27\n19.8\n\n\n97\n0.12083\n0.0\n2.89\nNo\n0.445\n8.069\n76.0\n3.4952\nLow\n276\n18.0\n4.21\n38.7\n\n\n484\n2.37857\n0.0\n18.10\nNo\n0.583\n5.871\n41.9\n3.7240\nHigh\n666\n20.2\n13.34\n20.6\n\n\n217\n0.07013\n0.0\n13.89\nNo\n0.550\n6.642\n85.1\n3.4211\nMedium\n276\n16.4\n9.69\n28.7"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#two-predictors-in-standardized-units",
@@ -263,7 +263,7 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-11",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "Original predictor\n\n\nCode\nplt.figure(figsize=(7,4)) # Create space for figure.\nsns.histplot(data = Boston_training, x = 'DIS') # Create the histogram.\nplt.title(\"Histogram of DIS\") # Plot title.\nplt.xlabel(\"DIS\") # X label\nplt.show() # Display the plot\n\n\n\n\n\n\n\n\n\n\nBox-Cox transformation\n\n\nCode\nplt.figure(figsize=(7,4)) # Create space for figure.\nsns.histplot(data = DIS_transform_df, x = 'DIS_boxcox') # Create the histogram.\nplt.title(\"Histogram of transformed DIS\") # Plot title.\nplt.xlabel(\"DIS (Box-Cox transformation\") # X label\nplt.show() # Display the plot"
+    "text": "Code\nplt.figure(figsize=(7,4)) # Create space for figure.\nsns.histplot(data = Boston_training, x = 'DIS') # Create the histogram.\nplt.title(\"Histogram of DIS\") # Plot title.\nplt.xlabel(\"DIS\") # X label\nplt.show() # Display the plot\n\n\n\n\n\n\n\n\n\nWe see that many of the predictor values are on the right of the plot, while few are on the left."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#between-predictor-correlation",
@@ -291,14 +291,14 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-12",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "In a nutshell, some predictors will have a higher impact in the model due to its unit and not its information provided to it."
+    "text": "Original predictor\n\n\nCode\nplt.figure(figsize=(7,4)) # Create space for figure.\nsns.histplot(data = Boston_training, x = 'DIS') # Create the histogram.\nplt.title(\"Histogram of DIS\") # Plot title.\nplt.xlabel(\"DIS\") # X label\nplt.show() # Display the plot\n\n\n\n\n\n\n\n\n\n\nBox-Cox transformation\n\n\nCode\nplt.figure(figsize=(7,4)) # Create space for figure.\nsns.histplot(data = DIS_transform_df, x = 'DIS_boxcox') # Create the histogram.\nplt.title(\"Histogram of transformed DIS\") # Plot title.\nplt.xlabel(\"DIS (Box-Cox transformation\") # X label\nplt.show() # Display the plot"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#section-13",
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-13",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "To scale a predictor, each of its value is divided by its standard deviation.\nScaling the data coerce the values to have a common standard deviation of one.\nIn mathematical terms, we standardize a predictor as:\n\\[{\\color{blue} \\tilde{x}_{i}} = \\frac{{ x_{i} - \\bar{x}}}{ \\sqrt{\\frac{1}{n -1} \\sum_{i=1}^{n} (x_{i} - \\bar{x})^2}},\\]\nwith \\(\\bar{x} = \\sum_{i=1}^n \\frac{x_i}{n}\\)."
+    "text": "In a nutshell, some predictors will have a higher impact in the model due to its unit and not its information provided to it."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#in-practice",
@@ -2594,7 +2594,7 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-1",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "Let’s import scikit-learn into Python together with the other relevant libraries.\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom sklearn.impute import SimpleImputer, KNNImputer\nfrom sklearn.feature_selection import VarianceThreshold\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import power_transform, StandardScaler \n\nWe will not use all the functions from the scikit-learn library. Instead, we will use specific functions from the sub-libraries preprocessing, feature_selection, model_selection and impute."
+    "text": "Let’s import scikit-learn into Python together with the other relevant libraries.\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.impute import SimpleImputer, KNNImputer\nfrom sklearn.preprocessing import power_transform, StandardScaler \nfrom sklearn.feature_selection import VarianceThreshold\n\nWe will not use all the functions from the scikit-learn library. Instead, we will use specific functions from the sub-libraries preprocessing, feature_selection, model_selection and impute."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#recall-that",
@@ -2636,14 +2636,14 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#the-predictors",
     "title": "Data preprocessing: Part I",
     "section": "The predictors",
-    "text": "The predictors\n\n\nCRIM: per capita crime rate by town.\nZN: proportion of residential land zoned for lots over 25,000 sq.ft.\nINDUS: proportion of non-retail business acres per town.\nCHAS: Charles River dummy variable (= 1 if tract bounds river; 0 otherwise).\nNOX: nitrogen oxides concentration (parts per 10 million).\nRM: average number of rooms per dwelling.\nAGE: proportion of owner-occupied units built prior to 1940.\nDIS: weighted mean of distances to five Boston employment centers\nRAD: index of accessibility to radial highways.\nTAX: full-value property-tax rate per $10,000.\nPTRATIO: pupil-teacher ratio by town.\nLSTAT: lower status of the population (percent)."
+    "text": "The predictors\n\n\nCRIM: per capita crime rate by town.\nZN: proportion of residential land zoned for lots over 25,000 sq.ft.\nINDUS: proportion of non-retail business acres per town.\nCHAS: Charles River (‘Yes’ if tract bounds river; ‘No’ otherwise).\nNOX: nitrogen oxides concentration (parts per 10 million).\nRM: average number of rooms per dwelling.\nAGE: proportion of owner-occupied units built prior to 1940.\nDIS: weighted mean of distances to five Boston employment centers\nRAD: index of accessibility to radial highways (‘Low’, ‘Medium’, ‘High’).\nTAX: full-value property-tax rate per $10,000.\nPTRATIO: pupil-teacher ratio by town.\nLSTAT: lower status of the population (percent)."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#read-the-dataset",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#read-the-dataset",
     "title": "Data preprocessing: Part I",
     "section": "Read the dataset",
-    "text": "Read the dataset\nWe read the dataset and set the variable CHAS as categorical.\n\nBoston_data = pd.read_excel('BostonHousing.xlsx')\n\nBoston_data['CHAS'] = pd.Categorical(Boston_data['CHAS'])\n\nBoston_data.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n0\n0.00632\n18.0\n2.31\n0\n0.538\n6.575\n65.2\n4.0900\n1\n296\n15.3\n4.98\n24.0\n\n\n1\n0.02731\n0.0\n7.07\n0\n0.469\n6.421\n78.9\n4.9671\n2\n242\n17.8\n9.14\n21.6\n\n\n2\n0.02729\n0.0\n7.07\n0\n0.469\n7.185\n61.1\n4.9671\n2\n242\n17.8\n4.03\n34.7\n\n\n3\n0.03237\n0.0\n2.18\n0\n0.458\n6.998\n45.8\n6.0622\n3\n222\n18.7\n2.94\n33.4"
+    "text": "Read the dataset\nWe read the dataset and set the variable CHAS and RAD as categorical.\n\nBoston_data = pd.read_excel('BostonHousing.xlsx')\n\nBoston_data['CHAS'] = pd.Categorical(Boston_data['CHAS'])\nBoston_data['RAD'] = pd.Categorical(Boston_data['RAD'])\n\nBoston_data.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n0\n0.00632\n18.0\n2.31\nNo\n0.538\n6.575\n65.2\n4.0900\nLow\n296\n15.3\n4.98\n24.0\n\n\n1\n0.02731\n0.0\n7.07\nNo\n0.469\n6.421\n78.9\n4.9671\nLow\n242\n17.8\n9.14\n21.6\n\n\n2\n0.02729\n0.0\n7.07\nNo\n0.469\n7.185\n61.1\n4.9671\nLow\n242\n17.8\n4.03\n34.7\n\n\n3\n0.03237\n0.0\n2.18\nNo\n0.458\n6.998\n45.8\n6.0622\nLow\n222\n18.7\n2.94\n33.4"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#how-do-we-generate-validation-data",
@@ -2657,7 +2657,7 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#create-the-predictor-matrix",
     "title": "Data preprocessing: Part I",
     "section": "Create the predictor matrix",
-    "text": "Create the predictor matrix\nWe use the function .drop() from pandas. This function drops one or more columns from a data frame. Let’s drop the response column MEDV and store the result in X_full.\n\n# Set full matrix of predictors.\nX_full = Boston_data.drop(columns = ['MEDV']) \nX_full.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\n\n\n\n\n0\n0.00632\n18.0\n2.31\n0\n0.538\n6.575\n65.2\n4.0900\n1\n296\n15.3\n4.98\n\n\n1\n0.02731\n0.0\n7.07\n0\n0.469\n6.421\n78.9\n4.9671\n2\n242\n17.8\n9.14\n\n\n2\n0.02729\n0.0\n7.07\n0\n0.469\n7.185\n61.1\n4.9671\n2\n242\n17.8\n4.03\n\n\n3\n0.03237\n0.0\n2.18\n0\n0.458\n6.998\n45.8\n6.0622\n3\n222\n18.7\n2.94"
+    "text": "Create the predictor matrix\nWe use the function .drop() from pandas. This function drops one or more columns from a data frame. Let’s drop the response column MEDV and store the result in X_full.\n\n# Set full matrix of predictors.\nX_full = Boston_data.drop(columns = ['MEDV']) \nX_full.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\n\n\n\n\n0\n0.00632\n18.0\n2.31\nNo\n0.538\n6.575\n65.2\n4.0900\nLow\n296\n15.3\n4.98\n\n\n1\n0.02731\n0.0\n7.07\nNo\n0.469\n6.421\n78.9\n4.9671\nLow\n242\n17.8\n9.14\n\n\n2\n0.02729\n0.0\n7.07\nNo\n0.469\n7.185\n61.1\n4.9671\nLow\n242\n17.8\n4.03\n\n\n3\n0.03237\n0.0\n2.18\nNo\n0.458\n6.998\n45.8\n6.0622\nLow\n222\n18.7\n2.94"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#create-the-response-column",
@@ -2678,14 +2678,14 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-3",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "The predictors and response in the training dataset are in the objects X_train and Y_train, respectively. We compile these objects into a single dataset using the function .concat() from pandas. The argument axis = 1 tells .concat() to concatenate the datasets by their rows.\n\ntraining_dataset = pd.concat([X_train, Y_train], axis = 1)\ntraining_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n497\n0.26838\n0.0\n9.69\n0\n0.585\n5.794\n70.6\n2.8927\n6\n391\n19.2\n14.10\n18.3\n\n\n155\n3.53501\n0.0\n19.58\n1\n0.871\n6.152\n82.6\n1.7455\n5\n403\n14.7\n15.02\n15.6\n\n\n143\n4.09740\n0.0\n19.58\n0\n0.871\n5.468\n100.0\n1.4118\n5\n403\n14.7\n26.42\n15.6\n\n\n167\n1.80028\n0.0\n19.58\n0\n0.605\n5.877\n79.2\n2.4259\n5\n403\n14.7\n12.14\n23.8"
+    "text": "The predictors and response in the training dataset are in the objects X_train and Y_train, respectively. We compile these objects into a single dataset using the function .concat() from pandas. The argument axis = 1 tells .concat() to concatenate the datasets by their rows.\n\ntraining_dataset = pd.concat([X_train, Y_train], axis = 1)\ntraining_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n127\n0.25915\n0.0\n21.89\nNo\n0.624\n5.693\n96.0\n1.7883\nMedium\n437\n21.2\n17.19\n16.2\n\n\n275\n0.09604\n40.0\n6.41\nNo\n0.447\n6.854\n42.8\n4.2673\nMedium\n254\n17.6\n2.98\n32.0\n\n\n70\n0.08826\n0.0\n10.81\nNo\n0.413\n6.417\n6.6\n5.2873\nMedium\n305\n19.2\n6.72\n24.2\n\n\n246\n0.33983\n22.0\n5.86\nNo\n0.431\n6.108\n34.9\n8.0555\nHigh\n330\n19.1\n9.16\n24.3"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-4",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-4",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "Equivalently, the predictors and response in the validation dataset are in the objects X_valid and Y_valid, respectively.\n\nvalidation_dataset = pd.concat([X_valid, Y_valid], axis = 1)\nvalidation_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n275\n0.09604\n40.0\n6.41\n0\n0.4470\n6.854\n42.8\n4.2673\n4\n254\n17.6\n2.98\n32.0\n\n\n189\n0.08370\n45.0\n3.44\n0\n0.4370\n7.185\n38.9\n4.5667\n5\n398\n15.2\n5.39\n34.9\n\n\n29\n1.00245\n0.0\n8.14\n0\n0.5380\n6.674\n87.3\n4.2390\n4\n307\n21.0\n11.98\n21.0\n\n\n203\n0.03510\n95.0\n2.68\n0\n0.4161\n7.853\n33.2\n5.1180\n4\n224\n14.7\n3.81\n48.5"
+    "text": "Equivalently, the predictors and response in the validation dataset are in the objects X_valid and Y_valid, respectively.\n\nvalidation_dataset = pd.concat([X_valid, Y_valid], axis = 1)\nvalidation_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n450\n6.71772\n0.0\n18.10\nNo\n0.713\n6.749\n92.6\n2.3236\nHigh\n666\n20.2\n17.44\n13.4\n\n\n310\n2.63548\n0.0\n9.90\nNo\n0.544\n4.973\n37.8\n2.5194\nMedium\n304\n18.4\n12.64\n16.1\n\n\n38\n0.17505\n0.0\n5.96\nNo\n0.499\n5.966\n30.2\n3.8473\nMedium\n279\n19.2\n10.13\n24.7\n\n\n41\n0.12744\n0.0\n6.91\nNo\n0.448\n6.770\n2.9\n5.7209\nLow\n233\n17.9\n4.84\n26.6"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#work-on-your-training-dataset",
@@ -2881,7 +2881,7 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-14",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "Unfortunately, the resulting object is not a pandas data frame. We then convert this object to this format. \n\nscaled_df = pd.DataFrame(Xs, columns = complete_sbAuto.columns)\nscaled_df.head()\n\n\n\n\n\n\n\n\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\n\n\n\n\n0\n0.370463\n0.574266\n-0.089095\n0.426617\n-0.205840\n\n\n1\n1.564660\n1.118000\n0.685890\n1.410503\n-0.561901\n\n\n2\n-0.823735\n-0.522741\n-0.502421\n-0.763451\n-1.416449\n\n\n3\n-0.823735\n-0.952004\n-0.734916\n-0.988925\n-0.027809\n\n\n4\n1.564660\n1.432793\n1.460876\n0.820895\n-2.698270"
+    "text": "To scale a predictor, each of its value is divided by its standard deviation.\nScaling the data coerce the values to have a common standard deviation of one.\nIn mathematical terms, we standardize a predictor as:\n\\[{\\color{blue} \\tilde{x}_{i}} = \\frac{{ x_{i} - \\bar{x}}}{ \\sqrt{\\frac{1}{n -1} \\sum_{i=1}^{n} (x_{i} - \\bar{x})^2}},\\]\nwith \\(\\bar{x} = \\sum_{i=1}^n \\frac{x_i}{n}\\)."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#example-1",
@@ -2909,21 +2909,21 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#polynomial-contrasts",
     "title": "Data preprocessing: Part II",
     "section": "Polynomial contrasts",
-    "text": "Polynomial contrasts\n\nPolynomial contrasts encode the order and trend of an ordinal variable.\nThey can capture:\n\nA linear trend: the (linear) change in the response when we increase the level of the ordinal variable.\nA quadratic trend: a nonlinear relationship between the response and the ordinal variable."
+    "text": "Polynomial contrasts\nPolynomial contrasts encode the order and trend of an ordinal variable.\nThey can capture:\n\nA linear trend: the linear change in the response when we increase the level of the ordinal variable.\nA quadratic trend: the quadratic change in the response when we increase the level of the ordinal variable.\nA cubic trend: a nonlinear relationship between the response and the ordinal variable."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#the-predictors",
     "href": "PreProcessing/PreProcessing_Part2.slides.html#the-predictors",
     "title": "Data preprocessing: Part II",
     "section": "The predictors",
-    "text": "The predictors\n\n\nCRIM: per capita crime rate by town.\nZN: proportion of residential land zoned for lots over 25,000 sq.ft.\nINDUS: proportion of non-retail business acres per town.\nCHAS: Charles River dummy variable (= 1 if tract bounds river; 0 otherwise).\nNOX: nitrogen oxides concentration (parts per 10 million).\nRM: average number of rooms per dwelling.\nAGE: proportion of owner-occupied units built prior to 1940.\nDIS: weighted mean of distances to five Boston employment centers\nRAD: index of accessibility to radial highways.\nTAX: full-value property-tax rate per $10,000.\nPTRATIO: pupil-teacher ratio by town.\nLSTAT: lower status of the population (percent)."
+    "text": "The predictors\n\n\nCRIM: per capita crime rate by town.\nZN: proportion of residential land zoned for lots over 25,000 sq.ft.\nINDUS: proportion of non-retail business acres per town.\nCHAS: Charles River (‘Yes’ if tract bounds river; ‘No’ otherwise).\nNOX: nitrogen oxides concentration (parts per 10 million).\nRM: average number of rooms per dwelling.\nAGE: proportion of owner-occupied units built prior to 1940.\nDIS: weighted mean of distances to five Boston employment centers\nRAD: index of accessibility to radial highways (‘Low’, ‘Medium’, ‘High’).\nTAX: full-value property-tax rate per $10,000.\nPTRATIO: pupil-teacher ratio by town.\nLSTAT: lower status of the population (percent)."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#read-the-dataset",
     "href": "PreProcessing/PreProcessing_Part2.slides.html#read-the-dataset",
     "title": "Data preprocessing: Part II",
     "section": "Read the dataset",
-    "text": "Read the dataset\nWe read the dataset.\n\nBoston_data = pd.read_excel('BostonHousing.xlsx')\n\n\nThe variable CHAS is a nominal categorical variable because it categories (“0” and “1”) denote whether the house is next to the Charles river.\nTherefore, we turn the predictor into categorical using .Categorical() function from pandas.\n\nBoston_data['CHAS'] = pd.Categorical(Boston_data['CHAS'])"
+    "text": "Read the dataset\nWe read the dataset.\n\nBoston_data = pd.read_excel('BostonHousing.xlsx')\n\n\nThe variable CHAS is a nominal categorical variable because it categories (“No” and “Yes”) denote whether the house is next to the Charles river.\nTherefore, we turn the predictor into categorical using .Categorical() function from pandas.\n\nBoston_data['CHAS'] = pd.Categorical(Boston_data['CHAS'])"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#how-do-we-generate-validation-data",
@@ -2958,21 +2958,21 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-15",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "After identifying predictors with low variability, we remove them from the problem because they do not add much to the problem. To this end, we use the command below.\n\n\n# Removing problematic predictors\nsb_reduced_glass = sb_glass.drop(columns=low_variance_cols)"
+    "text": "Unfortunately, the resulting object is not a pandas data frame. We then convert this object to this format. \n\nscaled_df = pd.DataFrame(Xs, columns = complete_sbAuto.columns)\nscaled_df.head()\n\n\n\n\n\n\n\n\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\n\n\n\n\n0\n0.370463\n0.574266\n-0.089095\n0.426617\n-0.205840\n\n\n1\n1.564660\n1.118000\n0.685890\n1.410503\n-0.561901\n\n\n2\n-0.823735\n-0.522741\n-0.502421\n-0.763451\n-1.416449\n\n\n3\n-0.823735\n-0.952004\n-0.734916\n-0.988925\n-0.027809\n\n\n4\n1.564660\n1.432793\n1.460876\n0.820895\n-2.698270"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#section-16",
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-16",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "Next, we plot the correlation matrix using the function heatmap() from seaborn. The argument annot shows the actual value of the pair-wise correlations, and cmap shows a nice color theme.\n\nplt.figure(figsize=(3,3))\nsns.heatmap(correlation_matrix, cmap='coolwarm', annot = True)"
+    "text": "After identifying predictors with low variability, we remove them from the problem because they do not add much to the problem. To this end, we use the command below.\n\n\n# Removing problematic predictors\nsb_reduced_glass = sb_glass.drop(columns=low_variance_cols)"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#section-17",
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-17",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "The predictors cylinders and displacement are highly correlated. In fact, their correlation is 0.95."
+    "text": "Next, we plot the correlation matrix using the function heatmap() from seaborn. The argument annot shows the actual value of the pair-wise correlations, and cmap shows a nice color theme.\n\nplt.figure(figsize=(3,3))\nsns.heatmap(correlation_matrix, cmap='coolwarm', annot = True)"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#section-18",

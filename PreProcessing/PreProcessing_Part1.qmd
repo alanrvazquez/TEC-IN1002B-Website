@@ -78,10 +78,10 @@ Let's import **scikit-learn** into Python together with the other relevant libra
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.impute import SimpleImputer, KNNImputer
-from sklearn.feature_selection import VarianceThreshold
 from sklearn.model_selection import train_test_split
+from sklearn.impute import SimpleImputer, KNNImputer
 from sklearn.preprocessing import power_transform, StandardScaler 
+from sklearn.feature_selection import VarianceThreshold
 ```
 
 We will not use all the functions from the **scikit-learn** library. Instead, we will use specific functions from the sub-libraries **preprocessing**, **feature_selection**, **model_selection** and **impute**.
@@ -166,12 +166,12 @@ The [response]{style="color:darkred;"} is the median value of owner-occupied hom
 -   `CRIM`: per capita crime rate by town.
 -   `ZN`: proportion of residential land zoned for lots over 25,000 sq.ft.
 -   `INDUS`: proportion of non-retail business acres per town.
--   `CHAS`: Charles River dummy variable (= 1 if tract bounds river; 0 otherwise).
+-   `CHAS`: Charles River ('Yes' if tract bounds river; 'No' otherwise).
 -   `NOX`: nitrogen oxides concentration (parts per 10 million).
 -   `RM`: average number of rooms per dwelling.
 -   `AGE`: proportion of owner-occupied units built prior to 1940.
 -   `DIS`: weighted mean of distances to five Boston employment centers
--   `RAD`: index of accessibility to radial highways.
+-   `RAD`: index of accessibility to radial highways ('Low', 'Medium', 'High').
 -   `TAX`: full-value property-tax rate per \$10,000.
 -   `PTRATIO`: pupil-teacher ratio by town.
 -   `LSTAT`: lower status of the population (percent).
