@@ -188,7 +188,9 @@ We read the dataset and set the variable `CHAS` and `RAD` as categorical.
 Boston_data = pd.read_excel('BostonHousing.xlsx')
 
 Boston_data['CHAS'] = pd.Categorical(Boston_data['CHAS'])
-Boston_data['RAD'] = pd.Categorical(Boston_data['RAD'])
+Boston_data['RAD'] = pd.Categorical(Boston_data['RAD'], 
+                                      categories=["Low", "Medium", "High"], 
+                                      ordered=True)
 
 Boston_data.head(4)
 ```
