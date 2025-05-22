@@ -526,6 +526,27 @@ glass_data = pd.read_excel('glass.xlsx')
 sb_glass = glass_data.drop(columns=['Type'])
 ```
 
+## Training and validation datasets
+
+Let's create a training and validation dataset. To this end, we will consider the variable `Type` as the response and the other numeric variables as the predictors. We will use 80% of the observations for the training dataset. The other 20% of the observations will go for validation.
+
+```{python}
+#| echo: true
+#| output: true
+
+# Set full matrix of predictors.
+X_full_g = glass_data.drop(columns = ['Type']) 
+
+# Set full matrix of responses.
+Y_full_g = glass_data.filter(['Type'])
+
+# Split the dataset into training and validation.
+X_train_g, X_valid_g, Y_train_g, Y_valid_g = train_test_split(X_full_g, 
+                                                      Y_full_g, 
+                                                      test_size = 0.2,
+                                                      random_state = 59227)
+```
+
 ## In Python
 
 We use the function `VarianceThreshold()` to set the threshold for determining a *low* sample variance. We also use other functions such as `selector.fit()` and `selector.get_support()`.
@@ -538,10 +559,10 @@ We use the function `VarianceThreshold()` to set the threshold for determining a
 selector = VarianceThreshold(threshold=0.01)
 
 # Apply threshold.
-selector.fit(sb_glass)
+selector.fit(X_train_g)
 
 # Identify predictors with low variance.
-low_variance_cols = sb_glass.columns[~selector.get_support()]
+low_variance_cols = X_train_g.columns[~selector.get_support()]
 
 # Print the list of predictors.
 print(f"Low variance columns: {low_variance_cols}")
@@ -560,7 +581,7 @@ After identifying predictors with low variability, we remove them from the probl
 #| output: true
 
 # Removing problematic predictors
-sb_reduced_glass = sb_glass.drop(columns=low_variance_cols)
+sb_Xtrain_glass = X_train_g.drop(columns=low_variance_cols)
 ```
 
 ## Between-predictor correlation

@@ -207,7 +207,7 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#section-10",
     "title": "Data preprocessing: Part II",
     "section": "",
-    "text": "After identifying predictors with low variability, we remove them from the problem because they do not add much to the problem. To this end, we use the command below.\n\n\n# Removing problematic predictors\nsb_reduced_glass = sb_glass.drop(columns=low_variance_cols)"
+    "text": "After identifying predictors with low variability, we remove them from the problem because they do not add much to the problem. To this end, we use the command below.\n\n\n# Removing problematic predictors\nsb_Xtrain_glass = X_train_g.drop(columns=low_variance_cols)"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#two-predictors-in-standardized-units",
@@ -256,7 +256,7 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#in-python-1",
     "title": "Data preprocessing: Part II",
     "section": "In Python",
-    "text": "In Python\nWe use the function VarianceThreshold() to set the threshold for determining a low sample variance. We also use other functions such as selector.fit() and selector.get_support().\n\n# Set threshold\nselector = VarianceThreshold(threshold=0.01)\n\n# Apply threshold.\nselector.fit(sb_glass)\n\n# Identify predictors with low variance.\nlow_variance_cols = sb_glass.columns[~selector.get_support()]\n\n# Print the list of predictors.\nprint(f\"Low variance columns: {low_variance_cols}\")\n\nLow variance columns: Index(['RI', 'Fe'], dtype='object')"
+    "text": "In Python\nWe use the function VarianceThreshold() to set the threshold for determining a low sample variance. We also use other functions such as selector.fit() and selector.get_support().\n\n# Set threshold\nselector = VarianceThreshold(threshold=0.01)\n\n# Apply threshold.\nselector.fit(X_train_g)\n\n# Identify predictors with low variance.\nlow_variance_cols = X_train_g.columns[~selector.get_support()]\n\n# Print the list of predictors.\nprint(f\"Low variance columns: {low_variance_cols}\")\n\nLow variance columns: Index(['RI', 'Fe'], dtype='object')"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#section-11",
@@ -3008,5 +3008,12 @@
     "title": "Data preprocessing: Part II",
     "section": "Example 1 (cont.)",
     "text": "Example 1 (cont.)\nWe use on the five numerical predictors in the complete_sbAuto dataset.\n\ncomplete_sbAuto.head()\n\n\n\n\n\n\n\n\ncylinders\ndisplacement\nhorsepower\nweight\nacceleration\n\n\n\n\n46\n6\n250.0\n100\n3282\n15.0\n\n\n72\n8\n307.0\n130\n4098\n14.0\n\n\n389\n4\n135.0\n84\n2295\n11.6\n\n\n145\n4\n90.0\n75\n2108\n15.5\n\n\n11\n8\n340.0\n160\n3609\n8.0"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part2.slides.html#training-and-validation-datasets-1",
+    "href": "PreProcessing/PreProcessing_Part2.slides.html#training-and-validation-datasets-1",
+    "title": "Data preprocessing: Part II",
+    "section": "Training and validation datasets",
+    "text": "Training and validation datasets\nLet’s create a training and validation dataset. To this end, we will consider the variable Type as the response and the other numeric variables as the predictors. We will use 80% of the observations for the training dataset. The other 20% of the observations will go for validation.\n\n# Set full matrix of predictors.\nX_full_g = glass_data.drop(columns = ['Type']) \n\n# Set full matrix of responses.\nY_full_g = glass_data.filter(['Type'])\n\n# Split the dataset into training and validation.\nX_train_g, X_valid_g, Y_train_g, Y_valid_g = train_test_split(X_full_g, \n                                                      Y_full_g, \n                                                      test_size = 0.2,\n                                                      random_state = 59227)"
   }
 ]
