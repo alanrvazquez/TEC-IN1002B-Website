@@ -179,6 +179,8 @@ The [response]{style="color:darkred;"} is the median value of owner-occupied hom
 
 ## Read the dataset
 
+</br>
+
 We read the dataset and set the variable `CHAS` and `RAD` as categorical.
 
 ```{python}
@@ -191,20 +193,29 @@ Boston_data['CHAS'] = pd.Categorical(Boston_data['CHAS'])
 Boston_data['RAD'] = pd.Categorical(Boston_data['RAD'], 
                                       categories=["Low", "Medium", "High"], 
                                       ordered=True)
+```
 
-Boston_data.head(4)
+##
+
+</br>
+
+```{python}
+#| echo: true
+#| output: true
+
+Boston_data.head()
 ```
 
 ## How do we generate validation data?
 
-</br>
-
 We split the current dataset into a training and a validation dataset. To this end, we use the function `train_test_split()` from **scikit-learn**.
+
+</br>
 
 The function has three main inputs:
 
--   A pandas data frame with the predictor columns only.
--   A pandas data frame with the response column only.
+-   A pandas dataframe with the predictor columns only.
+-   A pandas dataframe with the response column only.
 -   The parameter `test_size` which sets the portion of the dataset that will go to the validation set.
 
 ## Create the predictor matrix
@@ -266,8 +277,6 @@ training_dataset.head(4)
 
 ## 
 
-</br>
-
 Equivalently, the predictors and response in the validation dataset are in the objects `X_valid` and `Y_valid`, respectively.
 
 ```{python}
@@ -275,7 +284,7 @@ Equivalently, the predictors and response in the validation dataset are in the o
 #| output: true
 
 validation_dataset = pd.concat([X_valid, Y_valid], axis = 1)
-validation_dataset.head(4)
+validation_dataset.head()
 ```
 
 ## Work on your training dataset
@@ -369,9 +378,7 @@ Y_full_p = penguins_data.filter(['species'])
 
 ## 
 
-</br>
-
-We will use a validation dataset with 20% of the observations in `penguins_data`. The other 80% will be in the training dataset.
+We use a validation dataset with 20% of the observations in `penguins_data`. The other 80% will be in the training dataset.
 
 ```{python}
 #| echo: true
@@ -381,6 +388,8 @@ X_train_p, X_valid_p, Y_train_p, Y_valid_p = train_test_split(X_full_p, Y_full_p
                                                       test_size = 0.3,
                                                       random_state = 59227)
 ```
+
+</br>
 
 In `train_test_split`, we use the input `random_state` to set a *random seed*. Essentially, this allows you to obtain the same training and validation datasets every time you run the code. *The advice is setting* `random_state` *to a big integer number generated at random.*
 
@@ -400,7 +409,7 @@ X_train_p.head()
 
 </br>
 
-Let's check if the dataset has have missing observations is using the function `.info()` from **pandas**.
+Let's check if the dataset has missing observations using the function `.info()` from **pandas**.
 
 ```{python}
 #| echo: true
@@ -418,7 +427,7 @@ In the output of the function, "non-null" refers to the number of entries in a c
 X_train_p.info()
 ```
 
-The value next to "RangeIndex" is the number of observations in the dataset.
+The "Index" section shows the number of observations in the dataset.
 
 ## 
 
@@ -430,9 +439,11 @@ The output below shows that there are 240 entries but `bill_length_mm` has 238 t
 X_train_p.info()
 ```
 
-The same is true for the other predictors.
+The same is true for the other predictors except for `sex` that has **eight** missing values.
 
 ## 
+
+</br>
 
 Alternatively, we can use the function `.isnull()` together with `sum()` to determine the number of missing values for each column in the dataset.
 
@@ -444,10 +455,6 @@ Alternatively, we can use the function `.isnull()` together with `sum()` to dete
 missing_values = X_train_p.isnull().sum()
 missing_values
 ```
-
-</br>
-
-We see that each predictor column has two missing values.
 
 ## Removing missing values
 
@@ -491,20 +498,24 @@ In **scikit-learn**, we use the function `SimpleImputer()` to define the method 
 
 </br>
 
-Using `SimpleImputer()`, we set the method to imput missing values using the **mean**. We also use the function `fit_transform()` to apply the imputation method to the variable.
+Using `SimpleImputer()`, we set the method to imput missing values using the **mean**. 
+
+We also use the function `fit_transform()` to apply the imputation method to the variable.
 
 ```{python}
 #| echo: true
 #| output: true
 
 # Imputation for numerical variables (using the mean)
-num_imputer = SimpleImputer(strategy='mean')
+num_imputer = SimpleImputer(strategy = 'mean')
 
 # Replace the original variable with new version.
 X_train_p['bill_length_mm'] = num_imputer.fit_transform(X_train_p[ ['bill_length_mm'] ] )
 ```
 
 ## 
+
+</br>
 
 After imputation, the information of the predictors in the dataset looks like this.
 
@@ -588,7 +599,7 @@ The columns `bill_length_mm`, `bill_depth_mm`, and `sex` have 240 complete value
 
 ## Multivariate imputation using K-nearest neighbours
 
-K-nearest neighbours (KNN) is a multiple imputation method to fill in the missing values of a predictor using the available values from this and the other predictors.
+K-nearest neighbours (KNN) is an imputation method to fill in the missing values of a predictor using the available values from this and the other predictors.
 
 </br>
 
@@ -596,6 +607,16 @@ For each missing value in a predictor $X$:
 
 1.  Find the $K$ most similar rows based on the other predictors.
 2.  Impute the missing value of $X$ using the *average* of the available values of $X$ in the $K$ closest rows.
+
+
+
+## Basic idea II
+
+![](images/KNN_idea2.png){fig-align="center" width="645"}
+
+::: {style="font-size: 50%;"}
+<https://blog.dailydoseofds.com/p/the-most-overlooked-problem-with-768>
+:::
 
 ## Notes on its implementation
 

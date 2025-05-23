@@ -2692,14 +2692,14 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#read-the-dataset",
     "title": "Data preprocessing: Part I",
     "section": "Read the dataset",
-    "text": "Read the dataset\nWe read the dataset and set the variable CHAS and RAD as categorical.\n\nBoston_data = pd.read_excel('BostonHousing.xlsx')\n\nBoston_data['CHAS'] = pd.Categorical(Boston_data['CHAS'])\nBoston_data['RAD'] = pd.Categorical(Boston_data['RAD'], \n                                      categories=[\"Low\", \"Medium\", \"High\"], \n                                      ordered=True)\n\nBoston_data.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n0\n0.00632\n18.0\n2.31\nNo\n0.538\n6.575\n65.2\n4.0900\nLow\n296\n15.3\n4.98\n24.0\n\n\n1\n0.02731\n0.0\n7.07\nNo\n0.469\n6.421\n78.9\n4.9671\nLow\n242\n17.8\n9.14\n21.6\n\n\n2\n0.02729\n0.0\n7.07\nNo\n0.469\n7.185\n61.1\n4.9671\nLow\n242\n17.8\n4.03\n34.7\n\n\n3\n0.03237\n0.0\n2.18\nNo\n0.458\n6.998\n45.8\n6.0622\nLow\n222\n18.7\n2.94\n33.4"
+    "text": "Read the dataset\n\nWe read the dataset and set the variable CHAS and RAD as categorical.\n\nBoston_data = pd.read_excel('BostonHousing.xlsx')\n\nBoston_data['CHAS'] = pd.Categorical(Boston_data['CHAS'])\nBoston_data['RAD'] = pd.Categorical(Boston_data['RAD'], \n                                      categories=[\"Low\", \"Medium\", \"High\"], \n                                      ordered=True)"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#how-do-we-generate-validation-data",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#how-do-we-generate-validation-data",
     "title": "Data preprocessing: Part I",
     "section": "How do we generate validation data?",
-    "text": "How do we generate validation data?\n\nWe split the current dataset into a training and a validation dataset. To this end, we use the function train_test_split() from scikit-learn.\nThe function has three main inputs:\n\nA pandas data frame with the predictor columns only.\nA pandas data frame with the response column only.\nThe parameter test_size which sets the portion of the dataset that will go to the validation set."
+    "text": "How do we generate validation data?\nWe split the current dataset into a training and a validation dataset. To this end, we use the function train_test_split() from scikit-learn.\n\nThe function has three main inputs:\n\nA pandas dataframe with the predictor columns only.\nA pandas dataframe with the response column only.\nThe parameter test_size which sets the portion of the dataset that will go to the validation set."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#create-the-predictor-matrix",
@@ -2727,14 +2727,14 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-3",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "The predictors and response in the training dataset are in the objects X_train and Y_train, respectively. We compile these objects into a single dataset using the function .concat() from pandas. The argument axis = 1 tells .concat() to concatenate the datasets by their rows.\n\ntraining_dataset = pd.concat([X_train, Y_train], axis = 1)\ntraining_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n400\n25.04610\n0.0\n18.10\nNo\n0.693\n5.987\n100.0\n1.5888\nHigh\n666\n20.2\n26.77\n5.6\n\n\n342\n0.02498\n0.0\n1.89\nNo\n0.518\n6.540\n59.7\n6.2669\nLow\n422\n15.9\n8.65\n16.5\n\n\n153\n2.14918\n0.0\n19.58\nNo\n0.871\n5.709\n98.5\n1.6232\nMedium\n403\n14.7\n15.79\n19.4\n\n\n364\n3.47428\n0.0\n18.10\nYes\n0.718\n8.780\n82.9\n1.9047\nHigh\n666\n20.2\n5.29\n21.9"
+    "text": "Boston_data.head()\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n0\n0.00632\n18.0\n2.31\nNo\n0.538\n6.575\n65.2\n4.0900\nLow\n296\n15.3\n4.98\n24.0\n\n\n1\n0.02731\n0.0\n7.07\nNo\n0.469\n6.421\n78.9\n4.9671\nLow\n242\n17.8\n9.14\n21.6\n\n\n2\n0.02729\n0.0\n7.07\nNo\n0.469\n7.185\n61.1\n4.9671\nLow\n242\n17.8\n4.03\n34.7\n\n\n3\n0.03237\n0.0\n2.18\nNo\n0.458\n6.998\n45.8\n6.0622\nLow\n222\n18.7\n2.94\n33.4\n\n\n4\n0.06905\n0.0\n2.18\nNo\n0.458\n7.147\n54.2\n6.0622\nLow\n222\n18.7\n5.33\n36.2"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-4",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-4",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "Equivalently, the predictors and response in the validation dataset are in the objects X_valid and Y_valid, respectively.\n\nvalidation_dataset = pd.concat([X_valid, Y_valid], axis = 1)\nvalidation_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n405\n67.92080\n0.0\n18.10\nNo\n0.693\n5.683\n100.0\n1.4254\nHigh\n666\n20.2\n22.98\n5.0\n\n\n458\n7.75223\n0.0\n18.10\nNo\n0.713\n6.301\n83.7\n2.7831\nHigh\n666\n20.2\n16.23\n14.9\n\n\n126\n0.38735\n0.0\n25.65\nNo\n0.581\n5.613\n95.6\n1.7572\nLow\n188\n19.1\n27.26\n15.7\n\n\n423\n7.05042\n0.0\n18.10\nNo\n0.614\n6.103\n85.1\n2.0218\nHigh\n666\n20.2\n23.29\n13.4"
+    "text": "The predictors and response in the training dataset are in the objects X_train and Y_train, respectively. We compile these objects into a single dataset using the function .concat() from pandas. The argument axis = 1 tells .concat() to concatenate the datasets by their rows.\n\ntraining_dataset = pd.concat([X_train, Y_train], axis = 1)\ntraining_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n121\n0.07165\n0.0\n25.65\nNo\n0.581\n6.004\n84.1\n2.1974\nLow\n188\n19.1\n14.27\n20.3\n\n\n44\n0.12269\n0.0\n6.91\nNo\n0.448\n6.069\n40.0\n5.7209\nLow\n233\n17.9\n9.55\n21.2\n\n\n447\n9.92485\n0.0\n18.10\nNo\n0.740\n6.251\n96.6\n2.1980\nHigh\n666\n20.2\n16.44\n12.6\n\n\n378\n23.64820\n0.0\n18.10\nNo\n0.671\n6.380\n96.2\n1.3861\nHigh\n666\n20.2\n23.69\n13.1"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#work-on-your-training-dataset",
@@ -2755,14 +2755,14 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-5",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "Missing at random assumes that we can predict the value that is missing based on the other available data.\nMissing not at random assumes that there is a mechanism that generates the missing values, which may include observed and unobserved predictors."
+    "text": "Equivalently, the predictors and response in the validation dataset are in the objects X_valid and Y_valid, respectively.\n\nvalidation_dataset = pd.concat([X_valid, Y_valid], axis = 1)\nvalidation_dataset.head()\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n81\n0.04462\n25.0\n4.86\nNo\n0.426\n6.619\n70.4\n5.4007\nMedium\n281\n19.0\n7.22\n23.9\n\n\n59\n0.10328\n25.0\n5.13\nNo\n0.453\n5.927\n47.2\n6.9320\nHigh\n284\n19.7\n9.22\n19.6\n\n\n318\n0.40202\n0.0\n9.90\nNo\n0.544\n6.382\n67.2\n3.5325\nMedium\n304\n18.4\n10.36\n23.1\n\n\n327\n0.24103\n0.0\n7.38\nNo\n0.493\n6.083\n43.7\n5.4159\nMedium\n287\n19.6\n12.79\n22.2\n\n\n454\n9.51363\n0.0\n18.10\nNo\n0.713\n6.728\n94.1\n2.4961\nHigh\n666\n20.2\n18.71\n14.9"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-6",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-6",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "For large data sets, removal of observations based on missing values is not a problem, assuming that the type of missing data is completely at random.\n\nIn a smaller data sets, there is a high price in removing observations. To overcome this issue, we can use methods of imputation, which try to estimate the missing values of a predictor variable using the other predictors’ values.\n\nHere, we will introduce some simple methods for imputing missing values in categorical and numerical variables."
+    "text": "Missing at random assumes that we can predict the value that is missing based on the other available data.\nMissing not at random assumes that there is a mechanism that generates the missing values, which may include observed and unobserved predictors."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#example-2",
@@ -2783,42 +2783,42 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-7",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "We will use a validation dataset with 20% of the observations in penguins_data. The other 80% will be in the training dataset.\n\n# Split the dataset into training and validation.\nX_train_p, X_valid_p, Y_train_p, Y_valid_p = train_test_split(X_full_p, Y_full_p, \n                                                      test_size = 0.3,\n                                                      random_state = 59227)\n\nIn train_test_split, we use the input random_state to set a random seed. Essentially, this allows you to obtain the same training and validation datasets every time you run the code. The advice is setting random_state to a big integer number generated at random."
+    "text": "For large data sets, removal of observations based on missing values is not a problem, assuming that the type of missing data is completely at random.\n\nIn a smaller data sets, there is a high price in removing observations. To overcome this issue, we can use methods of imputation, which try to estimate the missing values of a predictor variable using the other predictors’ values.\n\nHere, we will introduce some simple methods for imputing missing values in categorical and numerical variables."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-8",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-8",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "Since preprocessing techniques are meant for the predictors, we will work on the X_train_p data frame.\n\n\n\n\n\n\n\n\n\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\n\n\n\n\n31\n37.2\n18.1\n178.0\n3900.0\nmale\n\n\n46\n41.1\n19.0\n182.0\n3425.0\nmale\n\n\n195\n49.6\n15.0\n216.0\n4750.0\nmale\n\n\n43\n44.1\n19.7\n196.0\n4400.0\nmale\n\n\n196\n50.5\n15.9\n222.0\n5550.0\nmale"
+    "text": "We use a validation dataset with 20% of the observations in penguins_data. The other 80% will be in the training dataset.\n\n# Split the dataset into training and validation.\nX_train_p, X_valid_p, Y_train_p, Y_valid_p = train_test_split(X_full_p, Y_full_p, \n                                                      test_size = 0.3,\n                                                      random_state = 59227)\n\n\nIn train_test_split, we use the input random_state to set a random seed. Essentially, this allows you to obtain the same training and validation datasets every time you run the code. The advice is setting random_state to a big integer number generated at random."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-9",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-9",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "Let’s check if the dataset has have missing observations is using the function .info() from pandas.\n\nX_train_p.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nIndex: 240 entries, 31 to 293\nData columns (total 5 columns):\n #   Column             Non-Null Count  Dtype   \n---  ------             --------------  -----   \n 0   bill_length_mm     238 non-null    float64 \n 1   bill_depth_mm      238 non-null    float64 \n 2   flipper_length_mm  238 non-null    float64 \n 3   body_mass_g        238 non-null    float64 \n 4   sex                232 non-null    category\ndtypes: category(1), float64(4)\nmemory usage: 9.7 KB"
+    "text": "Since preprocessing techniques are meant for the predictors, we will work on the X_train_p data frame.\n\n\n\n\n\n\n\n\n\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\n\n\n\n\n31\n37.2\n18.1\n178.0\n3900.0\nmale\n\n\n46\n41.1\n19.0\n182.0\n3425.0\nmale\n\n\n195\n49.6\n15.0\n216.0\n4750.0\nmale\n\n\n43\n44.1\n19.7\n196.0\n4400.0\nmale\n\n\n196\n50.5\n15.9\n222.0\n5550.0\nmale"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-10",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-10",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "In the output of the function, “non-null” refers to the number of entries in a column that have actual values. That is, the number of entries where there are not NaN.\n\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nIndex: 240 entries, 31 to 293\nData columns (total 5 columns):\n #   Column             Non-Null Count  Dtype   \n---  ------             --------------  -----   \n 0   bill_length_mm     238 non-null    float64 \n 1   bill_depth_mm      238 non-null    float64 \n 2   flipper_length_mm  238 non-null    float64 \n 3   body_mass_g        238 non-null    float64 \n 4   sex                232 non-null    category\ndtypes: category(1), float64(4)\nmemory usage: 9.7 KB\n\n\nThe value next to “RangeIndex” is the number of observations in the dataset."
+    "text": "Let’s check if the dataset has missing observations using the function .info() from pandas.\n\nX_train_p.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nIndex: 240 entries, 31 to 293\nData columns (total 5 columns):\n #   Column             Non-Null Count  Dtype   \n---  ------             --------------  -----   \n 0   bill_length_mm     238 non-null    float64 \n 1   bill_depth_mm      238 non-null    float64 \n 2   flipper_length_mm  238 non-null    float64 \n 3   body_mass_g        238 non-null    float64 \n 4   sex                232 non-null    category\ndtypes: category(1), float64(4)\nmemory usage: 9.7 KB"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-11",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-11",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "The output below shows that there are 240 entries but bill_length_mm has 238 that are “non-null”. Therefore, this column has two missing observations.\n\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nIndex: 240 entries, 31 to 293\nData columns (total 5 columns):\n #   Column             Non-Null Count  Dtype   \n---  ------             --------------  -----   \n 0   bill_length_mm     238 non-null    float64 \n 1   bill_depth_mm      238 non-null    float64 \n 2   flipper_length_mm  238 non-null    float64 \n 3   body_mass_g        238 non-null    float64 \n 4   sex                232 non-null    category\ndtypes: category(1), float64(4)\nmemory usage: 9.7 KB\n\n\nThe same is true for the other predictors."
+    "text": "In the output of the function, “non-null” refers to the number of entries in a column that have actual values. That is, the number of entries where there are not NaN.\n\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nIndex: 240 entries, 31 to 293\nData columns (total 5 columns):\n #   Column             Non-Null Count  Dtype   \n---  ------             --------------  -----   \n 0   bill_length_mm     238 non-null    float64 \n 1   bill_depth_mm      238 non-null    float64 \n 2   flipper_length_mm  238 non-null    float64 \n 3   body_mass_g        238 non-null    float64 \n 4   sex                232 non-null    category\ndtypes: category(1), float64(4)\nmemory usage: 9.7 KB\n\n\nThe “Index” section shows the number of observations in the dataset."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-12",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-12",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "Alternatively, we can use the function .isnull() together with sum() to determine the number of missing values for each column in the dataset.\n\n\nmissing_values = X_train_p.isnull().sum()\nmissing_values\n\nbill_length_mm       2\nbill_depth_mm        2\nflipper_length_mm    2\nbody_mass_g          2\nsex                  8\ndtype: int64\n\n\n\nWe see that each predictor column has two missing values."
+    "text": "The output below shows that there are 240 entries but bill_length_mm has 238 that are “non-null”. Therefore, this column has two missing observations.\n\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nIndex: 240 entries, 31 to 293\nData columns (total 5 columns):\n #   Column             Non-Null Count  Dtype   \n---  ------             --------------  -----   \n 0   bill_length_mm     238 non-null    float64 \n 1   bill_depth_mm      238 non-null    float64 \n 2   flipper_length_mm  238 non-null    float64 \n 3   body_mass_g        238 non-null    float64 \n 4   sex                232 non-null    category\ndtypes: category(1), float64(4)\nmemory usage: 9.7 KB\n\n\nThe same is true for the other predictors except for sex that has eight missing values."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#removing-missing-values",
@@ -2832,7 +2832,7 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-13",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "complete_predictors.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nIndex: 232 entries, 31 to 293\nData columns (total 5 columns):\n #   Column             Non-Null Count  Dtype   \n---  ------             --------------  -----   \n 0   bill_length_mm     232 non-null    float64 \n 1   bill_depth_mm      232 non-null    float64 \n 2   flipper_length_mm  232 non-null    float64 \n 3   body_mass_g        232 non-null    float64 \n 4   sex                232 non-null    category\ndtypes: category(1), float64(4)\nmemory usage: 9.4 KB\n\n\nThe new data is complete because each column has 232 “non-null” values; the total number of observations in complete_predictors.\nHowever, note that we have lost eight of the original observations in X_train_p!"
+    "text": "Alternatively, we can use the function .isnull() together with sum() to determine the number of missing values for each column in the dataset.\n\n\nmissing_values = X_train_p.isnull().sum()\nmissing_values\n\nbill_length_mm       2\nbill_depth_mm        2\nflipper_length_mm    2\nbody_mass_g          2\nsex                  8\ndtype: int64"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#imputation-using-the-mean",
@@ -2846,21 +2846,21 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-14",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "Using SimpleImputer(), we set the method to imput missing values using the mean. We also use the function fit_transform() to apply the imputation method to the variable.\n\n# Imputation for numerical variables (using the mean)\nnum_imputer = SimpleImputer(strategy='mean')\n\n# Replace the original variable with new version.\nX_train_p['bill_length_mm'] = num_imputer.fit_transform(X_train_p[ ['bill_length_mm'] ] )"
+    "text": "complete_predictors.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nIndex: 232 entries, 31 to 293\nData columns (total 5 columns):\n #   Column             Non-Null Count  Dtype   \n---  ------             --------------  -----   \n 0   bill_length_mm     232 non-null    float64 \n 1   bill_depth_mm      232 non-null    float64 \n 2   flipper_length_mm  232 non-null    float64 \n 3   body_mass_g        232 non-null    float64 \n 4   sex                232 non-null    category\ndtypes: category(1), float64(4)\nmemory usage: 9.4 KB\n\n\nThe new data is complete because each column has 232 “non-null” values; the total number of observations in complete_predictors.\nHowever, note that we have lost eight of the original observations in X_train_p!"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-15",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-15",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "After imputation, the information of the predictors in the dataset looks like this.\n\nX_train_p.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nIndex: 240 entries, 31 to 293\nData columns (total 5 columns):\n #   Column             Non-Null Count  Dtype   \n---  ------             --------------  -----   \n 0   bill_length_mm     240 non-null    float64 \n 1   bill_depth_mm      238 non-null    float64 \n 2   flipper_length_mm  238 non-null    float64 \n 3   body_mass_g        238 non-null    float64 \n 4   sex                232 non-null    category\ndtypes: category(1), float64(4)\nmemory usage: 9.7 KB\n\n\nNow, bill_length_mm has 240 complete values."
+    "text": "Using SimpleImputer(), we set the method to imput missing values using the mean.\nWe also use the function fit_transform() to apply the imputation method to the variable.\n\n# Imputation for numerical variables (using the mean)\nnum_imputer = SimpleImputer(strategy = 'mean')\n\n# Replace the original variable with new version.\nX_train_p['bill_length_mm'] = num_imputer.fit_transform(X_train_p[ ['bill_length_mm'] ] )"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-16",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-16",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "To imput the missing values using the median, we simply set this method in SimpleImputer(). For example, let’s imput the missing values of bill_depth_mm.\n\n# Imputation for numerical variables (using the mean)\nnum_imputer = SimpleImputer(strategy = 'median')\n\n# Replace the original variable with new version.\nX_train_p['bill_depth_mm'] = num_imputer.fit_transform(X_train_p[ ['bill_depth_mm'] ] )\n\n# Show the information of the predictor.\nX_train_p['bill_depth_mm'].info()\n\n&lt;class 'pandas.core.series.Series'&gt;\nIndex: 240 entries, 31 to 293\nSeries name: bill_depth_mm\nNon-Null Count  Dtype  \n--------------  -----  \n240 non-null    float64\ndtypes: float64(1)\nmemory usage: 3.8 KB"
+    "text": "After imputation, the information of the predictors in the dataset looks like this.\n\nX_train_p.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nIndex: 240 entries, 31 to 293\nData columns (total 5 columns):\n #   Column             Non-Null Count  Dtype   \n---  ------             --------------  -----   \n 0   bill_length_mm     240 non-null    float64 \n 1   bill_depth_mm      238 non-null    float64 \n 2   flipper_length_mm  238 non-null    float64 \n 3   body_mass_g        238 non-null    float64 \n 4   sex                232 non-null    category\ndtypes: category(1), float64(4)\nmemory usage: 9.7 KB\n\n\nNow, bill_length_mm has 240 complete values."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#using-the-mean-or-the-median",
@@ -2874,7 +2874,7 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-17",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "We use the sample median when the data is skewed (e.g., incomes, prices).\n\nPros: Less sensitive to outliers; robust for skewed distributions.\nCons: May reduce variability in the data."
+    "text": "To imput the missing values using the median, we simply set this method in SimpleImputer(). For example, let’s imput the missing values of bill_depth_mm.\n\n# Imputation for numerical variables (using the mean)\nnum_imputer = SimpleImputer(strategy = 'median')\n\n# Replace the original variable with new version.\nX_train_p['bill_depth_mm'] = num_imputer.fit_transform(X_train_p[ ['bill_depth_mm'] ] )\n\n# Show the information of the predictor.\nX_train_p['bill_depth_mm'].info()\n\n&lt;class 'pandas.core.series.Series'&gt;\nIndex: 240 entries, 31 to 293\nSeries name: bill_depth_mm\nNon-Null Count  Dtype  \n--------------  -----  \n240 non-null    float64\ndtypes: float64(1)\nmemory usage: 3.8 KB"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#imputation-method-for-a-categorical-variable",
@@ -2888,14 +2888,14 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-18",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "Let’s now have a look at the information of the dataset.\n\n# Apply imputation strategy for categorical variables.\nX_train_p.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nIndex: 240 entries, 31 to 293\nData columns (total 5 columns):\n #   Column             Non-Null Count  Dtype  \n---  ------             --------------  -----  \n 0   bill_length_mm     240 non-null    float64\n 1   bill_depth_mm      240 non-null    float64\n 2   flipper_length_mm  238 non-null    float64\n 3   body_mass_g        238 non-null    float64\n 4   sex                240 non-null    object \ndtypes: float64(4), object(1)\nmemory usage: 11.2+ KB\n\n\nThe columns bill_length_mm, bill_depth_mm, and sex have 240 complete values."
+    "text": "We use the sample median when the data is skewed (e.g., incomes, prices).\n\nPros: Less sensitive to outliers; robust for skewed distributions.\nCons: May reduce variability in the data."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#multivariate-imputation-using-k-nearest-neighbours",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#multivariate-imputation-using-k-nearest-neighbours",
     "title": "Data preprocessing: Part I",
     "section": "Multivariate imputation using K-nearest neighbours",
-    "text": "Multivariate imputation using K-nearest neighbours\nK-nearest neighbours (KNN) is a multiple imputation method to fill in the missing values of a predictor using the available values from this and the other predictors.\n\nFor each missing value in a predictor \\(X\\):\n\nFind the \\(K\\) most similar rows based on the other predictors.\nImpute the missing value of \\(X\\) using the average of the available values of \\(X\\) in the \\(K\\) closest rows."
+    "text": "Multivariate imputation using K-nearest neighbours\nK-nearest neighbours (KNN) is an imputation method to fill in the missing values of a predictor using the available values from this and the other predictors.\n\nFor each missing value in a predictor \\(X\\):\n\nFind the \\(K\\) most similar rows based on the other predictors.\nImpute the missing value of \\(X\\) using the average of the available values of \\(X\\) in the \\(K\\) closest rows."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#notes-on-its-implementation",
@@ -2916,6 +2916,27 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-19",
     "title": "Data preprocessing: Part I",
     "section": "",
+    "text": "Let’s now have a look at the information of the dataset.\n\n# Apply imputation strategy for categorical variables.\nX_train_p.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nIndex: 240 entries, 31 to 293\nData columns (total 5 columns):\n #   Column             Non-Null Count  Dtype  \n---  ------             --------------  -----  \n 0   bill_length_mm     240 non-null    float64\n 1   bill_depth_mm      240 non-null    float64\n 2   flipper_length_mm  238 non-null    float64\n 3   body_mass_g        238 non-null    float64\n 4   sex                240 non-null    object \ndtypes: float64(4), object(1)\nmemory usage: 11.2+ KB\n\n\nThe columns bill_length_mm, bill_depth_mm, and sex have 240 complete values."
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-20",
+    "href": "PreProcessing/PreProcessing_Part1.slides.html#section-20",
+    "title": "Data preprocessing: Part I",
+    "section": "",
     "text": "Let’s look at the new dataset.\n\nX_train_num_p.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 240 entries, 0 to 239\nData columns (total 4 columns):\n #   Column             Non-Null Count  Dtype  \n---  ------             --------------  -----  \n 0   bill_length_mm     240 non-null    float64\n 1   bill_depth_mm      240 non-null    float64\n 2   flipper_length_mm  240 non-null    float64\n 3   body_mass_g        240 non-null    float64\ndtypes: float64(4)\nmemory usage: 7.6 KB\n\n\nAll predictors have 240 complete entries."
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#basic-idea",
+    "href": "PreProcessing/PreProcessing_Part1.slides.html#basic-idea",
+    "title": "Data preprocessing: Part I",
+    "section": "Basic idea",
+    "text": "Basic idea"
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#basic-idea-ii",
+    "href": "PreProcessing/PreProcessing_Part1.slides.html#basic-idea-ii",
+    "title": "Data preprocessing: Part I",
+    "section": "Basic idea II",
+    "text": "Basic idea II\n\n\nhttps://blog.dailydoseofds.com/p/the-most-overlooked-problem-with-768"
   }
 ]
