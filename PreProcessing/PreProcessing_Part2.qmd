@@ -414,17 +414,30 @@ To correct the skewness of a predictor's distribution, we can transform the pred
 
 ## In Python
 
-We apply the Box-Cox transformation using the `power_transformation` function of the **scikit-learn** library.
+We apply the Box-Cox transformation using the `PowerTransformer` and `fit_transform` functions of the **scikit-learn** library.
 
 ```{python}
 #| echo: true
 
-DIS_transform = power_transform(Boston_training[['DIS']], method = "box-cox")
-DIS_transform_df = pd.DataFrame(DIS_transform, columns=['DIS_boxcox'])
-DIS_transform_df.head(3)
+pt = PowerTransformer(method='box-cox', standardize = False)
+DIS_transform = pt.fit_transform(Boston_training[['DIS']])
 ```
 
-In the code above, we use the `pd.DataFrame()` to turn the transformed column into a pandas dataframe.
+</br>
+
+In the `PowerTransformer`, the input `standardize` specifies if we wish to standardize the resulting transformed predictor to have a mean of zero and a standard deviation of one. We do not standardize the predictor yet.
+
+## 
+
+The result from the function is a **numpy** array. However, since we are working with **pandas** dataframes, we must transform the output to this format using the following code. 
+
+```{python}
+#| echo: true
+
+DIS_transform_df = pd.DataFrame(DIS_transform, columns=['DIS_boxcox'])
+DIS_transform_df.head()
+```
+
 
 ## 
 
@@ -463,6 +476,23 @@ plt.show() # Display the plot
 ```
 :::
 :::::
+
+## Value of $\lambda$
+
+</br>
+
+Recall that the Box-Cox transformation finds the best value of $\lambda$ that makes the transformed predictor $X^\lambda$ to follow a normal distribution. 
+
+We can obtain the value of $\lambda$ actually used in the transformation using the following code.
+
+```{python}
+#| echo: true
+
+# Retrieve the lambda value
+print(pt.lambdas_)
+```
+
+This means that the transformed predictor is $X' = X^{-0.123}$.
 
 ## Discussion
 
@@ -518,7 +548,7 @@ Since the values of this predictor variable do not vary or change at all, this p
 
 We consider a data set related to Glass identification. The data has 214 glass samples labeled as one of seven glass categories. There are nine predictors including the refractive index (RI) and percentages of eight elements: Na, Mg, Al, Si, K, Ca, Ba, and Fe.
 
-Let's read the data set. Note that this is a modified version of the original data.
+Let's read the data set. 
 
 ```{python}
 #| echo: true
@@ -526,14 +556,11 @@ Let's read the data set. Note that this is a modified version of the original da
 
 # Load Excel file (make sure the file is in your Colab)
 glass_data = pd.read_excel('glass.xlsx')
-
-# Drop the categorical variable.
-sb_glass = glass_data.drop(columns=['Type'])
 ```
 
 ## Training and validation datasets
 
-Let's create a training and validation dataset. To this end, we will consider the variable `Type` as the response and the other numeric variables as the predictors. We will use 80% of the observations for the training dataset. The other 20% of the observations will go for validation.
+Let's create a training and validation dataset. To this end, we will consider the variable `Type` as the response and the other numeric variables as the predictors. We will use 80% of the observations for the training dataset. The other 20% of the observations will go to the validation dataset.
 
 ```{python}
 #| echo: true
