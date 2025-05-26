@@ -80,7 +80,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer, KNNImputer
-from sklearn.preprocessing import power_transform, StandardScaler 
+from sklearn.preprocessing import PowerTransformer, StandardScaler 
 from sklearn.feature_selection import VarianceThreshold
 ```
 
@@ -195,7 +195,7 @@ Boston_data['RAD'] = pd.Categorical(Boston_data['RAD'],
                                       ordered=True)
 ```
 
-##
+## 
 
 </br>
 
@@ -498,7 +498,7 @@ In **scikit-learn**, we use the function `SimpleImputer()` to define the method 
 
 </br>
 
-Using `SimpleImputer()`, we set the method to impute missing values using the **mean**. 
+Using `SimpleImputer()`, we set the method to impute missing values using the **mean**.
 
 We also use the function `fit_transform()` to apply the imputation method to the variable.
 
@@ -607,7 +607,6 @@ For each missing value in a predictor $X$:
 
 1.  Find the $K$ most similar rows based on the other predictors.
 2.  Impute the missing value of $X$ using the *average* of the available values of $X$ in the $K$ closest rows.
-
 
 ## Basic idea
 

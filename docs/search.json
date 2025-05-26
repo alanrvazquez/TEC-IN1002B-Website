@@ -123,7 +123,7 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#transforming-numerical-predictors",
     "title": "Data preprocessing: Part II",
     "section": "Transforming numerical predictors",
-    "text": "Transforming numerical predictors\n\nA common problem with a predictor is that it may have a skewed distribution. That is, a distribution that accumulates many observations in smaller or larger values of the predictor.\nFor example, consider the distribution of the predictor DIS (weighted mean of distances to five Boston employment centers) in the “BostonHousing.xlsx” dataset."
+    "text": "Transforming numerical predictors\n\nA common problem with a predictor is that it may have a skewed distribution. That is, a distribution that accumulates many observations in smaller or larger values of the predictor.\n\nFor example, consider the distribution of the predictor DIS (weighted mean of distances to five Boston employment centers) in the “BostonHousing.xlsx” dataset."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#example-2",
@@ -179,7 +179,7 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#box-cox-transformation",
     "title": "Data preprocessing: Part II",
     "section": "Box-Cox Transformation",
-    "text": "Box-Cox Transformation\n\nThe Box-Cox transformation uses a family of power transformations on a predictor \\(X\\) such that \\(X' = X^{\\lambda}\\), where \\(\\lambda\\) is a parameter to be determined using the data. When \\(\\lambda = 0,\\) this means \\(X' = \\ln(X)\\), where \\(\\ln(\\cdot)\\) is the natural logarithm.\nThe Box-Cox transformation is the element of this family that results in a transformed variable that follows a normal distribution (approximately).\nThe variable \\(X\\) must be strictly positive!"
+    "text": "Box-Cox Transformation\n\n\n\nThe Box-Cox transformation uses a family of power transformations on a predictor \\(X\\) such that \\(X' = X^{\\lambda}\\), where \\(\\lambda\\) is a parameter to be determined using the data. When \\(\\lambda = 0,\\) this means \\(X' = \\ln(X)\\), where \\(\\ln(\\cdot)\\) is the natural logarithm.\nThe Box-Cox transformation is the element of this family that results in a transformed variable that follows a normal distribution (approximately).\nThe variable \\(X\\) must be strictly positive!"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#in-python",
@@ -2643,7 +2643,7 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-1",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "Let’s import scikit-learn into Python together with the other relevant libraries.\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.impute import SimpleImputer, KNNImputer\nfrom sklearn.preprocessing import power_transform, StandardScaler \nfrom sklearn.feature_selection import VarianceThreshold\n\nWe will not use all the functions from the scikit-learn library. Instead, we will use specific functions from the sub-libraries preprocessing, feature_selection, model_selection and impute."
+    "text": "Let’s import scikit-learn into Python together with the other relevant libraries.\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.impute import SimpleImputer, KNNImputer\nfrom sklearn.preprocessing import PowerTransformer, StandardScaler \nfrom sklearn.feature_selection import VarianceThreshold\n\nWe will not use all the functions from the scikit-learn library. Instead, we will use specific functions from the sub-libraries preprocessing, feature_selection, model_selection and impute."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#recall-that",
@@ -2734,14 +2734,14 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-4",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "The predictors and response in the training dataset are in the objects X_train and Y_train, respectively. We compile these objects into a single dataset using the function .concat() from pandas. The argument axis = 1 tells .concat() to concatenate the datasets by their rows.\n\ntraining_dataset = pd.concat([X_train, Y_train], axis = 1)\ntraining_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n412\n18.81100\n0.0\n18.10\nNo\n0.597\n4.628\n100.0\n1.5539\nHigh\n666\n20.2\n34.37\n17.9\n\n\n174\n0.08447\n0.0\n4.05\nNo\n0.510\n5.859\n68.7\n2.7019\nMedium\n296\n16.6\n9.64\n22.6\n\n\n448\n9.32909\n0.0\n18.10\nNo\n0.713\n6.185\n98.7\n2.2616\nHigh\n666\n20.2\n18.13\n14.1\n\n\n454\n9.51363\n0.0\n18.10\nNo\n0.713\n6.728\n94.1\n2.4961\nHigh\n666\n20.2\n18.71\n14.9"
+    "text": "The predictors and response in the training dataset are in the objects X_train and Y_train, respectively. We compile these objects into a single dataset using the function .concat() from pandas. The argument axis = 1 tells .concat() to concatenate the datasets by their rows.\n\ntraining_dataset = pd.concat([X_train, Y_train], axis = 1)\ntraining_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n366\n3.69695\n0.0\n18.10\nNo\n0.718\n4.963\n91.4\n1.7523\nHigh\n666\n20.2\n14.00\n21.9\n\n\n259\n0.65665\n20.0\n3.97\nNo\n0.647\n6.842\n100.0\n2.0107\nMedium\n264\n13.0\n6.90\n30.1\n\n\n284\n0.00906\n90.0\n2.97\nNo\n0.400\n7.088\n20.8\n7.3073\nLow\n285\n15.3\n7.85\n32.2\n\n\n32\n1.38799\n0.0\n8.14\nNo\n0.538\n5.950\n82.0\n3.9900\nMedium\n307\n21.0\n27.71\n13.2"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-5",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-5",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "Equivalently, the predictors and response in the validation dataset are in the objects X_valid and Y_valid, respectively.\n\nvalidation_dataset = pd.concat([X_valid, Y_valid], axis = 1)\nvalidation_dataset.head()\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n323\n0.28392\n0.0\n7.38\nNo\n0.493\n5.708\n74.3\n4.7211\nMedium\n287\n19.6\n11.74\n18.5\n\n\n112\n0.12329\n0.0\n10.01\nNo\n0.547\n5.913\n92.9\n2.3534\nMedium\n432\n17.8\n16.21\n18.8\n\n\n40\n0.03359\n75.0\n2.95\nNo\n0.428\n7.024\n15.8\n5.4011\nLow\n252\n18.3\n1.98\n34.9\n\n\n14\n0.63796\n0.0\n8.14\nNo\n0.538\n6.096\n84.5\n4.4619\nMedium\n307\n21.0\n10.26\n18.2\n\n\n106\n0.17120\n0.0\n8.56\nNo\n0.520\n5.836\n91.9\n2.2110\nMedium\n384\n20.9\n18.66\n19.5"
+    "text": "Equivalently, the predictors and response in the validation dataset are in the objects X_valid and Y_valid, respectively.\n\nvalidation_dataset = pd.concat([X_valid, Y_valid], axis = 1)\nvalidation_dataset.head()\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n220\n0.35809\n0.0\n6.20\nYes\n0.507\n6.951\n88.5\n2.8617\nHigh\n307\n17.4\n9.71\n26.7\n\n\n237\n0.51183\n0.0\n6.20\nNo\n0.507\n7.358\n71.6\n4.1480\nHigh\n307\n17.4\n4.73\n31.5\n\n\n92\n0.04203\n28.0\n15.04\nNo\n0.464\n6.442\n53.6\n3.6659\nMedium\n270\n18.2\n8.16\n22.9\n\n\n475\n6.39312\n0.0\n18.10\nNo\n0.584\n6.162\n97.4\n2.2060\nHigh\n666\n20.2\n24.10\n13.3\n\n\n67\n0.05789\n12.5\n6.07\nNo\n0.409\n5.878\n21.4\n6.4980\nMedium\n345\n18.9\n8.10\n22.0"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#work-on-your-training-dataset",

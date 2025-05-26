@@ -40,7 +40,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer, KNNImputer
-from sklearn.preprocessing import power_transform, StandardScaler 
+from sklearn.preprocessing import PowerTransformer, StandardScaler 
 from sklearn.feature_selection import VarianceThreshold
 ```
 
@@ -273,6 +273,8 @@ augmented_auto.head()
 
 A common problem with a predictor is that it may have a *skewed distribution*. That is, a distribution that accumulates many observations in smaller or larger values of the predictor.
 
+</br>
+
 For example, consider the distribution of the predictor `DIS` (weighted mean of distances to five Boston employment centers) in the "BostonHousing.xlsx" dataset.
 
 ## Example 2
@@ -356,6 +358,8 @@ X_train_b, X_valid_b, Y_train_b, Y_valid_b = train_test_split(X_full_b,
 
 ## 
 
+</br>
+
 The new training dataset we will work with is:
 
 ```{python}
@@ -398,11 +402,15 @@ To correct the skewness of a predictor's distribution, we can transform the pred
 
 </br>
 
-The Box-Cox transformation uses a family of power transformations on a predictor $X$ such that $X' = X^{\lambda}$, where $\lambda$ is a parameter to be determined using the data. When $\lambda = 0,$ this means $X' = \ln(X)$, where $\ln(\cdot)$ is the natural logarithm.
+::: incremental
 
-The Box-Cox transformation is the element of this family that results in a transformed variable that follows a normal distribution (approximately).
+- The Box-Cox transformation uses a family of power transformations on a predictor $X$ such that $X' = X^{\lambda}$, where $\lambda$ is a parameter to be determined using the data. When $\lambda = 0,$ this means $X' = \ln(X)$, where $\ln(\cdot)$ is the natural logarithm.
 
-[The variable $X$ must be strictly positive!]{style="color:blue;"}
+- The Box-Cox transformation is the element of this family that results in a transformed variable that follows a normal distribution (approximately).
+
+- [The variable $X$ must be strictly positive!]{style="color:blue;"}
+
+:::
 
 ## In Python
 
