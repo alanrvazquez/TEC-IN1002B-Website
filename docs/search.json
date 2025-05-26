@@ -2734,14 +2734,14 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-4",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "The predictors and response in the training dataset are in the objects X_train and Y_train, respectively. We compile these objects into a single dataset using the function .concat() from pandas. The argument axis = 1 tells .concat() to concatenate the datasets by their rows.\n\ntraining_dataset = pd.concat([X_train, Y_train], axis = 1)\ntraining_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n3\n0.03237\n0.0\n2.18\nNo\n0.458\n6.998\n45.8\n6.0622\nLow\n222\n18.7\n2.94\n33.4\n\n\n165\n2.92400\n0.0\n19.58\nNo\n0.605\n6.101\n93.0\n2.2834\nMedium\n403\n14.7\n9.81\n25.0\n\n\n211\n0.37578\n0.0\n10.59\nYes\n0.489\n5.404\n88.6\n3.6650\nMedium\n277\n18.6\n23.98\n19.3\n\n\n294\n0.08199\n0.0\n13.92\nNo\n0.437\n6.009\n42.3\n5.5027\nMedium\n289\n16.0\n10.40\n21.7"
+    "text": "The predictors and response in the training dataset are in the objects X_train and Y_train, respectively. We compile these objects into a single dataset using the function .concat() from pandas. The argument axis = 1 tells .concat() to concatenate the datasets by their rows.\n\ntraining_dataset = pd.concat([X_train, Y_train], axis = 1)\ntraining_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n412\n18.81100\n0.0\n18.10\nNo\n0.597\n4.628\n100.0\n1.5539\nHigh\n666\n20.2\n34.37\n17.9\n\n\n174\n0.08447\n0.0\n4.05\nNo\n0.510\n5.859\n68.7\n2.7019\nMedium\n296\n16.6\n9.64\n22.6\n\n\n448\n9.32909\n0.0\n18.10\nNo\n0.713\n6.185\n98.7\n2.2616\nHigh\n666\n20.2\n18.13\n14.1\n\n\n454\n9.51363\n0.0\n18.10\nNo\n0.713\n6.728\n94.1\n2.4961\nHigh\n666\n20.2\n18.71\n14.9"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-5",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-5",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "Equivalently, the predictors and response in the validation dataset are in the objects X_valid and Y_valid, respectively.\n\nvalidation_dataset = pd.concat([X_valid, Y_valid], axis = 1)\nvalidation_dataset.head()\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n397\n7.67202\n0.0\n18.10\nNo\n0.693\n5.747\n98.9\n1.6334\nHigh\n666\n20.2\n19.92\n8.5\n\n\n494\n0.27957\n0.0\n9.69\nNo\n0.585\n5.926\n42.6\n2.3817\nMedium\n391\n19.2\n13.59\n24.5\n\n\n130\n0.34006\n0.0\n21.89\nNo\n0.624\n6.458\n98.9\n2.1185\nMedium\n437\n21.2\n12.60\n19.2\n\n\n55\n0.01311\n90.0\n1.22\nNo\n0.403\n7.249\n21.9\n8.6966\nMedium\n226\n17.9\n4.81\n35.4\n\n\n447\n9.92485\n0.0\n18.10\nNo\n0.740\n6.251\n96.6\n2.1980\nHigh\n666\n20.2\n16.44\n12.6"
+    "text": "Equivalently, the predictors and response in the validation dataset are in the objects X_valid and Y_valid, respectively.\n\nvalidation_dataset = pd.concat([X_valid, Y_valid], axis = 1)\nvalidation_dataset.head()\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n323\n0.28392\n0.0\n7.38\nNo\n0.493\n5.708\n74.3\n4.7211\nMedium\n287\n19.6\n11.74\n18.5\n\n\n112\n0.12329\n0.0\n10.01\nNo\n0.547\n5.913\n92.9\n2.3534\nMedium\n432\n17.8\n16.21\n18.8\n\n\n40\n0.03359\n75.0\n2.95\nNo\n0.428\n7.024\n15.8\n5.4011\nLow\n252\n18.3\n1.98\n34.9\n\n\n14\n0.63796\n0.0\n8.14\nNo\n0.538\n6.096\n84.5\n4.4619\nMedium\n307\n21.0\n10.26\n18.2\n\n\n106\n0.17120\n0.0\n8.56\nNo\n0.520\n5.836\n91.9\n2.2110\nMedium\n384\n20.9\n18.66\n19.5"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#work-on-your-training-dataset",
@@ -2790,7 +2790,7 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-8",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "We use a validation dataset with 20% of the observations in penguins_data. The other 80% will be in the training dataset.\n\n# Split the dataset into training and validation.\nX_train_p, X_valid_p, Y_train_p, Y_valid_p = train_test_split(X_full_p, Y_full_p, \n                                                      test_size = 0.3,\n                                                      random_state = 59227)\n\n\nIn train_test_split, we use the input random_state to set a random seed. Essentially, this allows you to obtain the same training and validation datasets every time you run the code. The advice is setting random_state to a big integer number generated at random."
+    "text": "We use a validation dataset with 30% of the observations in penguins_data. The other 70% will be in the training dataset.\n\n# Split the dataset into training and validation.\nX_train_p, X_valid_p, Y_train_p, Y_valid_p = train_test_split(X_full_p, Y_full_p, \n                                                      test_size = 0.3,\n                                                      random_state = 59227)\n\n\nIn train_test_split, we use the input random_state to set a random seed. Essentially, this allows you to obtain the same training and validation datasets every time you run the code. The advice is setting random_state to a big integer number generated at random."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-9",
@@ -2853,7 +2853,7 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-15",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "Using SimpleImputer(), we set the method to imput missing values using the mean.\nWe also use the function fit_transform() to apply the imputation method to the variable.\n\n# Imputation for numerical variables (using the mean)\nnum_imputer = SimpleImputer(strategy = 'mean')\n\n# Replace the original variable with new version.\nX_train_p['bill_length_mm'] = num_imputer.fit_transform(X_train_p[ ['bill_length_mm'] ] )"
+    "text": "Using SimpleImputer(), we set the method to impute missing values using the mean.\nWe also use the function fit_transform() to apply the imputation method to the variable.\n\n# Imputation for numerical variables (using the mean)\nnum_imputer = SimpleImputer(strategy = 'mean')\n\n# Replace the original variable with new version.\nX_train_p['bill_length_mm'] = num_imputer.fit_transform(X_train_p[ ['bill_length_mm'] ] )"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-16",
@@ -2867,7 +2867,7 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-17",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "To imput the missing values using the median, we simply set this method in SimpleImputer(). For example, let’s imput the missing values of bill_depth_mm.\n\n# Imputation for numerical variables (using the mean)\nnum_imputer = SimpleImputer(strategy = 'median')\n\n# Replace the original variable with new version.\nX_train_p['bill_depth_mm'] = num_imputer.fit_transform(X_train_p[ ['bill_depth_mm'] ] )\n\n# Show the information of the predictor.\nX_train_p['bill_depth_mm'].info()\n\n&lt;class 'pandas.core.series.Series'&gt;\nIndex: 240 entries, 31 to 293\nSeries name: bill_depth_mm\nNon-Null Count  Dtype  \n--------------  -----  \n240 non-null    float64\ndtypes: float64(1)\nmemory usage: 3.8 KB"
+    "text": "To impute the missing values using the median, we simply set this method in SimpleImputer(). For example, let’s impute the missing values of bill_depth_mm.\n\n# Imputation for numerical variables (using the mean)\nnum_imputer = SimpleImputer(strategy = 'median')\n\n# Replace the original variable with new version.\nX_train_p['bill_depth_mm'] = num_imputer.fit_transform(X_train_p[ ['bill_depth_mm'] ] )\n\n# Show the information of the predictor.\nX_train_p['bill_depth_mm'].info()\n\n&lt;class 'pandas.core.series.Series'&gt;\nIndex: 240 entries, 31 to 293\nSeries name: bill_depth_mm\nNon-Null Count  Dtype  \n--------------  -----  \n240 non-null    float64\ndtypes: float64(1)\nmemory usage: 3.8 KB"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#using-the-mean-or-the-median",
@@ -2931,5 +2931,12 @@
     "title": "Data preprocessing: Part I",
     "section": "",
     "text": "Let’s look at the new dataset.\n\nX_train_num_p.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 240 entries, 0 to 239\nData columns (total 4 columns):\n #   Column             Non-Null Count  Dtype  \n---  ------             --------------  -----  \n 0   bill_length_mm     240 non-null    float64\n 1   bill_depth_mm      240 non-null    float64\n 2   flipper_length_mm  240 non-null    float64\n 3   body_mass_g        240 non-null    float64\ndtypes: float64(4)\nmemory usage: 7.6 KB\n\n\nAll predictors have 240 complete entries."
+  },
+  {
+    "objectID": "PreProcessing/PreProcessing_Part1.slides.html#basic-idea",
+    "href": "PreProcessing/PreProcessing_Part1.slides.html#basic-idea",
+    "title": "Data preprocessing: Part I",
+    "section": "Basic idea",
+    "text": "Basic idea\n\n\nhttps://blog.dailydoseofds.com/p/the-most-overlooked-problem-with-768"
   }
 ]

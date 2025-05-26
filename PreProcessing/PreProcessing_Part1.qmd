@@ -378,7 +378,7 @@ Y_full_p = penguins_data.filter(['species'])
 
 ## 
 
-We use a validation dataset with 20% of the observations in `penguins_data`. The other 80% will be in the training dataset.
+We use a validation dataset with 30% of the observations in `penguins_data`. The other 70% will be in the training dataset.
 
 ```{python}
 #| echo: true
@@ -498,7 +498,7 @@ In **scikit-learn**, we use the function `SimpleImputer()` to define the method 
 
 </br>
 
-Using `SimpleImputer()`, we set the method to imput missing values using the **mean**. 
+Using `SimpleImputer()`, we set the method to impute missing values using the **mean**. 
 
 We also use the function `fit_transform()` to apply the imputation method to the variable.
 
@@ -530,7 +530,7 @@ Now, `bill_length_mm` has 240 complete values.
 
 ## 
 
-To imput the missing values using the **median**, we simply set this method in `SimpleImputer()`. For example, let's imput the missing values of `bill_depth_mm`.
+To impute the missing values using the **median**, we simply set this method in `SimpleImputer()`. For example, let's impute the missing values of `bill_depth_mm`.
 
 ```{python}
 #| echo: true
@@ -609,8 +609,7 @@ For each missing value in a predictor $X$:
 2.  Impute the missing value of $X$ using the *average* of the available values of $X$ in the $K$ closest rows.
 
 
-
-## Basic idea II
+## Basic idea
 
 ![](images/KNN_idea2.png){fig-align="center" width="645"}
 

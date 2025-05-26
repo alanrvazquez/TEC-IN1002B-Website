@@ -267,7 +267,6 @@ augmented_auto = pd.concat([complete_Auto, dummy_data], axis = 1)
 augmented_auto.head()
 ```
 
-
 ## Transforming numerical predictors
 
 </br>
@@ -367,7 +366,6 @@ Boston_training = pd.concat([X_train_b, Y_train_b], axis = 1)
 Boston_training.head()
 ```
 
-
 ## Distribution of `DIS`
 
 A right-skewed distribution is characterized by the right tail (or the side with higher values) being longer and more extended than the left tail.
@@ -383,7 +381,6 @@ plt.title("Histogram of DIS") # Plot title.
 plt.xlabel("DIS") # X label
 plt.show() # Display the plot
 ```
-
 
 ## Problems with strong skewness
 
@@ -669,7 +666,6 @@ We can identify the variables that are highly correlated using quite complex cod
 # Dataset without highly correlated predictors.
 reduced_auto = complete_sbAuto[ ['weight', 'acceleration']]
 ```
-
 
 # Standarization
 
