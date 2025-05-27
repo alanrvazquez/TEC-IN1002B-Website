@@ -597,6 +597,21 @@ X_train_p.info()
 
 The columns `bill_length_mm`, `bill_depth_mm`, and `sex` have 240 complete values.
 
+## 
+
+</br>
+
+Unfortunately, after applying `cat_imputer` to the dataset, the variable `sex` is an object. To change it to categorical, we use the function  `pd.Categorical` again.
+
+```{python}
+#| echo: true
+#| output: true
+
+# Apply imputation strategy for categorical variables.
+X_train_p['sex'] = pd.Categorical(X_train_p['sex'])
+X_train_p.info()
+```
+
 ## Multivariate imputation using K-nearest neighbours
 
 K-nearest neighbours (KNN) is an imputation method to fill in the missing values of a predictor using the available values from this and the other predictors.

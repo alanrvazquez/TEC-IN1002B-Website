@@ -127,7 +127,7 @@ Y_full_c = auto_data.filter(['mpg'])
 
 </br>
 
-We will use a validation dataset with 20% of the observations in `auto_data`. The other 80% will be in the training dataset.
+We will use a validation dataset with 30% of the observations in `auto_data`. The other 70% will be in the training dataset.
 
 ```{python}
 #| echo: true
@@ -403,13 +403,11 @@ To correct the skewness of a predictor's distribution, we can transform the pred
 </br>
 
 ::: incremental
+-   The Box-Cox transformation uses a family of power transformations on a predictor $X$ such that $X' = X^{\lambda}$, where $\lambda$ is a parameter to be determined using the data. When $\lambda = 0,$ this means $X' = \ln(X)$, where $\ln(\cdot)$ is the natural logarithm.
 
-- The Box-Cox transformation uses a family of power transformations on a predictor $X$ such that $X' = X^{\lambda}$, where $\lambda$ is a parameter to be determined using the data. When $\lambda = 0,$ this means $X' = \ln(X)$, where $\ln(\cdot)$ is the natural logarithm.
+-   The Box-Cox transformation is the element of this family that results in a transformed variable that follows a normal distribution (approximately).
 
-- The Box-Cox transformation is the element of this family that results in a transformed variable that follows a normal distribution (approximately).
-
-- [The variable $X$ must be strictly positive!]{style="color:blue;"}
-
+-   [The variable $X$ must be strictly positive!]{style="color:blue;"}
 :::
 
 ## In Python
@@ -429,7 +427,7 @@ In the `PowerTransformer`, the input `standardize` specifies if we wish to stand
 
 ## 
 
-The result from the function is a **numpy** array. However, since we are working with **pandas** dataframes, we must transform the output to this format using the following code. 
+The result from the function is a **numpy** array. However, since we are working with **pandas** dataframes, we must transform the output to this format using the following code.
 
 ```{python}
 #| echo: true
@@ -437,7 +435,6 @@ The result from the function is a **numpy** array. However, since we are working
 DIS_transform_df = pd.DataFrame(DIS_transform, columns=['DIS_boxcox'])
 DIS_transform_df.head()
 ```
-
 
 ## 
 
@@ -481,7 +478,7 @@ plt.show() # Display the plot
 
 </br>
 
-Recall that the Box-Cox transformation finds the best value of $\lambda$ that makes the transformed predictor $X^\lambda$ to follow a normal distribution. 
+Recall that the Box-Cox transformation finds the best value of $\lambda$ that makes the transformed predictor $X^\lambda$ to follow a normal distribution.
 
 We can obtain the value of $\lambda$ actually used in the transformation using the following code.
 
@@ -548,7 +545,7 @@ Since the values of this predictor variable do not vary or change at all, this p
 
 We consider a data set related to Glass identification. The data has 214 glass samples labeled as one of seven glass categories. There are nine predictors including the refractive index (RI) and percentages of eight elements: Na, Mg, Al, Si, K, Ca, Ba, and Fe.
 
-Let's read the data set. 
+Let's read the data set.
 
 ```{python}
 #| echo: true
