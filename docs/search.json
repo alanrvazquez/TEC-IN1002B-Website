@@ -249,7 +249,7 @@
     "href": "PreProcessing/PreProcessing_Part2.slides.html#in-python-1",
     "title": "Data preprocessing: Part II",
     "section": "In Python",
-    "text": "In Python\nWe use the function VarianceThreshold() to set the threshold for determining a low sample variance. We also use other functions such as selector.fit() and selector.get_support().\n\n# Set threshold\nselector = VarianceThreshold(threshold=0.01)\n\n# Apply threshold.\nselector.fit(X_train_g)\n\n# Identify predictors with low variance.\nlow_variance_cols = X_train_g.columns[~selector.get_support()]\n\n# Print the list of predictors.\nprint(f\"Low variance columns: {low_variance_cols}\")\n\nLow variance columns: Index(['RI', 'Fe'], dtype='object')"
+    "text": "In Python\nWe use the function VarianceThreshold() to set the threshold for determining a low sample variance. We also use other functions such as .fit() and .get_support().\n\n# Set threshold\nselector = VarianceThreshold(threshold=0.01)\n\n# Apply threshold.\nselector.fit(X_train_g)\n\n# Identify predictors with low variance.\nlow_variance_cols = X_train_g.columns[~selector.get_support()]\n\n# Print the list of predictors.\nprint(f\"Low variance columns: {low_variance_cols}\")\n\nLow variance columns: Index(['RI', 'Fe'], dtype='object')"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part2.slides.html#section-11",

@@ -578,7 +578,7 @@ X_train_g, X_valid_g, Y_train_g, Y_valid_g = train_test_split(X_full_g,
 
 ## In Python
 
-We use the function `VarianceThreshold()` to set the threshold for determining a *low* sample variance. We also use other functions such as `selector.fit()` and `selector.get_support()`.
+We use the function `VarianceThreshold()` to set the threshold for determining a *low* sample variance. We also use other functions such as `.fit()` and `.get_support()`.
 
 ```{python}
 #| echo: true
@@ -819,7 +819,7 @@ In the new scale, the two points are now: $(1.82, 2.53)$ and $(-0.91, -1.60)$.
 plt.figure(figsize=(5,5))
 sns.scatterplot(data = scaled_df, x = 'horsepower', y = 'weight')
 plt.scatter(x = 1.83, y = 2.54, color = 'red')
-plt.scatter(x = -0.915, y = -1.605, color = 'red')
+plt.scatter(x = -0.90, y = -1.60, color = 'red')
 plt.xlabel('Standardized horsepower', fontsize=14)
 plt.ylabel('Standardized weight', fontsize=14)
 plt.show()
