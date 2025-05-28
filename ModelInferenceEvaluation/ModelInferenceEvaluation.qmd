@@ -45,6 +45,21 @@ import statsmodels.api as sm
 
 # Residual analysis
 
+## Questions
+
+</br>
+
+1.  How can we estimate $\beta_0, \beta_1, \ldots, \beta_p$ and $\sigma^2$?
+
+2.  [How can we validate the model and all its assumptions?]{style="color:blue;"}
+
+3.  How can we make inferences about $\beta_0, \beta_1, \ldots, \beta_p$?
+
+4.  If some assumptions are not met, can we do something about it?
+
+5.  How can we make predictions of future responses using the multiple linear regression model?
+
+
 ## Multiple linear regression model
 
 </br>
@@ -418,6 +433,20 @@ When $n$ is relatively small, you tend to see deviations, particularly in the ta
 [If the residuals are dependent]{style="color:red;"}, then the linear model is incorrect and everything falls apart!
 
 # Inference about individual $\beta$’s using t-tests
+
+## Questions
+
+</br>
+
+1.  How can we estimate $\beta_0, \beta_1, \ldots, \beta_p$ and $\sigma^2$?
+
+2.  How can we validate the model and all its assumptions?
+
+3.  [How can we make inferences about $\beta_0, \beta_1, \ldots, \beta_p$?]{style="color:blue;"}
+
+4.  If some assumptions are not met, can we do something about it?
+
+5.  How can we make predictions of future responses using the multiple linear regression model?
 
 ## Example 2
 

@@ -209,9 +209,9 @@ The error $\epsilon_i$’s must satisfy the following assumptions:
 ::: incremental
 1.  How can we estimate $\beta_0, \beta_1, \ldots, \beta_p$ and $\sigma^2$?
 
-2.  How can we make inferences about $\beta_0, \beta_1, \ldots, \beta_p$?
+2.  How can we validate the model and all its assumptions?
 
-3.  How can we validate the model and all its assumptions?
+3.  How can we make inferences about $\beta_0, \beta_1, \ldots, \beta_p$?
 
 4.  If some assumptions are not met, can we do something about it?
 
@@ -266,9 +266,9 @@ $\begin{pmatrix} Y_1 \\ Y_2 \\ \vdots \\ Y_n \end{pmatrix} = \begin{pmatrix}
 
 1.  [How can we estimate $\beta_0, \beta_1, \ldots, \beta_p$ and $\sigma^2$?]{style="color:blue;"}
 
-2.  How can we make inferences about $\beta_0, \beta_1, \ldots, \beta_p$?
+2.  How can we validate the model and all its assumptions?
 
-3.  How can we validate the model and all its assumptions?
+3.  How can we make inferences about $\beta_0, \beta_1, \ldots, \beta_p$?
 
 4.  If some assumptions are not met, can we do something about it?
 

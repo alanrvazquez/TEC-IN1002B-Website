@@ -460,6 +460,20 @@ Ideally, the dummy variables for the categorical predictors are standardized too
 
 # Remedies for faulty assumptions
 
+## Questions
+
+</br>
+
+1.  How can we estimate $\beta_0, \beta_1, \ldots, \beta_p$ and $\sigma^2$?
+
+2.  How can we validate the model and all its assumptions?
+
+3.  How can we make inferences about $\beta_0, \beta_1, \ldots, \beta_p$?
+
+4.  [If some assumptions are not met, can we do something about it?]{style="color:blue;"}
+
+5.  How can we make predictions of future responses using the multiple linear regression model?
+
 ## Incorrect model
 
 </br></br>
@@ -763,6 +777,20 @@ plt.show()
 :::
 
 # Predicting future observations
+
+## Questions
+
+</br>
+
+1.  How can we estimate $\beta_0, \beta_1, \ldots, \beta_p$ and $\sigma^2$?
+
+2.  How can we validate the model and all its assumptions?
+
+3.  How can we make inferences about $\beta_0, \beta_1, \ldots, \beta_p$?
+
+4.  If some assumptions are not met, can we do something about it?
+
+5.  [How can we make predictions of future responses using the multiple linear regression model?]{style="color:blue;"}
 
 ## Recall that ...
 
