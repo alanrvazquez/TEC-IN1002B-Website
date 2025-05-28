@@ -737,9 +737,9 @@ Scaling the data coerce the values to have a common standard deviation of one.
 
 In mathematical terms, we standardize a predictor as:
 
-$${\color{blue} \tilde{x}_{i}} = \frac{{ x_{i} - \bar{x}}}{ \sqrt{\frac{1}{n -1} \sum_{i=1}^{n} (x_{i} - \bar{x})^2}},$$
+$${\color{blue} \tilde{X}_{i}} = \frac{{ X_{i} - \bar{X}}}{ \sqrt{\frac{1}{n -1} \sum_{i=1}^{n} (X_{i} - \bar{X})^2}},$$
 
-with $\bar{x} = \sum_{i=1}^n \frac{x_i}{n}$.
+with $\bar{X} = \sum_{i=1}^n \frac{x_i}{n}$.
 
 ## Example 1 (cont.)
 

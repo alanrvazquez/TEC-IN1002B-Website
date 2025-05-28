@@ -66,8 +66,6 @@ A group of engineers conducted an experiment to determine the influence of five 
 
 ## The dataset
 
-</br>
-
 The dataset for the file is in "rayon.xlsx". It has 26 observations.
 
 ```{python}
@@ -78,13 +76,19 @@ rayon_data = pd.read_excel("rayon.xlsx")
 rayon_data.head()
 ```
 
+Here, we will consider it as the [training]{style="color:blue;"} dataset.
+
 ## Multiple linear regression model
 
 $$Y = f(\boldsymbol{X}) + \epsilon$$
 
+::: incremental
 -   $f(\boldsymbol{X}) = \beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p$ (constant).
 -   $p$ is the number of predictors.
 -   $\epsilon$ is a random variable describing everything that is not captured by our model.
+:::
+
+. . .
 
 Assumptions:
 
@@ -111,17 +115,27 @@ $$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \beta_4 X_4 + \beta_5 
 -   $p = 5$ and $\epsilon$ is the error of the model assumed to be 0 and of constant dispersion $\sigma^2$.
 :::
 
+::: notes
+That is, the dispersion does not change in terms of the predictors or other variables not in the model.
+:::
+
 ## Interpretation of coefficients
+
+</br>
 
 $$f(\boldsymbol{X}) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p,$$
 
 where the unknown parameter $\beta_0$ is called the “intercept,” and $\beta_j$ is the “coefficient” of the j-th predictor.
 
+. . .
+
 For the j-th predictor, we have that:
 
+::: incremental
 -   $\beta_j = 0$ implies no dependence.
 -   $\beta_j > 0$ implies positive dependence.
 -   $\beta_j < 0$ implies negative dependence.
+::: 
 
 ## 
 
@@ -135,6 +149,8 @@ $$f(\boldsymbol{X}) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p
 -   $\beta_j$ is the [amount of increase in the average response]{style="color:blue;"} by a 1 unit increase in the predictor $X_j$, *when all other predictors are fixed to an arbitrary value*.
 
 ## Training Data
+
+</br>
 
 The parameters $\beta_0, \beta_1, \ldots, \beta_p$ and $\sigma^2$ are unknown. To learn about them, we use our [**training**]{style="color:blue;"} data.
 

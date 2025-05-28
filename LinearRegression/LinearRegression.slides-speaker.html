@@ -236,7 +236,7 @@ Alan R. Vazquez
 <h2>Load the libraries</h2>
 <p><br><br></p>
 <p>Let’s import <strong>statsmodels</strong> into Python together with the other relevant libraries.</p>
-<div id="7087f1c0" class="cell" data-execution_count="1">
+<div id="5e164fbb" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Importing necessary libraries</span></span>
 <span id="cb1-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -261,12 +261,11 @@ Alan R. Vazquez
 </section>
 <section id="the-dataset" class="slide level2">
 <h2>The dataset</h2>
-<p><br></p>
 <p>The dataset for the file is in “rayon.xlsx”. It has 26 observations.</p>
-<div id="7e2383f5" class="cell" data-execution_count="2">
+<div id="edb239ab" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>rayon_data <span class="op">=</span> pd.read_excel(<span class="st">"rayon.xlsx"</span>)</span>
 <span id="cb2-2"><a></a>rayon_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="122">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -346,20 +345,25 @@ Alan R. Vazquez
 </div>
 </div>
 </div>
+<p>Here, we will consider it as the <span style="color:blue;">training</span> dataset.</p>
 </section>
 <section id="multiple-linear-regression-model-1" class="slide level2">
 <h2>Multiple linear regression model</h2>
 <p><span class="math display">\[Y = f(\boldsymbol{X}) + \epsilon\]</span></p>
+<div>
 <ul>
-<li><span class="math inline">\(f(\boldsymbol{X}) = \beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p\)</span> (constant).</li>
-<li><span class="math inline">\(p\)</span> is the number of predictors.</li>
-<li><span class="math inline">\(\epsilon\)</span> is a random variable describing everything that is not captured by our model.</li>
+<li class="fragment"><span class="math inline">\(f(\boldsymbol{X}) = \beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p\)</span> (constant).</li>
+<li class="fragment"><span class="math inline">\(p\)</span> is the number of predictors.</li>
+<li class="fragment"><span class="math inline">\(\epsilon\)</span> is a random variable describing everything that is not captured by our model.</li>
 </ul>
+</div>
+<div class="fragment">
 <p>Assumptions:</p>
 <ol type="1">
 <li>The expected or average value of <span class="math inline">\(\epsilon\)</span> is zero.</li>
 <li>The dispersion or variance of <span class="math inline">\(\epsilon\)</span> is <span class="math inline">\(\sigma^2\)</span> (unknown constant).</li>
 </ol>
+</div>
 </section>
 <section id="in-our-example" class="slide level2">
 <h2>In our example</h2>
@@ -375,17 +379,35 @@ Alan R. Vazquez
 <li><p><span class="math inline">\(p = 5\)</span> and <span class="math inline">\(\epsilon\)</span> is the error of the model assumed to be 0 and of constant dispersion <span class="math inline">\(\sigma^2\)</span>.</p></li>
 </ul>
 </div>
+<aside class="notes">
+<p>That is, the dispersion does not change in terms of the predictors or other variables not in the model.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="interpretation-of-coefficients" class="slide level2">
 <h2>Interpretation of coefficients</h2>
+<p><br></p>
 <p><span class="math display">\[f(\boldsymbol{X}) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p,\]</span></p>
 <p>where the unknown parameter <span class="math inline">\(\beta_0\)</span> is called the “intercept,” and <span class="math inline">\(\beta_j\)</span> is the “coefficient” of the j-th predictor.</p>
+<div class="fragment">
 <p>For the j-th predictor, we have that:</p>
+<div>
 <ul>
-<li><span class="math inline">\(\beta_j = 0\)</span> implies no dependence.</li>
-<li><span class="math inline">\(\beta_j &gt; 0\)</span> implies positive dependence.</li>
-<li><span class="math inline">\(\beta_j &lt; 0\)</span> implies negative dependence.</li>
+<li class="fragment"><span class="math inline">\(\beta_j = 0\)</span> implies no dependence.</li>
+<li class="fragment"><span class="math inline">\(\beta_j &gt; 0\)</span> implies positive dependence.</li>
+<li class="fragment"><span class="math inline">\(\beta_j &lt; 0\)</span> implies negative dependence.</li>
 </ul>
+</div>
+</div>
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
@@ -399,9 +421,10 @@ Alan R. Vazquez
 </section>
 <section id="training-data" class="slide level2">
 <h2>Training Data</h2>
+<p><br></p>
 <p>The parameters <span class="math inline">\(\beta_0, \beta_1, \ldots, \beta_p\)</span> and <span class="math inline">\(\sigma^2\)</span> are unknown. To learn about them, we use our <span style="color:blue;"><strong>training</strong></span> data.</p>
-<div id="f8e68fca" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div id="62464af3" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="123">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -488,8 +511,8 @@ Alan R. Vazquez
 <li><span class="math inline">\(X_{ij}\)</span> denotes the i-th observed value of predictor <span class="math inline">\(X_j\)</span>.</li>
 <li><span class="math inline">\(Y_i\)</span> denotes the i-th observed value of response <span class="math inline">\(Y\)</span>.</li>
 </ul>
-<div id="e038ec05" class="cell" data-execution_count="4">
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div id="5d854f79" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="124">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -709,7 +732,7 @@ Alan R. Vazquez
 <h2>Computation in Python</h2>
 <p><br></p>
 <p>To compute the least squares estimates, we first split the data set into a matrix with the values of the predictors only, and a matrix with the response values.</p>
-<div id="66b73d65" class="cell" data-execution_count="5">
+<div id="f076778b" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># Matrix with predictors.</span></span>
 <span id="cb3-2"><a></a>rayon_predictors <span class="op">=</span> rayon_data.drop(columns<span class="op">=</span>[<span class="st">'Y'</span>])</span>
 <span id="cb3-3"><a></a></span>
@@ -724,7 +747,7 @@ Alan R. Vazquez
 <h2></h2>
 <p><br><br></p>
 <p>Next, we use the functions <code>OLS()</code> and <code>fit()</code> from <strong>statsmodels</strong>.</p>
-<div id="3c64d55b" class="cell" data-execution_count="6">
+<div id="eb0389f8" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co"># Create linear regression object</span></span>
 <span id="cb4-2"><a></a>regr <span class="op">=</span> sm.OLS(rayon_Y_train, rayon_X_train)</span>
 <span id="cb4-3"><a></a></span>
@@ -736,7 +759,7 @@ Alan R. Vazquez
 <h2></h2>
 <p><br></p>
 <p>To show the estimated coefficients, we use the argument <code>params</code> of the <code>linear_model</code> object created previously.</p>
-<div id="b81f650a" class="cell" data-execution_count="7">
+<div id="ec1e5b88" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="co"># The estimated coefficients.</span></span>
 <span id="cb5-2"><a></a><span class="bu">print</span>(linear_model.params)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -789,7 +812,7 @@ dtype: float64</code></pre>
 <p><span class="math display">\[\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \hat{\beta}_2 X_{i2} + \cdots + \hat{\beta}_p X_{ip}\]</span></p>
 <p>where <span class="math inline">\(\hat{Y}_i\)</span> is the i-th fitted or predicted response.</p>
 <p>In Python, we use the argument <code>fittedvalues</code> to show the predicted responses of the estimated model.</p>
-<div id="1763da1e" class="cell" data-execution_count="8">
+<div id="4c85f0fa" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="co"># Make predictions using the the model</span></span>
 <span id="cb7-2"><a></a>rayon_Y_pred <span class="op">=</span> linear_model.fittedvalues</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -798,7 +821,7 @@ dtype: float64</code></pre>
 <h2></h2>
 <p><br></p>
 <p>Predictions of the 26 observations in the training dataset.</p>
-<div id="49f4969c" class="cell" data-execution_count="9">
+<div id="fdd4c74d" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="bu">print</span>(rayon_Y_pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0      72.205449
@@ -843,7 +866,7 @@ dtype: float64</code></pre>
 <section id="section-11" class="slide level2">
 <h2></h2>
 <p>In Python, we compute the residuals using the following command.</p>
-<div id="c7c3c834" class="cell" data-execution_count="10">
+<div id="14b0ad37" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>residuals <span class="op">=</span> linear_model.resid</span>
 <span id="cb10-2"><a></a></span>
 <span id="cb10-3"><a></a><span class="bu">print</span>(residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -884,7 +907,7 @@ dtype: float64</code></pre>
 <p>The variance <span class="math inline">\(\sigma^2\)</span> of the errors is estimated by</p>
 <p><span class="math display">\[\hat{\sigma}^2=\frac{1}{n-p-1}\sum_{i=1}^{n} \hat{\epsilon}_i^{2}.\]</span></p>
 <p>In Python, we compute <span class="math inline">\(\hat{\sigma}^2\)</span> as follows.</p>
-<div id="249dc486" class="cell" data-execution_count="11">
+<div id="7aaf9ad7" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a>error_variance <span class="op">=</span> linear_model.scale</span>
 <span id="cb12-2"><a></a></span>
 <span id="cb12-3"><a></a><span class="bu">print</span>( <span class="bu">round</span>(error_variance, <span class="dv">3</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -899,7 +922,7 @@ dtype: float64</code></pre>
 <p>The smaller the value of <span class="math inline">\(\hat{\sigma}^2\)</span>, the closer our predictions are to the actual responses.</p>
 <p>In practice, it is better to use the standard deviation of the errors. That is,</p>
 <p><span class="math display">\[\hat{\sigma}=\left(\frac{1}{n-p-1}\sum_{i=1}^{n} \hat{\epsilon}_i^{2}\right)^{1/2}.\]</span> In Python, we compute <span class="math inline">\(\hat{\sigma}\)</span> as follows:</p>
-<div id="bcb50a39" class="cell" data-execution_count="12">
+<div id="651cb8d9" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="bu">print</span>( <span class="bu">round</span>(error_variance<span class="op">**</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>), <span class="dv">3</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>10.292</code></pre>

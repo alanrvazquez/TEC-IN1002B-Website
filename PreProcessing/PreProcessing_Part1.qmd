@@ -601,7 +601,7 @@ The columns `bill_length_mm`, `bill_depth_mm`, and `sex` have 240 complete value
 
 </br>
 
-Unfortunately, after applying `cat_imputer` to the dataset, the variable `sex` is an object. To change it to categorical, we use the function  `pd.Categorical` again.
+Unfortunately, after applying `cat_imputer` to the dataset, the variable `sex` is an object. To change it to categorical, we use the function `pd.Categorical` again.
 
 ```{python}
 #| echo: true
