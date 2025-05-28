@@ -213,7 +213,9 @@ The error $\epsilon_i$’s must satisfy the following assumptions:
 
 3.  How can we validate the model and all its assumptions?
 
-4.  How can we make predictions of future responses using the multiple linear regression model?
+4.  If some assumptions are not met, can we do something about it?
+
+5.  How can we make predictions of future responses using the multiple linear regression model?
 :::
 
 ## Matrix notation
@@ -258,11 +260,28 @@ $\begin{pmatrix} Y_1 \\ Y_2 \\ \vdots \\ Y_n \end{pmatrix} = \begin{pmatrix}
 
 # Parameter Estimation
 
+## Questions
+
+</br>
+
+1.  [How can we estimate $\beta_0, \beta_1, \ldots, \beta_p$ and $\sigma^2$?]{style="color:blue;"}
+
+2.  How can we make inferences about $\beta_0, \beta_1, \ldots, \beta_p$?
+
+3.  How can we validate the model and all its assumptions?
+
+4.  If some assumptions are not met, can we do something about it?
+
+5.  How can we make predictions of future responses using the multiple linear regression model?
+
+
 ## An estimator for $\boldsymbol{\beta}$
 
-Our goal is to find an estimator for the vector $\boldsymbol{\beta}$ (and all its components). For the moment, let’s assume that we have one:
+Our **goal** is to find an estimator for the vector $\boldsymbol{\beta}$ (and all its components). For the moment, let’s assume that we have one:
 
 $\hat{\boldsymbol{\beta}} = \begin{pmatrix} \hat{\beta}_0 \\ \hat{\beta}_1 \\ \vdots\\ \hat{\beta}_p \end{pmatrix}$, where $\hat{\beta}_j$ is an estimator for $\beta_j$, $j = 0, \ldots, p$.
+
+. . .
 
 Using this estimator, we can compute the predicted responses of our model $\hat{\mathbf{Y}} = \mathbf{X}\hat{\boldsymbol{\beta}}$, where $\hat{\mathbf{Y}} = (\hat{Y}_1, \hat{Y}_2, \ldots, \hat{Y}_n)^{T}$ and $\hat{Y}_i$ is the i-th predicted response.
 
@@ -293,20 +312,24 @@ where $\hat{\boldsymbol{\epsilon}} = (\hat{\epsilon}_1, \hat{\epsilon}_2, \ldots
 
 To find the best estimator for $\boldsymbol{\beta}$ (and all its elements), we use the method of least squares. This method finds the best $\hat{\boldsymbol{\beta}}$ that minimizes the residual sum of squares (RSS):
 
-$$RSS = \left(\mathbf{y} - \mathbf{X} \hat{\boldsymbol{\beta}}\right)^{T} \left(\mathbf{y} - \mathbf{X} \hat{\boldsymbol{\beta}}\right) = \sum_{i=1}^{n} \hat{\epsilon}^2_i = \sum_{i=1}^{n} (Y_i - \hat{Y}_i)^2.$$
+$$RSS = \left(\mathbf{Y} - \mathbf{X} \hat{\boldsymbol{\beta}}\right)^{T} \left(\mathbf{Y} - \mathbf{X} \hat{\boldsymbol{\beta}}\right) = \sum_{i=1}^{n} \hat{\epsilon}^2_i = \sum_{i=1}^{n} (Y_i - \hat{Y}_i)^2.$$
+
+. . .
 
 The estimator that minimizes the expression above is called the [**least squares estimator**]{style="color:brown;"}:
 
-$$\hat{\boldsymbol{\beta}} = (\mathbf{X}^{T}\mathbf{X})^{-1} \mathbf{X}^{T}\mathbf{y}$$
+$$\hat{\boldsymbol{\beta}} = (\mathbf{X}^{T}\mathbf{X})^{-1} \mathbf{X}^{T}\mathbf{Y}$$
 
-## Computation of $\hat{\boldsymbol{\beta}} = (\mathbf{X}^{T}\mathbf{X})^{-1} \mathbf{X}^{T}\mathbf{y}$
+## Computation of $\hat{\boldsymbol{\beta}} = (\mathbf{X}^{T}\mathbf{X})^{-1} \mathbf{X}^{T}\mathbf{Y}$
 
 </br>
 
+::: incremental
 1.  Compute the transpose of a matrix: $\mathbf{X}^{T}$.
 2.  Compute the product of a matrix and a vector: $\mathbf{X}^{T}\mathbf{Y}$.
 3.  Compute the product of two matrices: $\mathbf{X}^{T} \mathbf{X}$.
 4.  Compute the [**inverse**]{style="color:red;"} of a matrix: $(\mathbf{X}^{T} \mathbf{X})^{-1}$.
+:::
 
 ## Remarks
 
@@ -316,6 +339,12 @@ $$\hat{\boldsymbol{\beta}} = (\mathbf{X}^{T}\mathbf{X})^{-1} \mathbf{X}^{T}\math
 -   If it does not have an inverse then the matrix is called [**singular**]{style="color:darkblue;"}. Otherwise, it is called **non-singular**.
 -   For the inverse to exist, the columns in $\mathbf{X}$ must be *linearly independent*.
 -   Or, equivalently, the determinant $|\mathbf{X}^{T} \mathbf{X}| > 0$.
+
+## 
+
+![](images/example_SLR.jpeg){fig-align="center"}
+
+
 
 ## 
 
@@ -398,14 +427,14 @@ The elements in the vector above are the estimates $\hat{\beta}_0$, $\hat{\beta}
 
 </br>
 
-If all the assumptions of the linear regression model are satisfied, the least squares estimators have some attractive properties.
+If all the assumptions of the linear regression model are met, the least squares estimators have some attractive properties.
 
 . . .
 
 For example:
 
-1.  On average, $\hat{\beta}_{j}$ equals the true parameter value $\beta_{j}$.
-2.  Each $\hat{\beta}_{j}$ follows a normal distribution with a specific mean and variance.
+1.  On average, the estimate $\hat{\beta}_{j}$ equals the true coefficient value $\beta_{j}$ for the predictor $X_j$.
+2.  Each estimate $\hat{\beta}_{j}$ follows a normal distribution with a specific mean and variance.
 
 ## Predictions
 
@@ -415,7 +444,7 @@ Once we estimate the intercept and model coefficients, we make predictions as fo
 
 $$\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \hat{\beta}_2 X_{i2} + \cdots + \hat{\beta}_p X_{ip}$$
 
-where $\hat{Y}_i$ is the i-th fitted or predicted response.
+where $\hat{Y}_i$ is the i-th [**fitted**]{style="color:orange;"} or [**predicted**]{style="color:orange;"} response.
 
 In Python, we use the argument `fittedvalues` to show the predicted responses of the estimated model.
 
@@ -473,9 +502,9 @@ print(residuals)
 
 The variance $\sigma^2$ of the errors is estimated by
 
-$$\hat{\sigma}^2=\frac{1}{n-p-1}\sum_{i=1}^{n} \hat{\epsilon}_i^{2}.$$
+$$\hat{\sigma}^2=\frac{1}{n-p-1}\sum_{i=1}^{n} \hat{\epsilon}_i^{2},$$
 
-In Python, we compute $\hat{\sigma}^2$ as follows.
+where $n$ and $p$ are the numbers of observations and predictors, respectively. In Python, we compute $\hat{\sigma}^2$ as follows:
 
 ```{python}
 #| echo: true
@@ -507,7 +536,7 @@ print( round(error_variance**(1/2), 3) )
 
 </br></br></br>
 
--   The smaller the $\hat{\sigma}$, the closer our predictions are to the actual responses.
+-   The smaller the $\hat{\sigma}$, the closer our predictions are to the actual responses in the [training]{style="color:blue;"} dataset.
 -   The $\hat{\sigma} = 10.292$ implies that, on average, the predictions of our model are off or incorrect by 10.292 mpg.
 
 # [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)
