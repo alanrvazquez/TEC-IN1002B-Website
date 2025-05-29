@@ -1327,7 +1327,7 @@
     "href": "LinearRegression/LinearRegression.slides.html#section-8",
     "title": "Multiple Linear Regression",
     "section": "",
-    "text": "Next, we use the functions OLS() and fit() from statsmodels.\n\n# Create linear regression object\nregr = sm.OLS(rayon_Y_train, rayon_X_train)\n\n# Train the model using the training sets\nlinear_model = regr.fit()"
+    "text": "Increasing the water temperature by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_3 = 0.793\\) units.\nIncreasing the sulfide concentration by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_4 = 25.583\\) units.\nIncreasing the amount of chlorine bleach by 1 unit increases the average whiteness of a rayon by \\(\\hat{\\beta}_5 = 17.208\\) units."
   },
   {
     "objectID": "LinearRegression/LinearRegression.slides.html#section-9",
@@ -1810,7 +1810,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#load-the-libraries",
     "title": "Model Evaluation and Inference",
     "section": "Load the libraries",
-    "text": "Load the libraries\n\nLet’s import statsmodels into Python together with the other relevant libraries.\n\n# Importing necessary libraries\nimport pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt\nimport statsmodels.api as sm"
+    "text": "Load the libraries\n\nLet’s import statsmodels into Python together with other relevant libraries.\n\n# Importing necessary libraries\nimport pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt\nimport statsmodels.api as sm"
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#questions",
@@ -1838,14 +1838,14 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#residuals",
     "title": "Model Evaluation and Inference",
     "section": "Residuals",
-    "text": "Residuals\n\nThe errors \\(\\epsilon_1, \\ldots, \\epsilon_n\\) are not observed. To overcome this issue, we use the residuals of our model.\nSuppose that the multiple linear regression model is correct and consider the fitted responses \\(\\hat{Y}_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_{i1} + \\cdots + \\hat{\\beta}_p X_{ip}\\), where \\(\\hat{\\beta}_{j}\\) is the least squares estimator for the j-th predictor.\nWe define the residual residuals \\(\\hat{\\epsilon}_i = Y_i - \\hat{Y}_i\\), \\(i = 1, \\ldots, n.\\)\n\nThe residuals \\(\\hat{\\epsilon}_i\\) are the estimates of the random errors \\(\\epsilon_i\\)."
+    "text": "Residuals\n\nThe errors \\(\\epsilon_1, \\ldots, \\epsilon_n\\) are not observed. To overcome this issue, we use the residuals of our model.\n\nSuppose that the multiple linear regression model is correct and consider the fitted responses \\(\\hat{Y}_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_{i1} + \\cdots + \\hat{\\beta}_p X_{ip}\\), where \\(\\hat{\\beta}_{j}\\) is the least squares estimator for the j-th predictor.\n\n\nWe define the residuals \\(\\hat{\\epsilon}_i = Y_i - \\hat{Y}_i\\), \\(i = 1, \\ldots, n.\\)\n\nThe residuals \\(\\hat{\\epsilon}_i\\) are the estimates of the random errors \\(\\epsilon_i\\)."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "If the model structure is correctly specified and assuming that the least-squares estimates \\(\\hat{\\beta}_j\\)’s are close to the true \\(\\beta_j\\)’s, respectively, we have that\n\\[\\hat{\\epsilon}_i = Y_i - \\hat{Y}_i = Y_i - \\hat{\\beta}_0 + \\hat{\\beta}_1 X_{i1} + \\cdots + \\hat{\\beta}_p X_{ip} \\approx \\epsilon_i\\]\nSo, the residuals \\(\\hat{\\epsilon}_i\\) should resemble the random errors \\(\\epsilon\\).\nTo evaluate the assumption of a (simple and) multiple linear regression model, we use a Residual analysis."
+    "text": "If the model structure is correctly specified and assuming that the least-squares estimates \\(\\hat{\\beta}_j\\)’s are close to the true \\(\\beta_j\\)’s, respectively, we have that\n\\[\\hat{\\epsilon}_i = Y_i - \\hat{Y}_i = Y_i - \\hat{\\beta}_0 + \\hat{\\beta}_1 X_{i1} + \\cdots + \\hat{\\beta}_p X_{ip} \\approx \\epsilon_i\\]\nSo, the residuals \\(\\hat{\\epsilon}_i\\) should resemble the random errors \\(\\epsilon\\).\n\nTo evaluate the assumption of a multiple linear regression model, we use a Residual analysis."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#residual-analysis-1",
@@ -1880,14 +1880,14 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#calculation-of-fitted-values-and-residuals",
     "title": "Model Evaluation and Inference",
     "section": "Calculation of fitted values and residuals",
-    "text": "Calculation of fitted values and residuals\nRecall that we can calculate the predicted values and residuals using commands from statsmodels.\n\n# Defining the predictor (X) and the response variable (Y).\nprod_Y_train = production_data['RunTime']\nprod_X_pred = production_data['RunSize']\nprod_X_train = sm.add_constant(prod_X_pred)\n\n# Fitting the simple linear regression model.\nregr = sm.OLS(prod_Y_train, prod_X_train)\nlinear_model = regr.fit()\n\n# Make predictions using the the model\nprod_Y_pred = linear_model.fittedvalues\n\n# Calculate residuals.\nresiduals = linear_model.resid"
+    "text": "Calculation of fitted values and residuals\n\nRecall that we can calculate the predicted values and residuals using commands from statsmodels.\n\n# Make predictions using the the model\nprod_Y_pred = linear_model.fittedvalues\n\n# Calculate residuals.\nresiduals = linear_model.resid"
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#residuals-vs-fitted-values",
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#residuals-vs-fitted-values",
     "title": "Model Evaluation and Inference",
     "section": "Residuals vs Fitted Values",
-    "text": "Residuals vs Fitted Values\n\n\n\n\nCode\n# Residual vs Fitted Values Plot\nplt.figure(figsize=(5, 5))\nsns.scatterplot(x = prod_Y_pred, y = residuals)\nplt.axhline(y=0, color='red', linestyle='--')\nplt.title('Residuals vs Fitted Values')\nplt.xlabel('Fitted (predicted) Values')\nplt.ylabel('Residuals')\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\n\nIf there is a trend, the model is misspecified.\nA “funnel” shape indicates that the assumption of constant variance is not met."
+    "text": "Residuals vs Fitted Values\n\n\n\n\nCode\nplt.figure(figsize=(5, 5))\nsns.scatterplot(x='RunSize', y='RunTime', data=production_data, color='blue')\nplt.plot(production_data['RunSize'], lr_model.fittedvalues, color='red', linestyle='--', linewidth=2)\nplt.title(\"Fitted Regression Line\")\nplt.xlabel(\"Run size\", fontsize = 14)\nplt.ylabel(\"Run time\", fontsize = 14)\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\n# Residual vs Fitted Values Plot\nplt.figure(figsize=(5, 5))\nsns.scatterplot(x = prod_Y_pred, y = residuals)\nplt.axhline(y=0, color='red', linestyle='--')\nplt.title('Residuals vs Fitted Values')\nplt.xlabel('Fitted (predicted) Values', fontsize = 14)\nplt.ylabel('Residuals', fontsize = 14)\nplt.show()"
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-1",
@@ -1943,7 +1943,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#normal-quantile-quantile-qq-plot",
     "title": "Model Evaluation and Inference",
     "section": "Normal Quantile-Quantile (QQ) Plot",
-    "text": "Normal Quantile-Quantile (QQ) Plot\n\nA normal QQ plot is helpful for deciding whether a sample was drawn from a distribution that is approximately normal.\n\nFirst, let \\(\\hat{\\epsilon}_{[1]}, \\hat{\\epsilon}_{[2]}, \\ldots, \\hat{\\epsilon}_{[n]}\\) be the residuals ranked in an increasing order, where \\(\\hat{\\epsilon}_{[1]}\\) is the minimum and \\(\\hat{\\epsilon}_{[n]}\\) is the maximum. These points define the sample percentiles (or quantiles) of the distribution of the residuals.\n\n\nNext, calculate the theoretical percentiles of a (standard) Normal distribution calculated using Python."
+    "text": "Normal Quantile-Quantile (QQ) Plot\n\nA normal QQ plot is helpful for deciding whether a sample was drawn from a distribution that is approximately normal.\n\n\nFirst, let \\(\\hat{\\epsilon}_{[1]}, \\hat{\\epsilon}_{[2]}, \\ldots, \\hat{\\epsilon}_{[n]}\\) be the residuals ranked in an increasing order, where \\(\\hat{\\epsilon}_{[1]}\\) is the minimum and \\(\\hat{\\epsilon}_{[n]}\\) is the maximum. These points define the sample percentiles (or quantiles) of the distribution of the residuals.\n\n\n\n\nNext, calculate the theoretical percentiles of a (standard) Normal distribution calculated using Python."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-5",
@@ -1992,7 +1992,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#consequences-of-faulty-assumptions",
     "title": "Model Evaluation and Inference",
     "section": "Consequences of faulty assumptions",
-    "text": "Consequences of faulty assumptions\n\nIf the model structure is incorrect, the estimated coefficients \\(\\hat{\\beta}_j\\) will be biased and the predictions \\(\\hat{Y}_i\\) will be inaccurate.\n\nIf the residuals do not follow a normal distribution, we have two cases:\n\nIf sample size is large, we still get accurate p-values for the t-tests (discussed later) for the coefficients thanks to the Central Limit Theorem.\nHowever, the t-tests and all inference tools are invalidated."
+    "text": "Consequences of faulty assumptions\n\n\nIf the model structure is incorrect, the estimated coefficients \\(\\hat{\\beta}_j\\) will be biased and the predictions \\(\\hat{Y}_i\\) will be inaccurate.\n\n\n\nIf the residuals do not follow a normal distribution, we have two cases:\n\n\nIf sample size is large, we still get accurate p-values for the t-tests (discussed later) for the coefficients thanks to the Central Limit Theorem.\nHowever, the t-tests and all inference tools are invalidated."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-9",
@@ -2048,7 +2048,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-11",
     "title": "Model Evaluation and Inference",
     "section": "",
-    "text": "\\(H_0: \\beta_j = 0\\) v.s. \\(H_1: \\beta_j \\neq 0\\) (Two-tailed Test)\n\n\nTesting this hypothesis consists of the following steps:\n\nTake a random sample.\nCompute the appropriate test statistic.\nReject or fail to reject the null hypothesis based on a computed p-value."
+    "text": "\\(H_0: \\beta_j = 0\\) v.s. \\(H_1: \\beta_j \\neq 0\\) (Two-tailed Test)\n\n\nTesting this hypothesis consists of the following steps:\n\n\nTake a random sample.\nCompute the appropriate test statistic.\nReject or fail to reject the null hypothesis based on a computed p-value."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#step-1.-random-sample",
@@ -2083,7 +2083,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#t-distribution",
     "title": "Model Evaluation and Inference",
     "section": "t distribution",
-    "text": "t distribution\n\nThis distribution is also known as the student’s t-distribution.\nIt was invented by William Gosset when he worked at the Guinness Brewery in Ireland.\nIt has one parameter \\(\\nu\\) which generally equals a number of degrees of freedom.\nThe parameter \\(\\nu\\) controls the shape of the distribution."
+    "text": "t distribution\n\n\n\nThis distribution is also known as the student’s t-distribution.\nIt was invented by William Gosset when he worked at the Guinness Brewery in Ireland.\nIt has one parameter \\(\\nu\\) which generally equals a number of degrees of freedom.\nThe parameter \\(\\nu\\) controls the shape of the distribution.\n\n William Gosset"
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#section-14",
@@ -2132,7 +2132,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#t-tests-in-python",
     "title": "Model Evaluation and Inference",
     "section": "t-tests in Python",
-    "text": "t-tests in Python\nWe obtain the t-tests of the coefficients using the function summary() together with the linear_model object.\n\nmodel_summary = linear_model.summary()\nprint(model_summary)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.700\nModel:                            OLS   Adj. R-squared:                  0.698\nMethod:                 Least Squares   F-statistic:                     453.2\nDate:                Wed, 28 May 2025   Prob (F-statistic):          2.43e-102\nTime:                        08:19:13   Log-Likelihood:                -1125.4\nNo. Observations:                 392   AIC:                             2257.\nDf Residuals:                     389   BIC:                             2269.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nconst           41.0953      1.868     21.999      0.000      37.423      44.768\nweight          -0.0073      0.000    -25.966      0.000      -0.008      -0.007\nacceleration     0.2617      0.086      3.026      0.003       0.092       0.432\n==============================================================================\nOmnibus:                       31.397   Durbin-Watson:                   0.818\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               39.962\nSkew:                           0.632   Prob(JB):                     2.10e-09\nKurtosis:                       3.922   Cond. No.                     2.67e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 2.67e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
+    "text": "t-tests in Python\nWe obtain the t-tests of the coefficients using the function summary() together with the linear_model object.\n\nmodel_summary = linear_model.summary()\nprint(model_summary)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.700\nModel:                            OLS   Adj. R-squared:                  0.698\nMethod:                 Least Squares   F-statistic:                     453.2\nDate:                Thu, 29 May 2025   Prob (F-statistic):          2.43e-102\nTime:                        16:05:52   Log-Likelihood:                -1125.4\nNo. Observations:                 392   AIC:                             2257.\nDf Residuals:                     389   BIC:                             2269.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nconst           41.0953      1.868     21.999      0.000      37.423      44.768\nweight          -0.0073      0.000    -25.966      0.000      -0.008      -0.007\nacceleration     0.2617      0.086      3.026      0.003       0.092       0.432\n==============================================================================\nOmnibus:                       31.397   Durbin-Watson:                   0.818\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               39.962\nSkew:                           0.632   Prob(JB):                     2.10e-09\nKurtosis:                       3.922   Cond. No.                     2.67e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 2.67e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#table-of-t-tests",
@@ -2230,7 +2230,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#model-building",
     "title": "Model Evaluation and Inference",
     "section": "Model building",
-    "text": "Model building\n\nModel building refers to a set of techniques to reduce the full model to one that only includes significant predictors.\nNote that it is more a deconstruction than building an actual model. This is because the full model must be a valid one to begin with. Specifically, the full model must provide residuals that satisfy all the assumptions (1)-(4).\nAfter we have obtained a satisfactory full model, we can start the model building process."
+    "text": "Model building\n\n\nModel building refers to a set of techniques to reduce the full model to one that only includes significant predictors.\nIt is more a deconstruction than building an actual model, since the full model must be a valid one to begin with. Specifically, the full model must provide residuals that satisfy all the assumptions (1)-(4).\nAfter we have obtained a satisfactory full model, we can start the model building process."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#two-model-building-techniques",
@@ -2987,5 +2987,47 @@
     "title": "Data preprocessing: Part I",
     "section": "",
     "text": "Let’s look at the new dataset.\n\nX_train_num_p.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 240 entries, 0 to 239\nData columns (total 4 columns):\n #   Column             Non-Null Count  Dtype  \n---  ------             --------------  -----  \n 0   bill_length_mm     240 non-null    float64\n 1   bill_depth_mm      240 non-null    float64\n 2   flipper_length_mm  240 non-null    float64\n 3   body_mass_g        240 non-null    float64\ndtypes: float64(4)\nmemory usage: 7.6 KB\n\n\nAll predictors have 240 complete entries."
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#section-6",
+    "href": "LinearRegression/LinearRegression.slides.html#section-6",
+    "title": "Multiple Linear Regression",
+    "section": "",
+    "text": "Next, we use the functions OLS() and fit() from statsmodels.\n\n# Create linear regression object\nregr = sm.OLS(rayon_Y_train, rayon_X_train)\n\n# Train the model using the training sets\nlinear_model = regr.fit()"
+  },
+  {
+    "objectID": "LinearRegression/LinearRegression.slides.html#section-7",
+    "href": "LinearRegression/LinearRegression.slides.html#section-7",
+    "title": "Multiple Linear Regression",
+    "section": "",
+    "text": "To show the estimated coefficients, we use the argument params of the linear_model object created previously.\n\n# The estimated coefficients.\nprint(linear_model.params)\n\nconst   -35.262607\nX1        0.745417\nX2       20.229167\nX3        0.793056\nX4       25.583333\nX5       17.208333\ndtype: float64\n\n\nThe elements in the vector above are the estimates \\(\\hat{\\beta}_0\\), \\(\\hat{\\beta}_1\\), \\(\\hat{\\beta}_2\\), \\(\\hat{\\beta}_3\\), \\(\\hat{\\beta}_4\\), and \\(\\hat{\\beta}_5\\)."
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#linear-regression-model",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#linear-regression-model",
+    "title": "Model Evaluation and Inference",
+    "section": "Linear regression model",
+    "text": "Linear regression model\n\\[\nY_i = \\beta_0 + \\beta_1 X_i +\\epsilon_i\n\\]\nwhere \\(X_i\\) is the run size and \\(Y_i\\) is the run time for the \\(i\\)-th observation, \\(i = 1, \\ldots, 20\\).\n\nWe fit the model in Python as follows.\n\n# Defining the predictor (X) and the response variable (Y).\nprod_Y_train = production_data['RunTime']\nprod_X_pred = production_data['RunSize']\nprod_X_train = sm.add_constant(prod_X_pred)\n\n# Fitting the simple linear regression model.\nregr = sm.OLS(prod_Y_train, prod_X_train)\nlinear_model = regr.fit()"
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#estimated-model",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#estimated-model",
+    "title": "Model Evaluation and Inference",
+    "section": "Estimated model",
+    "text": "Estimated model\n\n\\[\n\\hat{Y}_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_i = 149.75 + 0.26 X_i,\n\\]\nwhere \\(\\hat{Y}_i\\) is the predicted or fitted value of run time for the \\(i\\)-th observation, \\(i = 1, \\ldots, 20\\).\nThe residuals of this estimated model are \\(\\hat{\\epsilon}_i = \\hat{Y}_i - Y_i\\)."
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#residuals-vs-fitted-values-1",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#residuals-vs-fitted-values-1",
+    "title": "Model Evaluation and Inference",
+    "section": "Residuals vs Fitted Values",
+    "text": "Residuals vs Fitted Values\n\n\n\n\nIf there is a trend, the model is misspecified.\nA “funnel” shape indicates that the assumption of constant variance is not met."
+  },
+  {
+    "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#residuals-vs-time-plot-1",
+    "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#residuals-vs-time-plot-1",
+    "title": "Model Evaluation and Inference",
+    "section": "Residuals vs Time Plot",
+    "text": "Residuals vs Time Plot\n\n\nBy “time,” we mean that time the observation was taken or the order in which it was taken. The plot should not show any structure or pattern in the residuals.\nDependence on time is a common source of lack of independence, but other plots might also detect lack of independence.\nIdeally, we plot the residuals versus each variable of interest we could think of, either included or excluded in the model.\nAssessing the assumption of independence is hard in practice."
   }
 ]

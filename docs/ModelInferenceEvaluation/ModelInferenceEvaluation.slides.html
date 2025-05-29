@@ -225,8 +225,8 @@ Alan R. Vazquez
 <section id="load-the-libraries" class="slide level2">
 <h2>Load the libraries</h2>
 <p><br><br></p>
-<p>Let’s import <strong>statsmodels</strong> into Python together with the other relevant libraries.</p>
-<div id="32c72248" class="cell" data-execution_count="1">
+<p>Let’s import <strong>statsmodels</strong> into Python together with other relevant libraries.</p>
+<div id="101452f2" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Importing necessary libraries</span></span>
 <span id="cb1-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -278,9 +278,12 @@ Alan R. Vazquez
 <section id="residuals" class="slide level2">
 <h2>Residuals</h2>
 <p><br></p>
-<p>The errors <span class="math inline">\(\epsilon_1, \ldots, \epsilon_n\)</span> are not observed. To overcome this issue, we use the residuals of our model.</p>
+<p>The errors <span class="math inline">\(\epsilon_1, \ldots, \epsilon_n\)</span> are not observed. To overcome this issue, we use the <span style="color:purple;"><strong>residuals</strong></span> of our model.</p>
+<div class="fragment">
 <p>Suppose that the multiple linear regression model is correct and consider the fitted responses <span class="math inline">\(\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \cdots + \hat{\beta}_p X_{ip}\)</span>, where <span class="math inline">\(\hat{\beta}_{j}\)</span> is the least squares estimator for the j-th predictor.</p>
-<p>We define the residual <span style="color:purple;"><strong>residuals</strong></span> <span class="math inline">\(\hat{\epsilon}_i = Y_i - \hat{Y}_i\)</span>, <span class="math inline">\(i = 1, \ldots, n.\)</span></p>
+</div>
+<div class="fragment">
+<p>We define the <span style="color:purple;"><strong>residuals</strong></span> <span class="math inline">\(\hat{\epsilon}_i = Y_i - \hat{Y}_i\)</span>, <span class="math inline">\(i = 1, \ldots, n.\)</span></p>
 <aside class="notes">
 <p>The residuals <span class="math inline">\(\hat{\epsilon}_i\)</span> are the estimates of the random errors <span class="math inline">\(\epsilon_i\)</span>.</p>
 <style type="text/css">
@@ -294,6 +297,7 @@ Alan R. Vazquez
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</div>
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
@@ -301,7 +305,9 @@ Alan R. Vazquez
 <p>If the model structure is correctly specified and assuming that the least-squares estimates <span class="math inline">\(\hat{\beta}_j\)</span>’s are close to the true <span class="math inline">\(\beta_j\)</span>’s, respectively, we have that</p>
 <p><span class="math display">\[\hat{\epsilon}_i = Y_i - \hat{Y}_i = Y_i - \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \cdots + \hat{\beta}_p X_{ip} \approx \epsilon_i\]</span></p>
 <p>So, the residuals <span class="math inline">\(\hat{\epsilon}_i\)</span> should resemble the random errors <span class="math inline">\(\epsilon\)</span>.</p>
-<p>To evaluate the assumption of a (simple and) multiple linear regression model, we use a <span style="color:green;"><strong>Residual analysis</strong></span>.</p>
+<div class="fragment">
+<p>To evaluate the assumption of a multiple linear regression model, we use a <span style="color:green;"><strong>Residual analysis</strong></span>.</p>
+</div>
 </section>
 <section id="residual-analysis-1" class="slide level2">
 <h2>Residual Analysis</h2>
@@ -327,10 +333,10 @@ Alan R. Vazquez
 <section id="dataset" class="slide level2">
 <h2>Dataset</h2>
 <p>The dataset is in the file “production.xlsx”.</p>
-<div id="68c90353" class="cell" data-execution_count="2">
+<div id="63a078a0" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>production_data <span class="op">=</span> pd.read_excel(<span class="st">'production.xlsx'</span>)</span>
 <span id="cb2-2"><a></a>production_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="560">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -393,23 +399,15 @@ Alan R. Vazquez
 </div>
 </div>
 </section>
-<section id="intuition-behind" class="slide level2">
-<h2>Intuition behind …</h2>
-<p>the Residuals versus Fitted Values plot.</p>
-<div id="25a07277" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="ModelInferenceEvaluation_files/figure-revealjs/cell-4-output-1.png" class="quarto-figure quarto-figure-center" width="599" height="455"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="calculation-of-fitted-values-and-residuals" class="slide level2">
-<h2>Calculation of fitted values and residuals</h2>
-<p>Recall that we can calculate the predicted values and residuals using commands from <strong>statsmodels</strong>.</p>
-<div id="3256360d" class="cell" data-execution_count="4">
+<section id="linear-regression-model" class="slide level2">
+<h2>Linear regression model</h2>
+<p><span class="math display">\[
+Y_i = \beta_0 + \beta_1 X_i +\epsilon_i
+\]</span></p>
+<p>where <span class="math inline">\(X_i\)</span> is the run size and <span class="math inline">\(Y_i\)</span> is the run time for the <span class="math inline">\(i\)</span>-th observation, <span class="math inline">\(i = 1, \ldots, 20\)</span>.</p>
+<div class="fragment">
+<p>We fit the model in Python as follows.</p>
+<div id="f8e61afc" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># Defining the predictor (X) and the response variable (Y).</span></span>
 <span id="cb3-2"><a></a>prod_Y_train <span class="op">=</span> production_data[<span class="st">'RunTime'</span>]</span>
 <span id="cb3-3"><a></a>prod_X_pred <span class="op">=</span> production_data[<span class="st">'RunSize'</span>]</span>
@@ -417,45 +415,115 @@ Alan R. Vazquez
 <span id="cb3-5"><a></a></span>
 <span id="cb3-6"><a></a><span class="co"># Fitting the simple linear regression model.</span></span>
 <span id="cb3-7"><a></a>regr <span class="op">=</span> sm.OLS(prod_Y_train, prod_X_train)</span>
-<span id="cb3-8"><a></a>linear_model <span class="op">=</span> regr.fit()</span>
-<span id="cb3-9"><a></a></span>
-<span id="cb3-10"><a></a><span class="co"># Make predictions using the the model</span></span>
-<span id="cb3-11"><a></a>prod_Y_pred <span class="op">=</span> linear_model.fittedvalues</span>
-<span id="cb3-12"><a></a></span>
-<span id="cb3-13"><a></a><span class="co"># Calculate residuals.</span></span>
-<span id="cb3-14"><a></a>residuals <span class="op">=</span> linear_model.resid</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-8"><a></a>linear_model <span class="op">=</span> regr.fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="estimated-model" class="slide level2">
+<h2>Estimated model</h2>
+<p><br></p>
+<p><span class="math display">\[
+\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_i = 149.75 + 0.26 X_i,
+\]</span></p>
+<p>where <span class="math inline">\(\hat{Y}_i\)</span> is the <em>predicted</em> or <em>fitted</em> value of run time for the <span class="math inline">\(i\)</span>-th observation, <span class="math inline">\(i = 1, \ldots, 20\)</span>.</p>
+<p>The residuals of this estimated model are <span class="math inline">\(\hat{\epsilon}_i = \hat{Y}_i - Y_i\)</span>.</p>
+</section>
+<section id="calculation-of-fitted-values-and-residuals" class="slide level2">
+<h2>Calculation of fitted values and residuals</h2>
+<p><br></p>
+<p>Recall that we can calculate the predicted values and residuals using commands from <strong>statsmodels</strong>.</p>
+<div id="da266b84" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co"># Make predictions using the the model</span></span>
+<span id="cb4-2"><a></a>prod_Y_pred <span class="op">=</span> linear_model.fittedvalues</span>
+<span id="cb4-3"><a></a></span>
+<span id="cb4-4"><a></a><span class="co"># Calculate residuals.</span></span>
+<span id="cb4-5"><a></a>residuals <span class="op">=</span> linear_model.resid</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section>
+<section>
+<section id="residuals-vs-fitted-values-plot" class="title-slide slide level1 center">
+<h1>Residuals vs Fitted Values Plot</h1>
+
+</section>
+<section id="intuition-behind" class="slide level2">
+<h2>Intuition behind …</h2>
+<p>the Residuals versus Fitted Values plot.</p>
+<div id="4c7e4177" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="ModelInferenceEvaluation_files/figure-revealjs/cell-6-output-1.png" class="quarto-figure quarto-figure-center" width="599" height="455"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 <section id="residuals-vs-fitted-values" class="slide level2">
 <h2>Residuals vs Fitted Values</h2>
 <div class="columns">
-<div class="column" style="width:60%;">
-<div id="9c899dcd" class="cell" data-execution_count="5">
+<div class="column" style="width:50%;">
+<div id="460f26a7" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co"># Residual vs Fitted Values Plot</span></span>
-<span id="cb4-2"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</span>
-<span id="cb4-3"><a></a>sns.scatterplot(x <span class="op">=</span> prod_Y_pred, y <span class="op">=</span> residuals)</span>
-<span id="cb4-4"><a></a>plt.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
-<span id="cb4-5"><a></a>plt.title(<span class="st">'Residuals vs Fitted Values'</span>)</span>
-<span id="cb4-6"><a></a>plt.xlabel(<span class="st">'Fitted (predicted) Values'</span>)</span>
-<span id="cb4-7"><a></a>plt.ylabel(<span class="st">'Residuals'</span>)</span>
-<span id="cb4-8"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</span>
+<span id="cb5-2"><a></a>sns.scatterplot(x<span class="op">=</span><span class="st">'RunSize'</span>, y<span class="op">=</span><span class="st">'RunTime'</span>, data<span class="op">=</span>production_data, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb5-3"><a></a>plt.plot(production_data[<span class="st">'RunSize'</span>], lr_model.fittedvalues, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb5-4"><a></a>plt.title(<span class="st">"Fitted Regression Line"</span>)</span>
+<span id="cb5-5"><a></a>plt.xlabel(<span class="st">"Run size"</span>, fontsize <span class="op">=</span> <span class="dv">14</span>)</span>
+<span id="cb5-6"><a></a>plt.ylabel(<span class="st">"Run time"</span>, fontsize <span class="op">=</span> <span class="dv">14</span>)</span>
+<span id="cb5-7"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="ModelInferenceEvaluation_files/figure-revealjs/cell-6-output-1.png" class="quarto-figure quarto-figure-center" width="448" height="449"></p>
+<p><img data-src="ModelInferenceEvaluation_files/figure-revealjs/cell-7-output-1.png" class="quarto-figure quarto-figure-center" width="453" height="455"></p>
 </figure>
 </div>
 </div>
 </div>
-</div><div class="column" style="width:40%;">
+</div><div class="column" style="width:50%;">
+<div id="c8a5637e" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="co"># Residual vs Fitted Values Plot</span></span>
+<span id="cb6-2"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</span>
+<span id="cb6-3"><a></a>sns.scatterplot(x <span class="op">=</span> prod_Y_pred, y <span class="op">=</span> residuals)</span>
+<span id="cb6-4"><a></a>plt.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb6-5"><a></a>plt.title(<span class="st">'Residuals vs Fitted Values'</span>)</span>
+<span id="cb6-6"><a></a>plt.xlabel(<span class="st">'Fitted (predicted) Values'</span>, fontsize <span class="op">=</span> <span class="dv">14</span>)</span>
+<span id="cb6-7"><a></a>plt.ylabel(<span class="st">'Residuals'</span>, fontsize <span class="op">=</span> <span class="dv">14</span>)</span>
+<span id="cb6-8"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="ModelInferenceEvaluation_files/figure-revealjs/cell-8-output-1.png" class="quarto-figure quarto-figure-center" width="453" height="455"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="residuals-vs-fitted-values-1" class="slide level2">
+<h2>Residuals vs Fitted Values</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
 <p><br></p>
 <ul>
 <li>If there is a trend, the model is misspecified.</li>
 <li>A “funnel” shape indicates that the assumption of constant variance is not met.</li>
 </ul>
+</div><div class="column" style="width:60%;">
+<p><br></p>
+<div id="e6d187b1" class="cell" data-execution_count="8">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="ModelInferenceEvaluation_files/figure-revealjs/cell-9-output-1.png" class="quarto-figure quarto-figure-center" width="448" height="449"></p>
+</figure>
+</div>
+</div>
+</div>
 </div></div>
 </section>
 <section id="section-1" class="slide level2">
@@ -468,8 +536,13 @@ Alan R. Vazquez
 <p>Another example.</p>
 
 <img data-src="images/clipboard-890785179.png" class="quarto-figure quarto-figure-center r-stretch"><p>The phenomenon of non-constant variance is called <span style="color:red;"><strong>heteroscedasticity</strong></span>.</p>
+</section></section>
+<section>
+<section id="residuals-vs-time-plot" class="title-slide slide level1 center">
+<h1>Residuals vs Time Plot</h1>
+
 </section>
-<section id="residuals-vs-time-plot" class="slide level2">
+<section id="residuals-vs-time-plot-1" class="slide level2">
 <h2>Residuals vs Time Plot</h2>
 <div>
 <ul>
@@ -482,23 +555,24 @@ Alan R. Vazquez
 </section>
 <section id="section-3" class="slide level2">
 <h2></h2>
-<div id="36647649" class="cell" data-execution_count="6">
+<p><br></p>
+<div id="81e89000" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="co"># Residuals vs Time (Case) Plot</span></span>
-<span id="cb5-2"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
-<span id="cb5-3"><a></a>sns.scatterplot(x <span class="op">=</span> production_data[<span class="st">'Case'</span>], y <span class="op">=</span> residuals)</span>
-<span id="cb5-4"><a></a>plt.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
-<span id="cb5-5"><a></a>plt.title(<span class="st">'Residuals vs Time (Case)'</span>)</span>
-<span id="cb5-6"><a></a>plt.xlabel(<span class="st">'Case'</span>)</span>
-<span id="cb5-7"><a></a>plt.xticks(production_data[<span class="st">'Case'</span>])</span>
-<span id="cb5-8"><a></a>plt.ylabel(<span class="st">'Residuals'</span>)</span>
-<span id="cb5-9"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="co"># Residuals vs Time (Case) Plot</span></span>
+<span id="cb7-2"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb7-3"><a></a>sns.scatterplot(x <span class="op">=</span> production_data[<span class="st">'Case'</span>], y <span class="op">=</span> residuals)</span>
+<span id="cb7-4"><a></a>plt.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb7-5"><a></a>plt.title(<span class="st">'Residuals vs Time (Case)'</span>)</span>
+<span id="cb7-6"><a></a>plt.xlabel(<span class="st">'Case'</span>)</span>
+<span id="cb7-7"><a></a>plt.xticks(production_data[<span class="st">'Case'</span>])</span>
+<span id="cb7-8"><a></a>plt.ylabel(<span class="st">'Residuals'</span>)</span>
+<span id="cb7-9"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="ModelInferenceEvaluation_files/figure-revealjs/cell-7-output-1.png" class="quarto-figure quarto-figure-center" width="596" height="449"></p>
+<p><img data-src="ModelInferenceEvaluation_files/figure-revealjs/cell-10-output-1.png" class="quarto-figure quarto-figure-center" width="596" height="449"></p>
 </figure>
 </div>
 </div>
@@ -517,6 +591,11 @@ Alan R. Vazquez
 </figure>
 </div>
 </div></div>
+</section></section>
+<section>
+<section id="normal-quantile-quantile-plot" class="title-slide slide level1 center">
+<h1>Normal Quantile-Quantile Plot</h1>
+
 </section>
 <section id="checking-for-normality" class="slide level2">
 <h2>Checking for normality</h2>
@@ -531,20 +610,20 @@ Alan R. Vazquez
 <section id="histogram" class="slide level2">
 <h2>Histogram</h2>
 <p>Ideally, the histogram resembles a normal distribution around 0. If the number of observations is small, the histogram may not be an effective visualization.</p>
-<div id="8b9bad82" class="cell" data-execution_count="7">
+<div id="c5495694" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="co"># Histogram of residuals</span></span>
-<span id="cb6-2"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
-<span id="cb6-3"><a></a>sns.histplot(residuals)</span>
-<span id="cb6-4"><a></a>plt.title(<span class="st">'Histogram of Residuals'</span>)</span>
-<span id="cb6-5"><a></a>plt.xlabel(<span class="st">'Residuals'</span>)</span>
-<span id="cb6-6"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="co"># Histogram of residuals</span></span>
+<span id="cb8-2"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb8-3"><a></a>sns.histplot(residuals)</span>
+<span id="cb8-4"><a></a>plt.title(<span class="st">'Histogram of Residuals'</span>)</span>
+<span id="cb8-5"><a></a>plt.xlabel(<span class="st">'Residuals'</span>)</span>
+<span id="cb8-6"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="ModelInferenceEvaluation_files/figure-revealjs/cell-8-output-1.png" class="quarto-figure quarto-figure-center" width="427" height="302"></p>
+<p><img data-src="ModelInferenceEvaluation_files/figure-revealjs/cell-11-output-1.png" class="quarto-figure quarto-figure-center" width="427" height="302"></p>
 </figure>
 </div>
 </div>
@@ -555,43 +634,49 @@ Alan R. Vazquez
 <p><br></p>
 <p>A normal QQ plot is helpful for deciding whether a sample was drawn from a distribution that is approximately normal.</p>
 <div class="fragment">
-<p>First, let <span class="math inline">\(\hat{\epsilon}_{[1]}, \hat{\epsilon}_{[2]}, \ldots, \hat{\epsilon}_{[n]}\)</span> be the residuals ranked in an increasing order, where <span class="math inline">\(\hat{\epsilon}_{[1]}\)</span> is the minimum and <span class="math inline">\(\hat{\epsilon}_{[n]}\)</span> is the maximum. These points define the <span style="color:lightblue;"><strong>sample</strong></span> percentiles (or quantiles) of the distribution of the residuals.</p>
+<ol type="1">
+<li>First, let <span class="math inline">\(\hat{\epsilon}_{[1]}, \hat{\epsilon}_{[2]}, \ldots, \hat{\epsilon}_{[n]}\)</span> be the residuals ranked in an increasing order, where <span class="math inline">\(\hat{\epsilon}_{[1]}\)</span> is the minimum and <span class="math inline">\(\hat{\epsilon}_{[n]}\)</span> is the maximum. These points define the <span style="color:lightblue;"><strong>sample</strong></span> percentiles (or quantiles) of the distribution of the residuals.</li>
+</ol>
 </div>
 <div class="fragment">
-<p>Next, calculate the <span style="color:pink;"><strong>theoretical</strong></span> percentiles of a (standard) Normal distribution calculated using Python.</p>
+<ol start="2" type="1">
+<li>Next, calculate the <span style="color:pink;"><strong>theoretical</strong></span> percentiles of a (standard) Normal distribution calculated using Python.</li>
+</ol>
 </div>
 </section>
 <section id="section-5" class="slide level2">
 <h2></h2>
 <p><br><br></p>
-<p>The normal QQ plot displays the (sample) percentiles of the residuals versus the percentiles of a normal distribution.</p>
-<p>If these percentiles agree with each other, then they would approximate a straight line.</p>
-<p>The straight line is usually determined visually, with emphasis on the central values rather than the extremes.</p>
-<p>For a nice explanation, see this <a href="https://www.youtube.com/watch?v=okjYjClSjOg&amp;ab_channel=StatQuestwithJoshStarmer">YouTube video</a>.</p>
+<ul>
+<li><p>The normal QQ plot displays the (sample) percentiles of the residuals versus the percentiles of a normal distribution.</p></li>
+<li><p>If these percentiles agree with each other, then they would approximate a straight line.</p></li>
+<li><p>The straight line is usually determined visually, with emphasis on the central values rather than the extremes.</p></li>
+<li><p>For a nice explanation, see this <a href="https://www.youtube.com/watch?v=okjYjClSjOg&amp;ab_channel=StatQuestwithJoshStarmer">YouTube video</a>.</p></li>
+</ul>
 </section>
 <section id="qq-plot-in-python" class="slide level2">
 <h2>QQ plot in Python</h2>
 <p><br><br><br></p>
 <p>To construct a QQ plot, we use the function <code>qqplot()</code> <strong>statsmodels</strong> library.</p>
-<div id="0b31cc26" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="co"># QQ plot to assess normality of residuals</span></span>
-<span id="cb7-2"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
-<span id="cb7-3"><a></a>sm.qqplot(residuals, fit <span class="op">=</span> <span class="va">True</span>, line <span class="op">=</span> <span class="st">'45'</span>)</span>
-<span id="cb7-4"><a></a>plt.title(<span class="st">'QQ Plot of Residuals'</span>)</span>
-<span id="cb7-5"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="da6dfd6a" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="co"># QQ plot to assess normality of residuals</span></span>
+<span id="cb9-2"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb9-3"><a></a>sm.qqplot(residuals, fit <span class="op">=</span> <span class="va">True</span>, line <span class="op">=</span> <span class="st">'45'</span>)</span>
+<span id="cb9-4"><a></a>plt.title(<span class="st">'QQ Plot of Residuals'</span>)</span>
+<span id="cb9-5"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="section-6" class="slide level2">
 <h2></h2>
 <p>Substantial departures from a straight line indicate that the distribution is not normal.</p>
-<div id="d591e9a1" class="cell" data-execution_count="9">
+<div id="a4eb15e6" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <pre><code>&lt;Figure size 672x384 with 0 Axes&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="ModelInferenceEvaluation_files/figure-revealjs/cell-10-output-2.png" class="quarto-figure quarto-figure-center" width="823" height="449"></p>
+<p><img data-src="ModelInferenceEvaluation_files/figure-revealjs/cell-13-output-2.png" class="quarto-figure quarto-figure-center" width="823" height="449"></p>
 </figure>
 </div>
 </div>
@@ -600,14 +685,14 @@ Alan R. Vazquez
 <section id="section-7" class="slide level2">
 <h2></h2>
 <p>This plot suggests that the residuals are consistent with a Normal curve.</p>
-<div id="9383a379" class="cell" data-execution_count="10">
+<div id="b55b7976" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <pre><code>&lt;Figure size 672x384 with 0 Axes&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="ModelInferenceEvaluation_files/figure-revealjs/cell-11-output-2.png" class="quarto-figure quarto-figure-center" width="823" height="449"></p>
+<p><img data-src="ModelInferenceEvaluation_files/figure-revealjs/cell-14-output-2.png" class="quarto-figure quarto-figure-center" width="823" height="449"></p>
 </figure>
 </div>
 </div>
@@ -627,9 +712,13 @@ Alan R. Vazquez
 <section id="consequences-of-faulty-assumptions" class="slide level2">
 <h2>Consequences of faulty assumptions</h2>
 <p><br></p>
-<p><span style="color:red;">If the model structure is incorrect</span>, the estimated coefficients <span class="math inline">\(\hat{\beta}_j\)</span> will be biased and the predictions <span class="math inline">\(\hat{Y}_i\)</span> will be inaccurate.</p>
+<ol type="1">
+<li><span style="color:red;">If the model structure is incorrect</span>, the estimated coefficients <span class="math inline">\(\hat{\beta}_j\)</span> will be biased and the predictions <span class="math inline">\(\hat{Y}_i\)</span> will be inaccurate.</li>
+</ol>
 <div class="fragment">
-<p><span style="color:red;">If the residuals do not follow a normal distribution</span>, we have two cases:</p>
+<ol start="2" type="1">
+<li><span style="color:red;">If the residuals do not follow a normal distribution</span>, we have two cases:</li>
+</ol>
 <ul>
 <li>If sample size is large, we still get accurate p-values for the t-tests (discussed later) for the coefficients thanks to the <em>Central Limit Theorem</em>.</li>
 <li>However, the t-tests and all inference tools are invalidated.</li>
@@ -639,8 +728,10 @@ Alan R. Vazquez
 <section id="section-9" class="slide level2">
 <h2></h2>
 <p><br><br><br></p>
-<p><span style="color:red;">If the residuals do not have constant variance</span>, then the linear model is incorrect and everything falls apart!</p>
-<p><span style="color:red;">If the residuals are dependent</span>, then the linear model is incorrect and everything falls apart!</p>
+<ol start="3" type="1">
+<li><p><span style="color:red;">If the residuals do not have constant variance</span>, then the linear model is incorrect and everything falls apart!</p></li>
+<li><p><span style="color:red;">If the residuals are dependent</span>, then the linear model is incorrect and everything falls apart!</p></li>
+</ol>
 </section></section>
 <section>
 <section id="inference-about-individual-betas-using-t-tests" class="title-slide slide level1 center">
@@ -662,8 +753,8 @@ Alan R. Vazquez
 <h2>Example 2</h2>
 <p><br></p>
 <p>Let’s consider the “auto.xlsx” dataset.</p>
-<div id="4d8287d2" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>auto_data <span class="op">=</span> pd.read_excel(<span class="st">'auto.xlsx'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="39f905b5" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a>auto_data <span class="op">=</span> pd.read_excel(<span class="st">'auto.xlsx'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 <p>Let’s assume that we want to study the following model.</p>
@@ -719,31 +810,33 @@ Y_i = \beta_0 + \beta_1 X_{i1}+ \beta_2 X_{i2}+ \epsilon_i,
 </section>
 <section id="section-11" class="slide level2">
 <h2></h2>
-<p><br></p>
+<p><br><br></p>
 <div class="r-stack">
 <p><span class="math inline">\(H_0: \beta_j = 0\)</span> v.s. <span class="math inline">\(H_1: \beta_j \neq 0\)</span> (Two-tailed Test)</p>
 </div>
 <p><br></p>
 <p>Testing this hypothesis consists of the following steps:</p>
+<div>
 <ol type="1">
-<li>Take a random sample.</li>
-<li>Compute the appropriate test statistic.</li>
-<li>Reject or fail to reject the null hypothesis based on a computed p-value.</li>
+<li class="fragment">Take a random sample.</li>
+<li class="fragment">Compute the appropriate test statistic.</li>
+<li class="fragment">Reject or fail to reject the null hypothesis based on a computed p-value.</li>
 </ol>
+</div>
 </section>
 <section id="step-1.-random-sample" class="slide level2">
 <h2>Step 1. Random sample</h2>
 <p><br><br></p>
 <p>The random sample is the data we use to train or fit the model.</p>
-<div id="978b1f15" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="co"># Dataset with predictors.</span></span>
-<span id="cb11-2"><a></a>pred_auto <span class="op">=</span> auto_data[[<span class="st">'weight'</span>, <span class="st">'acceleration'</span>]]</span>
-<span id="cb11-3"><a></a></span>
-<span id="cb11-4"><a></a><span class="co"># Add the column for the intercept.</span></span>
-<span id="cb11-5"><a></a>auto_X_train <span class="op">=</span> sm.add_constant(pred_auto)</span>
-<span id="cb11-6"><a></a></span>
-<span id="cb11-7"><a></a><span class="co"># Dataset with the response only.</span></span>
-<span id="cb11-8"><a></a>auto_Y_train <span class="op">=</span> auto_data[<span class="st">'mpg'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="7bc04428" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="co"># Dataset with predictors.</span></span>
+<span id="cb13-2"><a></a>pred_auto <span class="op">=</span> auto_data[[<span class="st">'weight'</span>, <span class="st">'acceleration'</span>]]</span>
+<span id="cb13-3"><a></a></span>
+<span id="cb13-4"><a></a><span class="co"># Add the column for the intercept.</span></span>
+<span id="cb13-5"><a></a>auto_X_train <span class="op">=</span> sm.add_constant(pred_auto)</span>
+<span id="cb13-6"><a></a></span>
+<span id="cb13-7"><a></a><span class="co"># Dataset with the response only.</span></span>
+<span id="cb13-8"><a></a>auto_Y_train <span class="op">=</span> auto_data[<span class="st">'mpg'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="step-2.-test-statistic" class="slide level2">
@@ -760,12 +853,12 @@ Y_i = \beta_0 + \beta_1 X_{i1}+ \beta_2 X_{i2}+ \epsilon_i,
 <h2></h2>
 <p><br></p>
 <p>Recall that we obtain the least squares estimates (<span class="math inline">\(\hat{\beta}_{j}\)</span>) in Python using:</p>
-<div id="389cf0fd" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="co"># Fitting the simple linear regression model.</span></span>
-<span id="cb12-2"><a></a>regr <span class="op">=</span> sm.OLS(auto_Y_train, auto_X_train)</span>
-<span id="cb12-3"><a></a>linear_model <span class="op">=</span> regr.fit()</span>
-<span id="cb12-4"><a></a>linear_model.params</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div id="ed32dc00" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="co"># Fitting the simple linear regression model.</span></span>
+<span id="cb14-2"><a></a>regr <span class="op">=</span> sm.OLS(auto_Y_train, auto_X_train)</span>
+<span id="cb14-3"><a></a>linear_model <span class="op">=</span> regr.fit()</span>
+<span id="cb14-4"><a></a>linear_model.params</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="574">
 <pre><code>const           41.095329
 weight          -0.007293
 acceleration     0.261650
@@ -792,10 +885,15 @@ dtype: float64</code></pre>
 <section id="t-distribution" class="slide level2">
 <h2>t distribution</h2>
 <p><br></p>
+<div class="columns">
+<div class="column" style="width:70%;">
 <p>This distribution is also known as the student’s t-distribution.</p>
 <p>It was invented by <a href="https://en.wikipedia.org/wiki/William_Sealy_Gosset">William Gosset</a> when he worked at the Guinness Brewery in Ireland.</p>
 <p>It has one parameter <span class="math inline">\(\nu\)</span> which generally equals a number of degrees of freedom.</p>
 <p>The parameter <span class="math inline">\(\nu\)</span> controls the shape of the distribution.</p>
+</div><div class="column" style="width:30%;">
+<p><img data-src="images/William_Sealy_Gosset.jpg" width="478"> <a href="https://en.wikipedia.org/wiki/William_Sealy_Gosset">William Gosset</a></p>
+</div></div>
 </section>
 <section id="section-14" class="slide level2">
 <h2></h2>
@@ -860,17 +958,17 @@ dtype: float64</code></pre>
 <section id="t-tests-in-python" class="slide level2">
 <h2>t-tests in Python</h2>
 <p>We obtain the t-tests of the coefficients using the function <code>summary()</code> together with the <code>linear_model</code> object.</p>
-<div id="958e1d97" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>model_summary <span class="op">=</span> linear_model.summary()</span>
-<span id="cb14-2"><a></a><span class="bu">print</span>(model_summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c76bd933" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a>model_summary <span class="op">=</span> linear_model.summary()</span>
+<span id="cb16-2"><a></a><span class="bu">print</span>(model_summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                            OLS Regression Results                            
 ==============================================================================
 Dep. Variable:                    mpg   R-squared:                       0.700
 Model:                            OLS   Adj. R-squared:                  0.698
 Method:                 Least Squares   F-statistic:                     453.2
-Date:                Wed, 28 May 2025   Prob (F-statistic):          2.43e-102
-Time:                        08:19:13   Log-Likelihood:                -1125.4
+Date:                Thu, 29 May 2025   Prob (F-statistic):          2.43e-102
+Time:                        16:05:52   Log-Likelihood:                -1125.4
 No. Observations:                 392   AIC:                             2257.
 Df Residuals:                     389   BIC:                             2269.
 Df Model:                           2                                         
@@ -1157,11 +1255,6 @@ strong multicollinearity or other numerical problems.</code></pre>
 </ul>
 </div>
 </section>
-<section id="section-21" class="slide level2">
-<h2></h2>
-<p><br></p>
-
-<img data-src="images/Figures.004.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="remarks-on-r2" class="slide level2">
 <h2>Remarks on <span class="math inline">\(R^2\)</span></h2>
 <p><br></p>
@@ -1170,6 +1263,11 @@ strong multicollinearity or other numerical problems.</code></pre>
 <li><p>If <span class="math inline">\(R^2\)</span> is large, it does not necessarily imply that the full model will provide accurate predictions of future observations.</p></li>
 </ul>
 </section>
+<section id="section-21" class="slide level2">
+<h2></h2>
+<p><br></p>
+
+<img data-src="images/Figures.004.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="adjusted-r2-statistic" class="slide level2">
 <h2>Adjusted <span class="math inline">\(R^2\)</span> statistic</h2>
 <p>Adjusted <span class="math inline">\(R^2\)</span> is a better measure to decide whether to add a new variable into the model or not. It is:</p>
@@ -1211,15 +1309,15 @@ strong multicollinearity or other numerical problems.</code></pre>
 <h2>In Python</h2>
 <p><br></p>
 <p>To show the <span class="math inline">\(R^2\)</span> value, we use the <code>rsquared</code> argument of the <code>linear_model</code> object.</p>
-<div id="f390fbf5" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="bu">print</span>( <span class="bu">round</span>(linear_model.rsquared, <span class="dv">3</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="1d4bcb04" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="bu">print</span>( <span class="bu">round</span>(linear_model.rsquared, <span class="dv">3</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.7</code></pre>
 </div>
 </div>
 <p>To show the adjusted <span class="math inline">\(R^2\)</span> value, we use the <code>rsquared</code> argument of the <code>linear_model</code> object.</p>
-<div id="e80d4066" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="bu">print</span>( <span class="bu">round</span>(linear_model.rsquared_adj, <span class="dv">3</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="91973b0a" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a><span class="bu">print</span>( <span class="bu">round</span>(linear_model.rsquared_adj, <span class="dv">3</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.698</code></pre>
 </div>
@@ -1228,9 +1326,11 @@ strong multicollinearity or other numerical problems.</code></pre>
 <section id="model-building" class="slide level2">
 <h2>Model building</h2>
 <p><br></p>
-<p>Model building refers to a set of techniques to reduce the full model to one that only includes significant predictors.</p>
-<p>Note that it is more a deconstruction than building an actual model. This is because the full model must be a valid one to begin with. Specifically, the full model must provide residuals that satisfy all the assumptions (1)-(4).</p>
-<p>After we have obtained a satisfactory full model, we can start the model building process.</p>
+<ul>
+<li><p>Model building refers to a set of techniques to reduce the full model to one that only includes significant predictors.</p></li>
+<li><p>It is more a deconstruction than building an actual model, since the full model must be a valid one to begin with. Specifically, the full model must provide residuals that satisfy all the assumptions (1)-(4).</p></li>
+<li><p>After we have obtained a satisfactory full model, we can start the model building process.</p></li>
+</ul>
 </section>
 <section id="two-model-building-techniques" class="slide level2">
 <h2>Two model building techniques</h2>

@@ -340,15 +340,6 @@ $$\hat{\boldsymbol{\beta}} = (\mathbf{X}^{T}\mathbf{X})^{-1} \mathbf{X}^{T}\math
 -   For the inverse to exist, the columns in $\mathbf{X}$ must be *linearly independent*.
 -   Or, equivalently, the determinant $|\mathbf{X}^{T} \mathbf{X}| > 0$.
 
-## 
-
-![](images/example_SLR.jpeg){fig-align="center"}
-
-
-
-## 
-
-![](images/clipboard-2523519923.png){fig-align="center"}
 
 ## Computation in Python
 
@@ -422,6 +413,17 @@ The elements in the vector above are the estimates $\hat{\beta}_0$, $\hat{\beta}
 -   Increasing the sulfide concentration by 1 unit increases the average whiteness of a rayon by $\hat{\beta}_4 = 25.583$ units.
 
 -   Increasing the amount of chlorine bleach by 1 unit increases the average whiteness of a rayon by $\hat{\beta}_5 = 17.208$ units.
+
+## 
+
+![](images/example_SLR.jpeg){fig-align="center"}
+
+
+
+## 
+
+![](images/clipboard-2523519923.png){fig-align="center"}
+
 
 ## Properties of least squares estimators
 
