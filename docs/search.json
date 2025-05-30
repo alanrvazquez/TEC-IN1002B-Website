@@ -557,7 +557,7 @@
     "href": "Tools/Tools2.slides.html#agenda",
     "title": "Tools for Data Science: Part II",
     "section": "Agenda",
-    "text": "Agenda\n\n\nReview of data types and summary statistics\nData visualizations"
+    "text": "Agenda\n\n\nData manipulation with pandas\nBasic data wrangling"
   },
   {
     "objectID": "Tools/Tools2.slides.html#types-of-data-i",
@@ -592,7 +592,7 @@
     "href": "Tools/Tools2.slides.html#section",
     "title": "Tools for Data Science: Part II",
     "section": "",
-    "text": "In Python, we check the type of each variable in a dataset using the function info().\n\npenguins_data.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 344 entries, 0 to 343\nData columns (total 8 columns):\n #   Column             Non-Null Count  Dtype  \n---  ------             --------------  -----  \n 0   species            344 non-null    object \n 1   island             344 non-null    object \n 2   bill_length_mm     342 non-null    float64\n 3   bill_depth_mm      342 non-null    float64\n 4   flipper_length_mm  342 non-null    float64\n 5   body_mass_g        342 non-null    float64\n 6   sex                333 non-null    object \n 7   year               344 non-null    int64  \ndtypes: float64(4), int64(1), object(3)\nmemory usage: 21.6+ KB"
+    "text": "To practice, we will use the dataset penguins_data."
   },
   {
     "objectID": "Tools/Tools2.slides.html#general-python-formats",
@@ -613,7 +613,7 @@
     "href": "Tools/Tools2.slides.html#section-1",
     "title": "Tools for Data Science: Part II",
     "section": "",
-    "text": "Let’s check the type of variables again.\n\npenguins_data.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 344 entries, 0 to 343\nData columns (total 8 columns):\n #   Column             Non-Null Count  Dtype   \n---  ------             --------------  -----   \n 0   species            344 non-null    category\n 1   island             344 non-null    category\n 2   bill_length_mm     342 non-null    float64 \n 3   bill_depth_mm      342 non-null    float64 \n 4   flipper_length_mm  342 non-null    float64 \n 5   body_mass_g        342 non-null    float64 \n 6   sex                333 non-null    category\n 7   year               344 non-null    int64   \ndtypes: category(3), float64(4), int64(1)\nmemory usage: 14.9 KB"
+    "text": "Let’s load the dataset and the pandas library.\n\nimport pandas as pd\n\n# Load the Excel file into a pandas DataFrame.\npenguins_data = pd.read_excel(\"penguins.xlsx\")\n\n# Preview the dataset.\npenguins_data.head()\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.5\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007\n\n\n3\nAdelie\nTorgersen\nNaN\nNaN\nNaN\nNaN\nNaN\n2007\n\n\n4\nAdelie\nTorgersen\n36.7\n19.3\n193.0\n3450.0\nfemale\n2007"
   },
   {
     "objectID": "Tools/Tools2.slides.html#summary-statistics",
@@ -641,7 +641,7 @@
     "href": "Tools/Tools2.slides.html#section-2",
     "title": "Tools for Data Science: Part II",
     "section": "",
-    "text": "You can also round the result to, say, three decimals.\n\nprint( round(bill_length_mean, 3) )\n\nbill_length_mm    43.922\ndtype: float64"
+    "text": "The axis argument tells .filter() whether to select rows (0) or columns (1) from the dataframe.\n\n(penguins_data\n  .filter([\"species\", \"body_mass_g\", \"sex\"], axis = 1)\n).head()\n\n\n\nThe .head() command allows us to print the first six rows of the newly produced dataframe. We must remove it to have the entire new dataframe."
   },
   {
     "objectID": "Tools/Tools2.slides.html#sample-variance",
@@ -655,7 +655,7 @@
     "href": "Tools/Tools2.slides.html#section-3",
     "title": "Tools for Data Science: Part II",
     "section": "",
-    "text": "In Python, the sample variance is calculated using the function agg() with “var”.\n\nbill_length_var = (penguins_data\n                    .filter(['bill_length_mm'], axis = 1)\n                    .agg(\"var\")\n                    )\nprint( round(bill_length_var, 3) )\n\nbill_length_mm    29.807\ndtype: float64"
+    "text": "We can also use .filter() to select rows too. To this end, we set axis = 1. We can select specific rows, such as 0 and 10.\n\n(penguins_data\n  .filter([0, 10], axis = 0)\n)\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n10\nAdelie\nTorgersen\n37.8\n17.1\n186.0\n3300.0\nNaN\n2007"
   },
   {
     "objectID": "Tools/Tools2.slides.html#sample-standard-deviation",
@@ -669,7 +669,7 @@
     "href": "Tools/Tools2.slides.html#section-4",
     "title": "Tools for Data Science: Part II",
     "section": "",
-    "text": "In Python, the sample variance is calculated using the function agg() with “std”.\n\nbill_length_std = (penguins_data\n                    .filter(['bill_length_mm'], axis = 1)\n                    .agg(\"std\")\n                    )\nprint( round(bill_length_std, 3) )\n\nbill_length_mm    5.46\ndtype: float64"
+    "text": "Or, we can select a set of rows using the function range(). For example, let’s select the first 5 rows.\n\n(penguins_data\n  .filter(range(5), axis = 0)\n)\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.5\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007\n\n\n3\nAdelie\nTorgersen\nNaN\nNaN\nNaN\nNaN\nNaN\n2007\n\n\n4\nAdelie\nTorgersen\n36.7\n19.3\n193.0\n3450.0\nfemale\n2007"
   },
   {
     "objectID": "Tools/Tools2.slides.html#sample-quartiles",
@@ -683,7 +683,7 @@
     "href": "Tools/Tools2.slides.html#section-6",
     "title": "Tools for Data Science: Part II",
     "section": "",
-    "text": "In Python, the quartiles are calculated using the function quantile().\n\n# Set the quantiles.\nset_quantiles = [0.25, 0.5, 0.75]\n# Compute the quantiles.\n(penguins_data\n .filter(['bill_length_mm'], axis = 1)\n .agg(\"quantile\", q = set_quantiles)\n)\n\n\n\n\n\n\n\n\nbill_length_mm\n\n\n\n\n0.25\n39.225\n\n\n0.50\n44.450\n\n\n0.75\n48.500"
+    "text": "We can also filter the data to get penguins with a body mass greater than 5000g.\n\n(penguins_data\n  .query(\"body_mass_g &gt; 5000\")\n).head()\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n153\nGentoo\nBiscoe\n50.0\n16.3\n230.0\n5700.0\nmale\n2007\n\n\n155\nGentoo\nBiscoe\n50.0\n15.2\n218.0\n5700.0\nmale\n2007\n\n\n156\nGentoo\nBiscoe\n47.6\n14.5\n215.0\n5400.0\nmale\n2007\n\n\n159\nGentoo\nBiscoe\n46.7\n15.3\n219.0\n5200.0\nmale\n2007\n\n\n161\nGentoo\nBiscoe\n46.8\n15.4\n215.0\n5150.0\nmale\n2007"
   },
   {
     "objectID": "Tools/Tools2.slides.html#sample-maximum-and-minimum",
@@ -725,7 +725,7 @@
     "href": "Tools/Tools2.slides.html#section-7",
     "title": "Tools for Data Science: Part II",
     "section": "",
-    "text": "The dataset is in the file “glass.xlsx”. Let’s load it using pandas.\n\n# Load the Excel file into a pandas DataFrame.\nglass_data = pd.read_excel(\"glass.xlsx\")\n\n\nThe variable Type is categorical. So, let’s ensure Python knows this using the code below.\n\nglass_data['Type'] = pd.Categorical(glass_data['Type'])"
+    "text": "We can even combine .filter() and .query(). For example, let’s select the columns species, body_mass_g and sex, then filter the data for the “Gentoo” species.\n\n(penguins_data\n  .filter([\"species\", \"body_mass_g\", \"sex\"], axis = 1)\n  .query(\"species == 'Gentoo'\")\n).head(4)\n\n\n\n\n\n\n\n\nspecies\nbody_mass_g\nsex\n\n\n\n\n152\nGentoo\n4500.0\nfemale\n\n\n153\nGentoo\n5700.0\nmale\n\n\n154\nGentoo\n4450.0\nfemale\n\n\n155\nGentoo\n5700.0\nmale"
   },
   {
     "objectID": "Tools/Tools2.slides.html#matplotlib-library",
@@ -816,7 +816,7 @@
     "href": "Tools/Tools2.slides.html#section-8",
     "title": "Tools for Data Science: Part II",
     "section": "",
-    "text": "We create the bar chart using the function countplot() from seaborn.\n\n\nCode\n# Create plot.\nplt.figure(figsize=(7,4)) # Create space for the plot.\nsns.countplot(data = glass_data, x = 'Type') # Show the plot.\nplt.title(\"Bar chart of Type of Glasses\") # Set plot title.\nplt.ylabel(\"Frequency\") # Set label for Y axis.\nplt.show() # Show plot."
+    "text": "In this code, the df after lambda indicates that the dataframe (penguins_data) will be referred to as df inside the function. The colon : sets the start of the function.\n\n(penguins_data\n  .assign(LDRatio = lambda df: df[\"bill_length_mm\"] / df[\"bill_depth_mm\"])\n)\n\nThe code appends the new variable to the end of the resulting dataframe."
   },
   {
     "objectID": "Tools/Tools2.slides.html#saving-plots",
@@ -837,7 +837,7 @@
     "href": "Tools/Tools2.slides.html#section-9",
     "title": "Tools for Data Science: Part II",
     "section": "",
-    "text": "plt.figure(figsize=(5, 5))\nsns.countplot(data = glass_data, x = 'Type')\nplt.title('Relative Frequency of Each Category', fontsize = 12)\nplt.ylabel('Relative Frequency', fontsize = 12)\nplt.xlabel('Category', fontsize = 15)\nplt.xticks(fontsize = 12)\nplt.yticks(fontsize = 12)\nplt.savefig('bar_chart.png',dpi=300)"
+    "text": "We can see the new variable using .filter().\n\n(penguins_data\n  .assign(LDRatio = lambda df: df[\"bill_length_mm\"] / df[\"bill_depth_mm\"])\n  .filter([\"bill_length_mm\", \"bill_depth_mm\", \"LDRatio\"], axis = 1)\n).head()\n\n\n\n\n\n\n\n\nbill_length_mm\nbill_depth_mm\nLDRatio\n\n\n\n\n0\n39.1\n18.7\n2.090909\n\n\n1\n39.5\n17.4\n2.270115\n\n\n2\n40.3\n18.0\n2.238889\n\n\n3\nNaN\nNaN\nNaN\n\n\n4\n36.7\n19.3\n1.901554"
   },
   {
     "objectID": "Classification/Classification.slides.html#agenda",
@@ -1411,7 +1411,7 @@
     "href": "Tools/Tools1.slides.html#agenda",
     "title": "Tools for Data Science: Part I",
     "section": "Agenda",
-    "text": "Agenda\n\n\nIntroduction to Python\nReading data with Python\nData manipulation with pandas\nBasic data wrangling"
+    "text": "Agenda\n\n\nIntroduction to Python\nReading data with Python"
   },
   {
     "objectID": "Tools/Tools1.slides.html#python",
@@ -3197,5 +3197,558 @@
     "title": "Data preprocessing: Part I",
     "section": "",
     "text": "Let’s look at the new dataset.\n\nX_train_num_p.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 240 entries, 0 to 239\nData columns (total 4 columns):\n #   Column             Non-Null Count  Dtype  \n---  ------             --------------  -----  \n 0   bill_length_mm     240 non-null    float64\n 1   bill_depth_mm      240 non-null    float64\n 2   flipper_length_mm  240 non-null    float64\n 3   body_mass_g        240 non-null    float64\ndtypes: float64(4)\nmemory usage: 7.6 KB\n\n\nAll predictors have 240 complete entries."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#agenda",
+    "href": "Tools/Tools3.slides.html#agenda",
+    "title": "Tools for Data Science: Part III",
+    "section": "Agenda",
+    "text": "Agenda\n\n\nReview of data types and summary statistics\nData visualizations"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#types-of-data-i",
+    "href": "Tools/Tools3.slides.html#types-of-data-i",
+    "title": "Tools for Data Science: Part III",
+    "section": "Types of data I",
+    "text": "Types of data I\n\nWhen a numerical quantity designating how much or how many is assigned to each item in the sample, the resulting set of values is numerical or quantitative.\n\nHeight (in ft).\nWeight (in lbs).\nAge (in years)."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#types-of-data-ii",
+    "href": "Tools/Tools3.slides.html#types-of-data-ii",
+    "title": "Tools for Data Science: Part III",
+    "section": "Types of data II",
+    "text": "Types of data II\n\nWhen sample items are placed into categories and category names are assigned to the sample items, the data are categorical or qualitative.\n\nHair color.\nCountry of origin.\nZIP code."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#data-types",
+    "href": "Tools/Tools3.slides.html#data-types",
+    "title": "Tools for Data Science: Part III",
+    "section": "Data types",
+    "text": "Data types"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#example-1",
+    "href": "Tools/Tools3.slides.html#example-1",
+    "title": "Tools for Data Science: Part III",
+    "section": "Example 1",
+    "text": "Example 1\nLet’s load the data in “penguins.xlsx”.\n\n# Load pandas.\nimport pandas as pd\n\n# Load the Excel file into a pandas DataFrame.\npenguins_data = pd.read_excel(\"penguins.xlsx\")\n\n# Print the first 4 rows of the dataset.\npenguins_data.head(4)\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.5\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007\n\n\n3\nAdelie\nTorgersen\nNaN\nNaN\nNaN\nNaN\nNaN\n2007"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section",
+    "href": "Tools/Tools3.slides.html#section",
+    "title": "Tools for Data Science: Part III",
+    "section": "",
+    "text": "In Python, we check the type of each variable in a dataset using the function info().\n\npenguins_data.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 344 entries, 0 to 343\nData columns (total 8 columns):\n #   Column             Non-Null Count  Dtype  \n---  ------             --------------  -----  \n 0   species            344 non-null    object \n 1   island             344 non-null    object \n 2   bill_length_mm     342 non-null    float64\n 3   bill_depth_mm      342 non-null    float64\n 4   flipper_length_mm  342 non-null    float64\n 5   body_mass_g        342 non-null    float64\n 6   sex                333 non-null    object \n 7   year               344 non-null    int64  \ndtypes: float64(4), int64(1), object(3)\nmemory usage: 21.6+ KB"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#general-python-formats",
+    "href": "Tools/Tools3.slides.html#general-python-formats",
+    "title": "Tools for Data Science: Part III",
+    "section": "General Python formats",
+    "text": "General Python formats\n\n\nfloat64 format for numerical variables with decimals.\nint64 format for numerical variables with integers.\nobject format for general variables with characters."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#define-categorical-variables",
+    "href": "Tools/Tools3.slides.html#define-categorical-variables",
+    "title": "Tools for Data Science: Part III",
+    "section": "Define categorical variables",
+    "text": "Define categorical variables\nTechnically, the variable sex in penguins_data is categorical. To explicitly tell this to Python, we use the following code.\n\npenguins_data['sex'] = pd.Categorical(penguins_data['sex'])\n\nSetting sex to categorical allows us to use effective visualization for this data.\nWe do the same for the other categorical variables species and island.\n\npenguins_data['species'] = pd.Categorical(penguins_data['species'])\npenguins_data['island'] = pd.Categorical(penguins_data['island'])"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section-1",
+    "href": "Tools/Tools3.slides.html#section-1",
+    "title": "Tools for Data Science: Part III",
+    "section": "",
+    "text": "Let’s check the type of variables again.\n\npenguins_data.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 344 entries, 0 to 343\nData columns (total 8 columns):\n #   Column             Non-Null Count  Dtype   \n---  ------             --------------  -----   \n 0   species            344 non-null    category\n 1   island             344 non-null    category\n 2   bill_length_mm     342 non-null    float64 \n 3   bill_depth_mm      342 non-null    float64 \n 4   flipper_length_mm  342 non-null    float64 \n 5   body_mass_g        342 non-null    float64 \n 6   sex                333 non-null    category\n 7   year               344 non-null    int64   \ndtypes: category(3), float64(4), int64(1)\nmemory usage: 14.9 KB"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#summary-statistics",
+    "href": "Tools/Tools3.slides.html#summary-statistics",
+    "title": "Tools for Data Science: Part III",
+    "section": "Summary statistics",
+    "text": "Summary statistics\n\nA sample is often a long list of numbers. To help make the important features of a sample stand out, we compute summary statistics.\nFor numerical data, the most popular summary statistics are:\n\n\nSample mean\nSample variance and sample standard deviation\nSample quartiles\nSample maximum and minimum"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#sample-mean",
+    "href": "Tools/Tools3.slides.html#sample-mean",
+    "title": "Tools for Data Science: Part III",
+    "section": "Sample mean",
+    "text": "Sample mean\n\nLet \\(y_1, y_2, \\ldots, y_n\\) be an observed sample of size \\(n\\).\nThe sample mean is\n\\[\\bar{y} = \\frac{1}{n}\\sum_{i=1}^{n} y_i = \\frac{y_1 + y_2 + \\cdots + y_n}{n}.\\]\nThe sample mean gives an indication of the center of the data."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#in-python",
+    "href": "Tools/Tools3.slides.html#in-python",
+    "title": "Tools for Data Science: Part III",
+    "section": "In Python",
+    "text": "In Python\n\nThe sample mean is calculated using the function .agg() with “mean”.\n\nbill_length_mean = (penguins_data\n                    .filter(['bill_length_mm'], axis = 1)\n                    .agg(\"mean\")\n                    )\nprint(bill_length_mean)\n\nbill_length_mm    43.92193\ndtype: float64\n\n\nWe use the function print to show the number. Otherwise, Python will show the computer type of value stored in bill_length_mean."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section-2",
+    "href": "Tools/Tools3.slides.html#section-2",
+    "title": "Tools for Data Science: Part III",
+    "section": "",
+    "text": "You can also round the result to, say, three decimals.\n\nprint( round(bill_length_mean, 3) )\n\nbill_length_mm    43.922\ndtype: float64"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#sample-variance",
+    "href": "Tools/Tools3.slides.html#sample-variance",
+    "title": "Tools for Data Science: Part III",
+    "section": "Sample variance",
+    "text": "Sample variance\n\nLet \\(y_1, y_2, \\ldots, y_n\\) be an observed sample of size \\(n\\). The sample mean is\n\\[\ns^2 = \\frac{1}{n-1} \\sum_{i=1}^{n} (y_i - \\bar{y})^2 = \\frac{(y_1 - \\bar{y})^2  + \\cdots + (y_n - \\bar{y})^2}{n-1}\n\\]\n\nThe sample variance is like an average of the squared differences between each observation and the sample mean.\nIt gives an indication of how spread out the data are."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section-3",
+    "href": "Tools/Tools3.slides.html#section-3",
+    "title": "Tools for Data Science: Part III",
+    "section": "",
+    "text": "In Python, the sample variance is calculated using the function agg() with “var”.\n\nbill_length_var = (penguins_data\n                    .filter(['bill_length_mm'], axis = 1)\n                    .agg(\"var\")\n                    )\nprint( round(bill_length_var, 3) )\n\nbill_length_mm    29.807\ndtype: float64"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#sample-standard-deviation",
+    "href": "Tools/Tools3.slides.html#sample-standard-deviation",
+    "title": "Tools for Data Science: Part III",
+    "section": "Sample standard deviation",
+    "text": "Sample standard deviation\nA drawback of the sample variance is that it is not on the same scale as the actual observations.\nTo obtain a measure of spread whose units are the same as those of the sample, we simply take the squared root of the sample variance\n\\[\ns = \\left(\\frac{1}{n-1} \\sum_{i=1}^{n} (y_i - \\bar{y})^2 \\right)^{1/2}\n\\]\nThis quantity is known as the sample standard deviation. It is in the same units as the observations."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section-4",
+    "href": "Tools/Tools3.slides.html#section-4",
+    "title": "Tools for Data Science: Part III",
+    "section": "",
+    "text": "In Python, the sample variance is calculated using the function agg() with “std”.\n\nbill_length_std = (penguins_data\n                    .filter(['bill_length_mm'], axis = 1)\n                    .agg(\"std\")\n                    )\nprint( round(bill_length_std, 3) )\n\nbill_length_mm    5.46\ndtype: float64"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#sample-quartiles",
+    "href": "Tools/Tools3.slides.html#sample-quartiles",
+    "title": "Tools for Data Science: Part III",
+    "section": "Sample quartiles",
+    "text": "Sample quartiles\n\nThe sample median is the middle number of the ordered data values.\n\nSample quartiles divide the data as nearly as possible into quarters:\n\n\nFirst quartile (\\(Q_1\\)) is the median of the lower half of the data.\nSecond quartile (\\(Q_2\\)) is the median of the data.\nThird quartile (\\(Q_3\\)) is the median of the upper half of the data."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section-6",
+    "href": "Tools/Tools3.slides.html#section-6",
+    "title": "Tools for Data Science: Part III",
+    "section": "",
+    "text": "In Python, the quartiles are calculated using the function quantile().\n\n# Set the quantiles.\nset_quantiles = [0.25, 0.5, 0.75]\n# Compute the quantiles.\n(penguins_data\n .filter(['bill_length_mm'], axis = 1)\n .agg(\"quantile\", q = set_quantiles)\n)\n\n\n\n\n\n\n\n\nbill_length_mm\n\n\n\n\n0.25\n39.225\n\n\n0.50\n44.450\n\n\n0.75\n48.500"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#sample-maximum-and-minimum",
+    "href": "Tools/Tools3.slides.html#sample-maximum-and-minimum",
+    "title": "Tools for Data Science: Part III",
+    "section": "Sample maximum and minimum",
+    "text": "Sample maximum and minimum\nOther relevant summary statistics are the maximum and minimum, which are calculated using the functions max() and min(), respectively.\n\nbill_length_max = (penguins_data\n                   .filter(['bill_length_mm'], axis = 1)\n                   .agg(\"max\")\n                  )\nprint(bill_length_max)\n\nbill_length_mm    59.6\ndtype: float64\n\n\n\nbill_length_min = (penguins_data\n                   .filter(['bill_length_mm'], axis = 1)\n                   .agg(\"min\")\n                  )\nprint(bill_length_min)\n\nbill_length_mm    32.1\ndtype: float64"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#summary-statistics-for-categorical-data",
+    "href": "Tools/Tools3.slides.html#summary-statistics-for-categorical-data",
+    "title": "Tools for Data Science: Part III",
+    "section": "Summary statistics for categorical data",
+    "text": "Summary statistics for categorical data\n\nThe most commonly used statistical summaries for categorical data are:\n\nThe frequency of a category is the number of observations that belong to that category.\nThe relative frequency is the frequency divided by the total number of observations."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#frequency-table",
+    "href": "Tools/Tools3.slides.html#frequency-table",
+    "title": "Tools for Data Science: Part III",
+    "section": "Frequency table",
+    "text": "Frequency table\nSummarizes a categorical variable by counting the values per category.\n\n\n\n(penguins_data\n  .filter(['species'], axis = 1)\n  .value_counts()\n)  \n\nspecies  \nAdelie       152\nGentoo       124\nChinstrap     68\nName: count, dtype: int64\n\n\n\n\n\n\nSpecie\nFrequency\n\n\n\n\nAdelie\n152\n\n\nChinstrap\n68\n\n\nGentoo\n124\n\n\nTotal\n344\n\n\n\n\n\nFrequency: Number of observations in each category.\nTotal: Total sum of observations.\n\n\n\nVentajas de las frequencias.\nResumen claro y conciso de los datos categóricos.\nFacilita la identificación de patrones y tendencias.\nAyuda en la toma de decisiones informadas."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#relative-frequency-table",
+    "href": "Tools/Tools3.slides.html#relative-frequency-table",
+    "title": "Tools for Data Science: Part III",
+    "section": "Relative Frequency Table",
+    "text": "Relative Frequency Table\nSummarizes a categorical variable by calculating the proportion of values per category.\n\n\n\n(penguins_data\n .filter(['species'], axis = 1)\n .value_counts(normalize = True)\n)\n\nspecies  \nAdelie       0.441860\nGentoo       0.360465\nChinstrap    0.197674\nName: proportion, dtype: float64\n\n\n\n\n\n\nSpecie\nRelative Frequency\n\n\n\n\nAdelie\n0.4418605\n\n\nChinstrap\n0.1976744\n\n\nGentoo\n0.3604651\n\n\nSum\n1\n\n\n\n\n\nRelative frequency: Number of observations in each category divided by the total.\n\n\nLa ventaja de la frequencia relativa es que se puede interpretar como una probabilidad. Lo que da mas información."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#example-2",
+    "href": "Tools/Tools3.slides.html#example-2",
+    "title": "Tools for Data Science: Part III",
+    "section": "Example 2",
+    "text": "Example 2\n\nA criminologist is developing a rule-based system to classify the types of glasses encountered in criminal investigations.\nThe data consist of 214 glass samples labeled as one of seven class categories.\nThere are nine predictors, including refractive index and percentages of eight elements: Na, Mg, AL, Is, K, Ca, Ba, and Fe. The response is the type of glass."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section-7",
+    "href": "Tools/Tools3.slides.html#section-7",
+    "title": "Tools for Data Science: Part III",
+    "section": "",
+    "text": "The dataset is in the file “glass.xlsx”. Let’s load it using pandas.\n\n# Load the Excel file into a pandas DataFrame.\nglass_data = pd.read_excel(\"glass.xlsx\")\n\n\nThe variable Type is categorical. So, let’s ensure Python knows this using the code below.\n\nglass_data['Type'] = pd.Categorical(glass_data['Type'])"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#matplotlib-library",
+    "href": "Tools/Tools3.slides.html#matplotlib-library",
+    "title": "Tools for Data Science: Part III",
+    "section": "matplotlib library",
+    "text": "matplotlib library\n\nmatplotlib is a comprehensive library for creating static, animated, and interactive visualizations in Python\nIt is widely used in the data science community for plotting data in various formats\nIdeal for creating simple visualizations like line plots, bar charts, scatter plots, and more\nhttps://matplotlib.org/"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#seaborn-library",
+    "href": "Tools/Tools3.slides.html#seaborn-library",
+    "title": "Tools for Data Science: Part III",
+    "section": "seaborn library",
+    "text": "seaborn library\n\nseaborn is a Python library built on top of Matplotlib\nDesigned to make statistical data visualization easy and beautiful\nIdeal for creating informative and attractive visualizations with minimal code\nhttps://seaborn.pydata.org/index.html"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#importing-the-libraries",
+    "href": "Tools/Tools3.slides.html#importing-the-libraries",
+    "title": "Tools for Data Science: Part III",
+    "section": "Importing the libraries",
+    "text": "Importing the libraries\n\nThe matplotlib and seaborn libraries are pre-installed in Google Colab. However, we need to inform Google Colab that we want to use them and its functions using the following command:\n\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\nSimilar to pandas, the command as sns allows us to have a short name for seaborn. Similarly, we rename matplotlib as plt."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#histogram",
+    "href": "Tools/Tools3.slides.html#histogram",
+    "title": "Tools for Data Science: Part III",
+    "section": "Histogram",
+    "text": "Histogram\n\nGraphical display that gives an idea of the “shape” of the sample, indicating regions where sample points are concentrated and regions where they are sparse.\n\nThe bars of the histogram touch each other. A space indicates that there are no observations in that interval."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#histogram-of-na",
+    "href": "Tools/Tools3.slides.html#histogram-of-na",
+    "title": "Tools for Data Science: Part III",
+    "section": "Histogram of Na",
+    "text": "Histogram of Na\nTo create a histogram, we use the function histplot() from seabron.\n\n\nCode\nplt.figure(figsize=(7,4)) # Create space for figure.\nsns.histplot(data = glass_data, x = 'Na') # Create the histogram.\nplt.title(\"Histogram of Na\") # Plot title.\nplt.xlabel(\"Na\") # X label\nplt.show() # Display the plot"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#box-plot",
+    "href": "Tools/Tools3.slides.html#box-plot",
+    "title": "Tools for Data Science: Part III",
+    "section": "Box plot",
+    "text": "Box plot\n\nA box plot is a graphic that presents the median, the first and third quartiles, and any “outliers” present in the sample.\n\nThe interquartile range (IQR) is the difference between the third quartile and the first quartile (\\(Q_3 - Q_1\\)). This is the distance needed to span the middle half of the data."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#anatomy-of-a-box-plot",
+    "href": "Tools/Tools3.slides.html#anatomy-of-a-box-plot",
+    "title": "Tools for Data Science: Part III",
+    "section": "Anatomy of a box plot",
+    "text": "Anatomy of a box plot\n\nSee also https://towardsdatascience.com/why-1-5-in-iqr-method-of-outlier-detection-5d07fdc82097"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#box-plot-of-na",
+    "href": "Tools/Tools3.slides.html#box-plot-of-na",
+    "title": "Tools for Data Science: Part III",
+    "section": "Box plot of Na",
+    "text": "Box plot of Na\nTo create a boxplot, we use the function boxplot() from seabron.\n\n\nCode\nplt.figure(figsize=(7,4)) # Create space for the figure.\nsns.boxplot(data = glass_data, y = 'Na') # Create boxplot.\nplt.title(\"Box plot of Na\") # Add title.\nplt.show() # Show the plot."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#outliers",
+    "href": "Tools/Tools3.slides.html#outliers",
+    "title": "Tools for Data Science: Part III",
+    "section": "Outliers",
+    "text": "Outliers\n\nOutliers are points that are much larger or smaller than the rest of the sample points.\nOutliers may be data entry errors or they may be points that really are different from the rest.\nOutliers should not be deleted without considerable thought—sometimes calculations and analyses will be done with and without outliers and then compared."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#scatter-plot",
+    "href": "Tools/Tools3.slides.html#scatter-plot",
+    "title": "Tools for Data Science: Part III",
+    "section": "Scatter plot",
+    "text": "Scatter plot\n\nData for which items consists of a pair of numeric values is called bivariate. The graphical summary for bivariate data is a scatterplot.\nThe variables \\(X\\) and \\(Y\\) are placed on the horizontal and vertical axes, respectively. Each point on the graph marks the position of a pair of values of \\(X\\) and \\(Y\\).\nA scatterplot allows us to explore lineal and nonlinear relationships between two variables."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#scatter-plot-of-na-versus-ri",
+    "href": "Tools/Tools3.slides.html#scatter-plot-of-na-versus-ri",
+    "title": "Tools for Data Science: Part III",
+    "section": "Scatter plot of Na versus RI",
+    "text": "Scatter plot of Na versus RI\nTo create a scatter plot, we use the function scatter() from seabron. In this function, you must state the\n\n\nCode\nplt.figure(figsize=(7,4)) # Create space for the plot.\nsns.scatterplot(data = glass_data, x = 'Na', y = 'RI') # Show the plot.\nplt.title(\"Scatter plot of Na vs RI\") # Set plot title.\nplt.xlabel(\"Na\") # Set label for X axis.\nplt.ylabel(\"RI\") # Set label for Y axis.\nplt.show() # Show plot."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#bar-charts",
+    "href": "Tools/Tools3.slides.html#bar-charts",
+    "title": "Tools for Data Science: Part III",
+    "section": "Bar charts",
+    "text": "Bar charts\nBar charts are commonly used to describe qualitative data classified into various categories based on sector, region, different time periods, or other such factors.\nDifferent sectors, different regions, or different time periods are then labeled as specific categories.\nA bar chart is constructed by creating categories that are represented by labeling each category and which are represented by intervals of equal length on a horizontal axis.\nThe count or frequency within the corresponding category is represented by a bar of height proportional to the frequency."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section-8",
+    "href": "Tools/Tools3.slides.html#section-8",
+    "title": "Tools for Data Science: Part III",
+    "section": "",
+    "text": "We create the bar chart using the function countplot() from seaborn.\n\n\nCode\n# Create plot.\nplt.figure(figsize=(7,4)) # Create space for the plot.\nsns.countplot(data = glass_data, x = 'Type') # Show the plot.\nplt.title(\"Bar chart of Type of Glasses\") # Set plot title.\nplt.ylabel(\"Frequency\") # Set label for Y axis.\nplt.show() # Show plot."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#saving-plots",
+    "href": "Tools/Tools3.slides.html#saving-plots",
+    "title": "Tools for Data Science: Part III",
+    "section": "Saving plots",
+    "text": "Saving plots\n\nWe save a figure using the save.fig function from matplotlib. The dpi argument of this function sets the resolution of the image. The higher the dpi, the better the resolution.\n\nplt.figure(figsize=(5, 7))\nsns.countplot(data = glass_data, x = 'Type')\nplt.title('Frequency of Each Category')\nplt.ylabel('Frequency')\nplt.xlabel('Category')\nplt.savefig('bar_chart.png',dpi=300)"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#improving-the-figure",
+    "href": "Tools/Tools3.slides.html#improving-the-figure",
+    "title": "Tools for Data Science: Part III",
+    "section": "Improving the figure",
+    "text": "Improving the figure\n\nWe can also use other functions to improve the aspect of the figure:\n\nplt.title(fontsize): Font size of the title.\nplt.ylabel(fontsize): Font size of y axis title.\nplt.xlabel(fontsize): Font size of x axis title.\nplt.yticks(fontsize): Font size of the y axis labels.\nplt.xticks(fontsize): Font size of the x axis labels."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section-9",
+    "href": "Tools/Tools3.slides.html#section-9",
+    "title": "Tools for Data Science: Part III",
+    "section": "",
+    "text": "plt.figure(figsize=(5, 5))\nsns.countplot(data = glass_data, x = 'Type')\nplt.title('Relative Frequency of Each Category', fontsize = 12)\nplt.ylabel('Relative Frequency', fontsize = 12)\nplt.xlabel('Category', fontsize = 15)\nplt.xticks(fontsize = 12)\nplt.yticks(fontsize = 12)\nplt.savefig('bar_chart.png',dpi=300)"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#chaining-operations-with-pandas",
+    "href": "Tools/Tools2.slides.html#chaining-operations-with-pandas",
+    "title": "Tools for Data Science: Part II",
+    "section": "Chaining operations with pandas",
+    "text": "Chaining operations with pandas\nOne of the most important techniques in pandas is chaining, which allows for cleaner and more readable data manipulation.\nThe general structure of chaining looks like this:"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#key-pandas-methods",
+    "href": "Tools/Tools2.slides.html#key-pandas-methods",
+    "title": "Tools for Data Science: Part II",
+    "section": "Key pandas methods",
+    "text": "Key pandas methods\npandas provides methods or functions to solve common data manipulation tasks:\n\n\n.filter() selects specific columns or rows.\n.query() filters observations based on conditions.\n.assign() adds new variables that are functions of existing variables.\n.sort_values() changes the order of rows.\n.agg() reduces multiple values to a single numerical summary."
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#selecting-columns-with-.filter",
+    "href": "Tools/Tools2.slides.html#selecting-columns-with-.filter",
+    "title": "Tools for Data Science: Part II",
+    "section": "Selecting columns with .filter()",
+    "text": "Selecting columns with .filter()\nSelect the columns species, body_mass_g and sex.\n\n(penguins_data\n  .filter([\"species\", \"body_mass_g\", \"sex\"], axis = 1)\n).head()\n\n\n\n\n\n\n\n\nspecies\nbody_mass_g\nsex\n\n\n\n\n0\nAdelie\n3750.0\nmale\n\n\n1\nAdelie\n3800.0\nfemale\n\n\n2\nAdelie\n3250.0\nfemale\n\n\n3\nAdelie\nNaN\nNaN\n\n\n4\nAdelie\n3450.0\nfemale"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#filtering-rows-with-.query",
+    "href": "Tools/Tools2.slides.html#filtering-rows-with-.query",
+    "title": "Tools for Data Science: Part II",
+    "section": "Filtering rows with .query()",
+    "text": "Filtering rows with .query()\n\nAn alternative way of selecting rows is .query(). Compared to .filter(), .query() allows us to filter the data using statements or queries involving the variables.\n\nFor example, let’s filter the data for the species “Gentoo.”\n\n(penguins_data\n  .query(\"species == 'Gentoo'\")\n)"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#section-5",
+    "href": "Tools/Tools2.slides.html#section-5",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "(penguins_data\n  .query(\"species == 'Gentoo'\")\n).head()\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n152\nGentoo\nBiscoe\n46.1\n13.2\n211.0\n4500.0\nfemale\n2007\n\n\n153\nGentoo\nBiscoe\n50.0\n16.3\n230.0\n5700.0\nmale\n2007\n\n\n154\nGentoo\nBiscoe\n48.7\n14.1\n210.0\n4450.0\nfemale\n2007\n\n\n155\nGentoo\nBiscoe\n50.0\n15.2\n218.0\n5700.0\nmale\n2007\n\n\n156\nGentoo\nBiscoe\n47.6\n14.5\n215.0\n5400.0\nmale\n2007"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#create-new-columns-with-.assign",
+    "href": "Tools/Tools2.slides.html#create-new-columns-with-.assign",
+    "title": "Tools for Data Science: Part II",
+    "section": "Create new columns with .assign()",
+    "text": "Create new columns with .assign()\nWith .assign(), we can create new columns (variables) that are functions of existing ones. This function uses a special Python keyword called lambda. Technically, this keyword defines an anonymous function.\nFor example, we create a new variable LDRatio equaling the ratio of bill_length_mm and bill_depth_mm.\n\n(penguins_data\n  .assign(LDRatio = lambda df: df[\"bill_length_mm\"] / df[\"bill_depth_mm\"])\n)"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#sorting-with-.sort_values",
+    "href": "Tools/Tools2.slides.html#sorting-with-.sort_values",
+    "title": "Tools for Data Science: Part II",
+    "section": "Sorting with .sort_values()",
+    "text": "Sorting with .sort_values()\nWe can sort the data based on a column like bill_length_mm.\n\n(penguins_data\n  .sort_values(\"bill_length_mm\")\n).head(4)\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n142\nAdelie\nDream\n32.1\n15.5\n188.0\n3050.0\nfemale\n2009\n\n\n98\nAdelie\nDream\n33.1\n16.1\n178.0\n2900.0\nfemale\n2008\n\n\n70\nAdelie\nTorgersen\n33.5\n19.0\n190.0\n3600.0\nfemale\n2008\n\n\n92\nAdelie\nDream\n34.0\n17.1\n185.0\n3400.0\nfemale\n2008"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#section-10",
+    "href": "Tools/Tools2.slides.html#section-10",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "To sort in descending order, use ascending=False inside sort_values().\n\n(penguins_data\n  .sort_values(\"bill_length_mm\", ascending=False)\n).head()\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n185\nGentoo\nBiscoe\n59.6\n17.0\n230.0\n6050.0\nmale\n2007\n\n\n293\nChinstrap\nDream\n58.0\n17.8\n181.0\n3700.0\nfemale\n2007\n\n\n253\nGentoo\nBiscoe\n55.9\n17.0\n228.0\n5600.0\nmale\n2009\n\n\n339\nChinstrap\nDream\n55.8\n19.8\n207.0\n4000.0\nmale\n2009\n\n\n267\nGentoo\nBiscoe\n55.1\n16.0\n230.0\n5850.0\nmale\n2009"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#summarizing-with-.agg",
+    "href": "Tools/Tools2.slides.html#summarizing-with-.agg",
+    "title": "Tools for Data Science: Part II",
+    "section": "Summarizing with .agg()",
+    "text": "Summarizing with .agg()\nWe can calculate summary statistics of the columns bill_length_mm, bill_depth_mm, and body_mass_g.\n\n(penguins_data\n  .filter([\"bill_length_mm\", \"bill_depth_mm\", \"body_mass_g\"], axis = 1)\n  .agg([\"mean\"])\n)\n\n\n\n\n\n\n\n\nbill_length_mm\nbill_depth_mm\nbody_mass_g\n\n\n\n\nmean\n43.92193\n17.15117\n4201.754386\n\n\n\n\n\n\n\n\n\nBy default, agg() ignores missing values."
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#saving-results-in-new-objects",
+    "href": "Tools/Tools2.slides.html#saving-results-in-new-objects",
+    "title": "Tools for Data Science: Part II",
+    "section": "Saving results in new objects",
+    "text": "Saving results in new objects\n\nAfter performing operations on our data, we can save the modified dataset as a new object.\n\nmean_penguins_data = (penguins_data\n  .filter([\"bill_length_mm\", \"bill_depth_mm\", \"body_mass_g\"], axis = 1)\n  .agg([\"mean\"])\n)\n\nmean_penguins_data\n\n\n\n\n\n\n\n\nbill_length_mm\nbill_depth_mm\nbody_mass_g\n\n\n\n\nmean\n43.92193\n17.15117\n4201.754386"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#more-on-pandas",
+    "href": "Tools/Tools2.slides.html#more-on-pandas",
+    "title": "Tools for Data Science: Part II",
+    "section": "More on pandas",
+    "text": "More on pandas\n\n\nhttps://wesmckinney.com/book/"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#data-wrangling",
+    "href": "Tools/Tools2.slides.html#data-wrangling",
+    "title": "Tools for Data Science: Part II",
+    "section": "Data wrangling",
+    "text": "Data wrangling\n\n\nData wrangling is the process of transforming raw data into a clean and structured format.\nIt involves merging, reshaping, filtering, and organizing data for analysis.\nHere, we illustrate some special functions of the pandas for cleaning common issues with a dataset."
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#example",
+    "href": "Tools/Tools2.slides.html#example",
+    "title": "Tools for Data Science: Part II",
+    "section": "Example",
+    "text": "Example\nConsider an industrial engineer who receives a messy Excel file from a manufacturing client. The data file is called “industrial_dataset.xlsx”, which file includes data about machine maintenance logs, production output, and operator comments.\nThe goal is to clean and prepare this dataset using pandas so it can be analyzed.\nLet’s read the data set into Python\n\n# Load the Excel file into a pandas DataFrame.\nclient_data = pd.read_excel(\"industrial_dataset.xlsx\")"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#section-11",
+    "href": "Tools/Tools2.slides.html#section-11",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "# Preview the dataset.\nclient_data.head()\n\n\n\n\n\n\n\n\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\n\n\n\n\n0\n101\n1200\n2023-01-10\nAna\nok\n\n\n1\n101\n1200\n2023-01-10\nAna\nok\n\n\n2\n102\n1050\n2023-01-12\nBob\nNeeds oil!\n\n\n3\n103\nerror\n2023-01-13\nCharlie\nAll good\\n\n\n\n4\n103\n950\n2023-01-13\nCharlie\nAll good\\n"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#remove-duplicate-rows",
+    "href": "Tools/Tools2.slides.html#remove-duplicate-rows",
+    "title": "Tools for Data Science: Part II",
+    "section": "Remove duplicate rows",
+    "text": "Remove duplicate rows\n\nDuplicate or identical rows are rows that have the same entries in every column in the dataset.\nIf only one row is needed for the analysis, we can remove the duplicates using the .drop_duplicates() function.\n\nclient_data_single = (client_data\n                     .drop_duplicates()\n                      )"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#section-12",
+    "href": "Tools/Tools2.slides.html#section-12",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "The client_data_single dataframe does not have duplicate rows.\n\nclient_data_single.head()\n\n\n\n\n\n\n\n\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\n\n\n\n\n0\n101\n1200\n2023-01-10\nAna\nok\n\n\n1\n101\n1200\n2023-01-10\nAna\nok\n\n\n2\n102\n1050\n2023-01-12\nBob\nNeeds oil!\n\n\n3\n103\nerror\n2023-01-13\nCharlie\nAll good\\n\n\n\n4\n103\n950\n2023-01-13\nCharlie\nAll good\\n"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#add-an-index-column",
+    "href": "Tools/Tools2.slides.html#add-an-index-column",
+    "title": "Tools for Data Science: Part II",
+    "section": "Add an index column",
+    "text": "Add an index column\n\nIn some cases, it is useful to have a unique identifier for each row in the dataset. We can create an identifier using the function .assign with some extra syntaxis.\n\nclient_data_single = (client_data_single\n                      .reset_index(drop = True)\n                      .assign(ID = lambda x: x.index + 1)\n                      )"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#section-13",
+    "href": "Tools/Tools2.slides.html#section-13",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "The new column is appended to the end of the dataframe.\n\nclient_data_single.head()\n\n\n\n\n\n\n\n\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\nID\n\n\n\n\n0\n101\n1200\n2023-01-10\nAna\nok\n1\n\n\n1\n101\n1200\n2023-01-10\nAna\nok\n2\n\n\n2\n102\n1050\n2023-01-12\nBob\nNeeds oil!\n3\n\n\n3\n103\nerror\n2023-01-13\nCharlie\nAll good\\n\n4\n\n\n4\n103\n950\n2023-01-13\nCharlie\nAll good\\n\n5"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#section-14",
+    "href": "Tools/Tools2.slides.html#section-14",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "To bring it to the begining of the array, we can use the .filter() function.\n\nclient_data_single = (client_data_single\n.filter(['ID', 'Machine ID',    'Output (units)',   \n        'Maintenance Date', 'Operator', 'Comment'])\n)\nclient_data_single.head(3)  \n\n\n\n\n\n\n\n\nID\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\n\n\n\n\n0\n1\n101\n1200\n2023-01-10\nAna\nok\n\n\n1\n2\n101\n1200\n2023-01-10\nAna\nok\n\n\n2\n3\n102\n1050\n2023-01-12\nBob\nNeeds oil!"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#fill-blank-cells",
+    "href": "Tools/Tools2.slides.html#fill-blank-cells",
+    "title": "Tools for Data Science: Part II",
+    "section": "Fill blank cells",
+    "text": "Fill blank cells\nIn the dataset, there are columns with missing values. If we would like to fill them with specific values or text, we use the .fillna() function. In this function, we use the syntaxis 'Variable': 'Replace', where the Variable is the column in the dataset and Replace is the text or number to fill the entry in.\nLet’s fill in the missing entries of the columns Operator, Maintenance Date, and Comment.\n\ncomplete_data = (client_data_single\n                .fillna({'Operator': 'Unknown', \n                'Maintenance Date': '2023-01-01',\n                'Comment': 'None'})\n                )"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#section-15",
+    "href": "Tools/Tools2.slides.html#section-15",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "complete_data.head()\n\n\n\n\n\n\n\n\nID\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\n\n\n\n\n0\n1\n101\n1200\n2023-01-10\nAna\nok\n\n\n1\n2\n101\n1200\n2023-01-10\nAna\nok\n\n\n2\n3\n102\n1050\n2023-01-12\nBob\nNeeds oil!\n\n\n3\n4\n103\nerror\n2023-01-13\nCharlie\nAll good\\n\n\n\n4\n5\n103\n950\n2023-01-13\nCharlie\nAll good\\n"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#replace-values",
+    "href": "Tools/Tools2.slides.html#replace-values",
+    "title": "Tools for Data Science: Part II",
+    "section": "Replace values",
+    "text": "Replace values\n\nThere are some cases in which columns have some undesired or unwatned values. Consider the Output (units) as an example.\n\ncomplete_data['Output (units)'].head()\n\n0     1200\n1     1200\n2     1050\n3    error\n4      950\nName: Output (units), dtype: object\n\n\nThe column has the numbers of units but also text such as “error”."
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#section-16",
+    "href": "Tools/Tools2.slides.html#section-16",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "We can replace the “error” in this column by a user-specified value, say, 0. To this end, we use the function .replace(). The function has two inputs. The first one is the value to replace and the second one is the replacement value.\n\ncomplete_data['Output (units)'] = complete_data['Output (units)'].replace('error', 0)"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#section-17",
+    "href": "Tools/Tools2.slides.html#section-17",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "Let’s check the new column.\n\ncomplete_data['Output (units)']\n\n0     1200\n1     1200\n2     1050\n3        0\n4      950\n      ... \n95     800\n96    1100\n97     950\n98     950\n99    1100\nName: Output (units), Length: 100, dtype: int64\n\n\nNote that the new column is now numeric."
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#split-column-into-multiple-ones",
+    "href": "Tools/Tools2.slides.html#split-column-into-multiple-ones",
+    "title": "Tools for Data Science: Part II",
+    "section": "Split column into multiple ones",
+    "text": "Split column into multiple ones\nThere are some cases in which we want to split a column according to a character. For example, consider the column Comment from the dataset.\n\ncomplete_data['Comment']\n\n0                       ok\n1                       ok\n2               Needs oil!\n3               All good\\n\n4               All good\\n\n              ...         \n95    Requires part: valve\n96                      ok\n97    Delay: maintenance\\n\n98              Needs oil!\n99              All good\\n\nName: Comment, Length: 100, dtype: object"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#section-18",
+    "href": "Tools/Tools2.slides.html#section-18",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "The column has some values such as “Requires part: valve” and “Delay: maintenance” that we may want to split into columns.\n\n\n0                       ok\n1                       ok\n2               Needs oil!\n3               All good\\n\n4               All good\\n\n              ...         \n95    Requires part: valve\n96                      ok\n97    Delay: maintenance\\n\n98              Needs oil!\n99              All good\\n\nName: Comment, Length: 100, dtype: object"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#section-19",
+    "href": "Tools/Tools2.slides.html#section-19",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "We can split the values in the column according to the colon “:”.\nThat is, everything before the colon will be in a column. Everything after the colon will be in another column. To achieve this, we use the function str.split().\nOne input of the function is the symbol or character for which we cant to make a split. The other input, expand = True tells Python that we want to create new columns.\n\ncomplete_data['Comment'].str.split(':', expand = True)"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#section-20",
+    "href": "Tools/Tools2.slides.html#section-20",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "The result is two columns.\n\nsplit_column = complete_data['Comment'].str.split(':', expand = True)\nsplit_column.head()\n\n\n\n\n\n\n\n\n0\n1\n\n\n\n\n0\nok\nNone\n\n\n1\nok\nNone\n\n\n2\nNeeds oil!\nNone\n\n\n3\nAll good\\n\nNone\n\n\n4\nAll good\\n\nNone"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#section-21",
+    "href": "Tools/Tools2.slides.html#section-21",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "We can assign them to new columns in the dataset using the following code.\n\naugmented_data = (complete_data\n                  .assign(First_comment = split_column.filter([0]),\n                  Second_comment = split_column.filter([1]))\n                  )"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#section-22",
+    "href": "Tools/Tools2.slides.html#section-22",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "augmented_data.head()\n\n\n\n\n\n\n\n\nID\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\nFirst_comment\nSecond_comment\n\n\n\n\n0\n1\n101\n1200\n2023-01-10\nAna\nok\nok\nNone\n\n\n1\n2\n101\n1200\n2023-01-10\nAna\nok\nok\nNone\n\n\n2\n3\n102\n1050\n2023-01-12\nBob\nNeeds oil!\nNeeds oil!\nNone\n\n\n3\n4\n103\n0\n2023-01-13\nCharlie\nAll good\\n\nAll good\\n\nNone\n\n\n4\n5\n103\n950\n2023-01-13\nCharlie\nAll good\\n\nAll good\\n\nNone"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#remove-characters",
+    "href": "Tools/Tools2.slides.html#remove-characters",
+    "title": "Tools for Data Science: Part II",
+    "section": "Remove characters",
+    "text": "Remove characters\n\nSomething that we notice is that the column First_Comment has some extra characters like “” that may be useless when working with the data.\nWe can remove them using the function str.strip(). The input of the function is the character to remove.\n\naugmented_data['First_comment'] = augmented_data['First_comment'].str.strip(\"\\n\")"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#section-23",
+    "href": "Tools/Tools2.slides.html#section-23",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "Let’s see the cleaned column.\n\naugmented_data['First_comment']\n\n0                ok\n1                ok\n2        Needs oil!\n3          All good\n4          All good\n          ...      \n95    Requires part\n96               ok\n97            Delay\n98       Needs oil!\n99         All good\nName: First_comment, Length: 100, dtype: object"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#section-24",
+    "href": "Tools/Tools2.slides.html#section-24",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "We can also remove other characters.\n\naugmented_data['First_comment'].str.strip(\"!\")\n\n0                ok\n1                ok\n2         Needs oil\n3          All good\n4          All good\n          ...      \n95    Requires part\n96               ok\n97            Delay\n98        Needs oil\n99         All good\nName: First_comment, Length: 100, dtype: object"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#transform-text-case",
+    "href": "Tools/Tools2.slides.html#transform-text-case",
+    "title": "Tools for Data Science: Part II",
+    "section": "Transform text case",
+    "text": "Transform text case\nWhen working with text columns such as those containing names, it might be possible to have different ways of writing. A common case is when having lower case or upper case names or a combination thereof.\nFor example, consider the column Operator containing the names of the operators.\n\ncomplete_data['Operator'].head()\n\n0       Ana \n1        Ana\n2        Bob\n3    Charlie\n4    Charlie\nName: Operator, dtype: object"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#remove-extra-spaces",
+    "href": "Tools/Tools2.slides.html#remove-extra-spaces",
+    "title": "Tools for Data Science: Part II",
+    "section": "Remove extra spaces",
+    "text": "Remove extra spaces\n\nTo deal with names, we first use the .str.strip() to remove leading and trailing characters from strings.\n\ncomplete_data['Operator'] = complete_data['Operator'].str.strip()\ncomplete_data['Operator']\n\n0         Ana\n1         Ana\n2         Bob\n3     Charlie\n4     Charlie\n       ...   \n95    Charlie\n96        Ana\n97        Ana\n98    Charlie\n99        ana\nName: Operator, Length: 100, dtype: object"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#change-to-lowercase-letters",
+    "href": "Tools/Tools2.slides.html#change-to-lowercase-letters",
+    "title": "Tools for Data Science: Part II",
+    "section": "Change to lowercase letters",
+    "text": "Change to lowercase letters\n\nWe can turn all names to lowercase using the function str.lower().\n\ncomplete_data['Operator'].str.lower()\n\n0         ana\n1         ana\n2         bob\n3     charlie\n4     charlie\n       ...   \n95    charlie\n96        ana\n97        ana\n98    charlie\n99        ana\nName: Operator, Length: 100, dtype: object"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#change-to-uppercase-letters",
+    "href": "Tools/Tools2.slides.html#change-to-uppercase-letters",
+    "title": "Tools for Data Science: Part II",
+    "section": "Change to uppercase letters",
+    "text": "Change to uppercase letters\n\nWe can turn all names to lowercase using the function str.upper().\n\ncomplete_data['Operator'].str.upper()\n\n0         ANA\n1         ANA\n2         BOB\n3     CHARLIE\n4     CHARLIE\n       ...   \n95    CHARLIE\n96        ANA\n97        ANA\n98    CHARLIE\n99        ANA\nName: Operator, Length: 100, dtype: object"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#capitalize-the-first-letter",
+    "href": "Tools/Tools2.slides.html#capitalize-the-first-letter",
+    "title": "Tools for Data Science: Part II",
+    "section": "Capitalize the first letter",
+    "text": "Capitalize the first letter\n\nWe can convert all names to title case using the function str.title().\n\ncomplete_data['Operator'].str.title()\n\n0         Ana\n1         Ana\n2         Bob\n3     Charlie\n4     Charlie\n       ...   \n95    Charlie\n96        Ana\n97        Ana\n98    Charlie\n99        Ana\nName: Operator, Length: 100, dtype: object"
   }
 ]
