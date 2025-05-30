@@ -1565,7 +1565,7 @@
     "href": "Tools/Tools2.slides.html#example",
     "title": "Tools for Data Science: Part II",
     "section": "Example",
-    "text": "Example\nConsider an industrial engineer who receives a messy Excel file from a manufacturing client. The data file is called “industrial_dataset.xlsx”, which file includes data about machine maintenance logs, production output, and operator comments.\nThe goal is to clean and prepare this dataset using pandas so it can be analyzed.\nLet’s read the data set into Python\n\n# Load the Excel file into a pandas DataFrame.\nclient_data = pd.read_excel(\"industrial_dataset.xlsx\")"
+    "text": "Example\nConsider an industrial engineer who receives a messy Excel file from a manufacturing client. The data file is called “industrial_dataset.xlsx”, which file includes data about machine maintenance logs, production output, and operator comments.\nThe goal is to clean and prepare this dataset using pandas so it can be analyzed.\nLet’s read the data set into Python.\n\n# Load the Excel file into a pandas DataFrame.\nclient_data = pd.read_excel(\"industrial_dataset.xlsx\")"
   },
   {
     "objectID": "Tools/Tools2.slides.html#section-11",

@@ -329,7 +329,7 @@ Consider an industrial engineer who receives a messy Excel file from a manufactu
 
 The **goal** is to clean and prepare this dataset using pandas so it can be analyzed.
 
-Let's read the data set into Python
+Let's read the data set into Python.
 
 ```{python}
 #| echo: true
