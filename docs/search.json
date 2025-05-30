@@ -3008,5 +3008,243 @@
     "title": "Data preprocessing: Part I",
     "section": "",
     "text": "Let’s look at the new dataset.\n\nX_train_num_p.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 240 entries, 0 to 239\nData columns (total 4 columns):\n #   Column             Non-Null Count  Dtype  \n---  ------             --------------  -----  \n 0   bill_length_mm     240 non-null    float64\n 1   bill_depth_mm      240 non-null    float64\n 2   flipper_length_mm  240 non-null    float64\n 3   body_mass_g        240 non-null    float64\ndtypes: float64(4)\nmemory usage: 7.6 KB\n\n\nAll predictors have 240 complete entries."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#agenda",
+    "href": "Tools/Tools3.slides.html#agenda",
+    "title": "Tools for Data Science: Part II",
+    "section": "Agenda",
+    "text": "Agenda\n\n\nData cleaning and wrangling with Python"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#introduction",
+    "href": "Tools/Tools3.slides.html#introduction",
+    "title": "Tools for Data Science: Part II",
+    "section": "Introduction",
+    "text": "Introduction\nIn this lecture, we will simulate the work of an industrial engineer who receives a messy Excel file from a manufacturing client. The file includes data about machine maintenance logs, production output, and operator comments. The goal is to clean and prepare this dataset using pandas so it can be analyzed.\nWe will cover important data cleaning tasks using one consistent example and demonstrate modern pandas techniques such as .filter(), .query(), .assign(), .sort_values(), and .agg()."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#load-the-libraries",
+    "href": "Tools/Tools3.slides.html#load-the-libraries",
+    "title": "Tools for Data Science: Part II",
+    "section": "Load the libraries",
+    "text": "Load the libraries\n\nLet’s import the pandas library in Python\n\nimport pandas as pd"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#example",
+    "href": "Tools/Tools3.slides.html#example",
+    "title": "Tools for Data Science: Part II",
+    "section": "Example",
+    "text": "Example\nConsider an industrial engineer who receives a messy Excel file from a manufacturing client. The data file is called “industrial_dataset.xlsx”, which file includes data about machine maintenance logs, production output, and operator comments.\nThe goal is to clean and prepare this dataset using pandas so it can be analyzed.\nLet’s read the data set into Python\n\n# Load the Excel file into a pandas DataFrame.\nclient_data = pd.read_excel(\"industrial_dataset.xlsx\")"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#remove-duplicate-rows",
+    "href": "Tools/Tools3.slides.html#remove-duplicate-rows",
+    "title": "Tools for Data Science: Part II",
+    "section": "Remove duplicate rows",
+    "text": "Remove duplicate rows\n\nDuplicate or identical rows are rows that have the same entries in every column in the dataset.\nIf only one row is needed for the analysis, we can remove the duplicates using the .drop_duplicates() function.\n\nclient_data_single = (client_data\n                     .drop_duplicates()\n                      )"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#add-an-index-column",
+    "href": "Tools/Tools3.slides.html#add-an-index-column",
+    "title": "Tools for Data Science: Part II",
+    "section": "Add an index column",
+    "text": "Add an index column\n\nIn some cases, it is useful to have a unique identifier for each row in the dataset. We can create an identifier using the function .assign with some extra syntaxis.\n\nclient_data_single = (client_data_single\n                      .reset_index(drop = True)\n                      .assign(ID = lambda x: x.index + 1)\n                      )"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#fill-blank-cells",
+    "href": "Tools/Tools3.slides.html#fill-blank-cells",
+    "title": "Tools for Data Science: Part II",
+    "section": "Fill blank cells",
+    "text": "Fill blank cells\nIn the dataset, there are columns with missing values. If we would like to fill them with specific values or text, we use the .fillna() function. In this function, we use the syntaxis 'Variable': 'Replace', where the Variable is the column in the dataset and Replace is the text or number to fill the entry in.\nLet’s fill in the missing entries of the columns Operator, Maintenance Date, and Comment.\n\ncomplete_data = (client_data_single\n                .fillna({'Operator': 'Unknown', \n                'Maintenance Date': '2023-01-01',\n                'Comment': 'None'})\n                )"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#find-and-replace-values",
+    "href": "Tools/Tools3.slides.html#find-and-replace-values",
+    "title": "Tools for Data Science: Part II",
+    "section": "Find and replace values",
+    "text": "Find and replace values\n\ncomplete_data['Comment'].str.split(':|\\\\n', expand=True)[[0]]\n\n\n\n\n\n\n\n\n0\n\n\n\n\n0\nok\n\n\n1\nok\n\n\n2\nNeeds oil!\n\n\n3\nAll good\n\n\n4\nAll good\n\n\n...\n...\n\n\n95\nRequires part\n\n\n96\nok\n\n\n97\nDelay\n\n\n98\nNeeds oil!\n\n\n99\nAll good\n\n\n\n\n100 rows × 1 columns"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#find-and-replace-values-1",
+    "href": "Tools/Tools3.slides.html#find-and-replace-values-1",
+    "title": "Tools for Data Science: Part II",
+    "section": "Find and replace values",
+    "text": "Find and replace values\n\ncomplete_data['Comment'].str.split(':|\\\\n', expand=True)[[0]]\n\n\n\n\n\n\n\n\n0\n\n\n\n\n0\nok\n\n\n1\nok\n\n\n2\nNeeds oil!\n\n\n3\nAll good\n\n\n4\nAll good\n\n\n...\n...\n\n\n95\nRequires part\n\n\n96\nok\n\n\n97\nDelay\n\n\n98\nNeeds oil!\n\n\n99\nAll good\n\n\n\n\n100 rows × 1 columns"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#transform-text-case",
+    "href": "Tools/Tools3.slides.html#transform-text-case",
+    "title": "Tools for Data Science: Part II",
+    "section": "Transform text case",
+    "text": "Transform text case\nWhen working with text columns such as those containing names, it might be possible to have different ways of writing. A common case is when having lower case or upper case names or a combination thereof.\nFor example, consider the column Operator containing the names of the operators.\n\ncomplete_data['Operator'].head()\n\n0       Ana \n1        Ana\n2        Bob\n3    Charlie\n4    Charlie\nName: Operator, dtype: object"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#remove-extra-spaces",
+    "href": "Tools/Tools3.slides.html#remove-extra-spaces",
+    "title": "Tools for Data Science: Part II",
+    "section": "Remove extra spaces",
+    "text": "Remove extra spaces\n\nTo deal with names, we first use the .str.strip() to remove leading and trailing characters from strings.\n\ncomplete_data['Operator'] = complete_data['Operator'].str.strip()\ncomplete_data['Operator']\n\n0         Ana\n1         Ana\n2         Bob\n3     Charlie\n4     Charlie\n       ...   \n95    Charlie\n96        Ana\n97        Ana\n98    Charlie\n99        ana\nName: Operator, Length: 100, dtype: object"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#data-wrangling",
+    "href": "Tools/Tools3.slides.html#data-wrangling",
+    "title": "Tools for Data Science: Part II",
+    "section": "Data wrangling",
+    "text": "Data wrangling\n\nData wrangling is the process of transforming raw data into a clean and structured format.\nIt involves merging, reshaping, filtering, and organizing data for analysis.\nHere, we illustrate some special functions of the pandas for cleaning common issues with a dataset.\n\nLet’s import the pandas library in Python\n\nimport pandas as pd"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section",
+    "href": "Tools/Tools3.slides.html#section",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "# Preview the dataset.\nclient_data.head()\n\n\n\n\n\n\n\n\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\n\n\n\n\n0\n101\n1200\n2023-01-10\nAna\nok\n\n\n1\n101\n1200\n2023-01-10\nAna\nok\n\n\n2\n102\n1050\n2023-01-12\nBob\nNeeds oil!\n\n\n3\n103\nerror\n2023-01-13\nCharlie\nAll good\\n\n\n\n4\n103\n950\n2023-01-13\nCharlie\nAll good\\n"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#before-we-begin",
+    "href": "Tools/Tools3.slides.html#before-we-begin",
+    "title": "Tools for Data Science: Part II",
+    "section": "Before we begin",
+    "text": "Before we begin\n\nLet’s import the pandas library in Python\n\nimport pandas as pd"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section-1",
+    "href": "Tools/Tools3.slides.html#section-1",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "The client_data_single dataframe does not have duplicate rows.\n\nclient_data_single.head()\n\n\n\n\n\n\n\n\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\n\n\n\n\n0\n101\n1200\n2023-01-10\nAna\nok\n\n\n1\n101\n1200\n2023-01-10\nAna\nok\n\n\n2\n102\n1050\n2023-01-12\nBob\nNeeds oil!\n\n\n3\n103\nerror\n2023-01-13\nCharlie\nAll good\\n\n\n\n4\n103\n950\n2023-01-13\nCharlie\nAll good\\n"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section-2",
+    "href": "Tools/Tools3.slides.html#section-2",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "The new column is appended to the end of the dataframe.\n\nclient_data_single.head()\n\n\n\n\n\n\n\n\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\nID\n\n\n\n\n0\n101\n1200\n2023-01-10\nAna\nok\n1\n\n\n1\n101\n1200\n2023-01-10\nAna\nok\n2\n\n\n2\n102\n1050\n2023-01-12\nBob\nNeeds oil!\n3\n\n\n3\n103\nerror\n2023-01-13\nCharlie\nAll good\\n\n4\n\n\n4\n103\n950\n2023-01-13\nCharlie\nAll good\\n\n5"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section-3",
+    "href": "Tools/Tools3.slides.html#section-3",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "To bring it to the begining of the array, we can use the .filter() function.\n\nclient_data_single = (client_data_single\n.filter(['ID', 'Machine ID',    'Output (units)',   \n        'Maintenance Date', 'Operator', 'Comment'])\n)\nclient_data_single.head(3)  \n\n\n\n\n\n\n\n\nID\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\n\n\n\n\n0\n1\n101\n1200\n2023-01-10\nAna\nok\n\n\n1\n2\n101\n1200\n2023-01-10\nAna\nok\n\n\n2\n3\n102\n1050\n2023-01-12\nBob\nNeeds oil!"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section-4",
+    "href": "Tools/Tools3.slides.html#section-4",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "complete_data.head()\n\n\n\n\n\n\n\n\nID\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\n\n\n\n\n0\n1\n101\n1200\n2023-01-10\nAna\nok\n\n\n1\n2\n101\n1200\n2023-01-10\nAna\nok\n\n\n2\n3\n102\n1050\n2023-01-12\nBob\nNeeds oil!\n\n\n3\n4\n103\nerror\n2023-01-13\nCharlie\nAll good\\n\n\n\n4\n5\n103\n950\n2023-01-13\nCharlie\nAll good\\n"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section-5",
+    "href": "Tools/Tools3.slides.html#section-5",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "We can replace the “error” in this column by a user-specified value, say, 0. To this end, we use the function .replace(). The function has two inputs. The first one is the value to replace and the second one is the replacement value.\n\ncomplete_data['Output (units)'] = complete_data['Output (units)'].replace('error', 0)"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section-6",
+    "href": "Tools/Tools3.slides.html#section-6",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "Let’s check the new column.\n\ncomplete_data['Output (units)']\n\n0     1200\n1     1200\n2     1050\n3        0\n4      950\n      ... \n95     800\n96    1100\n97     950\n98     950\n99    1100\nName: Output (units), Length: 100, dtype: int64\n\n\nNote that the new column is now numeric."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section-7",
+    "href": "Tools/Tools3.slides.html#section-7",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "The column has some values such as “Requires part: valve” and “Delay: maintenance” that we may want to split into columns.\n\n\n0                       ok\n1                       ok\n2               Needs oil!\n3               All good\\n\n4               All good\\n\n              ...         \n95    Requires part: valve\n96                      ok\n97    Delay: maintenance\\n\n98              Needs oil!\n99              All good\\n\nName: Comment, Length: 100, dtype: object"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#remove-extra-spaces-1",
+    "href": "Tools/Tools3.slides.html#remove-extra-spaces-1",
+    "title": "Tools for Data Science: Part II",
+    "section": "Remove extra spaces",
+    "text": "Remove extra spaces\n\nTo deal with names, we first use the .str.strip() to remove leading and trailing characters from strings.\n\ncomplete_data['Operator'] = complete_data['Operator'].str.strip()\ncomplete_data['Operator']\n\n0         Ana\n1         Ana\n2         Bob\n3     Charlie\n4     Charlie\n       ...   \n95    Charlie\n96        Ana\n97        Ana\n98    Charlie\n99        ana\nName: Operator, Length: 100, dtype: object"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#change-to-lowercase-letters",
+    "href": "Tools/Tools3.slides.html#change-to-lowercase-letters",
+    "title": "Tools for Data Science: Part II",
+    "section": "Change to lowercase letters",
+    "text": "Change to lowercase letters\n\nWe can turn all names to lowercase using the function str.lower().\n\ncomplete_data['Operator'].str.lower()\n\n0         ana\n1         ana\n2         bob\n3     charlie\n4     charlie\n       ...   \n95    charlie\n96        ana\n97        ana\n98    charlie\n99        ana\nName: Operator, Length: 100, dtype: object"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#change-to-uppercase-letters",
+    "href": "Tools/Tools3.slides.html#change-to-uppercase-letters",
+    "title": "Tools for Data Science: Part II",
+    "section": "Change to uppercase letters",
+    "text": "Change to uppercase letters\n\nWe can turn all names to lowercase using the function str.upper().\n\ncomplete_data['Operator'].str.upper()\n\n0         ANA\n1         ANA\n2         BOB\n3     CHARLIE\n4     CHARLIE\n       ...   \n95    CHARLIE\n96        ANA\n97        ANA\n98    CHARLIE\n99        ANA\nName: Operator, Length: 100, dtype: object"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#capitalize-the-first-letter",
+    "href": "Tools/Tools3.slides.html#capitalize-the-first-letter",
+    "title": "Tools for Data Science: Part II",
+    "section": "Capitalize the first letter",
+    "text": "Capitalize the first letter\n\nWe can convert all names to title case using the function str.title().\n\ncomplete_data['Operator'].str.title()\n\n0         Ana\n1         Ana\n2         Bob\n3     Charlie\n4     Charlie\n       ...   \n95    Charlie\n96        Ana\n97        Ana\n98    Charlie\n99        Ana\nName: Operator, Length: 100, dtype: object"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#replace-values",
+    "href": "Tools/Tools3.slides.html#replace-values",
+    "title": "Tools for Data Science: Part II",
+    "section": "Replace values",
+    "text": "Replace values\n\nThere are some cases in which columns have some undesired or unwatned values. Consider the Output (units) as an example.\n\ncomplete_data['Output (units)'].head()\n\n0     1200\n1     1200\n2     1050\n3    error\n4      950\nName: Output (units), dtype: object\n\n\nThe column has the numbers of units but also text such as “error”."
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#split-column-into-multiple-ones",
+    "href": "Tools/Tools3.slides.html#split-column-into-multiple-ones",
+    "title": "Tools for Data Science: Part II",
+    "section": "Split column into multiple ones",
+    "text": "Split column into multiple ones\nThere are some cases in which we want to split a column according to a character. For example, consider the column Comment from the dataset.\n\ncomplete_data['Comment']\n\n0                       ok\n1                       ok\n2               Needs oil!\n3               All good\\n\n4               All good\\n\n              ...         \n95    Requires part: valve\n96                      ok\n97    Delay: maintenance\\n\n98              Needs oil!\n99              All good\\n\nName: Comment, Length: 100, dtype: object"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section-8",
+    "href": "Tools/Tools3.slides.html#section-8",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "We can split the values in the column according to the colon “:”.\nThat is, everything before the colon will be in a column. Everything after the colon will be in another column. To achieve this, we use the function str.split().\nOne input of the function is the symbol or character for which we cant to make a split. The other input, expand = True tells Python that we want to create new columns.\n\ncomplete_data['Comment'].str.split(':', expand = True)"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section-9",
+    "href": "Tools/Tools3.slides.html#section-9",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "The result is two columns.\n\nsplit_column = complete_data['Comment'].str.split(':', expand = True)\nsplit_column.head()\n\n\n\n\n\n\n\n\n0\n1\n\n\n\n\n0\nok\nNone\n\n\n1\nok\nNone\n\n\n2\nNeeds oil!\nNone\n\n\n3\nAll good\\n\nNone\n\n\n4\nAll good\\n\nNone"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section-10",
+    "href": "Tools/Tools3.slides.html#section-10",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "We can assign them to new columns in the dataset using the following code.\n\naugmented_data = (complete_data\n                  .assign(First_comment = split_column.filter([0]),\n                  Second_comment = split_column.filter([1]))\n                  )"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section-11",
+    "href": "Tools/Tools3.slides.html#section-11",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "augmented_data.head()\n\n\n\n\n\n\n\n\nID\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\nFirst_comment\nSecond_comment\n\n\n\n\n0\n1\n101\n1200\n2023-01-10\nAna\nok\nok\nNone\n\n\n1\n2\n101\n1200\n2023-01-10\nAna\nok\nok\nNone\n\n\n2\n3\n102\n1050\n2023-01-12\nBob\nNeeds oil!\nNeeds oil!\nNone\n\n\n3\n4\n103\n0\n2023-01-13\nCharlie\nAll good\\n\nAll good\\n\nNone\n\n\n4\n5\n103\n950\n2023-01-13\nCharlie\nAll good\\n\nAll good\\n\nNone"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#remove-characters",
+    "href": "Tools/Tools3.slides.html#remove-characters",
+    "title": "Tools for Data Science: Part II",
+    "section": "Remove characters",
+    "text": "Remove characters\n\nSomething that we notice is that the column First_Comment has some extra characters like “” that may be useless when working with the data.\nWe can remove them using the function str.strip(). The input of the function is the character to remove.\n\naugmented_data['First_comment'] = augmented_data['First_comment'].str.strip(\"\\n\")"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section-12",
+    "href": "Tools/Tools3.slides.html#section-12",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "Let’s see the cleaned column.\n\naugmented_data['First_comment']\n\n0                ok\n1                ok\n2        Needs oil!\n3          All good\n4          All good\n          ...      \n95    Requires part\n96               ok\n97            Delay\n98       Needs oil!\n99         All good\nName: First_comment, Length: 100, dtype: object"
+  },
+  {
+    "objectID": "Tools/Tools3.slides.html#section-13",
+    "href": "Tools/Tools3.slides.html#section-13",
+    "title": "Tools for Data Science: Part II",
+    "section": "",
+    "text": "We can also remove other characters.\n\naugmented_data['First_comment'].str.strip(\"!\")\n\n0                ok\n1                ok\n2         Needs oil\n3          All good\n4          All good\n          ...      \n95    Requires part\n96               ok\n97            Delay\n98        Needs oil\n99         All good\nName: First_comment, Length: 100, dtype: object"
   }
 ]

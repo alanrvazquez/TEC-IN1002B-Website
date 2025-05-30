@@ -98,7 +98,6 @@ sum([1, 5, 10])
 sum([1, 5, 10])
 ```
 
-
 ## Use Python as a basic calculator
 
 ```{python}
@@ -920,6 +919,5 @@ mean_penguins_data
 ::: {style="font-size: 50%;"}
 <https://wesmckinney.com/book/>
 :::
-
 
 # [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)

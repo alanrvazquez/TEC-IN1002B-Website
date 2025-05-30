@@ -341,11 +341,11 @@ Summarizes a categorical variable by counting the values per category.
 
 ::: {.column width="50%"}
 | **Specie** | **Frequency** |
-|-------------|----------------|
-| Adelie      | 152            |
-| Chinstrap   | 68             |
-| Gentoo      | 124            |
-| **Total**   | **344**        |
+|------------|---------------|
+| Adelie     | 152           |
+| Chinstrap  | 68            |
+| Gentoo     | 124           |
+| **Total**  | **344**       |
 :::
 :::::
 
