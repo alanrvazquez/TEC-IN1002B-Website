@@ -1,5 +1,5 @@
 ---
-title: "Tools for Data Science: Part III"
+title: "Data Types and Visualization"
 subtitle: "IN1002B: Introduction to Data Science Projects"
 author: 
   - name: Alan R. Vazquez

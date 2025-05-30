@@ -1,5 +1,5 @@
 ---
-title: "Tools for Data Science: Part I"
+title: "Introduction to Python and Pandas"
 subtitle: "IN1002B: Introduction to Data Science Projects"
 author: 
   - name: Alan R. Vazquez
@@ -651,6 +651,5 @@ Using `loc`, we can also retrieve a subset from the dataset by selecting specifi
 sub_rows_pdata = penguins_data.loc[2:5, ['bill_length_mm',  'species', 'island'] ]
 sub_rows_pdata
 ```
-
 
 # [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)

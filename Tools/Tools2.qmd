@@ -1,5 +1,5 @@
 ---
-title: "Tools for Data Science: Part II"
+title: "Data Manipulation and Wrangling"
 subtitle: "IN1002B: Introduction to Data Science Projects"
 author: 
   - name: Alan R. Vazquez
