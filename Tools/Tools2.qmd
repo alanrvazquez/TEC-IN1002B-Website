@@ -57,8 +57,7 @@ The general structure of chaining looks like this:
 
 To practice, we will use the dataset `penguins_data`.
 
-
-## 
+## Example 1
 
 Let's load the dataset and the **pandas** library.
 
@@ -71,10 +70,8 @@ import pandas as pd
 penguins_data = pd.read_excel("penguins.xlsx")
 
 # Preview the dataset.
-penguins_data.head()
+penguins_data.head(4)
 ```
-
-
 
 ## Selecting columns with `.filter()`
 
@@ -323,7 +320,7 @@ mean_penguins_data
 
 -   Here, we illustrate some special functions of the **pandas** for cleaning common issues with a dataset.
 
-## Example
+## Example 2
 
 Consider an industrial engineer who receives a messy Excel file from a manufacturing client. The data file is called "industrial_dataset.xlsx", which file includes data about machine maintenance logs, production output, and operator comments.
 

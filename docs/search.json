@@ -1439,7 +1439,7 @@
     "href": "Tools/Tools2.slides.html#section-1",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "Let’s load the dataset and the pandas library.\n\nimport pandas as pd\n\n# Load the Excel file into a pandas DataFrame.\npenguins_data = pd.read_excel(\"penguins.xlsx\")\n\n# Preview the dataset.\npenguins_data.head()\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.5\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007\n\n\n3\nAdelie\nTorgersen\nNaN\nNaN\nNaN\nNaN\nNaN\n2007\n\n\n4\nAdelie\nTorgersen\n36.7\n19.3\n193.0\n3450.0\nfemale\n2007"
+    "text": "The axis argument tells .filter() whether to select rows (0) or columns (1) from the dataframe.\n\n(penguins_data\n  .filter([\"species\", \"body_mass_g\", \"sex\"], axis = 1)\n).head()\n\n\n\nThe .head() command allows us to print the first six rows of the newly produced dataframe. We must remove it to have the entire new dataframe."
   },
   {
     "objectID": "Tools/Tools2.slides.html#selecting-columns-with-.filter",
@@ -1453,21 +1453,21 @@
     "href": "Tools/Tools2.slides.html#section-2",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "The axis argument tells .filter() whether to select rows (0) or columns (1) from the dataframe.\n\n(penguins_data\n  .filter([\"species\", \"body_mass_g\", \"sex\"], axis = 1)\n).head()\n\n\n\nThe .head() command allows us to print the first six rows of the newly produced dataframe. We must remove it to have the entire new dataframe."
+    "text": "We can also use .filter() to select rows too. To this end, we set axis = 1. We can select specific rows, such as 0 and 10.\n\n(penguins_data\n  .filter([0, 10], axis = 0)\n)\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n10\nAdelie\nTorgersen\n37.8\n17.1\n186.0\n3300.0\nNaN\n2007"
   },
   {
     "objectID": "Tools/Tools2.slides.html#section-3",
     "href": "Tools/Tools2.slides.html#section-3",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "We can also use .filter() to select rows too. To this end, we set axis = 1. We can select specific rows, such as 0 and 10.\n\n(penguins_data\n  .filter([0, 10], axis = 0)\n)\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n10\nAdelie\nTorgersen\n37.8\n17.1\n186.0\n3300.0\nNaN\n2007"
+    "text": "Or, we can select a set of rows using the function range(). For example, let’s select the first 5 rows.\n\n(penguins_data\n  .filter(range(5), axis = 0)\n)\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.5\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007\n\n\n3\nAdelie\nTorgersen\nNaN\nNaN\nNaN\nNaN\nNaN\n2007\n\n\n4\nAdelie\nTorgersen\n36.7\n19.3\n193.0\n3450.0\nfemale\n2007"
   },
   {
     "objectID": "Tools/Tools2.slides.html#section-4",
     "href": "Tools/Tools2.slides.html#section-4",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "Or, we can select a set of rows using the function range(). For example, let’s select the first 5 rows.\n\n(penguins_data\n  .filter(range(5), axis = 0)\n)\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.5\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007\n\n\n3\nAdelie\nTorgersen\nNaN\nNaN\nNaN\nNaN\nNaN\n2007\n\n\n4\nAdelie\nTorgersen\n36.7\n19.3\n193.0\n3450.0\nfemale\n2007"
+    "text": "(penguins_data\n  .query(\"species == 'Gentoo'\")\n).head()\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n152\nGentoo\nBiscoe\n46.1\n13.2\n211.0\n4500.0\nfemale\n2007\n\n\n153\nGentoo\nBiscoe\n50.0\n16.3\n230.0\n5700.0\nmale\n2007\n\n\n154\nGentoo\nBiscoe\n48.7\n14.1\n210.0\n4450.0\nfemale\n2007\n\n\n155\nGentoo\nBiscoe\n50.0\n15.2\n218.0\n5700.0\nmale\n2007\n\n\n156\nGentoo\nBiscoe\n47.6\n14.5\n215.0\n5400.0\nmale\n2007"
   },
   {
     "objectID": "Tools/Tools2.slides.html#filtering-rows-with-.query",
@@ -1481,21 +1481,21 @@
     "href": "Tools/Tools2.slides.html#section-5",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "(penguins_data\n  .query(\"species == 'Gentoo'\")\n).head()\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n152\nGentoo\nBiscoe\n46.1\n13.2\n211.0\n4500.0\nfemale\n2007\n\n\n153\nGentoo\nBiscoe\n50.0\n16.3\n230.0\n5700.0\nmale\n2007\n\n\n154\nGentoo\nBiscoe\n48.7\n14.1\n210.0\n4450.0\nfemale\n2007\n\n\n155\nGentoo\nBiscoe\n50.0\n15.2\n218.0\n5700.0\nmale\n2007\n\n\n156\nGentoo\nBiscoe\n47.6\n14.5\n215.0\n5400.0\nmale\n2007"
+    "text": "We can also filter the data to get penguins with a body mass greater than 5000g.\n\n(penguins_data\n  .query(\"body_mass_g &gt; 5000\")\n).head()\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n153\nGentoo\nBiscoe\n50.0\n16.3\n230.0\n5700.0\nmale\n2007\n\n\n155\nGentoo\nBiscoe\n50.0\n15.2\n218.0\n5700.0\nmale\n2007\n\n\n156\nGentoo\nBiscoe\n47.6\n14.5\n215.0\n5400.0\nmale\n2007\n\n\n159\nGentoo\nBiscoe\n46.7\n15.3\n219.0\n5200.0\nmale\n2007\n\n\n161\nGentoo\nBiscoe\n46.8\n15.4\n215.0\n5150.0\nmale\n2007"
   },
   {
     "objectID": "Tools/Tools2.slides.html#section-6",
     "href": "Tools/Tools2.slides.html#section-6",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "We can also filter the data to get penguins with a body mass greater than 5000g.\n\n(penguins_data\n  .query(\"body_mass_g &gt; 5000\")\n).head()\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n153\nGentoo\nBiscoe\n50.0\n16.3\n230.0\n5700.0\nmale\n2007\n\n\n155\nGentoo\nBiscoe\n50.0\n15.2\n218.0\n5700.0\nmale\n2007\n\n\n156\nGentoo\nBiscoe\n47.6\n14.5\n215.0\n5400.0\nmale\n2007\n\n\n159\nGentoo\nBiscoe\n46.7\n15.3\n219.0\n5200.0\nmale\n2007\n\n\n161\nGentoo\nBiscoe\n46.8\n15.4\n215.0\n5150.0\nmale\n2007"
+    "text": "We can even combine .filter() and .query(). For example, let’s select the columns species, body_mass_g and sex, then filter the data for the “Gentoo” species.\n\n(penguins_data\n  .filter([\"species\", \"body_mass_g\", \"sex\"], axis = 1)\n  .query(\"species == 'Gentoo'\")\n).head(4)\n\n\n\n\n\n\n\n\nspecies\nbody_mass_g\nsex\n\n\n\n\n152\nGentoo\n4500.0\nfemale\n\n\n153\nGentoo\n5700.0\nmale\n\n\n154\nGentoo\n4450.0\nfemale\n\n\n155\nGentoo\n5700.0\nmale"
   },
   {
     "objectID": "Tools/Tools2.slides.html#section-7",
     "href": "Tools/Tools2.slides.html#section-7",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "We can even combine .filter() and .query(). For example, let’s select the columns species, body_mass_g and sex, then filter the data for the “Gentoo” species.\n\n(penguins_data\n  .filter([\"species\", \"body_mass_g\", \"sex\"], axis = 1)\n  .query(\"species == 'Gentoo'\")\n).head(4)\n\n\n\n\n\n\n\n\nspecies\nbody_mass_g\nsex\n\n\n\n\n152\nGentoo\n4500.0\nfemale\n\n\n153\nGentoo\n5700.0\nmale\n\n\n154\nGentoo\n4450.0\nfemale\n\n\n155\nGentoo\n5700.0\nmale"
+    "text": "In this code, the df after lambda indicates that the dataframe (penguins_data) will be referred to as df inside the function. The colon : sets the start of the function.\n\n(penguins_data\n  .assign(LDRatio = lambda df: df[\"bill_length_mm\"] / df[\"bill_depth_mm\"])\n)\n\nThe code appends the new variable to the end of the resulting dataframe."
   },
   {
     "objectID": "Tools/Tools2.slides.html#create-new-columns-with-.assign",
@@ -1509,14 +1509,14 @@
     "href": "Tools/Tools2.slides.html#section-8",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "In this code, the df after lambda indicates that the dataframe (penguins_data) will be referred to as df inside the function. The colon : sets the start of the function.\n\n(penguins_data\n  .assign(LDRatio = lambda df: df[\"bill_length_mm\"] / df[\"bill_depth_mm\"])\n)\n\nThe code appends the new variable to the end of the resulting dataframe."
+    "text": "We can see the new variable using .filter().\n\n(penguins_data\n  .assign(LDRatio = lambda df: df[\"bill_length_mm\"] / df[\"bill_depth_mm\"])\n  .filter([\"bill_length_mm\", \"bill_depth_mm\", \"LDRatio\"], axis = 1)\n).head()\n\n\n\n\n\n\n\n\nbill_length_mm\nbill_depth_mm\nLDRatio\n\n\n\n\n0\n39.1\n18.7\n2.090909\n\n\n1\n39.5\n17.4\n2.270115\n\n\n2\n40.3\n18.0\n2.238889\n\n\n3\nNaN\nNaN\nNaN\n\n\n4\n36.7\n19.3\n1.901554"
   },
   {
     "objectID": "Tools/Tools2.slides.html#section-9",
     "href": "Tools/Tools2.slides.html#section-9",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "We can see the new variable using .filter().\n\n(penguins_data\n  .assign(LDRatio = lambda df: df[\"bill_length_mm\"] / df[\"bill_depth_mm\"])\n  .filter([\"bill_length_mm\", \"bill_depth_mm\", \"LDRatio\"], axis = 1)\n).head()\n\n\n\n\n\n\n\n\nbill_length_mm\nbill_depth_mm\nLDRatio\n\n\n\n\n0\n39.1\n18.7\n2.090909\n\n\n1\n39.5\n17.4\n2.270115\n\n\n2\n40.3\n18.0\n2.238889\n\n\n3\nNaN\nNaN\nNaN\n\n\n4\n36.7\n19.3\n1.901554"
+    "text": "To sort in descending order, use ascending=False inside sort_values().\n\n(penguins_data\n  .sort_values(\"bill_length_mm\", ascending=False)\n).head()\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n185\nGentoo\nBiscoe\n59.6\n17.0\n230.0\n6050.0\nmale\n2007\n\n\n293\nChinstrap\nDream\n58.0\n17.8\n181.0\n3700.0\nfemale\n2007\n\n\n253\nGentoo\nBiscoe\n55.9\n17.0\n228.0\n5600.0\nmale\n2009\n\n\n339\nChinstrap\nDream\n55.8\n19.8\n207.0\n4000.0\nmale\n2009\n\n\n267\nGentoo\nBiscoe\n55.1\n16.0\n230.0\n5850.0\nmale\n2009"
   },
   {
     "objectID": "Tools/Tools2.slides.html#sorting-with-.sort_values",
@@ -1530,7 +1530,7 @@
     "href": "Tools/Tools2.slides.html#section-10",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "To sort in descending order, use ascending=False inside sort_values().\n\n(penguins_data\n  .sort_values(\"bill_length_mm\", ascending=False)\n).head()\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n185\nGentoo\nBiscoe\n59.6\n17.0\n230.0\n6050.0\nmale\n2007\n\n\n293\nChinstrap\nDream\n58.0\n17.8\n181.0\n3700.0\nfemale\n2007\n\n\n253\nGentoo\nBiscoe\n55.9\n17.0\n228.0\n5600.0\nmale\n2009\n\n\n339\nChinstrap\nDream\n55.8\n19.8\n207.0\n4000.0\nmale\n2009\n\n\n267\nGentoo\nBiscoe\n55.1\n16.0\n230.0\n5850.0\nmale\n2009"
+    "text": "# Preview the dataset.\nclient_data.head()\n\n\n\n\n\n\n\n\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\n\n\n\n\n0\n101\n1200\n2023-01-10\nAna\nok\n\n\n1\n101\n1200\n2023-01-10\nAna\nok\n\n\n2\n102\n1050\n2023-01-12\nBob\nNeeds oil!\n\n\n3\n103\nerror\n2023-01-13\nCharlie\nAll good\\n\n\n\n4\n103\n950\n2023-01-13\nCharlie\nAll good\\n"
   },
   {
     "objectID": "Tools/Tools2.slides.html#summarizing-with-.agg",
@@ -1572,7 +1572,7 @@
     "href": "Tools/Tools2.slides.html#section-11",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "# Preview the dataset.\nclient_data.head()\n\n\n\n\n\n\n\n\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\n\n\n\n\n0\n101\n1200\n2023-01-10\nAna\nok\n\n\n1\n101\n1200\n2023-01-10\nAna\nok\n\n\n2\n102\n1050\n2023-01-12\nBob\nNeeds oil!\n\n\n3\n103\nerror\n2023-01-13\nCharlie\nAll good\\n\n\n\n4\n103\n950\n2023-01-13\nCharlie\nAll good\\n"
+    "text": "The client_data_single dataframe does not have duplicate rows.\n\nclient_data_single.head()\n\n\n\n\n\n\n\n\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\n\n\n\n\n0\n101\n1200\n2023-01-10\nAna\nok\n\n\n1\n101\n1200\n2023-01-10\nAna\nok\n\n\n2\n102\n1050\n2023-01-12\nBob\nNeeds oil!\n\n\n3\n103\nerror\n2023-01-13\nCharlie\nAll good\\n\n\n\n4\n103\n950\n2023-01-13\nCharlie\nAll good\\n"
   },
   {
     "objectID": "Tools/Tools2.slides.html#remove-duplicate-rows",
@@ -1586,7 +1586,7 @@
     "href": "Tools/Tools2.slides.html#section-12",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "The client_data_single dataframe does not have duplicate rows.\n\nclient_data_single.head()\n\n\n\n\n\n\n\n\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\n\n\n\n\n0\n101\n1200\n2023-01-10\nAna\nok\n\n\n1\n101\n1200\n2023-01-10\nAna\nok\n\n\n2\n102\n1050\n2023-01-12\nBob\nNeeds oil!\n\n\n3\n103\nerror\n2023-01-13\nCharlie\nAll good\\n\n\n\n4\n103\n950\n2023-01-13\nCharlie\nAll good\\n"
+    "text": "The new column is appended to the end of the dataframe.\n\nclient_data_single.head()\n\n\n\n\n\n\n\n\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\nID\n\n\n\n\n0\n101\n1200\n2023-01-10\nAna\nok\n1\n\n\n1\n101\n1200\n2023-01-10\nAna\nok\n2\n\n\n2\n102\n1050\n2023-01-12\nBob\nNeeds oil!\n3\n\n\n3\n103\nerror\n2023-01-13\nCharlie\nAll good\\n\n4\n\n\n4\n103\n950\n2023-01-13\nCharlie\nAll good\\n\n5"
   },
   {
     "objectID": "Tools/Tools2.slides.html#add-an-index-column",
@@ -1600,14 +1600,14 @@
     "href": "Tools/Tools2.slides.html#section-13",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "The new column is appended to the end of the dataframe.\n\nclient_data_single.head()\n\n\n\n\n\n\n\n\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\nID\n\n\n\n\n0\n101\n1200\n2023-01-10\nAna\nok\n1\n\n\n1\n101\n1200\n2023-01-10\nAna\nok\n2\n\n\n2\n102\n1050\n2023-01-12\nBob\nNeeds oil!\n3\n\n\n3\n103\nerror\n2023-01-13\nCharlie\nAll good\\n\n4\n\n\n4\n103\n950\n2023-01-13\nCharlie\nAll good\\n\n5"
+    "text": "To bring it to the begining of the array, we can use the .filter() function.\n\nclient_data_single = (client_data_single\n.filter(['ID', 'Machine ID',    'Output (units)',   \n        'Maintenance Date', 'Operator', 'Comment'])\n)\nclient_data_single.head(3)  \n\n\n\n\n\n\n\n\nID\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\n\n\n\n\n0\n1\n101\n1200\n2023-01-10\nAna\nok\n\n\n1\n2\n101\n1200\n2023-01-10\nAna\nok\n\n\n2\n3\n102\n1050\n2023-01-12\nBob\nNeeds oil!"
   },
   {
     "objectID": "Tools/Tools2.slides.html#section-14",
     "href": "Tools/Tools2.slides.html#section-14",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "To bring it to the begining of the array, we can use the .filter() function.\n\nclient_data_single = (client_data_single\n.filter(['ID', 'Machine ID',    'Output (units)',   \n        'Maintenance Date', 'Operator', 'Comment'])\n)\nclient_data_single.head(3)  \n\n\n\n\n\n\n\n\nID\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\n\n\n\n\n0\n1\n101\n1200\n2023-01-10\nAna\nok\n\n\n1\n2\n101\n1200\n2023-01-10\nAna\nok\n\n\n2\n3\n102\n1050\n2023-01-12\nBob\nNeeds oil!"
+    "text": "complete_data.head()\n\n\n\n\n\n\n\n\nID\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\n\n\n\n\n0\n1\n101\n1200\n2023-01-10\nAna\nok\n\n\n1\n2\n101\n1200\n2023-01-10\nAna\nok\n\n\n2\n3\n102\n1050\n2023-01-12\nBob\nNeeds oil!\n\n\n3\n4\n103\nerror\n2023-01-13\nCharlie\nAll good\\n\n\n\n4\n5\n103\n950\n2023-01-13\nCharlie\nAll good\\n"
   },
   {
     "objectID": "Tools/Tools2.slides.html#fill-blank-cells",
@@ -1621,7 +1621,7 @@
     "href": "Tools/Tools2.slides.html#section-15",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "complete_data.head()\n\n\n\n\n\n\n\n\nID\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\n\n\n\n\n0\n1\n101\n1200\n2023-01-10\nAna\nok\n\n\n1\n2\n101\n1200\n2023-01-10\nAna\nok\n\n\n2\n3\n102\n1050\n2023-01-12\nBob\nNeeds oil!\n\n\n3\n4\n103\nerror\n2023-01-13\nCharlie\nAll good\\n\n\n\n4\n5\n103\n950\n2023-01-13\nCharlie\nAll good\\n"
+    "text": "We can replace the “error” in this column by a user-specified value, say, 0. To this end, we use the function .replace(). The function has two inputs. The first one is the value to replace and the second one is the replacement value.\n\ncomplete_data['Output (units)'] = complete_data['Output (units)'].replace('error', 0)"
   },
   {
     "objectID": "Tools/Tools2.slides.html#replace-values",
@@ -1635,14 +1635,14 @@
     "href": "Tools/Tools2.slides.html#section-16",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "We can replace the “error” in this column by a user-specified value, say, 0. To this end, we use the function .replace(). The function has two inputs. The first one is the value to replace and the second one is the replacement value.\n\ncomplete_data['Output (units)'] = complete_data['Output (units)'].replace('error', 0)"
+    "text": "Let’s check the new column.\n\ncomplete_data['Output (units)']\n\n0     1200\n1     1200\n2     1050\n3        0\n4      950\n      ... \n95     800\n96    1100\n97     950\n98     950\n99    1100\nName: Output (units), Length: 100, dtype: int64\n\n\nNote that the new column is now numeric."
   },
   {
     "objectID": "Tools/Tools2.slides.html#section-17",
     "href": "Tools/Tools2.slides.html#section-17",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "Let’s check the new column.\n\ncomplete_data['Output (units)']\n\n0     1200\n1     1200\n2     1050\n3        0\n4      950\n      ... \n95     800\n96    1100\n97     950\n98     950\n99    1100\nName: Output (units), Length: 100, dtype: int64\n\n\nNote that the new column is now numeric."
+    "text": "The column has some values such as “Requires part: valve” and “Delay: maintenance” that we may want to split into columns.\n\n\n0                       ok\n1                       ok\n2               Needs oil!\n3               All good\\n\n4               All good\\n\n              ...         \n95    Requires part: valve\n96                      ok\n97    Delay: maintenance\\n\n98              Needs oil!\n99              All good\\n\nName: Comment, Length: 100, dtype: object"
   },
   {
     "objectID": "Tools/Tools2.slides.html#split-column-into-multiple-ones",
@@ -1656,35 +1656,35 @@
     "href": "Tools/Tools2.slides.html#section-18",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "The column has some values such as “Requires part: valve” and “Delay: maintenance” that we may want to split into columns.\n\n\n0                       ok\n1                       ok\n2               Needs oil!\n3               All good\\n\n4               All good\\n\n              ...         \n95    Requires part: valve\n96                      ok\n97    Delay: maintenance\\n\n98              Needs oil!\n99              All good\\n\nName: Comment, Length: 100, dtype: object"
+    "text": "We can split the values in the column according to the colon “:”.\nThat is, everything before the colon will be in a column. Everything after the colon will be in another column. To achieve this, we use the function str.split().\nOne input of the function is the symbol or character for which we cant to make a split. The other input, expand = True tells Python that we want to create new columns.\n\ncomplete_data['Comment'].str.split(':', expand = True)"
   },
   {
     "objectID": "Tools/Tools2.slides.html#section-19",
     "href": "Tools/Tools2.slides.html#section-19",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "We can split the values in the column according to the colon “:”.\nThat is, everything before the colon will be in a column. Everything after the colon will be in another column. To achieve this, we use the function str.split().\nOne input of the function is the symbol or character for which we cant to make a split. The other input, expand = True tells Python that we want to create new columns.\n\ncomplete_data['Comment'].str.split(':', expand = True)"
+    "text": "The result is two columns.\n\nsplit_column = complete_data['Comment'].str.split(':', expand = True)\nsplit_column.head()\n\n\n\n\n\n\n\n\n0\n1\n\n\n\n\n0\nok\nNone\n\n\n1\nok\nNone\n\n\n2\nNeeds oil!\nNone\n\n\n3\nAll good\\n\nNone\n\n\n4\nAll good\\n\nNone"
   },
   {
     "objectID": "Tools/Tools2.slides.html#section-20",
     "href": "Tools/Tools2.slides.html#section-20",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "The result is two columns.\n\nsplit_column = complete_data['Comment'].str.split(':', expand = True)\nsplit_column.head()\n\n\n\n\n\n\n\n\n0\n1\n\n\n\n\n0\nok\nNone\n\n\n1\nok\nNone\n\n\n2\nNeeds oil!\nNone\n\n\n3\nAll good\\n\nNone\n\n\n4\nAll good\\n\nNone"
+    "text": "We can assign them to new columns in the dataset using the following code.\n\naugmented_data = (complete_data\n                  .assign(First_comment = split_column.filter([0]),\n                  Second_comment = split_column.filter([1]))\n                  )"
   },
   {
     "objectID": "Tools/Tools2.slides.html#section-21",
     "href": "Tools/Tools2.slides.html#section-21",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "We can assign them to new columns in the dataset using the following code.\n\naugmented_data = (complete_data\n                  .assign(First_comment = split_column.filter([0]),\n                  Second_comment = split_column.filter([1]))\n                  )"
+    "text": "augmented_data.head()\n\n\n\n\n\n\n\n\nID\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\nFirst_comment\nSecond_comment\n\n\n\n\n0\n1\n101\n1200\n2023-01-10\nAna\nok\nok\nNone\n\n\n1\n2\n101\n1200\n2023-01-10\nAna\nok\nok\nNone\n\n\n2\n3\n102\n1050\n2023-01-12\nBob\nNeeds oil!\nNeeds oil!\nNone\n\n\n3\n4\n103\n0\n2023-01-13\nCharlie\nAll good\\n\nAll good\\n\nNone\n\n\n4\n5\n103\n950\n2023-01-13\nCharlie\nAll good\\n\nAll good\\n\nNone"
   },
   {
     "objectID": "Tools/Tools2.slides.html#section-22",
     "href": "Tools/Tools2.slides.html#section-22",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "augmented_data.head()\n\n\n\n\n\n\n\n\nID\nMachine ID\nOutput (units)\nMaintenance Date\nOperator\nComment\nFirst_comment\nSecond_comment\n\n\n\n\n0\n1\n101\n1200\n2023-01-10\nAna\nok\nok\nNone\n\n\n1\n2\n101\n1200\n2023-01-10\nAna\nok\nok\nNone\n\n\n2\n3\n102\n1050\n2023-01-12\nBob\nNeeds oil!\nNeeds oil!\nNone\n\n\n3\n4\n103\n0\n2023-01-13\nCharlie\nAll good\\n\nAll good\\n\nNone\n\n\n4\n5\n103\n950\n2023-01-13\nCharlie\nAll good\\n\nAll good\\n\nNone"
+    "text": "Let’s see the cleaned column.\n\naugmented_data['First_comment']\n\n0                ok\n1                ok\n2        Needs oil!\n3          All good\n4          All good\n          ...      \n95    Requires part\n96               ok\n97            Delay\n98       Needs oil!\n99         All good\nName: First_comment, Length: 100, dtype: object"
   },
   {
     "objectID": "Tools/Tools2.slides.html#remove-characters",
@@ -1698,7 +1698,7 @@
     "href": "Tools/Tools2.slides.html#section-23",
     "title": "Data Manipulation and Wrangling",
     "section": "",
-    "text": "Let’s see the cleaned column.\n\naugmented_data['First_comment']\n\n0                ok\n1                ok\n2        Needs oil!\n3          All good\n4          All good\n          ...      \n95    Requires part\n96               ok\n97            Delay\n98       Needs oil!\n99         All good\nName: First_comment, Length: 100, dtype: object"
+    "text": "We can also remove other characters.\n\naugmented_data['First_comment'].str.strip(\"!\")\n\n0                ok\n1                ok\n2         Needs oil\n3          All good\n4          All good\n          ...      \n95    Requires part\n96               ok\n97            Delay\n98        Needs oil\n99         All good\nName: First_comment, Length: 100, dtype: object"
   },
   {
     "objectID": "Tools/Tools2.slides.html#section-24",
@@ -3211,5 +3211,19 @@
     "title": "Data preprocessing: Part I",
     "section": "",
     "text": "Let’s look at the new dataset.\n\nX_train_num_p.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 240 entries, 0 to 239\nData columns (total 4 columns):\n #   Column             Non-Null Count  Dtype  \n---  ------             --------------  -----  \n 0   bill_length_mm     240 non-null    float64\n 1   bill_depth_mm      240 non-null    float64\n 2   flipper_length_mm  240 non-null    float64\n 3   body_mass_g        240 non-null    float64\ndtypes: float64(4)\nmemory usage: 7.6 KB\n\n\nAll predictors have 240 complete entries."
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#example-1",
+    "href": "Tools/Tools2.slides.html#example-1",
+    "title": "Data Manipulation and Wrangling",
+    "section": "Example 1",
+    "text": "Example 1\nLet’s load the dataset and the pandas library.\n\nimport pandas as pd\n\n# Load the Excel file into a pandas DataFrame.\npenguins_data = pd.read_excel(\"penguins.xlsx\")\n\n# Preview the dataset.\npenguins_data.head(4)\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.5\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007\n\n\n3\nAdelie\nTorgersen\nNaN\nNaN\nNaN\nNaN\nNaN\n2007"
+  },
+  {
+    "objectID": "Tools/Tools2.slides.html#example-2",
+    "href": "Tools/Tools2.slides.html#example-2",
+    "title": "Data Manipulation and Wrangling",
+    "section": "Example 2",
+    "text": "Example 2\nConsider an industrial engineer who receives a messy Excel file from a manufacturing client. The data file is called “industrial_dataset.xlsx”, which file includes data about machine maintenance logs, production output, and operator comments.\nThe goal is to clean and prepare this dataset using pandas so it can be analyzed.\nLet’s read the data set into Python.\n\n# Load the Excel file into a pandas DataFrame.\nclient_data = pd.read_excel(\"industrial_dataset.xlsx\")"
   }
 ]
