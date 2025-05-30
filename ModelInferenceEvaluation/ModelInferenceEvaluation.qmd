@@ -189,7 +189,7 @@ $$
 
 where $\hat{Y}_i$ is the _predicted_ or _fitted_ value of run time for the $i$-th observation, $i = 1, \ldots, 20$. 
 
-The residuals of this estimated model are $\hat{\epsilon}_i = \hat{Y}_i - Y_i$.
+The residuals of this estimated model are $\hat{\epsilon}_i = Y_i - \hat{Y}_i$.
 
 ## Calculation of fitted values and residuals
 
