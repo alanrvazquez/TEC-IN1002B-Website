@@ -59,7 +59,6 @@ import statsmodels.api as sm
 
 5.  How can we make predictions of future responses using the multiple linear regression model?
 
-
 ## Multiple linear regression model
 
 </br>
@@ -159,7 +158,7 @@ $$
 Y_i = \beta_0 + \beta_1 X_i +\epsilon_i
 $$
 
-where $X_i$ is the run size and $Y_i$ is the run time for the $i$-th observation, $i = 1, \ldots, 20$. 
+where $X_i$ is the run size and $Y_i$ is the run time for the $i$-th observation, $i = 1, \ldots, 20$.
 
 . . .
 
@@ -187,7 +186,7 @@ $$
 \hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_i = 149.75 + 0.26 X_i,
 $$
 
-where $\hat{Y}_i$ is the _predicted_ or _fitted_ value of run time for the $i$-th observation, $i = 1, \ldots, 20$. 
+where $\hat{Y}_i$ is the *predicted* or *fitted* value of run time for the $i$-th observation, $i = 1, \ldots, 20$.
 
 The residuals of this estimated model are $\hat{\epsilon}_i = Y_i - \hat{Y}_i$.
 
@@ -258,6 +257,7 @@ plt.ylabel("Run time", fontsize = 14)
 plt.show()
 ```
 :::
+
 ::: {.column width="50%"}
 ```{python}
 #| echo: true
@@ -285,10 +285,11 @@ plt.show()
 
 -   If there is a trend, the model is misspecified.
 -   A "funnel" shape indicates that the assumption of constant variance is not met.
-
 :::
+
 ::: {.column width="60%"}
 </br>
+
 ```{python}
 #| echo: false
 #| output: true
@@ -409,23 +410,23 @@ A normal QQ plot is helpful for deciding whether a sample was drawn from a distr
 
 . . .
 
-1. First, let $\hat{\epsilon}_{[1]}, \hat{\epsilon}_{[2]}, \ldots, \hat{\epsilon}_{[n]}$ be the residuals ranked in an increasing order, where $\hat{\epsilon}_{[1]}$ is the minimum and $\hat{\epsilon}_{[n]}$ is the maximum. These points define the [**sample**]{style="color:lightblue;"} percentiles (or quantiles) of the distribution of the residuals.
+1.  First, let $\hat{\epsilon}_{[1]}, \hat{\epsilon}_{[2]}, \ldots, \hat{\epsilon}_{[n]}$ be the residuals ranked in an increasing order, where $\hat{\epsilon}_{[1]}$ is the minimum and $\hat{\epsilon}_{[n]}$ is the maximum. These points define the [**sample**]{style="color:lightblue;"} percentiles (or quantiles) of the distribution of the residuals.
 
 . . .
 
-2. Next, calculate the [**theoretical**]{style="color:pink;"} percentiles of a (standard) Normal distribution calculated using Python.
+2.  Next, calculate the [**theoretical**]{style="color:pink;"} percentiles of a (standard) Normal distribution calculated using Python.
 
 ## 
 
 </br></br>
 
-- The normal QQ plot displays the (sample) percentiles of the residuals versus the percentiles of a normal distribution.
+-   The normal QQ plot displays the (sample) percentiles of the residuals versus the percentiles of a normal distribution.
 
-- If these percentiles agree with each other, then they would approximate a straight line.
+-   If these percentiles agree with each other, then they would approximate a straight line.
 
-- The straight line is usually determined visually, with emphasis on the central values rather than the extremes.
+-   The straight line is usually determined visually, with emphasis on the central values rather than the extremes.
 
-- For a nice explanation, see this [YouTube video](https://www.youtube.com/watch?v=okjYjClSjOg&ab_channel=StatQuestwithJoshStarmer).
+-   For a nice explanation, see this [YouTube video](https://www.youtube.com/watch?v=okjYjClSjOg&ab_channel=StatQuestwithJoshStarmer).
 
 ## QQ plot in Python
 
@@ -498,11 +499,11 @@ When $n$ is relatively small, you tend to see deviations, particularly in the ta
 
 </br>
 
-1. [If the model structure is incorrect]{style="color:red;"}, the estimated coefficients $\hat{\beta}_j$ will be biased and the predictions $\hat{Y}_i$ will be inaccurate.
+1.  [If the model structure is incorrect]{style="color:red;"}, the estimated coefficients $\hat{\beta}_j$ will be biased and the predictions $\hat{Y}_i$ will be inaccurate.
 
 . . .
 
-2. [If the residuals do not follow a normal distribution]{style="color:red;"}, we have two cases:
+2.  [If the residuals do not follow a normal distribution]{style="color:red;"}, we have two cases:
 
 -   If sample size is large, we still get accurate p-values for the t-tests (discussed later) for the coefficients thanks to the *Central Limit Theorem*.
 -   However, the t-tests and all inference tools are invalidated.
@@ -511,9 +512,9 @@ When $n$ is relatively small, you tend to see deviations, particularly in the ta
 
 </br></br></br>
 
-3. [If the residuals do not have constant variance]{style="color:red;"}, then the linear model is incorrect and everything falls apart!
+3.  [If the residuals do not have constant variance]{style="color:red;"}, then the linear model is incorrect and everything falls apart!
 
-4. [If the residuals are dependent]{style="color:red;"}, then the linear model is incorrect and everything falls apart!
+4.  [If the residuals are dependent]{style="color:red;"}, then the linear model is incorrect and everything falls apart!
 
 # Inference about individual $\beta$’s using t-tests
 
@@ -646,7 +647,7 @@ The test statistic is
 $$t_0 = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }$$
 
 -   $\hat{\beta}_j$ is the least squares estimate of the true coefficient $\beta_j$.
--   $\hat{v}_{jj}$ is the *standard error* of the estimate $\hat{\beta}_j$ calculated using Python.
+-   $\sqrt{\hat{v}_{jj}}$ is the *standard error* of the estimate $\hat{\beta}_j$ calculated using Python.
 
 ## 
 
@@ -690,7 +691,7 @@ $$t_0 = \frac{\hat{\beta}_{j}}{\sqrt{ \hat{v}_{jj}} }$$
 
 </br>
 
-::: columns
+::::: columns
 ::: {.column width="70%"}
 This distribution is also known as the student’s t-distribution.
 
@@ -700,11 +701,11 @@ It has one parameter $\nu$ which generally equals a number of degrees of freedom
 
 The parameter $\nu$ controls the shape of the distribution.
 :::
+
 ::: {.column width="30%"}
 ![](images/William_Sealy_Gosset.jpg){width="478"} [William Gosset](https://en.wikipedia.org/wiki/William_Sealy_Gosset)
 :::
-:::
-
+:::::
 
 ## 
 
@@ -801,7 +802,7 @@ print(model_summary)
 | weight       | -0.0073 | 0.000   | -25.966 | 0.000    | -0.008   | -0.007    |
 | acceleration | 0.2617  | 0.086   | 3.026   | 0.003    | 0.092    | 0.432     |
 
-The column [**std err**]{style="color:darkblue;"} contains the values of the [estimated standard error]{style="color:darkblue;"} ($\hat{v}_{jj}$) of the estimates $\hat{\beta}_j$. They represent the variability in the estimates.
+The column [**std err**]{style="color:darkblue;"} contains the values of the [estimated standard error]{style="color:darkblue;"} ($\sqrt{ \hat{v}_{jj}}$) of the estimates $\hat{\beta}_j$. They represent the variability in the estimates.
 
 ## 
 
@@ -887,7 +888,6 @@ What would you conclude about RSS if $R^2 = 1$?
 -   It turns out that $R^2$ is the square of the correlation between the observed ($Y_i$) and predicted ($\hat{Y}_i$) responses.
 :::
 
-
 ## Remarks on $R^2$
 
 </br>
@@ -901,7 +901,6 @@ What would you conclude about RSS if $R^2 = 1$?
 </br>
 
 ![](images/Figures.004.jpeg){fig-align="center"}
-
 
 ## Adjusted $R^2$ statistic
 
@@ -969,11 +968,11 @@ print( round(linear_model.rsquared_adj, 3) )
 
 </br>
 
-- Model building refers to a set of techniques to reduce the full model to one that only includes significant predictors.
+-   Model building refers to a set of techniques to reduce the full model to one that only includes significant predictors.
 
-- It is more a deconstruction than building an actual model, since the full model must be a valid one to begin with. Specifically, the full model must provide residuals that satisfy all the assumptions (1)-(4).
+-   It is more a deconstruction than building an actual model, since the full model must be a valid one to begin with. Specifically, the full model must provide residuals that satisfy all the assumptions (1)-(4).
 
-- After we have obtained a satisfactory full model, we can start the model building process.
+-   After we have obtained a satisfactory full model, we can start the model building process.
 
 ## Two model building techniques
 
