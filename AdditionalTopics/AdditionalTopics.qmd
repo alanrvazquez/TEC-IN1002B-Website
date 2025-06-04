@@ -67,9 +67,8 @@ We will not use all the functions from the **scikit-learn** library. Instead, we
 -   This approach implies a reference category. Specifically, the category that results when all dummy variables equal 0.
 
 -   This coding impacts the interpretation of the model coefficients:
-
-    -   $\beta_0$ is the mean response under the reference category.
-    -   $\beta_j$ is the amount of increase in the mean response when we change from the reference category to another category.
+    -   [$\beta_0$ is the mean response under the reference category.]{style="color:darkgreen;"}
+    -   [$\beta_j$ is the amount of increase in the mean response when we change from the reference category to another category.]{style="color:darkgreen;"}
 
 ## Example 1
 
@@ -87,12 +86,16 @@ auto_data = pd.read_excel("auto.xlsx")
 auto_data['origin'] = pd.Categorical(auto_data['origin'])
 ```
 
+In this section, we will consider the `auto_data` as our [**training**]{style="color:darkblue;"} dataset.
+
 ## Dataset
 
 ```{python}
 #| echo: true
-# Show dataset.
-auto_data[['mpg', 'origin']].head(6)
+
+(auto_data
+.filter(['mpg', 'origin'])
+).head(6)
 ```
 
 ## Dummy variables
@@ -183,18 +186,19 @@ We follow three steps to fit a linear model with a categorical predictor. First,
 # Create linear regression object
 dummy_data = pd.get_dummies(auto_data['origin'], drop_first = True, 
                             dtype = 'int')
-dummy_data.head()
 ```
 
-Next, we construct the matrix of predictors with the intercept.
+Next, we construct the response column and matrix of predictors with the intercept.
 
 ```{python}
 #| echo: true
 #| output: false
 
-# Create linear regression object
+# Create response vector
+Y_train = auto_data['mpg']
+
+# Create matrix of predictors with intercept
 dummy_X_train = sm.add_constant(dummy_data)
-dummy_X_train
 ```
 
 ## 
@@ -208,7 +212,7 @@ Finally, we fit the model using `OLS()` and `fit()` from **statsmodels**.
 #| output: true
 
 # Create linear regression object
-regr = sm.OLS(auto_data['mpg'], dummy_X_train)
+regr = sm.OLS(Y_train, dummy_X_train)
 
 # Train the model using the training sets
 linear_model = regr.fit()
@@ -229,6 +233,8 @@ print(summary_model)
 ```
 
 ## Analysis of covariance
+
+</br>
 
 Models that mix categorical and numerical predictors are sometimes referred to as analysis of covariance (ANCOVA) models.
 
@@ -361,11 +367,9 @@ An experiment was conducted to study the effect between these factors on the yie
 
 </br>
 
-The dataset is in the file "catalyst.xlsx".
+The [**training**]{style="color:darkblue;"} dataset is in the file "catalyst.xlsx".
 
 ## 
-
-</br>
 
 The units of concentration and temperature are percentages and Farenheit degrees, respectively.
 
@@ -373,7 +377,7 @@ The units of concentration and temperature are percentages and Farenheit degrees
 #| echo: true
 
 catalyst_data = pd.read_excel("catalyst.xlsx")
-print(catalyst_data)
+catalyst_data
 ```
 
 ## Standarization in Python
@@ -387,7 +391,9 @@ Recall that we standardize numerical predictors using the `scaler()` function fr
 #| output: true
 
 # Select predictor matrix.
-predictor_data = catalyst_data[['Concentration', 'Temperature']]
+predictor_data = (catalyst_data
+                  .filter(['Concentration', 'Temperature'])
+                  )
 
 # Define the scaling operator.
 scaler = StandardScaler()
@@ -419,11 +425,14 @@ To fit the model, we follow the same functions as before.
 #| echo: true
 #| output: true
 
+# Set the response.
+Yc = catalyst_data['Yield']
+
 # Add the intercept.
 Xs_training_int = sm.add_constant(Xs_training)
 
 # Create linear regression object.
-std_regr = sm.OLS(catalyst_data['Yield'], Xs_training)
+std_regr = sm.OLS(Yc, Xs_training)
 
 # Train the model using the training sets.
 std_linear_model = std_regr.fit()
@@ -552,20 +561,29 @@ plt.show()
 :::
 :::::
 
-## Remedies
+## Problems and remedies
+
+</br></br>
 
 [The assumed model structure is incorrect.]{style="color:red;"} That is, $Y \neq \beta_0 + \beta_1 X + \epsilon$.
 
-**Remedies**: Add high powers of the predictor variable to the model or transform the response (or predictor).
-
 . . .
 
+**Remedies**: Add high powers of the predictor variable to the model or transform the response (or predictor).
+
+## 
+
+</br></br>
+
 The [residuals]{style="color:red;"} of the fitted model [do not have constant variance]{style="color:red;"}.
+
+. . .
 
 **Remedies**: Transform the response or predictor variable.
 
 -   Logarithm transformation
 -   Square root transformation
+-   Box-Cox transformation.
 
 ## Transformations
 
@@ -792,17 +810,6 @@ plt.show()
 
 5.  [How can we make predictions of future responses using the multiple linear regression model?]{style="color:blue;"}
 
-## Recall that ...
-
-In data science, we assume that
-
-$$Y = f(\boldsymbol{X}) + \epsilon$$
-
-where $f(\boldsymbol{X})$ represents the true relationship between $\boldsymbol{X} = (X_1, X_2, \ldots, X_p)$ and $Y$, which is unknown and very complex!
-
-In our analysis, we further assume that
-
-$$f(\boldsymbol{X}) = \beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p.$$
 
 ## Two datasets
 
@@ -811,9 +818,9 @@ $$f(\boldsymbol{X}) = \beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p.$$
 The application of data science models needs two data sets:
 
 ::: incremental
--   [**Training data**]{style="color:blue;"} is data that we use to train or construct the estimated model $\hat{f}(\boldsymbol{X}) = \hat{\beta}_0 + \hat{\beta}_1 X_1 + \cdots + \hat{\beta}_p X_p$.
+-   [**Training data**]{style="color:blue;"} that we use to train or estimate the linear regression model $\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X_1 + \cdots + \hat{\beta}_p X_p$.
 
--   [**Test data**]{style="color:green;"} is data that we use to evaluate the predictive performance of $\hat{f}(\boldsymbol{X})$ only.
+-   [**Test data**]{style="color:green;"} that we use to evaluate the quality of the predictions $\hat{Y}$ of the response $Y$ using unobserved data.
 :::
 
 ## 
@@ -828,7 +835,7 @@ The application of data science models needs two data sets:
 
 A random sample of $n$ observations.
 
-Use it to **construct** $\hat{f}(\boldsymbol{X})$.
+Use it to **build** the linear regression model $\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X_1 + \cdots + \hat{\beta}_p X_p$.
 :::
 :::::
 
@@ -840,7 +847,7 @@ Use it to **construct** $\hat{f}(\boldsymbol{X})$.
 ::: {.column width="70%"}
 Another random sample of $n_t$ observations, which is independent of the training data.
 
-Use it to **evaluate** $\hat{f}(\boldsymbol{X})$.
+Use it to **evaluate** the predictions $\hat{Y}$ of the model.
 :::
 :::::
 
@@ -849,8 +856,6 @@ Use it to **evaluate** $\hat{f}(\boldsymbol{X})$.
 In many practical situations, a test dataset is not available. To overcome this issue, we use a [**validation dataset**]{style="color:orange;"}.
 
 ![](images/validation.png){fig-align="center" width="645"}
-
-. . .
 
 **Idea**: Apply model to your [**validation dataset**]{style="color:orange;"} to mimic what will happen when you apply it to test dataset.
 
@@ -899,9 +904,9 @@ Boston_data['CHAS'] = pd.Categorical(Boston_data['CHAS'])
 Boston_data.head(3)
 ```
 
-## How do we generate validation data?
+## Train and validation data
 
-We split the current dataset into a training and a validation dataset. To this end, we use the function `train_test_split()` from **scikit-learn**.
+We split the dataset into a training and a validation dataset using the function `train_test_split()` from **scikit-learn**.
 
 ```{python}
 #| echo: true
@@ -915,20 +920,11 @@ Y_full = Boston_data['MEDV']
 
 # Split the dataset into training and validation.
 X_train, X_valid, Y_train, Y_valid = train_test_split(X_full, Y_full, 
-                                                      test_size=0.3)
+                                                      test_size=0.3,
+                                                      random_state = 59227)
 ```
 
-The parameter `test_size` sets the portion of the dataset that will go to the validation set.
-
-## 
-
-</br></br>
-
--   The function makes a clever partition of the data using the *empirical* distribution of the response.
-
--   Technically, it splits the data so that the distribution of the response under the training and validation sets is similar.
-
--   Usually, the proportion of the dataset that goes to the validation set is 20% or 30%.
+The parameter `test_size` sets the portion of the dataset that will go to the validation set. It is usually 0.3 or 0.2.
 
 ## Fit a model using training data
 
@@ -977,10 +973,10 @@ plt.show()
 When the response is numeric, the most common evaluation metric is the validation [**Mean Squared Error**]{style="color:orange;"} ([**MSE**]{style="color:orange;"}):
 
 $$
-\frac{1}{n_{v}} \sum_{i=1}^{n_{v}} \left( Y_i - \hat{f}(\boldsymbol{X}_i) \right)^2
+\frac{1}{n_{v}} \sum_{i=1}^{n_{v}} \left( Y_i - \hat{Y}_i \right)^2
 $$
 
-where $(Y_1, \boldsymbol{X}_1), \ldots, (Y_{n_{v} }, \boldsymbol{X}_{n_{v}} )$ are the $n_{v}$ observations in the validation dataset, and $\hat{f}(\boldsymbol{X}_i)$ is the model prediction of the i-th response.
+where $(Y_1, \boldsymbol{X}_1), \ldots, (Y_{n_{v} }, \boldsymbol{X}_{n_{v}} )$ are the $n_{v}$ observations in the validation dataset, and $\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \hat{\beta}_2 X_{i2} + \cdots + \hat{\beta}_p X_{ip}$ is the model prediction of the i-th response.
 
 ## 
 
@@ -1030,6 +1026,6 @@ print( round(rmse, 3) )
 
 The lower the validation RMSE, the more accurate our model.
 
-[*Interpretation*: On average, our predictions are off by $\pm$ 4,465 dollars.]{style="color:darkblue;"}
+[*Interpretation*: On average, our predictions are off by $\pm$ 5,981 dollars.]{style="color:darkblue;"}
 
 # [Return to main page](https://alanrvazquez.github.io/TEC-IN1002B-Website/)

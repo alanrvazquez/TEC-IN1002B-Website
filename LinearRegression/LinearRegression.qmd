@@ -135,7 +135,7 @@ For the j-th predictor, we have that:
 -   $\beta_j = 0$ implies no dependence.
 -   $\beta_j > 0$ implies positive dependence.
 -   $\beta_j < 0$ implies negative dependence.
-::: 
+:::
 
 ## 
 
@@ -274,7 +274,6 @@ $\begin{pmatrix} Y_1 \\ Y_2 \\ \vdots \\ Y_n \end{pmatrix} = \begin{pmatrix}
 
 5.  How can we make predictions of future responses using the multiple linear regression model?
 
-
 ## An estimator for $\boldsymbol{\beta}$
 
 Our **goal** is to find an estimator for the vector $\boldsymbol{\beta}$ (and all its components). For the moment, let’s assume that we have one:
@@ -339,7 +338,6 @@ $$\hat{\boldsymbol{\beta}} = (\mathbf{X}^{T}\mathbf{X})^{-1} \mathbf{X}^{T}\math
 -   If it does not have an inverse then the matrix is called [**singular**]{style="color:darkblue;"}. Otherwise, it is called **non-singular**.
 -   For the inverse to exist, the columns in $\mathbf{X}$ must be *linearly independent*.
 -   Or, equivalently, the determinant $|\mathbf{X}^{T} \mathbf{X}| > 0$.
-
 
 ## Computation in Python
 
@@ -418,12 +416,9 @@ The elements in the vector above are the estimates $\hat{\beta}_0$, $\hat{\beta}
 
 ![](images/example_SLR.jpeg){fig-align="center"}
 
-
-
 ## 
 
 ![](images/clipboard-2523519923.png){fig-align="center"}
-
 
 ## Properties of least squares estimators
 

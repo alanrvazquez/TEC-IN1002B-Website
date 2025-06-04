@@ -2496,14 +2496,14 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#example-1",
     "title": "Additional Topics",
     "section": "Example 1",
-    "text": "Example 1\n\nThe auto data set includes a categorical variable “Origin” which shows the origin of each car.\n\n# Load the Excel file into a pandas DataFrame.\nauto_data = pd.read_excel(\"auto.xlsx\")\n\n# Set categorical variables.\nauto_data['origin'] = pd.Categorical(auto_data['origin'])"
+    "text": "Example 1\n\nThe auto data set includes a categorical variable “Origin” which shows the origin of each car.\n\n# Load the Excel file into a pandas DataFrame.\nauto_data = pd.read_excel(\"auto.xlsx\")\n\n# Set categorical variables.\nauto_data['origin'] = pd.Categorical(auto_data['origin'])\n\nIn this section, we will consider the auto_data as our training dataset."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#dataset",
     "href": "AdditionalTopics/AdditionalTopics.slides.html#dataset",
     "title": "Additional Topics",
     "section": "Dataset",
-    "text": "Dataset\n\n# Show dataset.\nauto_data[['mpg', 'origin']].head(6)\n\n\n\n\n\n\n\n\nmpg\norigin\n\n\n\n\n0\n18.0\nAmerican\n\n\n1\n15.0\nAmerican\n\n\n2\n18.0\nAmerican\n\n\n3\n16.0\nAmerican\n\n\n4\n17.0\nAmerican\n\n\n5\n15.0\nAmerican"
+    "text": "Dataset\n\n(auto_data\n.filter(['mpg', 'origin'])\n).head(6)\n\n\n\n\n\n\n\n\nmpg\norigin\n\n\n\n\n0\n18.0\nAmerican\n\n\n1\n15.0\nAmerican\n\n\n2\n18.0\nAmerican\n\n\n3\n16.0\nAmerican\n\n\n4\n17.0\nAmerican\n\n\n5\n15.0\nAmerican"
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#dummy-variables",
@@ -2545,28 +2545,28 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#in-python",
     "title": "Additional Topics",
     "section": "In Python",
-    "text": "In Python\n\nWe follow three steps to fit a linear model with a categorical predictor. First, we compute the dummy variables.\n\n# Create linear regression object\ndummy_data = pd.get_dummies(auto_data['origin'], drop_first = True, \n                            dtype = 'int')\ndummy_data.head()\n\nNext, we construct the matrix of predictors with the intercept.\n\n# Create linear regression object\ndummy_X_train = sm.add_constant(dummy_data)\ndummy_X_train"
+    "text": "In Python\n\nWe follow three steps to fit a linear model with a categorical predictor. First, we compute the dummy variables.\n\n# Create linear regression object\ndummy_data = pd.get_dummies(auto_data['origin'], drop_first = True, \n                            dtype = 'int')\n\nNext, we construct the response column and matrix of predictors with the intercept.\n\n# Create response vector\nY_train = auto_data['mpg']\n\n# Create matrix of predictors with intercept\ndummy_X_train = sm.add_constant(dummy_data)"
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#section-2",
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-2",
     "title": "Additional Topics",
     "section": "",
-    "text": "Finally, we fit the model using OLS() and fit() from statsmodels.\n\n# Create linear regression object\nregr = sm.OLS(auto_data['mpg'], dummy_X_train)\n\n# Train the model using the training sets\nlinear_model = regr.fit()\n\n# Summary of the models.\nsummary_model = linear_model.summary()"
+    "text": "Finally, we fit the model using OLS() and fit() from statsmodels.\n\n# Create linear regression object\nregr = sm.OLS(Y_train, dummy_X_train)\n\n# Train the model using the training sets\nlinear_model = regr.fit()\n\n# Summary of the models.\nsummary_model = linear_model.summary()"
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#section-3",
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-3",
     "title": "Additional Topics",
     "section": "",
-    "text": "print(summary_model)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.332\nModel:                            OLS   Adj. R-squared:                  0.328\nMethod:                 Least Squares   F-statistic:                     96.60\nDate:                Tue, 03 Jun 2025   Prob (F-statistic):           8.67e-35\nTime:                        12:29:06   Log-Likelihood:                -1282.2\nNo. Observations:                 392   AIC:                             2570.\nDf Residuals:                     389   BIC:                             2582.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         20.0335      0.409     49.025      0.000      19.230      20.837\nEuropean       7.5695      0.877      8.634      0.000       5.846       9.293\nJapanese      10.4172      0.828     12.588      0.000       8.790      12.044\n==============================================================================\nOmnibus:                       26.330   Durbin-Watson:                   0.763\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               30.217\nSkew:                           0.679   Prob(JB):                     2.74e-07\nKurtosis:                       3.066   Cond. No.                         3.16\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+    "text": "print(summary_model)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.332\nModel:                            OLS   Adj. R-squared:                  0.328\nMethod:                 Least Squares   F-statistic:                     96.60\nDate:                Wed, 04 Jun 2025   Prob (F-statistic):           8.67e-35\nTime:                        08:47:12   Log-Likelihood:                -1282.2\nNo. Observations:                 392   AIC:                             2570.\nDf Residuals:                     389   BIC:                             2582.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         20.0335      0.409     49.025      0.000      19.230      20.837\nEuropean       7.5695      0.877      8.634      0.000       5.846       9.293\nJapanese      10.4172      0.828     12.588      0.000       8.790      12.044\n==============================================================================\nOmnibus:                       26.330   Durbin-Watson:                   0.763\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               30.217\nSkew:                           0.679   Prob(JB):                     2.74e-07\nKurtosis:                       3.066   Cond. No.                         3.16\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#analysis-of-covariance",
     "href": "AdditionalTopics/AdditionalTopics.slides.html#analysis-of-covariance",
     "title": "Additional Topics",
     "section": "Analysis of covariance",
-    "text": "Analysis of covariance\nModels that mix categorical and numerical predictors are sometimes referred to as analysis of covariance (ANCOVA) models.\nExample (cont): Consider the predictor weight (\\(X\\)).\n\\[Y_i= \\beta_0+\\beta_1 d_{1i} +\\beta_2 d_{2i} + \\beta_3 X_{i} +\\epsilon_i,\\]\nwhere \\(X_i\\) denotes the i-th observed value of weight and \\(\\beta_3\\) is the coefficient of this predictor."
+    "text": "Analysis of covariance\n\nModels that mix categorical and numerical predictors are sometimes referred to as analysis of covariance (ANCOVA) models.\nExample (cont): Consider the predictor weight (\\(X\\)).\n\\[Y_i= \\beta_0+\\beta_1 d_{1i} +\\beta_2 d_{2i} + \\beta_3 X_{i} +\\epsilon_i,\\]\nwhere \\(X_i\\) denotes the i-th observed value of weight and \\(\\beta_3\\) is the coefficient of this predictor."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#ancova-model",
@@ -2594,7 +2594,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#model-summary",
     "title": "Additional Topics",
     "section": "Model summary",
-    "text": "Model summary\n\n# Summary of the models.\nsummary_ancova = ancova_model.summary()\nprint(summary_ancova)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.702\nModel:                            OLS   Adj. R-squared:                  0.700\nMethod:                 Least Squares   F-statistic:                     304.7\nDate:                Tue, 03 Jun 2025   Prob (F-statistic):          1.28e-101\nTime:                        12:29:06   Log-Likelihood:                -1123.9\nNo. Observations:                 392   AIC:                             2256.\nDf Residuals:                     388   BIC:                             2272.\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         43.7322      1.113     39.277      0.000      41.543      45.921\nEuropean       0.9709      0.659      1.474      0.141      -0.324       2.266\nJapanese       2.3271      0.665      3.501      0.001       1.020       3.634\nweight        -0.0070      0.000    -21.956      0.000      -0.008      -0.006\n==============================================================================\nOmnibus:                       40.731   Durbin-Watson:                   0.832\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               61.938\nSkew:                           0.689   Prob(JB):                     3.55e-14\nKurtosis:                       4.377   Cond. No.                     1.83e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 1.83e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
+    "text": "Model summary\n\n# Summary of the models.\nsummary_ancova = ancova_model.summary()\nprint(summary_ancova)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.702\nModel:                            OLS   Adj. R-squared:                  0.700\nMethod:                 Least Squares   F-statistic:                     304.7\nDate:                Wed, 04 Jun 2025   Prob (F-statistic):          1.28e-101\nTime:                        08:47:12   Log-Likelihood:                -1123.9\nNo. Observations:                 392   AIC:                             2256.\nDf Residuals:                     388   BIC:                             2272.\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         43.7322      1.113     39.277      0.000      41.543      45.921\nEuropean       0.9709      0.659      1.474      0.141      -0.324       2.266\nJapanese       2.3271      0.665      3.501      0.001       1.020       3.634\nweight        -0.0070      0.000    -21.956      0.000      -0.008      -0.006\n==============================================================================\nOmnibus:                       40.731   Durbin-Watson:                   0.832\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               61.938\nSkew:                           0.689   Prob(JB):                     3.55e-14\nKurtosis:                       4.377   Cond. No.                     1.83e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 1.83e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#standardization",
@@ -2629,21 +2629,21 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#example-2",
     "title": "Additional Topics",
     "section": "Example 2",
-    "text": "Example 2\n\nThe yield of a chemical process (\\(Y\\)) is related to the concentration of the reactant (\\(X_1\\)) and the operating temperature (\\(X_2\\)).\n\nAn experiment was conducted to study the effect between these factors on the yield.\n\nThe dataset is in the file “catalyst.xlsx”."
+    "text": "Example 2\n\nThe yield of a chemical process (\\(Y\\)) is related to the concentration of the reactant (\\(X_1\\)) and the operating temperature (\\(X_2\\)).\n\nAn experiment was conducted to study the effect between these factors on the yield.\n\nThe training dataset is in the file “catalyst.xlsx”."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#section-6",
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-6",
     "title": "Additional Topics",
     "section": "",
-    "text": "The units of concentration and temperature are percentages and Farenheit degrees, respectively.\n\ncatalyst_data = pd.read_excel(\"catalyst.xlsx\")\nprint(catalyst_data)\n\n   Order  Yield  Concentration  Temperature\n0      1     90              2          180\n1      2     91              2          180\n2      3     84              2          150\n3      4     89              1          180\n4      5     83              2          150\n5      6     79              1          150\n6      7     81              1          150\n7      8     87              1          180"
+    "text": "The units of concentration and temperature are percentages and Farenheit degrees, respectively.\n\ncatalyst_data = pd.read_excel(\"catalyst.xlsx\")\ncatalyst_data\n\n\n\n\n\n\n\n\nOrder\nYield\nConcentration\nTemperature\n\n\n\n\n0\n1\n90\n2\n180\n\n\n1\n2\n91\n2\n180\n\n\n2\n3\n84\n2\n150\n\n\n3\n4\n89\n1\n180\n\n\n4\n5\n83\n2\n150\n\n\n5\n6\n79\n1\n150\n\n\n6\n7\n81\n1\n150\n\n\n7\n8\n87\n1\n180"
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#standarization-in-python",
     "href": "AdditionalTopics/AdditionalTopics.slides.html#standarization-in-python",
     "title": "Additional Topics",
     "section": "Standarization in Python",
-    "text": "Standarization in Python\n\nRecall that we standardize numerical predictors using the scaler() function from scikit-learn.\n\n# Select predictor matrix.\npredictor_data = catalyst_data[['Concentration', 'Temperature']]\n\n# Define the scaling operator.\nscaler = StandardScaler()\n\n# Apply the scaling operator.\nXs_training = scaler.fit_transform(predictor_data)"
+    "text": "Standarization in Python\n\nRecall that we standardize numerical predictors using the scaler() function from scikit-learn.\n\n# Select predictor matrix.\npredictor_data = (catalyst_data\n                  .filter(['Concentration', 'Temperature'])\n                  )\n\n# Define the scaling operator.\nscaler = StandardScaler()\n\n# Apply the scaling operator.\nXs_training = scaler.fit_transform(predictor_data)"
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#section-7",
@@ -2657,14 +2657,14 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-8",
     "title": "Additional Topics",
     "section": "",
-    "text": "To fit the model, we follow the same functions as before.\n\n# Add the intercept.\nXs_training_int = sm.add_constant(Xs_training)\n\n# Create linear regression object.\nstd_regr = sm.OLS(catalyst_data['Yield'], Xs_training)\n\n# Train the model using the training sets.\nstd_linear_model = std_regr.fit()\n\n# Summary of the model.\nstd_summary_model = std_linear_model.summary()"
+    "text": "To fit the model, we follow the same functions as before.\n\n# Set the response.\nYc = catalyst_data['Yield']\n\n# Add the intercept.\nXs_training_int = sm.add_constant(Xs_training)\n\n# Create linear regression object.\nstd_regr = sm.OLS(Yc, Xs_training)\n\n# Train the model using the training sets.\nstd_linear_model = std_regr.fit()\n\n# Summary of the model.\nstd_summary_model = std_linear_model.summary()"
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#section-9",
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-9",
     "title": "Additional Topics",
     "section": "",
-    "text": "print(std_summary_model)\n\n                                 OLS Regression Results                                \n=======================================================================================\nDep. Variable:                  Yield   R-squared (uncentered):                   0.002\nModel:                            OLS   Adj. R-squared (uncentered):             -0.330\nMethod:                 Least Squares   F-statistic:                           0.006694\nDate:                Tue, 03 Jun 2025   Prob (F-statistic):                       0.993\nTime:                        12:29:06   Log-Likelihood:                         -46.940\nNo. Observations:                   8   AIC:                                      97.88\nDf Residuals:                       6   BIC:                                      98.04\nDf Model:                           2                                                  \nCovariance Type:            nonrobust                                                  \n=================================================================================\n                    coef    std err          t      P&gt;|t|      [0.025      0.975]\n---------------------------------------------------------------------------------\nConcentration     1.5000     34.907      0.043      0.967     -83.914      86.914\nTemperature       3.7500     34.907      0.107      0.918     -81.664      89.164\n==============================================================================\nOmnibus:                        2.258   Durbin-Watson:                   0.000\nProb(Omnibus):                  0.323   Jarque-Bera (JB):                0.627\nSkew:                           0.000   Prob(JB):                        0.731\nKurtosis:                       1.628   Cond. No.                         1.00\n==============================================================================\n\nNotes:\n[1] R² is computed without centering (uncentered) since the model does not contain a constant.\n[2] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+    "text": "print(std_summary_model)\n\n                                 OLS Regression Results                                \n=======================================================================================\nDep. Variable:                  Yield   R-squared (uncentered):                   0.002\nModel:                            OLS   Adj. R-squared (uncentered):             -0.330\nMethod:                 Least Squares   F-statistic:                           0.006694\nDate:                Wed, 04 Jun 2025   Prob (F-statistic):                       0.993\nTime:                        08:47:12   Log-Likelihood:                         -46.940\nNo. Observations:                   8   AIC:                                      97.88\nDf Residuals:                       6   BIC:                                      98.04\nDf Model:                           2                                                  \nCovariance Type:            nonrobust                                                  \n=================================================================================\n                    coef    std err          t      P&gt;|t|      [0.025      0.975]\n---------------------------------------------------------------------------------\nConcentration     1.5000     34.907      0.043      0.967     -83.914      86.914\nTemperature       3.7500     34.907      0.107      0.918     -81.664      89.164\n==============================================================================\nOmnibus:                        2.258   Durbin-Watson:                   0.000\nProb(Omnibus):                  0.323   Jarque-Bera (JB):                0.627\nSkew:                           0.000   Prob(JB):                        0.731\nKurtosis:                       1.628   Cond. No.                         1.00\n==============================================================================\n\nNotes:\n[1] R² is computed without centering (uncentered) since the model does not contain a constant.\n[2] Standard Errors assume that the covariance matrix of the errors is correctly specified."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#discussion",
@@ -2706,7 +2706,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#remedies",
     "title": "Additional Topics",
     "section": "Remedies",
-    "text": "Remedies\nThe assumed model structure is incorrect. That is, \\(Y \\neq \\beta_0 + \\beta_1 X + \\epsilon\\).\nRemedies: Add high powers of the predictor variable to the model or transform the response (or predictor).\n\nThe residuals of the fitted model do not have constant variance.\nRemedies: Transform the response or predictor variable.\n\nLogarithm transformation\nSquare root transformation"
+    "text": "Remedies\n\nThe assumed model structure is incorrect. That is, \\(Y \\neq \\beta_0 + \\beta_1 X + \\epsilon\\).\nRemedies: Add high powers of the predictor variable to the model or transform the response (or predictor).\n\nThe residuals of the fitted model do not have constant variance.\nRemedies: Transform the response or predictor variable.\n\nLogarithm transformation\nSquare root transformation"
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#transformations",
@@ -2755,7 +2755,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-10",
     "title": "Additional Topics",
     "section": "",
-    "text": "To fit this model to the data, we construct a new predictor matrix.\n\nX_quad = pd.concat([X_train, auto_data['horsepower']**2], axis = 1)\n\nNext, we fit the model as before.\n\nquad_regr = sm.OLS(log_Y, X_quad)\nquadratic_model = quad_regr.fit()\n\nAnd calculate the residuals and predicted values.\n\nY_pred = quadratic_model.fittedvalues\nresiduals = quadratic_model.resid"
+    "text": "The residuals of the fitted model do not have constant variance.\n\nRemedies: Transform the response or predictor variable.\n\nLogarithm transformation\nSquare root transformation\nBox-Cox transformation."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#residual-analysis-of-quadratic-model",
@@ -2790,21 +2790,21 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#two-datasets",
     "title": "Additional Topics",
     "section": "Two datasets",
-    "text": "Two datasets\n\nThe application of data science models needs two data sets:\n\n\nTraining data is data that we use to train or construct the estimated model \\(\\hat{f}(\\boldsymbol{X}) = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_1 + \\cdots + \\hat{\\beta}_p X_p\\).\nTest data is data that we use to evaluate the predictive performance of \\(\\hat{f}(\\boldsymbol{X})\\) only."
+    "text": "Two datasets\n\nThe application of data science models needs two data sets:\n\n\nTraining data that we use to train or estimate the linear regression model \\(\\hat{Y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_1 + \\cdots + \\hat{\\beta}_p X_p\\).\nTest data that we use to evaluate the quality of the predictions \\(\\hat{Y}\\) of the response \\(Y\\) using unobserved data."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#section-11",
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-11",
     "title": "Additional Topics",
     "section": "",
-    "text": "A random sample of \\(n\\) observations.\nUse it to construct \\(\\hat{f}(\\boldsymbol{X})\\).\n\n\n\n\n\nAnother random sample of \\(n_t\\) observations, which is independent of the training data.\nUse it to evaluate \\(\\hat{f}(\\boldsymbol{X})\\)."
+    "text": "To fit this model to the data, we construct a new predictor matrix.\n\nX_quad = pd.concat([X_train, auto_data['horsepower']**2], axis = 1)\n\nNext, we fit the model as before.\n\nquad_regr = sm.OLS(log_Y, X_quad)\nquadratic_model = quad_regr.fit()\n\nAnd calculate the residuals and predicted values.\n\nY_pred = quadratic_model.fittedvalues\nresiduals = quadratic_model.resid"
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#validation-dataset",
     "href": "AdditionalTopics/AdditionalTopics.slides.html#validation-dataset",
     "title": "Additional Topics",
     "section": "Validation Dataset",
-    "text": "Validation Dataset\nIn many practical situations, a test dataset is not available. To overcome this issue, we use a validation dataset.\n\n\nIdea: Apply model to your validation dataset to mimic what will happen when you apply it to test dataset."
+    "text": "Validation Dataset\nIn many practical situations, a test dataset is not available. To overcome this issue, we use a validation dataset.\n\nIdea: Apply model to your validation dataset to mimic what will happen when you apply it to test dataset."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#example-4",
@@ -2839,7 +2839,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-12",
     "title": "Additional Topics",
     "section": "",
-    "text": "The function makes a clever partition of the data using the empirical distribution of the response.\nTechnically, it splits the data so that the distribution of the response under the training and validation sets is similar.\nUsually, the proportion of the dataset that goes to the validation set is 20% or 30%."
+    "text": "A random sample of \\(n\\) observations.\nUse it to build the linear regression model \\(\\hat{Y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_1 + \\cdots + \\hat{\\beta}_p X_p\\).\n\n\n\n\n\nAnother random sample of \\(n_t\\) observations, which is independent of the training data.\nUse it to evaluate the predictions \\(\\hat{Y}\\) of the model."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#fit-a-model-using-training-data",
@@ -2860,7 +2860,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#validation-mean-squared-error",
     "title": "Additional Topics",
     "section": "Validation Mean Squared Error",
-    "text": "Validation Mean Squared Error\n\nWhen the response is numeric, the most common evaluation metric is the validation Mean Squared Error (MSE):\n\\[\n\\frac{1}{n_{v}} \\sum_{i=1}^{n_{v}} \\left( Y_i - \\hat{f}(\\boldsymbol{X}_i) \\right)^2\n\\]\nwhere \\((Y_1, \\boldsymbol{X}_1), \\ldots, (Y_{n_{v} }, \\boldsymbol{X}_{n_{v}} )\\) are the \\(n_{v}\\) observations in the validation dataset, and \\(\\hat{f}(\\boldsymbol{X}_i)\\) is the model prediction of the i-th response."
+    "text": "Validation Mean Squared Error\n\nWhen the response is numeric, the most common evaluation metric is the validation Mean Squared Error (MSE):\n\\[\n\\frac{1}{n_{v}} \\sum_{i=1}^{n_{v}} \\left( Y_i - \\hat{Y}_i \\right)^2\n\\]\nwhere \\((Y_1, \\boldsymbol{X}_1), \\ldots, (Y_{n_{v} }, \\boldsymbol{X}_{n_{v}} )\\) are the \\(n_{v}\\) observations in the validation dataset, and \\(\\hat{Y}_i = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_{i1} + \\hat{\\beta}_2 X_{i2} + \\cdots + \\hat{\\beta}_p X_{ip}\\) is the model prediction of the i-th response."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#section-13",
@@ -2881,7 +2881,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-14",
     "title": "Additional Topics",
     "section": "",
-    "text": "We compute the validation RMSE by first computing the validation MSE using a function with the same name of scikit-learn.\n\nmse = mean_squared_error(Y_valid, predicted_medv_val)\nrmse = mse**(1/2)\nprint( round(rmse, 3) )\n\n4.787\n\n\nThe lower the validation RMSE, the more accurate our model.\nInterpretation: On average, our predictions are off by \\(\\pm\\) 4,465 dollars."
+    "text": "We compute the validation RMSE by first computing the validation MSE using a function with the same name of scikit-learn.\n\nmse = mean_squared_error(Y_valid, predicted_medv_val)\nrmse = mse**(1/2)\nprint( round(rmse, 3) )\n\n5.981\n\n\nThe lower the validation RMSE, the more accurate our model.\nInterpretation: On average, our predictions are off by \\(\\pm\\) 5,981 dollars."
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#agenda",
@@ -3211,5 +3211,26 @@
     "title": "Data preprocessing: Part I",
     "section": "",
     "text": "Let’s look at the new dataset.\n\nX_train_num_p.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 240 entries, 0 to 239\nData columns (total 4 columns):\n #   Column             Non-Null Count  Dtype  \n---  ------             --------------  -----  \n 0   bill_length_mm     240 non-null    float64\n 1   bill_depth_mm      240 non-null    float64\n 2   flipper_length_mm  240 non-null    float64\n 3   body_mass_g        240 non-null    float64\ndtypes: float64(4)\nmemory usage: 7.6 KB\n\n\nAll predictors have 240 complete entries."
+  },
+  {
+    "objectID": "AdditionalTopics/AdditionalTopics.slides.html#problems-and-remedies",
+    "href": "AdditionalTopics/AdditionalTopics.slides.html#problems-and-remedies",
+    "title": "Additional Topics",
+    "section": "Problems and remedies",
+    "text": "Problems and remedies\n\nThe assumed model structure is incorrect. That is, \\(Y \\neq \\beta_0 + \\beta_1 X + \\epsilon\\).\n\nRemedies: Add high powers of the predictor variable to the model or transform the response (or predictor)."
+  },
+  {
+    "objectID": "AdditionalTopics/AdditionalTopics.slides.html#section-15",
+    "href": "AdditionalTopics/AdditionalTopics.slides.html#section-15",
+    "title": "Additional Topics",
+    "section": "",
+    "text": "We compute the validation RMSE by first computing the validation MSE using a function with the same name of scikit-learn.\n\nmse = mean_squared_error(Y_valid, predicted_medv_val)\nrmse = mse**(1/2)\nprint( round(rmse, 3) )\n\n4.22\n\n\nThe lower the validation RMSE, the more accurate our model.\nInterpretation: On average, our predictions are off by \\(\\pm\\) 4,465 dollars."
+  },
+  {
+    "objectID": "AdditionalTopics/AdditionalTopics.slides.html#train-and-validation-data",
+    "href": "AdditionalTopics/AdditionalTopics.slides.html#train-and-validation-data",
+    "title": "Additional Topics",
+    "section": "Train and validation data",
+    "text": "Train and validation data\nWe split the dataset into a training and a validation dataset using the function train_test_split() from scikit-learn.\n\n# Set full matrix of predictors.\nX_full = Boston_data.drop(columns = ['MEDV']) \n\n# Set full matrix of responses.\nY_full = Boston_data['MEDV']\n\n# Split the dataset into training and validation.\nX_train, X_valid, Y_train, Y_valid = train_test_split(X_full, Y_full, \n                                                      test_size=0.3,\n                                                      random_state = 59227)\n\nThe parameter test_size sets the portion of the dataset that will go to the validation set. It is usually 0.3 or 0.2."
   }
 ]
