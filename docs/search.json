@@ -1306,7 +1306,7 @@
     "href": "Classification/Classification.slides.html#section-9",
     "title": "Logistic Regression",
     "section": "",
-    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.030316\n         Iterations 14\nconst    -922.728966\nLeft        5.748853\nBottom      7.934604\nTop         9.553564\ndtype: float64"
+    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.048606\n         Iterations 12\nconst    -412.297912\nLeft        2.249918\nBottom      4.863525\nTop         7.022657\ndtype: float64"
   },
   {
     "objectID": "Classification/Classification.slides.html#parameter-testing",
@@ -1334,7 +1334,7 @@
     "href": "Classification/Classification.slides.html#section-11",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression model.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      136\nMethod:                           MLE   Df Model:                            3\nDate:                Tue, 03 Jun 2025   Pseudo R-squ.:                  0.9562\nTime:                        12:28:41   Log-Likelihood:                -4.2443\nconverged:                       True   LL-Null:                       -96.912\nCovariance Type:            nonrobust   LLR p-value:                 6.211e-40\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -922.7290    780.719     -1.182      0.237   -2452.911     607.453\nLeft           5.7489      5.785      0.994      0.320      -5.589      17.086\nBottom         7.9346      3.889      2.040      0.041       0.313      15.556\nTop            9.5536      4.117      2.321      0.020       1.485      17.622\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.77 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
+    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression model.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      136\nMethod:                           MLE   Df Model:                            3\nDate:                Wed, 04 Jun 2025   Pseudo R-squ.:                  0.9299\nTime:                        08:47:55   Log-Likelihood:                -6.8048\nconverged:                       True   LL-Null:                       -97.026\nCovariance Type:            nonrobust   LLR p-value:                 7.076e-39\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -412.2979    408.905     -1.008      0.313   -1213.737     389.141\nLeft           2.2499      3.212      0.700      0.484      -4.046       8.546\nBottom         4.8635      1.961      2.480      0.013       1.020       8.707\nTop            7.0227      2.902      2.420      0.016       1.335      12.710\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.58 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
   },
   {
     "objectID": "Classification/Classification.slides.html#estimated-classifier",
@@ -1362,14 +1362,14 @@
     "href": "Classification/Classification.slides.html#section-13",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The predict() function outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n120    1.000000e+00\n52     1.538316e-04\n18     1.121425e-04\n198    1.000000e+00\n39     5.512716e-08\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors).\n\nTo turn the probabilities to actual classes, we round them:\n\npredicted_classes = round(predicted_probability).astype('int')"
+    "text": "The predict() function outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n152    0.999356\n128    0.999890\n132    0.999999\n86     0.000017\n120    1.000000\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors).\n\nTo turn the probabilities to actual classes, we round them:\n\npredicted_classes = round(predicted_probability).astype('int')"
   },
   {
     "objectID": "Classification/Classification.slides.html#section-14",
     "href": "Classification/Classification.slides.html#section-14",
     "title": "Logistic Regression",
     "section": "",
-    "text": "predicted_classes.head()\n\n120    1\n52     0\n18     0\n198    1\n39     0\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the validation dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
+    "text": "predicted_classes.head()\n\n152    1\n128    1\n132    1\n86     0\n120    1\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the validation dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
   },
   {
     "objectID": "Classification/Classification.slides.html#confusion-matrix",
@@ -1383,7 +1383,7 @@
     "href": "Classification/Classification.slides.html#in-python-1",
     "title": "Logistic Regression",
     "section": "In Python",
-    "text": "In Python\n\nWe compute the confusion matrix using the function with the same name of scikit-learn.\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[32  1]\n [ 0 27]]"
+    "text": "In Python\n\nWe compute the confusion matrix using the function with the same name of scikit-learn.\n\n# Create dummy variables for test set.\nY_dummies = pd.get_dummies(Y_test, dtype = 'int')\n\n# Select target variable from test set.\nY_target_test = Y_dummies['counterfeit']\n\n# Compute confusion matrix.\ncm = confusion_matrix(Y_target_test, predicted_classes)\n\n# Show confusion matrix.\nprint(cm)\n\n[[28  1]\n [ 0 31]]"
   },
   {
     "objectID": "Classification/Classification.slides.html#section-15",
@@ -2356,7 +2356,7 @@
     "href": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#t-tests-in-python",
     "title": "Model Evaluation and Inference",
     "section": "t-tests in Python",
-    "text": "t-tests in Python\nWe obtain the t-tests of the coefficients using the function summary() together with the linear_model object.\n\nmodel_summary = linear_model.summary()\nprint(model_summary)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.700\nModel:                            OLS   Adj. R-squared:                  0.698\nMethod:                 Least Squares   F-statistic:                     453.2\nDate:                Tue, 03 Jun 2025   Prob (F-statistic):          2.43e-102\nTime:                        12:29:01   Log-Likelihood:                -1125.4\nNo. Observations:                 392   AIC:                             2257.\nDf Residuals:                     389   BIC:                             2269.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nconst           41.0953      1.868     21.999      0.000      37.423      44.768\nweight          -0.0073      0.000    -25.966      0.000      -0.008      -0.007\nacceleration     0.2617      0.086      3.026      0.003       0.092       0.432\n==============================================================================\nOmnibus:                       31.397   Durbin-Watson:                   0.818\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               39.962\nSkew:                           0.632   Prob(JB):                     2.10e-09\nKurtosis:                       3.922   Cond. No.                     2.67e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 2.67e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
+    "text": "t-tests in Python\nWe obtain the t-tests of the coefficients using the function summary() together with the linear_model object.\n\nmodel_summary = linear_model.summary()\nprint(model_summary)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.700\nModel:                            OLS   Adj. R-squared:                  0.698\nMethod:                 Least Squares   F-statistic:                     453.2\nDate:                Wed, 04 Jun 2025   Prob (F-statistic):          2.43e-102\nTime:                        08:48:16   Log-Likelihood:                -1125.4\nNo. Observations:                 392   AIC:                             2257.\nDf Residuals:                     389   BIC:                             2269.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n================================================================================\n                   coef    std err          t      P&gt;|t|      [0.025      0.975]\n--------------------------------------------------------------------------------\nconst           41.0953      1.868     21.999      0.000      37.423      44.768\nweight          -0.0073      0.000    -25.966      0.000      -0.008      -0.007\nacceleration     0.2617      0.086      3.026      0.003       0.092       0.432\n==============================================================================\nOmnibus:                       31.397   Durbin-Watson:                   0.818\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               39.962\nSkew:                           0.632   Prob(JB):                     2.10e-09\nKurtosis:                       3.922   Cond. No.                     2.67e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 2.67e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
   },
   {
     "objectID": "ModelInferenceEvaluation/ModelInferenceEvaluation.slides.html#table-of-t-tests",
@@ -2559,7 +2559,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-3",
     "title": "Additional Topics",
     "section": "",
-    "text": "print(summary_model)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.332\nModel:                            OLS   Adj. R-squared:                  0.328\nMethod:                 Least Squares   F-statistic:                     96.60\nDate:                Wed, 04 Jun 2025   Prob (F-statistic):           8.67e-35\nTime:                        08:47:12   Log-Likelihood:                -1282.2\nNo. Observations:                 392   AIC:                             2570.\nDf Residuals:                     389   BIC:                             2582.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         20.0335      0.409     49.025      0.000      19.230      20.837\nEuropean       7.5695      0.877      8.634      0.000       5.846       9.293\nJapanese      10.4172      0.828     12.588      0.000       8.790      12.044\n==============================================================================\nOmnibus:                       26.330   Durbin-Watson:                   0.763\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               30.217\nSkew:                           0.679   Prob(JB):                     2.74e-07\nKurtosis:                       3.066   Cond. No.                         3.16\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+    "text": "print(summary_model)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.332\nModel:                            OLS   Adj. R-squared:                  0.328\nMethod:                 Least Squares   F-statistic:                     96.60\nDate:                Wed, 04 Jun 2025   Prob (F-statistic):           8.67e-35\nTime:                        08:48:21   Log-Likelihood:                -1282.2\nNo. Observations:                 392   AIC:                             2570.\nDf Residuals:                     389   BIC:                             2582.\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         20.0335      0.409     49.025      0.000      19.230      20.837\nEuropean       7.5695      0.877      8.634      0.000       5.846       9.293\nJapanese      10.4172      0.828     12.588      0.000       8.790      12.044\n==============================================================================\nOmnibus:                       26.330   Durbin-Watson:                   0.763\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               30.217\nSkew:                           0.679   Prob(JB):                     2.74e-07\nKurtosis:                       3.066   Cond. No.                         3.16\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#analysis-of-covariance",
@@ -2594,7 +2594,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#model-summary",
     "title": "Additional Topics",
     "section": "Model summary",
-    "text": "Model summary\n\n# Summary of the models.\nsummary_ancova = ancova_model.summary()\nprint(summary_ancova)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.702\nModel:                            OLS   Adj. R-squared:                  0.700\nMethod:                 Least Squares   F-statistic:                     304.7\nDate:                Wed, 04 Jun 2025   Prob (F-statistic):          1.28e-101\nTime:                        08:47:12   Log-Likelihood:                -1123.9\nNo. Observations:                 392   AIC:                             2256.\nDf Residuals:                     388   BIC:                             2272.\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         43.7322      1.113     39.277      0.000      41.543      45.921\nEuropean       0.9709      0.659      1.474      0.141      -0.324       2.266\nJapanese       2.3271      0.665      3.501      0.001       1.020       3.634\nweight        -0.0070      0.000    -21.956      0.000      -0.008      -0.006\n==============================================================================\nOmnibus:                       40.731   Durbin-Watson:                   0.832\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               61.938\nSkew:                           0.689   Prob(JB):                     3.55e-14\nKurtosis:                       4.377   Cond. No.                     1.83e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 1.83e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
+    "text": "Model summary\n\n# Summary of the models.\nsummary_ancova = ancova_model.summary()\nprint(summary_ancova)\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.702\nModel:                            OLS   Adj. R-squared:                  0.700\nMethod:                 Least Squares   F-statistic:                     304.7\nDate:                Wed, 04 Jun 2025   Prob (F-statistic):          1.28e-101\nTime:                        08:48:21   Log-Likelihood:                -1123.9\nNo. Observations:                 392   AIC:                             2256.\nDf Residuals:                     388   BIC:                             2272.\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         43.7322      1.113     39.277      0.000      41.543      45.921\nEuropean       0.9709      0.659      1.474      0.141      -0.324       2.266\nJapanese       2.3271      0.665      3.501      0.001       1.020       3.634\nweight        -0.0070      0.000    -21.956      0.000      -0.008      -0.006\n==============================================================================\nOmnibus:                       40.731   Durbin-Watson:                   0.832\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               61.938\nSkew:                           0.689   Prob(JB):                     3.55e-14\nKurtosis:                       4.377   Cond. No.                     1.83e+04\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n[2] The condition number is large, 1.83e+04. This might indicate that there are\nstrong multicollinearity or other numerical problems."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#standardization",
@@ -2664,7 +2664,7 @@
     "href": "AdditionalTopics/AdditionalTopics.slides.html#section-9",
     "title": "Additional Topics",
     "section": "",
-    "text": "print(std_summary_model)\n\n                                 OLS Regression Results                                \n=======================================================================================\nDep. Variable:                  Yield   R-squared (uncentered):                   0.002\nModel:                            OLS   Adj. R-squared (uncentered):             -0.330\nMethod:                 Least Squares   F-statistic:                           0.006694\nDate:                Wed, 04 Jun 2025   Prob (F-statistic):                       0.993\nTime:                        08:47:12   Log-Likelihood:                         -46.940\nNo. Observations:                   8   AIC:                                      97.88\nDf Residuals:                       6   BIC:                                      98.04\nDf Model:                           2                                                  \nCovariance Type:            nonrobust                                                  \n=================================================================================\n                    coef    std err          t      P&gt;|t|      [0.025      0.975]\n---------------------------------------------------------------------------------\nConcentration     1.5000     34.907      0.043      0.967     -83.914      86.914\nTemperature       3.7500     34.907      0.107      0.918     -81.664      89.164\n==============================================================================\nOmnibus:                        2.258   Durbin-Watson:                   0.000\nProb(Omnibus):                  0.323   Jarque-Bera (JB):                0.627\nSkew:                           0.000   Prob(JB):                        0.731\nKurtosis:                       1.628   Cond. No.                         1.00\n==============================================================================\n\nNotes:\n[1] R² is computed without centering (uncentered) since the model does not contain a constant.\n[2] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+    "text": "print(std_summary_model)\n\n                                 OLS Regression Results                                \n=======================================================================================\nDep. Variable:                  Yield   R-squared (uncentered):                   0.002\nModel:                            OLS   Adj. R-squared (uncentered):             -0.330\nMethod:                 Least Squares   F-statistic:                           0.006694\nDate:                Wed, 04 Jun 2025   Prob (F-statistic):                       0.993\nTime:                        08:48:21   Log-Likelihood:                         -46.940\nNo. Observations:                   8   AIC:                                      97.88\nDf Residuals:                       6   BIC:                                      98.04\nDf Model:                           2                                                  \nCovariance Type:            nonrobust                                                  \n=================================================================================\n                    coef    std err          t      P&gt;|t|      [0.025      0.975]\n---------------------------------------------------------------------------------\nConcentration     1.5000     34.907      0.043      0.967     -83.914      86.914\nTemperature       3.7500     34.907      0.107      0.918     -81.664      89.164\n==============================================================================\nOmnibus:                        2.258   Durbin-Watson:                   0.000\nProb(Omnibus):                  0.323   Jarque-Bera (JB):                0.627\nSkew:                           0.000   Prob(JB):                        0.731\nKurtosis:                       1.628   Cond. No.                         1.00\n==============================================================================\n\nNotes:\n[1] R² is computed without centering (uncentered) since the model does not contain a constant.\n[2] Standard Errors assume that the covariance matrix of the errors is correctly specified."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#discussion",
@@ -2702,11 +2702,18 @@
     "text": "Residual analysis"
   },
   {
-    "objectID": "AdditionalTopics/AdditionalTopics.slides.html#remedies",
-    "href": "AdditionalTopics/AdditionalTopics.slides.html#remedies",
+    "objectID": "AdditionalTopics/AdditionalTopics.slides.html#problems-and-remedies",
+    "href": "AdditionalTopics/AdditionalTopics.slides.html#problems-and-remedies",
     "title": "Additional Topics",
-    "section": "Remedies",
-    "text": "Remedies\n\nThe assumed model structure is incorrect. That is, \\(Y \\neq \\beta_0 + \\beta_1 X + \\epsilon\\).\nRemedies: Add high powers of the predictor variable to the model or transform the response (or predictor).\n\nThe residuals of the fitted model do not have constant variance.\nRemedies: Transform the response or predictor variable.\n\nLogarithm transformation\nSquare root transformation"
+    "section": "Problems and remedies",
+    "text": "Problems and remedies\n\nThe assumed model structure is incorrect. That is, \\(Y \\neq \\beta_0 + \\beta_1 X + \\epsilon\\).\n\nRemedies: Add high powers of the predictor variable to the model or transform the response (or predictor)."
+  },
+  {
+    "objectID": "AdditionalTopics/AdditionalTopics.slides.html#section-10",
+    "href": "AdditionalTopics/AdditionalTopics.slides.html#section-10",
+    "title": "Additional Topics",
+    "section": "",
+    "text": "The residuals of the fitted model do not have constant variance.\n\nRemedies: Transform the response or predictor variable.\n\nLogarithm transformation\nSquare root transformation\nBox-Cox transformation."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#transformations",
@@ -2751,11 +2758,11 @@
     "text": "Quadratic model\n\nAlthough there is an improvement in the Residuals vs Fitted Values plot when using the logarithm. The two plots suggests that we are missing a term in the model.\n\n\nIn fact, a better model for the data is a quadratic model with the logarithm of the response:\n\\[\\log{(Y_i)} = \\beta_0 + \\beta_1 X_i + \\beta_2 X_i^2 +\\epsilon_i.\\]"
   },
   {
-    "objectID": "AdditionalTopics/AdditionalTopics.slides.html#section-10",
-    "href": "AdditionalTopics/AdditionalTopics.slides.html#section-10",
+    "objectID": "AdditionalTopics/AdditionalTopics.slides.html#section-11",
+    "href": "AdditionalTopics/AdditionalTopics.slides.html#section-11",
     "title": "Additional Topics",
     "section": "",
-    "text": "The residuals of the fitted model do not have constant variance.\n\nRemedies: Transform the response or predictor variable.\n\nLogarithm transformation\nSquare root transformation\nBox-Cox transformation."
+    "text": "To fit this model to the data, we construct a new predictor matrix.\n\nX_quad = pd.concat([X_train, auto_data['horsepower']**2], axis = 1)\n\nNext, we fit the model as before.\n\nquad_regr = sm.OLS(log_Y, X_quad)\nquadratic_model = quad_regr.fit()\n\nAnd calculate the residuals and predicted values.\n\nY_pred = quadratic_model.fittedvalues\nresiduals = quadratic_model.resid"
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#residual-analysis-of-quadratic-model",
@@ -2779,13 +2786,6 @@
     "text": "Questions\n\n\nHow can we estimate \\(\\beta_0, \\beta_1, \\ldots, \\beta_p\\) and \\(\\sigma^2\\)?\nHow can we validate the model and all its assumptions?\nHow can we make inferences about \\(\\beta_0, \\beta_1, \\ldots, \\beta_p\\)?\nIf some assumptions are not met, can we do something about it?\nHow can we make predictions of future responses using the multiple linear regression model?"
   },
   {
-    "objectID": "AdditionalTopics/AdditionalTopics.slides.html#recall-that",
-    "href": "AdditionalTopics/AdditionalTopics.slides.html#recall-that",
-    "title": "Additional Topics",
-    "section": "Recall that …",
-    "text": "Recall that …\nIn data science, we assume that\n\\[Y = f(\\boldsymbol{X}) + \\epsilon\\]\nwhere \\(f(\\boldsymbol{X})\\) represents the true relationship between \\(\\boldsymbol{X} = (X_1, X_2, \\ldots, X_p)\\) and \\(Y\\), which is unknown and very complex!\nIn our analysis, we further assume that\n\\[f(\\boldsymbol{X}) = \\beta_0 + \\beta_1 X_1 + \\cdots + \\beta_p X_p.\\]"
-  },
-  {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#two-datasets",
     "href": "AdditionalTopics/AdditionalTopics.slides.html#two-datasets",
     "title": "Additional Topics",
@@ -2793,11 +2793,11 @@
     "text": "Two datasets\n\nThe application of data science models needs two data sets:\n\n\nTraining data that we use to train or estimate the linear regression model \\(\\hat{Y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_1 + \\cdots + \\hat{\\beta}_p X_p\\).\nTest data that we use to evaluate the quality of the predictions \\(\\hat{Y}\\) of the response \\(Y\\) using unobserved data."
   },
   {
-    "objectID": "AdditionalTopics/AdditionalTopics.slides.html#section-11",
-    "href": "AdditionalTopics/AdditionalTopics.slides.html#section-11",
+    "objectID": "AdditionalTopics/AdditionalTopics.slides.html#section-12",
+    "href": "AdditionalTopics/AdditionalTopics.slides.html#section-12",
     "title": "Additional Topics",
     "section": "",
-    "text": "To fit this model to the data, we construct a new predictor matrix.\n\nX_quad = pd.concat([X_train, auto_data['horsepower']**2], axis = 1)\n\nNext, we fit the model as before.\n\nquad_regr = sm.OLS(log_Y, X_quad)\nquadratic_model = quad_regr.fit()\n\nAnd calculate the residuals and predicted values.\n\nY_pred = quadratic_model.fittedvalues\nresiduals = quadratic_model.resid"
+    "text": "A random sample of \\(n\\) observations.\nUse it to build the linear regression model \\(\\hat{Y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_1 + \\cdots + \\hat{\\beta}_p X_p\\).\n\n\n\n\n\nAnother random sample of \\(n_t\\) observations, which is independent of the training data.\nUse it to evaluate the predictions \\(\\hat{Y}\\) of the model."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#validation-dataset",
@@ -2828,18 +2828,11 @@
     "text": "Read the dataset\nWe read the dataset and set the variable CHAS as categorical.\n\n# Load Excel file (make sure the file is in your Colab)\nBoston_data = pd.read_excel('BostonHousing.xlsx')\n\n# Drop the categorical variable.\nBoston_data['CHAS'] = pd.Categorical(Boston_data['CHAS'])\n\n# Preview the dataset.\nBoston_data.head(3)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n0\n0.00632\n18.0\n2.31\n0\n0.538\n6.575\n65.2\n4.0900\n1\n296\n15.3\n4.98\n24.0\n\n\n1\n0.02731\n0.0\n7.07\n0\n0.469\n6.421\n78.9\n4.9671\n2\n242\n17.8\n9.14\n21.6\n\n\n2\n0.02729\n0.0\n7.07\n0\n0.469\n7.185\n61.1\n4.9671\n2\n242\n17.8\n4.03\n34.7"
   },
   {
-    "objectID": "AdditionalTopics/AdditionalTopics.slides.html#how-do-we-generate-validation-data",
-    "href": "AdditionalTopics/AdditionalTopics.slides.html#how-do-we-generate-validation-data",
+    "objectID": "AdditionalTopics/AdditionalTopics.slides.html#train-and-validation-data",
+    "href": "AdditionalTopics/AdditionalTopics.slides.html#train-and-validation-data",
     "title": "Additional Topics",
-    "section": "How do we generate validation data?",
-    "text": "How do we generate validation data?\nWe split the current dataset into a training and a validation dataset. To this end, we use the function train_test_split() from scikit-learn.\n\n# Set full matrix of predictors.\nX_full = Boston_data.drop(columns = ['MEDV']) \n\n# Set full matrix of responses.\nY_full = Boston_data['MEDV']\n\n# Split the dataset into training and validation.\nX_train, X_valid, Y_train, Y_valid = train_test_split(X_full, Y_full, \n                                                      test_size=0.3)\n\nThe parameter test_size sets the portion of the dataset that will go to the validation set."
-  },
-  {
-    "objectID": "AdditionalTopics/AdditionalTopics.slides.html#section-12",
-    "href": "AdditionalTopics/AdditionalTopics.slides.html#section-12",
-    "title": "Additional Topics",
-    "section": "",
-    "text": "A random sample of \\(n\\) observations.\nUse it to build the linear regression model \\(\\hat{Y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 X_1 + \\cdots + \\hat{\\beta}_p X_p\\).\n\n\n\n\n\nAnother random sample of \\(n_t\\) observations, which is independent of the training data.\nUse it to evaluate the predictions \\(\\hat{Y}\\) of the model."
+    "section": "Train and validation data",
+    "text": "Train and validation data\nWe split the dataset into a training and a validation dataset using the function train_test_split() from scikit-learn.\n\n# Set full matrix of predictors.\nX_full = Boston_data.drop(columns = ['MEDV']) \n\n# Set full matrix of responses.\nY_full = Boston_data['MEDV']\n\n# Split the dataset into training and validation.\nX_train, X_valid, Y_train, Y_valid = train_test_split(X_full, Y_full, \n                                                      test_size=0.3,\n                                                      random_state = 59227)\n\nThe parameter test_size sets the portion of the dataset that will go to the validation set. It is usually 0.3 or 0.2."
   },
   {
     "objectID": "AdditionalTopics/AdditionalTopics.slides.html#fit-a-model-using-training-data",
@@ -3007,14 +3000,14 @@
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-4",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "The predictors and response in the training dataset are in the objects X_train and Y_train, respectively. We compile these objects into a single dataset using the function .concat() from pandas. The argument axis = 1 tells .concat() to concatenate the datasets by their rows.\n\ntraining_dataset = pd.concat([X_train, Y_train], axis = 1)\ntraining_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n121\n0.07165\n0.0\n25.65\nNo\n0.581\n6.004\n84.1\n2.1974\nLow\n188\n19.1\n14.27\n20.3\n\n\n45\n0.17142\n0.0\n6.91\nNo\n0.448\n5.682\n33.8\n5.1004\nLow\n233\n17.9\n10.21\n19.3\n\n\n243\n0.12757\n30.0\n4.93\nNo\n0.428\n6.393\n7.8\n7.0355\nMedium\n300\n16.6\n5.19\n23.7\n\n\n5\n0.02985\n0.0\n2.18\nNo\n0.458\n6.430\n58.7\n6.0622\nLow\n222\n18.7\n5.21\n28.7"
+    "text": "The predictors and response in the training dataset are in the objects X_train and Y_train, respectively. We compile these objects into a single dataset using the function .concat() from pandas. The argument axis = 1 tells .concat() to concatenate the datasets by their rows.\n\ntraining_dataset = pd.concat([X_train, Y_train], axis = 1)\ntraining_dataset.head(4)\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n62\n0.11027\n25.0\n5.13\nNo\n0.453\n6.456\n67.8\n7.2255\nHigh\n284\n19.7\n6.73\n22.2\n\n\n378\n23.64820\n0.0\n18.10\nNo\n0.671\n6.380\n96.2\n1.3861\nHigh\n666\n20.2\n23.69\n13.1\n\n\n451\n5.44114\n0.0\n18.10\nNo\n0.713\n6.655\n98.2\n2.3552\nHigh\n666\n20.2\n17.73\n15.2\n\n\n408\n7.40389\n0.0\n18.10\nNo\n0.597\n5.617\n97.9\n1.4547\nHigh\n666\n20.2\n26.40\n17.2"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#section-5",
     "href": "PreProcessing/PreProcessing_Part1.slides.html#section-5",
     "title": "Data preprocessing: Part I",
     "section": "",
-    "text": "Equivalently, the predictors and response in the validation dataset are in the objects X_valid and Y_valid, respectively.\n\nvalidation_dataset = pd.concat([X_valid, Y_valid], axis = 1)\nvalidation_dataset.head()\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n474\n8.05579\n0.0\n18.10\nNo\n0.5840\n5.427\n95.4\n2.4298\nHigh\n666\n20.2\n18.14\n13.8\n\n\n373\n11.10810\n0.0\n18.10\nNo\n0.6680\n4.906\n100.0\n1.1742\nHigh\n666\n20.2\n34.77\n13.8\n\n\n254\n0.04819\n80.0\n3.64\nNo\n0.3920\n6.108\n32.0\n9.2203\nLow\n315\n16.4\n6.57\n21.9\n\n\n228\n0.29819\n0.0\n6.20\nNo\n0.5040\n7.686\n17.0\n3.3751\nHigh\n307\n17.4\n3.92\n46.7\n\n\n281\n0.03705\n20.0\n3.33\nNo\n0.4429\n6.968\n37.2\n5.2447\nMedium\n216\n14.9\n4.59\n35.4"
+    "text": "Equivalently, the predictors and response in the validation dataset are in the objects X_valid and Y_valid, respectively.\n\nvalidation_dataset = pd.concat([X_valid, Y_valid], axis = 1)\nvalidation_dataset.head()\n\n\n\n\n\n\n\n\nCRIM\nZN\nINDUS\nCHAS\nNOX\nRM\nAGE\nDIS\nRAD\nTAX\nPTRATIO\nLSTAT\nMEDV\n\n\n\n\n275\n0.09604\n40.0\n6.41\nNo\n0.447\n6.854\n42.8\n4.2673\nMedium\n254\n17.6\n2.98\n32.0\n\n\n261\n0.53412\n20.0\n3.97\nNo\n0.647\n7.520\n89.4\n2.1398\nMedium\n264\n13.0\n7.26\n43.1\n\n\n107\n0.13117\n0.0\n8.56\nNo\n0.520\n6.127\n85.2\n2.1224\nMedium\n384\n20.9\n14.09\n20.4\n\n\n470\n4.34879\n0.0\n18.10\nNo\n0.580\n6.167\n84.0\n3.0334\nHigh\n666\n20.2\n16.29\n19.9\n\n\n89\n0.05302\n0.0\n3.41\nNo\n0.489\n7.079\n63.1\n3.4145\nLow\n270\n17.8\n5.70\n28.7"
   },
   {
     "objectID": "PreProcessing/PreProcessing_Part1.slides.html#work-on-your-training-dataset",
@@ -3211,26 +3204,5 @@
     "title": "Data preprocessing: Part I",
     "section": "",
     "text": "Let’s look at the new dataset.\n\nX_train_num_p.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 240 entries, 0 to 239\nData columns (total 4 columns):\n #   Column             Non-Null Count  Dtype  \n---  ------             --------------  -----  \n 0   bill_length_mm     240 non-null    float64\n 1   bill_depth_mm      240 non-null    float64\n 2   flipper_length_mm  240 non-null    float64\n 3   body_mass_g        240 non-null    float64\ndtypes: float64(4)\nmemory usage: 7.6 KB\n\n\nAll predictors have 240 complete entries."
-  },
-  {
-    "objectID": "AdditionalTopics/AdditionalTopics.slides.html#problems-and-remedies",
-    "href": "AdditionalTopics/AdditionalTopics.slides.html#problems-and-remedies",
-    "title": "Additional Topics",
-    "section": "Problems and remedies",
-    "text": "Problems and remedies\n\nThe assumed model structure is incorrect. That is, \\(Y \\neq \\beta_0 + \\beta_1 X + \\epsilon\\).\n\nRemedies: Add high powers of the predictor variable to the model or transform the response (or predictor)."
-  },
-  {
-    "objectID": "AdditionalTopics/AdditionalTopics.slides.html#section-15",
-    "href": "AdditionalTopics/AdditionalTopics.slides.html#section-15",
-    "title": "Additional Topics",
-    "section": "",
-    "text": "We compute the validation RMSE by first computing the validation MSE using a function with the same name of scikit-learn.\n\nmse = mean_squared_error(Y_valid, predicted_medv_val)\nrmse = mse**(1/2)\nprint( round(rmse, 3) )\n\n4.22\n\n\nThe lower the validation RMSE, the more accurate our model.\nInterpretation: On average, our predictions are off by \\(\\pm\\) 4,465 dollars."
-  },
-  {
-    "objectID": "AdditionalTopics/AdditionalTopics.slides.html#train-and-validation-data",
-    "href": "AdditionalTopics/AdditionalTopics.slides.html#train-and-validation-data",
-    "title": "Additional Topics",
-    "section": "Train and validation data",
-    "text": "Train and validation data\nWe split the dataset into a training and a validation dataset using the function train_test_split() from scikit-learn.\n\n# Set full matrix of predictors.\nX_full = Boston_data.drop(columns = ['MEDV']) \n\n# Set full matrix of responses.\nY_full = Boston_data['MEDV']\n\n# Split the dataset into training and validation.\nX_train, X_valid, Y_train, Y_valid = train_test_split(X_full, Y_full, \n                                                      test_size=0.3,\n                                                      random_state = 59227)\n\nThe parameter test_size sets the portion of the dataset that will go to the validation set. It is usually 0.3 or 0.2."
   }
 ]
