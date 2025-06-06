@@ -927,6 +927,21 @@ X_train, X_valid, Y_train, Y_valid = train_test_split(X_full, Y_full,
 
 The parameter `test_size` sets the portion of the dataset that will go to the validation set. It is usually 0.3 or 0.2.
 
+## Transform the categorical predictors
+
+</br>
+
+Before we start, let's turn the categorical predictors into dummy variables
+
+```{python}
+#| echo: true
+#| output: true
+
+# Transform categorical predictors into dummy variables
+X_train_dummy = pd.get_dummies(X_train, drop_first = True, dtype = 'int')
+X_train_dummy.head(3)
+```
+
 ## Fit a model using training data
 
 </br>
@@ -938,7 +953,7 @@ We fit a multiple linear regression model to predict the `MEDV` in terms of the 
 #| output: true
 
 # Add intercept.
-Boston_X_train = sm.add_constant(X_train)
+Boston_X_train = sm.add_constant(X_train_dummy)
 
 # Create linear regression object
 regr = sm.OLS(Y_train, Boston_X_train)
@@ -997,15 +1012,26 @@ Benefits:
 
 ## In Python
 
+We first compute the predictions of our model on the validation dataset. To this end, we create the dummy variables of the categorical variables using the validation dataset.
+
+```{python}
+#| echo: true
+
+X_valid_dummy = pd.get_dummies(X_valid, drop_first = True, dtype = 'int')
+X_valid_dummy.head(3)
+```
+
+## 
+
 </br>
 
-We first compute the predictions of our model on the validation dataset. That is, we use the values of the predictors in this dataset and use it as input to our model. Our model then computes the prediction of the response for each combination of values of the predictors.
+Now, we use the values of the predictors in this dataset and use it as input to our model. Our model then computes the prediction of the response for each combination of values of the predictors.
 
 ```{python}
 #| echo: true
 
 # Add constant to the predictor matrix from the validation set.
-Boston_X_val = sm.add_constant(X_valid)
+Boston_X_val = sm.add_constant(X_valid_dummy)
 
 # Predict responses using validation data.
 predicted_medv_val = linear_model.predict(Boston_X_val)
