@@ -899,6 +899,7 @@ Boston_data = pd.read_excel('BostonHousing.xlsx')
 
 # Drop the categorical variable.
 Boston_data['CHAS'] = pd.Categorical(Boston_data['CHAS'])
+Boston_data['RAD'] = pd.Categorical(Boston_data['RAD'])
 
 # Preview the dataset.
 Boston_data.head(3)
@@ -983,7 +984,7 @@ where $(Y_1, \boldsymbol{X}_1), \ldots, (Y_{n_{v} }, \boldsymbol{X}_{n_{v}} )$ a
 Another useful metric is the validation [**Root Mean Squared Error**]{style="color:orange;"} ([**RMSE**]{style="color:orange;"}):
 
 $$
-\sqrt{\frac{1}{n_{v}} \sum_{i=1}^{n_{v}} \left( Y_i - \hat{f}(\boldsymbol{X}_i) \right)^2}
+\sqrt{\frac{1}{n_{v}} \sum_{i=1}^{n_{v}} \left( Y_i - \hat{Y}_i) \right)^2}
 $$
 
 Benefits:
