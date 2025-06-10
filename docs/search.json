@@ -1194,21 +1194,21 @@
     "href": "Classification/Classification.slides.html#data-pre-processing",
     "title": "Logistic Regression",
     "section": "Data pre-processing",
-    "text": "Data pre-processing\n\nBefore we start, we ensure that there are no highly correlated predictors in the dataset. To this end, we construct the correlation plot.\n\n# Remove response.\npredictors_full = bank_data.drop(columns = ['Status'])\n\n# Compute correlation matrix.\ncorrelation_matrix = predictors_full.corr()\n\n# Plot the correlation matrix\nsns.heatmap(correlation_matrix.abs(), cmap = 'coolwarm', annot = True)\nplt.title(\"Heatmap on correlations\") # Set plot title."
+    "text": "Data pre-processing\n\nBefore we start, we ensure that there are no highly correlated predictors in the dataset. To this end, we construct the correlation plot.\n\n# Compute correlation matrix.\ncorrelation_matrix = X_train.corr()\n\n# Plot the correlation matrix\nsns.heatmap(correlation_matrix.abs(), cmap = 'coolwarm', annot = True)\nplt.title(\"Heatmap on correlations\") # Set plot title."
   },
   {
     "objectID": "Classification/Classification.slides.html#section-4",
     "href": "Classification/Classification.slides.html#section-4",
     "title": "Logistic Regression",
     "section": "",
-    "text": "Text(0.5, 1.0, 'Heatmap on correlations')"
+    "text": "The function makes a clever partition of the data using the empirical distribution of the response.\nTechnically, it splits the data so that the distribution of the response under the training and validation sets is similar.\nUsually, the proportion of the dataset that goes to the test set is 20% or 30%.\nWe will later use the validation dataset to evaluate the classification performance of the estimated logistic regression model for classifying unobserved data."
   },
   {
     "objectID": "Classification/Classification.slides.html#section-5",
     "href": "Classification/Classification.slides.html#section-5",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The correlation plot shows that the predictors Left (\\(X_1\\)) and Right (\\(X_2\\)) have an absolute correlation of 0.74. Using a threshold for high correlation of 0.70, we thus remove one predictor from the database, say, Right.\n\nConsequently, our database for this problem is\n\nbank_data = bank_data.drop(columns = ['Right'])"
+    "text": "Text(0.5, 1.0, 'Heatmap on correlations')"
   },
   {
     "objectID": "Classification/Classification.slides.html#logistic-regression-lr",
@@ -1236,7 +1236,7 @@
     "href": "Classification/Classification.slides.html#section-6",
     "title": "Logistic Regression",
     "section": "",
-    "text": "Consider the banknote classification problem where \\(Y = 1\\) implies counterfeit and \\(Y = 0\\) genuine note. We have three predictors in \\(\\boldsymbol{X} =  (X_1, X_3, X_4)\\) summarizing specific characteristics of a banknote.\n\nThe odds ratio is \\(e^{\\beta_0 + \\beta_1 X_1 + \\beta_3 X_3 + \\beta_p X_4} = \\frac{P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}{1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}\\)\n\n\nIf the ratio is 1, the odds are 50-50.\nIf the ratio is greater than 1, the banknote is more likely to be counterfeit than genuine.\nIf the ratio is smaller than 1, the banknote is more likely to be genuine than counterfeit."
+    "text": "The correlation plot shows that the predictors Left (\\(X_1\\)) and Right (\\(X_2\\)) have an absolute correlation of 0.74. Using a threshold for high correlation of 0.70, we thus remove one predictor from the database, say, Right.\n\nConsequently, our database for this problem is\n\nX_train = X_train.drop(columns = ['Right'])"
   },
   {
     "objectID": "Classification/Classification.slides.html#the-logg-odds",
@@ -1257,7 +1257,7 @@
     "href": "Classification/Classification.slides.html#section-7",
     "title": "Logistic Regression",
     "section": "",
-    "text": "If \\(\\beta_j\\) is positive, increasing the value of \\(X_j\\) will be associated with increasing the odds ratio or \\(P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\). In other words, increasing the value of \\(X_j\\) increases, on average, the probability that \\(Y = 1\\).\n\nIf \\(\\beta_j\\) is negative, increasing \\(X_j\\) will be associated with decreasing \\(P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\), and with increasing \\(P(Y = 0 | \\boldsymbol{X} = \\boldsymbol{x})\\). In other words, increasing the value of \\(X_j\\) increases, on average, the probability that \\(Y = 0\\).\n\nhttps://stats.idre.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/"
+    "text": "Consider the banknote classification problem where \\(Y = 1\\) implies counterfeit and \\(Y = 0\\) genuine note. We have three predictors in \\(\\boldsymbol{X} =  (X_1, X_3, X_4)\\) summarizing specific characteristics of a banknote.\n\nThe odds ratio is \\(e^{\\beta_0 + \\beta_1 X_1 + \\beta_3 X_3 + \\beta_p X_4} = \\frac{P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}{1 - P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})}\\)\n\n\nIf the ratio is 1, the odds are 50-50.\nIf the ratio is greater than 1, the banknote is more likely to be counterfeit than genuine.\nIf the ratio is smaller than 1, the banknote is more likely to be genuine than counterfeit."
   },
   {
     "objectID": "Classification/Classification.slides.html#the-logistic-regression-model",
@@ -1271,7 +1271,7 @@
     "href": "Classification/Classification.slides.html#how-do-we-estimate-the-coefficients",
     "title": "Logistic Regression",
     "section": "How do we estimate the coefficients?",
-    "text": "How do we estimate the coefficients?\n\nWe use the training data!\n\n\n\n\n\n\n\n\n\nStatus\nLeft\nBottom\nTop\n\n\n\n\n0\ngenuine\n131.0\n9.0\n9.7\n\n\n1\ngenuine\n129.7\n8.1\n9.5\n\n\n2\ngenuine\n129.7\n8.7\n9.6\n\n\n3\ngenuine\n129.7\n7.5\n10.4"
+    "text": "How do we estimate the coefficients?\n\nWe use the training data!\n\ntraining_bank = pd.concat([X_train, Y_train], axis = 1)\ntraining_bank.head()\n\n\n\n\n\n\n\n\nLeft\nBottom\nTop\nStatus\n\n\n\n\n154\n130.3\n11.0\n11.5\ncounterfeit\n\n\n146\n130.5\n11.4\n10.7\ncounterfeit\n\n\n8\n129.4\n8.2\n11.0\ngenuine\n\n\n80\n129.7\n8.6\n10.3\ngenuine\n\n\n155\n130.0\n11.6\n10.5\ncounterfeit"
   },
   {
     "objectID": "Classification/Classification.slides.html#generate-training-data",
@@ -1285,7 +1285,7 @@
     "href": "Classification/Classification.slides.html#section-8",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The function makes a clever partition of the data using the empirical distribution of the response.\nTechnically, it splits the data so that the distribution of the response under the training and validation sets is similar.\nUsually, the proportion of the dataset that goes to the test set is 20% or 30%.\nWe will later use the validation dataset to evaluate the classification performance of the estimated logistic regression model for classifying unobserved data."
+    "text": "If \\(\\beta_j\\) is positive, increasing the value of \\(X_j\\) will be associated with increasing the odds ratio or \\(P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\). In other words, increasing the value of \\(X_j\\) increases, on average, the probability that \\(Y = 1\\).\n\n\nIf \\(\\beta_j\\) is negative, increasing \\(X_j\\) will be associated with decreasing \\(P(Y = 1 | \\boldsymbol{X} = \\boldsymbol{x})\\), and with increasing \\(P(Y = 0 | \\boldsymbol{X} = \\boldsymbol{x})\\). In other words, increasing the value of \\(X_j\\) increases, on average, the probability that \\(Y = 0\\).\n\n\n\nhttps://stats.idre.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/"
   },
   {
     "objectID": "Classification/Classification.slides.html#coefficient-estimation",
@@ -1306,7 +1306,7 @@
     "href": "Classification/Classification.slides.html#section-9",
     "title": "Logistic Regression",
     "section": "",
-    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.052570\n         Iterations 12\nconst    -322.689072\nLeft        1.483812\nBottom      5.706988\nTop         7.216921\ndtype: float64"
+    "text": "After that, we fit the model using the function Logit().\n\n# Create logistic regression object.\nlogit = sm.Logit(Y_target_train, X_train_int)\n\n# Train the model using the training set.\nlogit_model = logit.fit()\n\n# Show estimated coefficients.\nprint(logit_model.params)\n\nOptimization terminated successfully.\n         Current function value: 0.048447\n         Iterations 12\nconst    -273.125010\nLeft        1.250045\nBottom      4.364085\nTop         6.529565\ndtype: float64"
   },
   {
     "objectID": "Classification/Classification.slides.html#parameter-testing",
@@ -1334,7 +1334,7 @@
     "href": "Classification/Classification.slides.html#section-11",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression model.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      136\nMethod:                           MLE   Df Model:                            3\nDate:                Fri, 06 Jun 2025   Pseudo R-squ.:                  0.9240\nTime:                        12:25:14   Log-Likelihood:                -7.3598\nconverged:                       True   LL-Null:                       -96.812\nCovariance Type:            nonrobust   LLR p-value:                 1.521e-38\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -322.6891    385.325     -0.837      0.402   -1077.912     432.534\nLeft           1.4838      2.981      0.498      0.619      -4.359       7.326\nBottom         5.7070      2.165      2.636      0.008       1.464       9.950\nTop            7.2169      2.599      2.777      0.005       2.123      12.311\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.60 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
+    "text": "The summary() function of statsmodel contains the Wald tests of the coefficients in the logistic regression model.\n\nlogit_summary = logit_model.summary()\nprint(logit_summary)\n\n                           Logit Regression Results                           \n==============================================================================\nDep. Variable:            counterfeit   No. Observations:                  140\nModel:                          Logit   Df Residuals:                      136\nMethod:                           MLE   Df Model:                            3\nDate:                Tue, 10 Jun 2025   Pseudo R-squ.:                  0.9299\nTime:                        08:45:43   Log-Likelihood:                -6.7826\nconverged:                       True   LL-Null:                       -96.812\nCovariance Type:            nonrobust   LLR p-value:                 8.567e-39\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst       -273.1250    405.702     -0.673      0.501   -1068.287     522.037\nLeft           1.2500      3.117      0.401      0.688      -4.858       7.358\nBottom         4.3641      1.661      2.627      0.009       1.108       7.620\nTop            6.5296      2.106      3.100      0.002       2.401      10.658\n==============================================================================\n\nPossibly complete quasi-separation: A fraction 0.46 of observations can be\nperfectly predicted. This might indicate that there is complete\nquasi-separation. In this case some parameters will not be identified."
   },
   {
     "objectID": "Classification/Classification.slides.html#estimated-classifier",
@@ -1355,21 +1355,21 @@
     "href": "Classification/Classification.slides.html#evaluation",
     "title": "Logistic Regression",
     "section": "Evaluation",
-    "text": "Evaluation\n\nWe evaluate a the logistic regression classifier by classifying observations that were not used for training or estimating it.\nThat is, we use the classifier to predict the categories of the test dataset using the predictor values in this set only.\nIn Python, we use the commands:\n\n# Add constant to the predictor matrix from the test set.\nX_test = sm.add_constant(X_test)\n\n# Predict probabilities.\npredicted_probability = logit_model.predict(X_test)"
+    "text": "Evaluation\n\nWe evaluate a the logistic regression classifier by classifying observations that were not used for training or estimating it.\nThat is, we use the classifier to predict the categories of the test dataset using the predictor values in this set only.\nIn Python, we use the commands:\n\n# Remove problematic predictor from the test set.\nX_test = X_test.drop(columns = ['Right'])\n\n# Add constant to the predictor matrix from the test set.\nX_test = sm.add_constant(X_test)\n\n# Predict probabilities.\npredicted_probability = logit_model.predict(X_test)"
   },
   {
     "objectID": "Classification/Classification.slides.html#section-13",
     "href": "Classification/Classification.slides.html#section-13",
     "title": "Logistic Regression",
     "section": "",
-    "text": "The predict() function outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n144    0.999207\n186    0.989039\n153    0.999999\n197    0.999987\n90     0.000007\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors).\n\nTo turn the probabilities to actual classes, we round them:\n\npredicted_classes = round(predicted_probability).astype('int')"
+    "text": "The predict() function outputs probabilities instead of actual classes.\n\npredicted_probability.head()\n\n31     7.957367e-07\n122    9.999635e-01\n83     4.075908e-03\n135    9.999991e-01\n105    9.968478e-01\ndtype: float64\n\n\nThese are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors).\n\nTo turn the probabilities to actual classes, we round them:\n\npredicted_classes = round(predicted_probability).astype('int')"
   },
   {
     "objectID": "Classification/Classification.slides.html#section-14",
     "href": "Classification/Classification.slides.html#section-14",
     "title": "Logistic Regression",
     "section": "",
-    "text": "predicted_classes.head()\n\n144    1\n186    1\n153    1\n197    1\n90     0\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the validation dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
+    "text": "predicted_classes.head()\n\n31     0\n122    1\n83     0\n135    1\n105    1\ndtype: int64\n\n\n\nObservations with probabilities higher than 0.5 are classified as “counterfeit”.\nObservations with probabilities lower than 0.5 are classified as “genuine”.\n\nNow, we compare the predictions with the actual categories in the validation dataset. A good logistic regression model has a good agreement between its predictions and the actual categories."
   },
   {
     "objectID": "Classification/Classification.slides.html#confusion-matrix",
