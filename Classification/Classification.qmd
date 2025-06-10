@@ -222,7 +222,7 @@ X_full = bank_data.drop(columns = ['Status'])
 Y_full = bank_data['Status']
 
 # Split the dataset.
-X_train, X_test, Y_train, Y_test = train_test_split(X_full, Y_full, 
+X_train, X_val, Y_train, Y_val = train_test_split(X_full, Y_full, 
                                                     test_size=0.3)
 ```
 
@@ -342,7 +342,7 @@ Consider the banknote classification problem where $Y = 1$ implies counterfeit a
 
 </br>
 
-The odds ratio is $e^{\beta_0 + \beta_1 X_1 + \beta_3 X_3 + \beta_p X_4} = \frac{P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}{1 - P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}$
+The odds ratio is $e^{\beta_0 + \beta_1 X_1 + \beta_3 X_3 + \beta_4 X_4} = \frac{P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}{1 - P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}$
 
 ::: incremental
 -   If the ratio is 1, the odds are 50-50.
@@ -570,13 +570,13 @@ In Python, we use the commands:
 #| echo: true
 
 # Remove problematic predictor from the test set.
-X_test = X_test.drop(columns = ['Right'])
+X_val = X_val.drop(columns = ['Right'])
 
 # Add constant to the predictor matrix from the test set.
-X_test = sm.add_constant(X_test)
+X_val = sm.add_constant(X_val)
 
 # Predict probabilities.
-predicted_probability = logit_model.predict(X_test)
+predicted_probability = logit_model.predict(X_val)
 ```
 
 ## 
@@ -634,7 +634,7 @@ We compute the confusion matrix using the function with the same name of **sciki
 #| output: true
 
 # Create dummy variables for test set.
-Y_dummies = pd.get_dummies(Y_test, dtype = 'int')
+Y_dummies = pd.get_dummies(Y_val, dtype = 'int')
 
 # Select target variable from test set.
 Y_target_test = Y_dummies['counterfeit']

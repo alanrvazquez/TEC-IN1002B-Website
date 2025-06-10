@@ -231,7 +231,7 @@ Alan R. Vazquez
 <section id="load-the-libraries" class="slide level2">
 <h2>Load the libraries</h2>
 <p>Before we start, let’s import the data science libraries into Python.</p>
-<div id="15cf61b6" class="cell" data-execution_count="1">
+<div id="a4210914" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Importing necessary libraries</span></span>
 <span id="cb1-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -370,12 +370,12 @@ Alan R. Vazquez
 <section id="dataset" class="slide level2">
 <h2>Dataset</h2>
 <p>The data is in the file “banknotes.xlsx”.</p>
-<div id="d8092836" class="cell" data-execution_count="2">
+<div id="d2e75db5" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>bank_data <span class="op">=</span> pd.read_excel(<span class="st">"banknotes.xlsx"</span>)</span>
 <span id="cb2-2"><a></a><span class="co"># Set response variable as categorical.</span></span>
 <span id="cb2-3"><a></a>bank_data[<span class="st">'Status'</span>] <span class="op">=</span> pd.Categorical(bank_data[<span class="st">'Status'</span>])</span>
 <span id="cb2-4"><a></a>bank_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="38">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -453,7 +453,7 @@ Alan R. Vazquez
 <section id="generate-training-data" class="slide level2">
 <h2>Generate training data</h2>
 <p>We split the current data set into a training and a validation dataset. To this end, we use the function <code>train_test_split()</code> from <strong>scikit-learn</strong>.</p>
-<div id="10b3e7b7" class="cell" data-execution_count="3">
+<div id="fff4d7b0" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># Set full matrix of predictors.</span></span>
 <span id="cb3-2"><a></a>X_full <span class="op">=</span> bank_data.drop(columns <span class="op">=</span> [<span class="st">'Status'</span>])</span>
 <span id="cb3-3"><a></a></span>
@@ -461,7 +461,7 @@ Alan R. Vazquez
 <span id="cb3-5"><a></a>Y_full <span class="op">=</span> bank_data[<span class="st">'Status'</span>]</span>
 <span id="cb3-6"><a></a></span>
 <span id="cb3-7"><a></a><span class="co"># Split the dataset.</span></span>
-<span id="cb3-8"><a></a>X_train, X_test, Y_train, Y_test <span class="op">=</span> train_test_split(X_full, Y_full, </span>
+<span id="cb3-8"><a></a>X_train, X_val, Y_train, Y_val <span class="op">=</span> train_test_split(X_full, Y_full, </span>
 <span id="cb3-9"><a></a>                                                    test_size<span class="op">=</span><span class="fl">0.3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The parameter <code>test_size</code> sets the portion of the dataset that will go to the validation set.</p>
@@ -480,7 +480,7 @@ Alan R. Vazquez
 <h2>Data pre-processing</h2>
 <p><br></p>
 <p>Before we start, we ensure that there are no highly correlated predictors in the dataset. To this end, we construct the correlation plot.</p>
-<div id="8a36d6eb" class="cell" data-execution_count="4">
+<div id="1252f380" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co"># Compute correlation matrix.</span></span>
 <span id="cb4-2"><a></a>correlation_matrix <span class="op">=</span> X_train.corr()</span>
 <span id="cb4-3"><a></a></span>
@@ -492,8 +492,8 @@ Alan R. Vazquez
 <section id="section-5" class="slide level2">
 <h2></h2>
 <p><br></p>
-<div id="25ebb714" class="cell" data-execution_count="5">
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div id="39ca8f28" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="41">
 <pre><code>Text(0.5, 1.0, 'Heatmap on correlations')</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -511,7 +511,7 @@ Alan R. Vazquez
 <p>The correlation plot shows that the predictors <code>Left</code> (<span class="math inline">\(X_1\)</span>) and <code>Right</code> (<span class="math inline">\(X_2\)</span>) have an absolute correlation of 0.74. Using a threshold for high correlation of 0.70, we thus remove one predictor from the database, say, <code>Right</code>.</p>
 <p><br></p>
 <p>Consequently, our database for this problem is</p>
-<div id="cdd0b8fa" class="cell" data-execution_count="6">
+<div id="98bf472a" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>X_train <span class="op">=</span> X_train.drop(columns <span class="op">=</span> [<span class="st">'Right'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
@@ -554,7 +554,7 @@ Alan R. Vazquez
 <h2></h2>
 <p>Consider the banknote classification problem where <span class="math inline">\(Y = 1\)</span> implies counterfeit and <span class="math inline">\(Y = 0\)</span> genuine note. We have three predictors in <span class="math inline">\(\boldsymbol{X} =  (X_1, X_3, X_4)\)</span> summarizing specific characteristics of a banknote.</p>
 <p><br></p>
-<p>The odds ratio is <span class="math inline">\(e^{\beta_0 + \beta_1 X_1 + \beta_3 X_3 + \beta_p X_4} = \frac{P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}{1 - P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}\)</span></p>
+<p>The odds ratio is <span class="math inline">\(e^{\beta_0 + \beta_1 X_1 + \beta_3 X_3 + \beta_4 X_4} = \frac{P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}{1 - P(Y = 1 | \boldsymbol{X} = \boldsymbol{x})}\)</span></p>
 <div>
 <ul>
 <li class="fragment">If the ratio is 1, the odds are 50-50.</li>
@@ -617,10 +617,10 @@ Alan R. Vazquez
 <h2>How do we estimate the coefficients?</h2>
 <p><br></p>
 <p>We use the <span style="color:darkblue;">training data</span>!</p>
-<div id="1004497f" class="cell" data-execution_count="7">
+<div id="d7ed1c9d" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>training_bank <span class="op">=</span> pd.concat([X_train, Y_train], axis <span class="op">=</span> <span class="dv">1</span>)</span>
 <span id="cb7-2"><a></a>training_bank.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="43">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -648,38 +648,38 @@ Alan R. Vazquez
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">120</td>
+<td data-quarto-table-cell-role="th">45</td>
+<td>129.5</td>
+<td>8.3</td>
+<td>10.2</td>
+<td>genuine</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">72</td>
+<td>129.6</td>
+<td>8.7</td>
+<td>10.0</td>
+<td>genuine</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">28</td>
+<td>130.0</td>
+<td>7.4</td>
+<td>10.5</td>
+<td>genuine</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">94</td>
+<td>129.6</td>
+<td>8.3</td>
+<td>10.0</td>
+<td>genuine</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">192</td>
 <td>130.3</td>
-<td>10.1</td>
-<td>12.1</td>
-<td>counterfeit</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">95</td>
-<td>129.9</td>
-<td>9.0</td>
-<td>9.5</td>
-<td>genuine</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">128</td>
-<td>130.2</td>
-<td>10.1</td>
-<td>11.3</td>
-<td>counterfeit</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">14</td>
-<td>129.9</td>
-<td>7.7</td>
 <td>10.8</td>
-<td>genuine</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">103</td>
-<td>130.4</td>
-<td>9.9</td>
-<td>10.9</td>
+<td>11.1</td>
 <td>counterfeit</td>
 </tr>
 </tbody>
@@ -704,7 +704,7 @@ Alan R. Vazquez
 <section id="in-python" class="slide level2">
 <h2>In Python</h2>
 <p>Using the training dataset, we estimate a logistic regression classifier using the function <code>Logit()</code> from <strong>statsmodel</strong>. To this end, we first define the target category using the <code>get_dummies()</code>.</p>
-<div id="082923e8" class="cell" data-execution_count="8">
+<div id="30c148e0" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="co"># Create dummy variables.</span></span>
 <span id="cb8-2"><a></a>Y_dummies <span class="op">=</span> pd.get_dummies(Y_train, dtype <span class="op">=</span> <span class="st">'int'</span>)</span>
 <span id="cb8-3"><a></a></span>
@@ -712,7 +712,7 @@ Alan R. Vazquez
 <span id="cb8-5"><a></a>Y_target_train <span class="op">=</span> Y_dummies[<span class="st">'counterfeit'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We also define the matrix of predictors with the intercept.</p>
-<div id="24fa7638" class="cell" data-execution_count="9">
+<div id="804179e2" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="co"># Add the intercept to the predictor matrix.</span></span>
 <span id="cb9-2"><a></a>X_train_int <span class="op">=</span> sm.add_constant(X_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -721,7 +721,7 @@ Alan R. Vazquez
 <h2></h2>
 <p><br></p>
 <p>After that, we fit the model using the function <code>Logit()</code>.</p>
-<div id="544933d6" class="cell" data-execution_count="10">
+<div id="4497df0f" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="co"># Create logistic regression object.</span></span>
 <span id="cb10-2"><a></a>logit <span class="op">=</span> sm.Logit(Y_target_train, X_train_int)</span>
 <span id="cb10-3"><a></a></span>
@@ -732,12 +732,12 @@ Alan R. Vazquez
 <span id="cb10-8"><a></a><span class="bu">print</span>(logit_model.params)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Optimization terminated successfully.
-         Current function value: 0.050154
-         Iterations 12
-const     31.487108
-Left      -1.225216
-Bottom     5.787543
-Top        7.065246
+         Current function value: 0.033379
+         Iterations 14
+const    -702.878164
+Left        3.998308
+Bottom      7.866816
+Top        10.359240
 dtype: float64</code></pre>
 </div>
 </div>
@@ -772,7 +772,7 @@ dtype: float64</code></pre>
 <section id="section-11" class="slide level2">
 <h2></h2>
 <p>The <code>summary()</code> function of <strong>statsmodel</strong> contains the Wald tests of the coefficients in the logistic regression model.</p>
-<div id="3a81dacf" class="cell" data-execution_count="11">
+<div id="a6b0f496" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a>logit_summary <span class="op">=</span> logit_model.summary()</span>
 <span id="cb12-2"><a></a><span class="bu">print</span>(logit_summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -781,20 +781,20 @@ dtype: float64</code></pre>
 Dep. Variable:            counterfeit   No. Observations:                  140
 Model:                          Logit   Df Residuals:                      136
 Method:                           MLE   Df Model:                            3
-Date:                Tue, 10 Jun 2025   Pseudo R-squ.:                  0.9276
-Time:                        08:48:19   Log-Likelihood:                -7.0216
-converged:                       True   LL-Null:                       -96.983
-Covariance Type:            nonrobust   LLR p-value:                 9.161e-39
+Date:                Tue, 10 Jun 2025   Pseudo R-squ.:                  0.9518
+Time:                        10:53:45   Log-Likelihood:                -4.6731
+converged:                       True   LL-Null:                       -96.912
+Covariance Type:            nonrobust   LLR p-value:                 9.515e-40
 ==============================================================================
                  coef    std err          z      P&gt;|z|      [0.025      0.975]
 ------------------------------------------------------------------------------
-const         31.4871    429.112      0.073      0.942    -809.557     872.532
-Left          -1.2252      3.477     -0.352      0.725      -8.040       5.589
-Bottom         5.7875      2.426      2.385      0.017       1.032      10.543
-Top            7.0652      2.617      2.699      0.007       1.935      12.195
+const       -702.8782    622.947     -1.128      0.259   -1923.833     518.076
+Left           3.9983      4.679      0.855      0.393      -5.172      13.168
+Bottom         7.8668      3.928      2.003      0.045       0.168      15.566
+Top           10.3592      4.361      2.375      0.018       1.812      18.907
 ==============================================================================
 
-Possibly complete quasi-separation: A fraction 0.57 of observations can be
+Possibly complete quasi-separation: A fraction 0.78 of observations can be
 perfectly predicted. This might indicate that there is complete
 quasi-separation. In this case some parameters will not be identified.</code></pre>
 </div>
@@ -833,48 +833,48 @@ quasi-separation. In this case some parameters will not be identified.</code></p
 <p>We evaluate a the logistic regression classifier by classifying observations that were not used for training or estimating it.</p>
 <p>That is, we use the classifier to predict the categories of the test dataset using the predictor values in this set only.</p>
 <p>In Python, we use the commands:</p>
-<div id="32bc2d42" class="cell" data-execution_count="12">
+<div id="ead6c46f" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="co"># Remove problematic predictor from the test set.</span></span>
-<span id="cb14-2"><a></a>X_test <span class="op">=</span> X_test.drop(columns <span class="op">=</span> [<span class="st">'Right'</span>])</span>
+<span id="cb14-2"><a></a>X_val <span class="op">=</span> X_val.drop(columns <span class="op">=</span> [<span class="st">'Right'</span>])</span>
 <span id="cb14-3"><a></a></span>
 <span id="cb14-4"><a></a><span class="co"># Add constant to the predictor matrix from the test set.</span></span>
-<span id="cb14-5"><a></a>X_test <span class="op">=</span> sm.add_constant(X_test)</span>
+<span id="cb14-5"><a></a>X_val <span class="op">=</span> sm.add_constant(X_val)</span>
 <span id="cb14-6"><a></a></span>
 <span id="cb14-7"><a></a><span class="co"># Predict probabilities.</span></span>
-<span id="cb14-8"><a></a>predicted_probability <span class="op">=</span> logit_model.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-8"><a></a>predicted_probability <span class="op">=</span> logit_model.predict(X_val)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="section-13" class="slide level2">
 <h2></h2>
 <p>The <code>predict()</code> function outputs <span style="color:brown;"><strong>probabilities</strong></span> instead of actual classes.</p>
-<div id="0e17882b" class="cell" data-execution_count="13">
+<div id="d3d6a3f7" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a>predicted_probability.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
-<pre><code>94     0.000182
-170    0.950420
-77     0.000054
-76     0.002270
-188    0.999994
+<div class="cell-output cell-output-display" data-execution_count="49">
+<pre><code>39     2.070816e-08
+181    5.819495e-01
+120    1.000000e+00
+9      3.943886e-03
+149    1.000000e+00
 dtype: float64</code></pre>
 </div>
 </div>
 <p>These are the probabilities of a banknote being “counterfeit” according to its characteristics (values of the predictors).</p>
 <p><br></p>
 <p>To turn the probabilities to actual classes, we round them:</p>
-<div id="957c8300" class="cell" data-execution_count="14">
+<div id="40facd6c" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a>predicted_classes <span class="op">=</span> <span class="bu">round</span>(predicted_probability).astype(<span class="st">'int'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="section-14" class="slide level2">
 <h2></h2>
-<div id="5c0cce94" class="cell" data-execution_count="15">
+<div id="24130812" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a>predicted_classes.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
-<pre><code>94     0
-170    1
-77     0
-76     0
-188    1
+<div class="cell-output cell-output-display" data-execution_count="51">
+<pre><code>39     0
+181    1
+120    1
+9      0
+149    1
 dtype: int64</code></pre>
 </div>
 </div>
@@ -897,9 +897,9 @@ dtype: int64</code></pre>
 <h2>In Python</h2>
 <p><br></p>
 <p>We compute the confusion matrix using the function with the same name of <strong>scikit-learn</strong>.</p>
-<div id="27ad3429" class="cell" data-execution_count="16">
+<div id="880cffbf" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a><span class="co"># Create dummy variables for test set.</span></span>
-<span id="cb20-2"><a></a>Y_dummies <span class="op">=</span> pd.get_dummies(Y_test, dtype <span class="op">=</span> <span class="st">'int'</span>)</span>
+<span id="cb20-2"><a></a>Y_dummies <span class="op">=</span> pd.get_dummies(Y_val, dtype <span class="op">=</span> <span class="st">'int'</span>)</span>
 <span id="cb20-3"><a></a></span>
 <span id="cb20-4"><a></a><span class="co"># Select target variable from test set.</span></span>
 <span id="cb20-5"><a></a>Y_target_test <span class="op">=</span> Y_dummies[<span class="st">'counterfeit'</span>]</span>
@@ -910,15 +910,15 @@ dtype: int64</code></pre>
 <span id="cb20-10"><a></a><span class="co"># Show confusion matrix.</span></span>
 <span id="cb20-11"><a></a><span class="bu">print</span>(cm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[[32  0]
- [ 2 26]]</code></pre>
+<pre><code>[[26  1]
+ [ 0 33]]</code></pre>
 </div>
 </div>
 </section>
 <section id="section-15" class="slide level2">
 <h2></h2>
 <p>We can visualize the confusion matrix using the <code>ConfusionMatrixDisplay()</code> function.</p>
-<div id="35887aa4" class="cell" data-execution_count="17">
+<div id="0624ed32" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a></a>ConfusionMatrixDisplay(cm).plot()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -933,11 +933,11 @@ dtype: int64</code></pre>
 <h2>Accuracy</h2>
 <p>A simple metric to summarize the information of the confusion matrix is <strong>accuracy</strong>. It is the proportion of correct classifications for both classes, out of the total classifications made.</p>
 <p>In Python, we compute the accuracy using the function <code>accuracy_score()</code> from <strong>scikit-learn</strong>.</p>
-<div id="a8770186" class="cell" data-execution_count="18">
+<div id="90107e87" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a>accuracy <span class="op">=</span> accuracy_score(Y_target_test, predicted_classes)</span>
 <span id="cb23-2"><a></a><span class="bu">print</span>( <span class="bu">round</span>(accuracy, <span class="dv">2</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.97</code></pre>
+<pre><code>0.98</code></pre>
 </div>
 </div>
 <p><br></p>
