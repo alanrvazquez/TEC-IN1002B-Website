@@ -67,6 +67,7 @@ We will not use all the functions from the **scikit-learn** library. Instead, we
 -   This approach implies a reference category. Specifically, the category that results when all dummy variables equal 0.
 
 -   This coding impacts the interpretation of the model coefficients:
+
     -   [$\beta_0$ is the mean response under the reference category.]{style="color:darkgreen;"}
     -   [$\beta_j$ is the amount of increase in the mean response when we change from the reference category to another category.]{style="color:darkgreen;"}
 
@@ -810,7 +811,6 @@ plt.show()
 
 5.  [How can we make predictions of future responses using the multiple linear regression model?]{style="color:blue;"}
 
-
 ## Two datasets
 
 </br></br>
@@ -999,7 +999,7 @@ where $(Y_1, \boldsymbol{X}_1), \ldots, (Y_{n_{v} }, \boldsymbol{X}_{n_{v}} )$ a
 Another useful metric is the validation [**Root Mean Squared Error**]{style="color:orange;"} ([**RMSE**]{style="color:orange;"}):
 
 $$
-\sqrt{\frac{1}{n_{v}} \sum_{i=1}^{n_{v}} \left( Y_i - \hat{Y}_i) \right)^2}
+\sqrt{\frac{1}{n_{v}} \sum_{i=1}^{n_{v}} \left( Y_i - \hat{Y}_i \right)^2}
 $$
 
 Benefits:
